@@ -106,6 +106,24 @@
       "label": "Temporal Coverage To",
       "help_text": "End point for temporal period that the dataset covers.",
       "form_snippet": "date.html"
+    },
+    {
+      "field_name": "thematic_area_string",
+      "label": "Thematic Area",
+      "multiple": true,
+      "form_snippet": "multiple_select.html",
+      "required": true,
+      "choices": [
+	{
+	  "value": "first",
+	  "label": "First"
+	},
+	{
+	  "value": "second",
+	  "label": "Second"
+	}
+      ],
+      "validators": "ignore_missing"
     }
   ],
   "resource_fields": [
