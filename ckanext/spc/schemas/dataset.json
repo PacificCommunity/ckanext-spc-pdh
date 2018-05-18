@@ -113,51 +113,51 @@
       "preset": "multiple_select",
       "choices": [
 	{
-	  "value": "0",
+	  "value": "PCCOS",
 	  "label": "PCCOS (Pacific Community Centre for Ocean Science)"
 	},
 	{
-	  "value": "1",
+	  "value": "Climate Change",
 	  "label": "Climate Change"
 	},
 	{
-	  "value": "2",
+	  "value": "Economic Development",
 	  "label": "Economic Development"
 	},
 	{
-	  "value": "3",
+	  "value": "Education Quality and Assessment",
 	  "label": "Education Quality and Assessment"
 	},
 	{
-	  "value": "4",
+	  "value": "Energy",
 	  "label": "Energy"
 	},
 	{
-	  "value": "5",
+	  "value": "Fisheries, Aquaculture and Marine Ecosystems",
 	  "label": "Fisheries, Aquaculture and Marine Ecosystems"
 	},
 	{
-	  "value": "6",
+	  "value": "Geoscience",
 	  "label": "Geoscience"
 	},
 	{
-	  "value": "7",
+	  "value": "Health",
 	  "label": "Health"
 	},
 	{
-	  "value": "8",
+	  "value": "Human Rights",
 	  "label": "Human Rights"
 	},
 	{
-	  "value": "9",
+	  "value": "Land Resources",
 	  "label": "Land Resources"
 	},
 	{
-	  "value": "10",
+	  "value": "Social Development",
 	  "label": "Social Development"
 	},
 	{
-	  "value": "11",
+	  "value": "Statistics for Development",
 	  "label": "Statistics for Development"
 	}
       ]

@@ -1,5 +1,8 @@
+from operator import itemgetter
+
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.model as model
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
@@ -14,6 +17,7 @@ class SpcPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IValidators)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
 
@@ -41,3 +45,15 @@ class SpcPlugin(plugins.SingletonPlugin):
 
     def get_validators(self):
         return spc_validators.get_validators()
+
+    # IPackageController
+
+    def after_search(self, results, params):
+        is_popular_first = toolkit.asbool(
+            params.get('extras', {}).get('ext_popular_first', False)
+        )
+        if is_popular_first:
+            for item in results['results']:
+                item['recent_views'] = model.TrackingSummary.get_for_package(item['id'])['recent']
+            results['results'].sort(key=itemgetter('recent_views'), reverse=True)
+        return results
