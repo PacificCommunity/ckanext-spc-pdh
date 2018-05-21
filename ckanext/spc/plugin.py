@@ -1,8 +1,6 @@
-from operator import itemgetter
-
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-import ckan.model as model
+import ckan.lib.helpers as h
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
@@ -49,11 +47,36 @@ class SpcPlugin(plugins.SingletonPlugin):
     # IPackageController
 
     def after_search(self, results, params):
+        _org_cache = {}
+
         is_popular_first = toolkit.asbool(
             params.get('extras', {}).get('ext_popular_first', False)
         )
+
+        for item in results['results']:
+            item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
+            item['short_notest'] = h.whtext.truncate(item['notes'])
+
+            org_name = item['organization']['name']
+            try:
+                organization = _org_cache[org_name]
+            except KeyError:
+                organization = h.get_organization(org_name)
+                _org_cache[org_name] = organization
+            item['organization_image_url'
+                 ] = organization['image_display_url'] or h.url_for_static(
+                     '/base/images/placeholder-organization.png',
+                     qualified=True
+                 )
+
         if is_popular_first:
-            for item in results['results']:
-                item['recent_views'] = model.TrackingSummary.get_for_package(item['id'])['recent']
-            results['results'].sort(key=itemgetter('recent_views'), reverse=True)
+            results['results'].sort(
+                key=lambda i: i.get('ga_view_count', 0), reverse=True
+            )
         return results
+
+    def before_index(self, pkg_dict):
+        pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
+            pkg_dict['name']
+        )
+        return pkg_dict
