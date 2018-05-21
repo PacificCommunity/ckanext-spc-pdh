@@ -4,6 +4,7 @@ import ckan.model as model
 import paste.script
 from ckan.lib.cli import CkanCommand
 
+
 logger = logging.getLogger(__name__)
 
 

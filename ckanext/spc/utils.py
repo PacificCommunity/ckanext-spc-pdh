@@ -1,5 +1,6 @@
 import ckan.lib.helpers as h
-
+from ckanext.ga_report.ga_model import GA_Url
+import ckan.model as model
 
 def _normalize_res(res):
     return {
@@ -41,3 +42,10 @@ def normalize_to_dcat(pkg_dict):
     pkg_dict['issued'] = pkg_dict.pop('metadata_created')
     pkg_dict['modified'] = pkg_dict.pop('metadata_modified')
     return pkg_dict
+
+
+def ga_view_count(name):
+    return model.Session.query(GA_Url.pageviews).filter(
+        GA_Url.period_name == 'All',
+        GA_Url.package_id == name
+    ).scalar() or 0

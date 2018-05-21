@@ -64,6 +64,16 @@ do::
     pip install -r dev-requirements.txt
 
 
+---------------------
+SPC specific examples
+---------------------
+
+Recently updated dataset(within thematic area)::
+  http://ckan.url/api/action/package_search?q=extras_thematic_area_string:%22Climate%20Change%22&sort=metadata_modified+desc
+
+Most popular dataset(within thematic area)::
+  http://site.url/api/action/package_search?q=extras_thematic_area_string:%22Climate%20Change%22&sort=extras_ga_view_count+desc
+
 -----------------
 Running the Tests
 -----------------
