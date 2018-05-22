@@ -55,7 +55,7 @@ class SpcPlugin(plugins.SingletonPlugin):
 
         for item in results['results']:
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
-            item['short_notest'] = h.whtext.truncate(item['notes'])
+            item['short_notes'] = h.whtext.truncate(item['notes'])
 
             org_name = item['organization']['name']
             try:
