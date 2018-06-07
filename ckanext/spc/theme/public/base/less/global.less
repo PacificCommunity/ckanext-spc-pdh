@@ -1,0 +1,88 @@
+body {
+    background: @main-blue;
+}
+a {
+    color: @text-blue
+}
+.masthead {
+    background: @main-blue url(../images/header_gradient.png) 50% 50% no-repeat;
+    background-size: cover;
+    .navigation {
+        .nav-pills {
+            li.active {
+                a {
+                    background-color: @blue;
+                }
+            }
+        }
+    }
+}
+.account-masthead {
+    background: @main-blue;
+}
+.site-footer {
+    background: @main-blue url(../images/footer_gradient.png) 50% 50% no-repeat;
+    background-size: cover;
+}
+[role=main], .main {
+    background: @background;
+}
+.wrapper {
+    box-shadow: none;
+    border: 1px solid #b4b7b7;
+}
+.toolbar {
+    .breadcrumb {
+        li {
+            a {
+                color: @text-blue;
+                font-weight: 300;
+            }
+            &.active {
+                a {
+                    color: #434e4e;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
+.search-form {
+    h2 {
+        color: @light-blue;
+    }
+    .search-input {
+        button {
+            top: 30%
+        }
+    }
+}
+.filters {
+    .module-heading {
+        background-color: @blue;
+        color: #fff;
+    }
+}
+.btn-primary {
+    background: @blue;
+    &:hover, &:focus, &:active {
+        background: @blue;
+        box-shadow: inset 0px 0px 5px #c1c1c1;
+    }
+}
+.nav-item {
+    a {
+        color: @light-grey;
+    }
+}
+.dataset-list {
+    .dataset-heading {
+        a {
+            color: @text-blue;
+            font-weight: 400;
+        }
+    }
+    .dataset-item {
+        color: @light-grey;
+    }
+}

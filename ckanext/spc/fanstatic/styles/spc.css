@@ -1,0 +1,65 @@
+body {
+  background: #036295;
+}
+a {
+  color: #0869a1;
+}
+.masthead {
+  background: #036295 url(../images/header_gradient.png) 50% 50% no-repeat;
+  background-size: cover;
+}
+.masthead .navigation .nav-pills li.active a {
+  background-color: #2585bd;
+}
+.account-masthead {
+  background: #036295;
+}
+.site-footer {
+  background: #036295 url(../images/footer_gradient.png) 50% 50% no-repeat;
+  background-size: cover;
+}
+[role=main],
+.main {
+  background: #f8f8f8;
+}
+.wrapper {
+  box-shadow: none;
+  border: 1px solid #b4b7b7;
+}
+.toolbar .breadcrumb li a {
+  color: #0869a1;
+  font-weight: 300;
+}
+.toolbar .breadcrumb li.active a {
+  color: #434e4e;
+  font-weight: 300;
+}
+.search-form h2 {
+  color: #00b0ca;
+}
+.search-form .search-input button {
+  top: 30%;
+}
+.filters .module-heading {
+  background-color: #2585bd;
+  color: #fff;
+}
+.btn-primary {
+  background: #2585bd;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: #2585bd;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+}
+.nav-item a {
+  color: #727474;
+}
+.dataset-list .dataset-heading a {
+  color: #0869a1;
+  font-weight: 400;
+}
+.dataset-list .dataset-item {
+  color: #727474;
+}
