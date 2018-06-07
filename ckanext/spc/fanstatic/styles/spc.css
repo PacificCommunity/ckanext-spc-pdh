@@ -7,9 +7,18 @@ a {
 .masthead {
   background: #036295 url(../images/header_gradient.png) 50% 50% no-repeat;
   background-size: cover;
+  padding: 10px 0;
+}
+.masthead .navigation .nav-pills li a:hover,
+.masthead .navigation .nav-pills li a:focus,
+.masthead .navigation .nav-pills li a:active {
+  background-color: #2585bd;
 }
 .masthead .navigation .nav-pills li.active a {
   background-color: #2585bd;
+}
+.logo img {
+  max-width: 200px;
 }
 .account-masthead {
   background: #036295;
