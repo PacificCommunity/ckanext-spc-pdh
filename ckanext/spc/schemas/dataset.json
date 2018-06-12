@@ -113,52 +113,52 @@
       "preset": "multiple_select",
       "choices": [
 	{
-	  "value": "PCCOS",
-	  "label": "PCCOS (Pacific Community Centre for Ocean Science)"
+	  "label": "Social",
+	  "value": "Social"
 	},
 	{
-	  "value": "Climate Change",
-	  "label": "Climate Change"
+	  "label": "Statistics",
+	  "value": "Statistics"
 	},
 	{
-	  "value": "Economic Development",
-	  "label": "Economic Development"
+	  "label": "Climate Change",
+	  "value": "Climate Change"
 	},
 	{
-	  "value": "Education Quality and Assessment",
-	  "label": "Education Quality and Assessment"
+	  "label": "Fisheries",
+	  "value": "Fisheries"
 	},
 	{
-	  "value": "Energy",
-	  "label": "Energy"
+	  "label": "Geoscience",
+	  "value": "Geoscience"
 	},
 	{
-	  "value": "Fisheries, Aquaculture and Marine Ecosystems",
-	  "label": "Fisheries, Aquaculture and Marine Ecosystems"
+	  "label": "Land Resources",
+	  "value": "Land Resources"
 	},
 	{
-	  "value": "Geoscience",
-	  "label": "Geoscience"
+	  "label": "Human Rights",
+	  "value": "Human Rights"
 	},
 	{
-	  "value": "Health",
-	  "label": "Health"
+	  "label": "Health",
+	  "value": "Health"
 	},
 	{
-	  "value": "Human Rights",
-	  "label": "Human Rights"
+	  "label": "Energy",
+	  "value": "Energy"
 	},
 	{
-	  "value": "Land Resources",
-	  "label": "Land Resources"
+	  "label": "Education",
+	  "value": "Education"
 	},
 	{
-	  "value": "Social Development",
-	  "label": "Social Development"
+	  "label": "Economic Development",
+	  "value": "Economic Development"
 	},
 	{
-	  "value": "Statistics for Development",
-	  "label": "Statistics for Development"
+	  "label": "PCCOS",
+	  "value": "PCCOS"
 	}
       ]
     }
