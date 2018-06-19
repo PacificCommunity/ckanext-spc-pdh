@@ -2,9 +2,12 @@ import iso639
 import urlparse
 from routes import url_for as _routes_default_url_for
 
+from ckan.common import config
+
 def get_helpers():
     return dict(spc_get_available_languages=spc_get_available_languages,
-                url_for_logo=url_for_logo)
+                url_for_logo=url_for_logo,
+                get_conf_site_url=get_conf_site_url)
 
 
 def spc_get_available_languages():
@@ -25,3 +28,7 @@ def url_for_logo(*args, **kw):
 
     my_url = _routes_default_url_for(*args, **kw)
     return my_url
+
+def get_conf_site_url():
+    site_url = config.get('ckan.site_url', None)
+    return site_url
