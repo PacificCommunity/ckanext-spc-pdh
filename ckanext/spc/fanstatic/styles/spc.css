@@ -49,7 +49,8 @@ a {
 .search-form .search-input button {
   top: 30%;
 }
-.filters .module-heading {
+.filters .module-heading,
+.secondary .module-heading {
   background-color: #032f47;
   color: #fff;
 }
