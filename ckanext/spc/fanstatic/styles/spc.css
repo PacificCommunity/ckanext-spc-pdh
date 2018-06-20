@@ -1,30 +1,30 @@
 body {
-  background: #036295;
+  background: #032f47;
 }
 a {
   color: #0869a1;
 }
 .masthead {
-  background: #036295 url(../images/header_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../images/header_gradient.png) 50% 50% no-repeat;
   background-size: cover;
   padding: 10px 0;
 }
 .masthead .navigation .nav-pills li a:hover,
 .masthead .navigation .nav-pills li a:focus,
 .masthead .navigation .nav-pills li a:active {
-  background-color: #2585bd;
+  background-color: #0b6591;
 }
 .masthead .navigation .nav-pills li.active a {
-  background-color: #2585bd;
+  background-color: #0b6591;
 }
 .logo img {
   max-width: 200px;
 }
 .account-masthead {
-  background: #036295;
+  background: #032f47;
 }
 .site-footer {
-  background: #036295 url(../images/footer_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../images/footer_gradient.png) 50% 50% no-repeat;
   background-size: cover;
 }
 [role=main],
@@ -44,22 +44,22 @@ a {
   font-weight: 300;
 }
 .search-form h2 {
-  color: #00b0ca;
+  color: #0b6591;
 }
 .search-form .search-input button {
   top: 30%;
 }
 .filters .module-heading {
-  background-color: #2585bd;
+  background-color: #032f47;
   color: #fff;
 }
 .btn-primary {
-  background: #2585bd;
+  background: #032f47;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background: #2585bd;
+  background: #032f47;
   box-shadow: inset 0px 0px 5px #c1c1c1;
 }
 .nav-item a {
