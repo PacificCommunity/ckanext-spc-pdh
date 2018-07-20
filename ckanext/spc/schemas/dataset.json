@@ -109,7 +109,7 @@
     },
     {
       "field_name": "thematic_area_string",
-      "label": "Thematic Area",
+      "label": "Topic",
       "preset": "multiple_select",
       "choices": [
 	{
