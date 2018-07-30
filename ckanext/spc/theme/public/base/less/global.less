@@ -1,5 +1,8 @@
 body {
     background: @dark-blue;
+    @media (max-width: 767px) {
+        background: #003960;
+    }
 }
 a {
     color: @text-blue
@@ -14,9 +17,9 @@ header.navbar {
     }
 }
 .masthead {
-    background: @dark-blue url(../images/header_gradient.png) 50% 50% no-repeat;
+    background: @dark-blue url(../../images/header_gradient.png) 50% 50% no-repeat;
     background-size: cover;
-    padding: 10px 0;
+    line-height: 70px;
     .navigation {
         .nav-pills {
             li {
@@ -36,22 +39,33 @@ header.navbar {
 }
 .logo { 
     img {
-        max-width: 200px;
+        max-width: 172px;
     }
 }
 .account-masthead {
     background: @dark-blue;
 }
 .site-footer {
-    background: @dark-blue url(../images/footer_gradient.png) 50% 50% no-repeat;
+    background: @dark-blue url(../../images/footer_gradient.png) 50% 50% no-repeat;
     background-size: cover;
+    @media (max-width: 767px) {
+        background: #003960;
+    }
 }
 [role=main], .main {
     background: @background;
+    @media (max-width: 767px) {
+        padding-bottom: 0;
+    }
 }
 .wrapper {
     box-shadow: none;
     border: 1px solid #b4b7b7;
+}
+.module-content {
+    @media (max-width: 767px) {
+        padding: 0 15px;
+    }
 }
 .toolbar {
     .breadcrumb {
@@ -59,14 +73,26 @@ header.navbar {
             a {
                 color: @text-blue;
                 font-weight: 300;
+                @media (max-width: 767px) {
+                    font-size: 14px;
+                    color: #fff;
+                }
             }
             &.active {
                 a {
                     color: #434e4e;
                     font-weight: 300;
+                    @media (max-width: 767px) {
+                        color: #fff;
+                        text-decoration: underline;
+                    }
                 }
             }
         }
+    }
+    @media (max-width: 767px) {
+        background: #003960;
+        margin-bottom: 0;
     }
 }
 .search-form {
