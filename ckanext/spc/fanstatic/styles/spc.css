@@ -4,6 +4,15 @@ body {
 a {
   color: #0869a1;
 }
+header.navbar {
+  position: relative;
+}
+header.navbar > .container {
+  position: unset;
+}
+header.navbar > .container .collapse {
+  position: unset;
+}
 .masthead {
   background: #032f47 url(../images/header_gradient.png) 50% 50% no-repeat;
   background-size: cover;
@@ -72,4 +81,106 @@ a {
 }
 .dataset-list .dataset-item {
   color: #727474;
+}
+#main-menu {
+  position: absolute;
+  right: 30px;
+  top: 7px;
+}
+button.header-menu-btn {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  height: 35px;
+  width: 65px;
+}
+button.header-menu-btn span {
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin-top: 7px;
+  position: relative;
+  background: #fff;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+button.header-menu-btn span:first-child {
+  transform-origin: 0% 0%;
+  margin-top: 0;
+}
+button.header-menu-btn span:nth-child(2) {
+  transform-origin: 0% 100%;
+}
+button.header-menu-btn:focus {
+  outline: none;
+}
+.ma5-menu-active button.header-menu-btn span {
+  opacity: 1;
+  transform: rotate(45deg) translate(7px, -14px);
+}
+.ma5-menu-active button.header-menu-btn span:nth-child(2) {
+  transform: rotate(-45deg) translate(0, 20px);
+}
+.ma5-menu-active button.header-menu-btn span:nth-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+.ma5-mobile-menu-container {
+  background-color: #1d5f89;
+}
+.ma5-menu-panel {
+  background-color: #1d5f89;
+}
+.ma5-menu-panel .ma5-btn-enter {
+  background-color: transparent;
+  box-sizing: border-box;
+}
+.ma5-menu-panel li {
+  border-bottom: 1px solid rgba(246, 240, 234, 0.5);
+  clear: both;
+}
+.ma5-menu-panel li:hover {
+  background-color: rgba(246, 240, 234, 0.5);
+}
+.ma5-menu-panel li:hover a {
+  color: #1d5f89;
+}
+.ma5-menu-panel li:hover .ma5-btn-enter i {
+  color: #1d5f89;
+}
+.ma5-menu-panel li:first-child {
+  margin-top: 70px;
+  border-top: 1px solid rgba(246, 240, 234, 0.5);
+}
+.ma5-menu-panel li a {
+  overflow: unset;
+}
+.ma5-menu-panel div.ma5-leave-bar {
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  height: 70px;
+  line-height: 70px;
+  text-transform: none;
+  padding: 0 0 0 90px;
+}
+.ma5-menu-panel div.ma5-leave-bar .ma5-btn-leave {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  padding: 0;
+  overflow: hidden;
+  right: auto;
+  background-color: rgba(246, 240, 234, 0.25);
+  color: #fff;
+  cursor: pointer;
+}
+.ma5-menu-panel a {
+  color: #fff;
+  font-weight: 300;
 }

@@ -4,6 +4,15 @@ body {
 a {
     color: @text-blue
 }
+header.navbar {
+    position: relative;
+    &>.container {
+        position: unset;
+        .collapse {
+            position: unset;
+        }
+    }
+}
 .masthead {
     background: @dark-blue url(../images/header_gradient.png) 50% 50% no-repeat;
     background-size: cover;
