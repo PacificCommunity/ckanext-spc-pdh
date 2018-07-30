@@ -1,6 +1,11 @@
 body {
   background: #032f47;
 }
+@media (max-width: 767px) {
+  body {
+    background: #003960;
+  }
+}
 a {
   color: #0869a1;
 }
@@ -14,9 +19,9 @@ header.navbar > .container .collapse {
   position: unset;
 }
 .masthead {
-  background: #032f47 url(../images/header_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../../images/header_gradient.png) 50% 50% no-repeat;
   background-size: cover;
-  padding: 10px 0;
+  line-height: 70px;
 }
 .masthead .navigation .nav-pills li a:hover,
 .masthead .navigation .nav-pills li a:focus,
@@ -27,30 +32,64 @@ header.navbar > .container .collapse {
   background-color: #0b6591;
 }
 .logo img {
-  max-width: 200px;
+  max-width: 172px;
 }
 .account-masthead {
   background: #032f47;
 }
 .site-footer {
-  background: #032f47 url(../images/footer_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../../images/footer_gradient.png) 50% 50% no-repeat;
   background-size: cover;
+}
+@media (max-width: 767px) {
+  .site-footer {
+    background: #003960;
+  }
 }
 [role=main],
 .main {
   background: #f8f8f8;
 }
+@media (max-width: 767px) {
+  [role=main],
+  .main {
+    padding-bottom: 0;
+  }
+}
 .wrapper {
   box-shadow: none;
   border: 1px solid #b4b7b7;
+}
+@media (max-width: 767px) {
+  .module-content {
+    padding: 0 15px;
+  }
 }
 .toolbar .breadcrumb li a {
   color: #0869a1;
   font-weight: 300;
 }
+@media (max-width: 767px) {
+  .toolbar .breadcrumb li a {
+    font-size: 14px;
+    color: #fff;
+  }
+}
 .toolbar .breadcrumb li.active a {
   color: #434e4e;
   font-weight: 300;
+}
+@media (max-width: 767px) {
+  .toolbar .breadcrumb li.active a {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+@media (max-width: 767px) {
+  .toolbar {
+    background: #003960;
+    margin-bottom: 0;
+  }
 }
 .search-form h2 {
   color: #0b6591;
@@ -85,7 +124,12 @@ header.navbar > .container .collapse {
 #main-menu {
   position: absolute;
   right: 30px;
-  top: 7px;
+  top: -4px;
+}
+@media (max-width: 767px) {
+  #main-menu {
+    right: 8px;
+  }
 }
 button.header-menu-btn {
   position: relative;
