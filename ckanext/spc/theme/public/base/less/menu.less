@@ -1,0 +1,110 @@
+#main-menu {
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+
+button.header-menu-btn {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    height: 35px;
+    width: 65px;;
+    span {
+        display: block;
+        width: 40px;
+        height: 2px;
+        margin-top: 7px;
+        position: relative;
+        background: #fff;
+        z-index: 1;
+        transform-origin: 4px 0px;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+    }
+    span:first-child {
+        transform-origin: 0% 0%;
+        margin-top: 0;
+    }
+    span:nth-child(2) {
+        transform-origin: 0% 100%;
+    } 
+    &:focus {
+        outline: none;
+    }
+}
+.ma5-menu-active {
+    button.header-menu-btn {
+        span {
+            opacity: 1;
+            transform: rotate(45deg) translate(7px, -14px);
+        }
+        span:nth-child(2) {
+            transform: rotate(-45deg) translate(0, 20px);
+        }
+        span:nth-child(3) {
+            opacity: 0;
+            transform: rotate(0deg) scale(0.2, 0.2);
+        }
+    }
+}
+
+.ma5-mobile-menu-container {
+    background-color:  #1d5f89;
+}
+.ma5-menu-panel {
+    background-color:  #1d5f89;
+    .ma5-btn-enter {
+        background-color:  transparent;
+        box-sizing: border-box;
+    }
+    li {
+        border-bottom: 1px solid rgba(246, 240, 234, 0.5);
+        clear: both;
+        &:hover {
+            background-color: rgba(246, 240, 234, 0.5);
+            a {
+                color: #1d5f89; 
+            }
+            .ma5-btn-enter i {
+                color: #1d5f89; 
+            }
+        }
+        &:first-child {
+            margin-top: 70px;
+            border-top: 1px solid rgba(246, 240, 234, 0.5);
+        }
+        a {
+            overflow: unset;
+        }
+    }
+    div.ma5-leave-bar {
+        text-align: left;
+        color: #fff;
+        font-size: 16px;
+        height: 70px;
+        line-height: 70px;
+        text-transform: none;
+        padding: 0 0 0 90px;
+        .ma5-btn-leave {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            padding: 0;
+            overflow: hidden;
+            right: auto;
+            background-color: rgba(246, 240, 234, 0.25);
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+    a {
+        color: #fff;
+        font-weight: 300;
+    }
+}
