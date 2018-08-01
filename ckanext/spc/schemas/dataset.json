@@ -88,7 +88,13 @@
     {
       "field_name": "spatial",
       "label": "Spatial Coverage",
-      "form_placeholder": "{}"
+      "form_placeholder": "{}",
+      "form_snippet": "spatial.html",
+      "form_attrs": {
+	"data-module": "friendly-coords",
+	"class": "hide"
+      },
+      "display_snippet": null
     },
     {
       "field_name": "frequency",

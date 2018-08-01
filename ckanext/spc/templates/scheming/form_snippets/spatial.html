@@ -1,0 +1,52 @@
+{% import 'macros/form.html' as form %}
+
+{% call form.input(
+    field.field_name,
+    id='field-' + field.field_name,
+    label=h.scheming_language_text(field.label),
+    value=data[field.field_name],
+    error=errors[field.field_name],
+    classes=['control-full'],
+    attrs=field.form_attrs if 'form_attrs' in field else {},
+    is_required=h.scheming_field_required(field),
+    placeholder=h.scheming_language_text(field.form_placeholder)
+)
+%}
+    {%- snippet 'scheming/form_snippets/help_text.html', field=field -%}
+    {# Inputs are type == text rather than number because IE11's
+    validation trips over numbers with 5 decimal places #}
+    <div class="control-group">
+        <fieldset class="compose-fields">
+            <div class="control-group">
+                <label for="spatial-coverage-s">South latitude</label>
+                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-s">
+            </div>
+            <div class="control-group">
+                <label for="spatial-coverage-w">West longitude</label>
+                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-w">
+            </div>
+            <div class="control-group">
+                <label for="spatial-coverage-n">North latitude</label>
+                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-n">
+            </div>
+            <div class="control-group">
+                <label for="spatial-coverage-e">East longitude</label>
+                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-e">
+            </div>
+        </fieldset>
+    </div>
+{% endcall %}
+
+{% set default_extent=[[-15, 115], [-40, 155]] %}
+<section id="dataset-map" class="module module-narrow module-shallow control-group">
+    {% set map_config = h.get_common_map_config() %}
+    <div class="dataset-map dataset-template" data-module="spatial-select" data-default_extent="{{ default_extent }}" data-module-map_config="{{ h.dump_json(map_config) }}" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}" data-raster-display="block" data-vector-display="block" data-non_spatial-display="none">
+	<div id="dataset-map-container"></div>
+    </div>
+    <div id="dataset-map-attribution">
+	{% snippet "spatial/snippets/map_attribution.html", map_config=map_config %}
+    </div>
+</section>
+
+{% resource 'ckanext-spatial/spatial_query' %}
+{#{% resource 'ckanext-anzlic/scripts/anzlic-spatial-select.js' %} #}
