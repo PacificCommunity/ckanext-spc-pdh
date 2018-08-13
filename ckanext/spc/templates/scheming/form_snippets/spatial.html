@@ -1,6 +1,9 @@
 {% import 'macros/form.html' as form %}
 
-{% call form.input(
+{{ form.select('predefined_areas', label="Areas", options=[{}] + h.get_eez_options(), attrs={'data-module': 'autocomplete'}) }}
+
+
+{% call form.textarea(
     field.field_name,
     id='field-' + field.field_name,
     label=h.scheming_language_text(field.label),
@@ -15,27 +18,16 @@
     {%- snippet 'scheming/form_snippets/help_text.html', field=field -%}
     {# Inputs are type == text rather than number because IE11's
     validation trips over numbers with 5 decimal places #}
-    <div class="control-group">
-        <fieldset class="compose-fields">
-            <div class="control-group">
-                <label for="spatial-coverage-s">South latitude</label>
-                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-s">
-            </div>
-            <div class="control-group">
-                <label for="spatial-coverage-w">West longitude</label>
-                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-w">
-            </div>
-            <div class="control-group">
-                <label for="spatial-coverage-n">North latitude</label>
-                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-n">
-            </div>
-            <div class="control-group">
-                <label for="spatial-coverage-e">East longitude</label>
-                <input type="text" maxlength="10" pattern="-?\d{1,3}(?:\.\d{1,5})?" id="spatial-e">
-            </div>
-        </fieldset>
-    </div>
 {% endcall %}
+
+<div class="control-group">
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formatted-spatial-wrapper">{{ _("Show formatted spatial coverage") }}</button>
+    <div class="collapse" id="formatted-spatial-wrapper">
+	<pre id="formatted-spatial">
+
+	</pre>
+    </div>
+</div>
 
 {% set default_extent=[[-15, 115], [-40, 155]] %}
 <section id="dataset-map" class="module module-narrow module-shallow control-group">

@@ -1,3 +1,7 @@
+import logging
+import os
+import json
+
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
@@ -8,14 +12,28 @@ import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
 
+logger = logging.getLogger(__name__)
+
 
 class SpcPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
+    plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
+
+    # IConfigurable
+
+    def configure(self, config_):
+        filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
+        if not os.path.isfile(filepath):
+            return
+        with open(filepath) as file:
+            logger.debug('Updating EEZ list')
+            collection = json.load(file)
+            spc_utils.eez.update(collection['features'])
 
     # IConfigurer
 
