@@ -49,3 +49,17 @@ def ga_view_count(name):
         GA_Url.period_name == 'All',
         GA_Url.package_id == name
     ).scalar() or 0
+
+
+class _EEZ:
+    def __init__(self, collection):
+        self.collection = collection
+
+    def update(self, collection):
+        self.collection = collection
+
+    def __iter__(self):
+        return iter(self.collection)
+
+
+eez = _EEZ([])
