@@ -1,6 +1,99 @@
+import logging
+
+import requests
+
 import ckan.lib.helpers as h
-from ckanext.ga_report.ga_model import GA_Url
 import ckan.model as model
+from ckan.lib.search import query_for
+import ckan.plugins.toolkit as tk
+
+from ckanext.ga_report.ga_model import GA_Url
+
+logger = logging.getLogger(__name__)
+
+open_licenses = [
+    "cc", "creative commons", "open data commons", "pddl", "odc", "odbl",
+    "against drm", "data licence germany", "design science license",
+    "eff open audio license", "fal", "free art license",
+    "gnu free documentation license", "gnu fdl", "miros license",
+    "open government", "talis community license"
+]
+
+structured_formats = {
+    2: ["xls", "xlsx", "mdb", "esri rest", "excel"],
+    3: [
+        "csv", "comma separated values", "tsv", "tab separated values", "wms",
+        "web mapping service", "geojson", "wfs", "web feature service", "kml",
+        "kmz", "json", "xml", "shp", "rss", "gpx"
+    ],
+    4: [
+        "csv geo au", "sparql", "rdf", "relational document format", "json ld"
+    ]
+}
+
+
+def _get_stars_from_solr(id):
+    results = query_for('package').run({
+        'q': 'id:' + id,
+        'fl': 'extras_five_star_rating'
+    })['results']
+    try:
+        return int(results[0]['extras']['five_star_rating'])
+    except Exception as e:
+        logger.warn(
+            'Unable to get rating of <{}>: {}'.format(id, e)
+        )
+        return 0
+
+
+def check_link(url):
+    try:
+        if not h.url_is_local(url):
+            requests.head(url, timeout=2).raise_for_status()
+    except Exception:
+        return False
+    return True
+
+
+def count_stars(pkg_dict):
+    """Count stars as per https://5stardata.info
+    """
+    license = model.Package.get_license_register().get(pkg_dict['license_id'])
+    is_open = license and license.isopen()
+    license_id = license and license.id
+
+    resources = [{
+        'format': res.get('format'),
+        'url': res['url']
+    } for res in pkg_dict.get('resources', [])]
+    if not resources:
+        resources = [
+            {
+                'format': format,
+                'url': url
+            } for (url, format) in
+            zip(pkg_dict.get('res_url', []), (pkg_dict.get('res_format', [])))
+        ]
+
+    text = '\n'.join([pkg_dict.get('notes')] +
+                     pkg_dict.get('res_description', []) + [
+                         res['description']
+                         for res in pkg_dict.get('resources', [])
+                         if res.get('description')
+                     ])
+    data_dict = dict(
+        url=h.url_for(
+            controller='package',
+            action='read',
+            id=pkg_dict['id'],
+            qualified=True
+        ),
+        license='cc' if is_open else (license_id or ''),
+        notes=text,
+        resources=resources,
+    )
+    return tk.get_action('five_star_rating')(None, data_dict)['rating']
+
 
 def _normalize_res(res):
     return {

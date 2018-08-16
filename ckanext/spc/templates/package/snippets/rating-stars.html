@@ -1,0 +1,7 @@
+<div class="pull-right" title="{{ rating }} star{%if rating!=1%}s{%endif%}">
+    {% for i in range(rating) %}
+	<i class="fa fa-star" style="color: orange"></i>
+    {% else %}
+	<i class="fa fa-star-o" style="color: orange"></i>
+    {% endfor %}
+</div>

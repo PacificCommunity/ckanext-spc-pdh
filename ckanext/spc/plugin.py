@@ -72,6 +72,7 @@ class SpcPlugin(plugins.SingletonPlugin):
         )
 
         for item in results['results']:
+            item['five_star_rating'] = spc_utils._get_stars_from_solr(item['id'])
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
             item['short_notes'] = h.whtext.truncate(item['notes'])
 
@@ -96,5 +97,14 @@ class SpcPlugin(plugins.SingletonPlugin):
     def before_index(self, pkg_dict):
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
+        )
+        pkg_dict.update(
+            extras_five_star_rating=spc_utils.count_stars(pkg_dict)
+        )
+        return pkg_dict
+
+    def after_show(self, context, pkg_dict):
+        pkg_dict['five_star_rating'] = spc_utils._get_stars_from_solr(
+            pkg_dict['id']
         )
         return pkg_dict

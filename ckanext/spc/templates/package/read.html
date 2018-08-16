@@ -1,0 +1,5 @@
+{% ckan_extends %}
+{% block page_heading %}
+    {{ super() }}
+    {% snippet 'package/snippets/rating-stars.html', rating=pkg.get('five_star_rating', 0) %}
+{% endblock %}
