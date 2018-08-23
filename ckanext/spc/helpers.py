@@ -43,7 +43,7 @@ def get_conf_site_url():
 
 
 def get_eez_options():
-    return [
+    return [{'text': 'All countries', 'value': 'all'}] + [
         {
             'text': feature['properties']['GeoName'],
             'value': json.dumps(feature['geometry'])
