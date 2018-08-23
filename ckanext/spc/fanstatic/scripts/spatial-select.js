@@ -77,7 +77,23 @@ this.ckan.module('spatial-select', function ($, _) {
       });
       spatialField.trigger('input');
       $('#predefined_areas').on('change', function(event) {
-	spatialField.val(event.val).trigger('input');
+	var val = event.val;
+	if (val === 'all') {
+	  val = {type: 'MultiPolygon', coordinates: []};
+	  Array.prototype.slice.apply(event.target.options, [0]).forEach(
+	    function(option) {
+	      var item = option.value;
+	      if (!item || item === 'all') {
+		return;
+	      }
+	      var geoJson = JSON.parse(item);
+	      var coord = geoJson.type === 'MultiPolygon' ? geoJson.coordinates : [geoJson.coordinates];
+	      val.coordinates = val.coordinates.concat(coord);
+	    }
+	  );
+	  val = JSON.stringify(val);
+	}
+	  spatialField.val(val).trigger('input');
       });
       // OK map time
       map = ckan.commonLeafletMap(
