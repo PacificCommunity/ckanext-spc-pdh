@@ -43,10 +43,10 @@ def get_conf_site_url():
 
 
 def get_eez_options():
-    return [{'text': 'All countries', 'value': 'all'}] + [
+    return [{'text': 'All countries', 'value': 'all'}] + sorted([
         {
             'text': feature['properties']['GeoName'],
             'value': json.dumps(feature['geometry'])
         }
         for feature in eez
-    ]
+    ], key=lambda o: o['text'])
