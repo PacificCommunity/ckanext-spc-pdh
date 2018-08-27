@@ -1,0 +1,97 @@
+{
+  "scheming_version": 1,
+  "dataset_type": "biodiversity_data",
+  "about": "A reimplementation of the default CKAN dataset schema",
+  "about_url": "http://github.com/ckan/ckanext-scheming",
+  "dataset_fields": [
+    {
+      "field_name": "title",
+      "label": "Title",
+      "preset": "title"
+    },
+    {
+      "field_name": "name",
+      "label": "URL",
+      "preset": "dataset_slug",
+      "form_placeholder": "eg. my-dataset"
+    },
+    {
+      "field_name": "thematic_area_string",
+      "label": "Topic",
+      "preset": "multiple_select",
+      "choices": [
+        {
+          "label": "Social",
+          "value": "Social"
+        },
+        {
+          "label": "Statistics",
+          "value": "Statistics"
+        },
+        {
+          "label": "Climate Change",
+          "value": "Climate Change"
+        },
+        {
+          "label": "Fisheries",
+          "value": "Fisheries"
+        },
+        {
+          "label": "Geoscience",
+          "value": "Geoscience"
+        },
+        {
+          "label": "Land Resources",
+          "value": "Land Resources"
+        },
+        {
+          "label": "Human Rights",
+          "value": "Human Rights"
+        },
+        {
+          "label": "Health",
+          "value": "Health"
+        },
+        {
+          "label": "Energy",
+          "value": "Energy"
+        },
+        {
+          "label": "Education",
+          "value": "Education"
+        },
+        {
+          "label": "Economic Development",
+          "value": "Economic Development"
+        },
+        {
+          "label": "PCCOS",
+          "value": "PCCOS"
+        }
+      ]
+    }
+  ],
+  "resource_fields": [
+    {
+      "field_name": "url",
+      "label": "URL",
+      "preset": "resource_url_upload"
+    },
+    {
+      "field_name": "name",
+      "label": "Name",
+      "form_placeholder": "eg. January 2011 Gold Prices"
+    },
+    {
+      "field_name": "description",
+      "label": "Description",
+      "form_snippet": "markdown.html",
+      "form_placeholder": "Some useful notes about the data"
+    },
+    {
+      "field_name": "format",
+      "label": "Format",
+      "preset": "resource_format_autocomplete"
+    }
+  ] 
+}
