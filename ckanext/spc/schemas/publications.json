@@ -7,7 +7,6 @@
     {
       "name": "Dublin Core Metadata Element Set",
       "id": "dcm_element_set",
-      "default_active": true,
       "fields_list":
       [
         "title",
@@ -15,7 +14,7 @@
         "thematic_area_string",
         "creator",
         "tag_string",
-        "description",
+        "notes",
         "owner_org",
         "contributor",
         "type",
@@ -28,7 +27,6 @@
     {
       "name": "DCMI Metadata Terms",
       "id": "dcm_metadata_terms",
-      "default_active": true,
       "fields_list":
       [
         "alternative",
@@ -58,7 +56,6 @@
     {
       "name": "Relation",
       "id": "relation",
-      "default_active": true,
       "fields_list":
       [
         "is_version_of",
@@ -78,7 +75,6 @@
     {
       "name": "Date",
       "id": "date",
-      "default_active": true,
       "fields_list":
       [
         "date_accepted",
@@ -167,7 +163,7 @@
       "form_placeholder": "eg. economy, mental health, government"
     },
     {
-      "field_name": "description",
+      "field_name": "notes",
       "label": "Description",
       "form_snippet": "markdown.html"
     },

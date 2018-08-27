@@ -1,0 +1,312 @@
+{
+  "scheming_version": 1,
+  "dataset_type": "ecological_data",
+  "about": "A reimplementation of the default CKAN dataset schema",
+  "about_url": "http://github.com/ckan/ckanext-scheming",
+  "field_groups": [
+    {
+      "name": "Dataset Type",
+      "id": "dataset_type",
+      "fields_list":
+      [
+        "title",
+        "name",
+        "thematic_area_string",
+        "purpose",
+        "maintenance",
+        "contact",
+        "publisher",
+        "pub_place",
+        "methods",
+        "project"
+      ]
+    },
+    {
+      "name": "Maintenance Type",
+      "id": "maintenance_type",
+      "fields_list":
+      [
+        "notes",
+        "update_freq"
+      ]
+    },
+    {
+      "name": "Change History",
+      "id": "change_history",
+      "fields_list":
+      [
+        "change_scope",
+        "old_value",
+        "change_date",
+        "comment"
+      ]
+    },
+    {
+      "name": "Data Table",
+      "id": "data_table",
+      "fields_list":
+      [
+        "attribute_list",
+        "constraint",
+        "case_sensitive",
+        "number_of_records"
+      ]
+    },
+    {
+      "name": "Data Table",
+      "id": "data_table",
+      "fields_list":
+      [
+        "attribute_list",
+        "constraint",
+        "case_sensitive",
+        "number_of_records"
+      ]
+    }
+  ],
+  "dataset_fields": [
+    {
+      "field_name": "title",
+      "label": "Title",
+      "preset": "title"
+    },
+    {
+      "field_name": "name",
+      "label": "URL",
+      "preset": "dataset_slug",
+      "form_placeholder": "eg. my-dataset"
+    },
+    {
+      "field_name": "thematic_area_string",
+      "label": "Topic",
+      "preset": "multiple_select",
+      "choices": [
+        {
+          "label": "Social",
+          "value": "Social"
+        },
+        {
+          "label": "Statistics",
+          "value": "Statistics"
+        },
+        {
+          "label": "Climate Change",
+          "value": "Climate Change"
+        },
+        {
+          "label": "Fisheries",
+          "value": "Fisheries"
+        },
+        {
+          "label": "Geoscience",
+          "value": "Geoscience"
+        },
+        {
+          "label": "Land Resources",
+          "value": "Land Resources"
+        },
+        {
+          "label": "Human Rights",
+          "value": "Human Rights"
+        },
+        {
+          "label": "Health",
+          "value": "Health"
+        },
+        {
+          "label": "Energy",
+          "value": "Energy"
+        },
+        {
+          "label": "Education",
+          "value": "Education"
+        },
+        {
+          "label": "Economic Development",
+          "value": "Economic Development"
+        },
+        {
+          "label": "PCCOS",
+          "value": "PCCOS"
+        }
+      ]
+    },
+    {
+      "field_name": "purpose"
+    },
+    {
+      "field_name": "maintenance"
+    },
+    {
+      "field_name": "contact",
+      "required": true
+    },
+    {
+      "field_name": "publisher"
+    },
+    {
+      "field_name": "pub_place"
+    },
+    {
+      "field_name": "methods"
+    },
+    {
+      "field_name": "project"
+    },
+
+  
+    {
+      "field_name": "spatial_raster"
+    },
+    {
+      "field_name": "spatial_vector"
+    },
+    {
+      "field_name": "stored_procedure"
+    },
+    {
+      "field_name": "view"
+    },
+    {
+      "field_name": "other_entity"
+    },
+
+
+    {
+      "field_name": "notes",
+      "label": "Description",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "update_freq",
+      "label": "maintenanceUpdateFrequency",
+      "preset": "select",
+      "choices": [
+        {
+          "value": "annually",
+          "label": "Annually"
+        },
+        {
+          "value": "asNeeded",
+          "label": "As needed"
+        },
+        {
+          "value": "biannually",
+          "label": "Biannually"
+        },
+        {
+          "value": "continually",
+          "label": "Continually"
+        },
+        {
+          "value": "daily",
+          "label": "Daily"
+        },
+        {
+          "value": "irregular",
+          "label": "Irregular"
+        },
+        {
+          "value": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "value": "notPlanned",
+          "label": "Not planned"
+        },
+        {
+          "value": "weekly",
+          "label": "Weekly"
+        },
+        {
+          "value": "unkown",
+          "label": "Unkown"
+        },
+        {
+          "value": "otherMaintenancePeriod",
+          "label": "Other maintenance period"
+        }
+      ]
+    },
+
+
+    {
+      "field_name": "change_scope",
+      "required": true,
+      "help_text": "The expression should unambiguously identify the entity(s) and attribute(s) that were changed."
+    },
+    {
+      "field_name": "old_value",
+      "required": true,
+      "help_text": "The previous value or an expression that describes the previous value of the data."
+    },
+    {
+      "field_name": "change_date",
+      "required": true,
+      "help_text": "The date the changes were applied.",
+      "preset": "date"
+    },
+    {
+      "field_name": "comment",
+      "help_text": "Explanation or justification for the change made to the data."
+    },
+
+    {
+      "field_name": "attribute_list",
+      "required": true,
+      "help_text": "The list of attributes associated with this entity.",
+      "preset": "tag_string_autocomplete"
+    },
+    {
+      "field_name": "constraint",
+      "help_text": "Description of any relational constraints on this entity."
+    },
+    {
+      "field_name": "case_sensitive",
+      "preset": "select",
+      "choices": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "field_name": "number_of_records",
+      "help_text": "This is typically an integer value, and only includes records that represent observations."
+    }
+  ],
+  "resource_fields": [
+    {
+      "field_name": "url",
+      "label": "URL",
+      "preset": "resource_url_upload"
+    },
+    {
+      "field_name": "name",
+      "label": "Name",
+      "form_placeholder": "eg. January 2011 Gold Prices"
+    },
+    {
+      "field_name": "description",
+      "label": "Description",
+      "form_snippet": "markdown.html",
+      "form_placeholder": "Some useful notes about the data"
+    },
+    {
+      "field_name": "format",
+      "label": "Format",
+      "preset": "resource_format_autocomplete"
+    },
+    {
+      "field_name": "system"
+    },
+    {
+      "field_name": "scope"
+    }
+  ]
+}
