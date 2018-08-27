@@ -54,7 +54,7 @@ def get_conf_site_url():
 
 
 def get_eez_options():
-    # {'text': 'All countries', 'value': 'all'}] +
+
     options = sorted([{
         'text': feature['properties']['GeoName'],
         'value': json.dumps(feature['geometry'])
@@ -70,4 +70,5 @@ def get_eez_options():
             ).format(option['text']))
             continue
         result.append(option)
+    # result.append({'text': 'All countries', 'value': 'all'})
     return result
