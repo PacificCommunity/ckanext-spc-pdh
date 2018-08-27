@@ -1,0 +1,471 @@
+{
+  "scheming_version": 1,
+  "dataset_type": "publications",
+  "about": "A reimplementation of the default CKAN dataset schema",
+  "about_url": "http://github.com/ckan/ckanext-scheming",
+  "field_groups": [
+    {
+      "name": "Dublin Core Metadata Element Set",
+      "id": "dcm_element_set",
+      "default_active": true,
+      "fields_list":
+      [
+        "title",
+        "name",
+        "thematic_area_string",
+        "creator",
+        "tag_string",
+        "description",
+        "owner_org",
+        "contributor",
+        "type",
+        "identifier",
+        "source",
+        "language",
+        "rights"
+      ]
+    },
+    {
+      "name": "DCMI Metadata Terms",
+      "id": "dcm_metadata_terms",
+      "default_active": true,
+      "fields_list":
+      [
+        "alternative",
+        "abstract",
+        "access_rights",
+        "accrual_method",
+        "accrual_periodicity",
+        "accrual_policy",
+        "audience",
+        "available_from",
+        "available_to",
+        "bibliographic_citation ",
+        "conforms_to",
+        "education_level",
+        "instructional_method",
+        "issued",
+        "license_id",
+        "mediator",
+        "medium",
+        "provenance",
+        "rights_holder",
+        "spatial",
+        "table_of_contents",
+        "temporal"
+      ]
+    },
+    {
+      "name": "Relation",
+      "id": "relation",
+      "default_active": true,
+      "fields_list":
+      [
+        "is_version_of",
+        "has_version",
+        "is_replaced_by",
+        "replaces",
+        "is_required_by",
+        "requires",
+        "is_part_of",
+        "has_part",
+        "is_referenced_by",
+        "references",
+        "is_format_of",
+        "has_format"
+      ]
+    },
+    {
+      "name": "Date",
+      "id": "date",
+      "default_active": true,
+      "fields_list":
+      [
+        "date_accepted",
+        "date_copyrighted",
+        "date_submitted",
+        "valid"
+      ]
+    }
+  ],
+  "dataset_fields": [
+    {
+      "field_name": "title",
+      "label": "Title",
+      "preset": "title"
+    },
+    {
+      "field_name": "name",
+      "label": "URL",
+      "preset": "dataset_slug",
+      "form_placeholder": "eg. my-dataset"
+    },
+    {
+      "field_name": "thematic_area_string",
+      "label": "Topic",
+      "preset": "multiple_select",
+      "choices": [
+        {
+          "label": "Social",
+          "value": "Social"
+        },
+        {
+          "label": "Statistics",
+          "value": "Statistics"
+        },
+        {
+          "label": "Climate Change",
+          "value": "Climate Change"
+        },
+        {
+          "label": "Fisheries",
+          "value": "Fisheries"
+        },
+        {
+          "label": "Geoscience",
+          "value": "Geoscience"
+        },
+        {
+          "label": "Land Resources",
+          "value": "Land Resources"
+        },
+        {
+          "label": "Human Rights",
+          "value": "Human Rights"
+        },
+        {
+          "label": "Health",
+          "value": "Health"
+        },
+        {
+          "label": "Energy",
+          "value": "Energy"
+        },
+        {
+          "label": "Education",
+          "value": "Education"
+        },
+        {
+          "label": "Economic Development",
+          "value": "Economic Development"
+        },
+        {
+          "label": "PCCOS",
+          "value": "PCCOS"
+        }
+      ]
+    },
+    {
+      "field_name": "creator",
+      "label": "Creator",
+      "help_text": "An entity primarily responsible for making the resource. Examples of a Creator include a person, an organization, or a service."
+    },
+    {
+      "field_name": "tag_string",
+      "label": "Subject",
+      "preset": "tag_string_autocomplete",
+      "form_placeholder": "eg. economy, mental health, government"
+    },
+    {
+      "field_name": "description",
+      "label": "Description",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "owner_org",
+      "label": "Publisher",
+      "preset": "dataset_organization"
+    },
+    {
+      "field_name": "contributor",
+      "label": "Contributor",
+      "help_text": "An entity responsible for making contributions to the resource."
+    },
+    {
+      "field_name": "type",
+      "label": "Type",
+      "help_text": "The nature or genre of the resource."
+    },
+    {
+      "field_name": "identifier",
+      "label": "Identifier",
+      "help_text": "An unambiguous reference to the resource within a given context."
+    },
+    {
+      "field_name": "source",
+      "label": "Source",
+      "help_text": "A related resource from which the described resource is derived."
+    },
+    {
+      "field_name": "language",
+      "label": "Language",
+      "form_snippet": "language.html"
+    },
+    {
+      "field_name": "rights",
+      "label": "Rights",
+      "help_text": "Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights."
+    },
+
+
+    {
+      "field_name": "alternative",
+      "label": "Alternative Title",
+      "help_text": "The distinction between titles and alternative titles is application-specific."
+    },
+    {
+      "field_name": "abstract",
+      "label": "Abstract",
+      "help_text": "A summary (of the content) of the resource.",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "access_rights",
+      "label": "Access Rights",
+      "help_text": "Information about who can access the resource or an indication of its security status."
+    },
+    {
+      "field_name": "accrual_method",
+      "label": "Accrual Method",
+      "help_text": "The method by which items are added to a collection. ",
+      "preset": "select",
+      "choices": [
+        {
+          "value": "purchase",
+          "label": "Purchase"
+        },
+        {
+          "value": "donation",
+          "label": "Donation"
+        },
+        {
+          "value": "item_creation",
+          "label": "Item Creation"
+        }
+      ]
+    },
+    {
+      "field_name": "accrual_periodicity",
+      "label": "Accrual Periodicity",
+      "help_text": "The frequency with which items are added to a collection."
+    },
+    {
+      "field_name": "accrual_policy",
+      "label": "Accrual Policy",
+      "help_text": "The policy governing the addition of items to a collection. The Accrual Policy for a library subject collection for which new books and journals are bought - Active. The Accrual Policy for a special collection to which items are added only of they are donated or deposited by an external agent - Passive.",
+      "preset": "select",
+      "choices": [
+        {
+          "value": "active",
+          "label": "Active"
+        },
+        {
+          "value": "passive",
+          "label": "Passive"
+        }
+      ]
+    },
+    {
+      "field_name": "audience",
+      "label": "Audience",
+      "help_text": "A class of entity for whom the resource is intended or useful."
+    },
+    {
+      "field_name": "available_from",
+      "label": "Date Available From",
+      "help_text": "Date (often a range) that the resource became or will become available.",
+      "preset": "date"
+    },
+    {
+      "field_name": "available_to",
+      "label": "Date Available To",
+      "help_text": "Date (often a range) that the resource became or will become available.",
+      "preset": "date"
+    },
+    {
+      "field_name": "bibliographic_citation ",
+      "label": "Bibliographic Citation",
+      "help_text": "A bibliographic reference for the resource."
+    },
+    {
+      "field_name": "conforms_to",
+      "label": "Conforms To",
+      "help_text": "An established standard to which the described resource conforms."
+    },
+    {
+      "field_name": "education_level",
+      "label": "Audience Education Level",
+      "help_text": "A class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended."
+    },
+    {
+      "field_name": "instructional_method",
+      "label": "Instructional Method",
+      "help_text": "A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support."
+    },
+    {
+      "field_name": "issued",
+      "label": "Date Issued",
+      "help_text": "Date of formal issuance (e.g., publication) of the resource.",
+      "preset": "date"
+    },
+    {
+      "field_name": "license_id",
+      "label": "License",
+      "form_snippet": "license.html",
+      "help_text": "License definitions and additional information can be found at http://opendefinition.org/"
+    },
+    {
+      "field_name": "mediator",
+      "label": "Mediator",
+      "help_text": "An entity that mediates access to the resource and for whom the resource is intended or useful. In an educational context, a mediator might be a parent, teacher, teaching assistant, or care-giver."
+    },
+    {
+      "field_name": "medium",
+      "label": "Medium",
+      "help_text": "The material or physical carrier of the resource.",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "provenance",
+      "label": "Provenance",
+      "help_text": "A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "rights_holder",
+      "label": "Rights Holder",
+      "help_text": "A person or organization owning or managing rights over the resource."
+    },
+    {
+      "field_name": "spatial",
+      "label": "Spatial Coverage",
+      "form_placeholder": "{}",
+      "form_snippet": "spatial.html",
+      "form_attrs": {
+        "data-module": "friendly-coords?",
+        "class": "hide?"
+      },
+      "display_snippet": null
+    },
+    {
+      "field_name": "temporal",
+      "label": "Temporal Coverage",
+      "help_text": "Temporal characteristics of the resource."
+    },
+    {
+      "field_name": "table_of_contents",
+      "label": "Table Of Contents",
+      "help_text": "A list of subunits of the resource."
+    },
+
+
+    {
+      "field_name": "is_version_of",
+      "label": "Is Version Of",
+      "help_text": "A related resource of which the described resource is a version, edition, or adaptation."
+    },
+    {
+      "field_name": "has_version",
+      "label": "Has Version",
+      "help_text": "A related resource that is a version, edition, or adaptation of the described resource."
+    },
+    {
+      "field_name": "is_replaced_by",
+      "label": "Is Replaced By",
+      "help_text": "A related resource that supplants, displaces, or supersedes the described resource."
+    },
+    {
+      "field_name": "replaces",
+      "label": "Replaces",
+      "help_text": "A related resource that is supplanted, displaced, or superseded by the described resource."
+    },
+    {
+      "field_name": "is_required_by",
+      "label": "Is Required By",
+      "help_text": "A related resource that requires the described resource to support its function, delivery, or coherence."
+    },
+    {
+      "field_name": "requires",
+      "label": "Requires",
+      "help_text": "A related resource that is required by the described resource to support its function, delivery, or coherence."
+    },
+    {
+      "field_name": "is_part_of",
+      "label": "Is Part Of",
+      "help_text": "A related resource in which the described resource is physically or logically included."
+    },
+    {
+      "field_name": "has_part",
+      "label": "Has Part",
+      "help_text": "A related resource that is included either physically or logically in the described resource."
+    },
+    {
+      "field_name": "is_referenced_by",
+      "label": "Is Referenced By",
+      "help_text": "A related resource that references, cites, or otherwise points to the described resource."
+    },
+    {
+      "field_name": "references",
+      "label": "References",
+      "help_text": "A related resource that is referenced, cited, or otherwise pointed to by the described resource."
+    },
+    {
+      "field_name": "is_format_of",
+      "label": "Is Format Of",
+      "help_text": "A related resource that is substantially the same as the described resource, but in another format."
+    },
+    {
+      "field_name": "has_format",
+      "label": "Has Format",
+      "help_text": "A related resource that is substantially the same as the pre-existing described resource, but in another format."
+    },
+
+    {
+      "field_name": "date_accepted",
+      "label": "Date Accepted",
+      "help_text": "Date of acceptance of the resource.",
+      "preset": "date"
+    },
+    {
+      "field_name": "date_copyrighted",
+      "label": "Date Copyrighted",
+      "help_text": "Date of copyright.",
+      "preset": "date"
+    },
+    {
+      "field_name": "date_submitted",
+      "label": "Date Submitted",
+      "help_text": "Date of submission of the resource.",
+      "preset": "date"
+    },
+    {
+      "field_name": "valid",
+      "label": "Date Valid",
+      "help_text": "Date of validity of a resource.",
+      "preset": "date"
+    }
+  ],
+  "resource_fields": [
+    {
+      "field_name": "url",
+      "label": "URL",
+      "preset": "resource_url_upload"
+    },
+    {
+      "field_name": "name",
+      "label": "Name",
+      "form_placeholder": "eg. January 2011 Gold Prices"
+    },
+    {
+      "field_name": "description",
+      "label": "Description",
+      "form_snippet": "markdown.html",
+      "form_placeholder": "Some useful notes about the data"
+    },
+    {
+      "field_name": "format",
+      "label": "Format",
+      "preset": "resource_format_autocomplete"
+    }
+  ]
+}
