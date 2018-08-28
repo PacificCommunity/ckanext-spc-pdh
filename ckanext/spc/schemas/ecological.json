@@ -13,17 +13,13 @@
         "name",
         "thematic_area_string",
         "purpose",
-        "maintenance",
-        "contact",
-        "publisher",
-        "pub_place",
-        "methods",
-        "project"
+        "owner_org",
+        "pub_place"
       ]
     },
     {
-      "name": "Maintenance Type",
-      "id": "maintenance_type",
+      "name": "Maintenance",
+      "id": "maintenance",
       "fields_list":
       [
         "notes",
@@ -42,25 +38,48 @@
       ]
     },
     {
-      "name": "Data Table",
-      "id": "data_table",
+      "name": "Contact",
+      "id": "contact",
       "fields_list":
       [
-        "attribute_list",
-        "constraint",
-        "case_sensitive",
-        "number_of_records"
+        "organization_name",
+        "position_name",
+        "phone",
+        "email",
+        "online_url",
+        "user_id"
       ]
     },
     {
-      "name": "Data Table",
-      "id": "data_table",
+      "name": "Individual Name",
+      "id": "individual_name",
       "fields_list":
       [
-        "attribute_list",
-        "constraint",
-        "case_sensitive",
-        "number_of_records"
+        "surname",
+        "given_name",
+        "salutation"
+      ]
+    },
+    {
+      "name": "Adress",
+      "id": "adress",
+      "fields_list":
+      [
+        "delivery_point",
+        "city",
+        "administrative_area",
+        "postal_code",
+        "country"
+      ]
+    },
+    {
+      "name": "Methods",
+      "id": "methods",
+      "fields_list":
+      [
+        "method_step",
+        "sampling",
+        "quality_control"
       ]
     }
   ],
@@ -132,43 +151,20 @@
       ]
     },
     {
-      "field_name": "purpose"
+      "field_name": "purpose",
+      "label": "Purpose",
+      "help_text": "A description of the purpose of this dataset."
     },
     {
-      "field_name": "maintenance"
+      "field_name": "owner_org",
+      "label": "Publisher",
+      "preset": "dataset_organization"
     },
     {
-      "field_name": "contact",
-      "required": true
-    },
-    {
-      "field_name": "publisher"
-    },
-    {
-      "field_name": "pub_place"
-    },
-    {
-      "field_name": "methods"
-    },
-    {
-      "field_name": "project"
-    },
-
-  
-    {
-      "field_name": "spatial_raster"
-    },
-    {
-      "field_name": "spatial_vector"
-    },
-    {
-      "field_name": "stored_procedure"
-    },
-    {
-      "field_name": "view"
-    },
-    {
-      "field_name": "other_entity"
+      "field_name": "pub_place",
+      "label": "Place of publication",
+      "form_snippet": "markdown.html",
+      "help_text": "The pubPlace field is the location where the resource was published, which may be different from where the resource was created."
     },
 
 
@@ -179,7 +175,7 @@
     },
     {
       "field_name": "update_freq",
-      "label": "maintenanceUpdateFrequency",
+      "label": "Maintenance Update Frequency",
       "preset": "select",
       "choices": [
         {
@@ -232,52 +228,120 @@
 
     {
       "field_name": "change_scope",
-      "required": true,
+      "label": "Change Scope",
       "help_text": "The expression should unambiguously identify the entity(s) and attribute(s) that were changed."
     },
     {
       "field_name": "old_value",
-      "required": true,
+      "label": "Old Value",
       "help_text": "The previous value or an expression that describes the previous value of the data."
     },
     {
       "field_name": "change_date",
-      "required": true,
+      "label": "Change Date",
       "help_text": "The date the changes were applied.",
       "preset": "date"
     },
     {
       "field_name": "comment",
+      "label": "Comment",
       "help_text": "Explanation or justification for the change made to the data."
     },
 
+
     {
-      "field_name": "attribute_list",
+      "field_name": "organization_name",
+      "label": "Organization Name",
       "required": true,
-      "help_text": "The list of attributes associated with this entity.",
-      "preset": "tag_string_autocomplete"
+      "help_text": "The responsible party field contains the full name of the organization that is associated with the resource. This field is intended to describe which institution or overall organization is associated with the resource being described."
     },
     {
-      "field_name": "constraint",
-      "help_text": "Description of any relational constraints on this entity."
+      "field_name": "position_name",
+      "label": "Position Name",
+      "required": true,
+      "help_text": "This field is intended to be used instead of a particular person or full organization name. If the associated person who holds the role changes frequently, then Position Name would be used for consistency."
     },
     {
-      "field_name": "case_sensitive",
-      "preset": "select",
-      "choices": [
-        {
-          "value": "yes",
-          "label": "Yes"
-        },
-        {
-          "value": "no",
-          "label": "No"
-        }
-      ]
+      "field_name": "phone",
+      "label": "Phone"
     },
     {
-      "field_name": "number_of_records",
-      "help_text": "This is typically an integer value, and only includes records that represent observations."
+      "field_name": "email",
+      "label": "Email Adress"
+    },
+    {
+      "field_name": "phone",
+      "label": "Phone"
+    },
+    {
+      "field_name": "online_url",
+      "label": "URL",
+      "help_text": "A link to associated online information, usually a web site. When the party represents an organization, this is the URL to a website or other online information about the organization. If the party is an individual, it might be their personal web site or other related online information about the party.",
+      "display_snippet": "link.html"
+    },
+    {
+      "field_name": "user_id",
+      "label": "User Id",
+      "help_text": "An identifier that links this party to a directory of personnel. Although specific contact information for a party might change, the underlying correspondence to a real individual does not. This identifier provides a pointer within a personnel directory that may contain further, and possibly more current, information about the party.",
+      "form_snippet": "markdown.html"
+    },
+
+
+    {
+      "field_name": "surname",
+      "label": "Surname",
+      "required": true
+    },
+    {
+      "field_name": "given_name",
+      "label": "Given Name"
+    },
+    {
+      "field_name": "salutation",
+      "label": "Salutation",
+      "help_text": "The salutation field is used in addressing an individual with a particular title, such as Dr., Ms., Mrs., Mr., etc."
+    },
+
+
+    {
+      "field_name": "delivery_point",
+      "label": "Delivery Point",
+      "help_text": "The delivery point field is used for the physical address for postal communication. This field is used to accommodate the many different international conventions that are the equivalent to a U.S. 'street address'."
+    },
+    {
+      "field_name": "city",
+      "label": "City"
+    },
+    {
+      "field_name": "administrative_area",
+      "label": "Administrative Areae"
+    },
+    {
+      "field_name": "postal_code",
+      "label": "Postal Code"
+    },
+    {
+      "field_name": "country",
+      "label": "Country"
+    },
+
+
+    {
+      "field_name": "method_step",
+      "label": "Method Step",
+      "help_text": "The methodStep field allows for repeated sets of elements that document a series of procedures followed to produce a data object. These include text descriptions of the procedures, relevant literature, software, instrumentation, source data and any quality control measures taken.",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "sampling",
+      "label": "Sampling",
+      "help_text": "Description of sampling procedures including the geographic, temporal and taxonomic coverage of the study. ","form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "quality_control",
+      "label": "Quality Control",
+      "help_text": "The qualityControl field provides a location for the description of actions taken to either control or assess the quality of data resulting from the associated method step. A quality control description should identify a quality goal and describe prescriptive steps taken to ensure that the data meet those standards and/or postscriptive steps taken to assess the extent to which they are met. A quality control statement is associated with the methodStep that could have affected the targeted quality goal.",
+      "form_snippet": "markdown.html"
     }
   ],
   "resource_fields": [
@@ -301,12 +365,6 @@
       "field_name": "format",
       "label": "Format",
       "preset": "resource_format_autocomplete"
-    },
-    {
-      "field_name": "system"
-    },
-    {
-      "field_name": "scope"
     }
   ]
 }
