@@ -8,3 +8,9 @@
 	</a>
     {% endif %}
 {% endblock %}
+
+
+
+{% block organization_facets %}
+    {% snippet 'snippets/spc_facet_list.html', facet_titles=c.facet_titles, name=facet, extras={'id':c.group_dict.id} %}
+{% endblock %}

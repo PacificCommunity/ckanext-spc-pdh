@@ -121,6 +121,9 @@ header.navbar > .container .collapse {
 .dataset-list .dataset-item {
   color: #727474;
 }
+.ml-5 {
+  margin-left: 5px;
+}
 #main-menu {
   position: absolute;
   right: 30px;

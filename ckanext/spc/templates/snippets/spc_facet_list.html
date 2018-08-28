@@ -1,0 +1,8 @@
+<div class="filters">
+    <div>
+	{% for facet in c.facet_titles %}
+	    {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet, label_function=h.spc_type_facet_label if facet == 'type' else None, extras=extras) }}
+	{% endfor %}
+    </div>
+    <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>
+</div>
