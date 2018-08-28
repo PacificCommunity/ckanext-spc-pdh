@@ -1,0 +1,9 @@
+{% extends "package/base_form_page.html" %}
+
+{% block subtitle %}{{ _('Dataset Type') }}{% endblock %}
+
+
+{% block breadcrumb_content %}
+    <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
+    <li class="active"><a href="">{{ _('Dataset Type') }}</a></li>
+{% endblock %}
