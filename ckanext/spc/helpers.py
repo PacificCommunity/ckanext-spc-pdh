@@ -18,7 +18,7 @@ def get_helpers():
         spc_get_available_languages=spc_get_available_languages,
         url_for_logo=url_for_logo,
         get_conf_site_url=get_conf_site_url,
-        get_eez_options=get_eez_options
+        get_eez_options=get_eez_options,
     )
 
 

@@ -2,9 +2,14 @@ import logging
 import os
 import json
 
+from collections import OrderedDict
+from six import string_types
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+
+from ckan.common import _
+import ckanext.scheming.helpers as scheming_helpers
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
@@ -22,14 +27,14 @@ class SpcPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IFacets)
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
 
     # IRouter
-    def before_map(self, map):
-        from ckanext.spc.controllers.spc_package import PackageController
-        print(PackageController.choose_type)
+
+    def after_map(self, map):
         map.connect(
             'spc_dataset.new',
             '/{package_type}/new',
@@ -48,6 +53,11 @@ class SpcPlugin(plugins.SingletonPlugin):
     # IConfigurable
 
     def configure(self, config_):
+        self.dataset_types = OrderedDict([
+            (schema['dataset_type'], schema['about'])
+            for schema in scheming_helpers.scheming_dataset_schemas().values()
+        ])
+
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
         if not os.path.isfile(filepath):
             return
@@ -66,7 +76,14 @@ class SpcPlugin(plugins.SingletonPlugin):
     # ITemplateHelpers
 
     def get_helpers(self):
-        return spc_helpers.get_helpers()
+        helpers = {
+            'spc_dataset_type_label': lambda type: self.dataset_types[type],
+            'spc_type_facet_label': lambda item: self.dataset_types.get(
+                item['display_name'], item['display_name']
+            )
+        }
+        helpers.update(spc_helpers.get_helpers())
+        return helpers
 
     # IActions
 
@@ -84,6 +101,16 @@ class SpcPlugin(plugins.SingletonPlugin):
         return spc_validators.get_validators()
 
     # IPackageController
+
+    def before_search(self, search_params):
+        fq = search_params.get('fq')
+        if isinstance(fq, string_types):
+            search_params['fq'] = fq.replace(
+                'dataset_type:dataset', 'dataset_type:({})'.format(
+                    ' OR '.join([type for type in self.dataset_types])
+                )
+            )
+        return search_params
 
     def after_search(self, results, params):
         _org_cache = {}
@@ -131,3 +158,19 @@ class SpcPlugin(plugins.SingletonPlugin):
             pkg_dict['id']
         )
         return pkg_dict
+
+    # IFacets
+
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict['type'] = _('Dataset type')
+        return facets_dict
+
+    def group_facets(self, facets_dict, group_type, package_type):
+        facets_dict['type'] = _('Dataset type')
+        return facets_dict
+
+    def organization_facets(
+        self, facets_dict, organization_type, package_type
+    ):
+        facets_dict['type'] = _('Dataset type')
+        return facets_dict
