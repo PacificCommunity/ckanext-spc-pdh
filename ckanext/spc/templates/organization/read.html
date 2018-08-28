@@ -1,0 +1,10 @@
+{% ckan_extends %}
+
+{% block page_primary_action %}
+    {% if h.check_access('package_create', {'owner_org': c.group_dict.id}) %}
+	<a class="btn btn-primary" href="{{ h.url_for('spc_dataset.choose_type', group=c.group_dict.id) }}" >
+	    <i class=" fa fa-plus-square"></i>
+	    {{ _('Add Dataset') }}
+	</a>
+    {% endif %}
+{% endblock %}

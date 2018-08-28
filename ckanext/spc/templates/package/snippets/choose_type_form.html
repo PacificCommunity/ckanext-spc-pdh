@@ -1,0 +1,19 @@
+{% import 'macros/form.html' as form %}
+{% set action = c.form_action or '' %}
+
+{# This provides a full page that renders a form for adding a dataset. It can
+then itself be extended to add/remove blocks of functionality. #}
+<form id="dataset-edit" class="dataset-form form-horizontal" method="post" data-module="basic-form" novalidate>
+    <h2>Choose Dataset Type</h2>
+    {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
+
+    {{ form.select('type', label=_('Type'), options=options, selected='dataset', error=errors.type) }}
+
+    {% block form_actions %}
+	<div class="form-actions">
+	    {% block save_button %}
+		<button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next: Add Metadata') }}{% endblock %}</button>
+	    {% endblock %}
+	</div>
+    {% endblock %}
+</form>
