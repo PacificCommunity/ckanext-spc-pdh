@@ -39,10 +39,13 @@ class PackageController(base.BaseController):
             except KeyError:
                 errors = {'type': [_('Dataset type must be provided')]}
                 error_summary = {
-                    key.title(): value[0] for key, value in errors.items()
+                    key.title(): value[0]
+                    for key, value in errors.items()
                 }
             else:
-                return h.redirect_to('/' + dataset_type + '/new')
+                return h.redirect_to(
+                    'spc_dataset.new', package_type=dataset_type
+                )
 
         options = [
             {

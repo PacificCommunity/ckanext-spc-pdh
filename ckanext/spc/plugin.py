@@ -31,6 +31,13 @@ class SpcPlugin(plugins.SingletonPlugin):
         from ckanext.spc.controllers.spc_package import PackageController
         print(PackageController.choose_type)
         map.connect(
+            'spc_dataset.new',
+            '/{package_type}/new',
+            controller='package',
+            action='new'
+        )
+
+        map.connect(
             'spc_dataset.choose_type',
             '/dataset/new/choose_type',
             controller='ckanext.spc.controllers.spc_package:PackageController',
