@@ -3,6 +3,47 @@
   "dataset_type": "geographic_data",
   "about": "Geographic data",
   "about_url": "http://github.com/ckan/ckanext-scheming",
+  "field_groups": [
+    {
+      "name": "Dataset basic",
+      "id": "dataset_basic",
+      "fields_list":
+      [
+        "title",
+        "name",
+        "thematic_area_string",
+        "owner_org",
+        "license_id",
+        "notes",
+        "tag_string",
+        "spatial",
+        "temporal_coverage_from",
+        "temporal_coverage_to",
+        "lineage",
+        "statement",
+        "language"
+      ]
+    },
+    {
+      "name": "Cited Responsible Party",
+      "id": "cited_responsible_party",
+      "fields_list":
+      [
+        "crp_role",
+        "crp_organisation_name"
+      ]
+    },
+    {
+      "name": "Point of contact",
+      "id": "ci_responsible_party",
+      "fields_list":
+      [
+        "contact_role",
+        "contact_organisation_name",
+        "topicCategory"
+      ]
+    }
+  ],
   "dataset_fields": [
     {
       "field_name": "title",
@@ -80,6 +121,83 @@
       "label": "License",
       "form_snippet": "license.html",
       "help_text": "License definitions and additional information can be found at http://opendefinition.org/"
+    },
+    {
+      "field_name": "notes",
+      "label": "Abstract",
+      "form_snippet": "markdown.html",
+      "help_text": "The identification abstract provides additional information about the resource. This may allow users to obtain a better appreciation of the resource and assist them to determine fitness for purpose."
+    },
+    {
+      "field_name": "tag_string",
+      "label": "Keywords",
+      "preset": "tag_string_autocomplete"
+    },
+
+
+    {
+      "field_name": "crp_role",
+      "label": "Cited Responsible Party Role",
+      "required": true,
+      "help_text": "The role identifies the function that the individual, position and/or organisation performs in regards to the resource."
+    },
+    {
+      "field_name": "crp_organisation_name",
+      "label": "Cited Responsible Party Organisation name",
+      "help_text": "The name of the organisation responsible for the resource."
+    },
+
+
+    {
+      "field_name": "contact_role",
+      "label": "Contact Role",
+      "required": true
+    },
+    {
+      "field_name": "contact_organisation_name",
+      "label": "Contact Organisation name"
+    },
+    {
+      "field_name": "topic_category",
+      "label": "ISO Topic categories"
+    },
+
+
+    {
+      "field_name": "spatial",
+      "label": "Spatial Coverage",
+      "form_placeholder": "{}",
+      "form_snippet": "spatial.html",
+      "form_attrs": {
+        "data-module": "friendly-coords?",
+        "class": "hide?"
+      },
+      "display_snippet": null
+    },
+    {
+      "field_name": "temporal_coverage_from",
+      "label": "Temporal Coverage From",
+      "preset": "date"
+    },
+    {
+      "field_name": "temporal_coverage_to",
+      "label": "Temporal Coverage To",
+      "preset": "date"
+    },
+    {
+      "field_name": "lineage",
+      "label": "Lineaget"
+    },
+    {
+      "field_name": "statement",
+      "label": "Statement",
+      "form_snippet": "markdown.html",
+      "help_text": "This element provides a statement of the history of the resource. It can also include a textual explanation of the processing steps and source of the resource, although these attributes would be better described in their specific elements."
+    },
+    {
+      "field_name": "language",
+      "label": "Language",
+      "form_snippet": "language.html"
     }
   ],
   "resource_fields": [
