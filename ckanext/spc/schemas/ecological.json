@@ -12,6 +12,7 @@
         "title",
         "name",
         "thematic_area_string",
+        "license_id",
         "purpose",
         "owner_org",
         "pub_place"
@@ -149,6 +150,12 @@
           "value": "PCCOS"
         }
       ]
+    },
+    {
+      "field_name": "license_id",
+      "label": "License",
+      "form_snippet": "license.html",
+      "help_text": "License definitions and additional information can be found at http://opendefinition.org/"
     },
     {
       "field_name": "purpose",
