@@ -1,7 +1,7 @@
 {
   "scheming_version": 1,
   "dataset_type": "biodiversity_data",
-  "about": "A reimplementation of the default CKAN dataset schema",
+  "about": "Biodiversity data",
   "about_url": "http://github.com/ckan/ckanext-scheming",
   "dataset_fields": [
     {
@@ -104,5 +104,5 @@
       "label": "Format",
       "preset": "resource_format_autocomplete"
     }
-  ] 
+  ]
 }

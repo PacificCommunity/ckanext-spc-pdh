@@ -1,6 +1,7 @@
 {% ckan_extends %}
 
 {% block package_item %}
+    <span class="pull-right badge badge-info ml-5">{{ h.spc_dataset_type_label(package.type) }}</span>
     {% snippet 'package/snippets/rating-stars.html', rating=package.get('five_star_rating', 0) %}
     {{ super() }}
 {% endblock %}

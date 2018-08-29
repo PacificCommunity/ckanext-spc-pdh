@@ -1,7 +1,7 @@
 {
   "scheming_version": 1,
   "dataset_type": "ecological_data",
-  "about": "A reimplementation of the default CKAN dataset schema",
+  "about": "Ecological data",
   "about_url": "http://github.com/ckan/ckanext-scheming",
   "field_groups": [
     {

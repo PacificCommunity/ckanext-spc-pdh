@@ -29,7 +29,7 @@
     </div>
 </div>
 
-{% set default_extent=[[-15, 115], [-40, 155]] %}
+{% set default_extent=[[5, 160], [-20, 210]] %}
 <section id="dataset-map" class="module module-narrow module-shallow control-group">
     {% set map_config = h.get_common_map_config() %}
     <div class="dataset-map dataset-template" data-module="spatial-select" data-default_extent="{{ default_extent }}" data-module-map_config="{{ h.dump_json(map_config) }}" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}" data-raster-display="block" data-vector-display="block" data-non_spatial-display="none">

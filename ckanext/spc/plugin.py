@@ -2,15 +2,21 @@ import logging
 import os
 import json
 
+from collections import OrderedDict
+from six import string_types
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+
+from ckan.common import _
+import ckanext.scheming.helpers as scheming_helpers
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
 import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
+import ckanext.spc.controllers.spc_package
 
 logger = logging.getLogger(__name__)
 
@@ -21,12 +27,37 @@ class SpcPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IFacets)
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.IRoutes, inherit=True)
+
+    # IRouter
+
+    def after_map(self, map):
+        map.connect(
+            'spc_dataset.new',
+            '/{package_type}/new',
+            controller='package',
+            action='new'
+        )
+
+        map.connect(
+            'spc_dataset.choose_type',
+            '/dataset/new/choose_type',
+            controller='ckanext.spc.controllers.spc_package:PackageController',
+            action='choose_type'
+        )
+        return map
 
     # IConfigurable
 
     def configure(self, config_):
+        self.dataset_types = OrderedDict([
+            (schema['dataset_type'], schema['about'])
+            for schema in scheming_helpers.scheming_dataset_schemas().values()
+        ])
+
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
         if not os.path.isfile(filepath):
             return
@@ -45,7 +76,14 @@ class SpcPlugin(plugins.SingletonPlugin):
     # ITemplateHelpers
 
     def get_helpers(self):
-        return spc_helpers.get_helpers()
+        helpers = {
+            'spc_dataset_type_label': lambda type: self.dataset_types[type],
+            'spc_type_facet_label': lambda item: self.dataset_types.get(
+                item['display_name'], item['display_name']
+            )
+        }
+        helpers.update(spc_helpers.get_helpers())
+        return helpers
 
     # IActions
 
@@ -64,6 +102,16 @@ class SpcPlugin(plugins.SingletonPlugin):
 
     # IPackageController
 
+    def before_search(self, search_params):
+        fq = search_params.get('fq')
+        if isinstance(fq, string_types):
+            search_params['fq'] = fq.replace(
+                'dataset_type:dataset', 'dataset_type:({})'.format(
+                    ' OR '.join([type for type in self.dataset_types])
+                )
+            )
+        return search_params
+
     def after_search(self, results, params):
         _org_cache = {}
 
@@ -72,7 +120,9 @@ class SpcPlugin(plugins.SingletonPlugin):
         )
 
         for item in results['results']:
-            item['five_star_rating'] = spc_utils._get_stars_from_solr(item['id'])
+            item['five_star_rating'] = spc_utils._get_stars_from_solr(
+                item['id']
+            )
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
             item['short_notes'] = h.whtext.truncate(item['notes'])
 
@@ -108,3 +158,19 @@ class SpcPlugin(plugins.SingletonPlugin):
             pkg_dict['id']
         )
         return pkg_dict
+
+    # IFacets
+
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict['type'] = _('Dataset type')
+        return facets_dict
+
+    def group_facets(self, facets_dict, group_type, package_type):
+        facets_dict['type'] = _('Dataset type')
+        return facets_dict
+
+    def organization_facets(
+        self, facets_dict, organization_type, package_type
+    ):
+        facets_dict['type'] = _('Dataset type')
+        return facets_dict
