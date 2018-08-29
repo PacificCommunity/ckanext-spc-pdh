@@ -91,8 +91,8 @@
       "form_placeholder": "{}",
       "form_snippet": "spatial.html",
       "form_attrs": {
-	"data-module": "friendly-coords?",
-	"class": "hide?"
+        "data-module": "friendly-coords?",
+        "class": "hide?"
       },
       "display_snippet": null
     },
@@ -118,54 +118,54 @@
       "label": "Topic",
       "preset": "multiple_select",
       "choices": [
-	{
-	  "label": "Social",
-	  "value": "Social"
-	},
-	{
-	  "label": "Statistics",
-	  "value": "Statistics"
-	},
-	{
-	  "label": "Climate Change",
-	  "value": "Climate Change"
-	},
-	{
-	  "label": "Fisheries",
-	  "value": "Fisheries"
-	},
-	{
-	  "label": "Geoscience",
-	  "value": "Geoscience"
-	},
-	{
-	  "label": "Land Resources",
-	  "value": "Land Resources"
-	},
-	{
-	  "label": "Human Rights",
-	  "value": "Human Rights"
-	},
-	{
-	  "label": "Health",
-	  "value": "Health"
-	},
-	{
-	  "label": "Energy",
-	  "value": "Energy"
-	},
-	{
-	  "label": "Education",
-	  "value": "Education"
-	},
-	{
-	  "label": "Economic Development",
-	  "value": "Economic Development"
-	},
-	{
-	  "label": "PCCOS",
-	  "value": "PCCOS"
-	}
+        {
+          "label": "Social",
+          "value": "Social"
+        },
+        {
+          "label": "Statistics",
+          "value": "Statistics"
+        },
+        {
+          "label": "Climate Change",
+          "value": "Climate Change"
+        },
+        {
+          "label": "Fisheries",
+          "value": "Fisheries"
+        },
+        {
+          "label": "Geoscience",
+          "value": "Geoscience"
+        },
+        {
+          "label": "Land Resources",
+          "value": "Land Resources"
+        },
+        {
+          "label": "Human Rights",
+          "value": "Human Rights"
+        },
+        {
+          "label": "Health",
+          "value": "Health"
+        },
+        {
+          "label": "Energy",
+          "value": "Energy"
+        },
+        {
+          "label": "Education",
+          "value": "Education"
+        },
+        {
+          "label": "Economic Development",
+          "value": "Economic Development"
+        },
+        {
+          "label": "PCCOS",
+          "value": "PCCOS"
+        }
       ]
     }
   ],

@@ -83,7 +83,7 @@ class SpcPlugin(plugins.SingletonPlugin):
                 organization = h.get_organization(org_name)
                 _org_cache[org_name] = organization
             item['organization_image_url'
-                 ] = organization['image_display_url'] or h.url_for_static(
+                 ] = organization.get('image_display_url') or h.url_for_static(
                      '/base/images/placeholder-organization.png',
                      qualified=True
                  )
