@@ -3,6 +3,10 @@
 {% block styles %}
     {{ super() }}
     {% resource 'spc/styles' %}
+    {% set footer_url = h.get_footer_css_url() %}
+    {% if footer_url %}
+    	<link rel="stylesheet" href="{{ footer_url }}">
+    {% endif %}
 {% endblock %}
 
 {%- block scripts %}
