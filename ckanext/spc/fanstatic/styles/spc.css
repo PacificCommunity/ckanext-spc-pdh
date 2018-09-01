@@ -1,15 +1,15 @@
 @font-face {
-  font-family: 'Calibri Bold';
+  font-family: 'Calibri';
   src: url('../../fonts/Calibri-Bold.ttf');
   src: url('../../fonts/Calibri-Bold.eot?#iefix') format('embedded-opentype'), url('../../fonts/Calibri-Bold.woff2') format('woff2'), url('../../fonts/Calibri-Bold.woff') format('woff'), url('../../fonts/Calibri-Bold.ttf') format('truetype'), url('../../fonts/Calibri-Bold.svg#Calibri-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Calibri Light';
+  font-family: 'Calibri';
   src: url('../../fonts/Calibri-Light.ttf');
   src: url('../../fonts/Calibri-Light.eot?#iefix') format('embedded-opentype'), url('../../fonts/Calibri-Light.woff2') format('woff2'), url('../../fonts/Calibri-Light.woff') format('woff'), url('../../fonts/Calibri-Light.ttf') format('truetype'), url('../../fonts/Calibri-Light.svg#Calibri-Light') format('svg');
-  font-weight: normal;
+  font-weight: lighter;
   font-style: normal;
 }
 @font-face {
@@ -27,6 +27,8 @@
   font-style: normal;
 }
 body {
+  font-family: 'Calibri';
+  font-weight: lighter;
   background: #032f47;
 }
 @media (max-width: 767px) {
@@ -76,7 +78,7 @@ header.navbar > .container .collapse {
 }
 [role=main],
 .main {
-  background: #f8f8f8;
+  background: #fff;
 }
 @media (max-width: 767px) {
   [role=main],
@@ -84,9 +86,32 @@ header.navbar > .container .collapse {
     padding-bottom: 0;
   }
 }
+[role=main] .toolbar,
+.main .toolbar {
+  margin: 0 -47px 20px;
+}
+.container {
+  width: 1015px;
+}
+.container .span3 {
+  width: 250px;
+}
+.container .span9 {
+  width: 740px;
+}
 .wrapper {
+  background: transparent;
   box-shadow: none;
-  border: 1px solid #b4b7b7;
+  border: none;
+}
+.wrapper .primary {
+  border: 1px solid #bcdfe5;
+  border-radius: 5px;
+}
+.wrapper .secondary {
+  border: 1px solid #bcdfe5;
+  border-top: none;
+  border-radius: 2px;
 }
 @media (max-width: 767px) {
   .module-content {
@@ -94,8 +119,9 @@ header.navbar > .container .collapse {
   }
 }
 .toolbar .breadcrumb li a {
-  color: #0869a1;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: lighter;
+  color: #056199;
 }
 @media (max-width: 767px) {
   .toolbar .breadcrumb li a {
@@ -105,7 +131,7 @@ header.navbar > .container .collapse {
 }
 .toolbar .breadcrumb li.active a {
   color: #434e4e;
-  font-weight: 300;
+  font-weight: lighter;
 }
 @media (max-width: 767px) {
   .toolbar .breadcrumb li.active a {
@@ -113,44 +139,88 @@ header.navbar > .container .collapse {
     text-decoration: underline;
   }
 }
+.toolbar .breadcrumb li:after {
+  content: '>';
+  font-size: 14px;
+  font-weight: lighter;
+  color: #056199;
+  margin-left: 4px;
+}
 @media (max-width: 767px) {
   .toolbar {
     background: #003960;
     margin-bottom: 0;
   }
 }
+.search-form {
+  border-color: #bcdfe5;
+}
 .search-form h2 {
-  color: #0b6591;
+  color: #00b0ca;
+}
+.search-form .search-input input {
+  font-family: 'Calibri';
+  font-weight: lighter;
+  color: #b2b1b1;
+  border-color: #bcdfe5;
+  box-shadow: none;
 }
 .search-form .search-input button {
   top: 30%;
 }
+.search-form select {
+  border-color: #bcdfe5;
+}
+.search-form label {
+  font-weight: normal;
+}
+.filters .module-footer {
+  border-top: none;
+}
 .filters .module-heading,
 .secondary .module-heading {
-  background-color: #032f47;
+  background-color: #036295;
+  font-family: 'Calibri';
+  font-size: 18px;
+  font-weight: normal;
   color: #fff;
+  border-radius: 2px;
+}
+.filters .module:first-child .module-heading,
+.secondary .module:first-child .module-heading {
+  border-radius: 2px 2px 2px 2px;
 }
 .btn-primary {
-  background: #032f47;
+  background: #036295;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background: #032f47;
+  background: #036295;
   box-shadow: inset 0px 0px 5px #c1c1c1;
 }
-.nav-item a {
-  color: #727474;
+.nav-simple > li.nav-item {
+  border-bottom: 1px dashed #bcdfe5;
+}
+.nav-simple > li.nav-item a {
+  color: #2a2c2d;
 }
 .dataset-list .dataset-heading a {
   color: #0869a1;
-  font-weight: 400;
+  font-weight: normal;
 }
 .dataset-list .dataset-item {
   color: #727474;
+  border-color: #bcdfe5;
+}
+.dataset-list .dataset-item .dataset-resources li a {
+  font-weight: normal;
 }
 .ml-5 {
   margin-left: 5px;
+}
+.form-actions {
+  margin: 0;
 }
 #main-menu {
   position: absolute;
