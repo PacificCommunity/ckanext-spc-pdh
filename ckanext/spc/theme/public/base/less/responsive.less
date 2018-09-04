@@ -1,0 +1,64 @@
+@media(max-width: 1124px) {
+  [role=main] .toolbar, .main .toolbar {
+    margin: 0 0 20px;
+  }
+  header.navbar {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    & > .container {
+      max-width: 1000px;
+      width: auto;
+      padding: 0 15px;
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  body {
+    padding: 0;
+  }
+  .account-masthead {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  [role=main] #content {
+    padding: 0 20px;
+    .primary.span9 {
+      width: 100%;
+    }
+    .show-filters.btn {
+      background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
+      font-weight: normal;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      &:hover, &:focus, &:active {
+        background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+        color: #fff;
+      }
+    }
+    .toolbar {
+      background: #fff;
+      margin-bottom: 5px;
+      .breadcrumb {
+        li {
+          a {
+            color: #2a2c2d;
+          }
+          &.active {
+            a {
+              color: #2a2c2d;
+            }
+          }
+        } 
+      }
+    }
+  }
+  .dataset-read {
+    display: block;
+    .primary {
+      background: #fff;
+    }
+  }
+}

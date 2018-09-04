@@ -1,7 +1,25 @@
-<div class="pull-right" title="{{ rating }} star{%if rating!=1%}s{%endif%}">
+{% if dataset_page %}
+  <section class="module module-narrow">
+    <div class="module context-info">
+      <h2 class="module-heading"><i class="fa fa-star-half-o"></i> Rating</h2>
+      <div class="module-content">
+        <div class="stars-block" title="{{ rating }} star{%if rating!=1%}s{%endif%}">
+          {% for i in range(rating) %}
+            <i class="fa fa-star" style="color: orange"></i>
+          {% endfor %}
+          {% for i in range(5-rating) %}
+            <i class="fa fa-star-o" style="color: orange"></i>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
+  <div class="pull-right" title="{{ rating }} star{%if rating!=1%}s{%endif%}">
     {% for i in range(rating) %}
-	<i class="fa fa-star" style="color: orange"></i>
+	    <i class="fa fa-star" style="color: orange"></i>
     {% else %}
-	<i class="fa fa-star-o" style="color: orange"></i>
+    	<i class="fa fa-star-o" style="color: orange"></i>
     {% endfor %}
-</div>
+  </div>
+{% endif %}
