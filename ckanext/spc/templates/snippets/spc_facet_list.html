@@ -1,7 +1,14 @@
 <div class="filters">
     <div>
 	{% for facet in c.facet_titles %}
-	    {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet, label_function=h.spc_type_facet_label if facet == 'type' else None, extras=extras) }}
+		{% if facet == 'type' %}
+			{% set facet_func = h.spc_type_facet_label %}
+		{% elif facet == 'member_countries' %}
+			{% set facet_func = h.spc_member_countries_facet_label %}
+		{% else %}
+			{% set facet_func = None %}
+		{% endif %}
+	    {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet, label_function=facet_func, extras=extras) }}
 	{% endfor %}
     </div>
     <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>

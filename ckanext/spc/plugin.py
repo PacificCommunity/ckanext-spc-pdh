@@ -27,7 +27,7 @@ class SpcPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
-    plugins.implements(plugins.IFacets)
+    plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
@@ -57,6 +57,10 @@ class SpcPlugin(plugins.SingletonPlugin):
             (schema['dataset_type'], schema['about'])
             for schema in scheming_helpers.scheming_dataset_schemas().values()
         ])
+        self.member_countries = OrderedDict([
+            (choice['value'], choice['label']) 
+            for choice in scheming_helpers.scheming_get_preset('member_countries')['choices']
+        ])
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
         if not os.path.isfile(filepath):
@@ -79,6 +83,9 @@ class SpcPlugin(plugins.SingletonPlugin):
         helpers = {
             'spc_dataset_type_label': lambda type: self.dataset_types[type],
             'spc_type_facet_label': lambda item: self.dataset_types.get(
+                item['display_name'], item['display_name']
+            ),
+            'spc_member_countries_facet_label': lambda item: self.member_countries.get(
                 item['display_name'], item['display_name']
             )
         }
@@ -161,16 +168,19 @@ class SpcPlugin(plugins.SingletonPlugin):
 
     # IFacets
 
-    def dataset_facets(self, facets_dict, package_type):
+    def dataset_facets(self, facets_dict, package_type):     
         facets_dict['type'] = _('Dataset type')
+        facets_dict['member_countries'] = _('Member countries')
         return facets_dict
 
     def group_facets(self, facets_dict, group_type, package_type):
         facets_dict['type'] = _('Dataset type')
+        facets_dict['member_countries'] = _('Member countries')
         return facets_dict
 
     def organization_facets(
         self, facets_dict, organization_type, package_type
     ):
         facets_dict['type'] = _('Dataset type')
+        facets_dict['member_countries'] = _('Member countries')
         return facets_dict
