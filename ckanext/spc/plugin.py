@@ -58,8 +58,8 @@ class SpcPlugin(plugins.SingletonPlugin):
             for schema in scheming_helpers.scheming_dataset_schemas().values()
         ])
         self.member_countries = OrderedDict([
-            (choice['value'], choice['label']) 
-            for choice in scheming_helpers.scheming_get_preset('member_countries')['choices']
+            (choice['value'], choice['label']) for choice in
+            scheming_helpers.scheming_get_preset('member_countries')['choices']
         ])
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
@@ -155,6 +155,10 @@ class SpcPlugin(plugins.SingletonPlugin):
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
+        pkg_dict['topic'] = json.loads(
+            pkg_dict.get('thematic_area_string', '[]')
+        )
+
         pkg_dict.update(
             extras_five_star_rating=spc_utils.count_stars(pkg_dict)
         )
@@ -168,12 +172,16 @@ class SpcPlugin(plugins.SingletonPlugin):
 
     # IFacets
 
-    def dataset_facets(self, facets_dict, package_type):     
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict.pop('groups', None)
+        facets_dict['topic'] = _('Topic')
         facets_dict['type'] = _('Dataset type')
         facets_dict['member_countries'] = _('Member countries')
         return facets_dict
 
     def group_facets(self, facets_dict, group_type, package_type):
+        facets_dict.pop('groups', None)
+        facets_dict['topic'] = _('Topic')
         facets_dict['type'] = _('Dataset type')
         facets_dict['member_countries'] = _('Member countries')
         return facets_dict
@@ -181,6 +189,8 @@ class SpcPlugin(plugins.SingletonPlugin):
     def organization_facets(
         self, facets_dict, organization_type, package_type
     ):
+        facets_dict.pop('groups', None)
+        facets_dict['topic'] = _('Topic')
         facets_dict['type'] = _('Dataset type')
         facets_dict['member_countries'] = _('Member countries')
         return facets_dict

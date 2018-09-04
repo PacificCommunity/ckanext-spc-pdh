@@ -38,7 +38,11 @@ To install ckanext-spc:
    config file (by default the config file is located at
    ``/etc/ckan/default/production.ini``).
 
-4. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu::
+4. Update SOLR schema::
+
+     <field name="topic" type="string" indexed="true" stored="true" multiValued="true"/>
+
+5. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu::
 
      sudo service apache2 reload
 
