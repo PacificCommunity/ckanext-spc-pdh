@@ -13,6 +13,7 @@ header.navbar {
     position: relative;
     &>.container {
         position: unset;
+        width: 1015px;
         .collapse {
             position: unset;
         }
@@ -63,13 +64,15 @@ header.navbar {
         margin: 0 -47px 20px;
     }
 }
-.container {
-    width: 1015px;
-    .span3 {
-        width: 250px;
-    }
-    .span9 {
-        width: 740px;
+@media(min-width: 1125px) {
+    .container {
+        width: 1015px;
+        .span3 {
+            width: 250px;
+        }
+        .span9 {
+            width: 740px;
+        }
     }
 }
 .wrapper {
@@ -79,10 +82,16 @@ header.navbar {
     .primary {
         border:  1px solid @border-blue;
         border-radius: 5px;
+        .page-header {
+            margin-left: 0;
+        }
+        .media-grid {
+            margin-left: -10px;
+            background: #dfebed;
+        }
     }
     .secondary {
         border:  1px solid @border-blue;
-        border-top: none;
         border-radius: 2px;
     }
 }
@@ -170,10 +179,12 @@ header.navbar {
     }
 }
 .btn-primary {
-    background: @heading-blue;
+    background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
+    font-weight: normal;
+    border: none;
+    border-radius: 5px;
     &:hover, &:focus, &:active {
-        background: @heading-blue;
-        box-shadow: inset 0px 0px 5px #c1c1c1;
+        background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
     }
 }
 .nav-simple {
@@ -209,4 +220,31 @@ header.navbar {
 }
 .form-actions {
     margin: 0;
+}
+.module {
+    .pagination {
+        ul {
+            &>li {
+                display: inline-block;
+                a {
+                    padding: 5px 12px;
+                    border-radius: 5px;
+                    border: none;
+                    background-color: #bcdfe5;
+                    color: #fff;
+                }
+                &.active {
+                    a {
+                        background-color: #036295;
+                        border-radius: 5px;
+                    }
+                }
+                &:last-child {
+                    a {
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
 }

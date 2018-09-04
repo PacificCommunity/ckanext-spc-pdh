@@ -1,0 +1,26 @@
+{% ckan_extends %}
+
+{% block package_info %}
+  {% if pkg %}
+    <section class="module module-narrow">
+      <div class="module context-info">
+        <h2 class="module-heading"><i class="fa fa-plus"></i> Follow</h2>
+        <div class="module-content">
+          {% block package_info_inner %}
+            {% block heading %}{% endblock %}
+            {% block nums %}
+              <p class="followers">{{ _('Followers') }} {{ h.SI_number_span(h.follow_count('dataset', pkg.id)) }}</p>
+            {% endblock %}
+            {% block follow_button %}
+              {% if not hide_follow_button %}
+                <div class="follow_button">
+                  {{ h.follow_button('dataset', pkg.name) }}
+                </div>
+              {% endif %}
+            {% endblock %}
+          {% endblock %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endblock %}
