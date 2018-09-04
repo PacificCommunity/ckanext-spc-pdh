@@ -439,6 +439,11 @@
       "label": "Date Valid",
       "help_text": "Date of validity of a resource.",
       "preset": "date"
+    },
+    {
+      "field_name": "member_countries",
+      "label": "Member countries",
+      "preset": "member_countries"
     }
   ],
   "resource_fields": [
