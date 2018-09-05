@@ -192,11 +192,15 @@ header.navbar > .container .collapse {
 .search-form .search-input.search-giant button {
   top: 30%;
 }
-.search-form select {
-  font-size: 18px;
+.search-form .control-order-by select {
+  font-size: 17px;
   border-color: #bcdfe5;
+  width: 169px;
+  height: 35px;
+  line-height: 35px;
 }
 .search-form label {
+  font-size: 18px;
   font-weight: normal;
 }
 .filters .module-footer {
@@ -267,9 +271,14 @@ header.navbar > .container .collapse {
   border-top: 1px dotted #bcdfe5;
   padding-top: 20px;
 }
+.dataset-list .dataset-item .dataset-resources li {
+  display: inline-block;
+}
 .dataset-list .dataset-item .dataset-resources li a {
   font-size: 14px;
   font-weight: normal;
+  line-height: 14px;
+  padding-top: 4px;
 }
 .dataset-list .dataset-item .dataset-info {
   color: #1d1d1e;
@@ -279,6 +288,7 @@ header.navbar > .container .collapse {
   font-size: 14px;
   vertical-align: middle;
   margin-left: 15px;
+  padding-top: 3px;
 }
 .ml-5 {
   margin-left: 5px;
@@ -394,6 +404,7 @@ header.navbar > .container .collapse {
 }
 .dataset-read .primary .notes {
   font-size: 16px;
+  line-height: 21px;
   padding: 0 15px;
   margin-bottom: 50px;
 }
@@ -426,6 +437,7 @@ header.navbar > .container .collapse {
 .dataset-read .primary .resource-list .resource-item .heading {
   display: block;
   font-size: 16px;
+  color: #2a2c2d;
   font-weight: lighter;
   padding-right: 135px;
 }
@@ -434,6 +446,10 @@ header.navbar > .container .collapse {
 }
 .dataset-read .primary .resource-list .resource-item .btn-group {
   right: 25px;
+}
+.dataset-read .primary .resource-list .resource-item .description {
+  font-size: 13px;
+  color: #727474;
 }
 .dataset-read .primary .tags {
   margin: 25px 0 50px;
@@ -493,6 +509,7 @@ header.navbar > .container .collapse {
 }
 .dataset-read .secondary .module {
   font-size: 16px;
+  color: #2a2c2d;
 }
 .dataset-read .secondary .module .module-heading {
   border-radius: 0;
