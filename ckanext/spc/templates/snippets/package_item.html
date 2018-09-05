@@ -32,7 +32,9 @@
           </h3>
           <div class="dataset-info">
             <p class="pull-left">{{ package.organization.get('title') }} | {{ h.render_datetime(package.metadata_created, date_format='%d %B %Y') }}</p>
-            <span class="badge badge-info ml-5">{{ h.spc_dataset_type_label(package.type) }}</span></p>
+            <span class="badge badge-info ml-5">
+		{{ h.spc_dataset_type_label(package.type) }}
+	    </span></p>
           </div>
         {% endblock %}
         {% block banner %}

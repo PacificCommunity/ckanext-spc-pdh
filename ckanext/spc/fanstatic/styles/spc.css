@@ -706,6 +706,9 @@ button.header-menu-btn:focus {
   body {
     padding: 0;
   }
+  .secondary {
+    float: left;
+  }
   .account-masthead {
     margin-left: 0;
     margin-right: 0;
@@ -752,4 +755,7 @@ button.header-menu-btn:focus {
   .dataset-read .primary .resource-list .resource-item .heading {
     padding-right: 10px;
   }
+}
+.wrapper .primary .media-grid {
+  margin: 0 -15px;
 }
