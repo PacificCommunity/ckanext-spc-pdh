@@ -1,18 +1,26 @@
 .dataset-read {
   display: flex;
+  margin-bottom: 60px;
   .primary {
     position: relative;
     color: #2a2c2d;
+    border:  1px solid @border-blue;
     border-radius: 0;
     border-bottom-left-radius: 5px;
+    .module {
+      margin-top: 0;
+    }
     .module-content {
       padding-left: 25px;
     }
     h1 {
       font-size: 23px;
+      line-height: 1.2;
       font-weight: normal;
       color: @heading-blue;
-      margin-bottom: 15px;
+      padding: 0 15px;
+      margin-bottom: 30px;
+      margin-top: 9px;
     }
     h3 {
       font-size: 18px;
@@ -59,7 +67,8 @@
       }
     }
     .notes {
-      margin-bottom: 30px;
+      padding: 0 15px;
+      margin-bottom: 50px;
     }
     .resources {
       h3 {
@@ -71,9 +80,10 @@
       .resource-item {
         border-bottom: 1px dashed @border-blue;
         .btn-primary.dropdown-toggle {
+          line-height: 1.3;
           color: @heading-blue;
           background: #fff;
-          border: 1px solid @heading-blue;
+          border: 2px solid @heading-blue;
           .caret {
             border-top-color: @heading-blue;
             border-bottom-color: @heading-blue;
@@ -88,17 +98,22 @@
       }
     }
     .tags {
-      margin: 25px 0 45px;
+      margin: 25px 0 50px;
       .tag-list.well {
         background-color: #dfebed;
         border: none;
         box-shadow: none;
+        padding: 12px 22px 7px;
+        li {
+          margin-right: 7px;
+        }
         .tag {
           font-size: 15px;
           font-weight: lighter;
           background-color:  #dfebed;
           border-color:  #8aa4a8;
           box-shadow: none;
+          margin-bottom: 5px;
           &:hover, &:focus, &:active {
             color:  #2a2c2d;
             box-shadow: inset 0 1px 0 #8aa4a8;
@@ -112,11 +127,20 @@
     }
     .table-bordered {
       border-color: @border-blue;
+      margin-bottom: 35px;
       th, td {
         font-size: 16px;
         font-weight: normal;
         border-color: @border-blue;
+        padding-left: 22px;
+        &:first-child {
+          width: 30%;
+        }
       }
+    }
+    .media-grid {
+      background: transparent;
+      border: none;
     }
   }
   .secondary {
@@ -127,8 +151,10 @@
     .module {
       .module-heading {
         border-radius: 0;
+        padding-left: 25px;
         i {
-          margin-right: 5px;
+          font-size: 16px;
+          margin-right: 7px;
         }
       }
       &:first-child {
@@ -166,6 +192,18 @@
         &:hover, &:focus, &:active {
             background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
         }
+      }
+    }
+    .read-more {
+      a {
+        font-size: 12px;
+        font-weight: lighter;
+        color: @heading-blue;
+      }
+      i {
+        font-size: 14px;
+        margin-left: 5px;
+        color: @heading-blue;
       }
     }
   }

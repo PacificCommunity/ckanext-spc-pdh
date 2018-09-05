@@ -80,8 +80,7 @@ header.navbar {
     box-shadow: none;
     border: none;
     .primary {
-        border:  1px solid @border-blue;
-        border-radius: 5px;
+        border: none;
         .page-header {
             margin-left: 0;
         }
@@ -89,15 +88,23 @@ header.navbar {
             margin-left: -10px;
             background: #dfebed;
         }
+        .module {
+            &:first-child {
+                border:  1px solid @border-blue;
+                border-radius: 5px;
+            }
+        }
+        div.module-content {
+            padding-left: 25px;
+            @media (max-width: 767px) {
+                padding: 0 15px;
+            }
+        }
     }
     .secondary {
         border:  1px solid @border-blue;
         border-radius: 2px;
-    }
-}
-.module-content {
-    @media (max-width: 767px) {
-        padding: 0 15px;
+        width: 255px;
     }
 }
 .toolbar {
@@ -138,10 +145,12 @@ header.navbar {
 }
 .search-form {
     border-color: @border-blue;
+    padding-bottom: 35px;
     h2 {
         color: @turquoise;
     }
     .search-input {
+        margin-bottom: 35px;
         input {
             font-family: 'Calibri';
             font-weight: lighter;
@@ -221,30 +230,41 @@ header.navbar {
 .form-actions {
     margin: 0;
 }
-.module {
-    .pagination {
-        ul {
-            &>li {
-                display: inline-block;
-                a {
-                    padding: 5px 12px;
-                    border-radius: 5px;
-                    border: none;
+.pagination {
+    padding-bottom: 60px;
+    margin-top: 45px;
+    ul {
+        box-shadow: none;
+        &>li {
+            display: inline-block;
+            a {
+                color: #fff;
+                background-color: #bcdfe5;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 12px;
+                &:hover, &:focus, &:active {
                     background-color: #bcdfe5;
+                }
+            }
+            &.active {
+                a {
                     color: #fff;
+                    background-color: #036295;
+                    border-radius: 5px;
                 }
-                &.active {
-                    a {
-                        background-color: #036295;
-                        border-radius: 5px;
-                    }
-                }
-                &:last-child {
-                    a {
-                        border-radius: 5px;
-                    }
+            }
+            &:last-child {
+                a {
+                    border-radius: 5px;
                 }
             }
         }
+    }
+}
+.api-link {
+    .module-content {
+        padding-top: 40px;
+        padding-bottom: 0;
     }
 }
