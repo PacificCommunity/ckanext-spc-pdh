@@ -350,7 +350,7 @@ header.navbar > .container .collapse {
   margin-top: 9px;
 }
 .dataset-read .primary h3 {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: normal;
 }
 .dataset-read .primary .btn.manage {
@@ -388,10 +388,12 @@ header.navbar > .container .collapse {
   transform: translateY(-50%);
 }
 .dataset-read .primary ul.nav.nav-tabs li.active a {
+  font-size: 15px;
   color: #2a2c2d;
   background: #fff;
 }
 .dataset-read .primary .notes {
+  font-size: 16px;
   padding: 0 15px;
   margin-bottom: 50px;
 }
@@ -403,6 +405,7 @@ header.navbar > .container .collapse {
 }
 .dataset-read .primary .resource-list .resource-item {
   border-bottom: 1px dashed #bcdfe5;
+  padding-left: 75px;
 }
 .dataset-read .primary .resource-list .resource-item .btn-primary.dropdown-toggle {
   line-height: 1.3;
@@ -420,6 +423,18 @@ header.navbar > .container .collapse {
 .dataset-read .primary .resource-list .resource-item:hover {
   background-color: #dfebed;
 }
+.dataset-read .primary .resource-list .resource-item .heading {
+  display: block;
+  font-size: 16px;
+  font-weight: lighter;
+  padding-right: 135px;
+}
+.dataset-read .primary .resource-list .resource-item .format-label {
+  left: 25px;
+}
+.dataset-read .primary .resource-list .resource-item .btn-group {
+  right: 25px;
+}
 .dataset-read .primary .tags {
   margin: 25px 0 50px;
 }
@@ -433,7 +448,7 @@ header.navbar > .container .collapse {
   margin-right: 7px;
 }
 .dataset-read .primary .tags .tag-list.well .tag {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: lighter;
   background-color: #dfebed;
   border-color: #8aa4a8;
@@ -472,8 +487,12 @@ header.navbar > .container .collapse {
 .dataset-read .secondary {
   border: 1px solid #bcdfe5;
   border-left: none;
+  border-radius: 0;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+.dataset-read .secondary .module {
+  font-size: 16px;
 }
 .dataset-read .secondary .module .module-heading {
   border-radius: 0;
@@ -520,7 +539,7 @@ header.navbar > .container .collapse {
   background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
 }
 .dataset-read .secondary .read-more a {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: lighter;
   color: #036295;
 }
@@ -712,5 +731,8 @@ button.header-menu-btn:focus {
   .dataset-list .dataset-item {
     margin-left: 0;
     margin-right: 0;
+  }
+  .dataset-read .primary .resource-list .resource-item .heading {
+    padding-right: 10px;
   }
 }
