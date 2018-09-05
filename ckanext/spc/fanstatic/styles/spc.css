@@ -93,7 +93,7 @@ header.navbar > .container .collapse {
 }
 @media (min-width: 1125px) {
   .container {
-    width: 1015px;
+    width: 1010px;
   }
   .container .span3 {
     width: 250px;
@@ -122,7 +122,8 @@ header.navbar > .container .collapse {
   border-radius: 5px;
 }
 .wrapper .primary div.module-content {
-  padding-left: 25px;
+  padding-left: 29px;
+  padding-right: 29px;
 }
 @media (max-width: 767px) {
   .wrapper .primary div.module-content {
@@ -132,7 +133,6 @@ header.navbar > .container .collapse {
 .wrapper .secondary {
   border: 1px solid #bcdfe5;
   border-radius: 2px;
-  width: 255px;
 }
 .toolbar .breadcrumb li a {
   font-size: 14px;
@@ -169,26 +169,31 @@ header.navbar > .container .collapse {
   }
 }
 .search-form {
-  border-color: #bcdfe5;
+  border-bottom: none;
   padding-bottom: 35px;
+  margin-bottom: 0;
 }
 .search-form h2 {
+  font-size: 29px;
   color: #00b0ca;
 }
-.search-form .search-input {
+.search-form .search-input.search-giant {
   margin-bottom: 35px;
 }
-.search-form .search-input input {
+.search-form .search-input.search-giant input {
+  font-size: 18px;
   font-family: 'Calibri';
   font-weight: lighter;
   color: #b2b1b1;
-  border-color: #bcdfe5;
+  border: 2px solid #bcdfe5;
   box-shadow: none;
+  padding: 18px 15px;
 }
-.search-form .search-input button {
+.search-form .search-input.search-giant button {
   top: 30%;
 }
 .search-form select {
+  font-size: 18px;
   border-color: #bcdfe5;
 }
 .search-form label {
@@ -197,11 +202,20 @@ header.navbar > .container .collapse {
 .filters .module-footer {
   border-top: none;
 }
+.filters .module-footer a {
+  font-size: 16px;
+  font-weight: normal;
+}
+.filters .module-footer a i {
+  font-size: 13px;
+  font-weight: bold;
+  color: #036295;
+}
 .filters .module-heading,
 .secondary .module-heading {
   background-color: #036295;
   font-family: 'Calibri';
-  font-size: 18px;
+  font-size: 19px;
   font-weight: normal;
   color: #fff;
   border-radius: 2px;
@@ -209,6 +223,11 @@ header.navbar > .container .collapse {
 .filters .module:first-child .module-heading,
 .secondary .module:first-child .module-heading {
   border-radius: 2px 2px 2px 2px;
+}
+.filters .nav-item a,
+.secondary .nav-item a {
+  font-size: 16px;
+  padding: 10px 15px;
 }
 .btn-primary {
   background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
@@ -227,16 +246,39 @@ header.navbar > .container .collapse {
 .nav-simple > li.nav-item a {
   color: #2a2c2d;
 }
+.dataset-list .dataset-heading {
+  font-size: 19px;
+  margin-bottom: 12px;
+  padding-right: 25px;
+}
 .dataset-list .dataset-heading a {
   color: #0869a1;
   font-weight: normal;
 }
 .dataset-list .dataset-item {
+  font-size: 17px;
   color: #727474;
   border-color: #bcdfe5;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 0 20px 20px;
+}
+.dataset-list .dataset-item:first-of-type {
+  border-top: 1px dotted #bcdfe5;
+  padding-top: 20px;
 }
 .dataset-list .dataset-item .dataset-resources li a {
+  font-size: 14px;
   font-weight: normal;
+}
+.dataset-list .dataset-item .dataset-info {
+  color: #1d1d1e;
+  margin-bottom: 15px;
+}
+.dataset-list .dataset-item .dataset-info .badge {
+  font-size: 14px;
+  vertical-align: middle;
+  margin-left: 15px;
 }
 .ml-5 {
   margin-left: 5px;
@@ -277,6 +319,9 @@ header.navbar > .container .collapse {
 .api-link .module-content {
   padding-top: 40px;
   padding-bottom: 0;
+}
+.api-link .module-content small {
+  font-size: 12px;
 }
 .dataset-read {
   display: flex;
@@ -620,9 +665,6 @@ button.header-menu-btn:focus {
     border-radius: 5px 5px 0 0;
     border-right: 1px solid #bcdfe5;
   }
-  .wrapper .secondary {
-    width: 220px;
-  }
 }
 @media (max-width: 768px) {
   body {
@@ -666,5 +708,9 @@ button.header-menu-btn:focus {
   }
   .dataset-read .primary {
     background: #fff;
+  }
+  .dataset-list .dataset-item {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
