@@ -36,8 +36,18 @@
   body {
     padding: 0;
   }
+  .nav-simple > li.nav-item a {
+      &:before {
+	  position: static;
+      }
+  }
   .secondary {
+      margin-top: 10px;
       float: left;
+      display: block;
+      width: 100%;
+      margin-left: 0;
+      box-sizing: border-box;
   }
   .account-masthead {
     margin-left: 0;
