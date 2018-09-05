@@ -66,7 +66,7 @@ header.navbar {
 }
 @media(min-width: 1125px) {
     .container {
-        width: 1015px;
+        width: 1010px;
         .span3 {
             width: 250px;
         }
@@ -95,7 +95,8 @@ header.navbar {
             }
         }
         div.module-content {
-            padding-left: 25px;
+            padding-left: 29px;
+            padding-right: 29px;
             @media (max-width: 767px) {
                 padding: 0 15px;
             }
@@ -104,7 +105,6 @@ header.navbar {
     .secondary {
         border:  1px solid @border-blue;
         border-radius: 2px;
-        width: 255px;
     }
 }
 .toolbar {
@@ -144,25 +144,30 @@ header.navbar {
     }
 }
 .search-form {
-    border-color: @border-blue;
+    border-bottom: none;
     padding-bottom: 35px;
+    margin-bottom: 0;
     h2 {
+        font-size: 29px;
         color: @turquoise;
     }
-    .search-input {
+    .search-input.search-giant {
         margin-bottom: 35px;
         input {
+            font-size: 18px;
             font-family: 'Calibri';
             font-weight: lighter;
             color:  #b2b1b1;
-            border-color: @border-blue;
+            border: 2px solid @border-blue;
             box-shadow: none;
+            padding: 18px 15px;
         }
         button {
             top: 30%
         }
     }
     select {
+        font-size: 18px;
         border-color: @border-blue;
     }
     label {
@@ -172,19 +177,34 @@ header.navbar {
 .filters {
     .module-footer {
         border-top: none;
+        a {
+            font-size: 16px;
+            font-weight: normal;
+            i {
+                font-size: 13px;
+                font-weight: bold;
+                color: @heading-blue;
+            }
+        }
     }
 }
 .filters, .secondary {
     .module-heading {
         background-color: @heading-blue;
         font-family: 'Calibri';
-        font-size: 18px;
+        font-size: 19px;
         font-weight: normal;
         color: #fff;
         border-radius: 2px;
     }
     .module:first-child .module-heading {
         border-radius: 2px 2px 2px 2px;
+    }
+    .nav-item {
+        a {
+            font-size: 16px;
+            padding: 10px 15px;
+        }
     }
 }
 .btn-primary {
@@ -207,19 +227,40 @@ header.navbar {
 
 .dataset-list {
     .dataset-heading {
+        font-size: 19px;
+        margin-bottom: 12px;
+        padding-right: 25px;
         a {
             color: @text-blue;
             font-weight: normal;
         }
     }
     .dataset-item {
+        font-size: 17px;
         color: @light-grey;
         border-color: @border-blue;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 0 20px 20px;
+        &:first-of-type {
+            border-top: 1px dotted @border-blue;
+            padding-top: 20px;
+        }
         .dataset-resources {
             li {
                 a {
+                    font-size: 14px;
                     font-weight: normal;
                 }
+            }
+        }
+        .dataset-info {
+            color: @text;
+            margin-bottom: 15px;
+            .badge {
+                font-size: 14px;
+                vertical-align: middle;
+                margin-left: 15px;
             }
         }
     }
@@ -266,5 +307,8 @@ header.navbar {
     .module-content {
         padding-top: 40px;
         padding-bottom: 0;
+        small {
+            font-size: 12px;
+        }
     }
 }
