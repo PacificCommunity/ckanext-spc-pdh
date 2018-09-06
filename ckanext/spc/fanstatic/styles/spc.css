@@ -44,7 +44,9 @@ header.navbar {
 }
 header.navbar > .container {
   position: unset;
-  width: 1015px;
+  box-sizing: border-box;
+  width: 1170px;
+  padding: 0 15px;
 }
 header.navbar > .container .collapse {
   position: unset;
