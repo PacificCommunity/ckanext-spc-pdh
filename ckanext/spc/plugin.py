@@ -81,7 +81,7 @@ class SpcPlugin(plugins.SingletonPlugin):
 
     def get_helpers(self):
         helpers = {
-            'spc_dataset_type_label': lambda type: self.dataset_types[type],
+            'spc_dataset_type_label': lambda type: self.dataset_types.get(type),
             'spc_type_facet_label': lambda item: self.dataset_types.get(
                 item['display_name'], item['display_name']
             ),
