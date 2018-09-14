@@ -1,0 +1,453 @@
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+         packageId="https://ipt.sprep.org/resource?id=spc_procfish_invertebrates_tuvalu_2004_2005/v1.0" system="http://gbif.org" scope="system"
+         xml:lang="eng">
+
+<dataset>
+  <alternateIdentifier>https://ipt.sprep.org/resource?r=spc_procfish_invertebrates_tuvalu_2004_2005</alternateIdentifier>
+  <title xml:lang="eng">SPC PROCFish/C Invertebrates Observations Tuvalu 2004-2005</title>
+      <creator>
+    <individualName>
+        <givenName>Kim</givenName>
+      <surName>Friedman</surName>
+    </individualName>
+    <organizationName>The Pacific Community</organizationName>
+    <positionName>Senior Reef Fisheries Scientist</positionName>
+    <address>
+        <deliveryPoint>BP D5</deliveryPoint>
+        <city>Noumea</city>
+        <postalCode>98848</postalCode>
+        <country>NC</country>
+    </address>
+    <phone>(+687) 26.20.00</phone>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+          <userId directory="https://www.linkedin.com/profile/view?id=">kim-friedman-32a0b859</userId>
+      </creator>
+      <creator>
+    <individualName>
+        <givenName>Tataua</givenName>
+      <surName>Alefaio</surName>
+    </individualName>
+    <organizationName>Ministry of Natural Resources</organizationName>
+    <positionName>Fisheries Research Officer</positionName>
+    <address>
+        <deliveryPoint>Vaiaku</deliveryPoint>
+        <city>Funafuti </city>
+        <country>TV</country>
+    </address>
+    <phone>(+688) 20704</phone>
+      </creator>
+      <creator>
+    <individualName>
+        <givenName>Kalo</givenName>
+      <surName>Pakoa</surName>
+    </individualName>
+    <organizationName>The Pacific Community</organizationName>
+    <positionName>Reef Fisheries Officer</positionName>
+    <address>
+        <deliveryPoint>BP D5</deliveryPoint>
+        <city>Noumea</city>
+        <postalCode>98848</postalCode>
+        <country>NC</country>
+    </address>
+    <phone>(+687) 26.20.00</phone>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+          <userId directory="https://www.linkedin.com/profile/view?id=">kalo-pakoa-1aa222b0</userId>
+      </creator>
+      <creator>
+    <individualName>
+        <givenName>Emmanuel</givenName>
+      <surName>Tardy</surName>
+    </individualName>
+    <organizationName>The Pacific Community</organizationName>
+    <positionName>Reef Fisheries Officer</positionName>
+    <address>
+        <deliveryPoint>BP D5</deliveryPoint>
+        <city>Noumea</city>
+        <postalCode>98848</postalCode>
+        <country>NC</country>
+    </address>
+    <phone>(+687) 26.20.00</phone>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+          <userId directory="https://www.linkedin.com/profile/view?id=">emmanuel-tardy-a0259278</userId>
+      </creator>
+      <creator>
+    <individualName>
+        <givenName>Ferral</givenName>
+      <surName>Lasi</surName>
+    </individualName>
+    <organizationName>The Pacific Community</organizationName>
+    <positionName>Reef Fisheries Officer</positionName>
+    <address>
+        <deliveryPoint>BP D5</deliveryPoint>
+        <city>Noumea</city>
+        <postalCode>98848</postalCode>
+        <country>NC</country>
+    </address>
+    <phone>(+687) 26.20.00</phone>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+      </creator>
+      <metadataProvider>
+    <individualName>
+        <givenName>Franck</givenName>
+      <surName>Magron</surName>
+    </individualName>
+    <organizationName>The Pacific Community</organizationName>
+    <positionName>Coastal Fisheries Information and Database Manager</positionName>
+    <address>
+        <deliveryPoint>BP D5</deliveryPoint>
+        <city>Noumea</city>
+        <postalCode>98848</postalCode>
+        <country>NC</country>
+    </address>
+    <phone>(+687) 26.20.00</phone>
+    <electronicMailAddress>franckm@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+          <userId directory="https://www.linkedin.com/profile/view?id=">franck-magron-43b0983a</userId>
+      </metadataProvider>
+      <associatedParty>
+    <individualName>
+        <givenName>Sam</givenName>
+      <surName>Finikaso</surName>
+    </individualName>
+    <organizationName>Ministry of Natural Resources</organizationName>
+    <positionName>Director of Fisheries</positionName>
+    <address>
+        <deliveryPoint>Vaiaku</deliveryPoint>
+        <city>Funafuti </city>
+        <country>TV</country>
+    </address>
+    <phone>(+688) 20704</phone>
+    <electronicMailAddress>samf@tuvalufisheries.tv</electronicMailAddress>
+    <role>owner</role>
+      </associatedParty>
+  <pubDate>
+      2018-06-04
+  </pubDate>
+  <language>eng</language>
+  <abstract>
+    <para>Marine invertebrate species of commercial interest observed in Tuvalu during the PROCFish/C surveys (2004-2005) in 4 sites Funafuti, Niutao, Nukufetau and Vaitupu with a mix of survey methods (manta tow, reef benthos transects, and day and night searches)</para>
+  </abstract>
+      <keywordSet>
+            <keyword>Occurrence</keyword>
+        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+            <keyword>Observation</keyword>
+        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+            <keyword>SPC</keyword>
+            <keyword>PROCFish/C</keyword>
+            <keyword>CoFish</keyword>
+            <keyword>Marine invertebrates</keyword>
+        <keywordThesaurus>n/a</keywordThesaurus>
+      </keywordSet>
+  <additionalInfo>
+    <para>Data prepared and published under project &quot;Capacity building and data mobilization for conservation and decision making in the South Pacific&quot; - BID-PA2016-0002-REG</para>
+  </additionalInfo>
+  <intellectualRights>
+    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+  </intellectualRights>
+  <coverage>
+      <geographicCoverage>
+          <geographicDescription>Funafuti, Niutao, Nukufetau and Vaitupu in Tuvalu</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>177.329</westBoundingCoordinate>
+          <eastBoundingCoordinate>179.197</eastBoundingCoordinate>
+          <northBoundingCoordinate>-6.101</northBoundingCoordinate>
+          <southBoundingCoordinate>-8.634</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+          <temporalCoverage>
+              <rangeOfDates>
+                  <beginDate>
+                    <calendarDate>2004-10-22</calendarDate>
+                  </beginDate>
+                <endDate>
+                  <calendarDate>2005-04-02</calendarDate>
+                </endDate>
+              </rangeOfDates>
+          </temporalCoverage>
+          <taxonomicCoverage>
+              <taxonomicClassification>
+                <taxonRankValue>Actinopyga mauritiana</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Actinopyga miliaris</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Astralium sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Bohadschia argus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Bohadschia vitiensis</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Cerithium nodulosum</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Chama sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Charonia tritonis</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Chicoreus ramosus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Conomurex luhuanus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Conus miles</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Conus sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Culcita novaeguineae</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Cymatium sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Cypraea sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Cypraea tigris</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Drupa morum</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Drupa sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Drupella sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Echinometra mathaei</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Echinometra sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Echinothrix diadema</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Eriphia sebana</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Fromia sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Harpago chiragra</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Heterocentrotus mamillatus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Holothuria atra</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Holothuria fuscogilva</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Holothuria fuscopunctata</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Holothuria nobilis</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Lambis truncata</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Linckia laevigata</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Lysiosquillina sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Mancinella armigera</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Monetaria caputserpentis</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Monetaria moneta</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Octopus cyanea</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Panulirus sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Penaeus sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Pinctada margaritifera</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Spondylus sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Stichodactyla sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Talparia talpa</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Tectus niloticus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Tectus pyramis</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Tectus sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Thais sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Thelenota ananas</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Thelenota anax</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Tridacna maxima</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Tridacna squamosa</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Trochus maculatus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Trochus sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Turbo argyrostomus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Turbo setosus</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Turbo sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Tutufa sp.</taxonRankValue>
+              </taxonomicClassification>
+              <taxonomicClassification>
+                <taxonRankValue>Vasum ceramicum</taxonRankValue>
+              </taxonomicClassification>
+          </taxonomicCoverage>
+  </coverage>
+  <maintenance>
+    <description>
+      <para></para>
+    </description>
+    <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+  </maintenance>
+
+      <contact>
+    <individualName>
+        <givenName>Franck</givenName>
+      <surName>Magron</surName>
+    </individualName>
+    <organizationName>The Pacific Community</organizationName>
+    <positionName>Coastal Fisheries Information and Database Manager</positionName>
+    <address>
+        <deliveryPoint>BP D5</deliveryPoint>
+        <city>Noumea</city>
+        <postalCode>98848</postalCode>
+        <country>NC</country>
+    </address>
+    <phone>(+687) 26.20.00</phone>
+    <electronicMailAddress>franckm@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+          <userId directory="https://www.linkedin.com/profile/view?id=">franck-magron-43b0983a</userId>
+      </contact>
+  <methods>
+        <methodStep>
+          <description>
+            <para>Multiple observations for the same species aggregated by replicate. For replicates with a start and end positions (manta tow), the position provided is the middle point.</para>
+          </description>
+        </methodStep>
+      <sampling>
+        <studyExtent>
+          <description>
+            <para>Funafuti, Niutao, Nukufetau and Vaitupu in Tuvalu</para>
+          </description>
+        </studyExtent>
+        <samplingDescription>
+          <para>Diversity and abundance of invertebrate species were determined using a range of survey techniques, including broad-scale assessment (using the manta-tow technique) and finer-scale assessment of specific reef and benthic habitats.
+
+Broad-scale assessments were used to record large sedentary invertebrates; transects were 300 m long × 2 m wide, across inshore,
+midshore and more exposed oceanic habitats.
+
+Fine-scale assessments were conducted in target areas (areas with naturally higher abundance and/or the most suitable habitat) to specifically describe resource status. Fine-scale assessments were conducted of both reef (hard-bottom) and sandy (soft-bottom) areas to assess the range, size, and condition of invertebrate species present and to determine the nature and condition of the habitat with greater accuracy. These assessments were conducted using 40 m transects (1 m wide swathe, six replicates per station) recording most epi-benthic resources (those living on the bottom) and potential indicator species.
+
+For trochus and bêche-de-mer fisheries, searches to assess aggregations were made in the surf zone along exposed reef edges. On occasion, when time and conditions allowed, dives to 25–35 m were made to determine the availability of deeper-water sea cucumber populations. Night searches were conducted on inshore reefs to assess nocturnal sea cucumber species
+
+See http://purl.org/spc/digilib/doc/pfj5w
+</para>
+        </samplingDescription>
+      </sampling>
+      <qualityControl>
+        <description>
+          <para>Data from manta inner 1 station excluded as there is no position.</para>
+        </description>
+      </qualityControl>
+  </methods>
+  <project id="CoFish_PROCFish/C">
+    <title>Pacific Regional Oceanic and Coastal Fisheries Development Programme (PROCFish/C)</title>
+      <personnel>
+        <individualName>
+            <givenName>Kim</givenName>
+          <surName>Friedman</surName>
+        </individualName>
+              <userId directory="https://www.linkedin.com/profile/view?id=">kim-friedman-32a0b859</userId>
+        <role>principalInvestigator</role>
+      </personnel>
+      <personnel>
+        <individualName>
+            <givenName>Franck</givenName>
+          <surName>Magron</surName>
+        </individualName>
+              <userId directory="https://www.linkedin.com/profile/view?id=">franck-magron-43b0983a</userId>
+        <role>curator</role>
+      </personnel>
+      <abstract>
+        <para>The Pacific Regional Coastal Fisheries Development Programme (CoFish) and its associated programme PROCFish/C (the coastal component of the Pacific Regional Oceanic and Coastal Fisheries Development Programme) conducted fieldwork in 63 sites across 17 Pacific Island countries and territories over a seven-year period from 2002 to 2009.</para>
+      </abstract>
+      <funding>
+        <para>Funded by the European Union for the implementation of the Pacific Regional Coastal Fisheries Development Programme (CoFish), which ran from 1 May 2004 to 31 December 2009 under funding from the ninth European Development Fund (EDF 9), and the coastal component of the Pacific Regional Oceanic and Coastal Fisheries Development Programme (PROCFish/C), which ran from 1 March 2002 to 28 February 2009 under funding from the eighth European Development Fund (EDF 8).</para>
+      </funding>
+      <designDescription>
+        <description>
+          <para>The aim of the survey work was to provide baseline information on the status of reef fisheries, and to help fill the massive information gap that hinders the effective management of reef fisheries.</para>
+        </description>
+      </designDescription>
+  </project>
+</dataset>
+  <additionalMetadata>
+    <metadata>
+      <gbif>
+          <dateStamp>2018-06-03T11:37:30.215+00:00</dateStamp>
+          <hierarchyLevel>dataset</hierarchyLevel>
+            <citation>Friedman K, Alefaio T, Pakoa K, Tardy E, Lasi F (2018): SPC PROCFish/C Invertebrates Observations Tuvalu 2004-2005. v1.0. The Pacific Community (SPC). Dataset/Occurrence. https://ipt.sprep.org/resource?r=spc_procfish_invertebrates_tuvalu_2004_2005&amp;v=1.0</citation>
+          <bibliography>
+                <citation identifier="http://purl.org/spc/digilib/doc/zhas3">Tuvalu country report : profiles and results from survey work at Funafuti, Nukufetau, Vaitupu and Niutao (October - November 2004 and March - April 2005)</citation>
+                <citation identifier="http://purl.org/spc/digilib/doc/pfj5w">Pakoa K., Friedman K., Moore B., Tardy E., Bertram I. 2014. Assessing Tropical Marine Invertebrates: a manual for Pacific island resource managers. Noumea, New Caledonia: Secretariat of the Pacific Community. 118 p.</citation>
+          </bibliography>
+          <resourceLogoUrl>https://ipt.sprep.org/logo.do?r=spc_procfish_invertebrates_tuvalu_2004_2005</resourceLogoUrl>
+      </gbif>
+    </metadata>
+  </additionalMetadata>
+</eml:eml>
