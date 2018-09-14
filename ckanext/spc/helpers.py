@@ -81,40 +81,34 @@ def get_eez_options():
 
 def spc_get_footer():
     drupal_url = config.get('drupal.site_url')
-    if drupal_url == None:
-        return None
-    else:
+    if drupal_url:
         get_html = _spc_get_footer_from_drupal(drupal_url)
         return get_html
 
 @beaker_cache(expire=3600)
 def _spc_get_footer_from_drupal(drupal_url=None):
-    if drupal_url == None or drupal_url == h.full_current_url().split('?')[0][:-1]:
-      return None
+    if drupal_url is None or drupal_url == h.full_current_url().split('?')[0][:-1]:
+        return None
     r = None
-    section_menu = []
     try:
         r = requests.get(drupal_url + '/footer_export', verify=False, timeout=10)
     except requests.exceptions.Timeout:
-        log.warning(drupal_url + '/footer_export connection timeout')
+        logger.warning(drupal_url + '/footer_export connection timeout')
     except requests.exceptions.TooManyRedirects:
-        log.warning(drupal_url + '/footer_export too many redirects')
+        logger.warning(drupal_url + '/footer_export too many redirects')
     except requests.exceptions.RequestException as e:
-        log.error(e.message)
+        logger.error(e.message)
 
     if r:
-      footer = r.json()
+        footer = r.json()
     else:
-      return None
+        return None
 
     if footer and 'main' in footer:
         return footer['main'][0]
-    else:
-        return None
+
 
 def get_footer_css_url():
     drupal_url = config.get('drupal.site_url')
-    if drupal_url == None:
-        return None
-    url = drupal_url + '/sites/all/themes/spc/css/footer_css/footer.css'
-    return url
+    if drupal_url:
+        return drupal_url + '/sites/all/themes/spc/css/footer_css/footer.css'

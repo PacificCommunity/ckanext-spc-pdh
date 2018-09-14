@@ -1,0 +1,295 @@
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+         packageId="7c0cd863-8b81-4937-84f9-2f596fd3fa79/v1.7" system="http://gbif.org" scope="system"
+         xml:lang="eng">
+
+<dataset>
+  <alternateIdentifier>7c0cd863-8b81-4937-84f9-2f596fd3fa79</alternateIdentifier>
+  <alternateIdentifier>https://ipt.sprep.org/resource?r=spc_fema_nectalis3</alternateIdentifier>
+  <title xml:lang="eng">SPC NECTALIS Zooplankton/Micronekton specimens,  New Caledonia 2014</title>
+      <creator>
+    <individualName>
+        <givenName>Francois</givenName>
+      <surName>Roupsard</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>Research Assistant</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>francoisR@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+      </creator>
+      <creator>
+    <individualName>
+        <givenName>Sylvain</givenName>
+      <surName>Caillot</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>IT/DB Manager</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>sylvainC@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+      </creator>
+      <metadataProvider>
+    <individualName>
+        <givenName>Sylvain</givenName>
+      <surName>Caillot</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>DB/IT Manager</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>sylvainC@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+      </metadataProvider>
+      <metadataProvider>
+    <individualName>
+        <givenName>Francois</givenName>
+      <surName>Roupsard</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>Research Assistant</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>francoisR@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+      </metadataProvider>
+      <associatedParty>
+    <individualName>
+        <givenName>Christophe </givenName>
+      <surName>Menkes</surName>
+    </individualName>
+    <organizationName>French Institute for Research and Development (IRD)</organizationName>
+    <positionName>Oceanographer</positionName>
+    <address>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>Christophe.Menkes@ird.fr</electronicMailAddress>
+    <role>pointOfContact</role>
+      </associatedParty>
+      <associatedParty>
+    <individualName>
+        <givenName>Valerie</givenName>
+      <surName>Allain</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>Senior Fisheries Scientist</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>valerieA@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+    <role>pointOfContact</role>
+      </associatedParty>
+      <associatedParty>
+    <individualName>
+        <givenName>Ainsof</givenName>
+      <surName>So&apos;o</surName>
+    </individualName>
+    <organizationName>SPREP</organizationName>
+    <positionName>Systems Analyst and Developer</positionName>
+    <address>
+        <city>Apia</city>
+        <country>WS</country>
+    </address>
+    <electronicMailAddress>gbifnodemanager@sprep.org</electronicMailAddress>
+    <role>programmer</role>
+      </associatedParty>
+      <associatedParty>
+    <individualName>
+        <givenName>Elodie</givenName>
+      <surName>Vourey</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>Laborary Assistant</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>elodieV@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+    <role>curator</role>
+      </associatedParty>
+  <pubDate>
+      2018-08-27
+  </pubDate>
+  <language>eng</language>
+  <abstract>
+    <para>The overall objective of the NECTALIS 3 cruise is studying intermediate trophic levels in pelagic ecosystem: characterizing the environment, acoustics, sampling and modelling of zooplankton and micronekton in New Caledonia.
+
+The Nectalis 3 cruise contributes to explore the southern area of the exclusive economic zone (EEZ) of New Caledonia in the south-west Pacific to collect data and samples on the pelagic ecosystem where tuna swim, particularly albacore tuna.</para>
+  </abstract>
+      <keywordSet>
+            <keyword>Occurrence</keyword>
+        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+            <keyword>Specimen</keyword>
+        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+      </keywordSet>
+  <intellectualRights>
+    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+  </intellectualRights>
+  <distribution scope="document">
+    <online>
+      <url function="information">http://oceanfish.spc.int/en/ofpsection/ema/biological-research/nectalis/419-nectalis-3-journal-logbook</url>
+    </online>
+  </distribution>
+  <coverage>
+      <geographicCoverage>
+          <geographicDescription>South and west of New Caledonia EEZ</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>160</westBoundingCoordinate>
+          <eastBoundingCoordinate>168.354</eastBoundingCoordinate>
+          <northBoundingCoordinate>-20.056</northBoundingCoordinate>
+          <southBoundingCoordinate>-24.046</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+          <temporalCoverage>
+              <rangeOfDates>
+                  <beginDate>
+                    <calendarDate>2014-11-22</calendarDate>
+                  </beginDate>
+                <endDate>
+                  <calendarDate>2014-12-09</calendarDate>
+                </endDate>
+              </rangeOfDates>
+          </temporalCoverage>
+          <taxonomicCoverage>
+              <generalTaxonomicCoverage>Zooplankton is composed mainly of crustaceans measuring between 0.2mm and 2cm. Micronekton, which forms the food of tuna, is constituted of larger organisms: fish, shrimps or squids measuring between 2 and 20cm.</generalTaxonomicCoverage>
+              <taxonomicClassification>
+                  <taxonRankName>kingdom</taxonRankName>
+                <taxonRankValue>Animalia</taxonRankValue>
+              </taxonomicClassification>
+          </taxonomicCoverage>
+  </coverage>
+  <maintenance>
+    <description>
+      <para></para>
+    </description>
+    <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+  </maintenance>
+
+      <contact>
+    <individualName>
+        <givenName>Valerie</givenName>
+      <surName>Allain</surName>
+    </individualName>
+    <organizationName>The Pacific Community (SPC)</organizationName>
+    <positionName>Senior Fisheries Scientist</positionName>
+    <address>
+        <city>Noumea</city>
+        <postalCode>98800</postalCode>
+        <country>NC</country>
+    </address>
+    <electronicMailAddress>valerieA@spc.int</electronicMailAddress>
+    <onlineUrl>http://www.spc.int</onlineUrl>
+      </contact>
+  <methods>
+        <methodStep>
+          <description>
+            <para>Three methods were used to estimate zooplankton (organisms 2 µm – 20 mm) biomass: a Tracor Acoustic Profiling System (TAPS), net sampling and Ship-Borne Acoustic Doppler Current Profilers (S-ADCP).</para>
+          </description>
+        </methodStep>
+        <methodStep>
+          <description>
+            <para>Three methods were used to estimate micronekton (organisms 2 - 20 cm) biomass and species composition: using an EK60 echosounder, net sampling and the S-ADCP</para>
+          </description>
+        </methodStep>
+      <sampling>
+        <studyExtent>
+          <description>
+            <para>South and West of the New Caledonia EEZ on a daily basis during the NECTALIS cruise</para>
+          </description>
+        </studyExtent>
+        <samplingDescription>
+          <para>Based on acoustic signal of EK60 we used a mesopelagic midwater trawl (Micronekton pelagic trawl 24mx24m) to target acoustic layers and collect micronekton organisms.  </para>
+        </samplingDescription>
+      </sampling>
+      <qualityControl>
+        <description>
+          <para>Species identification made by taxonomists</para>
+        </description>
+      </qualityControl>
+  </methods>
+  <project id="BID-PA2016-0002-REG">
+    <title>NECTALIS 3 scientific cruise, micronekton collection</title>
+      <personnel>
+        <individualName>
+            <givenName>Valerie</givenName>
+          <surName>Allain</surName>
+        </individualName>
+        <role>pointOfContact</role>
+      </personnel>
+      <abstract>
+        <para>The NECTALIS3 project studies the mid-trophic levels of the pelagic ecosystem of New-Caledonia: zooplankton and micronekton. Those components are the link between physical/chemical factors which influence their distribution and abundance, and fish exploited resources, particularly tuna, which are their predators. To complement a larger project based on observations, technology and modelling, we propose a multidisciplinary cruise to collect sea water physical and chemical data as well as data on zooplankton and micronekton. 
+
+To characterise physico-chemical conditions and primary production, we measure temperature, salinity, oxygen, fluorescence, light, currents, nutrients, photosynthetic pigments, phytoplankton abundance, primary production, phytoplanktonic communities. Secondary production (zooplankton, micronekton) is measured with acoustic (TAPS, S-ADCP, L-ADCP, EK60) and net sampling of zooplankton and micronekton. This cruise is complemented by physical, chemical and biogeochemical modelling, by tuna diet study and by modelling of the pelagic ecosystem including several sub-models. 
+
+Specialists in dynamic, acoustic, biogeochemistry, oceanography, biology and fisheries coming from different research institutions collect, analyse and model observations on the mid-trophic levels. We have two goals:
+
+1) sustainable fish resources management with the improvement of our understanding of spatio-temporal distribution and behaviors of the tuna preys to eventually better understand tuna-environment relationships
+2) conservation and protection of offshore waters by providing new information on pelagic biodiversity to contribute to the identification of ecologically and biologically significant areas in the Caledonian EEZ.</para>
+      </abstract>
+      <funding>
+        <para>The Nectalis 3 cruise received the financial support of IRD, SPC and AAMP (French Marine Protected Areas), now Agence Française de la Biodiversité (AFB).
+
+Data prepared and published under project &quot;Capacity building and data mobilization for conservation and decision making in the South Pacific&quot; - BID-PA2016-0002-REG</para>
+      </funding>
+  </project>
+</dataset>
+  <additionalMetadata>
+    <metadata>
+      <gbif>
+          <dateStamp>2018-06-20T03:41:09.306+00:00</dateStamp>
+          <hierarchyLevel>dataset</hierarchyLevel>
+            <citation>Allain, V., Menkes, C., 2014. Nectalis 3 cruise, RV Alis. https://doi.org/10.17600/14004900</citation>
+          <bibliography>
+                <citation identifier="10.1016/j.dsr2.2014.10.026">Menkes, C., Allain, V., Rodier, M., Gallois, F., Lebourges-Dhaussy, A., Hunt, B.P.V., Smeti, H., Pagano, M., Josse, E., Daroux, A., Lehodey, P., Senina, I., Kestenare, E., Lorrain, A., Nicol, S.J., 2015. Seasonal oceanography from physics to micronekton in the south-west Pacific. Deep Sea Research Part II: Topical Studies in Oceanography. 113:125-144. DOI 10.1016/j.dsr2.2014.10.026</citation>
+          </bibliography>
+            <physical>
+              <objectName>NECTALIS 3</objectName>
+              <characterEncoding>UTF-8</characterEncoding>
+              <dataFormat>
+                <externallyDefinedFormat>
+                  <formatName>Website</formatName>
+                </externallyDefinedFormat>
+              </dataFormat>
+              <distribution>
+                <online>
+                  <url function="download">http://campagnes.flotteoceanographique.fr/campagnes/14004900/</url>
+                </online>
+              </distribution>
+            </physical>
+          <resourceLogoUrl>https://ipt.sprep.org/logo.do?r=spc_fema_nectalis3</resourceLogoUrl>
+              <collection>
+                  <collectionIdentifier>NEC3</collectionIdentifier>
+                <collectionName>Nectalis3 collection</collectionName>
+              </collection>
+                <specimenPreservationMethod>formalin</specimenPreservationMethod>
+                <specimenPreservationMethod>deepFrozen</specimenPreservationMethod>
+                <specimenPreservationMethod>alcohol</specimenPreservationMethod>
+          <dc:replaces>7c0cd863-8b81-4937-84f9-2f596fd3fa79/v1.7.xml</dc:replaces>
+      </gbif>
+    </metadata>
+  </additionalMetadata>
+</eml:eml>

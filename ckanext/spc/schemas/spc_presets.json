@@ -1,105 +1,113 @@
 {
-    "scheming_presets_version": 1,
-    "about": "SPC field scheming Presets",
-    "about_url": "http://github.com/ckan/ckanext-scheming#preset",
-    "presets": [
-        {
-          "preset_name": "member_countries",
-	      "values": {
-			"form_snippet": "select.html",
-			"display_snippet": "select.html",
-			"validators": "scheming_required scheming_choices",
-	      	"choices": [
-		        {
-		          "value": "AS",
-		          "label": "American Samoa"
-		        },
-		        {
-		          "value": "CK",
-		          "label": "Cook Islands"
-		        },
-		        {
-		          "value": "FJ",
-		          "label": "Fiji"
-		        },
-		        {
-		          "value": "PF",
-		          "label": "French Polynesia"
-		        },
-		        {
-		          "value": "GU",
-		          "label": "Guam"
-		        },
-		        {
-		          "value": "KI",
-		          "label": "Kiribati"
-		        },
-		        {
-		          "value": "MH",
-		          "label": "Marshall Islands"
-		        },
-		        {
-		          "value": "FM",
-		          "label": "Federated States of Micronesia"
-		        },
-		        {
-		          "value": "NR",
-		          "label": "Nauru"
-		        },
-		        {
-		          "value": "NC",
-		          "label": "New Caledonia"
-		        },
-		        {
-		          "value": "NU",
-		          "label": "Niue"
-		        },
-		        {
-		          "value": "MP",
-		          "label": "Northern Mariana Islands"
-		        },
-		        {
-		          "value": "PW",
-		          "label": "Palau"
-		        },
-		        {
-		          "value": "PG",
-		          "label": "Papua New Guinea"
-		        },
-		        {
-		          "value": "PN",
-		          "label": "Pitcairn Islands"
-		        },
-		        {
-		          "value": "WS",
-		          "label": "Samoa"
-		        },
-		        {
-		          "value": "SB",
-		          "label": "Solomon Islands"
-		        },
-		        {
-		          "value": "TK",
-		          "label": "Tokelau"
-		        },
-		        {
-		          "value": "TO",
-		          "label": "Tonga"
-		        },
-		        {
-		          "value": "TV",
-		          "label": "Tuvalu"
-		        },
-		        {
-		          "value": "VU",
-		          "label": "Vanuatu"
-		        },
-		        {
-		          "value": "WF",
-		          "label": "Wallis and Futuna"
-		        }
-	      	]
-	      }
-        }
-    ]
+  "scheming_presets_version": 1,
+  "about": "SPC field scheming Presets",
+  "about_url": "http://github.com/ckan/ckanext-scheming#preset",
+  "presets": [
+    {
+      "preset_name": "member_countries",
+      "values": {
+	"form_snippet": "select.html",
+	"display_snippet": "select.html",
+	"validators": "scheming_required scheming_choices",
+	"choices": [
+	  {
+	    "value": "AS",
+	    "label": "American Samoa"
+	  },
+	  {
+	    "value": "CK",
+	    "label": "Cook Islands"
+	  },
+	  {
+	    "value": "FJ",
+	    "label": "Fiji"
+	  },
+	  {
+	    "value": "PF",
+	    "label": "French Polynesia"
+	  },
+	  {
+	    "value": "GU",
+	    "label": "Guam"
+	  },
+	  {
+	    "value": "KI",
+	    "label": "Kiribati"
+	  },
+	  {
+	    "value": "MH",
+	    "label": "Marshall Islands"
+	  },
+	  {
+	    "value": "FM",
+	    "label": "Federated States of Micronesia"
+	  },
+	  {
+	    "value": "NR",
+	    "label": "Nauru"
+	  },
+	  {
+	    "value": "NC",
+	    "label": "New Caledonia"
+	  },
+	  {
+	    "value": "NU",
+	    "label": "Niue"
+	  },
+	  {
+	    "value": "MP",
+	    "label": "Northern Mariana Islands"
+	  },
+	  {
+	    "value": "PW",
+	    "label": "Palau"
+	  },
+	  {
+	    "value": "PG",
+	    "label": "Papua New Guinea"
+	  },
+	  {
+	    "value": "PN",
+	    "label": "Pitcairn Islands"
+	  },
+	  {
+	    "value": "WS",
+	    "label": "Samoa"
+	  },
+	  {
+	    "value": "SB",
+	    "label": "Solomon Islands"
+	  },
+	  {
+	    "value": "TK",
+	    "label": "Tokelau"
+	  },
+	  {
+	    "value": "TO",
+	    "label": "Tonga"
+	  },
+	  {
+	    "value": "TV",
+	    "label": "Tuvalu"
+	  },
+	  {
+	    "value": "VU",
+	    "label": "Vanuatu"
+	  },
+	  {
+	    "value": "WF",
+	    "label": "Wallis and Futuna"
+	  }
+	]
+      }
+    },
+    {
+      "preset_name": "date",
+      "values": {
+        "form_snippet": "date.html",
+        "display_snippet": "date.html",
+        "validators": "scheming_required spc_normalize_date isodate convert_to_json_if_date"
+      }
+    }
+  ]
 }

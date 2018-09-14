@@ -87,6 +87,13 @@
   ],
   "dataset_fields": [
     {
+      "field_name": "alternate_identifier",
+      "label": "Alternate Identifier",
+      "help_text": "This is the only identifier issued by the IPT for the metadata document; it is a UUID",
+      "validators": "ignore_empty spc_to_json",
+      "output_validators": "spc_from_json"
+    },
+    {
       "field_name": "title",
       "label": "Title",
       "preset": "title"
@@ -159,14 +166,39 @@
       "help_text": "License definitions and additional information can be found at http://opendefinition.org/"
     },
     {
-      "field_name": "purpose",
-      "label": "Purpose",
-      "help_text": "A description of the purpose of this dataset."
-    },
-    {
       "field_name": "owner_org",
       "label": "Publisher",
       "preset": "dataset_organization"
+    },
+    {
+      "field_name": "creator",
+      "label": "Creator",
+      "form_snippet": "markdown.html",
+      "help_text": "The creator is the person who created the resource (not necessarily the author of this metadata about the resource). This is the person or institution to contact with questions about the use, interpretation of a dataset.",
+      "required": true,
+      "validators": "construct_sub_schema(creator) scheming_required spc_to_json",
+      "output_validators": "spc_from_json"
+    },
+    {
+      "field_name": "metadata_provider",
+      "label": "Metadata Provider",
+      "form_snippet": "markdown.html",
+      "help_text": "The party responsible for the creation of the metadata document",
+      "required": true,
+      "validators": "construct_sub_schema(metadata_provider) scheming_required spc_to_json",
+      "output_validators": "spc_from_json"
+    },
+    {
+      "field_name": "associated_party",
+      "label": "Associated Party",
+      "validators": "construct_sub_schema(associated_party) ignore_empty spc_to_json",
+      "output_validators": "spc_from_json"
+    },
+    {
+      "field_name": "pub_date",
+      "label": "Publication Date",
+      "required": true,
+      "validators": "scheming_required"
     },
     {
       "field_name": "language",
@@ -174,187 +206,73 @@
       "form_snippet": "language.html"
     },
     {
-      "field_name": "pub_place",
-      "label": "Place of publication",
-      "form_snippet": "markdown.html",
-      "help_text": "The pubPlace field is the location where the resource was published, which may be different from where the resource was created."
-    },
-
-
-    {
       "field_name": "notes",
-      "label": "Description",
-      "form_snippet": "markdown.html"
-    },
-    {
-      "field_name": "update_freq",
-      "label": "Maintenance Update Frequency",
-      "preset": "select",
-      "choices": [
-        {
-          "value": "annually",
-          "label": "Annually"
-        },
-        {
-          "value": "asNeeded",
-          "label": "As needed"
-        },
-        {
-          "value": "biannually",
-          "label": "Biannually"
-        },
-        {
-          "value": "continually",
-          "label": "Continually"
-        },
-        {
-          "value": "daily",
-          "label": "Daily"
-        },
-        {
-          "value": "irregular",
-          "label": "Irregular"
-        },
-        {
-          "value": "monthly",
-          "label": "Monthly"
-        },
-        {
-          "value": "notPlanned",
-          "label": "Not planned"
-        },
-        {
-          "value": "weekly",
-          "label": "Weekly"
-        },
-        {
-          "value": "unkown",
-          "label": "Unkown"
-        },
-        {
-          "value": "otherMaintenancePeriod",
-          "label": "Other maintenance period"
-        }
-      ]
-    },
-
-
-    {
-      "field_name": "change_scope",
-      "label": "Change Scope",
-      "help_text": "The expression should unambiguously identify the entity(s) and attribute(s) that were changed."
-    },
-    {
-      "field_name": "old_value",
-      "label": "Old Value",
-      "help_text": "The previous value or an expression that describes the previous value of the data."
-    },
-    {
-      "field_name": "change_date",
-      "label": "Change Date",
-      "help_text": "The date the changes were applied.",
-      "preset": "date"
-    },
-    {
-      "field_name": "comment",
-      "label": "Comment",
-      "help_text": "Explanation or justification for the change made to the data."
-    },
-
-
-    {
-      "field_name": "organization_name",
-      "label": "Organization Name",
+      "label": "Abstract",
+      "form_snippet": "markdown.html",
       "required": true,
-      "help_text": "The responsible party field contains the full name of the organization that is associated with the resource. This field is intended to describe which institution or overall organization is associated with the resource being described."
+      "validators": "copy_from(abstract) scheming_required"
+
     },
     {
-      "field_name": "position_name",
-      "label": "Position Name",
+      "field_name": "tag_string",
+      "label": "Keyword Set",
+      "preset": "tag_string_autocomplete",
+      "form_placeholder": "eg. economy, mental health, government",
+      "validators": "copy_from(keyword_set) ignore_missing tag_string_convert"
+    },
+    {
+      "field_name": "additional_info",
+      "label": "Additional Info",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "intellectual_rights",
+      "label": "Intellectual Rights",
+      "form_snippet": "markdown.html"
+    },
+    {
+      "field_name": "distribution",
+      "label": "Distribution"
+    },
+    {
+      "field_name": "coverage",
+      "label": "Coverage",
+      "required": false,
+      "validators": "construct_sub_schema(coverage) scheming_required spc_to_json",
+      "output_validators": "spc_from_json"
+
+    },
+    {
+      "field_name": "purpose",
+      "label": "Purpose",
+      "help_text": "A description of the purpose of this dataset."
+    },
+    {
+      "field_name": "maintenance",
+      "label": "Maintenance",
+      "validators": "construct_sub_schema(maintenance) ignore_missing spc_to_json",
+      "output_validators": "spc_from_json"
+    },
+    {
+      "field_name": "contact",
+      "label": "Contact",
       "required": true,
-      "help_text": "This field is intended to be used instead of a particular person or full organization name. If the associated person who holds the role changes frequently, then Position Name would be used for consistency."
+      "validators": "construct_sub_schema(contact) scheming_required spc_to_json",
+      "output_validators": "spc_from_json"
     },
     {
-      "field_name": "phone",
-      "label": "Phone"
+      "field_name": "methods",
+      "label": "Methods",
+      "required": false,
+      "validators": "construct_sub_schema(methods) scheming_required spc_to_json",
+      "output_validators": "spc_from_json"
     },
     {
-      "field_name": "email",
-      "label": "Email Adress"
-    },
-    {
-      "field_name": "phone",
-      "label": "Phone"
-    },
-    {
-      "field_name": "online_url",
-      "label": "URL",
-      "help_text": "A link to associated online information, usually a web site. When the party represents an organization, this is the URL to a website or other online information about the organization. If the party is an individual, it might be their personal web site or other related online information about the party.",
-      "display_snippet": "link.html"
-    },
-    {
-      "field_name": "user_id",
-      "label": "User Id",
-      "help_text": "An identifier that links this party to a directory of personnel. Although specific contact information for a party might change, the underlying correspondence to a real individual does not. This identifier provides a pointer within a personnel directory that may contain further, and possibly more current, information about the party.",
-      "form_snippet": "markdown.html"
-    },
-
-
-    {
-      "field_name": "surname",
-      "label": "Surname",
-      "required": true
-    },
-    {
-      "field_name": "given_name",
-      "label": "Given Name"
-    },
-    {
-      "field_name": "salutation",
-      "label": "Salutation",
-      "help_text": "The salutation field is used in addressing an individual with a particular title, such as Dr., Ms., Mrs., Mr., etc."
-    },
-
-
-    {
-      "field_name": "delivery_point",
-      "label": "Delivery Point",
-      "help_text": "The delivery point field is used for the physical address for postal communication. This field is used to accommodate the many different international conventions that are the equivalent to a U.S. 'street address'."
-    },
-    {
-      "field_name": "city",
-      "label": "City"
-    },
-    {
-      "field_name": "administrative_area",
-      "label": "Administrative Areae"
-    },
-    {
-      "field_name": "postal_code",
-      "label": "Postal Code"
-    },
-    {
-      "field_name": "country",
-      "label": "Country"
-    },
-
-
-    {
-      "field_name": "method_step",
-      "label": "Method Step",
-      "help_text": "The methodStep field allows for repeated sets of elements that document a series of procedures followed to produce a data object. These include text descriptions of the procedures, relevant literature, software, instrumentation, source data and any quality control measures taken.",
-      "form_snippet": "markdown.html"
-    },
-    {
-      "field_name": "sampling",
-      "label": "Sampling",
-      "help_text": "Description of sampling procedures including the geographic, temporal and taxonomic coverage of the study. ","form_snippet": "markdown.html"
-    },
-    {
-      "field_name": "quality_control",
-      "label": "Quality Control",
-      "help_text": "The qualityControl field provides a location for the description of actions taken to either control or assess the quality of data resulting from the associated method step. A quality control description should identify a quality goal and describe prescriptive steps taken to ensure that the data meet those standards and/or postscriptive steps taken to assess the extent to which they are met. A quality control statement is associated with the methodStep that could have affected the targeted quality goal.",
-      "form_snippet": "markdown.html"
+      "field_name": "project",
+      "label": "Project",
+      "required": false,
+      "validators": "construct_sub_schema(project) scheming_required spc_to_json",
+      "output_validators": "spc_from_json"
     },
     {
       "field_name": "member_countries",

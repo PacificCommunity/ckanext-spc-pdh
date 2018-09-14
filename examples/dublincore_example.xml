@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<record
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/">
+<dc:title>Albacore fishery in French Polynesia</dc:title>
+<dcterms:alternative>Exploitation des germons en Polynésie Française</dcterms:alternative>
+<dc:creator>Abbes R.</dc:creator>
+<dc:creator>Josse E.</dc:creator>
+<dc:creator>Paul Ichinel</dc:creator>
+<dc:subject>Albacore Tuna</dc:subject>
+<dc:subject>Tuna fisheries</dc:subject>
+<dc:description>Albacore fishery in French Polynesia paper presented during the 5th South Pacific Albacore Research Workshop, Papeete 1993</dc:description>
+<dcterms:abstract>The deep albacore  fishery  in French Polynesia is involving. In  addition  to the asiatic long-liners which hâve been operating in the Economie Zone for several years, a polynesian fleet, currently 
+composed  of 4 twenty five meters tuna vessels will be extended to vessels within 3 years. Two  of  the four boats have been fishing in  1991 and  1992, and hâve catched respectively 46 and 23 tonnes  of   albacore. The asiatic longliners are targeting more and more other tunas of higher value (i.e. big eye tuna) than albacore which total catch decreased within the 10 past years  from  more than  1 000 tonnes  to 534 and 230 tonnes in  1991 and 1992.
+</dcterms:abstract>
+<dc:publisher>South Pacific Commission</dc:publisher>
+<dc:contributor>Mama J.P.</dc:contributor>
+<dcterms:created xsi:type="dcterms:W3CDTF">2018</dcterms:created>
+<dcterms:dateAccepted xsi:type="dcterms:W3CDTF">2018-03-10</dcterms:dateAccepted>
+<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+<dc:format xsi:type="dcterms:IMT">application/pdf</dc:format>
+<dc:format xsi:type="dcterms:IMT">image/vnd.djvu</dc:format>
+<dc:identifier>http://purl.org/spc/digilib/doc/zz2a4</dc:identifier>
+<dc:source>http://www.spc.int/DigitalLibrary/FAME/Collection/SPAR_5</dc:source>
+<dc:language xsi:type="dcterms:ISO639-2">en</dc:language>
+<dc:language xsi:type="dcterms:ISO639-2">fr</dc:language>
+<dc:relation>http://purl.org/spc/digilib/doc/zz211</dc:relation>
+<dc:relation>http://purl.org/spc/digilib/doc/za454</dc:relation>
+<dcterms:spatial xsi:type="dcterms:TGN">French Polynesia</dcterms:spatial>
+<dc:coverage xsi:type="dcterms:Box">northlimit=5980000; westlimit=644000; eastlimit=647000; southlimit=5966000; units=m; projection=UTM zone 55 south</dc:coverage>
+<dcterms:license xsi:type="dcterms:URI">https://creativecommons.org/licenses/by/4.0/</dcterms:license>
+<dcterms:audience>National fisheries</dcterms:audience>
+<dcterms:audience>Tuna fisheries research</dcterms:audience>
+<dcterms:provenance>SPC Special Collection</dcterms:provenance>
+<dcterms:rightsholder>The Pacific Community</dcterms:rightsholder>
+
+</record>
