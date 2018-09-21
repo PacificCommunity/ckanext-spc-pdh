@@ -1,0 +1,2278 @@
+<OAI-PMH xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd" xmlns="http://www.openarchives.org/OAI/2.0/">
+  <responseDate>2018-09-21T10:10:10Z</responseDate>
+  <request verb="ListRecords" resumptionToken="%7C%7C%7Coai_dc%7C22%7C2018-09-21T10%3A10%3A02Z">http://www.spc.int/DigitalLibrary/OAI</request>
+  <ListRecords>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d94f8b88-696e-4fb5-8e59-301fe893458b</identifier>
+        <datestamp>2015-08-19T04:43:42Z</datestamp>
+        <setSpec>All_BDM</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>BDM_VF_10</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Section Aquaculture</dc:title>
+          <dc:creator>Battaglene S.</dc:creator>
+          <dc:subject>Aquaculture</dc:subject>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Battaglene S. 1998. Section Aquaculture. La Bêche-de-mer, Bulletin d'information de la CPS 10:35-36.</dc:description>
+          <dc:date>1998</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM_VF/10/BDM10VF_35_Battaglene.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:02189326-0c4e-4044-9516-302680bef36f</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>WCPFC_SC3</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Large-scale experiment shows that banning wire leaders helps pelagic sharks and longline fisheries</dc:title>
+          <dc:creator>Ward P.</dc:creator>
+          <dc:creator>Lawrence E.</dc:creator>
+          <dc:creator>Darbyshire R.</dc:creator>
+          <dc:creator>Hindmarsh S.</dc:creator>
+          <dc:subject>Longlines (Fishery equipment)</dc:subject>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Longlining (Fisheries)</dc:subject>
+          <dc:subject>Sharks</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Ward P., Lawrence E., Darbyshire R., Hindmarsh S. 2007. Large-scale experiment shows that banning wire leaders helps pelagic sharks and longline fisheries [EB WP 5]. Pohnpei, Federated States of Micronesia: Western and Central Pacific Fisheries Commission. Scientific Committee Regular Session, Honolulu, Hawaii, USA, 13-24 August 2007, 3rd. 15 p.</dc:description>
+          <dc:publisher>Western and Central Pacific Fisheries Commission</dc:publisher>
+          <dc:date>2007</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC3/EB_WP5.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:050729ae-cc02-4fef-8d38-30270bfadcc2</identifier>
+        <datestamp>2016-04-14T22:34:09Z</datestamp>
+        <setSpec>BDM_36</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_BDM</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Sea cucumber hatchery seed production in Malaysia: From research and development, to pilot-scale production of the sandfish &lt;em&gt;Holothuria scabra&lt;/em&gt;</dc:title>
+          <dc:creator>Vaitilingon D.</dc:creator>
+          <dc:creator>Smith S.</dc:creator>
+          <dc:creator>Watson G.</dc:creator>
+          <dc:creator>Miller T.</dc:creator>
+          <dc:creator>Alattas S.</dc:creator>
+          <dc:creator>Ong Hock K.</dc:creator>
+          <dc:creator>Zainoddin J.</dc:creator>
+          <dc:creator>Zaidnuddin I.</dc:creator>
+          <dc:creator>Azhar H.</dc:creator>
+          <dc:subject>Fish hatcheries</dc:subject>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Vaitilingon D., Smith S., Watson G., Miller T., Alattas S., Ong Hock K., Zainoddin J., Zaidnuddin I., Azhar H. 2016. Sea cucumber hatchery seed production in Malaysia: From research and development, to pilot-scale production of the sandfish &lt;em&gt;Holothuria scabra&lt;/em&gt;. SPC Beche-de-mer Information Bulletin 36:67-75.</dc:description>
+          <dc:date>2016</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM/36/BDM36_67_Vaitilingon.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Malaysia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:8c746365-c849-45dd-9fb4-302a05a75082</identifier>
+        <datestamp>2015-09-03T02:50:47Z</datestamp>
+        <setSpec>WIF_VF_15</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>La sensibilisation des communautés comme préalable à la gestion durable des ressources</dc:title>
+          <dc:creator>Taua A.</dc:creator>
+          <dc:subject>Women in fisheries</dc:subject>
+          <dc:description>Taua A. 2005. La sensibilisation des communautés comme préalable à la gestion durable des ressources. HINA, les femmes et la pêche, Bulletin d'information de la CPS 15:21-22.</dc:description>
+          <dc:date>2005</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/WIF_VF/15/WIF15VF_21_Taua.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:a40abb2b-3ecb-4c1e-810e-302b6f4d4088</identifier>
+        <datestamp>2015-03-30T06:35:52Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC8</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Annual report to the commission - Part 1: information on fisheries, research and statistics: Fiji</dc:title>
+          <dc:creator>Tavaga N.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Tavaga N. 2012. Annual report to the commission - Part 1: information on fisheries, research and statistics: Fiji [AR CCM 07]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Busan, Republic of Korea, 7-15 August 2012 , 8th. [11 p.]</dc:description>
+          <dc:date>2012</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC8/AR-CCM-07.pdf</dc:identifier>
+          <dc:coverage>Fiji</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:5dd0a88b-5004-4c7f-9ce1-302c1d83c502</identifier>
+        <datestamp>2015-08-20T22:13:34Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>LRF_10</setSpec>
+        <setSpec>All _LRF</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Death in the live reef fish trades</dc:title>
+          <dc:creator>Sadovy Y.</dc:creator>
+          <dc:description>Sadovy Y. 2002. Death in the live reef fish trades. SPC Live Reef Fish Information Bulletin 10:3-5.</dc:description>
+          <dc:date>2002</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/LRF/10/LRF10_03_Sadovy.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d5cf1af3-7141-4a9b-bd63-303270234460</identifier>
+        <datestamp>2015-09-02T21:45:49Z</datestamp>
+        <setSpec>WIF_24</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>From women in fisheries to gender and fisheries</dc:title>
+          <dc:creator>Williams M.J.</dc:creator>
+          <dc:creator>Williams S.B.</dc:creator>
+          <dc:creator>Choo P.S.</dc:creator>
+          <dc:subject>Women in fisheries</dc:subject>
+          <dc:subject>Gender mainstreaming</dc:subject>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Williams M.J., Williams S.B., Choo P.S. 2014. From women in fisheries to gender and fisheries. SPC Women in Fisheries Information Bulletin 24:6-10.</dc:description>
+          <dc:date>2014</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/WIF/24/WIF24_06_Williams.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d319e073-195d-4677-8eef-3036620b8bfb</identifier>
+        <datestamp>2014-07-24T02:59:16Z</datestamp>
+        <setSpec>CRISP</setSpec>
+        <setSpec>All_Reports</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Capture and identification of coral reef fish larvae - French Polynesia</dc:title>
+          <dc:creator>Havimana L.</dc:creator>
+          <dc:description>Havimana L. 2010. Capture and identification of coral reef fish larvae - French Polynesia. Noumea, New Caledonia: Coral Reef Initiatives for the Pacific (CRISP). 29 p.</dc:description>
+          <dc:date>2010</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Reports/CRISP/ENG_2010_Capture_identification_coral_reef_fish_larvae.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:4588a9f9-f917-4e3e-9b8b-30464c14a8c5</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>FFA</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Review of the Japanese proposal for an international convention for the conservation and management of the South Pacific albacore stock and the South Pacific proposal for a management arrangement</dc:title>
+          <dc:creator>Lodge M. W.</dc:creator>
+          <dc:subject>Albacore</dc:subject>
+          <dc:description>Lodge M. W. 1991. Review of the Japanese proposal for an international convention for the conservation and management of the South Pacific albacore stock and the South Pacific proposal for a management arrangement. Honiara, Solomon Islands: Forum Fisheries Agency. FFA Report 91/82. 19 p.</dc:description>
+          <dc:publisher>Forum Fisheries Agency</dc:publisher>
+          <dc:date>1991</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/FFA/Reports/FFA_1991_082.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:acf64073-cf73-4df3-b731-3048e6032b5c</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_20</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>South Pacific Commission regional tuna bulletin : first quarter 1988</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 1988. South Pacific Commission regional tuna bulletin [WP 10]: first quarter 1988. Noumea, New Caledonia: South Pacific Comission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 1 - 5 August 1988, 20th. 28 p.</dc:description>
+          <dc:publisher>South Pacific Comission</dc:publisher>
+          <dc:date>1988</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/20/WP10.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:1f5d16b4-6efb-4123-8c37-3052152021fd</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_14</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Sample statistical summaries</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1982. Sample statistical summaries [WP 17]. Noumea, New Caledonia: South Pacific Commission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 2 - 6 August 1982, 14th. 3 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1982</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/14/WP17.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:3b75d655-264b-4c6e-aa4e-305e2228c4e6</identifier>
+        <datestamp>2015-08-24T02:45:38Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Sailboats for fishing</dc:title>
+          <dc:creator>Serve Y.</dc:creator>
+          <dc:description>Serve Y. 1980. Sailboats for fishing. SPC Fisheries Newsletter 20:23-29.</dc:description>
+          <dc:date>1980</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/20/FishNews20_23_Serve.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:393a7b13-964b-4bc3-9ee4-30614561c904</identifier>
+        <datestamp>2015-08-19T05:03:06Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_BDM</setSpec>
+        <setSpec>BDM_VF_23</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Reproduction asexuée par scission transversale induite chez les espèces holothuries &lt;i&gt;Bohadschia marmorata&lt;/i&gt; et &lt;i&gt;Holothuria atra&lt;/i&gt;</dc:title>
+          <dc:creator>Laxminarayana A.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Laxminarayana A. 2006. Reproduction asexuée par scission transversale induite chez les espèces holothuries &lt;i&gt;Bohadschia marmorata&lt;/i&gt; et &lt;i&gt;Holothuria atra&lt;/i&gt;. La Bêche-de-mer, Bulletin d'information de la CPS 23:35-37.</dc:description>
+          <dc:date>2006</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM_VF/23/BDM23VF_35_Laxminarayana.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d4c4f97d-54a2-4205-a5b8-306418bbcc39</identifier>
+        <datestamp>2016-02-29T04:34:48Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>FishNews_148</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Contributing to food security in post-cyclone Vanuatu and Federated States of Micronesia</dc:title>
+          <dc:creator>Manieva J.</dc:creator>
+          <dc:subject>Food security</dc:subject>
+          <dc:description>Contributing to food security in post-cyclone Vanuatu and Federated States of Micronesia. SPC Fisheries Newsletter 148:12–13.</dc:description>
+          <dc:date>2016</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/148/FishNews148_12_Manieva.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Federated States of Micronesia</dc:coverage>
+          <dc:coverage>Vanuatu</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:01af2785-7bba-409e-b646-306938a27d25</identifier>
+        <datestamp>2016-04-27T03:32:45Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>FishNews_VF_148</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>12e session de la WCPFC : Les priorités des membres de la FFA ont été en partie entendues</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:description>Anon. 2016. 12e session de la WCPFC : Les priorités des membres de la FFA ont été en partie entendues. Lettre d'information sur les pêches de la CPS 148:16–17.</dc:description>
+          <dc:date>2016</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/148/FishNews148_16_FFA_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:bcfedb14-16c9-4b65-9bbf-307be6de5220</identifier>
+        <datestamp>2015-08-20T05:00:31Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>NC_ALL</setSpec>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>FishNews_133</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Prawn farming in New Caledonia</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Aquaculture</dc:subject>
+          <dc:description>Anon. 2011. Prawn farming in New Caledonia. SPC Fisheries Newsletter 133:19-22.</dc:description>
+          <dc:date>2011</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/133/FishNews133_19_PrawnNC.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>New Caledonia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:a0e616c0-d7b6-46b2-9795-307e27ad34eb</identifier>
+        <datestamp>2015-03-30T06:09:41Z</datestamp>
+        <setSpec>WCPFC_SC7</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Characterisation and catch per unit effort of striped marlin in New Zealand</dc:title>
+          <dc:creator>Kendrick T.</dc:creator>
+          <dc:creator>Holdsworth J.</dc:creator>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:subject>Striped marlin</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Kendrick T., Holdsworth J. 2011. Characterisation and catch per unit effort of striped marlin in New Zealand [SA IP 14]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Nuku'alofa, Tonga, 9-17 August 2011, 7th. 39 p.</dc:description>
+          <dc:date>2011</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC7/SA-IP-14.pdf</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:0604e099-d5e7-4a1d-81d4-307e3b96ee7b</identifier>
+        <datestamp>2015-08-27T00:47:57Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Les samouraïs de la découpe de filets du marché central, à Osaka</dc:title>
+          <dc:creator>Beverly S.</dc:creator>
+          <dc:description>Beverly S. 2002. Les samouraïs de la découpe de filets du marché central, à Osaka. Lettre d'information sur les pêches de la CPS 97:27-32.</dc:description>
+          <dc:date>2002</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/97/FishNews97VF_27_Beverly.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Japan</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:00d74f46-faba-4881-b504-30806e1280be</identifier>
+        <datestamp>2015-08-30T22:21:05Z</datestamp>
+        <setSpec>POIB_11</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_POIB</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Commercial spat production of &lt;i&gt;Pinctada maxima&lt;/i&gt; at Roko Island hatchery, North-East Australia, with &lt;i&gt;in vitro&lt;/i&gt; fertilisation technique</dc:title>
+          <dc:creator>Ito M.</dc:creator>
+          <dc:subject>Fish hatcheries</dc:subject>
+          <dc:subject>Pearl oysters</dc:subject>
+          <dc:description>Ito M. 1998. Commercial spat production of &lt;i&gt;Pinctada maxima&lt;/i&gt; at Roko Island hatchery, North-East Australia, with &lt;i&gt;in vitro&lt;/i&gt; fertilisation technique. SPC Pearl Oyster Information Bulletin 11:3-5.</dc:description>
+          <dc:date>1998</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/POIB/11/POIB11_03_Ito.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Australia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:b862e71c-4891-47cc-ac86-3081158a24f4</identifier>
+        <datestamp>2013-01-09T21:38:01Z</datestamp>
+        <setSpec>CRISP</setSpec>
+        <setSpec>All_Reports</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>CRISP - Six années pour la protection, la gestion, et la valorisation des récifs coralliens du Pacifique: Capitalisation des résultats</dc:title>
+          <dc:creator>Gabrié C.</dc:creator>
+          <dc:creator>Duflos M.</dc:creator>
+          <dc:creator>Dupré C.</dc:creator>
+          <dc:creator>Chenet A.</dc:creator>
+          <dc:description>Gabrié C., Duflos M., Dupré C., Chenet A. 2011. CRISP - Six années pour la protection, la gestion, et la valorisation des récifs coralliens du Pacifique: Capitalisation des résultats. Noumea, New Caledonia: Coral Reef Initiatives for the Pacific (CRISP). 160 p.</dc:description>
+          <dc:date>2011</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Reports/CRISP/FR_2011_Capitalisation_Resultats.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:204be725-9002-49f5-86ea-308250d0a2b1</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>88_InshoreWkshp</setSpec>
+        <setSpec>NC_ALL</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Importance des mangroves pour l'ichyofaune du lagon de Nouvelle-Calédonie</dc:title>
+          <dc:creator>Thollot P.</dc:creator>
+          <dc:subject>Mangrove ecology</dc:subject>
+          <dc:subject>Marine resources</dc:subject>
+          <dc:description>Thollot P. 1988. Importance des mangroves pour l'ichyofaune du lagon de Nouvelle-Calédonie [BP22]. Nouméa, Nouvelle-Calédonie: Commission du Pacifique sud. Colloque sur les ressources côtières du Pacifique, Nouméa, Nouvelle-Calédonie, 14-25 mars 1988. 15 p.</dc:description>
+          <dc:publisher>Commission du Pacifique sud</dc:publisher>
+          <dc:date>1988</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/88_InshoreWkshp/BP22_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>New Caledonia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:b814aac4-9d35-4fce-a9e0-3090b96ea9b8</identifier>
+        <datestamp>2015-03-30T06:33:01Z</datestamp>
+        <setSpec>WCPFC_SC7</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>CPUE of skipjack for the Japanese offshore pole and line using GPS and catch data</dc:title>
+          <dc:creator>Okamoto S.</dc:creator>
+          <dc:creator>Kiyofuji H.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fisheries--Catch effort</dc:subject>
+          <dc:subject>Skipjack tuna</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:subject>Skipjack tuna fisheries</dc:subject>
+          <dc:description>Okamoto S., Kiyofuji H. 2011. CPUE of skipjack for the Japanese offshore pole and line using GPS and catch data [SA WP 09]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Pohnpei, Federated States of Micronesia, 9-17 August 2011, 7th. No paging</dc:description>
+          <dc:date>2011</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC7/SA-WP-09.pdf</dc:identifier>
+          <dc:coverage>Japan</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:669adbd9-1dc6-4916-91e5-3091b480fcff</identifier>
+        <datestamp>2015-03-30T06:32:58Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC6</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Annual report to the commission - Part 1: information on fisheries, research and statistics: Samoa</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2010. Annual report to the commission - Part 1: information on fisheries, research and statistics: Samoa [AR CCM 20]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Nuku'alofa, Tonga, 10-19 August 2010, 6th. 12 p.</dc:description>
+          <dc:date>2010</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC6/AR-CCM-20.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Samoa</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:9b7769a9-21c8-445d-9166-30974aed2460</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>RTMF_10</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Exposé national des Nouvelles-Hébrides</dc:title>
+          <dc:creator>Leymang R.F.G.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Leymang R.F.G. 1978. Exposé national des Nouvelles-Hébrides  [WP 18]. Nouméa, Nouvelle-Calédonie: Commission du Pacifique Sud. Conférence Technique Régionale des Pêches, Nouméa, Nouvelle-Calédonie, 13 - 17 mars 1978, 10ème. 1 p.</dc:description>
+          <dc:publisher>Commission du Pacifique Sud</dc:publisher>
+          <dc:date>1978</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/10/WP18_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Vanuatu</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:9ddf4190-0812-4804-abfb-3098402dda27</identifier>
+        <datestamp>2015-08-20T22:34:59Z</datestamp>
+        <setSpec>LRF_13</setSpec>
+        <setSpec>All _LRF</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Pre-settlement fish capture and culture workshop, Solomon Islands</dc:title>
+          <dc:creator>Hair C.</dc:creator>
+          <dc:description>Hair C. 2005. Pre-settlement fish capture and culture workshop, Solomon Islands. SPC Live Reef Fish Information Bulletin 13:32-33.</dc:description>
+          <dc:date>2005</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/LRF/13/LRF13_32_Hair.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Solomon Islands</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:9ae90f75-568a-4252-98b3-3099ad1e3db9</identifier>
+        <datestamp>2015-08-04T22:19:42Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC10</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Summary of the fishery and assessments of the major stocks of tuna exploited in the eastern Pacific Ocean</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2014. Summary of the fishery and assessments of the major stocks of tuna exploited in the eastern Pacific Ocean [GN-WP-02]. [Majuro, Republic of the Marshall Islands]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Majuro, Republic of the Marshall Islands, 6-14 August 2014, 10th. 122 p.</dc:description>
+          <dc:date>2014</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC10/SC10_GN_WP_02_IATTC_Tunas_and_billfishes_in_the_EPO_2013.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:6d8e3df7-98d3-4e83-b02a-309b6e5dd6be</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>88_InshoreWkshp</setSpec>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>NC_ALL</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Study of the mangrove crab (&lt;i&gt;Scylla serrata&lt;/i&gt;) in New Caledonia</dc:title>
+          <dc:creator>Delathière S.</dc:creator>
+          <dc:subject>Scylla serrata</dc:subject>
+          <dc:subject>Marine resources</dc:subject>
+          <dc:description>Delathière, S. 1988. Study of the mangrove crab (&lt;i&gt;Scylla serrata&lt;/i&gt;) in New Caledonia [BP 19]. Noumea: SPC. Workshop on Pacific Inshore Fishery Resources, Noumea, New Caledonia, 14-25 March 1988.  9 p.</dc:description>
+          <dc:date>1988</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/88_InshoreWkshp/BP19.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>New Caledonia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:07bba0b0-b3f7-411a-9add-309be7c63809</identifier>
+        <datestamp>2017-10-05T04:24:43Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>FishNews_153</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Pacific tuna stock assessment requires regular tagging experiments</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fish tagging</dc:subject>
+          <dc:subject>Fish stock assessment</dc:subject>
+          <dc:description>Anon. 2017. Pacific tuna stock assessment requires regular tagging experiments. SPC Fisheries Newsletter 153:5–6.</dc:description>
+          <dc:date>2017</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/153/FishNews153_05_Anon.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d6bbd6ba-5ea6-4ddb-98d3-30b2610f9953</identifier>
+        <datestamp>2015-08-21T03:56:03Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Pacific Island countries and the aquarium fish market</dc:title>
+          <dc:creator>Dufour V.</dc:creator>
+          <dc:subject>Marine aquarium fishes</dc:subject>
+          <dc:description>Dufour V. 1997. Pacific Island countries and the aquarium fish market. SPC Fisheries Newsletter 80/81:30-36.</dc:description>
+          <dc:date>1997</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/80/FishNews80_30_Dufour.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:ba43b08c-d67a-4064-8de7-30b4c577ae1d</identifier>
+        <datestamp>2015-08-17T22:24:53Z</datestamp>
+        <setSpec>All_BDM</setSpec>
+        <setSpec>BDM_20</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Natural spawning observations</dc:title>
+          <dc:creator>Rard M.</dc:creator>
+          <dc:creator>Desurmont A.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Rard M., Desurmont A. 2004. Natural spawning observations. SPC Beche-de-mer Information Bulletin 20:37.</dc:description>
+          <dc:date>2004</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM/20/BDM20_37_Rard.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:cf7fced1-c68f-42ef-ade8-30bacd411ffd</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Reports</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Field report no. 7 on development options and constraints including training needs within the tuna fishing industry and support services in the Kingdom of Tonga 27 May to 7 June 2000</dc:title>
+          <dc:creator>Chapman L.</dc:creator>
+          <dc:description>Chapman, L. 2001. Development options and constraints including training needs within the tuna fishing industry and support services in the Kingdom of Tonga (27 may to 7 June 2000). Noumea, New Caledonia: Secretariat of the Pacific Community. Field Report 7. xvi, 53 p.</dc:description>
+          <dc:date>2001</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Reports/Chapman_01_Tonga.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Tonga</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:9c1c7054-070b-4355-bd1b-30cce8f2f851</identifier>
+        <datestamp>2015-03-30T06:34:02Z</datestamp>
+        <setSpec>HOF_7</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Regional Technical Cooperation Programme (TCP) Project for selected Pacific Island Countries and Territories (PICTs): Information Paper 6</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:description>Anon. 2011. Regional Technical Cooperation Programme (TCP) Project for selected Pacific Island Countries and Territories (PICTs): Information Paper 6. Noumea, New Caledonia: Secretariat of the Pacific Community. Heads of Fisheries Meeting, Noumea, New Caledonia, 28 February-4 March 2011, 7th. 4 p.</dc:description>
+          <dc:date>2011</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/HOF/7/IP6.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:51766255-4135-4b97-8caa-30cfe51c6bd7</identifier>
+        <datestamp>2015-08-20T21:26:39Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>LRF_3</setSpec>
+        <setSpec>All _LRF</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Doomed fishermen</dc:title>
+          <dc:creator>Jacques M.</dc:creator>
+          <dc:description>Jacques M. 1997. Doomed fishermen. SPC Live Reef Fish Information Bulletin 3:37-39.</dc:description>
+          <dc:date>1997</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/LRF/3/LRF3_37_Jacques.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:38e59a28-ee3f-4a28-b153-30d70381ea1d</identifier>
+        <datestamp>2015-06-16T21:30:53Z</datestamp>
+        <setSpec>posters_MarineSpecies</setSpec>
+        <setSpec>Posters</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Most common bottomfish of Kosrae</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Bottom fishing</dc:subject>
+          <dc:description>Anon. 2005. Most common bottomfish of Kosrae [Poster]. Noumea, New Caledonia: SPC, Secretariat of the Pacific Community.</dc:description>
+          <dc:date>2005</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Posters/Kosrae-bottom.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Federated States of Micronesia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:cc41b9d7-ec80-4f21-8a6d-30dcc8baa371</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_17</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Fisheries sector refrigeration systems in Pacific Island countries</dc:title>
+          <dc:creator>Preston G.L.</dc:creator>
+          <dc:creator>Vincent M.A.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Refrigeration and refrigerating machinery</dc:subject>
+          <dc:description>Preston G.L., Vincent M.A. 1985. Fisheries sector refrigeration systems in Pacific Island countries [WP 2]. Noumea, New Caledonia: South Pacific Commission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 5 - 9 August 1985, 17th. 84 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1985</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/17/WP2.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:0513bb21-e3c6-4bcd-bd1b-30e17402598a</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>WPYRG_7</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Comparison in fish length frequency distribution of purse seine catches between the data collected byport sampling and on-board obervers</dc:title>
+          <dc:creator>Matsumoto T.</dc:creator>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Matsumoto T. 1997. Comparison in fish length frequency distribution of purse seine catches between the data collected byport sampling and on-board obervers [WP 2]. Noumea, New Caledonia: South Pacific Commission. Western Pacific Yellowfin Tuna Research Group, Nadi, Fiji, 18-20 June 1997, 7th. 5 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1997</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WPYRG/7/WP2.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:acf3f66b-b959-49c5-a314-30e1daa88063</identifier>
+        <datestamp>2015-08-27T03:53:17Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Pêche sur des DCP ancrés en Papouasie-Nouvelle-Guinée</dc:title>
+          <dc:creator>Sokimi W.</dc:creator>
+          <dc:subject>Fish aggregation devices</dc:subject>
+          <dc:description>Sokimi W. 2009. Pêche sur des DCP ancrés en Papouasie-Nouvelle-Guinée. Lettre d'information sur les pêches de la CPS 129:25-28.</dc:description>
+          <dc:date>2009</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/129/FishNews129VF_25_Sokimi.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Papua New Guinea</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:809c8c62-8b61-40c3-89d0-30e1f8acac62</identifier>
+        <datestamp>2015-08-19T04:44:00Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>BDM_VF_11</setSpec>
+        <setSpec>All_BDM</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Transformation de la bêche-de-mer : un petit effort supplémentaire permet de multiplier les bénéfices et de réduire le gaspillage de ressources précieuses</dc:title>
+          <dc:creator>Seeto J.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Seeto J. 1999. Transformation de la bêche-de-mer : un petit effort supplémentaire permet de multiplier les bénéfices et de réduire le gaspillage de ressources précieuses. La Bêche-de-mer, Bulletin d'information de la CPS 11:2-3.</dc:description>
+          <dc:date>1999</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM_VF/11/BDM11VF_02_Seeto.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:2ad48f18-2cf6-4268-a559-30e8e9384304</identifier>
+        <datestamp>2014-07-31T00:20:30Z</datestamp>
+        <setSpec>CRISP</setSpec>
+        <setSpec>All_Reports</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Promotion de la filière postlarves en Polynésie Française</dc:title>
+          <dc:creator>Petit M.</dc:creator>
+          <dc:description>Petit M. 2010. Promotion de la filière postlarves en Polynésie Française. Noumea, New Caledonia: Coral Reef Initiatives for the Pacific (CRISP). 49 p.</dc:description>
+          <dc:date>2010</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Reports/CRISP/FR_2010_Promotion_filiere_postlarves.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>French Polynesia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:f833a901-7fff-4a77-b03e-30f1b02908dc</identifier>
+        <datestamp>2015-03-30T05:41:26Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC9</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Annual report to the commission - Part 1: information on fisheries, research and statistics: Tokelau</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2013. Annual report to the commission - Part 1: information on fisheries, research and statistics: Tokelau [AR CCM 23]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Pohnpei, Federated States of Micronesia, 6–14 August 2013, 9th. 8 p.</dc:description>
+          <dc:date>2013</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC9/AR-CCM-23-Tokelau-AR-Part-1.pdf</dc:identifier>
+          <dc:coverage>Tokelau</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:3573640e-a282-40a4-80c5-30fabd86f4f6</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>RTMF_20</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Country statement - Northern Mariana Islands</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1988. Country statement - Northern Mariana Islands [WP 34]. Noumea, New Caledonia: South Pacific Commission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 1 - 5 August 1988, 20th. 4 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1988</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/20/WP34.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Northern Mariana Islands</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:93187b57-7df9-4891-ad92-30fd4029ad43</identifier>
+        <datestamp>2018-04-13T00:30:51Z</datestamp>
+        <setSpec>TRAD_39</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_TRAD</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>A field survey of the green snail (&lt;em&gt;Turbo marmoratus&lt;/em&gt;) in Vanuatu: Density, effects of transplantation, and villagers’ motives for participation in transplantation and conservation activities</dc:title>
+          <dc:creator>Terashima H.</dc:creator>
+          <dc:creator>Ham J.</dc:creator>
+          <dc:creator>Kaku R.</dc:creator>
+          <dc:creator>William A.</dc:creator>
+          <dc:creator>Malisa M.</dc:creator>
+          <dc:creator>Rena Gereva S.</dc:creator>
+          <dc:creator>Kakuma S.</dc:creator>
+          <dc:subject>Turbo marmoratus</dc:subject>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:subject>Marine invertebrate populations</dc:subject>
+          <dc:description>Terashima H., Ham J., Kaku R., William A., Malisa M., Rena Gereva S., Kakuma S. 2018. A field survey of the green snail (&lt;em&gt;Turbo marmoratus&lt;/em&gt;) in Vanuatu: Density, effects of transplantation, and villagers’ motives for participation in transplantation and conservation activities. SPC Traditional Marine Resource Management and Knowledge Information Bulletin 39:15–40.</dc:description>
+          <dc:date>2018</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/TRAD/39/Trad39_15_Terashima.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Vanuatu</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:50bbe651-05b4-4fa2-aab9-30fdbbde048d</identifier>
+        <datestamp>2015-03-30T05:49:40Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC9</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Consideration of data to use in the 2014 stock assessments for bigeye, yellowfin, and skipjack tunas</dc:title>
+          <dc:creator>Harley S.J.</dc:creator>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:subject>Skipjack tuna</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:subject>Yellowfin tuna</dc:subject>
+          <dc:subject>Fish stock assessment</dc:subject>
+          <dc:description>Harley S.J. 2013. Consideration of data to use in the 2014 stock assessments for bigeye, yellowfin, and skipjack tunas [ST-WP-06] . [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Pohnpei, Federated States of Micronesia, 6-14 August 2013, 9th. 3 p.</dc:description>
+          <dc:date>2013</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC9/ST-WP-06-data-use-YF-SKJ-BE.pdf</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:8e7cd230-ed23-45f9-9211-30ff96a3a165</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>SCTB_16</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Testing the accuracy of MULTIFAN-CL assessments using an operational model of yellowfin tuna (&lt;i&gt;Thunnus albacares&lt;/i&gt;) fisheries in the western and central Pacific Ocean</dc:title>
+          <dc:creator>Labelle M.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Yellowfin tuna</dc:subject>
+          <dc:description>Labelle, M. 2003. Testing the accuracy of MULTIFAN-CL assessments using an operational model of yellowfin tuna (&lt;i&gt;Thunnus albacares&lt;/i&gt;) fisheries in the western and central Pacific Ocean [MWG-1]. Noumea, New Caledonia: SPC, Secretariat of the Pacific Community. Standing Committee on Tuna and Billfish, Mooloolaba, Queensland, Australia, 9-16 July 2003, 16th. 32 p.</dc:description>
+          <dc:date>2003</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/SCTB/16/MWG_1.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:78ed6f9e-066f-401e-b486-31051b6f0e06</identifier>
+        <datestamp>2015-08-31T21:45:52Z</datestamp>
+        <setSpec>TRAD_VF_13</setSpec>
+        <setSpec>All_TRAD</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Recommandations relatives au choix d'un régime d'utilisation des espaces marins pour la gestion des ressources halieutiques, issues de l'étude intitulée "Connaissances et pratiques halieutiques traditionnelles au service de la gestion durable"</dc:title>
+          <dc:creator>Connolly B.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:description>Connolly B. 2002. Recommandations relatives au choix d'un régime d'utilisation des espaces marins pour la gestion des ressources halieutiques, issues de l'étude intitulée "Connaissances et pratiques halieutiques traditionnelles au service de la gestion durable". Ressources marines et traditions, Bulletin d'information de la CPS 13:24-27.</dc:description>
+          <dc:date>2002</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/TRAD_VF/13/TRAD13VF_24_Connolly.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:5faa6a7c-ee57-4be4-a725-31052247ee30</identifier>
+        <datestamp>2014-03-20T23:29:50Z</datestamp>
+        <setSpec>Brochures</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Qaravi Vakavanua ni iqoliqoli me vakatabui se Maroroi</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:description>Anon. 2014. Qaravi Vakavanua ni iqoliqoli me vakatabui se Maroroi. Noumea, New Caledonia: Secretariat of the Pacific Community. 4 p. [in Fijian]</dc:description>
+          <dc:date>2014</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Brochures/Anon_14_ISFC_00b_NoTake_areas_FJ.pdf</dc:identifier>
+          <dc:language>fj</dc:language>
+          <dc:coverage>Fiji</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:60ac355c-dc1c-4066-b345-3109b5b757ff</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>RTMF_10</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Report of construction of first aluminium catamaran built by the FAO/DANIDA village fisheries project in Western Samoa</dc:title>
+          <dc:creator>Overa A.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishing boats</dc:subject>
+          <dc:description>Overa A. 1978. Report of construction of first aluminium catamaran built by the FAO/DANIDA village fisheries project in Western Samoa. [S.l.]: [s.n.]. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 13 - 17 March 1978, 10th. 3 p.</dc:description>
+          <dc:publisher>[s.n.]</dc:publisher>
+          <dc:date>1978</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/10/Report_construction_of_aluminium_catamaran.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Samoa</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:8c27b238-4fdc-4595-a646-3117f997f136</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_25</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Country Statement Australia</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1994. Country Statement Australia [Information Paper 19]. Noumea, New Caledonia: South Pacific Commission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 14-18 March 1994, 25th. 8 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1994</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/25/IP19.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Australia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:748c7726-5f21-4785-8a0a-311cc5207352</identifier>
+        <datestamp>2015-08-27T03:58:42Z</datestamp>
+        <setSpec>FishNews_VF_132</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Les Îles Fidji lancent un projet d’élevage de chanidés pour renforcer leur sécurité alimentaire</dc:title>
+          <dc:creator>Billings G.</dc:creator>
+          <dc:creator>Pickering T.</dc:creator>
+          <dc:subject>Food security</dc:subject>
+          <dc:subject>Aquaculture</dc:subject>
+          <dc:description>Billings G., Pickering T. 2010. Les Îles Fidji lancent un projet d’élevage de chanidés pour renforcer leur sécurité alimentaire. Lettre d'information sur les pêches de la CPS 132:20-21.</dc:description>
+          <dc:date>2010</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/132/FishNews132VF_20_Billings.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Fiji</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:cbc88369-c49e-4a1b-9995-311fda9788d4</identifier>
+        <datestamp>2018-02-02T03:49:21Z</datestamp>
+        <setSpec>WCPFC_SC13</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Yellowfin tuna catch by gear and flag, 2010-2016</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:subject>Yellowfin tuna</dc:subject>
+          <dc:description>Anon. 2017. Yellowfin tuna catch by gear and flag, 2010-2016. Oceanic Fisheries Program. Pacific Community. [Rarotonga, Cook Islands]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Rarotonga, Cook Islands, 9-17 August 2017, 13th</dc:description>
+          <dc:date>2017</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC13/MI_IP_07_YFT_Tables.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:8b51db3b-f38a-42f0-b6b1-31230206c355</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Reports</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>SPC role in relation to quantitative information about Pacific Island fisheries</dc:title>
+          <dc:creator>Adams T.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Adams, T. 2003.  SPC role in relation to quantitative information about Pacific Island fisheries. Address to SPC regional meeting on coastal fisheries management 2003. [5] p.</dc:description>
+          <dc:date>2003</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Reports/Adams_03_SPCrole.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:b412948a-30a1-48d3-900c-3128b75243c0</identifier>
+        <datestamp>2015-09-02T21:34:49Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>WIF_22</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Heading towards the mainstream from the margins</dc:title>
+          <dc:creator>Williams M.J.</dc:creator>
+          <dc:subject>Women in fisheries</dc:subject>
+          <dc:description>Williams M.J. 2012. Heading towards the mainstream from the margins. SPC Women In Fisheries Information Bulletin 22:17-18.</dc:description>
+          <dc:date>2012</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/WIF/22/WIF22_17_Williams.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:9c772130-bd9c-44e6-9609-31337c484532</identifier>
+        <datestamp>2015-08-19T22:34:42Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>FAD</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>SPC Fish Aggregating Device Information Bulletin #1 - March 1996</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fish aggregation devices</dc:subject>
+          <dc:description>Anon. 1996. SPC Fish Aggregating Device Information Bulletin 1. Noumea, New Caledonia: The South Pacific Commission. 32 p.</dc:description>
+          <dc:date>1996</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FAD/1/FAD1.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:f3f5bc60-ccab-499d-82be-3135364d1b9b</identifier>
+        <datestamp>2015-03-30T06:06:21Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC6</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Overview of tuna fisheries in the Western and Central Pacific Ocean, including economic conditions – 2009</dc:title>
+          <dc:creator>Williams P.G.</dc:creator>
+          <dc:creator>Terawasi P.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Williams P.G., Terawasi P. 2010.  Overview of tuna fisheries in the Western and Central Pacific Ocean, including economic conditions – 2009 [GN WP 1]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Nuku'alofa, Tonga, 10-19 August 2010, 6th. 44 p.</dc:description>
+          <dc:date>2010</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC6/GN-WP-01.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d2690d47-3f46-4718-a506-3157daabc7e5</identifier>
+        <datestamp>2015-08-20T03:27:50Z</datestamp>
+        <setSpec>FishNews</setSpec>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>SPC Fisheries Newsletter #138 - May/August 2012</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 2012. SPC Fisheries Newsletter 138. Noumea, New Caledonia: Secretariat of the Pacific Community. 48 p.</dc:description>
+          <dc:date>2012</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/138/FishNews138.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:55f4e624-5fe2-4613-8bcb-3162b94a2667</identifier>
+        <datestamp>2015-08-20T22:34:01Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All _LRF</setSpec>
+        <setSpec>LRF_13</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Monitoring the chain of custody to reduce delayed mortality of net-caught fish in the aquarium trade</dc:title>
+          <dc:creator>Rubec P.J.</dc:creator>
+          <dc:creator>Cruz F.P.</dc:creator>
+          <dc:subject>Aquarium fish collecting</dc:subject>
+          <dc:description>Rubec P.J., Cruz F.P. 2005. Monitoring the chain of custody to reduce delayed mortality of net-caught fish in the aquarium trade. SPC Live Reef Fish Information Bulletin 13:13-23.</dc:description>
+          <dc:date>2005</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/LRF/13/LRF13_13_Rubec.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:00660d93-febc-4e26-a054-3166ab5b1a32</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>SCTB_11</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>U.S. Fisheries for tropical tunas and billfish of the Central-Western Pacific and South Pacific Albacore, 1993-1997</dc:title>
+          <dc:creator>Coan A.L.</dc:creator>
+          <dc:creator>Ito R.</dc:creator>
+          <dc:creator>Kikkawa B.S.</dc:creator>
+          <dc:subject>Albacore</dc:subject>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Coan A.L., Ito R., Kikkawa B.S. 1998. U.S. Fisheries for tropical tunas and billfish of the Central-Western Pacific and South Pacific Albacore, 1993-1997  [WP 43]. Noumea, New Caledonia: Secretariat of the Pacific Community. Standing Committe on Tuna and Billfish, Honolulu, Hawaii, 28 May - 6 June 1998, 11th. 21 p.</dc:description>
+          <dc:publisher>Secretariat of the Pacific Community</dc:publisher>
+          <dc:date>1998</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/SCTB/11/WP43.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>United States</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:028945b5-836e-4286-b7e8-316c5fca448c</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>SPB_VF</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Régimes de jouissance des récifs et des lagons dans les îles du Pacifique</dc:title>
+          <dc:creator>Johannes R.E.</dc:creator>
+          <dc:subject>Coral reefs and islands</dc:subject>
+          <dc:description>Johannes R.E. 1978. Régimes de jouissance des récifs et des lagons dans les îles du Pacifique. Nouméa, Nouvelle-Calédonie: Commission du Pacifique Sud. Bulletin du Pacifique Sud 28(4)/1978, p.11-13</dc:description>
+          <dc:publisher>Commission du Pacifique Sud</dc:publisher>
+          <dc:date>1978</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/SPB_VF/SPB28_4_Johannes_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:5e19b335-b0b3-4b0f-a5d2-316efe62ac86</identifier>
+        <datestamp>2015-08-27T05:35:10Z</datestamp>
+        <setSpec>FishNews_VF_145</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Essais de pêche à la canne et au bagan à Kavieng (Papouasie-Nouvelle-Guinée)</dc:title>
+          <dc:creator>Sokimi W.</dc:creator>
+          <dc:description>Sokimi W. 2015. Essais de pêche à la canne et au &lt;i&gt;bagan&lt;/i&gt; à Kavieng (Papouasie-Nouvelle-Guinée). Lettre d'information sur les pêches de la CPS 145:11-14.</dc:description>
+          <dc:date>2015</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/145/FishNews145_11_Sokimi_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Papua New Guinea</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:126d74b1-dc0d-43fb-9cae-317ca757604b</identifier>
+        <datestamp>2018-09-06T03:11:41Z</datestamp>
+        <setSpec>Policy_Briefs</setSpec>
+        <setSpec>Climate_Change</setSpec>
+        <setSpec>Brochures</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Note d'orientation de la CPS n°17 : Les ressources dulcicoles face au changement climatique</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Climatic changes</dc:subject>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 2012. Les ressources dulcicoles face au changement climatique - Note d'orientation 17/2012. Nouméa, Nouvelle-Calédonie: Secrétariat général de la Communauté du Pacifique. 4 p.</dc:description>
+          <dc:date>2012</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Brochures/Anon_12_PolicyBrief17_ClimateFreshwater_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d2ed7303-a14c-472b-ad6c-318e5ed4e84c</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_3</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Use of concrete</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishing boats</dc:subject>
+          <dc:description>Anon. 1968. Use of concrete [Tech. 1]. Noumea, New Caledonia: South Pacific Commission. Technical Meeting on Fisheries, Koror, Palau, 3 - 14 June 1968, 3rd. 4 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1968</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/3/TP1.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:179b9e68-9f5f-4fa0-aa26-318e86d2f1d3</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>RTMF_1962</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Fisheries Technical Meeting : Noumea, New Caledonia, 5th-13th February 1962: Report</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1962. Fisheries Technical Meeting : Noumea, New Caledonia, 5th-13th February 1962: Report. Noumea, New Caledonia: South Pacific Commission. Fisheries Technical Meeting, Noumea, New Caledonia, 5 - 13 February 1962. Various pagings</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1962</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/1962/Report.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:50eaec70-c415-4fc1-84a4-319225a6e0b6</identifier>
+        <datestamp>2015-08-24T02:48:16Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>South Pacific Commission Project on Fish Poisoning - B. Clinical observations on 3009 cases of ciguatera fish poisoning</dc:title>
+          <dc:creator>Bagnis R.</dc:creator>
+          <dc:creator>Kuberski T.</dc:creator>
+          <dc:creator>Laugier S.</dc:creator>
+          <dc:subject>Poisonous fishes--Toxicology</dc:subject>
+          <dc:description>Bagnis R., Kuberski T., Laugier S. 1979. South Pacific Commission Project on Fish Poisoning - B. Clinical observations on 3009 cases of ciguatera fish poisoning. SPC Fisheries Newsletter 19:20-22.</dc:description>
+          <dc:date>1979</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/19/FishNews19_20_Bagnis.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:609f3527-c28c-4f68-bc91-3196e726ae2f</identifier>
+        <datestamp>2015-03-30T06:28:59Z</datestamp>
+        <setSpec>WCPFC_SC5</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Summary report of 2009 steering committee meeting on Japanese Trust Fund (JTF)</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2009. Summary report of 2009 steering committee meeting on Japanese Trust Fund (JTF) [GN-WP-19]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Port Vila, Vanuatu, 10-21 August 2009, 5th. [2] p.</dc:description>
+          <dc:date>2009</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC5/GN-WP-19.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:5294aebc-9175-416d-b64b-319b674826c4</identifier>
+        <datestamp>2018-05-17T04:13:07Z</datestamp>
+        <setSpec>FishNews_VF_154</setSpec>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Le Groupe du fer de lance mélanésien s’attaque à la gestion des pêcheries d’holothuries</dc:title>
+          <dc:creator>Wapot S.</dc:creator>
+          <dc:creator>Govan H.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Wapot S., Govan H. 2018. Le Groupe du fer de lance mélanésien s’attaque à la gestion des pêcheries d’holothuries. Lettre d'information sur les pêches de la CPS 154:19–21.</dc:description>
+          <dc:date>2018</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/154/FishNews154_19_Govan_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:ef95893d-896b-4980-9ddc-319c6d444dee</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_15</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Messages échangés entre le Gouvernement des Iles Salomon et la Commission du Pacifique sud au sujet du point 6.a de l'ordre du jour provisoire</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1983. Messages échangés entre le Gouvernement des Iles Salomon et la Commission du Pacifique sud au sujet du point 6.a de l'ordre du jour provisoire  [WP 14]. Nouméa, Nouvelle-Calédonie: Commission du Pacifique Sud. Conférence Technique Régionale des Pêches, Nouméa, Nouvelle-Calédonie, 1-5 août 1983, 15ème. 4 p.</dc:description>
+          <dc:publisher>Commission du Pacifique Sud</dc:publisher>
+          <dc:date>1983</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/15/WP14_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Solomon Islands</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:556e6934-8313-43c4-85ee-319e37c6f118</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>HOF_3</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Review of the Oceanic Fisheries Programme</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:description>Anon. 2003. Review of the Oceanic Fisheries Programme [IP 3]. Noumea, New Caledonia: Secretariat of the Pacific Community. Heads of Fisheries Meeting, Noumea, New Caledonia, 18-23 August 2003, 3rd. 109 p.</dc:description>
+          <dc:publisher>Secretariat of the Pacific Community</dc:publisher>
+          <dc:date>2003</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/HOF/3/IP3.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:d666f564-9ead-49c9-b2ec-31a2e27fca21</identifier>
+        <datestamp>2015-08-26T22:38:25Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Glossaire de termes de pêche Japonais</dc:title>
+          <dc:creator>Gillett R.D.</dc:creator>
+          <dc:description>Gillet R.D. 1983. Glossaire de termes de pêche Japonais. Lettre d'information sur les pêches de la CPS 25:17-21.</dc:description>
+          <dc:date>1983</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/25/FishNews25VF_17_Gillet.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Japan</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:7769f35f-4f75-4d2c-b2e1-31b32b09959a</identifier>
+        <datestamp>2015-03-30T06:12:03Z</datestamp>
+        <setSpec>WCPFC_SC5</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Summary of issues arising from independent review</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2009. Summary of issues arising from independent review [GN-WP-8]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Port Vila, Vanuatu, 10-21 August 2009, 5th. [4] p.</dc:description>
+          <dc:date>2009</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC5/GN-WP-08.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:a60ab629-dbe7-42bf-bfbb-31b874416073</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC3</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Objectives and priorities for data to be collected by observers for fisheries other than purse-seine and longline</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Longlines (Fishery equipment)</dc:subject>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Longlining (Fisheries)</dc:subject>
+          <dc:subject>Purse seining</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2007. Objectives and priorities for data to be collected by observers for fisheries other than purse-seine and longline [ST WP 2]. Pohnpei, Federated States of Micronesia: Western and Central Pacific Fisheries Commission. Scientific Committee Regular Session, Honolulu, Hawaii, USA, 13-24 August 2007, 3rd. [4] p.</dc:description>
+          <dc:publisher>Western and Central Pacific Fisheries Commission</dc:publisher>
+          <dc:date>2007</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC3/ST_WP2.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:4cef1087-e360-48fb-840e-31c53d86b62b</identifier>
+        <datestamp>2015-08-21T00:41:16Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Fish aggregating devices: The Okinawan/Pacific experience</dc:title>
+          <dc:creator>Sokimi W.</dc:creator>
+          <dc:subject>Fish aggregation devices</dc:subject>
+          <dc:description>Sokimi W. 2007. Fish aggregating devices: The Okinawan/Pacific experience. SPC Fisheries Newsletter 119:45-51.</dc:description>
+          <dc:date>2007</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/119/FishNews119_45_Sokimi.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:299eef80-26b1-45d3-909a-31d909a24ba8</identifier>
+        <datestamp>2015-08-18T00:09:57Z</datestamp>
+        <setSpec>All_BDM</setSpec>
+        <setSpec>BDM_6</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>The beche-de-mer industry in the Solomon Islands: Recent trends and suggestions for management</dc:title>
+          <dc:creator>Holland A.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Holland A. 1994. The beche-de-mer industry in the Solomon Islands: Recent trends and suggestions for management. SPC Beche-de-mer Information Bulletin 6:2-9.</dc:description>
+          <dc:date>1994</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM/6/BDM6_02_Holland.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Solomon Islands</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:c3e89b67-222c-45dc-bb45-31dada667be9</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>SCTB_17</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Summary of : A Survey of Purse Seine Fishing Capacity in the Western and Central Pacific Ocean, 1988 to 2003</dc:title>
+          <dc:creator>Gillett B.</dc:creator>
+          <dc:creator>Lewis A.D.</dc:creator>
+          <dc:description>Gillett, R. 2004. A survey of purse seine fishing capacity in the western and central Pacific Ocean, 1988 to 2003: Executive Summary [INF-FTWG-1c]. Noumea, New Caledonia: SPC, Secretariat of the Pacific Community. Standing Committee on Tuna and Billfish, Majuro, Marshall Islands, 8-18 August 2004, 17th. 6 p.</dc:description>
+          <dc:date>2004</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/SCTB/17/INF_FTWG_1c.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:541cc379-e36d-42bf-b466-31e81f9bb9e3</identifier>
+        <datestamp>2015-08-20T23:46:22Z</datestamp>
+        <setSpec>LRF_19</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All _LRF</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>A regional Pacific Islands workshop on monitoring and managing reef fish spawning aggregations for sustainability: A first attempt</dc:title>
+          <dc:creator>Yeeting Y.</dc:creator>
+          <dc:creator>Sadovy Y.</dc:creator>
+          <dc:creator>Batibasaga A.</dc:creator>
+          <dc:creator>Veitayaki J.</dc:creator>
+          <dc:description>Yeeting Y., Sadovy Y., Batibasaga A., Veitayaki J. 2010. A regional Pacific Islands workshop on monitoring and managing reef fish spawning aggregations for sustainability: A first attempt. SPC Live Reef Fish Information Bulletin 19:17-18.</dc:description>
+          <dc:date>2010</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/LRF/19/LRF19_17_Yeeting.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:19eb42d5-00d2-4d55-8b15-31ea76044b7c</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>FFA</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Marine Resource Profiles : Solomon Islands</dc:title>
+          <dc:creator>Skewes T.</dc:creator>
+          <dc:description>Skewes T. 1990. Marine Resource Profiles : Solomon Islands. Honiara, Solomon Islands: Forum Fisheries Agency. FFA Report 90/61. 59 p.</dc:description>
+          <dc:publisher>Forum Fisheries Agency</dc:publisher>
+          <dc:date>1990</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/FFA/Reports/FFA_1990_061.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Solomon Islands</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:2bb586c8-1f43-4e8f-9731-31ec526e2f29</identifier>
+        <datestamp>2018-09-14T04:48:37Z</datestamp>
+        <setSpec>RESCCUE_NC_PNord</setSpec>
+        <setSpec>RESCCUE</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>L3.1 : rapport d’avancement de la mise en place du dispositif de suivi hydrologique,météorologique et de l’érosion et protocoles de fonctionnement du dispositif</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Erosion</dc:subject>
+          <dc:subject>Hydrology</dc:subject>
+          <dc:subject>Ecosystem management</dc:subject>
+          <dc:description>Anon. 2017. L3.1 : rapport d’avancement de la mise en place du dispositif de suivi hydrologique,météorologique et de l’érosion et protocoles de fonctionnement du dispositif.  Nouméa, Nouvelle-Calédonie: Communauté du Pacifique. 36 p.</dc:description>
+          <dc:date>2017</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/CCES/RESCCUE/New_Caledonia/Northern_Province/1_Avancement_dispositif_suivi_hydrologique_meteorologique_erosion_phase1.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>New Caledonia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:da512a8f-55ce-4ef9-adc5-31f1831f7932</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>Skipjack_76</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>A regional approach to fisheries management in the South Pacific Commission area</dc:title>
+          <dc:creator>Kearney R.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Kearney R. 1976. A regional approach to fisheries management in the South Pacific Commission area. Noumea, New Caledonia: South Pacific Commission. Ad hoc Meeting of scientists to discuss skipjack fisheries development and research requirements, Noumea, New Caledonia, 6-11 December 1976. 9 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1976</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/AdHoc_Meeting_Skipjack_Fisheries/1976/BD13.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:562cee24-0a19-41b2-ae8d-31f843413d2d</identifier>
+        <datestamp>2015-08-31T21:07:19Z</datestamp>
+        <setSpec>All_TRAD</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>TRAD_VF</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Ressources marines et traditions, Bulletin d'information de la CPS n°7 - Janvier 1997</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fishery management</dc:subject>
+          <dc:description>Anon. 1997. Ressources marines et traditions, Bulletin d'information de la CPS 7. Nouméa, Nouvelle-Calédonie : Commission du Pacifique Sud. 24 p.</dc:description>
+          <dc:date>1997</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/TRAD_VF/7/TRAD7VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:0f2b9b55-6936-4337-a3a8-31fae12fecd1</identifier>
+        <datestamp>2015-08-27T05:23:32Z</datestamp>
+        <setSpec>FishNews_VF_144</setSpec>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Un centre de ressources biologiques du thon pour une meilleure gestion de l’écosystème dans le Pacifique</dc:title>
+          <dc:creator>Sanchez C.</dc:creator>
+          <dc:creator>Roupsard F.</dc:creator>
+          <dc:creator>Allain V.</dc:creator>
+          <dc:creator>Nicol S.</dc:creator>
+          <dc:description>Sanchez C., Roupsard F., Allain V., Nicol S. 2014. Un centre de ressources biologiques du thon pour une meilleure gestion de l’écosystème dans le Pacifique. Lettre d'information sur les pêches de la CPS 144:6-8.</dc:description>
+          <dc:date>2014</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/144/FishNews144_06_Sanchez_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:1c927313-ca86-4606-a2bb-31fb1c20df24</identifier>
+        <datestamp>2015-08-18T00:10:08Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>BDM_6</setSpec>
+        <setSpec>All_BDM</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Fishing beche-de-mer in Madagascar</dc:title>
+          <dc:creator>Irwing M.A.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Irwing M.A. 1994. Fishing beche-de-mer in Madagascar. SPC Beche-de-mer Information Bulletin 6:10-11.</dc:description>
+          <dc:date>1994</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM/6/BDM6_10_Irwing.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Madagascar</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:39cddd9e-6dfb-4071-9b15-31fb991b5d5f</identifier>
+        <datestamp>2015-08-26T23:21:24Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Le projet Vaka de Tuvalu</dc:title>
+          <dc:creator>Brown S.A.</dc:creator>
+          <dc:description>Brown S.A. 1984. Le projet Vaka de Tuvalu. Lettre d'information sur les pêches de la CPS 28:20-23.</dc:description>
+          <dc:date>1984</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/28/FishNews28VF_20_Brown.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Tuvalu</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:dd22972e-95a6-4b0e-85ec-31fc6b965c71</identifier>
+        <datestamp>2018-02-02T03:58:20Z</datestamp>
+        <setSpec>WCPFC_SC13</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Issues arising from the commission (SC12 and WCPFC13)</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2017. Issues arising from the commission (SC12 and WCPFC13). [Rarotonga, Cook Islands]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Rarotonga, Cook Islands, 9-17 August 2017, 13th</dc:description>
+          <dc:date>2017</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC13/WCPFC_SC13_2017_GN_WP_03_Issues_arising_from_the_Commission.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:31c07201-4f95-45e4-844c-320aa6eec937</identifier>
+        <datestamp>2015-08-19T05:02:33Z</datestamp>
+        <setSpec>BDM_VF_23</setSpec>
+        <setSpec>All_BDM</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Examen des nouvelles activités de pêche d'holothuries &lt;i&gt;Cucumaria frondosa&lt;/i&gt; : biologie, politique et perspectives</dc:title>
+          <dc:creator>Therkildsen N.O.</dc:creator>
+          <dc:creator>Petersen C.W.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Therkildsen N.O., Petersen C.W. 2006. Examen des nouvelles activités de pêche d'holothuries &lt;i&gt;Cucumaria frondosa&lt;/i&gt; : biologie, politique et perspectives. La Bêche-de-mer, Bulletin d'information de la CPS 23:16-25.</dc:description>
+          <dc:date>2006</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM_VF/23/BDM23VF_16_Therkildsen.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:84c5966e-2ed8-4dc5-a3ab-320f6fdf60a4</identifier>
+        <datestamp>2015-03-30T06:26:27Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_20</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Proposal for a South Pacific tuna fisheries development project : trial purse seine fishing,  I. report of the study mission</dc:title>
+          <dc:creator>Pita E.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Purse seining</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Pita E. 1988. Proposal for a South Pacific tuna fisheries development project : trial purse seine fishing  [WP 28]:  I. report of the study mission. Noumea, New Caledonia: South Pacific Comission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 1 - 5 August 1988, 20th. 62 p.</dc:description>
+          <dc:publisher>South Pacific Comission</dc:publisher>
+          <dc:date>1988</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/20/WP28.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:ed7ae4d3-3a35-4c9f-b562-32179f4eb092</identifier>
+        <datestamp>2015-08-20T04:51:22Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>FishNews_134</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>CNMI expresses interest in offshore aquaculture</dc:title>
+          <dc:creator>Teitelbaum A.</dc:creator>
+          <dc:subject>Aquaculture</dc:subject>
+          <dc:description>Teitelbaum A. 2011. CNMI expresses interest in offshore aquaculture. SPC Fisheries Newsletter 134:24-25.</dc:description>
+          <dc:date>2011</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/134/FishNews134_24_Teitelbaum_Offshore.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Northern Mariana Islands</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:e3bdf795-0e37-4659-80e8-321d25d9afb8</identifier>
+        <datestamp>2015-08-27T05:02:43Z</datestamp>
+        <setSpec>All_FishNews</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>FishNews_VF_141</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Le Conseil de gestion des pêches dans le Pacifique occidental propose des solutions pour mettre fin à la surpêche du thon obèse</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Bigeye tuna</dc:subject>
+          <dc:description>Anon. 2013. Le Conseil de gestion des pêches dans le Pacifique occidental propose des solutions pour mettre fin à la surpêche du thon obèse. Lettre d'information sur les pêches de la CPS 141:22.</dc:description>
+          <dc:date>2013</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/141/FishNews141_22_Hawaii_Bigeye_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>United States</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:08d8e836-d4b8-41f6-a8c8-321f8a8cf074</identifier>
+        <datestamp>2015-03-30T06:14:02Z</datestamp>
+        <setSpec>WCPFC_SC8</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>REPORT OF JAPAN TRUST FUND STEERING COMMITTEE MEETING</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2012. REPORT OF JAPAN TRUST FUND STEERING COMMITTEE MEETING [RP JTF 02]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Busan, Republic of Korea, 7-15 August 2012, 8th. 2 p.</dc:description>
+          <dc:date>2012</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC8/RP-JTF-02.pdf</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:ac2afd23-c593-46fa-a355-3224d5c31c10</identifier>
+        <datestamp>2015-08-28T04:17:21Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>PI</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Fisheries and custom</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Traditional ecological knowledge</dc:subject>
+          <dc:subject>Fishing</dc:subject>
+          <dc:description>Anon. 1991. Fisheries and custom. Noumea, New Caledonia: South Pacific Commission. Pacific Impact 4(3)/1991, p. 30-35.</dc:description>
+          <dc:date>1991</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/PI/PI4_3_SPC2.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:0282c260-145c-40b7-be0e-3235ebadd67d</identifier>
+        <datestamp>2015-08-17T23:36:08Z</datestamp>
+        <setSpec>All_BDM</setSpec>
+        <setSpec>BDM_10</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Preliminary notes on the exploitation of holothurians in the new Wakatobi Marine National Park, Sulawesi, Indonesia</dc:title>
+          <dc:creator>Moore A.</dc:creator>
+          <dc:subject>Sea cucumbers</dc:subject>
+          <dc:description>Moore A. 1998. Preliminary notes on the exploitation of holothurians in the new Wakatobi Marine National Park, Sulawesi, Indonesia. SPC Beche-de-mer Information Bulletin 10:31-33.</dc:description>
+          <dc:date>1998</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/BDM/10/BDM10_31_Moore.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Indonesia</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:a3bc5949-7d85-4832-843d-3236fa6a3e3a</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>WCPFC_SC1</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>National tuna fisheries report of Japan as of 2005</dc:title>
+          <dc:creator>Uosaki K.</dc:creator>
+          <dc:creator>Okamoto H.</dc:creator>
+          <dc:creator>Nishikawa Y.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Uosaki, K., Okamoto, H., Nishikawa,Y. 2005. National tuna fisheries report of Japan as of 2005 [FR WP-5]. Kolonia, Pohnpei State, Federated States of Micronesia: Western and Central Pacific Fisheries Commission. Meeting of the Scientific Committee of the Western and Central Pacific Fisheries Commission, WCPFC-SC1, New Caledonia, 8-19 August 2005, 1st. 21 p.</dc:description>
+          <dc:date>2005</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC1/SC1_FR_WP_5.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Japan</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:7fd178d4-9f5d-42af-b519-32415eae4ca0</identifier>
+        <datestamp>2015-08-19T22:46:19Z</datestamp>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>FishNews</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>SPC Fisheries Newsletter #25 - April/June 1983</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1983. SPC Fisheries Newsletter 25. Noumea, New Caledonia: The South Pacific Commission. 26 p.</dc:description>
+          <dc:date>1983</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews/25/FishNews25.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:5e4c93ff-d10d-43cc-be7b-32471e041720</identifier>
+        <datestamp>2018-02-02T03:31:06Z</datestamp>
+        <setSpec>WCPFC_SC13</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Annual report to the commission - Part 1: information on fisheries, research, and statistics: Vietnam</dc:title>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>. 2017. Annual report to the commission - Part 1: information on fisheries, research, and statistics: Vietnam. [Rarotonga, Cook Islands]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Rarotonga, Cook Islands, 9-17 August 2017, 13th</dc:description>
+          <dc:date>2017</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC13/AR_CNM_36_VIETNAM_PART_1.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Vietnam</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:9977c2b4-dd98-4485-8e1b-324ee163d4c5</identifier>
+        <datestamp>2015-06-16T21:26:17Z</datestamp>
+        <setSpec>posters_MarineSpecies</setSpec>
+        <setSpec>Posters</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Some popular food fish of Tuvalu (2)</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:description>Anon. 2009. Some popular food fish of Tuvalu (2) [Poster]. Noumea, New Caledonia: SPC, Secretariat of the Pacific Community.</dc:description>
+          <dc:date>2009</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Posters/Tuvalu_Bottom.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Tuvalu</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:ab742f4e-42b4-4ccb-962c-325358c1f52e</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>FFA</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Global Fisheries Enforcement Workshop: Monitoring, Control and Surveillance in the South Pacific</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1994. Global Fisheries Enforcement Workshop: Monitoring, Control and Surveillance in the South Pacific. Honiara, Solomon Islands: Forum Fisheries Agency. Global Fisheries Enforcement Workshop.</dc:description>
+          <dc:publisher>Forum Fisheries Agency</dc:publisher>
+          <dc:date>1994</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/FFA/Reports/FFA_1994_062.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:7d7cc5c2-f2ab-4796-ab75-3258a836a6a0</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>SPB_VF</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>La conservation du poisson par fumage</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Smoked fish</dc:subject>
+          <dc:description>Anon. 1961. La conservation du poisson par fumage. Nouméa, Nouvelle-Calédonie: Commission du Pacifique Sud. Bulletin du Pacifique Sud Vol. 11, No. 2, avril 1961, p. 24-25</dc:description>
+          <dc:publisher>Commission du Pacifique Sud</dc:publisher>
+          <dc:date>1961</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/SPB_VF/SPB11_2_SPC_VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+          <dc:coverage>Papua New Guinea</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:b40ada9a-db5f-4219-aea3-325acee199ed</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>RTMF_19</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Nineteenth Regional Technical Meeting on Fisheries (Noumea, New Caledonia, 3 - 7 August 1987) : Report</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1987. Nineteenth Regional Technical Meeting on Fisheries (Noumea, New Caledonia, 3 - 7 August 1987): Report. Noumea, New Caledonia: South Pacific Commission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 3 - 7 August 1987, 19th. iv, 45 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1987</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/19/Report.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:c5120ac1-3f15-4b2d-96c4-32631dd28d55</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>RTMF_11</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Status of aquaculture in Papua New Guinea</dc:title>
+          <dc:creator>Kan T.T.</dc:creator>
+          <dc:subject>Aquaculture</dc:subject>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Kan T.T. 1979. Status of aquaculture in Papua New Guinea [WP 16]. Noumea, New Caledonia: South Pacific Commission. Regional Technical Meeting on Fisheries, Noumea, New Caledonia, 5 - 10 December 1979, 11th. 1 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1979</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/RTMF/11/WP16.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+          <dc:coverage>Papua New Guinea</dc:coverage>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:91cd70ef-8dde-44d7-84c6-3267b14c3d36</identifier>
+        <datestamp>2015-03-30T06:07:52Z</datestamp>
+        <setSpec>All_Meetings</setSpec>
+        <setSpec>WCPFC_SC8</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Key notes reported to undp for 2012 apr /pir for pims 4084: west pacific east asia oceanic fisheries management project</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:subject>Tuna fisheries</dc:subject>
+          <dc:description>Anon. 2012. Key notes reported to undp for 2012 apr /pir for pims 4084: west pacific east asia oceanic fisheries management project [RP WPEA 08]. [Pohnpei, Federated States of Micronesia]: Western and Central Pacific Fisheries Commission (WCPFC). Scientific Committee Regular Session, Busan, Republic of Korea, 7-15 August 2012, 8th. 11 p.</dc:description>
+          <dc:date>2012</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/WCPFC/SC8/RP-WPEA-08.pdf</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:48fcfe02-c330-41f7-85cf-326aa2e3a658</identifier>
+        <datestamp>2015-08-27T21:55:15Z</datestamp>
+        <setSpec>FishNews_VF</setSpec>
+        <setSpec>All_InfoBull</setSpec>
+        <setSpec>All_FishNews</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Lettre d'information sur les pêches de la CPS n°69 - Avril/Juin 1994</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Fisheries</dc:subject>
+          <dc:description>Anon. 1994. Lettre d'information sur les pêches de la CPS 69. Nouméa, Nouvelle-Calédonie : Commission du Pacifique Sud. 28 p.</dc:description>
+          <dc:date>1994</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/InfoBull/FishNews_VF/69/FishNews69VF.pdf</dc:identifier>
+          <dc:language>fr</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:www.spc.int:c58d7b4f-f3c9-402d-8e2b-326ab8210a82</identifier>
+        <datestamp>2012-07-30T21:28:24Z</datestamp>
+        <setSpec>SPAR_4</setSpec>
+        <setSpec>All_Meetings</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Longline, troll and driftnet catch rates of South Pacific albacore</dc:title>
+          <dc:creator>Anon.</dc:creator>
+          <dc:subject>Longlines (Fishery equipment)</dc:subject>
+          <dc:subject>Albacore</dc:subject>
+          <dc:subject>Albacore fisheries</dc:subject>
+          <dc:description>Anon. 1991. Longline, troll and driftnet catch rates of South Pacific albacore [WP 6]. Noumea, New Caledonia: South Pacific Commission. South Pacific Albacore Research Workshop, Taipei, Republic of China, 4-8 November 1991, 4th. 15 p.</dc:description>
+          <dc:publisher>South Pacific Commission</dc:publisher>
+          <dc:date>1991</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:format>application/pdf</dc:format>
+          <dc:identifier>http://www.spc.int/DigitalLibrary/Doc/FAME/Meetings/SPAR/4/WP6.pdf</dc:identifier>
+          <dc:language>en</dc:language>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <resumptionToken expirationDate="2018-09-21T11:10:12Z" completeListSize="11368" cursor="2200">|||oai_dc|23|2018-09-21T10:10:12Z</resumptionToken>
+  </ListRecords>
+</OAI-PMH>

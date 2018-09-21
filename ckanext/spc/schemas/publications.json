@@ -162,7 +162,11 @@
       "field_name": "creator",
       "label": "Creator",
       "help_text": "An entity primarily responsible for making the resource. Examples of a Creator include a person, an organization, or a service.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "tag_string",
@@ -293,7 +297,11 @@
     {
       "field_name": "format",
       "label": "Format",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "extent",
@@ -333,12 +341,20 @@
       "field_name": "language",
       "label": "Language",
       "form_snippet": "language.html",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "relation",
       "label": "Relation",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "is_version_of",
@@ -479,7 +495,11 @@
       "field_name": "audience",
       "label": "Audience",
       "help_text": "A class of entity for whom the resource is intended or useful.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "mediator",

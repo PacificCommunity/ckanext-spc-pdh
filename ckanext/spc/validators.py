@@ -21,16 +21,21 @@ def get_validators():
 
 def copy_from(copy_key):
     def validator(key, data, errors, context):
+        current_value = data.get(key)
+        if current_value and current_value is not missing:
+            return
         value = data.pop((copy_key, ), None)
         if not value:
             value = data.get(('__extras', ), {}).get(copy_key)
-        if value and value is not missing:
+        if value is not missing:
             data[key] = value
 
     return validator
 
 
 def spc_normalize_date(value):
+    if not value or value is missing:
+        return value
     try:
         return parse_date(
             value, dayfirst=True, default=datetime(2000, 1, 1)
@@ -40,10 +45,16 @@ def spc_normalize_date(value):
         raise Invalid('cannot parse date')
 
 
-def spc_to_json(value):
+def spc_to_json(key, data, errors, context):
+    extras_key = ('__extras', )
+    string_value = data.get(extras_key, {}).pop(key[0] + '_string', None)
+    value = data.get(key)
+    if string_value is not None:
+        value = filter(None, string_value.split(','))
+
     if not isinstance(value, (list, dict)):
         value = [value]
-    return json.dumps(value)
+    data[key] = json.dumps(value)
 
 
 def spc_from_json(value):
@@ -51,7 +62,7 @@ def spc_from_json(value):
         try:
             value = json.loads(value)
         except Exception as e:
-            logger.warn('spc_from_json_list: {}'.format(e))
+            logger.warn('spc_from_json: {}'.format(e))
     return value
 
 
