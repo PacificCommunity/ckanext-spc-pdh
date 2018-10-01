@@ -46,8 +46,10 @@ def spc_normalize_date(value):
 
 
 def spc_to_json(key, data, errors, context):
-    extras_key = ('__extras', )
-    string_value = data.get(extras_key, {}).pop(key[0] + '_string', None)
+    # ('__extras', ) - for package
+    # ('resources', 0, '__extras') - for resource
+    extras_key = key[:-1] + ('__extras', )
+    string_value = data.get(extras_key, {}).pop(key[-1] + '_string', None)
     value = data.get(key)
     if string_value is not None:
         value = filter(None, string_value.split(','))
