@@ -3,86 +3,6 @@
   "dataset_type": "publications",
   "about": "Publications",
   "about_url": "http://github.com/ckan/ckanext-scheming",
-  "field_groups": [
-    {
-      "name": "Dublin Core Metadata Element Set",
-      "id": "dcm_element_set",
-      "fields_list":
-      [
-        "title",
-        "name",
-        "thematic_area_string",
-        "creator",
-        "tag_string",
-        "notes",
-        "owner_org",
-        "contributor",
-        "type",
-        "identifier",
-        "source",
-        "language",
-        "rights"
-      ]
-    },
-    {
-      "name": "DCMI Metadata Terms",
-      "id": "dcm_metadata_terms",
-      "fields_list":
-      [
-        "alternative",
-        "abstract",
-        "access_rights",
-        "accrual_method",
-        "accrual_periodicity",
-        "accrual_policy",
-        "audience",
-        "available",
-        "bibliographic_citation ",
-        "conforms_to",
-        "education_level",
-        "instructional_method",
-        "issued",
-        "license_id",
-        "mediator",
-        "medium",
-        "provenance",
-        "rightsholder",
-        "spatial",
-        "table_of_contents",
-        "temporal"
-      ]
-    },
-    {
-      "name": "Relation",
-      "id": "relation",
-      "fields_list":
-      [
-        "is_version_of",
-        "has_version",
-        "is_replaced_by",
-        "replaces",
-        "is_required_by",
-        "requires",
-        "is_part_of",
-        "has_part",
-        "is_referenced_by",
-        "references",
-        "is_format_of",
-        "has_format"
-      ]
-    },
-    {
-      "name": "Date",
-      "id": "date",
-      "fields_list":
-      [
-        "date_accepted",
-        "date_copyrighted",
-        "date_submitted",
-        "valid"
-      ]
-    }
-  ],
   "dataset_fields": [
     {
       "field_name": "title",
@@ -170,12 +90,20 @@
     },
     {
       "field_name": "tag_string",
-      "label": "Subject",
+      "label": "Tags",
       "preset": "tag_string_autocomplete",
       "form_placeholder": "eg. economy, mental health, government",
-      "validators": "copy_from(subject) ignore_missing tag_string_convert",
+      "validators": "ignore_missing tag_string_convert"
+    },
+    {
+      "field_name": "subject",
+      "label": "Subject",
       "dc_ns": "dc",
-      "dc_name": "subject"
+      "dc_name": "subject",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "notes",
@@ -209,20 +137,32 @@
     {
       "field_name": "publisher",
       "label": "Publisher",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "contributor",
       "label": "Contributor",
       "help_text": "An entity responsible for making contributions to the resource.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "date",
       "label": "Date",
       "help_text": "Date (often a range)",
       "preset": "date",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "created",
@@ -292,7 +232,11 @@
       "field_name": "type",
       "label": "Type",
       "help_text": "The nature or genre of the resource.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "format",
@@ -322,7 +266,11 @@
       "field_name": "identifier",
       "label": "Identifier",
       "help_text": "An unambiguous reference to the resource within a given context.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "bibliographic_citation",
@@ -335,7 +283,11 @@
       "field_name": "source",
       "label": "Source",
       "help_text": "A related resource from which the described resource is derived.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "language",
@@ -474,7 +426,11 @@
       "field_name": "rights",
       "label": "Rights",
       "help_text": "Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.",
-      "dc_ns": "dc"
+      "dc_ns": "dc",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "access_rights",

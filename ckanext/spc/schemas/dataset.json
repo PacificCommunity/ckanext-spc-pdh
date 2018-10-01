@@ -20,13 +20,15 @@
       "field_name": "notes",
       "label": "Description",
       "form_snippet": "markdown.html",
-      "form_placeholder": "eg. Some useful notes about the data"
+      "form_placeholder": "eg. Some useful notes about the data",
+      "validators": "copy_from(description)"
     },
     {
       "field_name": "tag_string",
       "label": "Tags",
       "preset": "tag_string_autocomplete",
-      "form_placeholder": "eg. economy, mental health, government"
+      "form_placeholder": "eg. economy, mental health, government",
+      "validators": "copy_from(keyword) ignore_missing tag_string_convert"
     },
     {
       "field_name": "license_id",
@@ -40,36 +42,141 @@
       "preset": "dataset_organization"
     },
     {
-      "field_name": "url",
-      "label": "Source",
-      "form_placeholder": "http://example.com/dataset.json",
-      "display_property": "foaf:homepage",
-      "display_snippet": "link.html"
+      "field_name": "theme",
+      "label": "Theme",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
-      "field_name": "language",
-      "label": "Language",
-      "form_snippet": "language.html"
+      "field_name": "identifier",
+      "label": "Identifier",
+      "validators": "copy_from(guid) copy_from(id) ignore_missing"
     },
     {
       "field_name": "version",
       "label": "Version",
-      "validators": "ignore_missing unicode package_version_validator",
+      "validators": "copy_from(versionInfo) ignore_missing unicode package_version_validator",
       "form_placeholder": "1.0"
+    },
+    {
+      "field_name": "language",
+      "label": "Language",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "frequency",
+      "label": "Frequency",
+      "help_text": "The frequency at which dataset is published.",
+      "validators": "copy_from(accrualPeriodicity) ignore_missing"
+    },
+    {
+      "field_name": "conforms_to",
+      "label": "Conforms To",
+      "validators": "copy_from(conformsTo) ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "access_rights",
+      "label": "Access Rights",
+      "validators": "copy_from(accessRights) ignore_missing"
+    },
+    {
+      "field_name": "documentation",
+      "label": "Documentation",
+      "validators": "copy_from(page) ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "povenance",
+      "label": "Povenance"
+    },
+    {
+      "field_name": "dcat_type",
+      "label": "DCAT Type",
+      "validators": "copy_from(type) ignore_missing"
+    },
+    {
+      "field_name": "has_version",
+      "label": "Has Version",
+      "validators": "copy_from(hasVersion) ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "is_version_of",
+      "label": "Is Version Of",
+      "validators": "copy_from(isVersionOf) ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "source",
+      "label": "Source",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "sample",
+      "label": "Sample",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "spatial",
+      "label": "Spatial Coverage",
+      "form_placeholder": "{}",
+      "form_snippet": "spatial.html",
+      "display_snippet": null
+    },
+    {
+      "field_name": "temporal_start",
+      "label": "Temporal Coverage From",
+      "help_text": "Start point for temporal period that the dataset covers.",
+      "form_snippet": "date.html"
+    },
+    {
+      "field_name": "temporal_end",
+      "label": "Temporal Coverage To",
+      "help_text": "End point for temporal period that the dataset covers.",
+      "form_snippet": "date.html"
     },
     {
       "field_name": "publisher",
       "label": "Publisher",
       "form_placeholder": "Joe Bloggs",
-      "display_property": "dc:creator"
+      "display_property": "foaf:name"
     },
     {
       "field_name": "publisher_email",
       "label": "Publisher Email",
       "form_placeholder": "joe@example.com",
-      "display_property": "dc:creator",
+      "display_property": "foaf:mbox",
       "display_snippet": "email.html",
       "display_email_name_field": "publisher"
+    },
+    {
+      "field_name": "publisher_url",
+      "label": "Publisher Homepage",
+      "display_property": "foaf:homepage"
+    },
+    {
+      "field_name": "publisher_type",
+      "label": "Publisher Type"
     },
     {
       "field_name": "contact",
@@ -85,34 +192,8 @@
       "display_snippet": "email.html",
       "display_email_name_field": "contact"
     },
-    {
-      "field_name": "spatial",
-      "label": "Spatial Coverage",
-      "form_placeholder": "{}",
-      "form_snippet": "spatial.html",
-      "form_attrs": {
-        "data-module": "friendly-coords?",
-        "class": "hide?"
-      },
-      "display_snippet": null
-    },
-    {
-      "field_name": "frequency",
-      "label": "Frequency",
-      "help_text": "The frequency at which dataset is published."
-    },
-    {
-      "field_name": "temporal_from",
-      "label": "Temporal Coverage From",
-      "help_text": "Start point for temporal period that the dataset covers.",
-      "form_snippet": "date.html"
-    },
-    {
-      "field_name": "temporal_to",
-      "label": "Temporal Coverage To",
-      "help_text": "End point for temporal period that the dataset covers.",
-      "form_snippet": "date.html"
-    },
+
+
     {
       "field_name": "thematic_area_string",
       "label": "Topic",
@@ -192,9 +273,50 @@
       "form_placeholder": "Some useful notes about the data"
     },
     {
+      "field_name": "mimetype",
+      "label": "MIME Type"
+    },
+    {
       "field_name": "format",
       "label": "Format",
       "preset": "resource_format_autocomplete"
+    },
+    {
+      "field_name": "license_id",
+      "label": "License"
+    },
+    {
+      "field_name": "status",
+      "label": "Status"
+    },
+    {
+      "field_name": "rights",
+      "label": "Rights"
+    },
+    {
+      "field_name": "documentation",
+      "label": "Documentation",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "language",
+      "label": "Language",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "conforms_to",
+      "label": "Conforms To",
+      "validators": "ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     }
+
   ]
 }
