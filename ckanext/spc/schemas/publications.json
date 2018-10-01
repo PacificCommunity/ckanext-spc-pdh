@@ -229,7 +229,7 @@
       "dc_group": "date"
     },
     {
-      "field_name": "type",
+      "field_name": "publication_type",
       "label": "Type",
       "help_text": "The nature or genre of the resource.",
       "dc_ns": "dc",
