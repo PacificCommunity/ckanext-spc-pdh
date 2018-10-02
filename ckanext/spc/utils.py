@@ -75,12 +75,15 @@ def count_stars(pkg_dict):
             zip(pkg_dict.get('res_url', []), (pkg_dict.get('res_format', [])))
         ]
 
-    text = '\n'.join([pkg_dict.get('notes')] +
-                     pkg_dict.get('res_description', []) + [
-                         res['description']
-                         for res in pkg_dict.get('resources', [])
-                         if res.get('description')
-                     ])
+    text = '\n'.join(
+        filter(None, [pkg_dict.get('notes')] +
+               pkg_dict.get('res_description', []) + [
+                   res['description']
+                   for res in pkg_dict.get('resources', [])
+                   if res.get('description')
+               ]
+        )
+    )
     data_dict = dict(
         url=h.url_for(
             controller='package',

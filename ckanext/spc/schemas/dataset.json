@@ -55,11 +55,34 @@
       "validators": "copy_from(guid) copy_from(id) ignore_missing"
     },
     {
+      "field_name": "alternate_identifier",
+      "label": "Alternate Identifier",
+      "validators": "copy_from(guid) copy_from(id) ignore_missing"
+    },
+    {
+      "field_name": "issued",
+      "label": "Issued",
+      "validators": "copy_from(metadata_created) ignore_missing",
+      "form_snippet": "date.html"
+    },
+    {
+      "field_name": "modified",
+      "label": "Modified",
+      "validators": "copy_from(metadata_modified) ignore_missing",
+      "form_snippet": "date.html"
+    },
+    {
       "field_name": "version",
       "label": "Version",
       "validators": "copy_from(versionInfo) ignore_missing unicode package_version_validator",
       "form_placeholder": "1.0"
     },
+    {
+      "field_name": "version_notes",
+      "label": "Version Notes",
+      "validators": "copy_from(versionNotes) ignore_missing"
+    },
+
     {
       "field_name": "language",
       "label": "Language",
@@ -156,8 +179,12 @@
       "form_snippet": "date.html"
     },
     {
-      "field_name": "publisher",
-      "label": "Publisher",
+      "field_name": "publisher_uri",
+      "label": "Publisher"
+    },
+    {
+      "field_name": "publisher_name",
+      "label": "Publisher Name",
       "form_placeholder": "Joe Bloggs",
       "display_property": "foaf:name"
     },
@@ -166,8 +193,7 @@
       "label": "Publisher Email",
       "form_placeholder": "joe@example.com",
       "display_property": "foaf:mbox",
-      "display_snippet": "email.html",
-      "display_email_name_field": "publisher"
+      "display_snippet": "email.html"
     },
     {
       "field_name": "publisher_url",
@@ -179,8 +205,12 @@
       "label": "Publisher Type"
     },
     {
-      "field_name": "contact",
-      "label": "Contact",
+      "field_name": "contact_uri",
+      "label": "Contact Point"
+    },
+    {
+      "field_name": "contact_name",
+      "label": "Contact Name",
       "form_placeholder": "Joe Bloggs",
       "display_property": "dc:contributor"
     },
@@ -188,12 +218,8 @@
       "field_name": "contact_email",
       "label": "Contact Email",
       "form_placeholder": "joe@example.com",
-      "display_property": "dc:contributor",
-      "display_snippet": "email.html",
-      "display_email_name_field": "contact"
+      "display_snippet": "email.html"
     },
-
-
     {
       "field_name": "thematic_area_string",
       "label": "Topic",
@@ -259,7 +285,18 @@
     {
       "field_name": "url",
       "label": "URL",
-      "preset": "resource_url_upload"
+      "preset": "resource_url_upload",
+      "validators": "ignore_missing unicode remove_whitespace"
+    },
+    {
+      "field_name": "access_url",
+      "label": "Access URL",
+      "validators": "copy_from(accessURL) ignore_missing"
+    },
+    {
+      "field_name": "download_url",
+      "label": "Download URL",
+      "validators": "copy_from(downloadURL) ignore_missing"
     },
     {
       "field_name": "name",
@@ -282,12 +319,23 @@
       "preset": "resource_format_autocomplete"
     },
     {
-      "field_name": "license_id",
-      "label": "License"
-    },
-    {
       "field_name": "status",
       "label": "Status"
+    },
+    {
+      "field_name": "size",
+      "label": "Size",
+      "validators": "default(0)"
+    },
+    {
+      "field_name": "issued",
+      "label": "Issued",
+      "form_snippet": "date.html"
+    },
+    {
+      "field_name": "modified",
+      "label": "Modified",
+      "form_snippet": "date.html"
     },
     {
       "field_name": "rights",
@@ -316,7 +364,14 @@
       "output_validators": "spc_from_json",
       "display_snippet": "simple_list.html",
       "form_snippet": "simple_list.html"
+    },
+    {
+      "field_name": "hash",
+      "label": "Hash"
+    },
+    {
+      "field_name": "hash_algorithm",
+      "label": "Hash Algorithm"
     }
-
   ]
 }
