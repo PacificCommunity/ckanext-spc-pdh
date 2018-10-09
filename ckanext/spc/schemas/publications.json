@@ -17,13 +17,6 @@
       "form_placeholder": "eg. my-dataset"
     },
     {
-      "field_name": "alternative",
-      "label": "Alternative Title",
-      "help_text": "The distinction between titles and alternative titles is application-specific.",
-      "dc_ns": "dcterms",
-      "dc_group": "title"
-    },
-    {
       "field_name": "thematic_area_string",
       "label": "Topic",
       "preset": "multiple_select",
@@ -114,24 +107,8 @@
       "dc_name": "description"
     },
     {
-      "field_name": "table_of_contents",
-      "label": "Table of Contents",
-      "help_text": "A list of subunits of the resource.",
-      "form_snippet": "markdown.html",
-      "dc_ns": "dcterms",
-      "dc_group": "description"
-    },
-    {
-      "field_name": "abstract",
-      "label": "Abstract",
-      "help_text": "A summary (of the content) of the resource.",
-      "form_snippet": "markdown.html",
-      "dc_ns": "dcterms",
-      "dc_group": "description"
-    },
-    {
       "field_name": "owner_org",
-      "label": "Publisher",
+      "label": "Organization",
       "preset": "dataset_organization"
     },
     {
@@ -165,70 +142,6 @@
       "form_snippet": "simple_list.html"
     },
     {
-      "field_name": "created",
-      "label": "Date Created",
-      "help_text": "Date of resource creation.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "valid",
-      "label": "Date Valid",
-      "help_text": "Date of validity of a resource.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "available",
-      "label": "Date Available",
-      "help_text": "Date (often a range) that the resource is available.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "issued",
-      "label": "Date Issued",
-      "help_text": "Date of formal issuance (e.g., publication) of the resource.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "modified",
-      "label": "Date Modified",
-      "help_text": "Date of resource modification.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "date_accepted",
-      "label": "Date Accepted",
-      "help_text": "Date of acceptance of the resource.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "date_copyrighted",
-      "label": "Date Copyrighted",
-      "help_text": "Date of copyright.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
-      "field_name": "date_submitted",
-      "label": "Date Submitted",
-      "help_text": "Date of submission of the resource.",
-      "preset": "date",
-      "dc_ns": "dcterms",
-      "dc_group": "date"
-    },
-    {
       "field_name": "publication_type",
       "label": "Type",
       "help_text": "The nature or genre of the resource.",
@@ -248,21 +161,6 @@
       "form_snippet": "simple_list.html"
     },
     {
-      "field_name": "extent",
-      "label": "Extent",
-      "form_snippet": "markdown.html",
-      "dc_ns": "dcterms",
-      "dc_group": "format"
-    },
-    {
-      "field_name": "medium",
-      "label": "Medium",
-      "help_text": "The material or physical carrier of the resource.",
-      "form_snippet": "markdown.html",
-      "dc_ns": "dcterms",
-      "dc_group": "format"
-    },
-    {
       "field_name": "identifier",
       "label": "Identifier",
       "help_text": "An unambiguous reference to the resource within a given context.",
@@ -271,13 +169,6 @@
       "output_validators": "spc_from_json",
       "display_snippet": "simple_list.html",
       "form_snippet": "simple_list.html"
-    },
-    {
-      "field_name": "bibliographic_citation",
-      "label": "Bibliographic Citation",
-      "help_text": "A bibliographic reference for the resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "identifier"
     },
     {
       "field_name": "source",
@@ -309,97 +200,6 @@
       "form_snippet": "simple_list.html"
     },
     {
-      "field_name": "is_version_of",
-      "label": "Is Version Of",
-      "help_text": "A related resource of which the described resource is a version, edition, or adaptation.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "has_version",
-      "label": "Has Version",
-      "help_text": "A related resource that is a version, edition, or adaptation of the described resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "is_replaced_by",
-      "label": "Is Replaced By",
-      "help_text": "A related resource that supplants, displaces, or supersedes the described resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "replaces",
-      "label": "Replaces",
-      "help_text": "A related resource that is supplanted, displaced, or superseded by the described resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "is_required_by",
-      "label": "Is Required By",
-      "help_text": "A related resource that requires the described resource to support its function, delivery, or coherence.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "requires",
-      "label": "Requires",
-      "help_text": "A related resource that is required by the described resource to support its function, delivery, or coherence.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "is_part_of",
-      "label": "Is Part Of",
-      "help_text": "A related resource in which the described resource is physically or logically included.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "has_part",
-      "label": "Has Part",
-      "help_text": "A related resource that is included either physically or logically in the described resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "is_referenced_by",
-      "label": "Is Referenced By",
-      "help_text": "A related resource that references, cites, or otherwise points to the described resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "references",
-      "label": "References",
-      "help_text": "A related resource that is referenced, cited, or otherwise pointed to by the described resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "is_format_of",
-      "label": "Is Format Of",
-      "help_text": "A related resource that is substantially the same as the described resource, but in another format.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "has_format",
-      "label": "Has Format",
-      "help_text": "A related resource that is substantially the same as the pre-existing described resource, but in another format.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
-      "field_name": "conforms_to",
-      "label": "Conforms To",
-      "help_text": "An established standard to which the described resource conforms.",
-      "dc_ns": "dcterms",
-      "dc_group": "relation"
-    },
-    {
       "field_name": "spatial",
       "label": "Coverage",
       "form_placeholder": "{}",
@@ -407,20 +207,6 @@
       "validators": "copy_from(coverage) ignore_empty",
       "dc_ns": "dcterms",
       "dc_name": "coverage"
-    },
-    {
-      "field_name": "spatial_coverage",
-      "label": "Spatial",
-      "dc_ns": "dc",
-      "dc_name": "spatial",
-      "dc_group": "coverage"
-    },
-    {
-      "field_name": "temporal",
-      "label": "Temporal Coverage",
-      "help_text": "Temporal characteristics of the resource.",
-      "dc_ns": "dcterms",
-      "dc_group": "coverage"
     },
     {
       "field_name": "rights",
@@ -433,106 +219,12 @@
       "form_snippet": "simple_list.html"
     },
     {
-      "field_name": "access_rights",
-      "label": "Access Rights",
-      "help_text": "Information about who can access the resource or an indication of its security status.",
-      "dc_ns": "dcterms",
-      "dc_group": "rights"
-    },
-    {
       "field_name": "license_id",
       "label": "License",
       "form_snippet": "license.html",
       "help_text": "License definitions and additional information can be found at http://opendefinition.org/",
       "dc_ns": "dcterms",
       "dc_group": "rights"
-    },
-    {
-      "field_name": "audience",
-      "label": "Audience",
-      "help_text": "A class of entity for whom the resource is intended or useful.",
-      "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
-    },
-    {
-      "field_name": "mediator",
-      "label": "Mediator",
-      "help_text": "An entity that mediates access to the resource and for whom the resource is intended or useful. In an educational context, a mediator might be a parent, teacher, teaching assistant, or care-giver.",
-      "dc_ns": "dcterms",
-      "dc_group": "audience"
-    },
-    {
-      "field_name": "education_level",
-      "label": "Audience Education Level",
-      "help_text": "A class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.",
-      "dc_ns": "dcterms",
-      "dc_group": "audience"
-    },
-    {
-      "field_name": "accrual_method",
-      "label": "Accrual Method",
-      "help_text": "The method by which items are added to a collection. ",
-      "preset": "select",
-      "choices": [
-        {
-          "value": "purchase",
-          "label": "Purchase"
-        },
-        {
-          "value": "donation",
-          "label": "Donation"
-        },
-        {
-          "value": "item_creation",
-          "label": "Item Creation"
-        }
-      ],
-      "dc_ns": "dc"
-    },
-    {
-      "field_name": "accrual_periodicity",
-      "label": "Accrual Periodicity",
-      "help_text": "The frequency with which items are added to a collection.",
-      "dc_ns": "dc"
-    },
-    {
-      "field_name": "accrual_policy",
-      "label": "Accrual Policy",
-      "help_text": "The policy governing the addition of items to a collection. The Accrual Policy for a library subject collection for which new books and journals are bought - Active. The Accrual Policy for a special collection to which items are added only of they are donated or deposited by an external agent - Passive.",
-      "preset": "select",
-      "choices": [
-        {
-          "value": "active",
-          "label": "Active"
-        },
-        {
-          "value": "passive",
-          "label": "Passive"
-        }
-      ],
-      "dc_ns": "dc"
-    },
-    {
-      "field_name": "instructional_method",
-      "label": "Instructional Method",
-      "help_text": "A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.",
-      "dc_ns": "dc"
-    },
-    {
-      "field_name": "provenance",
-      "label": "Provenance",
-      "help_text": "A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.",
-      "form_snippet": "markdown.html",
-      "dc_ns": "dc"
-    },
-    {
-      "field_name": "rightsholder",
-      "label": "Rights Holder",
-      "help_text": "A person or organization owning or managing rights over the resource.",
-      "dc_ns": "dc"
     },
     {
       "field_name": "member_countries",
