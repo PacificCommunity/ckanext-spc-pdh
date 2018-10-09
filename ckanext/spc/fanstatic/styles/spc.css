@@ -335,6 +335,51 @@ header.navbar > .container .collapse {
 .api-link .module-content small {
   font-size: 12px;
 }
+.data-quality-tooltip {
+  display: inline-block;
+  position: relative;
+}
+.data-quality-tooltip i {
+  color: #3a87ad;
+}
+.data-quality-tooltip i:hover {
+  cursor: help;
+}
+.data-quality-tooltip .tooltiptext {
+  visibility: hidden;
+  position: absolute;
+  left: -64px;
+  bottom: 35px;
+  width: 120px;
+  font-size: 14px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  background-color: #3a87ad;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 12px;
+}
+.data-quality-tooltip .tooltiptext a {
+  color: #fff;
+  text-decoration: underline;
+}
+.data-quality-tooltip .tooltiptext a:hover {
+  text-shadow: 1px 1px #036295;
+}
+.data-quality-tooltip .tooltiptext:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  top: 100%;
+  border-color: #3a87ad transparent transparent transparent;
+}
+.data-quality-tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
@@ -520,6 +565,9 @@ header.navbar > .container .collapse {
 .dataset-read .secondary .module .module-heading i {
   font-size: 16px;
   margin-right: 7px;
+}
+.dataset-read .secondary .module .module-heading .data-quality-tooltip i {
+  color: #fff;
 }
 .dataset-read .secondary .module:first-child .module-heading {
   border-top-right-radius: 5px;

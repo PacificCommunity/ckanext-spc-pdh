@@ -322,3 +322,51 @@ header.navbar {
         }
     }
 }
+
+.data-quality-tooltip {
+    display: inline-block;
+    position: relative;
+    i {
+        color: #3a87ad;
+        &:hover {
+            cursor: help;
+        }
+    }
+    .tooltiptext {
+        visibility: hidden;
+        position: absolute;
+        left: -64px;
+        bottom: 35px;
+        width: 120px;
+        font-size: 14px;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        background-color: #3a87ad;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        padding: 12px;
+        a {
+            color: #fff;
+            text-decoration: underline;
+            &:hover {
+                text-shadow: 1px 1px @heading-blue;
+            }
+        }
+        &:after {
+            content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+            top: 100%;
+            border-color: #3a87ad transparent transparent transparent;
+        }
+    }
+    &:hover {
+        .tooltiptext {
+            visibility: visible;
+        }
+    }
+}
