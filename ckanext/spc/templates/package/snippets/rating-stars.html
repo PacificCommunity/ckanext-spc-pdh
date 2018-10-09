@@ -1,7 +1,17 @@
+{% set dqs_explanation_url = h.get_dqs_explanation_url() %}
+
 {% if dataset_page %}
   <section class="module module-narrow">
     <div class="module context-info">
-      <h2 class="module-heading"><i class="fa fa-star-half-o"></i> Rating</h2>
+      <h2 class="module-heading">
+        <i class="fa fa-star-half-o"></i> Rating
+        <div class="data-quality-tooltip pull-right">
+          <i class="fa fa-question-circle"></i>
+          <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
+            Calculated using the <a href="{{ dqs_explanation_url if dqs_explanation_url }}">Open data scale</a>
+          </span>
+        </div>
+      </h2>
       <div class="module-content">
         <div class="stars-block" title="{{ rating }} star{%if rating!=1%}s{%endif%}">
           {% for i in range(rating) %}
@@ -21,5 +31,11 @@
     {% else %}
     	<i class="fa fa-star-o" style="color: orange"></i>
     {% endfor %}
+    <div class="data-quality-tooltip">
+      <i class="fa fa-question-circle"></i>
+      <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
+        Calculated using the <a href="{{ dqs_explanation_url if dqs_explanation_url }}">Open data scale</a>
+      </span>
+    </div>
   </div>
 {% endif %}
