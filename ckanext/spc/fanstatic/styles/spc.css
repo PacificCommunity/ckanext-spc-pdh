@@ -408,7 +408,7 @@ header.navbar > .container .collapse {
   font-size: 16px;
   line-height: 21px;
   padding: 0 15px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .dataset-read .primary .resources h3 {
   margin-bottom: 20px;
@@ -566,6 +566,19 @@ header.navbar > .container .collapse {
   font-size: 14px;
   margin-left: 5px;
   color: #036295;
+}
+#dataset-resources {
+  clear: both;
+}
+.meta-export-select {
+  margin-bottom: 30px;
+}
+.meta-export-select li a:hover {
+  background: #dfebed;
+  color: #036295;
+}
+.meta-export-select.btn-group.open .btn-primary.dropdown-toggle {
+  background-color: #0c436b;
 }
 #main-menu {
   position: absolute;
