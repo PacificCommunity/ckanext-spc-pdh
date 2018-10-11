@@ -81,6 +81,8 @@ setup(
     entry_points='''
         [ckan.plugins]
         spc=ckanext.spc.plugin:SpcPlugin
+        spc_oaipmh_harvester=ckanext.spc.harvesters.oaipmh:SpcOaipmhHarvester
+        spc_dkan_harvester=ckanext.spc.harvesters.dkan:DKANHarvester
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan

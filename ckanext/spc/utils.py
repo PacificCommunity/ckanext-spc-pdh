@@ -40,9 +40,7 @@ def _get_stars_from_solr(id):
     try:
         return int(results[0]['extras']['five_star_rating'])
     except Exception as e:
-        logger.warn(
-            'Unable to get rating of <{}>: {}'.format(id, e)
-        )
+        logger.warn('Unable to get rating of <{}>: {}'.format(id, e))
         return 0
 
 
@@ -58,10 +56,6 @@ def check_link(url):
 def count_stars(pkg_dict):
     """Count stars as per https://5stardata.info
     """
-    license = model.Package.get_license_register().get(pkg_dict['license_id'])
-    is_open = license and license.isopen()
-    license_id = license and license.id
-
     resources = [{
         'format': res.get('format'),
         'url': res['url']
@@ -76,14 +70,21 @@ def count_stars(pkg_dict):
         ]
 
     text = '\n'.join(
-        filter(None, [pkg_dict.get('notes')] +
-               pkg_dict.get('res_description', []) + [
-                   res['description']
-                   for res in pkg_dict.get('resources', [])
-                   if res.get('description')
-               ]
+        filter(
+            None,
+            [pkg_dict.get('notes')] + pkg_dict.get('res_description', []) + [
+                res['description'] for res in pkg_dict.get('resources', [])
+                if res.get('description')
+            ]
         )
     )
+
+    license = model.Package.get_license_register().get(
+        pkg_dict.get('license_id')
+    )
+    is_open = license and license.isopen()
+    license_id = license and license.id
+
     data_dict = dict(
         url=h.url_for(
             controller='package',
@@ -142,8 +143,7 @@ def normalize_to_dcat(pkg_dict):
 
 def ga_view_count(name):
     return model.Session.query(GA_Url.pageviews).filter(
-        GA_Url.period_name == 'All',
-        GA_Url.package_id == name
+        GA_Url.period_name == 'All', GA_Url.package_id == name
     ).scalar() or 0
 
 
