@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+LIB_URL=http://www.spc.int/DigitalLibrary/SPC/OAI
+
 if [ ! -d 'ckanext-spc' ]
 then
     echo Switch to folder containing CKAN extensions
@@ -44,18 +46,69 @@ pip install -e ckanext-spc
 echo Initializing database
 paster --plugin=ckanext-harvest harvester initdb --config=$1
 
+echo Creating user for harvesting
+paster --plugin=ckan user add harvest email=harvest@example.com password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c12) -c $1
+
+echo Creating harvest sources
+url=$LIB_URL
+
+name='spc-cces'
+title='Climate Change and Environmental Sustainability'
+org='spc-cces'
+config='{"set": "CCES_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
+
+name='spc-fame'
+title='Fisheries, Aquaculture & Marine Ecosystems'
+org='spc-fame'
+config='{"set": "FAME_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
+
+name='spc-gem'
+title='Geoscience, Energy and Maritime'
+org='spc-gem'
+config='{"set": "GEM_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
+
+name='spc-lrd'
+title='Land Resources Division'
+org='spc-lrd'
+config='{"set": "LRD_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
+
+name='spc-phd'
+title='Public Health Division'
+org='spc-phd'
+config='{"set": "PHD_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
+
+name='spc-sdp'
+title='Social Development Program'
+org='spc-sdp'
+config='{"set": "SDP_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
+
+name='spc-sdd'
+title='Statistics for Development Division'
+org='spc-sdd'
+config='{"set": "SDD_PDH"}'
+paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 echo
 echo ________________________________________________________________________________
 echo Done
+
 echo
 echo Make sure you have redis installed and it\'s automatically started during system boot.
 echo Setup ckanext-harvest for production.
 echo Reference: https://github.com/ckan/ckanext-harvest#setting-up-the-harvesters-on-a-production-server
+
 echo
 echo Update $1 with following changes:
+echo -e '\t'ckan.auth.user_create_groups = true
 echo -e '\t'ckan.harvest.mq.type = redis
 echo -e '\t'ckan.plugins = ... harvest spc_oaipmh_harvester spc_dkan_harvester
+
 echo
 echo Restart server and create new harvest sources under /harvest:
-echo -e '\t{"set": HARVEST_SET, "user": HARVEST_USER}'
+echo -e '\t{"set": HARVEST_SET}'
