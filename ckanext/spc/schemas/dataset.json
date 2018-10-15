@@ -164,7 +164,7 @@
       "label": "Spatial Coverage",
       "form_placeholder": "{}",
       "form_snippet": "spatial.html",
-      "display_snippet": null
+      "display_snippet": "spatial.html"
     },
     {
       "field_name": "temporal_start",
