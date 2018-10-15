@@ -14,14 +14,29 @@ logger = logging.getLogger(__name__)
 
 
 class SpcOaipmhHarvester(OaipmhHarvester):
+    def _set_config(self, source_config):
+        super(SpcOaipmhHarvester, self)._set_config(source_config)
+        try:
+            config_json = json.loads(source_config)
+            self.topic = config_json['topic']
+
+        except KeyError:
+            self.topic = None
+        except ValueError:
+            pass
+
+
     def _extract_additional_fields(self, content, package_dict):
+        package_dict['thematic_area_string'] = self.topic
         skip_keys = {'set_spec', 'description'}
+
         for key, value in content.items():
             if key in package_dict or key in skip_keys:
                 continue
             if key == 'type':
                 key = 'publication_type'
             package_dict[key] = value
+
         package_dict.pop('extras', None)
         package_dict['type'] = 'publications'
         package_dict.pop('maintainer_email', None)
@@ -65,6 +80,7 @@ class SpcOaipmhHarvester(OaipmhHarvester):
                 group = get_action('group_show')(context, data_dict)
                 logger.info('found the group ' + group['id'])
             except:
+                context['__auth_audit'] = []
                 group = get_action('group_create')(context, data_dict)
                 logger.info('created the group ' + group['id'])
             group_ids.append(group['id'])

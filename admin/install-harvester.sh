@@ -55,43 +55,50 @@ url=$LIB_URL
 name='spc-cces'
 title='Climate Change and Environmental Sustainability'
 org='spc-cces'
-config='{"set": "CCES_PDH"}'
+config='{"set": "CCES_PDH", "topic": "Climate Change"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 name='spc-fame'
 title='Fisheries, Aquaculture & Marine Ecosystems'
 org='spc-fame'
-config='{"set": "FAME_PDH"}'
+config='{"set": "FAME_PDH", "topic": "Fisheries"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 name='spc-gem'
 title='Geoscience, Energy and Maritime'
 org='spc-gem'
-config='{"set": "GEM_PDH"}'
+config='{"set": "GEM_PDH", "topic": "Geoscience"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 name='spc-lrd'
 title='Land Resources Division'
 org='spc-lrd'
-config='{"set": "LRD_PDH"}'
+config='{"set": "LRD_PDH", "topic": "Land Resources"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 name='spc-phd'
 title='Public Health Division'
 org='spc-phd'
-config='{"set": "PHD_PDH"}'
+config='{"set": "PHD_PDH", "topic": "Health"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 name='spc-sdp'
 title='Social Development Program'
 org='spc-sdp'
-config='{"set": "SDP_PDH"}'
+config='{"set": "SDP_PDH", "topic": "Social"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 name='spc-sdd'
 title='Statistics for Development Division'
 org='spc-sdd'
-config='{"set": "SDD_PDH"}'
+config='{"set": "SDD_PDH", "topic": "Statistics"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
 echo
@@ -111,4 +118,4 @@ echo -e '\t'ckan.plugins = ... harvest spc_oaipmh_harvester spc_dkan_harvester
 
 echo
 echo Restart server and create new harvest sources under /harvest:
-echo -e '\t{"set": HARVEST_SET}'
+echo -e '\t{"set": HARVEST_SET, "topic": DEFAULT_TOPIC}'

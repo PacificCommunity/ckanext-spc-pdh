@@ -74,7 +74,6 @@ class DKANHarvester(CKANHarvester):
     def get_harvested_package_dict(cls, harvest_object):
         package = CKANHarvester.get_harvested_package_dict(harvest_object)
         # change the DKAN-isms into CKAN-style
-        import ipdb; ipdb.set_trace()
         try:
             if 'extras' not in package:
                 package['extras'] = {}
