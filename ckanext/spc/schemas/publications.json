@@ -204,6 +204,7 @@
       "label": "Coverage",
       "form_placeholder": "{}",
       "form_snippet": "spatial.html",
+      "display_snippet": "spatial.html",
       "validators": "copy_from(coverage) ignore_empty",
       "dc_ns": "dcterms",
       "dc_name": "coverage"
