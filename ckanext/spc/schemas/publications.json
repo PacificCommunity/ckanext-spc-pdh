@@ -76,10 +76,7 @@
       "label": "Creator",
       "help_text": "An entity primarily responsible for making the resource. Examples of a Creator include a person, an organization, or a service.",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "tag_string",
@@ -93,10 +90,7 @@
       "label": "Subject",
       "dc_ns": "dc",
       "dc_name": "subject",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "notes",
@@ -115,20 +109,14 @@
       "field_name": "publisher",
       "label": "Publisher",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "contributor",
       "label": "Contributor",
       "help_text": "An entity responsible for making contributions to the resource.",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "date",
@@ -136,68 +124,47 @@
       "help_text": "Date (often a range)",
       "preset": "date",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "publication_type",
       "label": "Type",
       "help_text": "The nature or genre of the resource.",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "format",
       "label": "Format",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "identifier",
       "label": "Identifier",
       "help_text": "An unambiguous reference to the resource within a given context.",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "source",
       "label": "Source",
       "help_text": "A related resource from which the described resource is derived.",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "language",
       "label": "Language",
       "form_snippet": "language.html",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "relation",
       "label": "Relation",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "spatial",
@@ -214,10 +181,7 @@
       "label": "Rights",
       "help_text": "Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.",
       "dc_ns": "dc",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "license_id",

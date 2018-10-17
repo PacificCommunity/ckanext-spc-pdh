@@ -44,10 +44,7 @@
     {
       "field_name": "theme",
       "label": "Theme",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "identifier",
@@ -89,10 +86,7 @@
     {
       "field_name": "language",
       "label": "Language",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "frequency",
@@ -103,10 +97,8 @@
     {
       "field_name": "conforms_to",
       "label": "Conforms To",
-      "validators": "copy_from(conformsTo) ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list",
+      "validators": "copy_from(conformsTo) ignore_missing spc_to_json"
     },
     {
       "field_name": "access_rights",
@@ -116,10 +108,8 @@
     {
       "field_name": "documentation",
       "label": "Documentation",
-      "validators": "copy_from(page) ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list",
+      "validators": "copy_from(page) ignore_missing spc_to_json"
     },
     {
       "field_name": "povenance",
@@ -133,34 +123,24 @@
     {
       "field_name": "has_version",
       "label": "Has Version",
-      "validators": "copy_from(hasVersion) ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list",
+      "validators": "copy_from(hasVersion) ignore_missing spc_to_json"
     },
     {
       "field_name": "is_version_of",
       "label": "Is Version Of",
-      "validators": "copy_from(isVersionOf) ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list",
+      "validators": "copy_from(isVersionOf) ignore_missing spc_to_json"
     },
     {
       "field_name": "source",
       "label": "Source",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "sample",
       "label": "Sample",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "spatial",
@@ -347,26 +327,17 @@
     {
       "field_name": "documentation",
       "label": "Documentation",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "language",
       "label": "Language",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "conforms_to",
       "label": "Conforms To",
-      "validators": "ignore_missing spc_to_json",
-      "output_validators": "spc_from_json",
-      "display_snippet": "simple_list.html",
-      "form_snippet": "simple_list.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "hash",
