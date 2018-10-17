@@ -1,10 +1,15 @@
 import json
 import logging
+
+from ckan.common import _
 from datetime import datetime
 from dateutil.parser import parse as parse_date
-from ckantoolkit import missing, Invalid, StopOnError
+from ckantoolkit import missing, Invalid, navl_validate, StopOnError
 from six import string_types
-from ckan.lib.navl.dictization_functions import unflatten, flatten_dict
+from ckan.lib.navl.dictization_functions import (
+    unflatten, flatten_dict, MissingNullEncoder
+)
+import ckanext.spc.schemas.sub_schema as sub_schema
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +21,7 @@ def get_validators():
         spc_from_json=spc_from_json,
         spc_to_json=spc_to_json,
         construct_sub_schema=construct_sub_schema,
+        spc_ignore_missing_if_one_of=spc_ignore_missing_if_one_of,
     )
 
 
@@ -56,7 +62,7 @@ def spc_to_json(key, data, errors, context):
 
     if not isinstance(value, (list, dict)):
         value = [value]
-    data[key] = json.dumps(value)
+    data[key] = MissingNullEncoder().encode(value)
 
 
 def spc_from_json(value):
@@ -70,13 +76,58 @@ def spc_from_json(value):
 
 def construct_sub_schema(name):
     def converter(key, data, errors, context):
+        single_value = False
         junk_key = ('__junk', )
         junk = unflatten(data.get(junk_key, {}))
 
-        sub_data = junk.pop(name, None)
-        if not sub_data:
+        # for multiple-valued fields, everything moved to junk
+        sub_data = junk.pop(key[0], None) or data.get(key)
+
+        if not sub_data or sub_data is missing:
+            data[key] = missing
             return
-        data[key] = sub_data
         data[junk_key] = flatten_dict(junk)
 
+        schema = getattr(sub_schema, 'get_default_{}_schema'.format(name))()
+
+        if not isinstance(sub_data, (list, dict)):
+            sub_data = json.loads(sub_data)
+
+        if isinstance(sub_data, dict):
+            single_value = True
+            sub_data = [sub_data]
+
+        validated_list = []
+        errors_list = []
+        for chunk in sub_data:
+            validated_data, err = navl_validate(chunk, schema, context)
+            validated_list.append(validated_data)
+            if err:
+                errors_list.append(err)
+
+        data[key] = validated_list[0] if single_value else validated_list
+        if errors_list:
+            errors.setdefault(key, []).extend(errors_list)
+            raise StopOnError
+
     return converter
+
+
+def spc_ignore_missing_if_one_of(*fields):
+    def at_least_one_validator(key, data, errors, context):
+        value = data.get(key)
+
+        if value and value is not missing:
+            return
+        prefix = key[:-1]
+        if any(
+            data.get(prefix + (field, ), missing) is not missing
+            for field in fields
+        ):
+            raise StopOnError
+        raise Invalid(
+            _('Cannot be empty if none of alternatives specified: {}')
+            .format(fields)
+        )
+
+    return at_least_one_validator

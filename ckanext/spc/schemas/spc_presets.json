@@ -112,6 +112,23 @@
         "display_snippet": "date.html",
         "validators": "scheming_required spc_normalize_date isodate convert_to_json_if_date"
       }
+    },
+    {
+      "preset_name": "multivalued_list",
+      "values": {
+	"validators": "ignore_missing spc_to_json",
+	"output_validators": "convert_to_json_if_string",
+	"display_snippet": "simple_list.html",
+	"form_snippet": "simple_list.html"
+      }
+    },
+    {
+      "preset_name": "agent",
+      "values": {
+        "required": true,
+	"validators": "construct_sub_schema(agent) scheming_required spc_to_json",
+	"output_validators": "convert_to_json_if_string"
+      }
     }
   ]
 }
