@@ -54,7 +54,10 @@
     {
       "field_name": "alternate_identifier",
       "label": "Alternate Identifier",
-      "validators": "copy_from(guid) copy_from(id) ignore_missing"
+      "validators": "copy_from(guid) copy_from(id) ignore_missing spc_to_json",
+      "output_validators": "spc_from_json",
+      "display_snippet": "simple_list.html",
+      "form_snippet": "simple_list.html"
     },
     {
       "field_name": "issued",
