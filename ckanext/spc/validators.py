@@ -22,6 +22,7 @@ def get_validators():
         spc_to_json=spc_to_json,
         construct_sub_schema=construct_sub_schema,
         spc_ignore_missing_if_one_of=spc_ignore_missing_if_one_of,
+        spc_float_validator=spc_float_validator,
     )
 
 
@@ -91,7 +92,10 @@ def construct_sub_schema(name):
         schema = getattr(sub_schema, 'get_default_{}_schema'.format(name))()
 
         if not isinstance(sub_data, (list, dict)):
-            sub_data = json.loads(sub_data)
+            try:
+                sub_data = json.loads(sub_data)
+            except ValueError:
+                raise Invalid(_('Plain values are not supported'))
 
         if isinstance(sub_data, dict):
             single_value = True
@@ -131,3 +135,10 @@ def spc_ignore_missing_if_one_of(*fields):
         )
 
     return at_least_one_validator
+
+
+def spc_float_validator(value):
+    try:
+        return float(value)
+    except ValueError:
+        raise Invalid(_('Must be a decimal number'))
