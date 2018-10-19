@@ -90,14 +90,12 @@
     {
       "field_name": "creator",
       "label": "Creator",
-      "form_snippet": "markdown.html",
       "help_text": "The creator is the person who created the resource (not necessarily the author of this metadata about the resource). This is the person or institution to contact with questions about the use, interpretation of a dataset.",
       "preset": "agent"
     },
     {
       "field_name": "metadata_provider",
       "label": "Metadata Provider",
-      "form_snippet": "markdown.html",
       "help_text": "The party responsible for the creation of the metadata document",
       "preset": "agent"
     },
@@ -139,6 +137,8 @@
       "field_name": "keyword_set",
       "label": "Keyword Set",
       "required": true,
+      "form_snippet": "sub_form.html",
+      "sub_form": "keyword_set_form",
       "validators": "construct_sub_schema(keyword_set) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -155,6 +155,8 @@
     {
       "field_name": "coverage",
       "label": "Coverage",
+      "form_snippet": "sub_form.html",
+      "sub_form": "coverage_form",
       "required": false,
       "validators": "construct_sub_schema(coverage) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
@@ -168,6 +170,8 @@
     {
       "field_name": "maintenance",
       "label": "Maintenance",
+      "form_snippet": "sub_form.html",
+      "sub_form": "maintenance_form",
       "validators": "construct_sub_schema(maintenance) ignore_missing spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -179,12 +183,16 @@
     {
       "field_name": "methods",
       "label": "Methods",
+      "form_snippet": "sub_form.html",
+      "sub_form": "methods_form",
       "validators": "construct_sub_schema(methods) ignore_missing spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "project",
       "label": "Project",
+      "form_snippet": "sub_form.html",
+      "sub_form": "project_form",
       "validators": "construct_sub_schema(project) ignore_missing spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },

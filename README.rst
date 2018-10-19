@@ -67,6 +67,17 @@ do::
     python setup.py develop
     pip install -r dev-requirements.txt
 
+---------------
+Template macros
+---------------
+
+This extension provides new template macro _nested_field_ which is
+used for rendering fields in nested schemas. It can be easily added to
+any page that have access to dataset metadata via next snippet::
+
+  {{ nested_field(parent_field_name, index_of_current_field_amoung_other_siblings, current_field_name, parent_data_dict, parent_errors_dict) }}
+
+More examples can be found in `templates/macro/spc.html`.
 
 ---------------------
 SPC specific examples

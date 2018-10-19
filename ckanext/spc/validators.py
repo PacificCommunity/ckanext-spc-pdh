@@ -13,6 +13,22 @@ import ckanext.spc.schemas.sub_schema as sub_schema
 
 logger = logging.getLogger(__name__)
 
+incorrectly_dictized_dict = (
+    ('individual_name', ),
+    ('address', ),
+    ('geographic_coverage', ),
+    ('temporal_coverage', ),
+    ('taxonomic_coverage', ),
+    ('range_of_dates', ),
+    ('bounding_coordinates', ),
+    ('sampling', ),
+    ('study_area_description', ),
+    ('personnel', ),
+)
+incorrectly_dictized_sub_lists = {
+    ('taxonomic_coverage', ): 'taxonomic_classification',
+    ('personnel', ): 'person'
+}
 
 def get_validators():
     return dict(
@@ -97,6 +113,19 @@ def construct_sub_schema(name):
             except ValueError:
                 raise Invalid(_('Plain values are not supported'))
 
+
+        if key[-1:] in incorrectly_dictized_dict:
+            try:
+                sub_data = sub_data[0]
+            except KeyError:
+                pass
+
+        if key in incorrectly_dictized_sub_lists:
+            list_key = incorrectly_dictized_sub_lists[key]
+            try:
+                sub_data[list_key] = list(sub_data.get(list_key, {}).values())
+            except AttributeError:
+                pass
         if isinstance(sub_data, dict):
             single_value = True
             sub_data = [sub_data]
@@ -106,11 +135,10 @@ def construct_sub_schema(name):
         for chunk in sub_data:
             validated_data, err = navl_validate(chunk, schema, context)
             validated_list.append(validated_data)
-            if err:
-                errors_list.append(err)
+            errors_list.append(err)
 
         data[key] = validated_list[0] if single_value else validated_list
-        if errors_list:
+        if any(err for err in errors_list):
             errors.setdefault(key, []).extend(errors_list)
             raise StopOnError
 
