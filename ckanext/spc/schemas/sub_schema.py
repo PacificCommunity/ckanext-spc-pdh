@@ -26,10 +26,10 @@ def get_default_maintenance_schema():
     }
 
 
-def get_default_position_name_schema():
+def get_default_individual_name_schema():
     return {
         'given_name': [get_validator('ignore_empty')],
-        'sur_name': [get_validator('not_empty')],
+        'sur_name': [get_validator('ignore_empty')],
         '__extras': [get_validator('ignore')]
     }
 
@@ -59,7 +59,8 @@ def get_default_keyword_set_schema():
     return {
         'keyword': [
             get_validator('not_empty'),
-            get_validator('convert_to_list_if_string'),
+            get_validator('spc_to_json'),
+            get_validator('convert_to_json_if_string'),
             get_validator('list_of_strings')
         ],
         'keyword_thesaurus': [get_validator('not_empty')],
@@ -91,8 +92,8 @@ def get_default_agent_schema():
             get_validator('spc_ignore_missing_if_one_of')(
                 'position_name', 'organization_name'
             ),
-            get_validator('construct_sub_schema')('position_name'),
-            get_validator('not_empty')
+            get_validator('construct_sub_schema')('individual_name'),
+            get_validator('ignore_empty')
         ],
         'position_name': [
             get_validator('spc_ignore_missing_if_one_of')(
@@ -116,7 +117,8 @@ def get_default_agent_schema():
         ],
         'user_id': [
             get_validator('ignore_empty'),
-            get_validator('convert_to_list_if_string'),
+            get_validator('spc_to_json'),
+            get_validator('convert_to_json_if_string'),
             get_validator('list_of_strings'),
         ],
         '__extras': [get_validator('ignore')],
@@ -233,10 +235,21 @@ def get_default_taxonomic_class_schema():
     }
 
 
+def get_default_personnel_schema():
+    return {
+        'person': get_default_agent_with_role_schema(),
+        '__extras': [get_validator('ignore')],
+        '__junk': [get_validator('ignore')],
+    }
+
+
 def get_default_project_schema():
     return {
         'title': [get_validator('not_empty'), unicode],
-        'personnel': get_default_agent_with_role_schema(),
+        'personnel': [
+            get_validator('ignore_empty'),
+            get_validator('construct_sub_schema')('personnel')
+        ],
         'abstract': [get_validator('ignore_empty'), unicode],
         'funding': [get_validator('ignore_empty'), unicode],
         'study_area_description': [

@@ -127,7 +127,9 @@
       "values": {
         "required": true,
 	"validators": "construct_sub_schema(agent) scheming_required spc_to_json",
-	"output_validators": "convert_to_json_if_string"
+	"output_validators": "convert_to_json_if_string",
+	"form_snippet": "sub_form.html",
+	"sub_form": "agent_form"
       }
     }
   ]

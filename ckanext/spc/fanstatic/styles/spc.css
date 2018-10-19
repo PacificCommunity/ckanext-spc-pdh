@@ -830,3 +830,10 @@ button.header-menu-btn:focus {
 .wrapper .primary .media-grid {
   margin: 0 -15px;
 }
+
+ .raised {
+     box-shadow: 0px 0px 6px lightgray;
+     margin: 5px;
+     padding: 10px;
+     margin-bottom: 15px;
+ }
