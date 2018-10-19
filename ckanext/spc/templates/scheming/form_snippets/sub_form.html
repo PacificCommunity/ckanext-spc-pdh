@@ -3,7 +3,7 @@
     <legend>{{ field.label }}</legend>
     <span></span>
     {% for i in range(data[field.field_name]|length) %}
-	{% with item_data = data.get(field.field_name, []), item_errors = errors.get(field.field_name, []), uniq=field.field_name ~ '_' ~ i%}
+	{% with item_data = data.get(field.field_name) or [], item_errors = errors.get(field.field_name, []), uniq=field.field_name ~ '_' ~ i%}
 	    <div id="{{ uniq }}-wrapper">
 		<a class="btn btn-info control-group" type="button" data-toggle="collapse" data-target="#{{ uniq }}">
 		    {{ field.label }} #{{ i + 1 }}
