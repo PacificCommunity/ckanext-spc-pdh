@@ -129,6 +129,7 @@
 	"validators": "construct_sub_schema(agent) scheming_required spc_to_json",
 	"output_validators": "convert_to_json_if_string",
 	"form_snippet": "sub_form.html",
+	"display_snippet": "sub_table.html",
 	"sub_form": "agent_form"
       }
     }

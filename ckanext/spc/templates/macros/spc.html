@@ -182,7 +182,7 @@
     {% endif %}
     {% set input_attrs = {'class': 'form-controls'} %}
     {% do input_attrs.update(attrs) %}
-    {% do additional.update({{'select': 'selected', 'checkbox': 'checked'}.get(type, 'value'): data[key]}) %}
+    {% do additional.update({{'select': 'selected', 'checkbox': 'checked'}.get(type, 'value'): data.get(key)}) %}
     {{ form[type](
 	tpl | format(name, idx, key), label=_(label),
 	classes=['control-medium'] if type != 'markdown' else [], attrs=input_attrs,
