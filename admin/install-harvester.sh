@@ -15,6 +15,7 @@ then
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
 fi
 
+
 echo Downloading ckanext-harvest
 git clone https://github.com/ckan/ckanext-harvest
 cd ckanext-harvest
@@ -101,6 +102,24 @@ config='{"set": "SDD_PDH", "topic": "Statistics"}'
 paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
 
+# GBIF
+url='http://api.gbif.org'
+name='spc-gbif'
+title='GBIF SPC published'
+org='spc-fame'
+config='{"topic": "Fisheries", "hosting_org": "cd3512e7-886c-4873-b629-740abe8ae74e", "q": "+spc"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
+paster --plugin=ckanext-harvest harvester source "$name" "$url" GBIF "$title" true "$org" DAILY "$config" -c $1
+
+name='sprep-gbif'
+title='GBIF SPREP published'
+org='sprep'
+config='{"topic": "Fisheries", "hosting_org": "cd3512e7-886c-4873-b629-740abe8ae74e", "q": "-spc"}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
+paster --plugin=ckanext-harvest harvester source "$name" "$url" GBIF "$title" true "$org" DAILY "$config" -c $1
+
+
+
 echo
 echo ________________________________________________________________________________
 echo Done
@@ -114,7 +133,7 @@ echo
 echo Update $1 with following changes:
 echo -e '\t'ckan.auth.user_create_groups = true
 echo -e '\t'ckan.harvest.mq.type = redis
-echo -e '\t'ckan.plugins = ... harvest spc_oaipmh_harvester spc_dkan_harvester
+echo -e '\t'ckan.plugins = ... harvest spc_oaipmh_harvester spc_dkan_harvester spc_gbif_harvester
 
 echo
 echo Restart server and create new harvest sources under /harvest:
