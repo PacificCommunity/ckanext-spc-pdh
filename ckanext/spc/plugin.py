@@ -86,7 +86,7 @@ class SpcPlugin(plugins.SingletonPlugin):
                 item['display_name'], item['display_name']
             ),
             'spc_member_countries_facet_label': lambda item: self.member_countries.get(
-                item['display_name'], item['display_name']
+                item['display_name'].upper(), item['display_name']
             )
         }
         helpers.update(spc_helpers.get_helpers())
@@ -161,6 +161,9 @@ class SpcPlugin(plugins.SingletonPlugin):
 
         pkg_dict.update(
             extras_five_star_rating=spc_utils.count_stars(pkg_dict)
+        )
+        pkg_dict['member_countries'] = spc_helpers.countries_list(
+            pkg_dict.get('member_countries', '[]')
         )
         return pkg_dict
 
