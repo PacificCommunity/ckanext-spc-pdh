@@ -24,10 +24,14 @@ incorrectly_dictized_dict = (
     ('sampling', ),
     ('study_area_description', ),
     ('personnel', ),
+
+    ('metadata_extension_info', ),
 )
 incorrectly_dictized_sub_lists = {
     ('taxonomic_coverage', ): 'taxonomic_classification',
-    ('personnel', ): 'person'
+    ('personnel', ): 'person',
+
+    ('metadata_extension_info', ): 'extended_element_information'
 }
 
 def get_validators():
@@ -96,7 +100,8 @@ def construct_sub_schema(name):
         single_value = False
         junk_key = ('__junk', )
         junk = unflatten(data.get(junk_key, {}))
-
+        # if key == ('metadata_extension_info', ):
+            # import ipdb; ipdb.set_trace()
         # for multiple-valued fields, everything moved to junk
         sub_data = junk.pop(key[0], None) or data.get(key)
 

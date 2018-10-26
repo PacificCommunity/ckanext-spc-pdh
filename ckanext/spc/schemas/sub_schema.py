@@ -1,5 +1,6 @@
 from ckantoolkit import get_validator
 
+from ckanext.spc.schemas.gmd import *
 
 def _default(value):
     return get_validator('default')(value)

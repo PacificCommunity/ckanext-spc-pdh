@@ -3,47 +3,6 @@
   "dataset_type": "geographic_data",
   "about": "Geographic data",
   "about_url": "http://github.com/ckan/ckanext-scheming",
-  "field_groups": [
-    {
-      "name": "Dataset basic",
-      "id": "dataset_basic",
-      "fields_list":
-      [
-        "title",
-        "name",
-        "thematic_area_string",
-        "owner_org",
-        "license_id",
-        "notes",
-        "tag_string",
-        "spatial",
-        "temporal_coverage_from",
-        "temporal_coverage_to",
-        "lineage",
-        "statement",
-        "language"
-      ]
-    },
-    {
-      "name": "Cited Responsible Party",
-      "id": "cited_responsible_party",
-      "fields_list":
-      [
-        "crp_role",
-        "crp_organisation_name"
-      ]
-    },
-    {
-      "name": "Point of contact",
-      "id": "ci_responsible_party",
-      "fields_list":
-      [
-        "contact_role",
-        "contact_organisation_name",
-        "topicCategory"
-      ]
-    }
-  ],
   "dataset_fields": [
     {
       "field_name": "title",
@@ -133,71 +92,167 @@
       "label": "Keywords",
       "preset": "tag_string_autocomplete"
     },
-
-
-    {
-      "field_name": "crp_role",
-      "label": "Cited Responsible Party Role",
-      "required": true,
-      "help_text": "The role identifies the function that the individual, position and/or organisation performs in regards to the resource."
-    },
-    {
-      "field_name": "crp_organisation_name",
-      "label": "Cited Responsible Party Organisation name",
-      "help_text": "The name of the organisation responsible for the resource."
-    },
-
-
-    {
-      "field_name": "contact_role",
-      "label": "Contact Role",
-      "required": true
-    },
-    {
-      "field_name": "contact_organisation_name",
-      "label": "Contact Organisation name"
-    },
-    {
-      "field_name": "topic_category",
-      "label": "ISO Topic categories"
-    },
-
-
     {
       "field_name": "spatial",
       "label": "Spatial Coverage",
       "form_placeholder": "{}",
       "form_snippet": "spatial.html",
-      "form_attrs": {
-        "data-module": "friendly-coords?",
-        "class": "hide?"
-      },
       "display_snippet": "spatial.html"
-    },
-    {
-      "field_name": "temporal_coverage_from",
-      "label": "Temporal Coverage From",
-      "preset": "date"
-    },
-    {
-      "field_name": "temporal_coverage_to",
-      "label": "Temporal Coverage To",
-      "preset": "date"
-    },
-    {
-      "field_name": "lineage",
-      "label": "Lineaget"
-    },
-    {
-      "field_name": "statement",
-      "label": "Statement",
-      "form_snippet": "markdown.html",
-      "help_text": "This element provides a statement of the history of the resource. It can also include a textual explanation of the processing steps and source of the resource, although these attributes would be better described in their specific elements."
     },
     {
       "field_name": "language",
       "label": "Language",
+      "multiple": false,
+      "required": false,
+      "validators": "scheming_required",
       "form_snippet": "language.html"
+    },
+    {
+      "field_name": "character_set",
+      "label": "Character Set",
+      "multiple": false,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_code_string) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "parent_identifier",
+      "label": "Parent Identifier",
+      "multiple": false,
+      "required": false,
+      "validators": "scheming_required"
+    },
+    {
+      "field_name": "hierarchy_level",
+      "label": "Hierarchy Level",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_code_string) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "hierarchy_level_name",
+      "label": "Hierarchy Level Name",
+      "multiple": true,
+      "required": false,
+      "validators": "scheming_required"
+    },
+    {
+      "field_name": "contact",
+      "label": "Contact",
+      "multiple": true,
+      "required": true,
+      "validators": "construct_sub_schema(gmd_cited_responsible_party) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "date_stamp",
+      "label": "Date Stamp",
+      "multiple": false,
+      "required": true,
+      "preset": "date"
+    },
+    {
+      "field_name": "metadata_standard_name",
+      "label": "Metadata Standard Name",
+      "multiple": false,
+      "required": false,
+      "validators": "scheming_required"
+    },
+    {
+      "field_name": "metadata_standard_version",
+      "label": "Metadata Standard Version",
+      "multiple": false,
+      "required": false,
+      "validators": "scheming_required"
+    },
+    {
+      "field_name": "locale",
+      "label": "locale",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_locale) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "spatial_representation_info",
+      "label": "Spatial Representation Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_spatial) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "reference_system_info",
+      "label": "Reference System Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_identifier) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "metadata_extension_info",
+      "label": "Metadata Extension Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_metadata_extension) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "identification_info",
+      "label": "Identification Info",
+      "multiple": true,
+      "required": true,
+      "validators": "construct_sub_schema(gmd_identification_info) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "content_info",
+      "label": "Content Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_content_info) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "data_quality_info",
+      "label": "Data Quality Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_data_quality) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "portrayal_catalogue_info",
+      "label": "Portrayal Catalogue Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_citation) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "metadata_constraints",
+      "label": "Metadata Constraints",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_metadata_constraints) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "application_schema_info",
+      "label": "Application Schema Info",
+      "multiple": true,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_application_schema_info) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
+    },
+    {
+      "field_name": "metadata_maintenance",
+      "label": "Metadata Maintenance",
+      "multiple": false,
+      "required": false,
+      "validators": "construct_sub_schema(gmd_maintenance) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "member_countries",
