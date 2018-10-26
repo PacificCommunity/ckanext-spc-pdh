@@ -84,6 +84,8 @@ setup(
         spc_oaipmh_harvester=ckanext.spc.harvesters.oaipmh_harvester:SpcOaipmhHarvester
         spc_gbif_harvester=ckanext.spc.harvesters.gbif:SpcGbifHarvester
         spc_dkan_harvester=ckanext.spc.harvesters.dkan:DKANHarvester
+        spc_prdr_harvester=ckanext.spc.harvesters.prdr_publications:PRDRPublicationsHarvester
+
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
