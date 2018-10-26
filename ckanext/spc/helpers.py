@@ -27,6 +27,13 @@ def get_helpers():
         get_dqs_explanation_url=get_dqs_explanation_url
     )
 
+def countries_list(countries):
+    countries_list = []
+    try:
+        countries_list = json.loads(countries)
+    except ValueError, e:
+        countries_list.append(countries)
+    return map(lambda x: x.upper(), countries_list)
 
 def spc_get_available_languages():
     return filter(
