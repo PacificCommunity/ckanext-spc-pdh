@@ -36,7 +36,7 @@ def get_default_individual_name_schema():
 
 def get_default_sampling_schema():
     return {
-        'study_extent': [get_validator('not_empty'), unicode],
+        'study_extent': [get_validator('ignore_empty'), unicode],
         'sampling_description': [get_validator('not_empty'), unicode],
         '__extras': [get_validator('ignore')],
     }
@@ -44,7 +44,7 @@ def get_default_sampling_schema():
 
 def get_default_methods_schema():
     return {
-        'method_step': [get_validator('not_empty'), unicode],
+        'method_step': [get_validator('ignore_empty'), unicode],
         'sampling': [
             get_validator('ignore_empty'),
             get_validator('construct_sub_schema')('sampling')
@@ -133,7 +133,7 @@ def get_default_coverage_schema():
             get_validator('construct_sub_schema')('geographic_coverage'),
         ],
         'temporal_coverage': [
-            get_validator('not_empty'),
+            get_validator('ignore_empty'),
             get_validator('construct_sub_schema')('temporal_coverage'),
         ],
         'taxonomic_coverage': [
