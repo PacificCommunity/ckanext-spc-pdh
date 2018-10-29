@@ -261,7 +261,11 @@
     {
       "field_name": "member_countries",
       "label": "Member countries",
-      "preset": "member_countries"
+      "preset": "member_countries",
+      "form_snippet": "multiple_select.html",
+      "display_snippet": "multiple_choice.html",
+      "validators": "scheming_multiple_choice",
+      "output_validators": "scheming_multiple_choice_output"
     }
   ],
   "resource_fields": [

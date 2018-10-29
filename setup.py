@@ -84,7 +84,8 @@ setup(
         spc_oaipmh_harvester=ckanext.spc.harvesters.oaipmh_harvester:SpcOaipmhHarvester
         spc_gbif_harvester=ckanext.spc.harvesters.gbif:SpcGbifHarvester
         spc_dkan_harvester=ckanext.spc.harvesters.dkan:DKANHarvester
-        spc_prdr_harvester=ckanext.spc.harvesters.prdr_publications:PRDRPublicationsHarvester
+        spc_prdr_publications_harvester=ckanext.spc.harvesters.prdr_publications:PRDRPublicationsHarvester
+        spc_prdr_res_energy_harvester=ckanext.spc.harvesters.prdr_engery_resource:PRDREngergyResourcesHarvester
 
 
         [babel.extractors]
