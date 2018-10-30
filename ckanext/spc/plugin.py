@@ -152,6 +152,7 @@ class SpcPlugin(plugins.SingletonPlugin):
         return results
 
     def before_index(self, pkg_dict):
+
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
@@ -165,6 +166,8 @@ class SpcPlugin(plugins.SingletonPlugin):
         pkg_dict['member_countries'] = spc_helpers.countries_list(
             pkg_dict.get('member_countries', '[]')
         )
+        # Otherwise you'll get `immense field` error from SOLR
+        pkg_dict.pop('data_quality_info', None)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):

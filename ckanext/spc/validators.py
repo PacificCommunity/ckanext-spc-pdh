@@ -24,15 +24,8 @@ incorrectly_dictized_dict = (
     ('sampling', ),
     ('study_area_description', ),
     ('personnel', ),
-
-    ('metadata_extension_info', ),
+    ('character_set', ),
 )
-incorrectly_dictized_sub_lists = {
-    ('taxonomic_coverage', ): 'taxonomic_classification',
-    ('personnel', ): 'person',
-
-    ('metadata_extension_info', ): 'extended_element_information'
-}
 
 def get_validators():
     return dict(
@@ -43,6 +36,7 @@ def get_validators():
         construct_sub_schema=construct_sub_schema,
         spc_ignore_missing_if_one_of=spc_ignore_missing_if_one_of,
         spc_float_validator=spc_float_validator,
+        spc_list_of=spc_list_of,
     )
 
 
@@ -100,10 +94,10 @@ def construct_sub_schema(name):
         single_value = False
         junk_key = ('__junk', )
         junk = unflatten(data.get(junk_key, {}))
-        # if key == ('metadata_extension_info', ):
-            # import ipdb; ipdb.set_trace()
         # for multiple-valued fields, everything moved to junk
-        sub_data = junk.pop(key[0], None) or data.get(key)
+        sub_data = data.get(key)
+        if not sub_data or sub_data is missing:
+            sub_data = junk.pop(key[0], None)
 
         if not sub_data or sub_data is missing:
             data[key] = missing
@@ -118,26 +112,21 @@ def construct_sub_schema(name):
             except ValueError:
                 raise Invalid(_('Plain values are not supported'))
 
-
         if key[-1:] in incorrectly_dictized_dict:
             try:
                 sub_data = sub_data[0]
             except KeyError:
                 pass
 
-        if key in incorrectly_dictized_sub_lists:
-            list_key = incorrectly_dictized_sub_lists[key]
-            try:
-                sub_data[list_key] = list(sub_data.get(list_key, {}).values())
-            except AttributeError:
-                pass
         if isinstance(sub_data, dict):
             single_value = True
             sub_data = [sub_data]
 
+        sub_data = [_listize(item) for item in sub_data]
         validated_list = []
         errors_list = []
         for chunk in sub_data:
+
             validated_data, err = navl_validate(chunk, schema, context)
             validated_list.append(validated_data)
             errors_list.append(err)
@@ -175,3 +164,23 @@ def spc_float_validator(value):
         return float(value)
     except ValueError:
         raise Invalid(_('Must be a decimal number'))
+
+
+def spc_list_of(inner):
+    def _spc_list_of(key, data, errors, context):
+        ret = inner(key, data, errors, context)
+        return ret
+
+    return _spc_list_of
+
+
+
+def _listize(data_dict):
+    if not isinstance(data_dict, dict):
+        return data_dict
+    for k, v in data_dict.items():
+        if isinstance(v, dict) and list(v.keys()) == list(range(len(v))):
+            v = list(v.values())
+        if isinstance(v, list):
+            data_dict[k] = [_listize(item) for item in v]
+    return data_dict

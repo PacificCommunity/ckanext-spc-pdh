@@ -1,7 +1,7 @@
 from ckantoolkit import get_validator
 
 ne = get_validator('not_empty')
-im = get_validator('ignore_missing')
+im = get_validator('ignore_empty')
 
 
 def _sub(name):
@@ -25,7 +25,6 @@ def get_default_gmd_citation_schema():
             get_validator('isodate'),
             get_validator('convert_to_json_if_date'),
         ],
-        'identifier': get_default_gmd_identifier_schema(),
         'cited_responsible_party': get_default_gmd_cited_responsible_party_schema(),
         'presentation_form': get_default_gmd_code_string_schema(),
         'series': [im, _sub('gmd_series')],
@@ -75,8 +74,8 @@ def get_default_gmd_identification_info_schema():
 def get_default_gmd_extent_schema():
     return {
         'description': [im, unicode],
-        'geographic_element': get_default_gmd_geo_element_schema(),
-        'vertical_element': get_default_gmd_vertical_element_schema(),
+        'geographic_element': [im, _sub('gmd_geo_element')],
+        'vertical_element': [im, _sub('gmd_vertical_element')],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -84,8 +83,8 @@ def get_default_gmd_extent_schema():
 
 def get_default_gmd_vertical_element_schema():
     return {
-        'minimumValue': [ne, get_validator('spc_float_validator')],
-        'maximumValue': [ne, get_validator('spc_float_validator')],
+        'minimum_value': [ne, get_validator('spc_float_validator')],
+        'maximum_value': [ne, get_validator('spc_float_validator')],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -103,10 +102,10 @@ def get_default_gmd_geo_element_schema():
 
 def get_default_gmd_bounding_box_schema():
     return {
-        'westBoundLongitude': [ne, get_validator('spc_float_validator')],
-        'eastBoundLongitude': [ne, get_validator('spc_float_validator')],
-        'southBoundLatitude': [ne, get_validator('spc_float_validator')],
-        'northBoundLatitude': [ne, get_validator('spc_float_validator')],
+        'west_bound_longitude': [ne, get_validator('spc_float_validator')],
+        'east_bound_longitude': [ne, get_validator('spc_float_validator')],
+        'south_bound_latitude': [ne, get_validator('spc_float_validator')],
+        'north_bound_latitude': [ne, get_validator('spc_float_validator')],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -125,7 +124,7 @@ def get_default_gmd_base_identification_schema():
         ],
         'status': get_default_gmd_code_string_schema(),
         'point_of_contact': get_default_gmd_cited_responsible_party_schema(),
-        'resource_maintenance': get_default_gmd_maintenance_schema(),
+        'resource_maintenance': get_validator('spc_list_of')(_sub('gmd_maintenance')),
         'graphic_overview': get_default_gmd_graphic_schema(),
         'resource_format': get_default_gmd_format_schema(),
         'descriptive_keywords': get_default_gmd_keywords_schema(),
@@ -285,7 +284,6 @@ def get_default_gmd_code_string_schema():
     return {
         'code_list': [ne],
         'code_list_value': [ne],
-        'code_space': [im],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -470,7 +468,10 @@ def get_default_gmd_geo_object_schema():
 def get_default_gmd_metadata_extension_schema():
     return {
         'extension_on_line_resource': [im, _sub('gmd_online_resource')],
-        'extended_element_information': get_default_gmd_extended_element_schema(),
+        'extended_element_information': [
+            get_validator('spc_list_of')(_sub('gmd_extended_element')),
+            im
+        ],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -563,8 +564,8 @@ def get_default_gmd_lineage_process_step_schema():
             get_validator('isodate'),
             get_validator('convert_to_json_if_date'),
         ],
-        'processor': get_default_gmd_cited_responsible_party_schema(),
-        'source': get_default_gmd_lineage_source_schema(),
+        'processor': [im, get_validator('spc_list_of')(_sub('gmd_cited_responsible_party'))],
+        'source': [im, get_validator('spc_list_of')(_sub('gmd_lineage_source'))],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -576,7 +577,7 @@ def get_default_gmd_lineage_source_schema():
         'scale_denominator': [im, get_validator('int_validator')],
         'source_reference_system': [im, _sub('gmd_identifier')],
         'source_citation': [im, _sub('gmd_citation')],
-        'source_extent': get_default_gmd_extent_schema(),
+        'source_extent': get_validator('spc_list_of')(_sub('gmd_extent')),
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -597,9 +598,9 @@ def get_default_gmd_dqt_report_schema():
         'evaluation_procedure': [im, _sub('gmd_citation')],
         'date_time': [
             im,
-            get_validator('spc_to_json'),
-            get_validator('convert_to_json_if_string'),
-            get_validator('list_of_strings')
+            get_validator('spc_normalize_date'),
+            get_validator('isodate'),
+            get_validator('convert_to_json_if_date'),
         ],
         'result': [ne, _sub('gmd_dqt_result')],
         '__extras': [get_validator('ignore')],
@@ -635,9 +636,12 @@ def get_default_gmd_dqt_scope_schema():
 
 def get_default_gmd_metadata_constraints_schema():
     return {
-        'use_limitations': {
-            'limitation': [ne, unicode]
-        },
+        'use_limitations': [
+            ne,
+            get_validator('spc_to_json'),
+            get_validator('convert_to_json_if_string'),
+            get_validator('list_of_strings')
+        ],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }

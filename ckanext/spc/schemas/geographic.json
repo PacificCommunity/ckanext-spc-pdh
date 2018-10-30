@@ -135,7 +135,7 @@
       "label": "Hierarchy Level Name",
       "multiple": true,
       "required": false,
-      "validators": "scheming_required"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "contact",
