@@ -4,50 +4,39 @@
  }
 </style>
 {% macro render_rows(data, parents=[]) %}
-    {% if data is iterable %}
-	{% for item in data %}
-
+  {% if data is iterable %}
+		{% for item in data %}
 	    {% if item is string and data[item] is string %}
-		{% if data[item] %}
-		    <tr>
-			<td>{{ item|replace('_', ' ')|capitalize }}</td>
-			<td>{{ data[item] }}</td>
-		</tr>
-		{% endif %}
+				{% if data[item] %}
+			    <tr>
+						<td>{{ item|replace('_', ' ')|capitalize }}</td>
+						<td>{{ data[item] }}</td>
+					</tr>
+				{% endif %}
 	    {% elif item is string and data[item] is not undefined %}
-		{% if data[item] %}
-		<!-- <tr> -->
-		<!-- <td class="text-center" colspan="2"> -->
-			{#{ item|replace('_', ' ')|capitalize }#}
-		<!-- </td> -->
-		<!-- </tr> -->
-		    {{ render_rows(data[item], parents + [item|replace('_', ' ')|capitalize]) }}
-		{% endif %}
-	    {% elif item is string and item %}
-		<tr>
-		    <td>{{ parents | join(' | ') }}</td>
-		    <td>{{ item  }}</td>
-		</tr>
+				{% if data[item] %}
+					<tr>
+						<td class="text-center" colspan="2">
+							{{ item|replace('_', ' ')|capitalize }}
+						</td>
+					</tr>
+		    	{{ render_rows(data[item], parents + [item|replace('_', ' ')|capitalize]) }}
+				{% endif %}
+    	{% elif item is string and item %}
+				<tr>
+				    <td>{{ parents | join(' | ') }}</td>
+				    <td>{{ item  }}</td>
+				</tr>
 	    {% elif item %}
-		{{ render_rows(item, parents) }}
+				{{ render_rows(item, parents) }}
 	    {% endif %}
-	{% endfor %}
-    {% endif %}
+		{% endfor %}
+  {% endif %}
 {% endmacro %}
 {% if data[field.field_name] %}
     <table class="table table-bordered nested-table">
-	<thead>
-	    <tr>
-		<th>
-		    {{ _('Attribute') }}
-		</th>
-		<th>
-		    {{ _('Value') }}
-		</th>
-	    </tr>
-	</thead>
 {% endif %}
-{{ render_rows(data[field.field_name]) }}
+			{{ render_rows(data[field.field_name]) }}
 {% if data[field.field_name] %}
     </table>
 {% endif %}

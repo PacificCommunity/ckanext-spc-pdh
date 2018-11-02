@@ -142,10 +142,10 @@
         }
       }
     }
-    .table-striped tbody tr:nth-child(even) td, 
-    .table-striped tbody tr:nth-child(even) th {
-      background-color:  #dfebed;
-    }
+    // .table-striped tbody tr:nth-child(even) td, 
+    // .table-striped tbody tr:nth-child(even) th {
+    //   background-color:  #dfebed;
+    // }
     .table-bordered {
       border-color: @border-blue;
       margin-bottom: 35px;
@@ -164,6 +164,7 @@
       border: none;
     }
   }
+
   .secondary {
     border:  1px solid @border-blue;
     border-left: none;
@@ -233,6 +234,41 @@
         font-size: 14px;
         margin-left: 5px;
         color: @heading-blue;
+      }
+    }
+  }
+  .additional-info {
+    table {
+      &.table-striped {
+        tr {
+          td, th {
+            background-color: unset;
+          }
+          &.complex-row.label-row {
+            background-color: #dfebed;
+            cursor: pointer;
+            th, td {
+              &:before {
+                content: "\f0d7";
+                font-family: "FontAwesome";
+                margin-right: 10px;
+              }
+            }
+            &.collapsed {
+              th, td {
+                &:before {
+                  content: "\f0da";
+                }
+              }
+            }
+          }
+          &.complex-row.content-row {
+            visibility: collapse;
+            &.in {
+              visibility: visible;
+            }
+          }
+        }
       }
     }
   }
