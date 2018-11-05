@@ -4,6 +4,7 @@
  }
 </style>
 {% macro render_rows(data, parents=[]) %}
+	{% set level = parents|count + 1 %}
   {% if data is iterable %}
 		{% for item in data %}
 	    {% if item is string and data[item] is string %}
@@ -15,12 +16,18 @@
 				{% endif %}
 	    {% elif item is string and data[item] is not undefined %}
 				{% if data[item] %}
-					<tr>
-						<td class="text-center" colspan="2">
+					<tr class="label-row level-{{ level }}">
+						<td colspan="2">
 							{{ item|replace('_', ' ')|capitalize }}
 						</td>
 					</tr>
-		    	{{ render_rows(data[item], parents + [item|replace('_', ' ')|capitalize]) }}
+					<tr class="data-row level-{{ level }}">
+						<td colspan="2">
+				    	<table class="table nested-table">
+				    		{{ render_rows(data[item], parents + [item|replace('_', ' ')|capitalize]) }}
+				    	</table>
+			    	</td>
+		    	</tr>
 				{% endif %}
     	{% elif item is string and item %}
 				<tr>
@@ -34,7 +41,7 @@
   {% endif %}
 {% endmacro %}
 {% if data[field.field_name] %}
-    <table class="table table-bordered nested-table">
+    <table class="table nested-table">
 {% endif %}
 			{{ render_rows(data[field.field_name]) }}
 {% if data[field.field_name] %}

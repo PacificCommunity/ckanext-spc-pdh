@@ -248,10 +248,13 @@
             background-color: #dfebed;
             cursor: pointer;
             th, td {
+              font-size: 16px;
+              font-weight: bold;
               &:before {
                 content: "\f0d7";
                 font-family: "FontAwesome";
                 margin-right: 10px;
+                color: #2a86b8;
               }
             }
             &.collapsed {
@@ -266,6 +269,35 @@
             visibility: collapse;
             &.in {
               visibility: visible;
+            }
+            & > td {
+              padding: 0px;
+            }
+          }
+        }
+      }
+      &.nested-table {
+        border: none;
+        border-radius: 0px;
+        background-color: unset;
+        tr {
+          border-bottom: 1px solid #bcdfe5;
+          td {
+            border: none;
+            border-radius: 0px;
+            padding: 0px;
+          }
+          &.level-1.label-row {
+            background-color: #f1f6f7;
+            td {
+              font-size: 15px;
+              &:before {
+                content: "\f111";
+                font-family: "FontAwesome";
+                margin-right: 5px;
+                font-size: 9px;
+                color: #2a86b8;
+              }  
             }
           }
         }

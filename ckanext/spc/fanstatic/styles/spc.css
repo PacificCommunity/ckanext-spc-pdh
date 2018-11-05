@@ -619,11 +619,17 @@ header.navbar > .container .collapse {
   background-color: #dfebed;
   cursor: pointer;
 }
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row th,
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row td {
+  font-size: 16px;
+  font-weight: bold;
+}
 .dataset-read .additional-info table.table-striped tr.complex-row.label-row th:before,
 .dataset-read .additional-info table.table-striped tr.complex-row.label-row td:before {
   content: "\f0d7";
   font-family: "FontAwesome";
   margin-right: 10px;
+  color: #2a86b8;
 }
 .dataset-read .additional-info table.table-striped tr.complex-row.label-row.collapsed th:before,
 .dataset-read .additional-info table.table-striped tr.complex-row.label-row.collapsed td:before {
@@ -634,6 +640,35 @@ header.navbar > .container .collapse {
 }
 .dataset-read .additional-info table.table-striped tr.complex-row.content-row.in {
   visibility: visible;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.content-row > td {
+  padding: 0px;
+}
+.dataset-read .additional-info table.nested-table {
+  border: none;
+  border-radius: 0px;
+  background-color: unset;
+}
+.dataset-read .additional-info table.nested-table tr {
+  border-bottom: 1px solid #bcdfe5;
+}
+.dataset-read .additional-info table.nested-table tr td {
+  border: none;
+  border-radius: 0px;
+  padding: 0px;
+}
+.dataset-read .additional-info table.nested-table tr.level-1.label-row {
+  background-color: #f1f6f7;
+}
+.dataset-read .additional-info table.nested-table tr.level-1.label-row td {
+  font-size: 15px;
+}
+.dataset-read .additional-info table.nested-table tr.level-1.label-row td:before {
+  content: "\f111";
+  font-family: "FontAwesome";
+  margin-right: 5px;
+  font-size: 9px;
+  color: #2a86b8;
 }
 #dataset-resources {
   clear: both;
