@@ -524,10 +524,6 @@ header.navbar > .container .collapse {
   color: #2a2c2d;
   box-shadow: inset 0 1px 0 #8aa4a8;
 }
-.dataset-read .primary .table-striped tbody tr:nth-child(even) td,
-.dataset-read .primary .table-striped tbody tr:nth-child(even) th {
-  background-color: #dfebed;
-}
 .dataset-read .primary .table-bordered {
   border-color: #bcdfe5;
   margin-bottom: 35px;
@@ -614,6 +610,89 @@ header.navbar > .container .collapse {
   font-size: 14px;
   margin-left: 5px;
   color: #036295;
+}
+.dataset-read .additional-info table.table {
+  table-layout: auto;
+  background-color: unset;
+}
+.dataset-read .additional-info table.table tr td,
+.dataset-read .additional-info table.table tr th {
+  font-size: 15px;
+  font-family: "Calibri";
+  font-weight: normal;
+  border-radius: 0px;
+  background-color: unset;
+  padding: 10px 12px 10px 22px;
+}
+.dataset-read .additional-info table.table tr td.dataset-label,
+.dataset-read .additional-info table.table tr th.dataset-label {
+  width: 30%;
+}
+.dataset-read .additional-info table.table tr td.dataset-details,
+.dataset-read .additional-info table.table tr th.dataset-details {
+  width: 70%;
+  font-weight: lighter;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row {
+  background-color: #dfebed;
+  cursor: pointer;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row td,
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row th {
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 22px;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row td:before,
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row th:before {
+  content: "\f0d7";
+  font-family: "FontAwesome";
+  margin-right: 14px;
+  color: #2a86b8;
+  font-size: 20px;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row.collapsed td:before,
+.dataset-read .additional-info table.table-striped tr.complex-row.label-row.collapsed th:before {
+  margin-right: 18px;
+  content: "\f0da";
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.content-row {
+  visibility: collapse;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.content-row.in {
+  visibility: visible;
+}
+.dataset-read .additional-info table.table-striped tr.complex-row.content-row > td,
+.dataset-read .additional-info table.table-striped tr.complex-row.content-row th {
+  border-left: none;
+  padding: 0px;
+}
+.dataset-read .additional-info table.nested-table {
+  border: none;
+  border-radius: 0px;
+  margin: 0px;
+}
+.dataset-read .additional-info table.nested-table tr td {
+  border-radius: 0px;
+}
+.dataset-read .additional-info table.nested-table tr.level-label.level-0 {
+  background-color: #f1f6f7;
+}
+.dataset-read .additional-info table.nested-table tr.level-label.level-0 td {
+  font-size: 15px;
+}
+.dataset-read .additional-info table.nested-table tr.level-label.level-0 td.parent-label:before {
+  content: "\f111";
+  font-family: "FontAwesome";
+  margin-right: 10px;
+  font-size: 6px;
+  color: #2a86b8;
+}
+.dataset-read .additional-info table.nested-table tr.level-data > td {
+  padding: 0px;
+}
+.dataset-read .additional-info table.nested-table tr.level-data td.dataset-label {
+  border-left: 0px;
 }
 #dataset-resources {
   clear: both;
@@ -830,10 +909,3 @@ button.header-menu-btn:focus {
 .wrapper .primary .media-grid {
   margin: 0 -15px;
 }
-
- .raised {
-     box-shadow: 0px 0px 6px lightgray;
-     margin: 5px;
-     padding: 10px;
-     margin-bottom: 15px;
- }

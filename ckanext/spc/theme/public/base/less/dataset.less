@@ -142,10 +142,10 @@
         }
       }
     }
-    .table-striped tbody tr:nth-child(even) td, 
-    .table-striped tbody tr:nth-child(even) th {
-      background-color:  #dfebed;
-    }
+    // .table-striped tbody tr:nth-child(even) td, 
+    // .table-striped tbody tr:nth-child(even) th {
+    //   background-color:  #dfebed;
+    // }
     .table-bordered {
       border-color: @border-blue;
       margin-bottom: 35px;
@@ -164,6 +164,7 @@
       border: none;
     }
   }
+
   .secondary {
     border:  1px solid @border-blue;
     border-left: none;
@@ -233,6 +234,102 @@
         font-size: 14px;
         margin-left: 5px;
         color: @heading-blue;
+      }
+    }
+  }
+  .additional-info {
+    table {
+      &.table {
+        table-layout: auto;
+        background-color: unset;
+        tr {
+          td, th {
+            font-size: 15px;
+            font-family: "Calibri";
+            font-weight: normal;
+            border-radius: 0px;
+            background-color: unset;
+            padding: 10px 12px 10px 22px;
+            &.dataset-label {
+              width: 30%;
+            }
+            &.dataset-details {
+              width: 70%;
+              font-weight: lighter;
+            }
+          }
+        }
+      }
+      &.table-striped {
+        tr {
+          &.complex-row.label-row {
+            background-color: #dfebed;
+            cursor: pointer;
+            td, th {
+              font-size: 16px;
+              font-weight: bold;
+              padding-left: 22px;
+              &:before {
+                content: "\f0d7";
+                font-family: "FontAwesome";
+                margin-right: 14px;
+                color: #2a86b8;
+                font-size: 20px
+              }
+            }
+            &.collapsed {
+              td, th {
+                &:before {
+                  margin-right: 18px;
+                  content: "\f0da";
+                }
+              }
+            }
+          }
+          &.complex-row.content-row {
+            visibility: collapse;
+            &.in {
+              visibility: visible;
+            }
+            & > td, th {
+              border-left: none;
+              padding: 0px;
+            }
+          }
+        }
+      }
+      &.nested-table {
+        border: none;
+        border-radius: 0px;
+        margin: 0px;
+        tr {
+          td {
+            border-radius: 0px;
+          }
+          &.level-label {
+            &.level-0 {
+              background-color: #f1f6f7;
+              td {
+                font-size: 15px;
+                &.parent-label:before {
+                  content: "\f111";
+                  font-family: "FontAwesome";
+                  margin-right: 10px;
+                  font-size: 6px;
+                  color: #2a86b8;
+                }  
+              }
+            }
+          }
+          &.level-data {
+            & > td {
+              padding: 0px;
+            }
+            & td.dataset-label {
+              border-left: 0px;
+            }
+          }
+        }
       }
     }
   }
