@@ -1,8 +1,8 @@
 {%- set field_class = "field-" + field.field_name + "-value" -%}
 <tr class="complex-row label-row collapsed" data-target=".{{ field_class}}" data-toggle="collapse">
-	<th scope="row" class="dataset-label" colspan="2">
+	<td scope="row" class="dataset-label" colspan="2">
 		{{h.scheming_language_text(field.label) }}
-	</th>
+	</td>
 </tr>
 <tr class="complex-row content-row {{ field_class }} collapse">
 	<td class="dataset-details"{% if field.display_property %} property="{{ field.display_property}}"{% endif %} colspan="2">

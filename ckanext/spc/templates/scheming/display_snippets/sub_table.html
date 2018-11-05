@@ -4,25 +4,27 @@
  }
 </style>
 {% macro render_rows(data, parents=[]) %}
-	{% set level = parents|count + 1 %}
-  {% if data is iterable %}
+	{% set level = parents|count %}
+	{% set padding = 16 %}
+	{% set indent = padding * level + 35 %}
+	  {% if data is iterable %}
 		{% for item in data %}
 	    {% if item is string and data[item] is string %}
 				{% if data[item] %}
 			    <tr>
-						<td>{{ item|replace('_', ' ')|capitalize }}</td>
-						<td>{{ data[item] }}</td>
+						<td class="dataset-label" style="padding-left: {{ indent }}px">{{ item|replace('_', ' ')|capitalize }}</td>
+						<td class="dataset-details">{{ data[item] }}</td>
 					</tr>
 				{% endif %}
 	    {% elif item is string and data[item] is not undefined %}
 				{% if data[item] %}
-					<tr class="label-row level-{{ level }}">
-						<td colspan="2">
+					<tr class="level-label level-{{ level }}">
+						<td class="parent-label" colspan="2" style="padding-left: {{ indent }}px">
 							{{ item|replace('_', ' ')|capitalize }}
 						</td>
 					</tr>
-					<tr class="data-row level-{{ level }}">
-						<td colspan="2">
+					<tr class="level-data level-{{ level }}">
+						<td colspan="2" >
 				    	<table class="table nested-table">
 				    		{{ render_rows(data[item], parents + [item|replace('_', ' ')|capitalize]) }}
 				    	</table>
@@ -31,8 +33,8 @@
 				{% endif %}
     	{% elif item is string and item %}
 				<tr>
-				    <td>{{ parents | join(' | ') }}</td>
-				    <td>{{ item  }}</td>
+				    <td class="dataset-label" style="padding-left: {{ indent }}px">{{ parents | join(' | ') }}</td>
+				    <td class="dataset-details">{{ item  }}</td>
 				</tr>
 	    {% elif item %}
 				{{ render_rows(item, parents) }}

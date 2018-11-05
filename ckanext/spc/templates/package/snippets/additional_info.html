@@ -20,7 +20,7 @@
 						{%- else -%}
 							<tr>
 								<td class="dataset-label">{{h.scheming_language_text(field.label) }}</td>
-								<td>{%- snippet 'scheming/snippets/display_field.html', field=field, data=pkg_dict, schema=schema -%}</td>
+								<td class="dataset-details">{%- snippet 'scheming/snippets/display_field.html', field=field, data=pkg_dict, schema=schema -%}</td>
 							</tr>
 						{%- endif -%}
 			    {%- endif -%}

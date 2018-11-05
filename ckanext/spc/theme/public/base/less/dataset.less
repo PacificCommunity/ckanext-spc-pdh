@@ -239,27 +239,48 @@
   }
   .additional-info {
     table {
-      &.table-striped {
+      &.table {
+        table-layout: auto;
+        background-color: unset;
         tr {
           td, th {
+            font-size: 15px;
+            font-family: "Calibri";
+            font-weight: normal;
+            border-radius: 0px;
             background-color: unset;
+            padding: 10px 12px 10px 22px;
+            &.dataset-label {
+              width: 30%;
+            }
+            &.dataset-details {
+              width: 70%;
+              font-weight: lighter;
+            }
           }
+        }
+      }
+      &.table-striped {
+        tr {
           &.complex-row.label-row {
             background-color: #dfebed;
             cursor: pointer;
-            th, td {
+            td, th {
               font-size: 16px;
               font-weight: bold;
+              padding-left: 22px;
               &:before {
                 content: "\f0d7";
                 font-family: "FontAwesome";
-                margin-right: 10px;
+                margin-right: 14px;
                 color: #2a86b8;
+                font-size: 20px
               }
             }
             &.collapsed {
-              th, td {
+              td, th {
                 &:before {
+                  margin-right: 18px;
                   content: "\f0da";
                 }
               }
@@ -270,7 +291,8 @@
             &.in {
               visibility: visible;
             }
-            & > td {
+            & > td, th {
+              border-left: none;
               padding: 0px;
             }
           }
@@ -279,25 +301,32 @@
       &.nested-table {
         border: none;
         border-radius: 0px;
-        background-color: unset;
+        margin: 0px;
         tr {
-          border-bottom: 1px solid #bcdfe5;
           td {
-            border: none;
             border-radius: 0px;
-            padding: 0px;
           }
-          &.level-1.label-row {
-            background-color: #f1f6f7;
-            td {
-              font-size: 15px;
-              &:before {
-                content: "\f111";
-                font-family: "FontAwesome";
-                margin-right: 5px;
-                font-size: 9px;
-                color: #2a86b8;
-              }  
+          &.level-label {
+            &.level-0 {
+              background-color: #f1f6f7;
+              td {
+                font-size: 15px;
+                &.parent-label:before {
+                  content: "\f111";
+                  font-family: "FontAwesome";
+                  margin-right: 10px;
+                  font-size: 6px;
+                  color: #2a86b8;
+                }  
+              }
+            }
+          }
+          &.level-data {
+            & > td {
+              padding: 0px;
+            }
+            & td.dataset-label {
+              border-left: 0px;
             }
           }
         }
