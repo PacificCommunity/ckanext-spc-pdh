@@ -1,3 +1,4 @@
+import uuid
 import json
 import logging
 import re
@@ -56,7 +57,6 @@ class SpcSprepHarvester(HarvesterBase):
             for record in requests.get(
                 harvest_job.source.url + '/api/3/action/package_list'
             ).json()['result']:
-
                 harvest_obj = HarvestObject(
                     guid=record, content=record, job=harvest_job
                 )
@@ -115,18 +115,23 @@ class SpcSprepHarvester(HarvesterBase):
         logger.debug("in fetch stage: %s" % harvest_object.guid)
         try:
             self._set_config(harvest_object.job.source.config)
-
-            record = None
             try:
                 logger.debug(
                     "Load %s with metadata prefix '%s'" %
                     (harvest_object.guid, 'sprep')
                 )
-                content_dict = requests.get(
+                result = requests.get(
                     harvest_object.source.url + '/api/3/action/package_show', {
                         'id': harvest_object.content
                     }
-                ).json()['result'][0]
+                ).json()['result']
+                if not result:
+                    self._save_object_error(
+                        'No records found for id <%s>' %
+                        harvest_object.content, harvest_object
+                    )
+                    return False
+                content_dict = result[0]
                 content_dict['name'] += content_dict['id']
                 content_dict['name'] = content_dict['name'][:99]
                 logger.debug('record found!')
@@ -180,13 +185,15 @@ class SpcSprepHarvester(HarvesterBase):
 
             package_dict = json.loads(harvest_object.content)
             data_dict = {}
-
+            data_dict['id'] = package_dict['id']
             data_dict['title'] = package_dict['title']
             data_dict['name'] = munge_title_to_name(package_dict['name'])
-            data_dict['notes'] = markdown_extract(package_dict['notes'])
+            data_dict['notes'] = markdown_extract(package_dict.get('notes'))
 
             tags = package_dict.get('tags', [])
-            data_dict['tag_string'] = ', '.join([munge_tag(tag['name']) for tag in tags])
+            data_dict['tag_string'] = ', '.join([
+                munge_tag(tag['name']) for tag in tags
+            ])
 
             data_dict['private'] = False
             data_dict['license_id'] = 'cc-by'
@@ -236,31 +243,8 @@ class SpcSprepHarvester(HarvesterBase):
 
             except Exception as e:
                 logger.debug('[Parsing topic] %s' % e)
-            context = {
-                'model': model,
-                'session': Session,
-                'user': self._get_user_name(),
-                'ignore_auth': True,
-            }
-            try:
-                # _find_existing_package can be overridden if necessary
-                pkg_dict = self._find_existing_package({
-                    'id': data_dict['name']
-                })
-                action = get_action('package_update')
-                model.Session.query(HarvestObject).filter_by(
-                    package_id=pkg_dict['id']
-                ).update({
-                    'current': False
-                })
-            except tk.ObjectNotFound:
-                action = get_action('package_create')
-            import pprint
-            pprint.pprint(data_dict)
-            pkg_dict = action(context, data_dict)
-            harvest_object.current = True
-            harvest_object.package_id = pkg_dict['id']
-            harvest_object.add()
+            self._create_or_update_package(data_dict, harvest_object)
+
             Session.commit()
 
             logger.debug("Finished record")
