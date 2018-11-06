@@ -12,8 +12,23 @@
 	    {% if item is string and data[item] is string %}
 				{% if data[item] %}
 			    <tr>
-						<td class="dataset-label" style="padding-left: {{ indent }}px">{{ item|replace('_', ' ')|capitalize }}</td>
-						<td class="dataset-details">{{ data[item] }}</td>
+						<td class="dataset-label" style="padding-left: {{ indent }}px">
+							{{ item|replace('_', ' ')|capitalize }}
+						</td>
+						<td class="dataset-details">
+							{{ data[item] }}
+						</td>
+					</tr>
+				{% endif %}
+	    {% elif item is string and data[item] is number %}
+		    {% if data[item] is not none %}
+			    <tr>
+						<td class="dataset-label" style="padding-left: {{ indent }}px">
+							{{ item|replace('_', ' ')|capitalize }}
+						</td>
+						<td class="dataset-details">
+							{{ data[item] }}
+						</td>
 					</tr>
 				{% endif %}
 	    {% elif item is string and data[item] is not undefined %}
@@ -33,8 +48,12 @@
 				{% endif %}
     	{% elif item is string and item %}
 				<tr>
-				    <td class="dataset-label" style="padding-left: {{ indent }}px">{{ parents | join(' | ') }}</td>
-				    <td class="dataset-details">{{ item  }}</td>
+				    <td class="dataset-label" style="padding-left: {{ indent }}px">
+				    	{{ parents | join(' | ') }}
+				    </td>
+				    <td class="dataset-details">
+				    	{{ item  }}
+				    </td>
 				</tr>
 	    {% elif item %}
 				{{ render_rows(item, parents) }}
