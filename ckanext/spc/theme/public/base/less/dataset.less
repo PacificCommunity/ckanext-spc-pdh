@@ -242,6 +242,7 @@
       &.table {
         table-layout: auto;
         background-color: unset;
+        border:  1px solid @border-blue;
         tr {
           td, th {
             font-size: 15px;
@@ -250,6 +251,10 @@
             border-radius: 0px;
             background-color: unset;
             padding: 10px 12px 10px 22px;
+            vertical-align: middle;
+            &:first-child {
+              border-left: none;
+            }
             &.dataset-label {
               width: 30%;
             }
@@ -292,7 +297,6 @@
               visibility: visible;
             }
             & > td, th {
-              border-left: none;
               padding: 0px;
             }
           }
@@ -307,26 +311,21 @@
             border-radius: 0px;
           }
           &.level-label {
-            &.level-0 {
-              background-color: #f1f6f7;
-              td {
-                font-size: 15px;
-                &.parent-label:before {
-                  content: "\f111";
-                  font-family: "FontAwesome";
-                  margin-right: 10px;
-                  font-size: 6px;
-                  color: #2a86b8;
-                }  
-              }
+            background-color: #f1f6f7;
+            td {
+              font-size: 15px;
+              &.parent-label:before {
+                content: "\f111";
+                font-family: "FontAwesome";
+                margin-right: 10px;
+                font-size: 6px;
+                color: #2a86b8;
+              }  
             }
           }
           &.level-data {
             & > td {
               padding: 0px;
-            }
-            & td.dataset-label {
-              border-left: 0px;
             }
           }
         }

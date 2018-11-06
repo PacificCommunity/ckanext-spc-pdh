@@ -614,6 +614,7 @@ header.navbar > .container .collapse {
 .dataset-read .additional-info table.table {
   table-layout: auto;
   background-color: unset;
+  border: 1px solid #bcdfe5;
 }
 .dataset-read .additional-info table.table tr td,
 .dataset-read .additional-info table.table tr th {
@@ -623,6 +624,11 @@ header.navbar > .container .collapse {
   border-radius: 0px;
   background-color: unset;
   padding: 10px 12px 10px 22px;
+  vertical-align: middle;
+}
+.dataset-read .additional-info table.table tr td:first-child,
+.dataset-read .additional-info table.table tr th:first-child {
+  border-left: none;
 }
 .dataset-read .additional-info table.table tr td.dataset-label,
 .dataset-read .additional-info table.table tr th.dataset-label {
@@ -664,7 +670,6 @@ header.navbar > .container .collapse {
 }
 .dataset-read .additional-info table.table-striped tr.complex-row.content-row > td,
 .dataset-read .additional-info table.table-striped tr.complex-row.content-row th {
-  border-left: none;
   padding: 0px;
 }
 .dataset-read .additional-info table.nested-table {
@@ -675,13 +680,13 @@ header.navbar > .container .collapse {
 .dataset-read .additional-info table.nested-table tr td {
   border-radius: 0px;
 }
-.dataset-read .additional-info table.nested-table tr.level-label.level-0 {
+.dataset-read .additional-info table.nested-table tr.level-label {
   background-color: #f1f6f7;
 }
-.dataset-read .additional-info table.nested-table tr.level-label.level-0 td {
+.dataset-read .additional-info table.nested-table tr.level-label td {
   font-size: 15px;
 }
-.dataset-read .additional-info table.nested-table tr.level-label.level-0 td.parent-label:before {
+.dataset-read .additional-info table.nested-table tr.level-label td.parent-label:before {
   content: "\f111";
   font-family: "FontAwesome";
   margin-right: 10px;
@@ -690,9 +695,6 @@ header.navbar > .container .collapse {
 }
 .dataset-read .additional-info table.nested-table tr.level-data > td {
   padding: 0px;
-}
-.dataset-read .additional-info table.nested-table tr.level-data td.dataset-label {
-  border-left: 0px;
 }
 #dataset-resources {
   clear: both;
