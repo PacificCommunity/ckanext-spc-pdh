@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 LIB_URL=http://www.spc.int/DigitalLibrary/SPC/OAI
 
 if [ ! -d 'ckanext-spc' ]
@@ -118,6 +119,14 @@ config='{"topic": "Fisheries", "hosting_org": "cd3512e7-886c-4873-b629-740abe8ae
 paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" GBIF "$title" true "$org" DAILY "$config" -c $1
 
+# SPREP
+url='https://pacific-data.sprep.org'
+name='sprep'
+title='Inform Regional Data Portal '
+org='sprep'
+config='{"topic_mapping": {"Atmosphere and Climate": "Climate Change", "Info": null, "Land": "Land Resources", "Biodiversity": "Fisheries", "Build Environment": "Economic Development", "Coastal and Marine": "Fisheries", "Culture and Heritage": "Social", "Inland Waters": "Geoscience"}}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
+paster --plugin=ckanext-harvest harvester source "$name" "$url" SPREP "$title" true "$org" DAILY "$config" -c $1
 
 
 echo
