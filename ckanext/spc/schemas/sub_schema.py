@@ -90,10 +90,10 @@ def get_default_agent_schema():
             unicode,
         ],
         'individual_name': [
+            get_validator('construct_sub_schema')('individual_name'),
             get_validator('spc_ignore_missing_if_one_of')(
                 'position_name', 'organization_name'
             ),
-            get_validator('construct_sub_schema')('individual_name'),
             get_validator('ignore_empty')
         ],
         'position_name': [
@@ -236,21 +236,11 @@ def get_default_taxonomic_class_schema():
     }
 
 
-def get_default_personnel_schema():
-    return {
-        'person': get_default_agent_with_role_schema(),
-        '__extras': [get_validator('ignore')],
-        '__junk': [get_validator('ignore')],
-    }
-
 
 def get_default_project_schema():
     return {
         'title': [get_validator('not_empty'), unicode],
-        'personnel': [
-            get_validator('ignore_empty'),
-            get_validator('construct_sub_schema')('personnel')
-        ],
+        'personnel': get_default_agent_with_role_schema(),
         'abstract': [get_validator('ignore_empty'), unicode],
         'funding': [get_validator('ignore_empty'), unicode],
         'study_area_description': [

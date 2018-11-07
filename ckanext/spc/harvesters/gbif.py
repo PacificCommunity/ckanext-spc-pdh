@@ -425,9 +425,8 @@ def _parse_project(e):
         'study_area_description/name', 'design_description', 'id'
     )
     data = _dumb_parse(e, keys)
-    data['personnel'] = {
-        'person': [_parse_agent(el) for el in e.findall('personnel')]
-    }
+    data['personnel'] = [_parse_agent(el) for el in e.findall('personnel')]
+
     return data
 
 

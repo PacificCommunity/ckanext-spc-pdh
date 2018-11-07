@@ -23,7 +23,6 @@ incorrectly_dictized_dict = (
     ('bounding_coordinates', ),
     ('sampling', ),
     ('study_area_description', ),
-    ('personnel', ),
     ('character_set', ),
 )
 
@@ -94,11 +93,19 @@ def construct_sub_schema(name):
     def converter(key, data, errors, context):
         single_value = False
         junk_key = ('__junk', )
+
         junk = unflatten(data.get(junk_key, {}))
         # for multiple-valued fields, everything moved to junk
+
         sub_data = data.get(key)
         if not sub_data or sub_data is missing:
-            sub_data = junk.pop(key[0], None)
+            sub_data = junk
+            try:
+                for k in key[:-1]:
+                    sub_data = sub_data[k]
+                sub_data = sub_data.pop(key[-1], None)
+            except (KeyError, IndexError):
+                sub_data = None
 
         if not sub_data or sub_data is missing:
             data[key] = missing
@@ -123,9 +130,12 @@ def construct_sub_schema(name):
             sub_data = [sub_data]
 
         sub_data = [_listize(item) for item in sub_data]
+
         validated_list, errors_list = _validate_sub_data(
             sub_data, schema, context
         )
+        print(key, errors_list, validated_list)
+        print()
 
         data[key] = validated_list[0] if single_value else validated_list
         if any(err for err in errors_list):
@@ -138,12 +148,11 @@ def construct_sub_schema(name):
 def spc_ignore_missing_if_one_of(*fields):
     def at_least_one_validator(key, data, errors, context):
         value = data.get(key)
-
         if value and value is not missing:
             return
         prefix = key[:-1]
         if any(
-            data.get(prefix + (field, ), missing) is not missing
+            data.get(prefix + (field, ), missing) not in [missing, None, '']
             for field in fields
         ):
             raise StopOnError

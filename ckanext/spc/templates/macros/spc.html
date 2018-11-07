@@ -139,9 +139,8 @@
 
 {% macro project_form(field, name, idx, data={}, errors={}) %}
     {{ nested_field(name, idx, 'title', data, errors) }}
-    {% with personnel = data.get('personnel') or {}, errs = ((errors if errors is not string else {}).get('personnel') or [{}])[0] %}
-	{% set personnel = h.spc_unwrap_list(personnel) %}
-	{{ subform('%s__%s__personnel__0__%s'| format(name, idx, 'person'), personnel['person'], errs, _('Personnel'), 'agent_form', '(project)') }}
+    {% with personnel = data.get('personnel') or [], errs = ((errors if errors is not string else {}).get('personnel') or [{}])[0] %}
+	{{ subform('%s__%s__personnel'| format(name, idx), personnel['person'] or personnel, errs, _('Personnel'), 'agent_form', '(project)') }}
     {% endwith %}
     {{ nested_field(name, idx, 'abstract', data, errors, type='markdown') }}
     {{ nested_field(name, idx, 'funding', data, errors) }}
