@@ -1,0 +1,204 @@
+{% import 'macros/form.html' as form %}
+{% set sad_options = [
+    {'value': 'thematic', 'text': 'Thematic'},
+    {'value': 'geographic', 'text': 'Geographic'},
+    {'value': 'generic', 'text': 'Generic'},
+] %}
+{% set maintenance_options = [
+    {"value": "annually", "text": "Annually"},
+    {"value": "asNeeded", "text": "As needed"},
+    {"value": "biannually", "text": "Biannually"},
+    {"value": "continually", "text": "Continually"},
+    {"value": "daily", "text": "Daily"},
+    {"value": "irregular", "text": "Irregular"},
+    {"value": "monthly", "text": "Monthly"},
+    {"value": "notPlanned", "text": "Not planned"},
+    {"value": "weekly", "text": "Weekly"},
+    {"value": "unkown", "text": "Unkown"},
+    {"value": "otherMaintenancePeriod", "text": "Other maintenance period"},
+] %}
+
+{% macro maintenance_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'description', data, errors, type='markdown') }}
+    {{ nested_field(name, idx, 'maintenance_update_frequency', data, errors, type='select', additional={'options': maintenance_options}) }}
+{% endmacro %}
+
+{% macro keyword_set_form(field, name, idx, data={}, errors={}) %}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'keyword'), 'keyword', data, errors, _('Keywords')) }}
+    {{ nested_field(name, idx, 'keyword_thesaurus', data, errors) }}
+{% endmacro %}
+
+
+{% macro methods_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'method_step', data, errors) }}
+    {% with sampling = data.get('sampling') or {}, errs = ((errors if errors is not string else {}).get('sampling') or [{}])[0] %}
+	{# key 0 appears if previously submitted form hadn't pass validation #}
+	{# you just need to accept it because it's written in ckan core and cannot be changed #}
+	{% if 0 in sampling %}
+	    {% set sampling = sampling[0] %}
+	{% endif %}
+
+	{{ nested_field(name, idx ~ '__sampling__0', 'study_extent', sampling, errs) }}
+	{{ nested_field(name, idx ~ '__sampling__0', 'sampling_description', sampling, errs) }}
+    {% endwith %}
+    {{ nested_field(name, idx, 'quality_control', data, errors) }}
+    <!-- <hr/> -->
+{% endmacro %}
+
+
+{% macro agent_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'organization_name', data, errors) }}
+
+    {% with individual_name = data.get('individual_name') or {}, errs = ((errors if errors is not string else {}).get('individual_name') or [{}])[0] %}
+
+	{# key 0 appears if previously submitted form hadn't pass validation #}
+	{# you just need to accept it because it's written in ckan core and cannot be changed #}
+	{% if 0 in individual_name %}
+	    {% set individual_name = individual_name[0] %}
+	{% endif %}
+
+	{{ nested_field(name, idx ~ '__individual_name__0', 'sur_name', individual_name, errs) }}
+	{{ nested_field(name, idx ~ '__individual_name__0', 'given_name', individual_name, errs) }}
+    {% endwith %}
+
+
+    {{ nested_field(name, idx, 'position_name', data, errors) }}
+
+    {% with address = data.get('address') or {}, errs = ((errors if errors is not string else {}).get('address') or [{}])[0] %}
+
+	{# key 0 appears if previously submitted form hadn't pass validation #}
+	{# you just need to accept it because it's written in ckan core and cannot be changed #}
+	{% if 0 in address %}
+	    {% set address = address[0] %}
+	{% endif %}
+
+	{{ nested_field(name, idx ~ '__address__0', 'administrative_area', address, errs) }}
+	{{ nested_field(name, idx ~ '__address__0', 'city', address, errs) }}
+	{{ nested_field(name, idx ~ '__address__0', 'postal_code', address, errs) }}
+	{{ nested_field(name, idx ~ '__address__0', 'delivery_point', address, errs) }}
+	{{ nested_field(name, idx ~ '__address__0', 'country', address, errs) }}
+    {% endwith %}
+
+    {{ nested_field(name, idx, 'phone', data, errors) }}
+    {{ nested_field(name, idx, 'electronic_mail_address', data, errors, additional={'type': 'email'}) }}
+    {{ nested_field(name, idx, 'online_url', data, errors) }}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'user_id'), 'user_id', data, errors, _('User ID')) }}
+
+    {% if '(agent_with_role)' in field.validators or '(project)' in field.validators %}
+	{{ nested_field(name, idx, 'role', data, errors) }}
+    {% endif %}
+
+
+{% endmacro %}
+
+
+{% macro coverage_form(field, name, idx, data={}, errors={}) %}
+    {% with geographic = data.get('geographic_coverage') or {}, errs = ((errors if errors is not string else {}).get('geographic_coverage') or [{}])[0] %}
+	{% if 0 in geographic %}
+	    {% set geographic = geographic[0] %}
+	{% endif %}
+	{{ nested_field(name, idx ~ '__geographic_coverage__0', 'geographic_description', geographic, errs) }}
+	{% with coordinates = geographic.get('bounding_coordinates') or {}, errs = ((errs if errs is not string else {}).get('bounding_coordinates') or [{}])[0] %}
+	    {% if 0 in coordinates %}
+		{% set coordinates = coordinates[0] %}
+	    {% endif %}
+	    {% for side in ['west', 'east', 'north', 'south'] %}
+		{{ nested_field(
+		    name, idx ~ '__geographic_coverage__0__bounding_coordinates__0', side + '_bounding_coordinate',
+		    coordinates, errs,
+		    additional={'type': 'number'}, attrs={'step': '0.0000001'}) }}
+	    {% endfor %}
+	{% endwith %}
+    {% endwith %}
+
+    {% with temporal = data.get('temporal_coverage') or {}, errs = ((errors if errors is not string else {}).get('temporal_coverage') or [{}])[0] %}
+	{% if 0 in temporal %}
+	    {% set temporal = temporal[0] %}
+	{% endif %}
+
+	{% with
+	range_of_dates = temporal.get('range_of_dates') or {},
+	errs = ((errs if errs is not string else {}).get('range_of_dates') or [{}])[0],
+	idx = idx ~ '__temporal_coverage__0__range_of_dates__0' %}
+	{% if 0 in range_of_dates %}
+	    {% set range_of_dates = range_of_dates[0] %}
+	{% endif %}
+
+	{{ nested_field(
+	    name, idx, 'begin_date',
+	    range_of_dates, errs,
+	    additional={'type': 'date'}) }}
+	{{ nested_field(
+	    name, idx, 'end_date',
+	    range_of_dates, errs,
+	    additional={'type': 'date'}) }}
+    {% endwith %}
+
+    {{ nested_field(name, idx ~ '__temporal_coverage__0', 'single_date_time', temporal, errs, additional={'type': 'date'}) }}
+    {% endwith %}
+
+    {% with taxonomic = data.get('taxonomic_coverage') or {}, errs = ((errors if errors is not string else {}).get('taxonomic_coverage') or [{}])[0] %}
+	{% if 0 in taxonomic %}
+	    {% set taxonomic = taxonomic[0] %}
+	{% endif %}
+	{{ nested_field(name, idx ~ '__taxonomic_coverage__0', 'general_taxonomic_coverage', taxonomic, errs) }}
+	{{ subform('%s__%s__taxonomic_coverage__0__%s'| format(name, idx, 'taxonomic_classification'),
+	    taxonomic['taxonomic_classification'], errs, _('Taxonomic classification'), 'taxonomic_classification_form') }}
+    {% endwith %}
+{% endmacro %}
+
+{% macro taxonomic_classification_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'taxon_rank_name', data, errors) }}
+    {{ nested_field(name, idx, 'taxon_rank_value', data, errors) }}
+    {{ nested_field(name, idx, 'common_name', data, errors) }}
+{% endmacro %}
+
+{% macro project_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'title', data, errors) }}
+    {% with personnel = data.get('personnel') or {}, errs = ((errors if errors is not string else {}).get('personnel') or [{}])[0] %}
+	{% if 0 in personnel %}
+	    {% set personnel = personnel[0] %}
+	{% endif %}
+	{{ subform('%s__%s__personnel__0__%s'| format(name, idx, 'person'), personnel['person'], errs, _('Personnel'), 'agent_form', '(project)') }}
+    {% endwith %}
+    {{ nested_field(name, idx, 'abstract', data, errors, type='markdown') }}
+    {{ nested_field(name, idx, 'funding', data, errors) }}
+
+    {% with study_area = data.get('study_area_description') or {}, errs = ((errors if errors is not string else {}).get('study_area_description') or [{}])[0] %}
+	{% if 0 in study_area %}
+	    {% set study_area = study_area[0] %}
+	{% endif %}
+	{{ nested_field(name, idx ~ '__study_area_description__0', 'descriptor_value', study_area, errs) }}
+	{{ nested_field(name, idx ~ '__study_area_description__0', 'citable_classification_system', study_area, errs, type='checkbox', additional={'value': 'yes'}) }}
+	{{ nested_field(name, idx ~ '__study_area_description__0', 'name', study_area, errs, type='select', additional={'options': sad_options}) }}
+    {% endwith %}
+    {{ nested_field(name, idx, 'design_description', data, errors, type='markdown') }}
+    {{ nested_field(name, idx, 'id', data, errors) }}
+{% endmacro %}
+
+{% macro nested_field(name, idx, key, data={}, errors={}, tpl='%s__%s__%s', label=none, type='input', additional={}, attrs={}) %}
+    {% if label is none %}
+	{% set label = key | replace('_', ' ') | capitalize %}
+    {% endif %}
+    {% set input_attrs = {'class': 'form-controls'} %}
+    {% do input_attrs.update(attrs) %}
+    {% do additional.update({{'select': 'selected', 'checkbox': 'checked'}.get(type, 'value'): data.get(key)}) %}
+    {{ form[type](
+	tpl | format(name, idx, key), label=_(label),
+	classes=['control-medium'] if type != 'markdown' else [], attrs=input_attrs,
+	**additional
+    ) }}
+{% endmacro %}
+
+{% macro multifield(name, key, data, errors, label) %}
+    {% snippet 'scheming/form_snippets/simple_list.html',
+    data={name: data[key], name + '_string': data[key + '_string']},
+    errors=errors,
+    field={'field_name': name, 'label': label}
+    %}
+{% endmacro %}
+
+{% macro subform(name, data, errors, label, type, validators='') %}
+    {% snippet 'scheming/form_snippets/sub_form.html', data={name: data}, errors=errors,
+    field={'field_name': name, 'label': label, 'sub_form': type, 'validators': validators} %}
+{% endmacro %}

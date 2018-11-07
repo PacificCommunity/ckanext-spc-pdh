@@ -1,0 +1,11 @@
+{%- set field_class = "field-" + field.field_name + "-value" -%}
+<tr class="complex-row label-row collapsed" data-target=".{{ field_class}}" data-toggle="collapse">
+	<td scope="row" class="dataset-label" colspan="2">
+		{{h.scheming_language_text(field.label) }}
+	</td>
+</tr>
+<tr class="complex-row content-row {{ field_class }} collapse">
+	<td class="dataset-details"{% if field.display_property %} property="{{ field.display_property}}"{% endif %} colspan="2">
+		{%- snippet 'scheming/snippets/display_field.html', field=field, data=data, schema=schema -%}
+	</td>
+</tr>

@@ -3,95 +3,12 @@
   "dataset_type": "biodiversity_data",
   "about": "Biodiversity data",
   "about_url": "http://github.com/ckan/ckanext-scheming",
-  "field_groups": [
-    {
-      "name": "Dataset Type",
-      "id": "dataset_type",
-      "fields_list":
-      [
-        "title",
-        "name",
-        "thematic_area_string",
-        "license_id",
-        "purpose",
-        "owner_org",
-        "language",
-        "pub_place"
-      ]
-    },
-    {
-      "name": "Maintenance",
-      "id": "maintenance",
-      "fields_list":
-      [
-        "notes",
-        "update_freq"
-      ]
-    },
-    {
-      "name": "Change History",
-      "id": "change_history",
-      "fields_list":
-      [
-        "change_scope",
-        "old_value",
-        "change_date",
-        "comment"
-      ]
-    },
-    {
-      "name": "Contact",
-      "id": "contact",
-      "fields_list":
-      [
-        "organization_name",
-        "position_name",
-        "phone",
-        "email",
-        "online_url",
-        "user_id"
-      ]
-    },
-    {
-      "name": "Individual Name",
-      "id": "individual_name",
-      "fields_list":
-      [
-        "surname",
-        "given_name",
-        "salutation"
-      ]
-    },
-    {
-      "name": "Adress",
-      "id": "adress",
-      "fields_list":
-      [
-        "delivery_point",
-        "city",
-        "administrative_area",
-        "postal_code",
-        "country"
-      ]
-    },
-    {
-      "name": "Methods",
-      "id": "methods",
-      "fields_list":
-      [
-        "method_step",
-        "sampling",
-        "quality_control"
-      ]
-    }
-  ],
   "dataset_fields": [
     {
       "field_name": "alternate_identifier",
       "label": "Alternate Identifier",
       "help_text": "This is the only identifier issued by the IPT for the metadata document; it is a UUID",
-      "validators": "ignore_empty spc_to_json",
-      "output_validators": "spc_from_json"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "title",
@@ -173,37 +90,33 @@
     {
       "field_name": "creator",
       "label": "Creator",
-      "form_snippet": "markdown.html",
       "help_text": "The creator is the person who created the resource (not necessarily the author of this metadata about the resource). This is the person or institution to contact with questions about the use, interpretation of a dataset.",
-      "required": true,
-      "validators": "construct_sub_schema(creator) scheming_required spc_to_json",
-      "output_validators": "spc_from_json"
+      "preset": "agent"
     },
     {
       "field_name": "metadata_provider",
       "label": "Metadata Provider",
-      "form_snippet": "markdown.html",
       "help_text": "The party responsible for the creation of the metadata document",
-      "required": true,
-      "validators": "construct_sub_schema(metadata_provider) scheming_required spc_to_json",
-      "output_validators": "spc_from_json"
+      "preset": "agent"
     },
     {
       "field_name": "associated_party",
       "label": "Associated Party",
-      "validators": "construct_sub_schema(associated_party) ignore_empty spc_to_json",
-      "output_validators": "spc_from_json"
+      "preset": "agent",
+      "required": false,
+      "validators": "construct_sub_schema(agent_with_role) scheming_required spc_to_json"
+
     },
     {
       "field_name": "pub_date",
       "label": "Publication Date",
       "required": true,
-      "validators": "scheming_required"
+      "preset": "date"
     },
     {
       "field_name": "language",
       "label": "Language",
-      "form_snippet": "language.html"
+      "preset": "multivalued_list"
     },
     {
       "field_name": "notes",
@@ -215,10 +128,20 @@
     },
     {
       "field_name": "tag_string",
-      "label": "Keyword Set",
+      "label": "Tags",
       "preset": "tag_string_autocomplete",
       "form_placeholder": "eg. economy, mental health, government",
-      "validators": "copy_from(keyword_set) ignore_missing tag_string_convert"
+      "validators": "ignore_missing tag_string_convert"
+    },
+    {
+      "field_name": "keyword_set",
+      "label": "Keyword Set",
+      "required": true,
+      "form_snippet": "sub_form.html",
+      "display_snippet": "sub_table.html",
+      "sub_form": "keyword_set_form",
+      "validators": "construct_sub_schema(keyword_set) scheming_required spc_to_json",
+      "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "additional_info",
@@ -231,48 +154,52 @@
       "form_snippet": "markdown.html"
     },
     {
-      "field_name": "distribution",
-      "label": "Distribution"
-    },
-    {
       "field_name": "coverage",
       "label": "Coverage",
+      "form_snippet": "sub_form.html",
+      "sub_form": "coverage_form",
+      "display_snippet": "sub_table.html",
       "required": false,
       "validators": "construct_sub_schema(coverage) scheming_required spc_to_json",
-      "output_validators": "spc_from_json"
-
+      "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "purpose",
       "label": "Purpose",
-      "help_text": "A description of the purpose of this dataset."
+      "help_text": "A description of the purpose of this dataset.",
+      "form_snippet": "markdown.html"
     },
     {
       "field_name": "maintenance",
       "label": "Maintenance",
+      "form_snippet": "sub_form.html",
+      "sub_form": "maintenance_form",
+      "display_snippet": "sub_table.html",
       "validators": "construct_sub_schema(maintenance) ignore_missing spc_to_json",
-      "output_validators": "spc_from_json"
+      "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "contact",
       "label": "Contact",
-      "required": true,
-      "validators": "construct_sub_schema(contact) scheming_required spc_to_json",
-      "output_validators": "spc_from_json"
+      "preset": "agent"
     },
     {
       "field_name": "methods",
       "label": "Methods",
-      "required": false,
-      "validators": "construct_sub_schema(methods) scheming_required spc_to_json",
-      "output_validators": "spc_from_json"
+      "form_snippet": "sub_form.html",
+      "sub_form": "methods_form",
+      "display_snippet": "sub_table.html",
+      "validators": "construct_sub_schema(methods) ignore_missing spc_to_json",
+      "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "project",
       "label": "Project",
-      "required": false,
-      "validators": "construct_sub_schema(project) scheming_required spc_to_json",
-      "output_validators": "spc_from_json"
+      "form_snippet": "sub_form.html",
+      "sub_form": "project_form",
+      "display_snippet": "sub_table.html",
+      "validators": "construct_sub_schema(project) ignore_missing spc_to_json",
+      "output_validators": "convert_to_json_if_string"
     },
     {
       "field_name": "member_countries",
@@ -301,6 +228,10 @@
       "field_name": "format",
       "label": "Format",
       "preset": "resource_format_autocomplete"
+    },
+    {
+      "field_name": "scope",
+      "label": "Scope"
     }
   ]
 }

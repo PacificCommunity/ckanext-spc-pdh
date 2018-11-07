@@ -23,9 +23,17 @@ def get_helpers():
         get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
-        get_footer_css_url=get_footer_css_url
+        get_footer_css_url=get_footer_css_url,
+        get_dqs_explanation_url=get_dqs_explanation_url
     )
 
+def countries_list(countries):
+    countries_list = []
+    try:
+        countries_list = json.loads(countries)
+    except ValueError, e:
+        countries_list.append(countries)
+    return map(lambda x: x.upper(), countries_list)
 
 def spc_get_available_languages():
     return filter(
@@ -112,3 +120,8 @@ def get_footer_css_url():
     drupal_url = config.get('drupal.site_url')
     if drupal_url:
         return drupal_url + '/sites/all/themes/spc/css/footer_css/footer.css'
+
+
+def get_dqs_explanation_url():
+    dqs_explanation_url = config.get('ckan.dqs_explanation_url')
+    return dqs_explanation_url

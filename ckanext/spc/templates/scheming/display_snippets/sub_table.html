@@ -1,0 +1,70 @@
+<style>
+ .additional-info td, .additional-info th  {
+     width: auto
+ }
+</style>
+{% macro render_rows(data, parents=[]) %}
+	{% set level = parents|count %}
+	{% set padding = 16 %}
+	{% set indent = padding * level + 35 %}
+	  {% if data is iterable %}
+		{% for item in data %}
+	    {% if item is string and data[item] is string %}
+				{% if data[item] %}
+			    <tr>
+						<td class="dataset-label" style="padding-left: {{ indent }}px">
+							{{ item|replace('_', ' ')|capitalize }}
+						</td>
+						<td class="dataset-details">
+							{{ data[item] }}
+						</td>
+					</tr>
+				{% endif %}
+	    {% elif item is string and data[item] is number %}
+		    {% if data[item] is not none %}
+			    <tr>
+						<td class="dataset-label" style="padding-left: {{ indent }}px">
+							{{ item|replace('_', ' ')|capitalize }}
+						</td>
+						<td class="dataset-details">
+							{{ data[item] }}
+						</td>
+					</tr>
+				{% endif %}
+	    {% elif item is string and data[item] is not undefined %}
+				{% if data[item] %}
+					<tr class="level-label level-{{ level }}">
+						<td class="parent-label" colspan="2" style="padding-left: {{ indent }}px">
+							{{ item|replace('_', ' ')|capitalize }}
+						</td>
+					</tr>
+					<tr class="level-data level-{{ level }}">
+						<td colspan="2" >
+				    	<table class="table nested-table">
+				    		{{ render_rows(data[item], parents + [item|replace('_', ' ')|capitalize]) }}
+				    	</table>
+			    	</td>
+		    	</tr>
+				{% endif %}
+    	{% elif item is string and item %}
+				<tr>
+				    <td class="dataset-label" style="padding-left: {{ indent }}px">
+				    	{{ parents | join(' | ') }}
+				    </td>
+				    <td class="dataset-details">
+				    	{{ item  }}
+				    </td>
+				</tr>
+	    {% elif item %}
+				{{ render_rows(item, parents) }}
+	    {% endif %}
+		{% endfor %}
+  {% endif %}
+{% endmacro %}
+{% if data[field.field_name] %}
+    <table class="table nested-table">
+{% endif %}
+			{{ render_rows(data[field.field_name]) }}
+{% if data[field.field_name] %}
+    </table>
+{% endif %}

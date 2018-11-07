@@ -1,0 +1,41 @@
+{% ckan_extends %}
+
+{% block package_description %}
+    {{ super() }}
+    <div class="dropdown btn-group meta-export-select pull-right">
+	<a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+	    <i class="fa fa-arrow-circle-o-up"></i>
+	    Export metadata
+	    <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="{{ h.url_for('/api/3/action/package_show', id=pkg.id) }}" title="Export metadata as JSON" target="_blank">JSON</a>
+	    </li>
+	    {% if pkg.type in ['dataset', 'publications', 'biodiversity_data'] %}
+		{% set format = {'publications': 'dc-rdf', 'dataset': 'dcat-rdf', 'biodiversity_data': 'eml-rdf'}[pkg.type] %}
+		<li>
+		    <a
+			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format=format) }}"
+			      target="_blank">RDF/XML</a>
+
+		</li>
+	    {% endif %}
+	    {% if pkg.type in ['biodiversity_data'] %}
+		<li>
+		    <a
+			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='eml-xml') }}"
+			      target="_blank">EML/XML </a>
+		</li>
+	    {% endif %}
+	    {% if pkg.type in ['geographic_data'] %}
+		<li>
+		    <a
+			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='anzlic-xml') }}"
+			      target="_blank">XML</a>
+		</li>
+	    {% endif %}
+
+	</ul>
+    </div>
+{% endblock %}

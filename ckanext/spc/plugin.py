@@ -86,7 +86,7 @@ class SpcPlugin(plugins.SingletonPlugin):
                 item['display_name'], item['display_name']
             ),
             'spc_member_countries_facet_label': lambda item: self.member_countries.get(
-                item['display_name'], item['display_name']
+                item['display_name'].upper(), item['display_name']
             )
         }
         helpers.update(spc_helpers.get_helpers())
@@ -152,6 +152,7 @@ class SpcPlugin(plugins.SingletonPlugin):
         return results
 
     def before_index(self, pkg_dict):
+
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
@@ -162,6 +163,11 @@ class SpcPlugin(plugins.SingletonPlugin):
         pkg_dict.update(
             extras_five_star_rating=spc_utils.count_stars(pkg_dict)
         )
+        pkg_dict['member_countries'] = spc_helpers.countries_list(
+            pkg_dict.get('member_countries', '[]')
+        )
+        # Otherwise you'll get `immense field` error from SOLR
+        pkg_dict.pop('data_quality_info', None)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
