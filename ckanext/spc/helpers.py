@@ -24,8 +24,10 @@ def get_helpers():
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
         get_footer_css_url=get_footer_css_url,
-        get_dqs_explanation_url=get_dqs_explanation_url
+        get_dqs_explanation_url=get_dqs_explanation_url,
+        spc_unwrap_list=spc_unwrap_list,
     )
+
 
 def countries_list(countries):
     countries_list = []
@@ -34,6 +36,7 @@ def countries_list(countries):
     except ValueError, e:
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
+
 
 def spc_get_available_languages():
     return filter(
@@ -93,13 +96,17 @@ def spc_get_footer():
         get_html = _spc_get_footer_from_drupal(drupal_url)
         return get_html
 
+
 @beaker_cache(expire=3600)
 def _spc_get_footer_from_drupal(drupal_url=None):
-    if drupal_url is None or drupal_url == h.full_current_url().split('?')[0][:-1]:
+    if drupal_url is None or drupal_url == h.full_current_url(
+    ).split('?')[0][:-1]:
         return None
     r = None
     try:
-        r = requests.get(drupal_url + '/footer_export', verify=False, timeout=10)
+        r = requests.get(
+            drupal_url + '/footer_export', verify=False, timeout=10
+        )
     except requests.exceptions.Timeout:
         logger.warning(drupal_url + '/footer_export connection timeout')
     except requests.exceptions.TooManyRedirects:
@@ -125,3 +132,11 @@ def get_footer_css_url():
 def get_dqs_explanation_url():
     dqs_explanation_url = config.get('ckan.dqs_explanation_url')
     return dqs_explanation_url
+
+
+def spc_unwrap_list(value):
+    if isinstance(value, list):
+        return value[0] if value else {}
+    if 0 in value:
+        return value[0]
+    return value
