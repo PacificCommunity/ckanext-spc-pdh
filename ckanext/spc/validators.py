@@ -134,8 +134,6 @@ def construct_sub_schema(name):
         validated_list, errors_list = _validate_sub_data(
             sub_data, schema, context
         )
-        print(key, errors_list, validated_list)
-        print()
 
         data[key] = validated_list[0] if single_value else validated_list
         if any(err for err in errors_list):
