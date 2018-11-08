@@ -124,7 +124,9 @@ def get_default_gmd_base_identification_schema():
         ],
         'status': get_default_gmd_code_string_schema(),
         'point_of_contact': get_default_gmd_cited_responsible_party_schema(),
-        'resource_maintenance': get_validator('spc_list_of')(_sub('gmd_maintenance')),
+        'resource_maintenance': [
+            get_validator('spc_list_of')(_sub('gmd_maintenance'))
+        ],
         'graphic_overview': get_default_gmd_graphic_schema(),
         'resource_format': get_default_gmd_format_schema(),
         'descriptive_keywords': get_default_gmd_keywords_schema(),
@@ -469,8 +471,7 @@ def get_default_gmd_metadata_extension_schema():
     return {
         'extension_on_line_resource': [im, _sub('gmd_online_resource')],
         'extended_element_information': [
-            get_validator('spc_list_of')(_sub('gmd_extended_element')),
-            im
+            get_validator('spc_list_of')(_sub('gmd_extended_element')), im
         ],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
@@ -564,8 +565,13 @@ def get_default_gmd_lineage_process_step_schema():
             get_validator('isodate'),
             get_validator('convert_to_json_if_date'),
         ],
-        'processor': [im, get_validator('spc_list_of')(_sub('gmd_cited_responsible_party'))],
-        'source': [im, get_validator('spc_list_of')(_sub('gmd_lineage_source'))],
+        'processor': [
+            im,
+            get_validator('spc_list_of')(_sub('gmd_cited_responsible_party'))
+        ],
+        'source': [
+            im, get_validator('spc_list_of')(_sub('gmd_lineage_source'))
+        ],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }

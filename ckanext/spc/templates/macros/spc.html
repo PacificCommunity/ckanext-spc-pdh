@@ -34,9 +34,7 @@
     {% with sampling = data.get('sampling') or {}, errs = ((errors if errors is not string else {}).get('sampling') or [{}])[0] %}
 	{# key 0 appears if previously submitted form hadn't pass validation #}
 	{# you just need to accept it because it's written in ckan core and cannot be changed #}
-	{% if 0 in sampling %}
-	    {% set sampling = sampling[0] %}
-	{% endif %}
+	{% set sampling = h.spc_unwrap_list(sampling) %}
 
 	{{ nested_field(name, idx ~ '__sampling__0', 'study_extent', sampling, errs) }}
 	{{ nested_field(name, idx ~ '__sampling__0', 'sampling_description', sampling, errs) }}
@@ -53,9 +51,7 @@
 
 	{# key 0 appears if previously submitted form hadn't pass validation #}
 	{# you just need to accept it because it's written in ckan core and cannot be changed #}
-	{% if 0 in individual_name %}
-	    {% set individual_name = individual_name[0] %}
-	{% endif %}
+	{% set individual_name = h.spc_unwrap_list(individual_name) %}
 
 	{{ nested_field(name, idx ~ '__individual_name__0', 'sur_name', individual_name, errs) }}
 	{{ nested_field(name, idx ~ '__individual_name__0', 'given_name', individual_name, errs) }}
@@ -68,9 +64,7 @@
 
 	{# key 0 appears if previously submitted form hadn't pass validation #}
 	{# you just need to accept it because it's written in ckan core and cannot be changed #}
-	{% if 0 in address %}
-	    {% set address = address[0] %}
-	{% endif %}
+	{% set address = h.spc_unwrap_list(address) %}
 
 	{{ nested_field(name, idx ~ '__address__0', 'administrative_area', address, errs) }}
 	{{ nested_field(name, idx ~ '__address__0', 'city', address, errs) }}
@@ -94,14 +88,10 @@
 
 {% macro coverage_form(field, name, idx, data={}, errors={}) %}
     {% with geographic = data.get('geographic_coverage') or {}, errs = ((errors if errors is not string else {}).get('geographic_coverage') or [{}])[0] %}
-	{% if 0 in geographic %}
-	    {% set geographic = geographic[0] %}
-	{% endif %}
+	{% set geographic = h.spc_unwrap_list(geographic) %}
 	{{ nested_field(name, idx ~ '__geographic_coverage__0', 'geographic_description', geographic, errs) }}
 	{% with coordinates = geographic.get('bounding_coordinates') or {}, errs = ((errs if errs is not string else {}).get('bounding_coordinates') or [{}])[0] %}
-	    {% if 0 in coordinates %}
-		{% set coordinates = coordinates[0] %}
-	    {% endif %}
+	    {% set coordinates = h.spc_unwrap_list(coordinates) %}
 	    {% for side in ['west', 'east', 'north', 'south'] %}
 		{{ nested_field(
 		    name, idx ~ '__geographic_coverage__0__bounding_coordinates__0', side + '_bounding_coordinate',
@@ -112,17 +102,13 @@
     {% endwith %}
 
     {% with temporal = data.get('temporal_coverage') or {}, errs = ((errors if errors is not string else {}).get('temporal_coverage') or [{}])[0] %}
-	{% if 0 in temporal %}
-	    {% set temporal = temporal[0] %}
-	{% endif %}
+	{% set temporal = h.spc_unwrap_list(temporal) %}
 
 	{% with
 	range_of_dates = temporal.get('range_of_dates') or {},
 	errs = ((errs if errs is not string else {}).get('range_of_dates') or [{}])[0],
 	idx = idx ~ '__temporal_coverage__0__range_of_dates__0' %}
-	{% if 0 in range_of_dates %}
-	    {% set range_of_dates = range_of_dates[0] %}
-	{% endif %}
+	{% set range_of_dates = h.spc_unwrap_list(range_of_dates) %}
 
 	{{ nested_field(
 	    name, idx, 'begin_date',
@@ -138,9 +124,7 @@
     {% endwith %}
 
     {% with taxonomic = data.get('taxonomic_coverage') or {}, errs = ((errors if errors is not string else {}).get('taxonomic_coverage') or [{}])[0] %}
-	{% if 0 in taxonomic %}
-	    {% set taxonomic = taxonomic[0] %}
-	{% endif %}
+	{% set taxonomic = h.spc_unwrap_list(taxonomic) %}
 	{{ nested_field(name, idx ~ '__taxonomic_coverage__0', 'general_taxonomic_coverage', taxonomic, errs) }}
 	{{ subform('%s__%s__taxonomic_coverage__0__%s'| format(name, idx, 'taxonomic_classification'),
 	    taxonomic['taxonomic_classification'], errs, _('Taxonomic classification'), 'taxonomic_classification_form') }}
@@ -155,19 +139,14 @@
 
 {% macro project_form(field, name, idx, data={}, errors={}) %}
     {{ nested_field(name, idx, 'title', data, errors) }}
-    {% with personnel = data.get('personnel') or {}, errs = ((errors if errors is not string else {}).get('personnel') or [{}])[0] %}
-	{% if 0 in personnel %}
-	    {% set personnel = personnel[0] %}
-	{% endif %}
-	{{ subform('%s__%s__personnel__0__%s'| format(name, idx, 'person'), personnel['person'], errs, _('Personnel'), 'agent_form', '(project)') }}
+    {% with personnel = data.get('personnel') or [], errs = ((errors if errors is not string else {}).get('personnel') or [{}])[0] %}
+	{{ subform('%s__%s__personnel'| format(name, idx), personnel['person'] or personnel, errs, _('Personnel'), 'agent_form', '(project)') }}
     {% endwith %}
     {{ nested_field(name, idx, 'abstract', data, errors, type='markdown') }}
     {{ nested_field(name, idx, 'funding', data, errors) }}
 
     {% with study_area = data.get('study_area_description') or {}, errs = ((errors if errors is not string else {}).get('study_area_description') or [{}])[0] %}
-	{% if 0 in study_area %}
-	    {% set study_area = study_area[0] %}
-	{% endif %}
+	{% set study_area = h.spc_unwrap_list(study_area) %}
 	{{ nested_field(name, idx ~ '__study_area_description__0', 'descriptor_value', study_area, errs) }}
 	{{ nested_field(name, idx ~ '__study_area_description__0', 'citable_classification_system', study_area, errs, type='checkbox', additional={'value': 'yes'}) }}
 	{{ nested_field(name, idx ~ '__study_area_description__0', 'name', study_area, errs, type='select', additional={'options': sad_options}) }}
