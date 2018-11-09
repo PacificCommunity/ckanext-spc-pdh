@@ -1,8 +1,10 @@
 import logging
 import json
 
+import ckan.model as model
 from ckan.logic import check_access, get_action
 from ckan.lib.munge import munge_title_to_name
+import ckan.plugins.toolkit as tk
 
 from ckanext.oaipmh.harvester import OaipmhHarvester
 from ckanext.scheming.helpers import (
@@ -24,6 +26,7 @@ class SpcOaipmhHarvester(OaipmhHarvester):
             self.topic = None
         except ValueError:
             pass
+        self.userobj = model.User.get(self.user)
 
 
     def _extract_additional_fields(self, content, package_dict):
@@ -70,16 +73,20 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         logger.debug('Group names: %s' % groups)
         group_ids = []
         for group_name in groups:
+            munged_name = munge_title_to_name(group_name)
+            existing = model.Group.get(munged_name)
+            if existing and 'organization' == existing.type:
+                munged_name += '_group'
             data_dict = {
                 'id': group_name,
-                'name': munge_title_to_name(group_name),
+                'name': munged_name,
                 'title': group_name
             }
             try:
                 check_access('group_show', context, data_dict)
                 group = get_action('group_show')(context, data_dict)
                 logger.info('found the group ' + group['id'])
-            except:
+            except Exception as e:
                 context['__auth_audit'] = []
                 group = get_action('group_create')(context, data_dict)
                 logger.info('created the group ' + group['id'])
