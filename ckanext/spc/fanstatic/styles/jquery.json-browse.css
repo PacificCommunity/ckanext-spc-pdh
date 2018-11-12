@@ -68,3 +68,11 @@ a.json-placeholder {
 a.json-placeholder:hover {
   text-decoration: underline;
 }
+
+@media(max-width: 768px) {
+  ul.json-dict li, ol.json-array li {
+    word-break: break-word;
+    line-height: 15px;
+    margin: 6px 0;
+  }
+}

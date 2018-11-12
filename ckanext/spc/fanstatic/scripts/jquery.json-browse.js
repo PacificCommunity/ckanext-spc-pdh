@@ -29,7 +29,7 @@
    * Transform a json object into html representation
    * @return string
    */
-  function json2html(json, options) {
+  function json2html(json, options, topLevel) {
     html = '';
     if (typeof json === 'string') {
       // Escape tags
@@ -56,13 +56,13 @@
           var keyRepr = options.withQuotes ?
               '<span class="json-string">"' + i+1 + '"</span>' : i+1;
           // Add toggle button if item is collapsable
-          if (isCollapsable(json[i])) {
+          if (!topLevel && json.length > 1 && isCollapsable(json[i])) {
             html += '<a href class="json-toggle">' + keyRepr + '</a>';
           }
           else {
             html += keyRepr;
           }
-          html += ': ' + json2html(json[i], options);
+          html += ': ' + json2html(json[i], options, false);
           html += '</li>';
         }
         html += '</ol>';
@@ -75,17 +75,17 @@
         for (var key in json) {
           if (json.hasOwnProperty(key)) {
             html += '<li>';
-            var label = capitalize(key.replace('_', ' '));
+            var label = capitalize(key.replace(/_/g, ' '));
             var keyRepr = options.withQuotes ?
               '<span class="json-string">"' + label + '"</span>' : label;
             // Add toggle button if item is collapsable
-            if (isCollapsable(json[key])) {
+            if (!topLevel && isCollapsable(json[key])) {
               html += '<a href class="json-toggle">' + keyRepr + '</a>';
             }
             else {
               html += keyRepr;
             }
-            html += ': ' + json2html(json[key], options);
+            html += ': ' + json2html(json[key], options, false);
             html += '</li>';
           }
         }
@@ -106,7 +106,7 @@
     // jQuery chaining
     return this.each(function() {
       // Transform to HTML
-      var html = json2html(json, options)
+      var html = json2html(json, options, true)
 
       // Insert HTML in target DOM element
       $(this).html(html);
