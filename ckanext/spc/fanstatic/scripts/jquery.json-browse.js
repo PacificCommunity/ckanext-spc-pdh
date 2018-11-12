@@ -56,7 +56,7 @@
           var keyRepr = options.withQuotes ?
               '<span class="json-string">"' + i+1 + '"</span>' : i+1;
           // Add toggle button if item is collapsable
-          if (!topLevel && json.length > 1 && isCollapsable(json[i])) {
+          if (!topLevel && json.length > 1) {
             html += '<a href class="json-toggle">' + keyRepr + '</a>';
           }
           else {
@@ -79,7 +79,7 @@
             var keyRepr = options.withQuotes ?
               '<span class="json-string">"' + label + '"</span>' : label;
             // Add toggle button if item is collapsable
-            if (!topLevel && isCollapsable(json[key])) {
+            if (isCollapsable(json[key])) {
               html += '<a href class="json-toggle">' + keyRepr + '</a>';
             }
             else {
