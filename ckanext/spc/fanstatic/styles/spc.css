@@ -709,6 +709,9 @@ header.navbar > .container .collapse {
 .meta-export-select.btn-group.open .btn-primary.dropdown-toggle {
   background-color: #0c436b;
 }
+.resource-view .ckanext-datapreview > iframe {
+  min-height: auto;
+}
 #main-menu {
   position: absolute;
   right: 30px;
