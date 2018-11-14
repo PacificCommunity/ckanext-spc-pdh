@@ -9,7 +9,7 @@ ul.json-dict, ol.json-array {
   line-height: 18px;
   list-style-type: none;
   border-left: 1px solid #bcdfe5;
-  padding-left: 10px;
+  padding-left: 15px;
   margin-left: 3px;
 }
 ul.json-dict li, ol.json-array li {
@@ -21,9 +21,9 @@ ul.json-dict li:after, ol.json-array li:after {
   display: block;
   position: absolute;
   top: 9px;
-  left: -10px;
+  left: -15px;
   height: 1px;
-  width: 7px;
+  width: 12px;
   border-bottom: 1px solid #bcdfe5;
   border-left: 1px solid #bcdfe5;
 }
@@ -51,7 +51,7 @@ a.json-toggle:before {
   position: absolute;
   display: inline-block;
   font-size: 16px;
-  left: -22px;
+  left: -30px;
 }
 a.json-toggle.collapsed:before {
   content: '+';
