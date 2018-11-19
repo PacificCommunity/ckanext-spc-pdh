@@ -276,6 +276,9 @@ header.navbar > .container .collapse {
   border-top: 1px dotted #bcdfe5;
   padding-top: 20px;
 }
+.dataset-list .dataset-item .dataset-content {
+  word-wrap: break-word;
+}
 .dataset-list .dataset-item .dataset-resources li {
   display: inline-block;
 }
