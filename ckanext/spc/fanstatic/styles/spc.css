@@ -52,7 +52,7 @@ header.navbar > .container .collapse {
   position: unset;
 }
 .masthead {
-  background: #032f47 url(../../images/header_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../../../images/header_gradient.png) 50% 50% no-repeat;
   background-size: cover;
   line-height: 70px;
 }
@@ -71,7 +71,7 @@ header.navbar > .container .collapse {
   background: #032f47;
 }
 .site-footer {
-  background: #032f47 url(../../images/footer_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../../../images/footer_gradient.png) 50% 50% no-repeat;
   background-size: cover;
 }
 @media (max-width: 767px) {
@@ -193,6 +193,9 @@ header.navbar > .container .collapse {
 }
 .search-form .search-input.search-giant button {
   top: 30%;
+}
+.search-form .search-input.search-giant button i {
+  color: #333;
 }
 .search-form .control-order-by select {
   font-size: 17px;
