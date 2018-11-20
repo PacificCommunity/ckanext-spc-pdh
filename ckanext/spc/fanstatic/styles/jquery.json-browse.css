@@ -50,12 +50,12 @@ a.json-toggle:before {
   color: #2a2c2d;
   position: absolute;
   display: inline-block;
-  font-size: 16px;
-  left: -30px;
+  font-size: 18px;
+  left: -28px;
 }
 a.json-toggle.collapsed:before {
   content: '+';
-  font-size: 16px;
+  left: -30px;
 }
 a.json-toggle:hover:after {
   content: 'Collapse';
@@ -71,6 +71,7 @@ a.json-toggle:hover:after {
 }
 a.json-toggle.collapsed:hover:after {
   content: 'Expand';
+  left: -46px;
 }
 
 /* Collapsable placeholder links */
