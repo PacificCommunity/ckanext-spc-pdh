@@ -2,7 +2,7 @@
 {% set url = h.url_for(controller='organization', action='read', id=organization.name) %}
 
 {% block info %}
-  <div class="module module-narrow module-shallow context-info">
+  <div class="module module-narrow module-shallow context-info organization-info">
     {% if has_context_title %}
       <h2 class="module-heading"><i class="fa fa-building-o"></i> {{ _('Organization') }}</h2>
     {% endif %}
@@ -27,9 +27,11 @@
         <p>
           {{ h.markdown_extract(organization.description, 180) }}
         </p>
-        <div class="pull-right read-more">
-          {% link_for _('Read More'), controller='organization', action='about', id=organization.name %}
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <div class="read-more">
+          <div class="pull-right">
+            {% link_for _('Read More'), controller='organization', action='about', id=organization.name %}
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </div>
         </div>
       {% else %}
         <p class="empty">{{ _('There is no description for this organization') }}</p>

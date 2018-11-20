@@ -136,6 +136,12 @@ header.navbar > .container .collapse {
   border: 1px solid #bcdfe5;
   border-radius: 2px;
 }
+.wrapper .secondary .organization-info .read-more {
+  overflow: hidden;
+}
+.wrapper .secondary .organization-info .follow_button .btn {
+  background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+}
 .toolbar .breadcrumb li a {
   font-size: 14px;
   font-weight: lighter;
