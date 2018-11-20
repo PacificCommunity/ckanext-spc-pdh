@@ -57,6 +57,21 @@ a.json-toggle.collapsed:before {
   content: '+';
   font-size: 16px;
 }
+a.json-toggle:hover:after {
+  content: 'Collapse';
+  color: #fff;
+  background: #2a2c2d;
+  position: absolute;
+  display: inline-block;
+  font-size: 12px;
+  left: -48px;
+  top: -20px;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+a.json-toggle.collapsed:hover:after {
+  content: 'Expand';
+}
 
 /* Collapsable placeholder links */
 a.json-placeholder {
