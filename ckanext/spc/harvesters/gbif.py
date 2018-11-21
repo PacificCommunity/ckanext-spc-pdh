@@ -1,7 +1,7 @@
 import re
 import logging
 import json
-from urlparse import urljoin
+from urlparse import urljoin, urlparse
 import requests
 import lxml.etree as et
 from ckan.logic import check_access, get_action
@@ -146,9 +146,10 @@ class SpcGbifHarvester(HarvesterBase):
         nsmap['oai'] = nsmap.pop(None)
         id = root.find('*//oai:identifier', namespaces=nsmap).text
         dataset = root.find('*//dataset')
-        return id, dataset
+        gbif = root.findall('*//gbif')
+        return id, dataset, gbif
 
-    def _eml_to_dict(self, record):
+    def _eml_to_dict(self, record, gbif):
         data = {}
         data['type'] = 'biodiversity_data'
         data['license_id'] = 'cc-nc'
@@ -196,10 +197,6 @@ class SpcGbifHarvester(HarvesterBase):
         data['project'] = [
             _parse_project(e) for e in record.findall('project')
         ]
-        data['resources'] = [
-            _parse_distribution(e) for e in record.findall('distribution')
-        ]
-
         return data
 
     def fetch_stage(self, harvest_object):
@@ -227,7 +224,7 @@ class SpcGbifHarvester(HarvesterBase):
                     (harvest_object.guid, 'eml')
                 )
 
-                id, record = self._fetch_record(
+                id, record, gbif = self._fetch_record(
                     urljoin(
                         harvest_object.job.source.url, '/v1/oai-pmh/registry'
                     ), harvest_object.guid
@@ -241,8 +238,31 @@ class SpcGbifHarvester(HarvesterBase):
 
             try:
 
-                content_dict = self._eml_to_dict(record)
+                content_dict = self._eml_to_dict(record, gbif)
                 content_dict['id'] = id
+
+                content_dict['resources'] = [{
+                    'name': 'GBIF annotated archive',
+                    'url': 'https://www.gbif.org/occurrence/download?dataset_key='
+                    + id
+                }, {
+                    'name': 'GBIF annotated metadata',
+                    'url': 'https://api.gbif.org/v1/dataset/{}/document'.
+                    format(id)
+                }]
+                for url in content_dict['alternate_identifier']:
+                    parsed_url = urlparse(url)
+                    if not parsed_url.netloc:
+                        continue
+
+                    content_dict['resources'].insert(
+                        1, {
+                            'name': 'Source archive',
+                            'url': parsed_url._replace(path='/archive.do'
+                                                       ).geturl()
+                        }
+                    )
+
                 content = json.dumps(content_dict)
             except Exception:
                 logger.exception('Dumping the metadata failed!')
@@ -430,6 +450,10 @@ def _parse_project(e):
     return data
 
 
-def _parse_distribution(e):
-    url = _text(e.find('online/url'))
-    return {'url': url}
+def _parse_additional(e):
+    url = _text(e.find('resourceLogoUrl'))
+    if url:
+        url = urlparse(url)._replace(path='/archive.do').geturl()
+
+    description = _text(e.find('citation'))
+    return {'url': url, 'description': description, 'name': 'Source archive'}

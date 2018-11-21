@@ -1,0 +1,94 @@
+/* Syntax highlighting for JSON objects */
+.json-body {
+  margin: 10px 20px;
+}
+
+ul.json-dict, ol.json-array {
+  font-family: 'Calibri';
+  font-size: 14px;
+  line-height: 18px;
+  list-style-type: none;
+  border-left: 1px solid #bcdfe5;
+  padding-left: 15px;
+  margin-left: 3px;
+}
+ul.json-dict li, ol.json-array li {
+  position: relative;
+}
+
+ul.json-dict li:after, ol.json-array li:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 9px;
+  left: -15px;
+  height: 1px;
+  width: 12px;
+  border-bottom: 1px solid #bcdfe5;
+  border-left: 1px solid #bcdfe5;
+}
+.json-string {
+  color: #036295;
+  font-weight: bold;
+}
+.json-literal {
+  color: #036295;
+  font-weight: bold;
+}
+
+/* Toggle button */
+a.json-toggle {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+a.json-toggle:focus {
+  outline: none;
+}
+a.json-toggle:before {
+  content: '-';
+  color: #2a2c2d;
+  position: absolute;
+  display: inline-block;
+  font-size: 18px;
+  left: -28px;
+}
+a.json-toggle.collapsed:before {
+  content: '+';
+  left: -30px;
+}
+a.json-toggle:hover:after {
+  content: 'Collapse';
+  color: #fff;
+  background: #2a2c2d;
+  position: absolute;
+  display: inline-block;
+  font-size: 12px;
+  left: -48px;
+  top: -20px;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+a.json-toggle.collapsed:hover:after {
+  content: 'Expand';
+  left: -46px;
+}
+
+/* Collapsable placeholder links */
+a.json-placeholder {
+  font-size: 12px;
+  color: #727474;
+  padding: 0 2px;
+  text-decoration: none;
+}
+a.json-placeholder:hover {
+  text-decoration: underline;
+}
+
+@media(max-width: 768px) {
+  ul.json-dict li, ol.json-array li {
+    word-break: break-word;
+    line-height: 15px;
+    margin: 6px 0;
+  }
+}

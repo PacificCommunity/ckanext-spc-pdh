@@ -1,28 +1,28 @@
 @font-face {
   font-family: 'Calibri';
-  src: url('../../fonts/Calibri-Bold.ttf');
-  src: url('../../fonts/Calibri-Bold.eot?#iefix') format('embedded-opentype'), url('../../fonts/Calibri-Bold.woff2') format('woff2'), url('../../fonts/Calibri-Bold.woff') format('woff'), url('../../fonts/Calibri-Bold.ttf') format('truetype'), url('../../fonts/Calibri-Bold.svg#Calibri-Bold') format('svg');
+  src: url('../../../fonts/Calibri-Bold.ttf');
+  src: url('../../../fonts/Calibri-Bold.eot?#iefix') format('embedded-opentype'), url('../../../fonts/Calibri-Bold.woff2') format('woff2'), url('../../../fonts/Calibri-Bold.woff') format('woff'), url('../../../fonts/Calibri-Bold.ttf') format('truetype'), url('../../../fonts/Calibri-Bold.svg#Calibri-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: 'Calibri';
-  src: url('../../fonts/Calibri-Light.ttf');
-  src: url('../../fonts/Calibri-Light.eot?#iefix') format('embedded-opentype'), url('../../fonts/Calibri-Light.woff2') format('woff2'), url('../../fonts/Calibri-Light.woff') format('woff'), url('../../fonts/Calibri-Light.ttf') format('truetype'), url('../../fonts/Calibri-Light.svg#Calibri-Light') format('svg');
+  src: url('../../../fonts/Calibri-Light.ttf');
+  src: url('../../../fonts/Calibri-Light.eot?#iefix') format('embedded-opentype'), url('../../../fonts/Calibri-Light.woff2') format('woff2'), url('../../../fonts/Calibri-Light.woff') format('woff'), url('../../../fonts/Calibri-Light.ttf') format('truetype'), url('../../../fonts/Calibri-Light.svg#Calibri-Light') format('svg');
   font-weight: lighter;
   font-style: normal;
 }
 @font-face {
   font-family: 'Calibri';
-  src: url('../../fonts/Calibri.ttf');
-  src: url('../../fonts/Calibri.eot?#iefix') format('embedded-opentype'), url('../../fonts/Calibri.woff2') format('woff2'), url('../../fonts/Calibri.woff') format('woff'), url('../../fonts/Calibri.ttf') format('truetype'), url('../../fonts/Calibri.svg#Calibri') format('svg');
+  src: url('../../../fonts/Calibri.ttf');
+  src: url('../../../fonts/Calibri.eot?#iefix') format('embedded-opentype'), url('../../../fonts/Calibri.woff2') format('woff2'), url('../../../fonts/Calibri.woff') format('woff'), url('../../../fonts/Calibri.ttf') format('truetype'), url('../../../fonts/Calibri.svg#Calibri') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../../fonts/fontawesome-webfont.ttf');
-  src: url('../../fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/fontawesome-webfont.woff') format('woff'), url('../../fonts/fontawesome-webfont.ttf') format('truetype'), url('../../fonts/fontawesome-webfont.svg#fontawesome-webfont') format('svg');
+  src: url('../../../fonts/fontawesome-webfont.ttf');
+  src: url('../../../fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../../../fonts/fontawesome-webfont.woff') format('woff'), url('../../../fonts/fontawesome-webfont.ttf') format('truetype'), url('../../../fonts/fontawesome-webfont.svg#fontawesome-webfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -52,7 +52,7 @@ header.navbar > .container .collapse {
   position: unset;
 }
 .masthead {
-  background: #032f47 url(../../images/header_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../../../images/header_gradient.png) 50% 50% no-repeat;
   background-size: cover;
   line-height: 70px;
 }
@@ -71,7 +71,7 @@ header.navbar > .container .collapse {
   background: #032f47;
 }
 .site-footer {
-  background: #032f47 url(../../images/footer_gradient.png) 50% 50% no-repeat;
+  background: #032f47 url(../../../images/footer_gradient.png) 50% 50% no-repeat;
   background-size: cover;
 }
 @media (max-width: 767px) {
@@ -136,6 +136,12 @@ header.navbar > .container .collapse {
   border: 1px solid #bcdfe5;
   border-radius: 2px;
 }
+.wrapper .secondary .organization-info .read-more {
+  overflow: hidden;
+}
+.wrapper .secondary .organization-info .follow_button .btn {
+  background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+}
 .toolbar .breadcrumb li a {
   font-size: 14px;
   font-weight: lighter;
@@ -193,6 +199,9 @@ header.navbar > .container .collapse {
 }
 .search-form .search-input.search-giant button {
   top: 30%;
+}
+.search-form .search-input.search-giant button i {
+  color: #333;
 }
 .search-form .control-order-by select {
   font-size: 17px;
@@ -272,6 +281,9 @@ header.navbar > .container .collapse {
 .dataset-list .dataset-item:first-of-type {
   border-top: 1px dotted #bcdfe5;
   padding-top: 20px;
+}
+.dataset-list .dataset-item .dataset-content {
+  word-wrap: break-word;
 }
 .dataset-list .dataset-item .dataset-resources li {
   display: inline-block;
@@ -708,6 +720,9 @@ header.navbar > .container .collapse {
 }
 .meta-export-select.btn-group.open .btn-primary.dropdown-toggle {
   background-color: #0c436b;
+}
+.resource-view .ckanext-datapreview > iframe {
+  min-height: auto;
 }
 #main-menu {
   position: absolute;
