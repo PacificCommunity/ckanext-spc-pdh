@@ -650,6 +650,8 @@ header.navbar > .container .collapse {
 .dataset-read .additional-info table.table tr th.dataset-details {
   width: 70%;
   font-weight: lighter;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 .dataset-read .additional-info table.table-striped tr.complex-row.label-row {
   background-color: #dfebed;
