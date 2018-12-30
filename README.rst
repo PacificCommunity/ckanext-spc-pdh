@@ -102,58 +102,137 @@ coverage installed in your virtualenv (``pip install coverage``) then run::
 
     nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.spc --cover-inclusive --cover-erase --cover-tests
 
-
----------------------------------
-Registering ckanext-spc on PyPI
----------------------------------
-
-ckanext-spc should be availabe on PyPI as
-https://pypi.python.org/pypi/ckanext-spc. If that link doesn't work, then
-you can register the project on PyPI for the first time by following these
-steps:
-
-1. Create a source distribution of the project::
-
-     python setup.py sdist
-
-2. Register the project::
-
-     python setup.py register
-
-3. Upload the source distribution to PyPI::
-
-     python setup.py sdist upload
-
-4. Tag the first release of the project on GitHub with the version number from
-   the ``setup.py`` file. For example if the version number in ``setup.py`` is
-   0.0.1 then do::
-
-       git tag 0.0.1
-       git push --tags
+-------------------
+General Information
+-------------------
 
 
-----------------------------------------
-Releasing a New Version of ckanext-spc
-----------------------------------------
+Harvesters
+##########
 
-ckanext-spc is availabe on PyPI as https://pypi.python.org/pypi/ckanext-spc.
-To publish a new version to PyPI follow these steps:
+OAI-PMH
+*******
 
-1. Update the version number in the ``setup.py`` file.
-   See `PEP 440 <http://legacy.python.org/dev/peps/pep-0440/#public-version-identifiers>`_
-   for how to choose version numbers.
+* Name used in config: **spc\_oaipmh\_harvester**
+* Dataset type: **publications**
+* Sources:
 
-2. Create a source distribution of the new version::
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| Url                                       | Title                           | Settings                                       | Organization |
++===========================================+=================================+================================================+==============+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Social Development Program      | {"set": "SDP_PDH", "topic": "Social"}          | spc-sdp      |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Climate Change and              | {"set": "CCES_PDH", "topic": "Climate Change"} | spc-cces     |
+|                                           | Environmental Sustainability    |                                                |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Fisheries, Aquaculture &        | {"set": "FAME_PDH", "topic": "Fisheries"}      | spc-fame     |
+|                                           | Marine Ecosystems               |                                                |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Geoscience, Energy and Maritime | {"set": "GEM_PDH", "topic": "Geoscience"}      | spc-gem      |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Land Resources Division         | {"set": "LRD_PDH", "topic": "Land Resources"}  | spc-lrd      |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Public Health Division          | {"set": "PHD_PDH", "topic": "Health"}          | spc-phd      |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Statistics for Development      | {"set": "SDD_PDH", "topic": "Statistics"}      | spc-sdd      |
+|                                           | Division                        |                                                |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 
-     python setup.py sdist
+DKAN
+****
 
-3. Upload the source distribution to PyPI::
+* Name used in config: **spc\_dkan\_harvester**
+* Dataset type: **dataset**
+* Sources:
 
-     python setup.py sdist upload
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| Url                                       | Title                           | Settings                                       | Organization |
++===========================================+=================================+================================================+==============+
+|                                           |                                 |                                                |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 
-4. Tag the new release of the project on GitHub with the version number from
-   the ``setup.py`` file. For example if the version number in ``setup.py`` is
-   0.0.2 then do::
+GBIF
+****
 
-       git tag 0.0.2
-       git push --tags
+* Name used in config: **spc\_gbif\_harvester**
+* Dataset type: **biodiversity\_data**
+* Sources:
+
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| Url                                       | Title                           | Settings                                       | Organization |
++===========================================+=================================+================================================+==============+
+| http://api.gbif.org                       | GBIF SPREP published            | {"topic": "Fisheries", "hosting_org":          | sprep        |
+|                                           |                                 | "cd3512e7-886c-4873-b629-740abe8ae74e",        |              |
+|                                           |                                 | "q": "-spc"}                                   |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| http://api.gbif.org                       | GBIF SPC published              | {"topic": "Fisheries", "hosting_org":          | spc-fame     |
+|                                           |                                 | "cd3512e7-886c-4873-b629-740abe8ae74e",        |              |
+|                                           |                                 | "q": "+spc"}                                   |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+
+PRDR Publications Harvester
+***************************
+
+* Name used in config: **spc\_prdr\_publications\_harvester**
+* Dataset type: **publications**
+* Sources:
+
++--------------------------------------------------------------------+-----------------------+---------------------+--------------+
+| Url                                                                | Title                 | Settings            | Organization |
++====================================================================+=======================+=====================+==============+
+| https://prdr-dev.spc.links.com.au/api/action/publications_list     | SPC PRDR Publications | {"topic": "Energy"} | spc-gem      |
++--------------------------------------------------------------------+-----------------------+---------------------+--------------+
+
+PRDR Data(energy-resource) Harvester
+************************************
+
+* Name used in config: **spc\_prdr\_res\_energy\_harvester**
+* Dataset type: **dataset**
+* Sources:
+
++--------------------------------------------------------------------+-----------------------+---------------------+--------------+
+| Url                                                                | Title                 | Settings            | Organization |
++====================================================================+=======================+=====================+==============+
+| https://prdr-dev.spc.links.com.au/api/action/energy_resources_list | SPC PRDR Data         | {"topic": "Energy"} | spc-gem      |
++--------------------------------------------------------------------+-----------------------+---------------------+--------------+
+
+SPREP
+*****
+
+* Name used in config: **spc\_sprep\_harvester**
+* Dataset type: **dataset**
+* Sources:
+
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+| Url                                       | Title                           | Settings                                       | Organization |
++===========================================+=================================+================================================+==============+
+|  https://pacific-data.sprep.org           | Inform Regional Data Portal     | {"topic_mapping": {"Atmosphere and Climate":   | sprep        |
+|                                           |                                 | "Climate Change", "Info": null,                |              |
+|                                           |                                 | "Land": "Land Resources",                      |              |
+|                                           |                                 | "Biodiversity": "Fisheries",                   |              |
+|                                           |                                 | "Build Environment": "Economic Development",   |              |
+|                                           |                                 | "Coastal and Marine": "Fisheries",             |              |
+|                                           |                                 | "Culture and Heritage": "Social",              |              |
+|                                           |                                 | "Inland Waters": "Geoscience"}}                |              |
++-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
+
+
+Datasets types
+##############
+
+* **Biodiversity data** - EML schema
+
+This Dataset type has multiple fields which includes subfields:
+	- Creator
+	- Metadata Provider
+	- Associated Party
+	- Keyword Set
+	- Coverage
+	- Maintenance
+	- Contact
+	- Methods
+	- Project
+
+* **Dataset** - DCAT schema
+* **Geographic data** - ANZLIC schema
+* **Publications** - Dublin Core schema
