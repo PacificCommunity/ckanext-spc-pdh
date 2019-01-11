@@ -163,8 +163,6 @@ eez = _EEZ([])
 
 
 def store_search_query(search_params):
-    import ipdb; ipdb.set_trace()
-
     logger.debug('after_search {}'.format(search_params))
     try:
         q = search_params['q']

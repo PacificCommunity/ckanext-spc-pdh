@@ -19,5 +19,4 @@ class SearchQuery(Base):
             meta.Session.add(existing)
 
         existing.count += 1
-        print(meta.Session.new)
         return existing
