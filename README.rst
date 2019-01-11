@@ -42,7 +42,12 @@ To install ckanext-spc:
 
      <field name="topic" type="string" indexed="true" stored="true" multiValued="true"/>
 
-5. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu::
+5. Update DB schema::
+
+     paster spc db-upgrade -c config.ini
+
+
+6. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu::
 
      sudo service apache2 reload
 
@@ -66,6 +71,7 @@ do::
     cd ckanext-spc
     python setup.py develop
     pip install -r dev-requirements.txt
+    paster spc db-upgrade -c config.ini
 
 ---------------
 Template macros

@@ -149,6 +149,9 @@ class SpcPlugin(plugins.SingletonPlugin):
             results['results'].sort(
                 key=lambda i: i.get('ga_view_count', 0), reverse=True
             )
+
+        spc_utils.store_search_query(params)
+
         return results
 
     def before_index(self, pkg_dict):

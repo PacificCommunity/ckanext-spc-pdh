@@ -8,6 +8,7 @@ from ckan.lib.search import query_for
 import ckan.plugins.toolkit as tk
 
 from ckanext.ga_report.ga_model import GA_Url
+from ckanext.spc.model import SearchQuery
 
 logger = logging.getLogger(__name__)
 
@@ -159,3 +160,46 @@ class _EEZ:
 
 
 eez = _EEZ([])
+
+
+def store_search_query(search_params):
+    import ipdb; ipdb.set_trace()
+
+    logger.debug('after_search {}'.format(search_params))
+    try:
+        q = search_params['q']
+        if not _is_user_text_search(tk.c, q):
+            return
+        # TODO: If a user performs a text-based search and then
+        # continuously refines the result via facets then we end up with
+        # many entries for basically the same search, which might screw up
+        # our scoring.
+        q = _normalize_search_query(q)
+        query = SearchQuery.update_or_create(q)
+        model.Session.commit()
+        return query
+    except Exception:
+        # Log exception but don't cause search request to fail
+        logger.exception('An exception occurred while storing a search query')
+
+
+def _normalize_search_query(q):
+    return ' '.join(q.lower().split()).strip()
+
+
+def _is_user_text_search(context, query):
+    '''
+    Decide if a search query is a user-initiated text search.
+    '''
+    # See https://github.com/ckan/ckanext-searchhistory/issues/1#issue-32079108
+    try:
+        if (
+            context.controller != 'package'
+            or context.action != 'search'
+            or (query or '').strip() in (':', '*:*')
+        ):
+            return False
+    except TypeError:
+        # Web context not ready. Happens, for example, in paster commands.
+        return False
+    return True
