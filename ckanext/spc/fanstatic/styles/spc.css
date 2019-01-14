@@ -235,6 +235,10 @@ header.navbar > .container .collapse {
   color: #fff;
   border-radius: 2px;
 }
+.filters .module-heading .action,
+.secondary .module-heading .action {
+  color: #fff;
+}
 .filters .module:first-child .module-heading,
 .secondary .module:first-child .module-heading {
   border-radius: 2px 2px 2px 2px;
@@ -391,6 +395,13 @@ header.navbar > .container .collapse {
 }
 .data-quality-tooltip:hover .tooltiptext {
   visibility: visible;
+}
+.dataset-map-expanded #dataset-map {
+  width: 100%;
+  max-width: 1008px;
+  left: 0;
+  border-color: #bcdfe5;
+  border-radius: 2px;
 }
 .dataset-read {
   display: flex;
