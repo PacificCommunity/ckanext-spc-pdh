@@ -403,6 +403,17 @@ header.navbar > .container .collapse {
   border-color: #bcdfe5;
   border-radius: 2px;
 }
+.dataset-map-expanded #dataset-map .btn.cancel {
+  color: #036295;
+  background: #fff;
+  border: 2px solid #036295;
+  line-height: 16px;
+}
+.dataset-map-expanded #dataset-map .btn.apply.disabled {
+  line-height: 16px;
+  background-color: transparent;
+  opacity: 0.8;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
