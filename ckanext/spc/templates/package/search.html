@@ -69,7 +69,7 @@
 {% block secondary_content %}
   {% block sidebar_spatial_search %}
     {% if 'spatial_query' in g.plugins %}
-      {% snippet "spatial/snippets/spatial_query.html", default_extent=[[-38, 139], [-27, 155]] %}
+      {% snippet "snippets/spatial_query.html", default_extent=[[-38, 139], [-27, 155]] %}
     {% endif %}
   {% endblock %}
   {% snippet 'snippets/spc_facet_list.html', facet_titles=c.facet_titles %}
