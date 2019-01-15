@@ -397,5 +397,18 @@ header.navbar {
         left: 0;
         border-color: @border-blue;
         border-radius: 2px;
+        .btn.cancel {
+            color: #036295;
+            background: #fff;
+            border: 2px solid #036295;
+            line-height: 16px;
+        }
+        .btn.apply {
+            &.disabled {
+                line-height: 16px;
+                background-color: transparent;
+                opacity: 0.8;
+            }
+        }
     }
 }
