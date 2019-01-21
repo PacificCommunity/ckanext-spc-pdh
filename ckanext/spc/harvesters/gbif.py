@@ -66,6 +66,7 @@ class SpcGbifHarvester(HarvesterBase):
             url = urljoin(harvest_job.source.url, '/v1/dataset/search')
 
             for record in self._fetch_record_outline(url):
+
                 harvest_obj = HarvestObject(
                     guid=record['key'],
                     content=record['country'],
@@ -152,7 +153,8 @@ class SpcGbifHarvester(HarvesterBase):
     def _eml_to_dict(self, record, gbif):
         data = {}
         data['type'] = 'biodiversity_data'
-        data['license_id'] = 'cc-nc'
+
+        data['license_id'] = 'cc-nc-4.0'
         data['thematic_area_string'] = self._topic
 
         data['title'] = record.find('title').text.strip()
@@ -177,9 +179,12 @@ class SpcGbifHarvester(HarvesterBase):
         data['additional_info'] = '\n\n'.join(
             record.xpath('additionalInfo/para/text()')
         )
-        data['intellectual_rights'] = '\n\n'.join(
-            record.xpath('intellectualRights/para/text()')
-        )
+
+        data['intellectual_rights'] = '\n\n'.join([
+            unlinkify_para(item)
+            for item in record.xpath('intellectualRights/para')
+        ])
+
         data['purpose'] = '\n\n'.join(record.xpath('purpose/para/text()'))
 
         data['keyword_set'] = [
@@ -241,15 +246,18 @@ class SpcGbifHarvester(HarvesterBase):
                 content_dict = self._eml_to_dict(record, gbif)
                 content_dict['id'] = id
 
-                content_dict['resources'] = [{
+                content_dict[
+                    'resources'
+                ] = [{
                     'name': 'GBIF annotated archive',
                     'url': 'https://www.gbif.org/occurrence/download?dataset_key='
                     + id
-                }, {
-                    'name': 'GBIF annotated metadata',
-                    'url': 'https://api.gbif.org/v1/dataset/{}/document'.
-                    format(id)
-                }]
+                },
+                     {
+                         'name': 'GBIF annotated metadata',
+                         'url': 'https://api.gbif.org/v1/dataset/{}/document'.
+                         format(id)
+                     }]
                 for url in content_dict['alternate_identifier']:
                     parsed_url = urlparse(url)
                     if not parsed_url.netloc:
@@ -457,3 +465,14 @@ def _parse_additional(e):
 
     description = _text(e.find('citation'))
     return {'url': url, 'description': description, 'name': 'Source archive'}
+
+def unlinkify_para(para):
+    result = para.text
+    for child in para.iterchildren():
+        child_text = ''.join(list(child.itertext()))
+        child_url = child.attrib.get('url')
+        if child_url:
+            child_text = '[{}]({})'.format(child_text, child_url)
+        result += child_text + child.tail
+
+    return result
