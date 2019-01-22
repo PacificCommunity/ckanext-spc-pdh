@@ -1,6 +1,8 @@
 import logging
 import os
 import json
+import requests
+from tika import parser as pdf_parser
 
 from collections import OrderedDict
 from six import string_types
@@ -94,10 +96,10 @@ class SpcPlugin(plugins.SingletonPlugin):
             (schema['dataset_type'], schema['about'])
             for schema in scheming_helpers.scheming_dataset_schemas().values()
         ])
-        self.member_countries = OrderedDict([
-            (choice['value'], choice['label']) for choice in
-            scheming_helpers.scheming_get_preset('member_countries')['choices']
-        ])
+        self.member_countries = OrderedDict(
+            [(choice['value'], choice['label']) for choice in scheming_helpers.
+             scheming_get_preset('member_countries')['choices']]
+        )
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
         if not os.path.isfile(filepath):
@@ -197,7 +199,6 @@ class SpcPlugin(plugins.SingletonPlugin):
         return results
 
     def before_index(self, pkg_dict):
-
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
@@ -213,6 +214,33 @@ class SpcPlugin(plugins.SingletonPlugin):
         )
         # Otherwise you'll get `immense field` error from SOLR
         pkg_dict.pop('data_quality_info', None)
+
+        try:
+            res_pairs = [(fmt.lower(), url)
+                         for fmt, url in
+                         zip(pkg_dict['res_format'], pkg_dict['res_url'])
+                         if fmt.lower() in ('txt', 'pdf')]
+        except KeyError as e:
+            logger.warn(
+                'Problem during indexind resources of <%s>: key %s not found',
+                pkg_dict['id'], e
+            )
+            res_pairs = []
+        for fmt, url in res_pairs:
+            try:
+                content = requests.get(url).content
+            except Exception as e:
+                logger.warn(
+                    'Problem during indexing resources(%s): %s', type(e), e
+                )
+                continue
+            if fmt == 'pdf':
+                try:
+                    content = pdf_parser.from_buffer(content)['content'].strip()
+                except Exception as e:
+                    logger.error("PDF parsing error(%s): %s", type(e), e)
+                pkg_dict.setdefault('text', []).append(content)
+
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
