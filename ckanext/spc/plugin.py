@@ -2,6 +2,7 @@ import logging
 import os
 import json
 import requests
+import tika
 from tika import parser as pdf_parser
 
 from collections import OrderedDict
@@ -194,8 +195,7 @@ class SpcPlugin(plugins.SingletonPlugin):
                     content = pdf_parser.from_buffer(content)['content'].strip()
                 except Exception as e:
                     logger.error("PDF parsing error(%s): %s", type(e), e)
-                pkg_dict.setdefault('text', []).append(content)
-
+            pkg_dict.setdefault('text', []).append(content)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
