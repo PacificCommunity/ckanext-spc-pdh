@@ -2,13 +2,14 @@ import logging
 import os
 import json
 import requests
-from tika import parser as pdf_parser
+import textract
 
 from collections import OrderedDict
 from six import string_types
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+from ckan.lib.uploader import get_resource_uploader
 
 from ckan.common import _
 import ckanext.scheming.helpers as scheming_helpers
@@ -216,31 +217,30 @@ class SpcPlugin(plugins.SingletonPlugin):
         pkg_dict.pop('data_quality_info', None)
 
         try:
-            res_pairs = [(fmt.lower(), url)
-                         for fmt, url in
-                         zip(pkg_dict['res_format'], pkg_dict['res_url'])
-                         if fmt.lower() in ('txt', 'pdf')]
+            resources = json.loads(pkg_dict['validated_data_dict'])['resources']
+            resources_to_index = []
+            for res in resources:
+                if res.get('format', '').lower() in ('txt', 'pdf'):
+                    resources_to_index.append(res)
         except KeyError as e:
             logger.warn(
                 'Problem during indexind resources of <%s>: key %s not found',
                 pkg_dict['id'], e
             )
-            res_pairs = []
-        for fmt, url in res_pairs:
-            try:
-                content = requests.get(url).content
-            except Exception as e:
-                logger.warn(
-                    'Problem during indexing resources(%s): %s', type(e), e
-                )
+            resources_to_index
+        for res in resources_to_index:
+            uploader = get_resource_uploader(res)
+            path = uploader.get_path(res['id'])
+            if not os.path.exists(path):
+                logger.warn('Resource "%s" refers to unexisting path "%s"', res['id'], path)
                 continue
+            fmt = res['format'].lower()
             if fmt == 'pdf':
-                try:
-                    content = pdf_parser.from_buffer(content)['content'].strip()
-                except Exception as e:
-                    logger.error("PDF parsing error(%s): %s", type(e), e)
-                pkg_dict.setdefault('text', []).append(content)
-
+                content = textract.process(path, extension='.pdf')
+            else:
+                with open(path) as f:
+                    content = f.read()
+            pkg_dict.setdefault('text', []).append(content)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
