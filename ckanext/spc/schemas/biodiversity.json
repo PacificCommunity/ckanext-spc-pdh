@@ -151,7 +151,8 @@
     {
       "field_name": "intellectual_rights",
       "label": "Intellectual Rights",
-      "form_snippet": "markdown.html"
+      "form_snippet": "markdown.html",
+      "display_snippet": "markdown.html"
     },
     {
       "field_name": "coverage",
