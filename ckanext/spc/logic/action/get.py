@@ -89,17 +89,28 @@ five_star_rating.__doc__ = five_star_rating.__doc__.format(
 @tk.side_effect_free
 def spc_package_search(context, data_dict):
     data_dict['rows'] = 1000
+    types_count = {}
+    def _countTypes(item):
+        if item['type'] not in types_count:
+            types_count[item['type']] = 1
+        else:
+            types_count[item['type']] += 1
+        return True
 
     results = tk.get_action('package_search')(context, data_dict)
 
     if results and results['count'] > 1000:
-        extra_requests_number = int(math.ceil(results['count'] / 1000.0)) - 1
+        extra_requests_number = int(math.ceil(
+            results['count'] / 1000.0)) - 1
         for i in range(1, extra_requests_number + 1):
             offset = i * 1000
             data_dict['start'] = offset
-            extra_request = tk.get_action('package_search')(context, data_dict)
+            extra_request = tk.get_action('package_search')(
+                context, data_dict)
             if extra_request and extra_request['results']:
                 results['results'] += extra_request['results']
-        return results
-    else:
-        return results
+
+    map(_countTypes, results['results'])
+    results['types_count'] = types_count
+
+    return results
