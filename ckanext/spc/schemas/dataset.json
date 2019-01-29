@@ -112,8 +112,8 @@
       "validators": "copy_from(page) ignore_missing spc_to_json"
     },
     {
-      "field_name": "povenance",
-      "label": "Povenance"
+      "field_name": "provenance",
+      "label": "Provenance"
     },
     {
       "field_name": "dcat_type",

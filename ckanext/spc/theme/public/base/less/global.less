@@ -22,7 +22,7 @@ header.navbar {
     }
 }
 .masthead {
-    background: @dark-blue url(../../images/header_gradient.png) 50% 50% no-repeat;
+    background: @dark-blue url(../../../images/header_gradient.png) 50% 50% no-repeat;
     background-size: cover;
     line-height: 70px;
     .navigation {
@@ -51,7 +51,7 @@ header.navbar {
     background: @dark-blue;
 }
 .site-footer {
-    background: @dark-blue url(../../images/footer_gradient.png) 50% 50% no-repeat;
+    background: @dark-blue url(../../../images/footer_gradient.png) 50% 50% no-repeat;
     background-size: cover;
     @media (max-width: 767px) {
         background: #003960;
@@ -107,6 +107,16 @@ header.navbar {
     .secondary {
         border:  1px solid @border-blue;
         border-radius: 2px;
+        .organization-info {
+            .read-more {
+                overflow: hidden;
+            }
+            .follow_button {
+                .btn {
+                    background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+                }
+            }
+        }
     }
 }
 .toolbar {
@@ -165,7 +175,10 @@ header.navbar {
             padding: 18px 15px;
         }
         button {
-            top: 30%
+            top: 30%;
+            i {
+                color: #333;    
+            }
         }
     }
     .control-order-by select {
@@ -251,6 +264,9 @@ header.navbar {
         &:first-of-type {
             border-top: 1px dotted @border-blue;
             padding-top: 20px;
+        }
+        .dataset-content {
+            word-wrap: break-word;
         }
         .dataset-resources {
             li {

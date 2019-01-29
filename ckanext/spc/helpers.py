@@ -12,6 +12,7 @@ from ckan.common import config
 from ckanext.spc.utils import eez
 import ckan.lib.helpers as h
 from pylons.decorators.cache import beaker_cache
+import ckan.plugins.toolkit as toolkit
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +27,7 @@ def get_helpers():
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
+        spc_hotjar_enabled=spc_hotjar_enabled
     )
 
 
@@ -140,3 +142,10 @@ def spc_unwrap_list(value):
     if 0 in value:
         return value[0]
     return value
+
+
+def spc_hotjar_enabled():
+    enabled = toolkit.asbool(config.get('ckan.spc.hotjar_enabled', False))
+    if enabled:
+        return True
+    return False

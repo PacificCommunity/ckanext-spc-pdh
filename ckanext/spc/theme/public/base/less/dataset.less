@@ -261,6 +261,8 @@
             &.dataset-details {
               width: 70%;
               font-weight: lighter;
+              word-break: break-word;
+              word-wrap: break-word;
             }
           }
         }
@@ -350,5 +352,11 @@
     .btn-primary.dropdown-toggle {
       background-color: #0c436b;
     }
+  }
+}
+
+.resource-view {
+  .ckanext-datapreview>iframe {
+    min-height: auto;
   }
 }

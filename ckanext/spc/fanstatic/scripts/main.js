@@ -1,3 +1,7 @@
 (function ($) {
-    $('body>div.page-wrapper').addClass('ma5-page');
+  $('.json-data').map((i, item) => {
+    $(item).jsonBrowse($(item).data().json, {
+      collapsed: true
+    });
+  })
 })(jQuery);
