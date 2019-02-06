@@ -1,29 +1,17 @@
-import re
-import logging
 import json
-from urlparse import urljoin, urlparse
-import requests
-import lxml.etree as et
-from ckan.logic import check_access, get_action
-from ckan.lib.munge import munge_title_to_name
-
-from ckanext.oaipmh.harvester import OaipmhHarvester
-from ckanext.scheming.helpers import (
-    scheming_get_dataset_schema, scheming_field_by_name, scheming_field_choices
-)
-from ckanext.spc.utils import eez
-
+import logging
+import re
 import urllib2
+from urlparse import urljoin, urlparse
 
-from ckan.model import Session
+import lxml.etree as et
+import requests
 from ckan import model
-
+from ckan.lib.munge import munge_title_to_name
+from ckan.logic import get_action
+from ckan.model import Session
 from ckanext.harvest.harvesters.base import HarvesterBase
-from ckan.lib.munge import munge_tag
 from ckanext.harvest.model import HarvestObject
-
-import oaipmh.client
-from oaipmh.metadata import MetadataRegistry
 
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\w)')
@@ -67,6 +55,8 @@ class SpcGbifHarvester(HarvesterBase):
 
             for record in self._fetch_record_outline(url):
 
+                # if record['key'] != 'a38c7d49-5a5d-4aa6-a64e-421178bd06d7':
+                    # continue
                 harvest_obj = HarvestObject(
                     guid=record['key'],
                     content=record['country'],
@@ -184,6 +174,10 @@ class SpcGbifHarvester(HarvesterBase):
             unlinkify_para(item)
             for item in record.xpath('intellectualRights/para')
         ])
+
+        license = record.find('intellectualRights/para/ulink/citetitle')
+        if license is not None:
+            data['license_id'] = license.text
 
         data['purpose'] = '\n\n'.join(record.xpath('purpose/para/text()'))
 
@@ -465,6 +459,7 @@ def _parse_additional(e):
 
     description = _text(e.find('citation'))
     return {'url': url, 'description': description, 'name': 'Source archive'}
+
 
 def unlinkify_para(para):
     result = para.text
