@@ -88,7 +88,13 @@ five_star_rating.__doc__ = five_star_rating.__doc__.format(
 
 @tk.side_effect_free
 def spc_package_search(context, data_dict):
-    data_dict['rows'] = 1000
+    default_limit_rows = 1000
+    revice_all_data = False
+
+    if 'rows' not in data_dict:
+        data_dict['rows'] = default_limit_rows
+        revice_all_data = True
+
     types_count = {}
     def _countTypes(item):
         if item['type'] not in types_count:
@@ -99,7 +105,7 @@ def spc_package_search(context, data_dict):
 
     results = tk.get_action('package_search')(context, data_dict)
 
-    if results and results['count'] > 1000:
+    if revice_all_data and results and results['count'] > 1000:
         extra_requests_number = int(math.ceil(
             results['count'] / 1000.0)) - 1
         for i in range(1, extra_requests_number + 1):
