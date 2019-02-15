@@ -88,6 +88,8 @@ class DKANHarvester(CKANHarvester):
                 if license.title == package['license_title']:
                     package['license_id'] = license.id
                     break
+            else:
+                package['license_id'] = 'notspecified'
 
             if 'resources' not in package:
                 raise PackageDictError('Dataset has no resources')

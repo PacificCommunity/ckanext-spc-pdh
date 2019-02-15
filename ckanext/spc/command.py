@@ -3,7 +3,7 @@ import logging
 import ckan.model as model
 import paste.script
 from ckan.lib.cli import CkanCommand
-
+import ckan.lib.search as search
 
 logger = logging.getLogger(__name__)
 
@@ -40,3 +40,16 @@ class SPCCommand(CkanCommand):
             return self.usage
 
         return cmd()
+
+    def fix_missed_licenses(self):
+        q = model.Session.query(model.Package).filter_by(license_id=None)
+        ids = [pkg.id for pkg in q]
+        if not ids:
+            print('There are no packages with missed license_id')
+            return
+        broken_count = q.update({'license_id': 'notspecified'})
+        model.Session.commit()
+        print('{} packages were updated:'.format(broken_count))
+        for id in ids:
+            search.rebuild(id)
+            print('\t' + id)
