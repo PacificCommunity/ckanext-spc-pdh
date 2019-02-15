@@ -66,13 +66,16 @@ class SPCCommand(CkanCommand):
 
     def fix_missed_licenses(self):
         q = model.Session.query(model.Package).filter(
-            model.Package.license_id.is_(None) | (model.Package.license == '')
+            model.Package.license_id.is_(None)
+            | (model.Package.license_id == '')
         )
         ids = [pkg.id for pkg in q]
         if not ids:
             print('There are no packages with missed license_id')
             return
-        broken_count = q.update({'license_id': 'notspecified'})
+        broken_count = q.update({
+            'license_id': 'notspecified'
+        }, synchronize_session=False)
         model.Session.commit()
         print('{} packages were updated:'.format(broken_count))
         for id in ids:
