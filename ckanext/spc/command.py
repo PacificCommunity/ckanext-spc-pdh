@@ -42,7 +42,9 @@ class SPCCommand(CkanCommand):
         return cmd()
 
     def fix_missed_licenses(self):
-        q = model.Session.query(model.Package).filter_by(license_id=None)
+        q = model.Session.query(model.Package).filter(
+            model.Package.license_id.is_(None) | (model.Package.license == '')
+        )
         ids = [pkg.id for pkg in q]
         if not ids:
             print('There are no packages with missed license_id')
