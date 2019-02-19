@@ -460,6 +460,15 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
                     p.toolkit.get_action('package_create')(context, package_dict)
                 log.info('Created dataset with id %s', package_id)
         model.Session.commit()
+        stored_package = p.toolkit.get_action('package_show')(
+            context.copy(), {'id': package_id}
+        )
+        for res in stored_package.get('resources', []):
+            p.toolkit.get_action('resource_create_default_resource_views')(
+                context.copy(),
+                {'package': stored_package, 'resource': res}
+            )
+
         return True
 
     def _set_config(self, source_config):
