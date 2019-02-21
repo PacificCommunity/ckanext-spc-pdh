@@ -2,8 +2,9 @@ import json
 import urlparse
 import logging
 import requests
-
 import iso639
+
+from beaker.cache import CacheManager
 
 from routes import url_for as _routes_default_url_for
 
@@ -11,10 +12,10 @@ from ckan.common import config
 
 from ckanext.spc.utils import eez
 import ckan.lib.helpers as h
-from pylons.decorators.cache import beaker_cache
 import ckan.plugins.toolkit as toolkit
 
 logger = logging.getLogger(__name__)
+cache = CacheManager()
 
 
 def get_helpers():
@@ -99,7 +100,7 @@ def spc_get_footer():
         return get_html
 
 
-@beaker_cache(expire=3600)
+@cache.cache('footer_from_drupal', expire=3600)
 def _spc_get_footer_from_drupal(drupal_url=None):
     if drupal_url is None or drupal_url == h.full_current_url(
     ).split('?')[0][:-1]:
