@@ -71,6 +71,7 @@ header.navbar > .container .collapse {
   background: #032f47;
 }
 .site-footer {
+  padding: 0;
   background: #032f47 url(../../../images/footer_gradient.png) 50% 50% no-repeat;
   background-size: cover;
 }
