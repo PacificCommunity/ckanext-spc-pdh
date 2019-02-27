@@ -32,6 +32,15 @@
   }
 }
 
+// @meida (max-width: 991px) {
+@media(max-width: 991px) {
+    #main-menu {
+        display: none;
+    }
+}
+// }
+
+
 @media(max-width: 768px) {
   body {
     padding: 0;
@@ -54,7 +63,8 @@
     margin-right: 0;
   }
   [role=main] #content {
-    padding: 0 20px;
+    // padding: 0 20px;
+      margin: 0px 15px;
     .primary.span9 {
       width: 100%;
     }
@@ -70,20 +80,7 @@
       }
     }
     .toolbar {
-      background: #fff;
-      margin-bottom: 5px;
-      .breadcrumb {
-        li {
-          a {
-            color: #2a2c2d;
-          }
-          &.active {
-            a {
-              color: #2a2c2d;
-            }
-          }
-        }
-      }
+        display: none;
     }
   }
   .dataset-read {

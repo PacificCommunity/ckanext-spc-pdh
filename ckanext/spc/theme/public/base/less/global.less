@@ -1,10 +1,7 @@
 body {
     font-family: 'Montserrat';
     font-weight: 400;
-    background: @dark-blue;
-    @media (max-width: 767px) {
-        background: #003960;
-    }
+    background-color: #f7f7f7;
 }
 a {
     color: @text-blue
@@ -22,9 +19,82 @@ header.navbar {
     }
 }
 .masthead {
-    background: @dark-blue url(../../../images/header_gradient.png) 50% 50% no-repeat;
+    background-image: linear-gradient(135deg, rgba(0,198,236,0.85) 0%, rgba(0,3,102,0.95) 100%), url("@{relative_root}/base/images/header.jpg");
     background-size: cover;
+    background-position: 50%;
+    height: 650px;
     line-height: 70px;
+    line-height: 1em;
+    margin-bottom: -520px;
+    padding: 23px 2px;
+    z-index: auto;
+    .logo {
+        img {
+            max-width: 135px;
+        }
+    }
+    #main-menu {
+
+
+        li {
+            .hide-empty-element;
+            display: inline-block;
+            margin: 15px 17px;
+            border-color: transparent;
+            a {
+                // .header-link-animated;
+                padding: 2px;
+                font-size: 13px;
+                // &:hover, &:active, &:focus {
+                    // text-decoration: none;
+                // }
+            }
+        }
+        & > ul > li:last-child {
+            display: none;
+        }
+        .dropdown {
+            &.open {
+                .dropdown-menu {
+                    margin-top: 26px;
+                    margin-left: -23px;
+                    border-radius: 19px;
+                    padding: 15px;
+                }
+            }
+            .dropdown-toggle {
+                .fa-chevron-down {
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    color: transparent;
+                    margin: 0px 10px;
+                    vertical-align: sub;
+                    width: 10px;
+                    .spc-icon-chevron-down;
+                }
+            }
+            li {
+                .hide-empty-element;
+                display: block;
+                padding: 3px 10px;
+                margin: 0px;
+                a {
+                    padding: 2px;
+                    border-bottom: 1px dashed #D3D3D3;
+
+                    &:hover {
+                        background-color: transparent;
+                        color: #007AD8;
+                    }
+                }
+                &:last-child {
+                    a {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+    }
     .navigation {
         .nav-pills {
             li {
@@ -48,7 +118,7 @@ header.navbar {
     }
 }
 .account-masthead {
-    background: @dark-blue;
+    background: #0c80bd;
 }
 .site-footer {
     padding: 0;
@@ -59,23 +129,46 @@ header.navbar {
     }
 }
 [role=main], .main {
-    background: #fff;
-    @media (max-width: 767px) {
-        padding-bottom: 0;
-    }
+    background: transparent;
+    padding-bottom: 25px;
     .toolbar {
-        margin: 0 -47px 20px;
+        margin-left: -15px;
+        background-color: transparent;
+        top: -40px;
+        .breadcrumb {
+            a, li:after {
+                color: #ffffff;
+            }
+            li + li:before {
+                content: '';
+                padding: 0px;
+            }
+            li:last-child:after {
+                content: '';
+            }
+            .active {
+                a {
+                    color: #ffffff;
+                    font-weight: 900;
+                }
+            }
+
+        }
+    }
+    #content {
+        background: #ffffff;
+        border-radius: 5px;
     }
 }
 @media(min-width: 1125px) {
     .container {
-        width: 1010px;
-        .span3 {
-            width: 250px;
-        }
-        .span9 {
-            width: 740px;
-        }
+        // width: 1010px;
+        // .span3 {
+            // width: 250px;
+        // }
+        // .span9 {
+            // width: 740px;
+        // }
     }
 }
 .wrapper {
@@ -178,7 +271,7 @@ header.navbar {
         button {
             top: 30%;
             i {
-                color: #333;    
+                color: #333;
             }
         }
     }
@@ -237,14 +330,6 @@ header.navbar {
     border-radius: 5px;
     &:hover, &:focus, &:active {
         background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
-    }
-}
-.nav-simple {
-    &>li.nav-item {
-        border-bottom: 1px dashed @border-blue;
-        a {
-            color: #2a2c2d;
-        }
     }
 }
 
@@ -391,24 +476,26 @@ header.navbar {
     }
 }
 
-.dataset-map-expanded {
-    #dataset-map {
-        width: 100%;
-        max-width: 1008px;
-        left: 0;
-        border-color: @border-blue;
-        border-radius: 2px;
-        .btn.cancel {
-            color: #036295;
-            background: #fff;
-            border: 2px solid #036295;
-            line-height: 16px;
-        }
-        .btn.apply {
-            &.disabled {
+@media(min-width: 769px) {
+    .dataset-map-expanded {
+        #dataset-map {
+            width: 100%;
+            max-width: 1008px;
+            left: 0;
+            border-color: @border-blue;
+            border-radius: 2px;
+            .btn.cancel {
+                color: #036295;
+                background: #fff;
+                border: 2px solid #036295;
                 line-height: 16px;
-                background-color: transparent;
-                opacity: 0.8;
+            }
+            .btn.apply {
+                &.disabled {
+                    line-height: 16px;
+                    background-color: transparent;
+                    opacity: 0.8;
+                }
             }
         }
     }
