@@ -67,11 +67,6 @@
 {% endblock %}
 
 {% block secondary_content %}
-  {% block sidebar_spatial_search %}
-    {% if 'spatial_query' in g.plugins %}
-      {% snippet "snippets/spatial_query.html", default_extent=[[-28, 132], [8, 201]] %}
-    {% endif %}
-  {% endblock %}
   {% snippet 'snippets/spc_facet_list.html', facet_titles=c.facet_titles %}
 {% endblock %}
 
@@ -88,6 +83,6 @@
             r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
             a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>      
+    </script>
   {% endif %}
 {% endblock %}

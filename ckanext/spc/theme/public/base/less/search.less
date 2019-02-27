@@ -1,0 +1,118 @@
+.secondary {
+  .filters {
+    // mobile facets
+    .js [role='main'] & {
+      background: #ffffff;
+      padding: 24px 17px;
+    }
+    .mobile-filters-heading {
+        margin: 0 26px;
+        padding-bottom: 16px;
+        font-size: 50px;
+        font-weight: 600;
+        line-height: 61px;
+        border-bottom: 1px dashed #c6c6c6;
+    }
+    .js body.filters-modal & {
+        .hide-filters {
+            right: 51px;
+            top: 43px;
+            i {
+                .spc-icon-times();
+                width: 21px;
+                height: 21px;
+                color: transparent;
+                background-size: cover;
+
+                &:before {
+                    visibility: hidden;
+                }
+            }
+        }
+        .module {
+            .module-footer {
+                display: block;
+                margin: 9px 25px;
+                a {
+                    font-size: 25px;
+                    &:hover, &:active {
+                        text-decoration: none;
+                    }
+                }
+                .show-more-icon {
+                    width: 18px;
+                    height: 11px;
+                    display: inline-block;
+                    margin-left: 10px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    & > div {
+        border-radius: 10px;
+        border: 1px solid #c3c3c3;
+        .nav-facet {
+            padding: 0 40px;
+        }
+    }
+    .module {
+        position: relative;
+        .module-heading {
+            background: #f8f8f8;
+            font-size: 30px;
+            font-weight: 600;
+            color: #000;
+            border-radius: 50px 10px 10px 50px;
+            border: none;
+            position: absolute;
+            margin: 25px;
+            left: 0px;
+            right: 0px;
+            padding: 0px;
+            & + nav {
+                padding-top: 130px;
+            }
+            .spc-facet-heading-icon {
+                width: 60px;
+                height: 60px;
+                display: inline-block;
+                border-radius: 50%;
+                background-color: #001e73;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                vertical-align: middle;
+                margin: 12px;
+                margin-right: 6px;
+            }
+        }
+
+    }
+    .nav-simple {
+        & > li.nav-item {
+            border-bottom: 1px dashed #bdbdbd;
+            word-break: break-word;
+            a {
+                font-size: 25px;
+                line-height: 50px;
+                color: #000000;
+                padding-right: 50px;
+                &:hover:after, &:after {
+                    position: absolute;
+                    content: '+';
+                    font-size: 35px;
+                    font-family: Raleway;
+                    background: none;
+                    top: 10px;
+                    right: 20px;
+                    width: 20px;
+                    height: 20px;
+                    margin-top: 0px;
+                }
+
+            }
+        }
+    }
+
+  }
+}
