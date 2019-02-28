@@ -1,4 +1,11 @@
 <div class="filters">
+    <h2 class="mobile-filters-heading">Filter by</h2>
+    {% block sidebar_spatial_search %}
+        {% if 'spatial_query' in g.plugins %}
+            {% snippet "snippets/spatial_query.html", default_extent=[[-28, 132], [8, 201]] %}
+        {% endif %}
+    {% endblock %}
+
     <div>
 	{% for facet in c.facet_titles %}
 		{% if facet == 'type' %}

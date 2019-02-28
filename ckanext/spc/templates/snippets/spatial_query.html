@@ -21,8 +21,15 @@ e.g.
     <div id="dataset-map-container"></div>
   </div>
   <div id="dataset-map-attribution">
-    {% snippet "spatial/snippets/map_attribution.html", map_config=map_config %}
+      {% snippet "spatial/snippets/map_attribution.html", map_config=map_config %}
   </div>
 </section>
 
-{% resource 'ckanext-spatial/spatial_query' %}
+{#{% resource 'ckanext-spatial/spatial_query' %}#}
+{% resource 'ckanext-spatial/js/vendor/leaflet/leaflet.js'  %}
+{% resource 'ckanext-spatial/js/vendor/leaflet.draw/leaflet.draw.js'  %}
+{% resource 'ckanext-spatial/js/common_map.js'  %}
+{% resource 'ckanext-spatial/js/spatial_query.js'  %}
+{% resource 'ckanext-spatial/js/vendor/leaflet/leaflet.css'  %}
+{% resource 'ckanext-spatial/js/vendor/leaflet.draw/leaflet.draw.css'  %}
+{% resource 'spc/spatial_query_rewrite_css'  %}
