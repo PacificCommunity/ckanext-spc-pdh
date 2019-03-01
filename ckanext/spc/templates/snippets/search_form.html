@@ -1,0 +1,37 @@
+{% ckan_extends %}
+
+{% set label_map = {
+    'Last Modified': 'Modified',
+    'Name Ascending': 'Name Asc',
+    'Name Descending': 'Name Desc',
+} %}
+
+{% block search_facets %}
+    {# 'Filter Results' button and facet pills were here #}
+{% endblock %}
+
+
+{% block search_sortby %}
+    <div class="search-additional-control">
+        <div>
+            <div  class="show-filters-wrapper"><a class="show-filters">{{ _('Filter by') }}</a></div>
+        </div>
+        <div>
+            {% if sorting %}
+                <div class="form-select form-group control-order-by">
+                    {{ _('Order by') }}
+                    <select id="field-order-by" name="sort" class="form-control">
+                        {% for label, value in sorting %}
+                            {% if label and value %}
+                                <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label_map[label]|default(label) }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% block search_sortby_button %}
+                        <button class="btn btn-default js-hide" type="submit">{{ _('Go') }}</button>
+                    {% endblock %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

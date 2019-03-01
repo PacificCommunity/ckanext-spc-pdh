@@ -12,14 +12,16 @@ e.g.
 
 #}
 <section id="dataset-map" class="module module-narrow module-shallow">
-  <h2 class="module-heading">
-    {{ _('Filter by location') }}
-    <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location']) }}" class="action">{{ _('Clear') }}</a>
-  </h2>
   {% set map_config = h.get_common_map_config() %}
-  <div class="dataset-map" data-module="spatial-query" data-default_extent="{{ default_extent }}" data-module-map_config="{{ h.dump_json(map_config) }}">
-    <div id="dataset-map-container"></div>
+  <div class="dataset-map" data-module="spc-spatial-query" data-default_extent="{{ default_extent }}" data-module-map_config="{{ h.dump_json(map_config) }}">
+      <div id="dataset-map-container"></div>
   </div>
+  <h2 class="module-heading">
+      <i class="spc-facet-heading-icon spc-icon-marker"></i>
+      {{ _('Filter by location') }}
+      <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location']) }}" class="action" title="{{ _('Clear') }}">&times;</a>
+  </h2>
+
   <div id="dataset-map-attribution">
       {% snippet "spatial/snippets/map_attribution.html", map_config=map_config %}
   </div>

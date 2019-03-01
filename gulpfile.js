@@ -7,14 +7,15 @@ const publicPath = root + 'fanstatic/styles';
 
 const isProd = () => process.argv.includes('--prod');
 
-const compile = () =>
+const build = () =>
   console.log('Recompiling styles...') ||
   exec(
     `lessc ${lessPath}/spc.less ${publicPath}/spc.css` +
       (isProd() ? '' : ' --source-map-inline --source-map-include-source')
   );
 
-const watch = () => gulp.watch(lessPath + '/*.less', compile);
+const watch = () => gulp.watch(lessPath + '/*.less', build);
 
 gulp.task('default', watch);
-gulp.task('compile', compile);
+gulp.task('watch', watch);
+gulp.task('build', build);
