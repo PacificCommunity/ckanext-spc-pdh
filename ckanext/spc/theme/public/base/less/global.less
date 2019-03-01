@@ -25,7 +25,7 @@ header.navbar {
     height: 650px;
     line-height: 70px;
     line-height: 1em;
-    margin-bottom: -520px;
+    margin-bottom: -485px;
     padding: 23px 2px;
     z-index: auto;
     .logo {
@@ -132,6 +132,7 @@ header.navbar {
     background: transparent;
     padding-bottom: 25px;
     .toolbar {
+        position: absolute;;
         margin-left: -15px;
         background-color: transparent;
         top: -40px;
@@ -177,6 +178,7 @@ header.navbar {
     border: none;
     .primary {
         border: none;
+        padding: 0px;
         .page-header {
             margin-left: 0;
         }
@@ -185,22 +187,17 @@ header.navbar {
             background: #dfebed;
         }
         .module {
-            &:first-child {
-                border:  1px solid @border-blue;
-                border-radius: 5px;
-            }
         }
         div.module-content {
-            padding-left: 29px;
-            padding-right: 29px;
-            @media (max-width: 767px) {
-                padding: 0 15px;
-            }
+            padding: 0px;
+            // padding-left: 29px;
+            // padding-right: 29px;
+            // @media (max-width: 767px) {
+                // padding: 0 15px;
+            // }
         }
     }
     .secondary {
-        border:  1px solid @border-blue;
-        border-radius: 2px;
         .organization-info {
             .read-more {
                 overflow: hidden;
@@ -249,44 +246,6 @@ header.navbar {
         margin-bottom: 0;
     }
 }
-.search-form {
-    border-bottom: none;
-    padding-bottom: 35px;
-    margin-bottom: 0;
-    h2 {
-        font-size: 29px;
-        color: @turquoise;
-    }
-    .search-input.search-giant {
-        margin-bottom: 35px;
-        input {
-            font-size: 18px;
-            font-family: 'Calibri';
-            font-weight: lighter;
-            color:  #b2b1b1;
-            border: 2px solid @border-blue;
-            box-shadow: none;
-            padding: 18px 15px;
-        }
-        button {
-            top: 30%;
-            i {
-                color: #333;
-            }
-        }
-    }
-    .control-order-by select {
-        font-size: 17px;
-        border-color: @border-blue;
-        width: 169px;
-        height: 35px;
-        line-height: 35px;
-    }
-    label {
-        font-size: 18px;
-        font-weight: normal;
-    }
-}
 .filters {
     .module-footer {
         border-top: none;
@@ -321,6 +280,11 @@ header.navbar {
             font-size: 16px;
             padding: 10px 15px;
         }
+        &.active {
+            > a:before {
+                display: none;
+            }
+        }
     }
 }
 .btn-primary {
@@ -332,53 +296,8 @@ header.navbar {
         background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
     }
 }
-
-.dataset-list {
-    .dataset-heading {
-        font-size: 19px;
-        margin-bottom: 12px;
-        padding-right: 25px;
-        a {
-            color: @text-blue;
-            font-weight: normal;
-        }
-    }
-    .dataset-item {
-        font-size: 17px;
-        color: @light-grey;
-        border-color: @border-blue;
-        margin-left: -20px;
-        margin-right: -20px;
-        padding: 0 20px 20px;
-        &:first-of-type {
-            border-top: 1px dotted @border-blue;
-            padding-top: 20px;
-        }
-        .dataset-content {
-            word-wrap: break-word;
-        }
-        .dataset-resources {
-            li {
-                display: inline-block;
-                a {
-                    font-size: 14px;
-                    font-weight: normal;
-                    line-height: 14px;
-                    padding-top: 4px;
-                }
-            }
-        }
-        .dataset-info {
-            color: @text;
-            margin-bottom: 15px;
-            .badge {
-                font-size: 14px;
-                vertical-align: middle;
-                margin-left: 15px;
-                padding-top: 3px;
-            }
-        }
-    }
+.clearfix {
+    clear: both;
 }
 .ml-5 {
     margin-left: 5px;
@@ -418,15 +337,6 @@ header.navbar {
         }
     }
 }
-.api-link {
-    .module-content {
-        padding-top: 40px;
-        padding-bottom: 0;
-        small {
-            font-size: 12px;
-        }
-    }
-}
 
 .data-quality-tooltip {
     display: inline-block;
@@ -440,7 +350,7 @@ header.navbar {
     .tooltiptext {
         visibility: hidden;
         position: absolute;
-        left: -64px;
+        left: -85px;
         bottom: 35px;
         width: 120px;
         font-size: 14px;
@@ -460,11 +370,11 @@ header.navbar {
         }
         &:after {
             content: "";
-    position: absolute;
-    left: 50%;
-    margin-left: -10px;
-    border-width: 10px;
-    border-style: solid;
+            position: absolute;
+            left: 50%;
+            margin-left: 20px;
+            border-width: 10px;
+            border-style: solid;
             top: 100%;
             border-color: #3a87ad transparent transparent transparent;
         }
@@ -499,4 +409,13 @@ header.navbar {
             }
         }
     }
+}
+
+.desktop-only { display: none;}
+.fa-question-circle:before {
+    .spc-icon-question;
+    color: transparent;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
