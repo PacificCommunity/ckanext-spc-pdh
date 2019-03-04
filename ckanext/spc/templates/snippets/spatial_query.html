@@ -17,9 +17,10 @@ e.g.
       <div id="dataset-map-container"></div>
   </div>
   <h2 class="module-heading">
-      <i class="spc-facet-heading-icon spc-icon-marker"></i>
+      <i class="heading-icon spc-icon-marker"></i>
       {{ _('Filter by location') }}
-      <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location']) }}" class="action" title="{{ _('Clear') }}">&times;</a>
+      <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location'], extras={'id': c.group.id} if c.group else {}) }}" class="action" title="{{ _('Clear') }}">&times;</a>
+
   </h2>
 
   <div id="dataset-map-attribution">
