@@ -39,6 +39,22 @@
 
 
 @media(max-width: 767px) {
+    .wrapper.no-nav {
+        .primary {
+            float: none;
+            width: auto;
+        }
+        .primary, .secondary {
+            margin: 0 10px;
+        }
+        .module-resource {
+            border-bottom: none;
+        }
+        .resources {
+            margin-bottom: 20px;
+        }
+
+    }
   body {
     padding: 0;
   }
@@ -337,6 +353,33 @@
             li {
                 a {
                     padding: 3px 10px;
+                }
+            }
+        }
+    }
+    .module-resource {
+        + .secondary {
+            margin: 10px;
+            padding: 10px 10px 20px;
+            border: 1px solid #cdcdcd;
+            border-radius: 5px;
+            + .primary {
+                width: 66%;
+                padding-right: 10px;
+            }
+            .resources {
+                padding-bottom: 20px;
+                .module-heading {
+                    display: none;
+                }
+                .nav-item {
+                    border-bottom: none;
+                    &.active {
+                        border-radius: 20px;
+                        a {
+                            border-radius: 20px;
+                        }
+                    }
                 }
             }
         }

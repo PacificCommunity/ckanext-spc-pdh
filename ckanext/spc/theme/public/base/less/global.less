@@ -202,11 +202,6 @@ header.navbar {
             .read-more {
                 overflow: hidden;
             }
-            .follow_button {
-                .btn {
-                    background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
-                }
-            }
         }
     }
 }
@@ -283,15 +278,18 @@ header.navbar {
         }
     }
 }
-.btn-primary {
-    background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
-    font-weight: normal;
-    border: none;
-    border-radius: 5px;
-    &:hover, &:focus, &:active {
-        background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+.btn {
+    background: @dark-blue;
+    border: 1px solid @dark-blue;;
+    color: white;
+    border-radius: 20px;
+    font-weight: 100;
+    &:hover, &:active, &:focus {
+        color: @dark-blue;
+        background: white;
     }
 }
+
 .clearfix {
     clear: both;
 }
@@ -457,6 +455,37 @@ header.navbar {
             background-size: 11px;
             margin: 4px 11px;
             margin-right: 3px;
+        }
+    }
+}
+table.table {
+    &.table-bordered {
+        border: none;
+    }
+    table-layout: auto;
+    background-color: unset;
+    margin-bottom: 46px;
+    tr {
+        td, th {
+            border: none;
+            font-size: 13px;
+            font-weight: normal;
+            border-radius: 0px;
+            background-color: unset;
+            padding: 6px;
+            vertical-align: middle;
+            &:first-child {
+                border-left: none;
+            }
+            &.dataset-label {
+                width: 40%;
+            }
+            &.dataset-details {
+                width: 70%;
+                font-weight: lighter;
+                word-break: break-word;
+                word-wrap: break-word;
+            }
         }
     }
 }
