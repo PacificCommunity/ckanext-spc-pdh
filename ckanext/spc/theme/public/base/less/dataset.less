@@ -7,8 +7,8 @@
         float: none;
         .module {
             margin-top: 0;
-            .module-content {
-                > .empty, > .activity {
+            .module-content > {
+                .empty, .activity, .add-to-group, form {
                     padding: 0px 20px;
                 }
             }
@@ -267,34 +267,6 @@
             font-size: 15px;
         }
         table {
-            &.table {
-                table-layout: auto;
-                background-color: unset;
-                margin-bottom: 46px;
-                tr {
-                    td, th {
-                        border: none;
-                        font-size: 13px;
-                        font-weight: normal;
-                        border-radius: 0px;
-                        background-color: unset;
-                        padding: 6px;
-                        vertical-align: middle;
-                        &:first-child {
-                            border-left: none;
-                        }
-                        &.dataset-label {
-                            width: 40%;
-                        }
-                        &.dataset-details {
-                            width: 70%;
-                            font-weight: lighter;
-                            word-break: break-word;
-                            word-wrap: break-word;
-                        }
-                    }
-                }
-            }
             &.table-striped {
                 tr {
                     &.complex-row.label-row {
