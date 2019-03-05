@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "============= ckanext-spc =============",
   "scripts": {
-    "watch": "gulp default",
-    "build": "gulp compile --prod"
+    "watch": "gulp",
+    "build": "gulp build --prod"
   },
   "repository": {
     "type": "git",
