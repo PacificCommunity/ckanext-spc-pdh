@@ -1,5 +1,5 @@
-const gulp = require('gulp');
-const exec = require('child_process').exec;
+const { watch } = require('gulp');
+const { exec } = require('child_process');
 
 const root = __dirname + '/ckanext/spc/';
 const lessPath = root + 'theme/public/base/less';
@@ -14,8 +14,9 @@ const build = () =>
       (isProd() ? '' : ' --source-map-inline --source-map-include-source')
   );
 
-const watch = () => gulp.watch(lessPath + '/*.less', build);
+const observeChanges = () =>
+  watch(lessPath + '/*.less', { ignoreInitial: false }, build);
 
-gulp.task('default', watch);
-gulp.task('watch', watch);
-gulp.task('build', build);
+exports.default = observeChanges;
+exports.watch = observeChanges;
+exports.build = build;

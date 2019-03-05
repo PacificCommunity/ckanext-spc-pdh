@@ -123,7 +123,7 @@
 
 .wrapper {
     &:before {
-        border: none;
+        display: none;
     }
     .primary {
 	.media-grid {
@@ -138,6 +138,7 @@
     .mobile-only { display: none;}
     .desktop-only { display: initial;}
     .js [role=main] {
+        padding-top: 17px;
         .secondary {
             width: 31%;
             .filters {
@@ -224,6 +225,95 @@
             }
         }
     }
+    .dataset-read {
+        margin-bottom: 0px;
+        .primary {
+            h1 {
+                font-size: 20px;
+                font-weight: 700;
+            }
+            .nav-tabs {
+                margin: 19px 9px 36px;
+                li {
+                    &.active {
+                        a {
+                            padding: 7px 21px;
+                        }
+                    }
+                }
+            }
+            .module {
+                .module-content {
+                    padding: 0px 29px;
+                    .notes {
+                        padding: 0px 10px;
+                    }
+                    .meta-export-select {
+                        padding: 0px 8px;
+                        margin-bottom: 10px;
+                    }
+                    .resources {
+                        // margin: 0px;
+                        h3 {
+                            margin: 25px 0px;
+                        }
+                        .resource-item {
+                            padding-left: 66px;
+                            .description {
+                                margin-right: 135px;
+                            }
+                            .spc-resource-format-icon {
+                                left: 17px;
+                            }
+                            .btn-group {
+                                position: absolute;
+                                top: 9px;
+                            }
+                        }
+                    }
+                    .additional-info {
+                        h3 {
+                            margin: 33px 0px 20px;
+                        }
+                        .table {
+                            tr {
+                                td {
+                                    &.dataset-label {
+                                        width: auto;
+                                        padding: 0px 30px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .secondary {
+            border: 1px solid #cdcdcd;
+            border-radius: 5px;
+            margin: 13px;
+            .stars-block {
+                i {
+                    margin: 20px 4px 9px;
+                }
+            }
+            .followers {
+                padding: 15px 0px 0px 50px ;
+            }
+            .social {
+                font-size: 12px;
+                padding-top: 85px;
+                padding-bottom: 15px;
+                .module-heading {
+                    margin-top: 19px;
+                }
+            }
+            .license {
+                font-size: 12px;
+            }
+        }
+    }
     .masthead {
         padding-top: 10px;
         margin-bottom: -536px;
@@ -253,10 +343,34 @@
     }
 }
 @media(min-width: 992px) {
+    .js {
+        .dataset-read {
+            .secondary {
+                width: 26%;
+                .stars-block {
+                    i {
+                        margin: 20px 8px 9px;
+                    }
+                }
+                .organization-info {
+                    .image, .heading, p, .read-more {
+                        padding: 0px 12px;
+                    }
+                }
+            }
+            .primary {
+                width: 73%;
+            }
+        }
+    }
 }
 @media(min-width: 1200px) {
 }
-
+@media (min-width: 1280px) {
+    .container {
+        width: 1238px;
+    }
+}
 @media(min-width: 768px) and (max-width: 991px) {
     .container {
         width: 740px;

@@ -7,9 +7,11 @@
         float: none;
         .module {
             margin-top: 0;
-        }
-        .module-content {
-            padding-left: 25px;
+            .module-content {
+                > .empty, > .activity {
+                    padding: 0px 20px;
+                }
+            }
         }
 
         h1 {
@@ -180,7 +182,7 @@
             color: #000;
             font-size: 12px;
             &:after {
-                border-color: white;
+                border-color: white transparent;
             }
             a {
                 position: static;
