@@ -12,10 +12,12 @@
 
 
 {% block search_sortby %}
-    <div class="search-additional-control">
-        <div>
-            <div  class="show-filters-wrapper"><a class="show-filters">{{ _('Filter by') }}</a></div>
-        </div>
+    <div class="search-additional-control {% if not facets %}search-without-facets{% endif %}">
+        {% if facets %}
+            <div>
+                <div  class="show-filters-wrapper"><a class="show-filters">{{ _('Filter by') }}</a></div>
+            </div>
+        {% endif %}
         <div>
             {% if sorting %}
                 <div class="form-select form-group control-order-by">

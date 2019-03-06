@@ -384,6 +384,56 @@
             }
         }
     }
+    .organization-list-page {
+        display: flex;
+        flex-direction: row-reverse;
+        .primary {
+            margin: 7px 0px 15px 24px;
+        }
+        .organization-list-sidebar {
+            border: 1px solid @light-gray;
+            border-radius: 5px;
+            margin: 15px;
+            padding: 10px 25px;
+            .module-heading {
+                margin: 0px -10px 20px -22px;
+            }
+            .module-content {
+                text-align: left;
+                padding: 0px;
+            }
+        }
+        #organization-search-form {
+            .search-additional-control {
+                > div {
+                    padding: 17px 0px;
+                }
+            }
+        }
+        .search-form {
+            .search-input-group {
+                #field-giant-search {
+                    border: 1px solid @light-gray;
+                    background: none;
+                }
+            }
+            h2 {
+                display: inline-block;
+                font-size: 25px;
+                margin-left: 14px;
+                margin-top: 10px;
+                margin-bottom: 0px;
+            }
+        }
+        #publisher-tree {
+            ul.hierarchy-tree-top {
+                padding: 0px 43px;
+                > li {
+                    border: none;
+                }
+            }
+        }
+    }
 }
 @media(min-width: 992px) {
     .js {
