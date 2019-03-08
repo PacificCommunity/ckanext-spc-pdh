@@ -1,0 +1,123 @@
+.secondary {
+  .filters {
+    // mobile facets
+    .js [role='main'] & {
+      background: #ffffff;
+      padding: 10px 8px;
+    }
+    .mobile-filters-heading {
+        margin: 0 13px;
+        padding-bottom: 3px;
+        font-size: 25px;
+        font-weight: 600;
+        border-bottom: 1px dashed @light-gray;
+    }
+    .mobile-filters-heading-count {
+        margin: 14px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+    .js body.filters-modal & {
+        .hide-filters {
+            right: 25px;
+            top: 21px;
+            i {
+                .spc-icon-times();
+                width: 10px;
+                height: 10px;
+                color: transparent;
+                background-size: cover;
+
+                &:before {
+                    visibility: hidden;
+                }
+            }
+        }
+        .module {
+            .module-content.empty {
+                padding-top: 61px;
+                margin-left: 40px;
+            }
+            .module-footer {
+                display: block;
+                margin-left: 40px;
+                margin-bottom: 10px;
+                a {
+                    font-size: 13px;
+                    &:hover, &:active, &:focus {
+                        text-decoration: none;
+                    }
+                }
+                .show-more-icon {
+                    background-size: 9px;
+                    width: 9px;
+                    height: 6px;
+                    display: inline-block;
+                    margin-left: 3px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    > div {
+        border-radius: 5px;
+        border: 1px solid #c3c3c3;
+        margin-top: 13px;
+        .nav-facet {
+            padding: 0 55px;
+        }
+        .module {
+            .module-heading {
+                margin-left: 6px;
+                margin-top: 10px;
+                z-index: 1;
+                .heading-icon {
+                    background-size: 15px;
+                }
+            }
+        }
+    }
+    .nav-simple {
+        > li.nav-item {
+            border-bottom: 1px dashed #bdbdbd;
+            word-break: break-word;
+            a {
+                font-size: 13px;
+                color: #000000;
+                padding: 6px 25px 7px 0px;
+                &:hover:after, &:after {
+                    position: absolute;
+                    content: '+';
+                    font-size: 17px;
+                    font-family: Raleway;
+                    background: none;
+                    top: 5px;
+                    right: 6px;
+                    width: 10px;
+                    height: 10px;
+                    margin-top: 0px;
+                }
+            }
+            &.active {
+                background: transparent;
+                a {
+                    background-color: transparent;
+                    &:after {
+                        transform: rotateZ(45deg);
+                        right: -1px;
+                        color: white;
+                        background: #8b8b8b;
+                        border-radius: 50%;
+                        width: 23px;
+                        height: 23px;
+                        text-align: center;
+                     }
+                    span {
+                        white-space: normal;
+                    }
+                }
+            }
+        }
+    }
+  }
+}

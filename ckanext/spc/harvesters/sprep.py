@@ -198,6 +198,9 @@ class SpcSprepHarvester(HarvesterBase):
             data_dict['private'] = False
             data_dict['license_id'] = package_dict.get('license_title', 'cc-by').strip('/').split('/')[-1]
 
+            if not data_dict['license_id']:
+                data_dict['license_id'] = 'notspecified'
+
             data_dict['issued'] = _parse_drupal_date(
                 package_dict['metadata_created']
             )
