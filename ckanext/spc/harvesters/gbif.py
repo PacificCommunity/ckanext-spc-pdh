@@ -324,7 +324,7 @@ class SpcGbifHarvester(HarvesterBase):
             package_dict['owner_org'] = owner_org
 
             # logger.debug('Create/update package using dict: %s' % package_dict)
-            self._create_or_update_package(package_dict, harvest_object)
+            self._create_or_update_package(package_dict, harvest_object, 'package_show')
 
             Session.commit()
 
