@@ -257,7 +257,7 @@ class SpcSprepHarvester(HarvesterBase):
 
             except Exception as e:
                 logger.debug('[Parsing topic] %s' % e)
-            self._create_or_update_package(data_dict, harvest_object)
+            self._create_or_update_package(data_dict, harvest_object, 'package_show')
 
             Session.commit()
 
