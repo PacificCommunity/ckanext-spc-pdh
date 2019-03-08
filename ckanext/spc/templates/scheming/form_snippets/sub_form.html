@@ -1,30 +1,40 @@
 {% import 'macros/spc.html' as spc_form with context %}
+{% if errors is string %}
+    {% set errors = {} %}
+{% endif %}
+{% set item_data = h.spc_wrap_list(data.get(field.field_name)) %}
+{% set item_errors = errors.get(field.field_name, []) %}
+<style>
+ .raised {
+     margin-left: 20px;
+     margin-bottom: 20px;
+ }
+</style>
 <fieldset class="raised">
     <legend>{{ field.label }}</legend>
     <span></span>
-    {% for i in range(data[field.field_name]|length) %}
-	{% if errors is string %}
-	    {% set errors = {} %}
-	  {% endif %}
-	{% with item_data = data.get(field.field_name) or [], item_errors = errors.get(field.field_name, []), uniq=field.field_name ~ '_' ~ i%}
-	    <div id="{{ uniq }}-wrapper">
-		<a class="btn btn-info control-group" type="button" data-toggle="collapse" data-target="#{{ uniq }}">
-		    {{ field.label }} #{{ i + 1 }}
-		</a>
-		<a class="btn btn-danger control-group" type="button" onclick="document.getElementById('{{ uniq }}-wrapper').remove()">
+    {% for i in range(item_data|length) %}
+        {% set uniq=field.field_name ~ '_' ~ i %}
+	<fieldset id="{{ uniq }}-wrapper">
+	    <a class="btn btn-info control-group" type="button" data-toggle="collapse" data-target="#{{ uniq }}">
+		{{ field.label }} #{{ i + 1 }}
+	    </a>
+            {% if field.multiple %}
+	        <a class="btn btn-danger control-group" type="button" onclick="ckan.pubsub.publish('clonable-fieldset', 'remove', '{{ uniq  }}-wrapper')">
 		    Remove
-		</a>
-
-		<div class="collapse {% if item_errors[i]|default(false) %}in{% endif %}" id="{{ uniq }}">
-		    {{ spc_form[field.sub_form](field, field.field_name, i, item_data[i], item_errors[i]|default({})) }}
-		</div>
+	        </a>
+            {% endif %}
+	    <div class="collapse {% if item_errors[i]|default(false) %}in{% endif %}" id="{{ uniq }}">
+		{{ spc_form[field.sub_form](field, field.field_name, i, item_data[i], item_errors[i]|default({})) }}
 	    </div>
-	{% endwith %}
+	</fieldset>
     {% endfor %}
+
     {% with wildcard = field.field_name ~ '_CLONABLE_INDEX_',  uniq=field.field_name ~ '_' ~ wildcard %}
 	<fieldset
 	    disabled hidden
 	    data-module="clonable-fieldset"
+            data-module-multiple="{{ field.multiple|string|lower }}"
 	    data-module-wildcard="{{ wildcard }}"
 	    data-module-i="{{ data[field.field_name]|length }}"
 	    id="{{ uniq }}-wrapper"
@@ -33,7 +43,7 @@
 	    <a class="btn btn-info control-group" type="button" data-toggle="collapse" data-target="#{{ uniq }}">
 		{{ field.label }} #New
 	    </a>
-	    <a class="btn btn-danger control-group" type="button" onclick="document.getElementById('{{ uniq }}-wrapper').remove()">
+	    <a class="btn btn-danger control-group" type="button" onclick="ckan.pubsub.publish('clonable-fieldset', 'remove', '{{ uniq  }}-wrapper')">
 		Remove
 	    </a>
 
