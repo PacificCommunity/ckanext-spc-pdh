@@ -22,8 +22,16 @@ import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
 from ckan.model.license import DefaultLicense, LicenseRegister, License
 
-
 logger = logging.getLogger(__name__)
+
+
+class LicenseCreativeCommonsNonCommercialShareAlice40(DefaultLicense):
+    id = "cc-nc-sa-4.0"
+    url = "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode"
+
+    @property
+    def title(self):
+        return _("Creative Commons Attribution-NonCommercial-ShareAlike 4.0")
 
 
 class LicenseCreativeCommonsNonCommercial40(DefaultLicense):
@@ -41,6 +49,9 @@ original_create_license_list = LicenseRegister._create_license_list
 def _redefine_create_license_list(self, *args, **kwargs):
     original_create_license_list(self, *args, **kwargs)
     self.licenses.append(License(LicenseCreativeCommonsNonCommercial40()))
+    self.licenses.append(
+        License(LicenseCreativeCommonsNonCommercialShareAlice40())
+    )
 
 
 LicenseRegister._create_license_list = _redefine_create_license_list

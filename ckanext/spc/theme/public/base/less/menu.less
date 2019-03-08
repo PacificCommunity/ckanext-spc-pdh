@@ -1,21 +1,15 @@
-#main-menu {
-    // position: absolute;
-    // right: 30px;
-    // top: -4px;
-    // @media (max-width: 767px) {
-        // right: 8px;
-    // }
+#mobile-menu {
+    display: none;
 }
-
 button.header-menu-btn {
     position: relative;
     background-color: transparent;
     border: none;
-    height: 35px;
+    height: 25px;
     width: 65px;;
     span {
         display: block;
-        width: 40px;
+        width: 30px;
         height: 2px;
         margin-top: 7px;
         position: relative;
@@ -41,10 +35,10 @@ button.header-menu-btn {
     button.header-menu-btn {
         span {
             opacity: 1;
-            transform: rotate(45deg) translate(7px, -14px);
+            transform: rotate(45deg) translate(7px, -9px);
         }
         span:nth-child(2) {
-            transform: rotate(-45deg) translate(0, 20px);
+            transform: rotate(-45deg) translate(0, 15px);
         }
         span:nth-child(3) {
             opacity: 0;
@@ -52,34 +46,22 @@ button.header-menu-btn {
         }
     }
 }
-
-.ma5-mobile-menu-container {
-    background-color:  #1d5f89;
-}
 .ma5-menu-panel {
-    background-color:  #1d5f89;
+    background-color: @spc-primary-color;
     .ma5-btn-enter {
         background-color:  transparent;
-        box-sizing: border-box;
     }
     li {
         border-bottom: 1px solid rgba(246, 240, 234, 0.5);
-        clear: both;
         &:hover {
             background-color: rgba(246, 240, 234, 0.5);
             a {
-                color: #1d5f89;
-            }
-            .ma5-btn-enter i {
-                color: #1d5f89;
+                color: #fff;
             }
         }
         &:first-child {
             margin-top: 70px;
             border-top: 1px solid rgba(246, 240, 234, 0.5);
-        }
-        a {
-            overflow: unset;
         }
     }
     div.ma5-leave-bar {
