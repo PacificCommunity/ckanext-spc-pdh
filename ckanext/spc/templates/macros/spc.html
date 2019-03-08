@@ -172,7 +172,6 @@
     {{ subform('%s__%s__character_encoding'| format(name, idx), data.get('character_encoding', {}), errors, _('Encoding'), 'gmd_code_string_form') }}
 {% endmacro %}
 {% macro gmd_cited_responsible_party_form(field, name, idx, data={}, errors={}) %}
-    {{ data }}
     {{ nested_field(name, idx, 'individual_name', data, errors) }}
     {{ nested_field(name, idx, 'organisation_name', data, errors) }}
     {{ nested_field(name, idx, 'position_name', data, errors) }}
