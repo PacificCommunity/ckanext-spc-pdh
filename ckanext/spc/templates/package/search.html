@@ -1,93 +1,94 @@
 {% ckan_extends %}
 
-{% block primary_content %}
-  <section class="module">
-    <div class="module-content">
-      {% block page_primary_action %}
-        {% if h.check_access('package_create') %}
-          <div class="page_primary_action">
-            <a class="btn btn-primary" href="{{ h.url_for('spc_dataset.choose_type') }}" >
-              <i class=" fa fa-plus-square"></i>
-              {{ _('Add Dataset') }}
-            </a>
-          </div>
-        {% endif %}
-      {% endblock %}
-      {% block form %}
-        {% set facets = {
-          'fields': c.fields_grouped,
-          'search': c.search_facets,
-          'titles': c.facet_titles,
-          'translated_fields': c.translated_fields,
-          'remove_field': c.remove_field }
-        %}
-        {% set sorting = [
-          (_('Relevance'), 'score desc, metadata_modified desc'),
-          (_('Name Ascending'), 'title_string asc'),
-          (_('Name Descending'), 'title_string desc'),
-          (_('Last Modified'), 'metadata_modified desc'),
-          (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ]
-        %}
-        {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type='dataset', query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields %}
-      {% endblock %}
-      {% block package_search_results_list %}
-        {{ h.snippet('snippets/package_list.html', packages=c.page.items) }}
-      {% endblock %}
+{% block header %}
+    <div class="header-search-wrapper">
+        {{ super() }}
     </div>
+{% endblock %}
 
-    {% block package_search_results_api %}
-      <section class="module api-link">
+{% block primary_content %}
+    <section class="module">
         <div class="module-content">
-          {% block package_search_results_api_inner %}
-          <small>
-            {% set api_link = h.link_to(_('API'), h.url_for(controller='api', action='get_api', ver=3)) %}
-            {% set api_doc_link = h.link_to(_('API Docs'), 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version)) %}
-            {% if g.dumps_url -%}
-              {% set dump_link = h.link_to(_('full {format} dump').format(format=g.dumps_format), g.dumps_url) %}
-              {% trans %}
-                You can also access this registry using the {{ api_link }} (see {{ api_doc_link }}) or download a {{ dump_link }}.
-              {% endtrans %}
-            {% else %}
-              {% trans %}
-                You can also access this registry using the {{ api_link }} (see {{ api_doc_link}}).
-              {% endtrans %}
-            {%- endif %}
-          </small>
-          {% endblock %}
+            {% block page_primary_action %}
+                {% if h.check_access('package_create') %}
+                    <div class="page_primary_action">
+                        <a class="btn btn-primary" href="{{ h.url_for('spc_dataset.choose_type') }}" >
+                            <i class=" fa fa-plus-square"></i>
+                            {{ _('Add Dataset') }}
+                        </a>
+                    </div>
+                {% endif %}
+            {% endblock %}
+            {% block form %}
+                {% set facets = {
+                    'fields': c.fields_grouped,
+                    'search': c.search_facets,
+                    'titles': c.facet_titles,
+                    'translated_fields': c.translated_fields,
+                    'remove_field': c.remove_field }
+                %}
+                {% set sorting = [
+                    (_('Relevance'), 'score desc, metadata_modified desc'),
+                    (_('Name Ascending'), 'title_string asc'),
+                    (_('Name Descending'), 'title_string desc'),
+                    (_('Last Modified'), 'metadata_modified desc'),
+                    (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ]
+                %}
+                {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type='dataset', query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields %}
+            {% endblock %}
+            {% block package_search_results_list %}
+                {{ h.snippet('snippets/package_list.html', packages=c.page.items) }}
+            {% endblock %}
         </div>
-      </section>
+
+        {% block package_search_results_api %}
+            <section class="module api-link">
+                <div class="module-content">
+                    {% block package_search_results_api_inner %}
+                        <small>
+                            {% set api_link = h.link_to(_('API'), h.url_for(controller='api', action='get_api', ver=3)) %}
+                            {% set api_doc_link = h.link_to(_('API Docs'), 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version)) %}
+                            {% if g.dumps_url -%}
+                                {% set dump_link = h.link_to(_('full {format} dump').format(format=g.dumps_format), g.dumps_url) %}
+                                {% trans %}
+                                You can also access this registry using the {{ api_link }} (see {{ api_doc_link }}) or download a {{ dump_link }}.
+              {% endtrans %}
+                            {% else %}
+              {% trans %}
+              You can also access this registry using the {{ api_link }} (see {{ api_doc_link}}).
+              {% endtrans %}
+                            {%- endif %}
+                        </small>
+                    {% endblock %}
+                </div>
+            </section>
+        {% endblock %}
+
+    </section>
+
+    {% block page_pagination %}
+        {{ c.page.pager(q=c.q) }}
     {% endblock %}
-
-  </section>
-
-  {% block page_pagination %}
-    {{ c.page.pager(q=c.q) }}
-  {% endblock %}
 
 {% endblock %}
 
 {% block secondary_content %}
-  {% block sidebar_spatial_search %}
-    {% if 'spatial_query' in g.plugins %}
-      {% snippet "snippets/spatial_query.html", default_extent=[[-28, 132], [8, 201]] %}
-    {% endif %}
-  {% endblock %}
-  {% snippet 'snippets/spc_facet_list.html', facet_titles=c.facet_titles %}
+    {% snippet 'snippets/spc_facet_list.html', facet_titles=c.facet_titles %}
 {% endblock %}
 
 {% block scripts %}
-  {{ super() }}
-  {% if h.spc_hotjar_enabled() %}
-    <!-- Hotjar Tracking Code for pacificdata.org -->
-    <script>
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:1051527,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>      
+    {{ super() }}
+    {% if h.spc_hotjar_enabled() %}
+        <!-- Hotjar Tracking Code for pacificdata.org -->
+        <script>
+         (function(h,o,t,j,a,r){
+             h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+             h._hjSettings={hjid:1051527,hjsv:6};
+             a=o.getElementsByTagName('head')[0];
+             r=o.createElement('script');r.async=1;
+             r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+             a.appendChild(r);
+         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        </script>
   {% endif %}
 {% endblock %}

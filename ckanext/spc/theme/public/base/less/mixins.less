@@ -1,0 +1,55 @@
+.default-label {
+    background: #aaaaaa;
+}
+
+.spc-resource-format-icon {
+    display: inline-block;
+    height: 45px;
+    width: 32px;
+    background: url("@{relative_root}/base/images/format-base.png") 50% no-repeat;
+    background-size: cover;
+    position: relative;
+    margin-right: 25px;
+    .label {
+        position: absolute;
+        top: 20px;
+        right: 3px;
+        font-size: 11px;
+        font-weight: normal;
+        line-height: 14px;
+        padding: 2px 5px;
+
+    }
+
+}
+.spc-bg-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+.plain-link-on-hover {
+    &:hover, &:active, &:focus {
+        text-decoration: none;
+    }
+}
+.hide-empty-element {
+    &:empty {
+        display: none;
+    }
+}
+
+.header-link-animated {
+    border: 0px solid transparent;
+    transition: border .3s, margin .3s, box-shadow .3s;
+    margin: 2px;
+    box-sizing: border-box;
+    border-bottom-right-radius: 10px;
+    &:hover, &:active, &:focus {
+        border: 2px solid #ffffff;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        box-shadow: 4px 6px 4px rgba(30, 30, 30, .3);
+        margin: 0px;
+    }
+
+}

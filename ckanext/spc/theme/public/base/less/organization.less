@@ -1,0 +1,103 @@
+.organization-list-page {
+    .organization-list-sidebar {
+        border-bottom: 1px dashed @light-gray;
+        margin: 5px;
+        .module-heading {
+            position: relative;
+        }
+        @media(max-width: 767px) {
+            .module-heading {
+                background: none;
+                text-align: center;
+                .heading-icon {
+                    background-size: 14px;
+                    margin: 7px 4px 16px;
+                }
+            }
+            .second-heading {
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                font-size: 14px;
+                margin-top: -5px;
+            }
+        }
+        .module-content {
+            padding: 7px 50px;
+            text-align: center;
+            font-size: 12px;
+        }
+    }
+    #organization-search-form {
+        margin-top: 14px;
+        .search-input-group {
+            position: relative;
+            top: auto;
+            #field-giant-search {
+                box-shadow: none;
+                padding: 5px 17px;
+                font-size: 13px;
+            }
+        }
+        .search-additional-control {
+            display: block;
+            border-bottom: none;
+            > div {
+                padding: 24px 5px 18px;
+                font-size: 12px;
+                select {
+                    font-size: 12px;
+                    padding-left: 25px;
+                }
+            }
+        }
+    }
+    #publisher-tree {
+        margin-top: 20px;
+        ul.hierarchy-tree-top {
+            padding: 0px 35px;
+            li {
+                list-style: none;
+                margin: 7px 0;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+                a {
+                    color: #001e73;
+                }
+            }
+            & > li {
+                border-bottom: 1px dashed @light-gray;
+                padding-bottom: 7px;
+                position: relative;
+                &:before, & > .hierarchy-tree:before {
+                    display: block;
+                    width: 8px;
+                    height: 8px;
+                    content: ' ';
+                    .spc-icon-chevron-down-blue;
+                    .spc-bg-icon;
+                    background-color: #fff;
+                    position: absolute;
+                    left: -15px;
+                    top:7px;
+                }
+            }
+            .hierarchy-tree {
+                &:before {
+                    transform: rotateZ(-90deg);
+                }
+
+                background: none;
+                li {
+                    &, &:last-child {
+                        background: none;
+                    }
+                    &:before {
+                        content: '-'
+                    }
+                }
+            }
+        }
+    }
+}
