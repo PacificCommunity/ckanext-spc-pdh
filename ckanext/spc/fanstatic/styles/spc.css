@@ -160,6 +160,12 @@
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../../fonts/montserrat/Montserrat-Light.otf');
+  font-weight: 300;
+  font-style: normal;
+}
 body {
   font-family: 'Montserrat';
   font-weight: 400;
@@ -279,11 +285,37 @@ header.navbar > .container .collapse {
   background-color: transparent;
   top: -40px;
 }
-[role=main] .toolbar .breadcrumb a,
-.main .toolbar .breadcrumb a,
+[role=main] .toolbar .breadcrumb li a,
+.main .toolbar .breadcrumb li a {
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+}
+@media (max-width: 767px) {
+  [role=main] .toolbar .breadcrumb li a,
+  .main .toolbar .breadcrumb li a {
+    font-size: 14px;
+    color: #fff;
+  }
+}
+[role=main] .toolbar .breadcrumb li.active a,
+.main .toolbar .breadcrumb li.active a {
+  color: #fff;
+}
+@media (max-width: 767px) {
+  [role=main] .toolbar .breadcrumb li.active a,
+  .main .toolbar .breadcrumb li.active a {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
 [role=main] .toolbar .breadcrumb li:after,
 .main .toolbar .breadcrumb li:after {
-  color: #ffffff;
+  content: '>';
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  margin-left: 4px;
 }
 [role=main] .toolbar .breadcrumb li + li:before,
 .main .toolbar .breadcrumb li + li:before {
@@ -293,11 +325,6 @@ header.navbar > .container .collapse {
 [role=main] .toolbar .breadcrumb li:last-child:after,
 .main .toolbar .breadcrumb li:last-child:after {
   content: '';
-}
-[role=main] .toolbar .breadcrumb .active a,
-.main .toolbar .breadcrumb .active a {
-  color: #ffffff;
-  font-weight: 900;
 }
 [role=main] #content,
 .main #content {
@@ -326,40 +353,6 @@ header.navbar > .container .collapse {
 }
 .wrapper .secondary .organization-info .read-more {
   overflow: hidden;
-}
-.toolbar .breadcrumb li a {
-  font-size: 14px;
-  font-weight: lighter;
-  color: #056199;
-}
-@media (max-width: 767px) {
-  .toolbar .breadcrumb li a {
-    font-size: 14px;
-    color: #fff;
-  }
-}
-.toolbar .breadcrumb li.active a {
-  color: #434e4e;
-  font-weight: lighter;
-}
-@media (max-width: 767px) {
-  .toolbar .breadcrumb li.active a {
-    color: #fff;
-    text-decoration: underline;
-  }
-}
-.toolbar .breadcrumb li:after {
-  content: '>';
-  font-size: 14px;
-  font-weight: lighter;
-  color: #056199;
-  margin-left: 4px;
-}
-@media (max-width: 767px) {
-  .toolbar {
-    background: #003960;
-    margin-bottom: 0;
-  }
 }
 .filters .module-footer {
   border-top: none;
@@ -490,6 +483,9 @@ header.navbar > .container .collapse {
 }
 .data-quality-tooltip:hover .tooltiptext {
   visibility: visible;
+}
+.page_primary_action .btn {
+  margin: 15px;
 }
 @media (min-width: 769px) {
   .dataset-map-expanded #dataset-map {
@@ -824,15 +820,14 @@ table.table tr th.dataset-details {
   text-align: center;
 }
 .dataset-read .secondary .follow_button .btn {
-  background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
-  font-weight: normal;
-  border: none;
-  border-radius: 5px;
+  background: #001e73;
+  border: 1px solid #001e73;
+  color: #fff;
+  border-radius: 20px;
 }
-.dataset-read .secondary .follow_button .btn:hover,
-.dataset-read .secondary .follow_button .btn:focus,
-.dataset-read .secondary .follow_button .btn:active {
-  background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+.dataset-read .secondary .follow_button .btn:hover {
+  color: #001e73;
+  background: #fff;
 }
 .dataset-read .secondary .organization-info .read-more,
 .dataset-read .secondary .organization-info .image,

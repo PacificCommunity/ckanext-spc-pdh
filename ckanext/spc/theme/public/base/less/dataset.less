@@ -100,11 +100,9 @@
                     }
                 }
                 .btn-group {
-                    // right: 82px;
                     position: relative;
                     display: inline-block;
                     top: 20px;
-                    // bottom: -47px;
                     .dropdown-toggle {
                         border: none;
                         color: @light-blue;
@@ -139,10 +137,6 @@
         .tags {
             display: none;
         }
-        // .table-striped tbody tr:nth-child(even) td,
-        // .table-striped tbody tr:nth-child(even) th {
-        //   background-color:  #dfebed;
-        // }
         .table-bordered {
             border-color: @border-blue;
             margin-bottom: 35px;
@@ -229,12 +223,13 @@
         .follow_button {
             text-align: center;
             .btn {
-                background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
-                font-weight: normal;
-                border: none;
-                border-radius: 5px;
-                &:hover, &:focus, &:active {
-                    background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
+                background: @dark-blue;
+                border: 1px solid @dark-blue;
+                color: #fff;
+                border-radius: 20px;
+                &:hover {
+                    color: @dark-blue;
+                    background: #fff;
                 }
             }
         }
