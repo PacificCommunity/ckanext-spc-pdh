@@ -5,7 +5,7 @@
   display: inline-block;
   height: 45px;
   width: 32px;
-  background: url("/base/images/format-base.png") 50% no-repeat;
+  background: url("/data/base/images/format-base.png") 50% no-repeat;
   background-size: cover;
   position: relative;
   margin-right: 25px;
@@ -187,7 +187,7 @@ header.navbar > .container .collapse {
   position: unset;
 }
 .masthead {
-  background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 100%), url("/base/images/header.jpg");
+  background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 100%), url("/data/base/images/header.jpg");
   background-size: cover;
   background-position: 50%;
   height: 650px;
@@ -962,364 +962,364 @@ table.table tr th.dataset-details {
   margin-right: 2px;
 }
 .res-format-aac {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: 0px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-3ds {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -29.88px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-ai {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -59.76px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-avi {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -89.64px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-bmp {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -119.52px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-cad {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -149.4px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-cdr {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -179.28px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-css {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -209.16px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-dat {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -239.04px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-dll {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -268.92px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-doc {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -298.8px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-dmg {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -328.68px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-eps {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -358.56px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-flv {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -388.44px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-fla {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -418.32px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-gif {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -448.2px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-html {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -478.08px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-indd {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -507.96px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-iso {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -537.84px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-jpg {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -567.72px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-js {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -597.6px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-midi {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -627.48px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-mov {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -657.36px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-mp3 {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -687.24px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-mpg {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -717.12px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-pdf {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -747px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-php {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -776.88px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-png {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -806.76px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-ppt {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -836.64px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-ps {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -866.52px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-psd {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -896.4px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-raw {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -926.28px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-sql {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -956.16px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-svg {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -986.04px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-tif {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1015.92px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-txt {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1045.8px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-wmv {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1075.68px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-xls {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1105.56px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-xml {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1135.44px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-zip {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1165.32px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-api {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1195.2px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-data {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1225.08px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-csv {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1254.96px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-docx {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1284.84px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-json {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1314.72px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-geojson {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1344.6px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-jpeg {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1374.48px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-kml {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1404.36px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-kmz {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1434.24px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-rdf {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1464.12px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-wms {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1494px 0;
   height: 34px;
   width: 30px;
 }
 .res-format-xlsx {
-  background-image: url('/base/images/sprite_res.png');
+  background-image: url('/data/base/images/sprite_res.png');
   background-repeat: no-repeat;
   background-position: -1523.88px 0;
   height: 34px;
