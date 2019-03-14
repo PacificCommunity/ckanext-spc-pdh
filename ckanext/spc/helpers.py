@@ -28,6 +28,7 @@ def get_helpers():
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
+        spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled
     )
 
@@ -143,6 +144,17 @@ def spc_unwrap_list(value):
     if 0 in value:
         return value[0]
     return value
+
+
+def spc_wrap_list(value):
+    if isinstance(value, list):
+        return value
+    if value is None:
+        return []
+    if isinstance(value, dict):
+        if list(sorted(value.keys())) == list(range(0, len(value))):
+            return list(value.values())
+    return [value]
 
 
 def spc_hotjar_enabled():

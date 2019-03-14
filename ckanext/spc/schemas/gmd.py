@@ -302,7 +302,7 @@ def get_default_gmd_identifier_schema():
 
 def get_default_gmd_cited_responsible_party_schema():
     return {
-        'individual_name': [im, unicode],
+        'individual_name': [ne, unicode],
         'organisation_name': [im, unicode],
         'position_name': [im, unicode],
         'contact_info': [im, _sub('gmd_contact')],
