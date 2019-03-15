@@ -66,9 +66,9 @@
                     {% block resources_outer %}
                         <div class="dataset-resources">
                             {% block resources_inner %}
-                                {% for resource in h.dict_list_reduce(package.resources, 'format') %}
+                                {% for resource in package.resources %}
                                     <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}">
-                                        <div class="res-format res-format-{{ resource.lower() }}"></div>
+                                        <div class="res-format res-format-{{ resource.format.lower() or 'data' }}"></div>
                                     </a>
                                 {% endfor %}
                             {% endblock %}
