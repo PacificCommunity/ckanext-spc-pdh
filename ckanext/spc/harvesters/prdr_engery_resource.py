@@ -68,7 +68,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
 
             # get the `requests` session object
             session = requests.Session()
-            
+
             # first we try a HEAD request which may not be supported
             did_get = False
             r = session.head(url)
@@ -300,7 +300,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
             page = page + 1
 
             previous_guids = batch_guids
-        
+
         #Check datasets that need to be deleted
         guids_to_delete = set(guids_in_db) - set(guids_in_source)
         for guid in guids_to_delete:
@@ -384,6 +384,9 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
             if source_dataset.owner_org:
                 package_dict['owner_org'] = source_dataset.owner_org
 
+        if not package_dict.get('license_id'):
+            package_dict['license_id'] = 'notspecified'
+
         # Flag this object as the current one
         harvest_object.current = True
         harvest_object.add()
@@ -455,8 +458,17 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
                     package_dict['id'] = harvest_object.package_id
                 package_id = \
                     p.toolkit.get_action('package_create')(context, package_dict)
-                log.info('Created dataset with id %s', package_id)                
+                log.info('Created dataset with id %s', package_id)
         model.Session.commit()
+        stored_package = p.toolkit.get_action('package_show')(
+            context.copy(), {'id': package_id}
+        )
+        for res in stored_package.get('resources', []):
+            p.toolkit.get_action('resource_create_default_resource_views')(
+                context.copy(),
+                {'package': stored_package, 'resource': res}
+            )
+
         return True
 
     def _set_config(self, source_config):
