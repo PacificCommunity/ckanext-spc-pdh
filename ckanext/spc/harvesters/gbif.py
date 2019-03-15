@@ -1,29 +1,17 @@
-import re
-import logging
 import json
-from urlparse import urljoin, urlparse
-import requests
-import lxml.etree as et
-from ckan.logic import check_access, get_action
-from ckan.lib.munge import munge_title_to_name
-
-from ckanext.oaipmh.harvester import OaipmhHarvester
-from ckanext.scheming.helpers import (
-    scheming_get_dataset_schema, scheming_field_by_name, scheming_field_choices
-)
-from ckanext.spc.utils import eez
-
+import logging
+import re
 import urllib2
+from urlparse import urljoin, urlparse
 
-from ckan.model import Session
+import lxml.etree as et
+import requests
 from ckan import model
-
+from ckan.lib.munge import munge_title_to_name
+from ckan.logic import get_action
+from ckan.model import Session
 from ckanext.harvest.harvesters.base import HarvesterBase
-from ckan.lib.munge import munge_tag
 from ckanext.harvest.model import HarvestObject
-
-import oaipmh.client
-from oaipmh.metadata import MetadataRegistry
 
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\w)')
@@ -66,6 +54,9 @@ class SpcGbifHarvester(HarvesterBase):
             url = urljoin(harvest_job.source.url, '/v1/dataset/search')
 
             for record in self._fetch_record_outline(url):
+
+                # if record['key'] != 'a38c7d49-5a5d-4aa6-a64e-421178bd06d7':
+                    # continue
                 harvest_obj = HarvestObject(
                     guid=record['key'],
                     content=record['country'],
@@ -152,7 +143,8 @@ class SpcGbifHarvester(HarvesterBase):
     def _eml_to_dict(self, record, gbif):
         data = {}
         data['type'] = 'biodiversity_data'
-        data['license_id'] = 'cc-nc'
+
+        data['license_id'] = 'cc-nc-4.0'
         data['thematic_area_string'] = self._topic
 
         data['title'] = record.find('title').text.strip()
@@ -177,9 +169,16 @@ class SpcGbifHarvester(HarvesterBase):
         data['additional_info'] = '\n\n'.join(
             record.xpath('additionalInfo/para/text()')
         )
-        data['intellectual_rights'] = '\n\n'.join(
-            record.xpath('intellectualRights/para/text()')
-        )
+
+        data['intellectual_rights'] = '\n\n'.join([
+            unlinkify_para(item)
+            for item in record.xpath('intellectualRights/para')
+        ])
+
+        license = record.find('intellectualRights/para/ulink/citetitle')
+        if license is not None:
+            data['license_id'] = license.text
+
         data['purpose'] = '\n\n'.join(record.xpath('purpose/para/text()'))
 
         data['keyword_set'] = [
@@ -241,15 +240,18 @@ class SpcGbifHarvester(HarvesterBase):
                 content_dict = self._eml_to_dict(record, gbif)
                 content_dict['id'] = id
 
-                content_dict['resources'] = [{
+                content_dict[
+                    'resources'
+                ] = [{
                     'name': 'GBIF annotated archive',
                     'url': 'https://www.gbif.org/occurrence/download?dataset_key='
                     + id
-                }, {
-                    'name': 'GBIF annotated metadata',
-                    'url': 'https://api.gbif.org/v1/dataset/{}/document'.
-                    format(id)
-                }]
+                },
+                     {
+                         'name': 'GBIF annotated metadata',
+                         'url': 'https://api.gbif.org/v1/dataset/{}/document'.
+                         format(id)
+                     }]
                 for url in content_dict['alternate_identifier']:
                     parsed_url = urlparse(url)
                     if not parsed_url.netloc:
@@ -322,7 +324,7 @@ class SpcGbifHarvester(HarvesterBase):
             package_dict['owner_org'] = owner_org
 
             # logger.debug('Create/update package using dict: %s' % package_dict)
-            self._create_or_update_package(package_dict, harvest_object)
+            self._create_or_update_package(package_dict, harvest_object, 'package_show')
 
             Session.commit()
 
@@ -457,3 +459,15 @@ def _parse_additional(e):
 
     description = _text(e.find('citation'))
     return {'url': url, 'description': description, 'name': 'Source archive'}
+
+
+def unlinkify_para(para):
+    result = para.text
+    for child in para.iterchildren():
+        child_text = ''.join(list(child.itertext()))
+        child_url = child.attrib.get('url')
+        if child_url:
+            child_text = '[{}]({})'.format(child_text, child_url)
+        result += child_text + child.tail
+
+    return result

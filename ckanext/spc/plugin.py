@@ -1,12 +1,15 @@
 import logging
 import os
 import json
+import requests
+import textract
 
 from collections import OrderedDict
 from six import string_types
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+from ckan.lib.uploader import get_resource_uploader
 
 from ckan.common import _
 import ckanext.scheming.helpers as scheming_helpers
@@ -17,8 +20,41 @@ import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
+from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 logger = logging.getLogger(__name__)
+
+
+class LicenseCreativeCommonsNonCommercialShareAlice40(DefaultLicense):
+    id = "cc-nc-sa-4.0"
+    url = "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode"
+
+    @property
+    def title(self):
+        return _("Creative Commons Attribution-NonCommercial-ShareAlike 4.0")
+
+
+class LicenseCreativeCommonsNonCommercial40(DefaultLicense):
+    id = "cc-nc-4.0"
+    url = "https://creativecommons.org/licenses/by-nc/4.0/legalcode"
+
+    @property
+    def title(self):
+        return _("Creative Commons Attribution-NonCommercial 4.0")
+
+
+original_create_license_list = LicenseRegister._create_license_list
+
+
+def _redefine_create_license_list(self, *args, **kwargs):
+    original_create_license_list(self, *args, **kwargs)
+    self.licenses.append(License(LicenseCreativeCommonsNonCommercial40()))
+    self.licenses.append(
+        License(LicenseCreativeCommonsNonCommercialShareAlice40())
+    )
+
+
+LicenseRegister._create_license_list = _redefine_create_license_list
 
 
 class SpcPlugin(plugins.SingletonPlugin):
@@ -57,10 +93,10 @@ class SpcPlugin(plugins.SingletonPlugin):
             (schema['dataset_type'], schema['about'])
             for schema in scheming_helpers.scheming_dataset_schemas().values()
         ])
-        self.member_countries = OrderedDict([
-            (choice['value'], choice['label']) for choice in
-            scheming_helpers.scheming_get_preset('member_countries')['choices']
-        ])
+        self.member_countries = OrderedDict(
+            [(choice['value'], choice['label']) for choice in scheming_helpers.
+             scheming_get_preset('member_countries')['choices']]
+        )
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
         if not os.path.isfile(filepath):
@@ -155,7 +191,6 @@ class SpcPlugin(plugins.SingletonPlugin):
         return results
 
     def before_index(self, pkg_dict):
-
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
@@ -171,6 +206,32 @@ class SpcPlugin(plugins.SingletonPlugin):
         )
         # Otherwise you'll get `immense field` error from SOLR
         pkg_dict.pop('data_quality_info', None)
+
+        try:
+            resources = json.loads(pkg_dict['validated_data_dict'])['resources']
+            resources_to_index = []
+            for res in resources:
+                if res.get('format', '').lower() in ('txt', 'pdf'):
+                    resources_to_index.append(res)
+        except KeyError as e:
+            logger.warn(
+                'Problem during indexind resources of <%s>: key %s not found',
+                pkg_dict['id'], e
+            )
+            resources_to_index
+        for res in resources_to_index:
+            uploader = get_resource_uploader(res)
+            path = uploader.get_path(res['id'])
+            if not os.path.exists(path):
+                logger.warn('Resource "%s" refers to unexisting path "%s"', res['id'], path)
+                continue
+            fmt = res['format'].lower()
+            if fmt == 'pdf':
+                content = textract.process(path, extension='.pdf')
+            else:
+                with open(path) as f:
+                    content = f.read()
+            pkg_dict.setdefault('text', []).append(content)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):

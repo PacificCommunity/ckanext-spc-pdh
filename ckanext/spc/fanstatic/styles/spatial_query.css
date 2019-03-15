@@ -1,0 +1,173 @@
+/*****************************************************************************/
+/*                           Configure SPC controls                          */
+/*****************************************************************************/
+/* hide zoom */
+.leaflet-left.leaflet-top {
+    display: none;
+}
+/* move pencil to bottom */
+.leaflet-right.leaflet-top {
+    top: auto;
+    bottom: 30px;
+    right: 23px;
+}
+/* update pencil styles */
+.leaflet-draw-toolbar, .leaflet-control {
+    box-shadow: none;
+}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+    border-color: white;
+}
+.leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+    width: 47px;
+    height: 47px;
+    background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAADR0lEQVRoQ9XaP2gTURzA8e/vKt1KRRA6mDSKg4tUBBenuvln0KLSDlpbrINisW0igoMUxMXmahFRQag6OCgVQycR1KroJsRNJ9MLOKeuNvfkekmTpmnurk0uL29s3939Pnm/3/td7iLoPGLXD2Db14AFLPP5RqGKtgYX8BHYXogxjWEMk5lKV8asJ2I9oBh3DsUwWTNVDtEPsTGgFLdSw2SnnxX/oB8iEk8j9HimeRlEH0Tsehe2PYRhvMW2F4BOD0gOwzji1IgeCBfwBdiLUg9A3iO88VwNyGCZu5uPKAcUo16B8B2Rp54QRV9zEdUAgSEy3jxELYB/yBJGPtYcRNfoTtrbv63UgNfYOLWWMIze5hS2C/gM7POK3/2/msGaHicyMVRWI6sAZ0a4KxEUIPKIxeQVIvHbCNtQ6hfIGG35U2RmMuE3u6AAJ42y06N0x++guOkGLP1YyVfNuXcKClhdgcQUohJuVjFL1rxYLQUbn04NBjS+JkIANBYREqBxiBABjUHUAwAvsMxz/vpIvfvErvEdGMZX342suONEynahgID6roQLcL4H7Pf1CbqAESIT9xG5Wjgm0ArUt9k1EVCflWgyYOsIDQBbQ2gC2DxCI8DmEJoBgiOCAtw9/3zFNjqHZZ71tQ37nOT/LnbPjU6Wl53HKv76wAqgY5Do38cglwrx1B3gfyVWAP8+gBz0+eGEBvCH0BzgjWgBQG1EiwA2RrQQoDqixQDrEcEBc1gd/WFso7V2xbV9ojvxEKUu+9xGX2KZA0TjT4AR9xh5jZU84/P4uk0rIaKJScR+h5IZ4JDHFeawrAGi3bOgBgtz57HMk3WLLMCJSojuxAJK9SDqhAdEK8DamojGVQGfqwHRDlBCxBK92Mp5Z1wcRcgUcLh036NPCpVnm5tO0cQYqHsVaZjDlqMYahr4o1MNVJZLATGRAqlWlO6K5NVPRO4i4j7QFVIsmn0Baq+hUwuIeK7GK9fyFXFSax6r4zRMLjc0sgAnF2JjMey23x7H5DDUMfLGcbLJWwHOH8pUqXiNtP6iih8IaRSpyt9UhBKhj4sI0bjzG4kLq3NFPqFwekaatvwCmRkn1bQegtOpIYdBmkzSeQzZcuM/sq/Yw1D571gAAAAASUVORK5CYII=") 50% no-repeat;
+    background-size: 25px;
+
+}
+
+
+.module-narrow #dataset-map-container {
+    height: 328px;
+    border-radius: 4px;
+}
+@media(min-width: 768px) {
+    .module-narrow #dataset-map-container {
+        height: 220px;
+    }
+    .leaflet-left.leaflet-top {
+        display: block;
+        top: auto;
+        left: auto;
+        bottom: 18px;
+        right: 21px;
+    }
+    .leaflet-right .leaflet-control {
+        margin-right: -2px;
+    }
+    .leaflet-right.leaflet-top {
+        top: 60px;
+        bottom: auto;
+        right: 23px;
+    }
+    .leaflet-bar a, .leaflet-bar a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        height: 30px;
+        width: 30px;
+        background-size: 15px;
+    }
+}
+.module-content #dataset-map-container {
+  height: 250px;
+}
+#dataset-map-attribution {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.module-heading .action {
+  float: right;
+  color: #888888;
+  font-size: 12px;
+  line-height: 20px;
+  text-decoration: underline;
+}
+.module-narrow #dataset-map-attribution {
+  margin: 5px 8px;
+  color: #666;
+}
+.leaflet-draw-label-single {
+  display: none;
+}
+.leaflet-draw-label-subtext {
+  display: none;
+}
+#field-location {
+  width: 190px;
+}
+.select2-results .select2-no-results {
+  padding: 3px 6px;
+}
+#dataset-map-edit {
+  margin: 5px 8px;
+}
+#dataset-map-edit-buttons {
+  display: none;
+}
+.leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+  background-image: url("../../../../../../../base/images/pencil.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 12px 12px;
+  border-radius: 4px;
+}
+.leaflet-draw-actions li {
+  display: none;
+}
+@media(min-width: 768px) {
+    .dataset-map-expanded #dataset-map {
+        position: absolute;
+        width: 740px;
+        height: 384px;
+        top: -384px;
+        left: 0px;
+        background-color: white;
+        border: 1px solid #CCC;
+        margin: 0;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-container {
+        height: 300px;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-attribution {
+        *zoom: 1;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-attribution:before,
+    .dataset-map-expanded #dataset-map #dataset-map-attribution:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-attribution:after {
+        clear: both;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-attribution div {
+        float: left;
+        margin-right: 10px;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-edit-buttons {
+        display: block;
+        float: right;
+        padding: 10px;
+    }
+    .dataset-map-expanded #dataset-map #dataset-map-edit {
+        display: none;
+    }
+    .dataset-map-expanded #dataset-map .module-heading {
+        border-top-color: #000;
+    }
+    .dataset-map-expanded .wrapper {
+        margin-top: 383px;
+    }
+}
+
+@media(min-width: 992px) {
+    .module-narrow #dataset-map-container {
+        height: 280px;
+    }
+    .dataset-map-expanded #dataset-map {
+        width: 970px;
+    }
+}
+@media(min-width: 1200px) {
+    .module-narrow #dataset-map-container {
+        height: 328px;
+    }
+    .dataset-map-expanded #dataset-map {
+        width: 1170px;
+        max-width: 1170px;
+    }
+}
