@@ -16,7 +16,7 @@ from dateutil.parser import parse
 import ckan.model as model
 
 logger = logging.getLogger(__name__)
-RE_SWITCH_CASE = re.compile('_(?P<letter>\w)')
+RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
 
 
 class SpcSprepHarvester(HarvesterBase):
@@ -196,7 +196,20 @@ class SpcSprepHarvester(HarvesterBase):
             ])
 
             data_dict['private'] = False
-            data_dict['license_id'] = package_dict.get('license_title', 'cc-by').strip('/').split('/')[-1]
+
+            license_mapping = {
+                'de2a56f5-a565-481a-8589-406dc40b5588': 'cc-nc-sa-4.0',
+                'c12c3333-1ad7-4a3a-a629-ed51fcb636ac': 'other-closed',
+                'a270745d-07d5-4e93-94fc-ba6e0afc97fb': 'other-closed',
+            }
+            license_id = package_dict.get('license_title',
+                                          'cc-by').strip('/').split('/')[-1]
+            data_dict['license_id'] = license_mapping.get(
+                license_id, license_id
+            )
+
+            if not data_dict['license_id']:
+                data_dict['license_id'] = 'notspecified'
 
             data_dict['issued'] = _parse_drupal_date(
                 package_dict['metadata_created']
@@ -236,14 +249,15 @@ class SpcSprepHarvester(HarvesterBase):
                 page = BeautifulSoup(requests.get(package_dict['url']).content)
                 topics = page.select('.field-name-field-topic .field-item')
                 thematic_area = [
-                    self._mapping[topic.text] for topic in topics
+                    self._mapping[topic.text]
+                    for topic in topics
                     if topic.text in self._mapping
                 ]
                 data_dict['thematic_area_string'] = thematic_area
 
             except Exception as e:
                 logger.debug('[Parsing topic] %s' % e)
-            self._create_or_update_package(data_dict, harvest_object)
+            self._create_or_update_package(data_dict, harvest_object, 'package_show')
 
             Session.commit()
 

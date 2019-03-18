@@ -31,6 +31,10 @@ class SpcOaipmhHarvester(OaipmhHarvester):
 
     def _extract_additional_fields(self, content, package_dict):
         package_dict['thematic_area_string'] = self.topic
+
+        if not package_dict.get('license_id'):
+            package_dict['license_id'] = 'notspecified'
+
         skip_keys = {'set_spec', 'description'}
 
         for key, value in content.items():

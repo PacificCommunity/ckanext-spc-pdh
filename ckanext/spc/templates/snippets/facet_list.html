@@ -1,7 +1,12 @@
 {% ckan_extends %}
 
+{% set facet_icons = {
+    'map': 'marker', 'organization': 'organization', 'tags': 'tag', 'res_format': 'format', 'license_id': 'license',
+    'topic': 'bulb', 'type': 'raid', 'member_countries': 'human'} %}
+
 {% block facet_list_heading %}
-<h2 class="module-heading">
+    <h2 class="module-heading ">
+        <i class="heading-icon spc-icon-{{ facet_icons[name] }}"></i>
   {% set title = title or h.get_facet_title(name) %}
   {{ title }}
 </h2>
@@ -15,7 +20,8 @@
         {% for item in items %}
           {% set href = h.remove_url_param(name, item.name, extras=extras, alternative_url=alternative_url) if item.active else h.add_url_param(new_params={name: item.name}, extras=extras, alternative_url=alternative_url) %}
           {% set label = label_function(item) if label_function else item.display_name %}
-          {% set label_truncated = h.truncate(label, 22) if not label_function else label %}
+          {#% set label_truncated = h.truncate(label, 22) if not label_function else label %#}
+            {% set label_truncated = label %}
           {% set count = count_label(item['count']) if count_label else ('(%d)' % item['count']) %}
             <li class="{{ nav_item_class or 'nav-item' }}{% if item.active %} active{% endif %}">
               <a href="{{ href }}" title="{{ label if label != label_truncated else '' }}">
@@ -27,12 +33,13 @@
     </nav>
 
     <p class="module-footer">
-      <a href="{{ h.remove_url_param('_%s_limit' % name, replace=0, extras=extras, alternative_url=alternative_url) }}" class="read-more">{{ _('Show More {facet_type}').format(facet_type=title) }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-      {% if h.get_param_int('_%s_limit' % name) %}
-        {% if h.has_more_facets(name) %}
-        {% endif %}
-      {% else %}
-        <a href="{{ h.remove_url_param('_%s_limit' % name, extras=extras, alternative_url=alternative_url) }}" class="read-more">{{ _('Show Only Popular {facet_type}').format(facet_type=title) }} <i class="fa fa-angle-up" aria-hidden="true"></i></a>
+        {% if h.get_param_int('_%s_limit' % name) %}
+            {% if h.has_more_facets(name) %}
+                <a href="{{ h.remove_url_param('_%s_limit' % name, replace=0, extras=extras, alternative_url=alternative_url) }}" class="read-more">{{ _('show more').format(facet_type=title) }} <i class="show-more-icon spc-icon-arrow-down" aria-hidden="true"></i></a>
+
+            {% endif %}
+        {% else %}
+            <a href="{{ h.remove_url_param('_%s_limit' % name, extras=extras, alternative_url=alternative_url) }}" class="read-more">{{ _('show only popular').format(facet_type=title) }} <i class="show-more-icon spc-icon-arrow-down" aria-hidden="true"></i></a>
       {% endif %}
     </p>
   {% else %}

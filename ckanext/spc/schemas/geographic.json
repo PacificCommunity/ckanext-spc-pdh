@@ -113,6 +113,8 @@
       "multiple": false,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_code_string_form",
       "validators": "construct_sub_schema(gmd_code_string) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -129,6 +131,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_code_string_form",
       "validators": "construct_sub_schema(gmd_code_string) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -145,6 +149,8 @@
       "multiple": true,
       "required": true,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_cited_responsible_party_form",
       "validators": "construct_sub_schema(gmd_cited_responsible_party) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -171,10 +177,12 @@
     },
     {
       "field_name": "locale",
-      "label": "locale",
+      "label": "Locale",
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_locale_form",
       "validators": "construct_sub_schema(gmd_locale) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -184,6 +192,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_spatial_form",
       "validators": "construct_sub_schema(gmd_spatial) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -193,6 +203,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_identifier_form",
       "validators": "construct_sub_schema(gmd_identifier) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -202,6 +214,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_metadata_extension_form",
       "validators": "construct_sub_schema(gmd_metadata_extension) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -211,6 +225,8 @@
       "multiple": true,
       "required": true,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_identification_info_form",
       "validators": "construct_sub_schema(gmd_identification_info) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -220,6 +236,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_content_info_form",
       "validators": "construct_sub_schema(gmd_content_info) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -229,6 +247,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_data_quality_form",
       "validators": "construct_sub_schema(gmd_data_quality) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -238,6 +258,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_citation_form",
       "validators": "construct_sub_schema(gmd_citation) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -247,6 +269,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_metadata_constraints_form",
       "validators": "construct_sub_schema(gmd_metadata_constraints) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -256,6 +280,8 @@
       "multiple": true,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_application_schema_info_form",
       "validators": "construct_sub_schema(gmd_application_schema_info) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
@@ -265,6 +291,8 @@
       "multiple": false,
       "required": false,
       "display_snippet": "sub_table.html",
+      "form_snippet": "sub_form.html",
+      "sub_form": "gmd_maintenance_form",
       "validators": "construct_sub_schema(gmd_maintenance) scheming_required spc_to_json",
       "output_validators": "convert_to_json_if_string"
     },
