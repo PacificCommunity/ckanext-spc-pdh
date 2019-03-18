@@ -173,6 +173,8 @@ def store_search_query(search_params):
         # many entries for basically the same search, which might screw up
         # our scoring.
         q = _normalize_search_query(q)
+        if not q:
+            return
         query = SearchQuery.update_or_create(q)
         model.Session.commit()
         return query
