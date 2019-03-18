@@ -84,6 +84,21 @@ class SpcPlugin(plugins.SingletonPlugin):
             controller='ckanext.spc.controllers.spc_package:PackageController',
             action='choose_type'
         )
+
+        return map
+
+    def before_map(self, map):
+
+        map.connect(
+            'search_queries.index',
+            '/ckan-admin/search-queries',
+            controller=(
+                'ckanext.spc.controllers.search_queries'
+                ':SearchQueryController'),
+            action='index',
+            ckan_icon='search-plus'
+        )
+
         return map
 
     # IConfigurable
@@ -105,6 +120,11 @@ class SpcPlugin(plugins.SingletonPlugin):
             logger.debug('Updating EEZ list')
             collection = json.load(file)
             spc_utils.eez.update(collection['features'])
+
+        toolkit.add_ckan_admin_tab(
+            config_, 'search_queries.index', 'Search Queries'
+        )
+
 
     # IConfigurer
 
@@ -185,6 +205,9 @@ class SpcPlugin(plugins.SingletonPlugin):
             results['results'].sort(
                 key=lambda i: i.get('ga_view_count', 0), reverse=True
             )
+
+        spc_utils.store_search_query(params)
+
         return results
 
     def before_index(self, pkg_dict):
