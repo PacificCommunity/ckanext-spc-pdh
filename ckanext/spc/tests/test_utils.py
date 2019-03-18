@@ -1,6 +1,10 @@
 import nose.tools as nt
-
+import ckan.model as model
+from ckan.tests.helpers import call_action, FunctionalTestBase
+from ckan.tests.legacy.pylons_controller import PylonsTestCase
 import ckanext.spc.utils as utils
+from ckanext.spc.tests.test_helpers import cli
+from nose.tools import eq_, assert_raises
 
 
 def test_normalize_res():
@@ -41,3 +45,9 @@ def test_normalize_to_dcat():
     )
 
     nt.assert_dict_equal(expected, utils.normalize_to_dcat(pkg))
+
+
+def test_normalize_search_query():
+    eq_('a a', utils._normalize_search_query('A A'))
+    eq_('a a', utils._normalize_search_query('a a'))
+    eq_('a a', utils._normalize_search_query('      a            A    '))
