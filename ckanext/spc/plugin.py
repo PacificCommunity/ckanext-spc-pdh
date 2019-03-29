@@ -10,7 +10,7 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
 from ckan.lib.uploader import get_resource_uploader
-
+from ckan.lib.plugins import DefaultTranslation
 from ckan.common import _
 import ckanext.scheming.helpers as scheming_helpers
 
@@ -57,9 +57,10 @@ def _redefine_create_license_list(self, *args, **kwargs):
 LicenseRegister._create_license_list = _redefine_create_license_list
 
 
-class SpcPlugin(plugins.SingletonPlugin):
+class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
