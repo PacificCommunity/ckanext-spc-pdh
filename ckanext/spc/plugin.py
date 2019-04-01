@@ -215,16 +215,22 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
-        pkg_dict['topic'] = json.loads(
-            pkg_dict.get('thematic_area_string', '[]')
-        )
+
+        topic_str = pkg_dict.get('thematic_area_string', '[]')
+        if isinstance(topic_str, string_types):
+            pkg_dict['topic'] = json.loads(
+                topic_str
+            )
+        else:
+            pkg_dict['topic'] = topic_str
 
         pkg_dict.update(
             extras_five_star_rating=spc_utils.count_stars(pkg_dict)
         )
-        pkg_dict['member_countries'] = spc_helpers.countries_list(
-            pkg_dict.get('member_countries', '[]')
-        )
+        if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
+            pkg_dict['member_countries'] = spc_helpers.countries_list(
+                pkg_dict.get('member_countries', '[]')
+            )
         # Otherwise you'll get `immense field` error from SOLR
         pkg_dict.pop('data_quality_info', None)
 
