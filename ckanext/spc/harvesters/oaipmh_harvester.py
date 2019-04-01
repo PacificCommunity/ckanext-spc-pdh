@@ -3,7 +3,7 @@ import json
 
 import ckan.model as model
 from ckan.logic import check_access, get_action
-from ckan.lib.munge import munge_title_to_name
+from ckan.lib.munge import munge_title_to_name, munge_tag
 import ckan.plugins.toolkit as tk
 
 from ckanext.oaipmh.harvester import OaipmhHarvester
@@ -94,7 +94,38 @@ class SpcOaipmhHarvester(OaipmhHarvester):
                 context['__auth_audit'] = []
                 group = get_action('group_create')(context, data_dict)
                 logger.info('created the group ' + group['id'])
-            group_ids.append(group['id'])
+            group_ids.append({'id': group['id']})
 
         logger.debug('Group ids: %s' % group_ids)
         return group_ids
+
+    def _extract_tags_and_extras(self, content):
+        extras = []
+        tags = []
+        for key, value in content.iteritems():
+            if key in self._get_mapping().values():
+                continue
+            if key in ['type', 'subject']:
+                if type(value) is list:
+                    tags.extend(value)
+                else:
+                    tags.extend(value.split(';'))
+                continue
+            if value and type(value) is list:
+                value = value[0]
+            if not value:
+                value = None
+            if key.endswith('date') and value:
+                # the ckan indexer can't handle timezone-aware datetime objects
+                try:
+                    from dateutil.parser import parse
+                    date_value = parse(value)
+                    date_without_tz = date_value.replace(tzinfo=None)
+                    value = date_without_tz.isoformat()
+                except (ValueError, TypeError):
+                    continue
+
+            extras.append((key, value))
+
+        tags = [{'state': 'active', 'name': munge_tag(tag[:100])} for tag in tags]
+        return (tags, extras)
