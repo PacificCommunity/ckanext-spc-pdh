@@ -150,5 +150,8 @@ class PacGeoHarvester(CSWHarvester):
                     }
                     data.setdefault('contact', []).append(contact)
 
-        print(extras)
+        harvest_source = model.Package.get(harvest_object.source.id)
+        if harvest_source:
+            data['owner_org'] = harvest_source.owner_org
+
         return data
