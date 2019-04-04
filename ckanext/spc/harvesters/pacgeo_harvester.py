@@ -153,5 +153,5 @@ class PacGeoHarvester(CSWHarvester):
         harvest_source = model.Package.get(harvest_object.source.id)
         if harvest_source:
             data['owner_org'] = harvest_source.owner_org
-
+        data['thematic_area_string'] = 'Geoscience'
         return data
