@@ -129,6 +129,15 @@ paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" SPREP "$title" true "$org" DAILY "$config" -c $1
 
 
+# PacGeo
+url='http://www.pacgeo.org/catalogue/csw'
+name='pacgeo'
+title='PacGeo'
+org='spc-gem'
+config='{"keywords": ["maritimeboundaries", "boundaries-administrative"]}'
+paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
+paster --plugin=ckanext-harvest harvester source "$name" "$url" pacgeo "$title" true "$org" DAILY "$config" -c $1
+
 echo
 echo ________________________________________________________________________________
 echo Done
@@ -142,7 +151,7 @@ echo
 echo Update $1 with following changes:
 echo -e '\t'ckan.auth.user_create_groups = true
 echo -e '\t'ckan.harvest.mq.type = redis
-echo -e '\t'ckan.plugins = ... harvest spc_oaipmh_harvester spc_dkan_harvester spc_gbif_harvester
+echo -e '\t'ckan.plugins = ... harvest spc_oaipmh_harvester spc_dkan_harvester spc_gbif_harvester spc_pacgeo_harvester
 
 echo
 echo Restart server and create new harvest sources under /harvest:
