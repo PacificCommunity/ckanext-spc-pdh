@@ -1514,13 +1514,13 @@ button.header-menu-btn:focus {
   background-color: transparent;
 }
 .secondary .filters .nav-simple > li.nav-item.active a:after {
-  transform: rotateZ(45deg);
-  right: -1px;
-  color: white;
-  background: #8b8b8b;
+  background: url("/data/base/images/tag-close-side.png") 50% no-repeat;
+  background-size: contain;
+  right: 1px;
+  color: transparent;
   border-radius: 50%;
-  width: 23px;
-  height: 23px;
+  width: 20px;
+  height: 20px;
   text-align: center;
 }
 .secondary .filters .nav-simple > li.nav-item.active a span {
@@ -1596,6 +1596,28 @@ button.header-menu-btn:focus {
   background-position: 50%;
   background-size: 15px;
 }
+.search-form .filter-list {
+  margin-left: 27px;
+  margin-top: 37px;
+  margin-bottom: 13px;
+}
+.search-form .filter-list .filtered {
+  margin: 5px 10px 6px 0;
+  padding: 5px 9px 5px 19px;
+  background: #8ca0a6;
+  font-size: 15px;
+}
+.search-form .filter-list .filtered .remove {
+  margin-left: 12px;
+  position: relative;
+  top: -2px;
+  color: transparent;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("/data/base/images/tag-close.png") 50% no-repeat;
+  background-size: contain;
+}
 .search-form .search-additional-control {
   border-bottom: 1px solid #c2c2c2;
   display: flex;
@@ -1610,7 +1632,7 @@ button.header-menu-btn:focus {
   border-left: 1px solid #c2c2c2;
 }
 .search-form .search-additional-control > div:first-child {
-  flex-grow: .8;
+  flex-grow: 0.8;
 }
 .search-form .search-additional-control > div:first-child a {
   cursor: pointer;
@@ -2022,7 +2044,7 @@ button.header-menu-btn:focus {
     display: block;
     float: right;
     border: none;
-    margin-top: -5px;
+    margin-top: 10px;
   }
   .search-form .search-additional-control > div {
     padding: 0px;
