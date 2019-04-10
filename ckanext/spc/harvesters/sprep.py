@@ -288,6 +288,8 @@ class SpcSprepHarvester(HarvesterBase):
 
             data_dict['thematic_area_string'] = _map_theme_to_topic(data_dict['theme'])
 
+            data_dict['harvest_source'] = 'SPREP'
+
             self._create_or_update_package(
                 data_dict, harvest_object, 'package_show'
             )

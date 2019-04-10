@@ -140,6 +140,12 @@
       "display_snippet": "list_of_links.html"
     },
     {
+      "field_name": "harvest_source",
+      "label": "Harvest Source",
+      "display_snippet": null
+    },
+
+    {
       "field_name": "sample",
       "label": "Sample",
       "preset": "multivalued_list"
