@@ -91,6 +91,8 @@ class SpcSprepHarvester(HarvesterBase):
                     continue
                 if 'hub.pacificdata' == record.get('isPartOf'):
                     continue
+                if 'Info' in record.get('theme', []):
+                    continue
                 harvest_obj = HarvestObject(
                     guid=record['identifier'],
                     content=json.dumps(record),
@@ -280,19 +282,12 @@ class SpcSprepHarvester(HarvesterBase):
                     data_dict['owner_org'] = org.id
 
             data_dict['source'] = package_dict.get('landingPage')
-            # logger.debug('Create/update package using dict: %s' % package_dict)
-            try:
-                page = BeautifulSoup(requests.get(package_dict['url']).content)
-                topics = page.select('.field-name-field-topic .field-item')
-                thematic_area = [
-                    self._mapping[topic.text]
-                    for topic in topics
-                    if topic.text in self._mapping
-                ]
-                data_dict['thematic_area_string'] = thematic_area
 
-            except Exception as e:
-                logger.debug('[Parsing topic] %s' % e)
+            data_dict['theme'] = package_dict.get('theme', [])
+            data_dict['theme'] = package_dict.get('theme', [])
+
+            data_dict['thematic_area_string'] = _map_theme_to_topic(data_dict['theme'])
+
             self._create_or_update_package(
                 data_dict, harvest_object, 'package_show'
             )
@@ -312,3 +307,26 @@ class SpcSprepHarvester(HarvesterBase):
 def _parse_drupal_date(date_str):
 
     return parse(date_str, dayfirst=True)
+
+def _map_theme_to_topic(themes):
+    topics = set()
+    if len(themes) >= 3:
+        topics.add('Environment')
+    if 'Atmosphere and Climate' in themes:
+        topics.add('Climate Change')
+    if 'Biodiversity' in themes:
+        topics.add('Land Resources')
+        if any(t in themes for t in ('Atmosphere and Climate', 'Inland Waters')):
+            topics.add('Fisheries')
+    if 'Land' in themes:
+        topics.add('Land Resources')
+    if 'Built Environment' in themes:
+        topics.add('Environment')
+        topics.add('Economic Development')
+    if 'Coastal and Marine' in themes:
+        topics.add('Fisheries')
+    if 'Culture and Heritage' in themes:
+        topics.add('Social')
+    if 'Inland Waters' in themes:
+        topics.add('Geoscience')
+    return list(topics)
