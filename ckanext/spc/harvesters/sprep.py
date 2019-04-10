@@ -227,9 +227,12 @@ class SpcSprepHarvester(HarvesterBase):
             data_dict['modified'] = _parse_drupal_date(
                 package_dict['modified']
             )
-            data_dict['contact_name'] = package_dict['contactPoint']['fn']
-            data_dict['contact_email'] = package_dict['contactPoint'][
-                'hasEmail']
+
+            c_point, c_email = package_dict['contactPoint']['fn'], package_dict['contactPoint'][
+                'hasEmail'].split(':')[-1]
+            if c_email != 'noemailprovided@usa.gov':
+                data_dict['contact_uri'] = c_point
+                data_dict['contact_email'] = c_email
             data_dict['resources'] = []
             for res in package_dict.get('distribution', []):
 
