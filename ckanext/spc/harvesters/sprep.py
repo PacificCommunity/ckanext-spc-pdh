@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
 RE_SPATIAL = re.compile(r'POLYGON \(\((.*)\)\)')
 
+
 class SpcSprepHarvester(HarvesterBase):
     '''
     SPREP Harvester
@@ -65,10 +66,9 @@ class SpcSprepHarvester(HarvesterBase):
             for record in requests.get(
                 urlparse.urljoin(harvest_job.source.url, 'data.json')
             ).json()['dataset']:
-            # for record in json.loads(open('/tmp/data.json').read())['dataset']:
-                license_id = record.get(
-                    'license', 'cc-by'
-                ).strip('/').split('/')[-1]
+                # for record in json.loads(open('/tmp/data.json').read())['dataset']:
+                license_id = record.get('license',
+                                        'cc-by').strip('/').split('/')[-1]
                 if license_id in skip_licenses:
                     continue
 
@@ -186,7 +186,9 @@ class SpcSprepHarvester(HarvesterBase):
             data_dict['title'] = package_dict['title']
             data_dict['name'] = munge_title_to_name(package_dict['name'])
 
-            data_dict['notes'] = markdown_extract(package_dict.get('description'))
+            data_dict['notes'] = markdown_extract(
+                package_dict.get('description')
+            )
 
             tags = package_dict.get('keyword', [])
             data_dict['tag_string'] = ', '.join([
@@ -195,23 +197,20 @@ class SpcSprepHarvester(HarvesterBase):
 
             data_dict['private'] = False
 
-
-            license_id = package_dict.get(
-                'license', 'cc-by'
-            ).strip('/').split('/')[-1]
+            license_id = package_dict.get('license',
+                                          'cc-by').strip('/').split('/')[-1]
 
             if license_id == 'de2a56f5-a565-481a-8589-406dc40b5588':
                 license_id = 'cc-nc-sa-4.0'
             data_dict['license_id'] = license_id or 'notspecified'
 
-            data_dict['created'] = _parse_drupal_date(
-                package_dict['issued']
-            )
+            data_dict['created'] = _parse_drupal_date(package_dict['issued'])
             data_dict['modified'] = _parse_drupal_date(
                 package_dict['modified']
             )
             data_dict['contact_name'] = package_dict['contactPoint']['fn']
-            data_dict['contact_email'] = package_dict['contactPoint']['hasEmail']
+            data_dict['contact_email'] = package_dict['contactPoint'][
+                'hasEmail']
             data_dict['resources'] = []
             for res in package_dict.get('distribution', []):
 
@@ -229,13 +228,10 @@ class SpcSprepHarvester(HarvesterBase):
                 try:
                     data_dict['spatial'] = json.dumps({
                         "type": "Polygon",
-                        "coordinates": [[
-                            [float(c) for c in pair.split()]
-                            for pair in
-                            RE_SPATIAL.match(
-                                data_dict['spatial']
-                            ).group(1).split(', ')
-                        ]]
+                        "coordinates": [[[
+                            float(c) for c in pair.split()
+                        ] for pair in RE_SPATIAL.match(data_dict['spatial']).
+                                         group(1).split(', ')]]
                     })
                 except KeyError:
                     pass
