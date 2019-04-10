@@ -276,6 +276,7 @@ class SpcSprepHarvester(HarvesterBase):
                 if org:
                     data_dict['owner_org'] = org.id
 
+            data_dict['source'] = package_dict.get('landingPage')
             # logger.debug('Create/update package using dict: %s' % package_dict)
             try:
                 page = BeautifulSoup(requests.get(package_dict['url']).content)
