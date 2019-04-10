@@ -3,6 +3,7 @@ import json
 import logging
 import re
 import urllib2
+import urlparse
 from bs4 import BeautifulSoup
 import requests
 from ckan.lib.helpers import markdown_extract
@@ -14,10 +15,11 @@ from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
 from dateutil.parser import parse
 import ckan.model as model
+from ckan.lib.munge import munge_title_to_name
 
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
-
+RE_SPATIAL = re.compile(r'POLYGON \(\((.*)\)\)')
 
 class SpcSprepHarvester(HarvesterBase):
     '''
@@ -53,12 +55,27 @@ class SpcSprepHarvester(HarvesterBase):
         try:
             harvest_obj_ids = []
             self._set_config(harvest_job.source.config)
-            # TODO: clear upper limit
+
+            skip_licenses = {
+                'c12c3333-1ad7-4a3a-a629-ed51fcb636ac',
+                'a270745d-07d5-4e93-94fc-ba6e0afc97fb',
+            }
+
+            # TODO: switch
             for record in requests.get(
-                harvest_job.source.url + '/api/3/action/package_list'
-            ).json()['result']:
+                urlparse.urljoin(harvest_job.source.url, 'data.json')
+            ).json()['dataset']:
+            # for record in json.loads(open('/tmp/data.json').read())['dataset']:
+                license_id = record.get(
+                    'license', 'cc-by'
+                ).strip('/').split('/')[-1]
+                if license_id in skip_licenses:
+                    continue
+
                 harvest_obj = HarvestObject(
-                    guid=record, content=record, job=harvest_job
+                    guid=record['identifier'],
+                    content=json.dumps(record),
+                    job=harvest_job
                 )
                 harvest_obj.save()
                 harvest_obj_ids.append(harvest_obj.id)
@@ -72,7 +89,7 @@ class SpcSprepHarvester(HarvesterBase):
                 harvest_job
             )
             return None
-        except Exception, e:
+        except Exception as e:
             logger.exception(
                 'Gather stage failed on %s: %s' % (
                     harvest_job.source.url,
@@ -91,7 +108,6 @@ class SpcSprepHarvester(HarvesterBase):
             config_json = json.loads(source_config)
             # logger.debug('config_json: %s' % config_json)
             self.config = config_json
-            self.config['api_version'] = 3
             self.user = 'harvest'
             self._mapping = config_json.get('topic_mapping', False)
 
@@ -115,31 +131,12 @@ class SpcSprepHarvester(HarvesterBase):
         logger.debug("in fetch stage: %s" % harvest_object.guid)
         try:
             self._set_config(harvest_object.job.source.config)
-            try:
-                logger.debug(
-                    "Load %s with metadata prefix '%s'" %
-                    (harvest_object.guid, 'sprep')
-                )
-                result = requests.get(
-                    harvest_object.source.url + '/api/3/action/package_show', {
-                        'id': harvest_object.content
-                    }
-                ).json()['result']
-                if not result:
-                    self._save_object_error(
-                        'No records found for id <%s>' %
-                        harvest_object.content, harvest_object
-                    )
-                    return False
-                content_dict = result[0]
-                content_dict['name'] += content_dict['id']
-                content_dict['name'] = content_dict['name'][:99]
-                logger.debug('record found!')
-            except Exception:
-                logger.exception('fetch_record failed')
-                self._save_object_error('Fetch record failed!', harvest_object)
-                return False
+            content_dict = json.loads(harvest_object.content)
+            content_dict['id'] = content_dict['identifier']
 
+            content_dict['name'] = (
+                munge_title_to_name(content_dict['title']) + content_dict['id']
+            )[:99]
             try:
                 content = json.dumps(content_dict)
             except Exception:
@@ -188,52 +185,61 @@ class SpcSprepHarvester(HarvesterBase):
             data_dict['id'] = package_dict['id']
             data_dict['title'] = package_dict['title']
             data_dict['name'] = munge_title_to_name(package_dict['name'])
-            data_dict['notes'] = markdown_extract(package_dict.get('notes'))
 
-            tags = package_dict.get('tags', [])
+            data_dict['notes'] = markdown_extract(package_dict.get('description'))
+
+            tags = package_dict.get('keyword', [])
             data_dict['tag_string'] = ', '.join([
-                munge_tag(tag['name']) for tag in tags
+                munge_tag(tag) for tag in tags
             ])
 
             data_dict['private'] = False
 
-            license_mapping = {
-                'de2a56f5-a565-481a-8589-406dc40b5588': 'cc-nc-sa-4.0',
-                'c12c3333-1ad7-4a3a-a629-ed51fcb636ac': 'other-closed',
-                'a270745d-07d5-4e93-94fc-ba6e0afc97fb': 'other-closed',
-            }
-            license_id = package_dict.get('license_title',
-                                          'cc-by').strip('/').split('/')[-1]
-            data_dict['license_id'] = license_mapping.get(
-                license_id, license_id
-            )
 
-            if not data_dict['license_id']:
-                data_dict['license_id'] = 'notspecified'
+            license_id = package_dict.get(
+                'license', 'cc-by'
+            ).strip('/').split('/')[-1]
 
-            data_dict['issued'] = _parse_drupal_date(
-                package_dict['metadata_created']
+            if license_id == 'de2a56f5-a565-481a-8589-406dc40b5588':
+                license_id = 'cc-nc-sa-4.0'
+            data_dict['license_id'] = license_id or 'notspecified'
+
+            data_dict['created'] = _parse_drupal_date(
+                package_dict['issued']
             )
             data_dict['modified'] = _parse_drupal_date(
-                package_dict['metadata_modified']
+                package_dict['modified']
             )
-            data_dict['contact_name'] = package_dict['maintainer']
-            data_dict['contact_email'] = package_dict['maintainer_email']
+            data_dict['contact_name'] = package_dict['contactPoint']['fn']
+            data_dict['contact_email'] = package_dict['contactPoint']['hasEmail']
             data_dict['resources'] = []
-            for res in package_dict.get('resources', []):
-                res['issued'] = _parse_drupal_date(res.pop('created'))
-                res['modified'] = _parse_drupal_date(
-                    res.pop('last_modified').replace('Date changed ', '')
-                )
-                try:
-                    res['size'] = float(res['size'].split()[0])
-                except (ValueError, IndexError):
-                    res['size'] = 0
-                res['url'] = BeautifulSoup(res['url']).text
+            for res in package_dict.get('distribution', []):
+
+                # res['issued'] = _parse_drupal_date(res.pop('created'))
+                # res['modified'] = _parse_drupal_date(
+                #     res.pop('last_modified').replace('Date changed ', '')
+                # )
+                res['url'] = res.get('downloadURL') or res.get('accessURL')
+                res['format'] = res['format']
+                res['name'] = res['title']
+                res['description'] = markdown_extract(res.get('description'))
                 data_dict['resources'].append(res)
             if 'spatial' in package_dict:
                 data_dict['spatial'] = package_dict['spatial']
-            # package_dict.pop('type')
+                try:
+                    data_dict['spatial'] = json.dumps({
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [float(c) for c in pair.split()]
+                            for pair in
+                            RE_SPATIAL.match(
+                                data_dict['spatial']
+                            ).group(1).split(', ')
+                        ]]
+                    })
+                except KeyError:
+                    pass
+                # package_dict.pop('type')
             # add owner_org
             source_dataset = get_action('package_show')({
                 'ignore_auth': True
@@ -257,7 +263,9 @@ class SpcSprepHarvester(HarvesterBase):
 
             except Exception as e:
                 logger.debug('[Parsing topic] %s' % e)
-            self._create_or_update_package(data_dict, harvest_object, 'package_show')
+            self._create_or_update_package(
+                data_dict, harvest_object, 'package_show'
+            )
 
             Session.commit()
 
