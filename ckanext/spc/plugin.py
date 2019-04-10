@@ -6,6 +6,8 @@ import textract
 
 from collections import OrderedDict
 from six import string_types
+
+import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
@@ -130,12 +132,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         )
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
-        if not os.path.isfile(filepath):
-            return
-        with open(filepath) as file:
-            logger.debug('Updating EEZ list')
-            collection = json.load(file)
-            spc_utils.eez.update(collection['features'])
+        if os.path.isfile(filepath):
+            with open(filepath) as file:
+                logger.debug('Updating EEZ list')
+                collection = json.load(file)
+                spc_utils.eez.update(collection['features'])
 
         toolkit.add_ckan_admin_tab(
             config_, 'search_queries.index', 'Search Queries'
