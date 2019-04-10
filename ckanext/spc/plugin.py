@@ -43,6 +43,19 @@ class LicenseCreativeCommonsNonCommercial40(DefaultLicense):
         return _("Creative Commons Attribution-NonCommercial 4.0")
 
 
+class LicenseSprepPublic(DefaultLicense):
+    id = "sprep-public-license"
+    url = (
+        "https://pacific-data.sprep.org/dataset/"
+        "data-portal-license-agreements/resource/"
+        "de2a56f5-a565-481a-8589-406dc40b5588"
+    )
+
+    @property
+    def title(self):
+        return _("SPREP Public License")
+
+
 original_create_license_list = LicenseRegister._create_license_list
 
 
@@ -52,6 +65,7 @@ def _redefine_create_license_list(self, *args, **kwargs):
     self.licenses.append(
         License(LicenseCreativeCommonsNonCommercialShareAlice40())
     )
+    self.licenses.append(License(LicenseSprepPublic()))
 
 
 LicenseRegister._create_license_list = _redefine_create_license_list
@@ -95,7 +109,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             '/ckan-admin/search-queries',
             controller=(
                 'ckanext.spc.controllers.search_queries'
-                ':SearchQueryController'),
+                ':SearchQueryController'
+            ),
             action='index',
             ckan_icon='search-plus'
         )
@@ -125,7 +140,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_ckan_admin_tab(
             config_, 'search_queries.index', 'Search Queries'
         )
-
 
     # IConfigurer
 
@@ -218,9 +232,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         topic_str = pkg_dict.get('thematic_area_string', '[]')
         if isinstance(topic_str, string_types):
-            pkg_dict['topic'] = json.loads(
-                topic_str
-            )
+            pkg_dict['topic'] = json.loads(topic_str)
         else:
             pkg_dict['topic'] = topic_str
 
@@ -235,7 +247,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict.pop('data_quality_info', None)
 
         try:
-            resources = json.loads(pkg_dict['validated_data_dict'])['resources']
+            resources = json.loads(pkg_dict['validated_data_dict']
+                                   )['resources']
             resources_to_index = []
             for res in resources:
                 if res.get('format', '').lower() in ('txt', 'pdf'):
@@ -250,7 +263,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             uploader = get_resource_uploader(res)
             path = uploader.get_path(res['id'])
             if not os.path.exists(path):
-                logger.warn('Resource "%s" refers to unexisting path "%s"', res['id'], path)
+                logger.warn(
+                    'Resource "%s" refers to unexisting path "%s"', res['id'],
+                    path
+                )
                 continue
             fmt = res['format'].lower()
             if fmt == 'pdf':

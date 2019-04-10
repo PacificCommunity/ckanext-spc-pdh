@@ -63,10 +63,10 @@ class SpcSprepHarvester(HarvesterBase):
             }
 
             # TODO: switch
+            # for record in json.loads(open('/tmp/data.json').read())['dataset']:
             for record in requests.get(
                 urlparse.urljoin(harvest_job.source.url, 'data.json')
             ).json()['dataset']:
-                # for record in json.loads(open('/tmp/data.json').read())['dataset']:
                 license_id = record.get('license',
                                         'cc-by').strip('/').split('/')[-1]
                 if license_id in skip_licenses:
@@ -201,7 +201,7 @@ class SpcSprepHarvester(HarvesterBase):
                                           'cc-by').strip('/').split('/')[-1]
 
             if license_id == 'de2a56f5-a565-481a-8589-406dc40b5588':
-                license_id = 'cc-nc-sa-4.0'
+                license_id = 'sprep-public-license'
             data_dict['license_id'] = license_id or 'notspecified'
 
             data_dict['created'] = _parse_drupal_date(package_dict['issued'])
