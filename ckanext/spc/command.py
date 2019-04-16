@@ -75,9 +75,42 @@ class SPCCommand(CkanCommand):
             return
         broken_count = q.update({
             'license_id': 'notspecified'
-        }, synchronize_session=False)
+        },
+                                synchronize_session=False)
         model.Session.commit()
         print('{} packages were updated:'.format(broken_count))
         for id in ids:
             search.rebuild(id)
             print('\t' + id)
+
+    def create_country_orgs(self):
+        site_user = tk.get_action('get_site_user')({'ignore_auth': True}, {})
+        for name, title in country_orgs.items():
+            if model.Session.query(model.Group).filter_by(name=name + '-data'
+                                                          ).count():
+                continue
+            tk.get_action('organization_create')({
+                'ignore_auth': True,
+                'user': site_user['name']
+            }, {
+                'name': name + '-data',
+                'title': title
+            })
+
+    def drop_mendeley_publications(self):
+        while True:
+            results = tk.get_action('package_search')(
+                None, {
+                    'q': 'harvest_source:MENDELEY',
+                    'rows': 100
+                }
+            )
+            if not results['count']:
+                break
+            print('{} packages left'.format(results['count']))
+            for pkg in results['results']:
+                package = model.Package.get(pkg['id'])
+                package.purge()
+                print('\tPurged package <{}>'.format(pkg['id']))
+            model.Session.commit()
+        print('Done')
