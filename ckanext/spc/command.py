@@ -92,7 +92,8 @@ class SPCCommand(CkanCommand):
             return
         broken_count = q.update({
             'license_id': 'notspecified'
-        }, synchronize_session=False)
+        },
+                                synchronize_session=False)
         model.Session.commit()
         print('{} packages were updated:'.format(broken_count))
         for id in ids:
@@ -114,3 +115,21 @@ class SPCCommand(CkanCommand):
                 'name': name + '-data',
                 'title': title
             })
+
+    def drop_mendeley_publications(self):
+        while True:
+            results = tk.get_action('package_search')(
+                None, {
+                    'q': 'harvest_source:MENDELEY',
+                    'rows': 100
+                }
+            )
+            if not results['count']:
+                break
+            print('{} packages left'.format(results['count']))
+            for pkg in results['results']:
+                package = model.Package.get(pkg['id'])
+                package.purge()
+                print('\tPurged package <{}>'.format(pkg['id']))
+            model.Session.commit()
+        print('Done')
