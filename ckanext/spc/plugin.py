@@ -20,7 +20,11 @@ import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
+from ckanext.spc.ingesters import MendeleyBib
 from ckan.model.license import DefaultLicense, LicenseRegister, License
+
+from ckanext.ingest.interfaces import IIngest
+
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +72,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(IIngest)
+
+    # IIngest
+
+    def get_ingesters(self):
+        return [
+            ('mendeley_bib', MendeleyBib())
+        ]
 
     # IRouter
 
@@ -124,6 +136,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         toolkit.add_ckan_admin_tab(
             config_, 'search_queries.index', 'Search Queries'
+        )
+        toolkit.add_ckan_admin_tab(
+            config_, 'ingest.index', 'Ingest'
         )
 
 
