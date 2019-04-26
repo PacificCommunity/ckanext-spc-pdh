@@ -87,7 +87,7 @@ setup(
         spc_dkan_harvester=ckanext.spc.harvesters.dkan:DKANHarvester
         spc_prdr_publications_harvester=ckanext.spc.harvesters.prdr_publications:PRDRPublicationsHarvester
         spc_prdr_res_energy_harvester=ckanext.spc.harvesters.prdr_engery_resource:PRDREngergyResourcesHarvester
-
+        spc_pacgeo_harvester=ckanext.spc.harvesters.pacgeo_harvester:PacGeoHarvester
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
