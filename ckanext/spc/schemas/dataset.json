@@ -135,7 +135,9 @@
     {
       "field_name": "source",
       "label": "Source",
-      "preset": "multivalued_list"
+      "preset": "multivalued_list",
+      "external_links": true,
+      "display_snippet": "list_of_links.html"
     },
     {
       "field_name": "sample",
