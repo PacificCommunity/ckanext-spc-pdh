@@ -2,6 +2,7 @@ import logging
 import os
 
 import ckan.model as model
+import ckan.plugins.toolkit as tk
 import paste.script
 from alembic import command
 from alembic.config import Config
@@ -11,6 +12,22 @@ from ckan.lib.cli import CkanCommand
 import ckan.lib.search as search
 
 logger = logging.getLogger(__name__)
+country_orgs = {
+    "palau": "Palau Environment Data Portal",
+    "fsm": "Federated States of Micronesia Environment Data Portal",
+    "png": "Papua New Guinea Data Portal",
+    "vanuatu": "Vanuatu Environment Data Portal",
+    "solomonislands": "Solomon Islands Environment Data Portal",
+    "nauru": "Nauru Environment Data Portal",
+    "rmi": "Republic of Marshall Islands Environment Data Portal",
+    "tuvalu": "Tuvalu Environment Data Portal",
+    "fiji": "Fiji Environment Data Portal",
+    "tonga": "Tonga Environment Data Portal",
+    "samoa": "Samoa Environment Data Portal",
+    "niue": "Niue Environment Data Portal",
+    "cookislands": "Cook Islands Environment Data Portal",
+    "kiribati": "Kiribati Environment Data Portal",
+}
 
 
 class SPCCommand(CkanCommand):
@@ -84,7 +101,9 @@ class SPCCommand(CkanCommand):
             print('\t' + id)
 
     def create_country_orgs(self):
-        site_user = tk.get_action('get_site_user')({'ignore_auth': True}, {})
+        site_user = tk.get_action('get_site_user')({
+            'ignore_auth': True
+        }, {})
         for name, title in country_orgs.items():
             if model.Session.query(model.Group).filter_by(name=name + '-data'
                                                           ).count():

@@ -1,0 +1,7 @@
+<ul class="unstyled">
+    {% for value in data[field.field_name] %}
+	<li>
+            <a href="{{ value }}" {% if field.external_links %}target="_blank"{% endif %}>{{ value }}</a>
+        </li>
+    {% endfor %}
+</ul>

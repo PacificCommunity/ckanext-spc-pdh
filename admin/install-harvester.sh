@@ -128,7 +128,6 @@ config='{"topic_mapping": {"Atmosphere and Climate": "Climate Change", "Info": n
 paster --plugin=ckanext-harvest harvester clearsource "$name" -c $1
 paster --plugin=ckanext-harvest harvester source "$name" "$url" SPREP "$title" true "$org" DAILY "$config" -c $1
 
-
 # PacGeo
 url='http://www.pacgeo.org/catalogue/csw'
 name='pacgeo'
