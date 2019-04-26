@@ -1,7 +1,6 @@
 import logging
 import os
 import json
-import requests
 import textract
 
 from collections import OrderedDict
@@ -9,7 +8,6 @@ from six import string_types
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
-from ckan.lib.uploader import get_resource_uploader
 from ckan.lib.plugins import DefaultTranslation
 from ckan.common import _
 import ckanext.scheming.helpers as scheming_helpers
@@ -19,7 +17,6 @@ import ckanext.spc.utils as spc_utils
 import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
-import ckanext.spc.controllers.spc_package
 from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 logger = logging.getLogger(__name__)
@@ -247,10 +244,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             )
             resources_to_index
         for res in resources_to_index:
-            uploader = get_resource_uploader(res)
-            path = uploader.get_path(res['id'])
-            if not os.path.exists(path):
-                logger.warn('Resource "%s" refers to unexisting path "%s"', res['id'], path)
+            path = spc_utils.filepath_for_res_indexing(res)
+            if not path:
                 continue
             fmt = res['format'].lower()
             if fmt == 'pdf':
@@ -259,6 +254,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 with open(path) as f:
                     content = f.read()
             pkg_dict.setdefault('text', []).append(content)
+
+            if res['url_type'] != 'upload':
+                os.remove(path)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
