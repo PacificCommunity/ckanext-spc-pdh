@@ -21,6 +21,24 @@ logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
 RE_SPATIAL = re.compile(r'POLYGON \(\((.*)\)\)')
 
+country_mapping = {
+    "palau": "PW",
+    "fsm": "FM",
+    "png": "PG",
+    "vanuatu": "VU",
+    "solomonislands": "SB",
+    "nauru": "NR",
+    "rmi": "MH",
+    "tuvalu": "TV",
+    "fiji": "FJ",
+    "tonga": "TO",
+    "samoa": "WS",
+    "niue": "NU",
+    "cookislands": "CK",
+    "kiribati": "KI",
+    None: "Regional",
+}
+
 
 class SpcSprepHarvester(HarvesterBase):
     '''
@@ -245,6 +263,17 @@ class SpcSprepHarvester(HarvesterBase):
 
             owner_org = source_dataset.get('owner_org')
             data_dict['owner_org'] = owner_org
+            data_dict['member_countries'] = country_mapping[None]
+            if 'isPartOf' in package_dict:
+                country = package_dict['isPartOf'].split('.')[0]
+                data_dict['member_countries'] = country_mapping.get(
+                    country, country_mapping[None]
+                )
+                org = model.Session.query(
+                    model.Group
+                ).filter_by(name=country + '-data').first()
+                if org:
+                    data_dict['owner_org'] = org.id
 
             # logger.debug('Create/update package using dict: %s' % package_dict)
             try:
