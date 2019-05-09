@@ -8,3 +8,4 @@ textract==1.6.1
 pdf2text==1.0.0
 pdfminer==20140328
 bibtexparser==1.1.0
+pyparsing==2.3.0
