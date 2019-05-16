@@ -280,7 +280,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 continue
             fmt = res['format'].lower()
             if fmt == 'pdf':
-                content = textract.process(path, extension='.pdf')
+                try:
+                    content = textract.process(path, extension='.pdf')
+                except Exception as e:
+                    logger.warn(
+                        'Problem during extracting content from <%s>: %s',
+                        path, e
+                    )
+                    content = ''
             else:
                 with open(path) as f:
                     content = f.read()
