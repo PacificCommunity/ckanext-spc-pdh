@@ -130,7 +130,7 @@
 	{% set taxonomic = h.spc_unwrap_list(taxonomic) %}
 	{{ nested_field(name, idx ~ '__taxonomic_coverage__0', 'general_taxonomic_coverage', taxonomic, errs) }}
 	{{ subform('%s__%s__taxonomic_coverage__0__%s'| format(name, idx, 'taxonomic_classification'),
-	    taxonomic['taxonomic_classification'], errs, _('Taxonomic classification'), 'taxonomic_classification_form') }}
+	    taxonomic.get('taxonomic_classification'), errs, _('Taxonomic classification'), 'taxonomic_classification_form') }}
     {% endwith %}
 {% endmacro %}
 

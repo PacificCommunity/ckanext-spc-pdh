@@ -36,7 +36,7 @@
 	    data-module="clonable-fieldset"
             data-module-multiple="{{ field.multiple|string|lower }}"
 	    data-module-wildcard="{{ wildcard }}"
-	    data-module-i="{{ data[field.field_name]|length }}"
+	    data-module-i="{% if data[field.field_name] %}{{ data[field.field_name]|length }}{% else %}0{% endif %}"
 	    id="{{ uniq }}-wrapper"
 	>
 
