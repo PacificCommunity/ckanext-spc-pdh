@@ -26,7 +26,7 @@ class MendeleyBib(object):
             'tag_string': ','.join(
                 munge_tag(tag) for tag in record['keywords'].split(',')
             ),
-            'owner_org': 'mendeley',
+            'owner_org': tk.config.get('ckanext.ingestor.config.mendeley_bib.owner_org', 'iaea'),
             'type': 'publications'
         }
         identifiers = []
