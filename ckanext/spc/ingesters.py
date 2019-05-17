@@ -22,7 +22,7 @@ class MendeleyBib(object):
             'name': munge_title_to_name(record['ID'] + record['title']),
             'notes': record['abstract'],
             'harvest_source': 'MENDELEY',
-            'creator': record['author'].split(','),
+            'creator': record['author'].replace(',', '').split(' and '),
             'tag_string': ','.join(
                 munge_tag(tag) for tag in record['keywords'].split(',')
             ),
