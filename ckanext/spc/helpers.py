@@ -29,7 +29,8 @@ def get_helpers():
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
         spc_wrap_list=spc_wrap_list,
-        spc_hotjar_enabled=spc_hotjar_enabled
+        spc_hotjar_enabled=spc_hotjar_enabled,
+        spc_link_to_identifier=spc_link_to_identifier,
     )
 
 
@@ -162,3 +163,12 @@ def spc_hotjar_enabled():
     if enabled:
         return True
     return False
+
+def spc_link_to_identifier(id):
+    if not id:
+        return id
+    if id.startswith('doi'):
+        return 'http://doi.org/' + id[4:]
+    if id.startswith('pmid'):
+        return 'https://europepmc.org/abstract/med/' + id[5:]
+    return None
