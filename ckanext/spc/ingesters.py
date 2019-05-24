@@ -8,7 +8,9 @@ import ckan.model as model
 class MendeleyBib(object):
 
     def __str__(self):
-        return 'Mendeley Bibtex'
+        return tk.config.get(
+            'ckanext.ingestor.label.mendeley_bib', 'IAEA Mendeley Bibtext'
+        )
 
     def extract(self, source):
         return load(source).entries
