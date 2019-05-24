@@ -144,14 +144,16 @@
       "label": "Identifier",
       "help_text": "An unambiguous reference to the resource within a given context.",
       "dc_ns": "dc",
-      "preset": "multivalued_list"
+      "preset": "multivalued_list",
+      "display_snippet": "identifier_list.html"
     },
     {
       "field_name": "source",
       "label": "Source",
       "help_text": "A related resource from which the described resource is derived.",
       "dc_ns": "dc",
-      "preset": "multivalued_list"
+      "preset": "multivalued_list",
+      "display_snippet": "list_of_links.html"
     },
     {
       "field_name": "language",

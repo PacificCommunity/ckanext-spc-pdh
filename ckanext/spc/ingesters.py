@@ -8,7 +8,9 @@ import ckan.model as model
 class MendeleyBib(object):
 
     def __str__(self):
-        return 'Mendeley Bibtex'
+        return tk.config.get(
+            'ckanext.ingestor.label.mendeley_bib', 'IAEA Mendeley Bibtext'
+        )
 
     def extract(self, source):
         return load(source).entries
@@ -20,11 +22,11 @@ class MendeleyBib(object):
             'name': munge_title_to_name(record['ID'] + record['title']),
             'notes': record['abstract'],
             'harvest_source': 'MENDELEY',
-            'creator': record['author'].split(','),
+            'creator': record['author'].replace(',', '').split(' and '),
             'tag_string': ','.join(
                 munge_tag(tag) for tag in record['keywords'].split(',')
             ),
-            'owner_org': 'mendeley',
+            'owner_org': tk.config.get('ckanext.ingestor.config.mendeley_bib.owner_org', 'iaea'),
             'type': 'publications'
         }
         identifiers = []

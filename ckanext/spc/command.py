@@ -129,7 +129,8 @@ class SPCCommand(CkanCommand):
             print('{} packages left'.format(results['count']))
             for pkg in results['results']:
                 package = model.Package.get(pkg['id'])
-                package.purge()
-                print('\tPurged package <{}>'.format(pkg['id']))
+                if package:
+                    package.purge()
+                    print('\tPurged package <{}>'.format(pkg['id']))
             model.Session.commit()
         print('Done')
