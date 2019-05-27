@@ -39,6 +39,8 @@ class SPCCommand(CkanCommand):
 
     Commands::
         db-upgrade    Upgrade database to the state of the latest migration
+        fix-missed-licenses
+        drop-mendeley-publications
     ...
     """
 
