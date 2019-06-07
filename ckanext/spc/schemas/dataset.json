@@ -135,8 +135,16 @@
     {
       "field_name": "source",
       "label": "Source",
-      "preset": "multivalued_list"
+      "preset": "multivalued_list",
+      "external_links": true,
+      "display_snippet": "list_of_links.html"
     },
+    {
+      "field_name": "harvest_source",
+      "label": "Harvest Source",
+      "display_snippet": null
+    },
+
     {
       "field_name": "sample",
       "label": "Sample",
@@ -247,6 +255,10 @@
         {
           "label": "Education",
           "value": "Education"
+        },
+        {
+          "label": "Environment",
+          "value": "Environment"
         },
         {
           "label": "Economic Development",

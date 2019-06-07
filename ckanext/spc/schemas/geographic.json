@@ -227,7 +227,7 @@
       "field_name": "identification_info",
       "label": "Identification Info",
       "multiple": true,
-      "required": true,
+      "required": false,
       "display_snippet": "sub_table.html",
       "form_snippet": "sub_form.html",
       "sub_form": "gmd_identification_info_form",

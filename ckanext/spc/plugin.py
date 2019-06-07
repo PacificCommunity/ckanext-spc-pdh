@@ -1,15 +1,15 @@
 import logging
 import os
 import json
-import requests
 import textract
 
 from collections import OrderedDict
 from six import string_types
+
+import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
-from ckan.lib.uploader import get_resource_uploader
 from ckan.lib.plugins import DefaultTranslation
 from ckan.common import _
 import ckanext.scheming.helpers as scheming_helpers
@@ -20,7 +20,12 @@ import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
+from ckanext.spc.ingesters import MendeleyBib
+
 from ckan.model.license import DefaultLicense, LicenseRegister, License
+
+from ckanext.ingest.interfaces import IIngest
+
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +48,19 @@ class LicenseCreativeCommonsNonCommercial40(DefaultLicense):
         return _("Creative Commons Attribution-NonCommercial 4.0")
 
 
+class LicenseSprepPublic(DefaultLicense):
+    id = "sprep-public-license"
+    url = (
+        "https://pacific-data.sprep.org/dataset/"
+        "data-portal-license-agreements/resource/"
+        "de2a56f5-a565-481a-8589-406dc40b5588"
+    )
+
+    @property
+    def title(self):
+        return _("SPREP Public License")
+
+
 original_create_license_list = LicenseRegister._create_license_list
 
 
@@ -52,6 +70,7 @@ def _redefine_create_license_list(self, *args, **kwargs):
     self.licenses.append(
         License(LicenseCreativeCommonsNonCommercialShareAlice40())
     )
+    self.licenses.append(License(LicenseSprepPublic()))
 
 
 LicenseRegister._create_license_list = _redefine_create_license_list
@@ -68,6 +87,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(IIngest)
+
+    # IIngest
+
+    def get_ingesters(self):
+        return [
+            ('mendeley_bib', MendeleyBib())
+        ]
 
     # IRouter
 
@@ -95,7 +122,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             '/ckan-admin/search-queries',
             controller=(
                 'ckanext.spc.controllers.search_queries'
-                ':SearchQueryController'),
+                ':SearchQueryController'
+            ),
             action='index',
             ckan_icon='search-plus'
         )
@@ -115,17 +143,18 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         )
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
-        if not os.path.isfile(filepath):
-            return
-        with open(filepath) as file:
-            logger.debug('Updating EEZ list')
-            collection = json.load(file)
-            spc_utils.eez.update(collection['features'])
+        if os.path.isfile(filepath):
+            with open(filepath) as file:
+                logger.debug('Updating EEZ list')
+                collection = json.load(file)
+                spc_utils.eez.update(collection['features'])
 
         toolkit.add_ckan_admin_tab(
             config_, 'search_queries.index', 'Search Queries'
         )
-
+        toolkit.add_ckan_admin_tab(
+            config_, 'ingest.index', 'Ingest'
+        )
 
     # IConfigurer
 
@@ -215,21 +244,26 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
             pkg_dict['name']
         )
-        pkg_dict['topic'] = json.loads(
-            pkg_dict.get('thematic_area_string', '[]')
-        )
+
+        topic_str = pkg_dict.get('thematic_area_string', '[]')
+        if isinstance(topic_str, string_types):
+            pkg_dict['topic'] = json.loads(topic_str)
+        else:
+            pkg_dict['topic'] = topic_str
 
         pkg_dict.update(
             extras_five_star_rating=spc_utils.count_stars(pkg_dict)
         )
-        pkg_dict['member_countries'] = spc_helpers.countries_list(
-            pkg_dict.get('member_countries', '[]')
-        )
+        if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
+            pkg_dict['member_countries'] = spc_helpers.countries_list(
+                pkg_dict.get('member_countries', '[]')
+            )
         # Otherwise you'll get `immense field` error from SOLR
         pkg_dict.pop('data_quality_info', None)
 
         try:
-            resources = json.loads(pkg_dict['validated_data_dict'])['resources']
+            resources = json.loads(pkg_dict['validated_data_dict']
+                                   )['resources']
             resources_to_index = []
             for res in resources:
                 if res.get('format', '').lower() in ('txt', 'pdf'):
@@ -241,18 +275,26 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             )
             resources_to_index
         for res in resources_to_index:
-            uploader = get_resource_uploader(res)
-            path = uploader.get_path(res['id'])
-            if not os.path.exists(path):
-                logger.warn('Resource "%s" refers to unexisting path "%s"', res['id'], path)
+            path = spc_utils.filepath_for_res_indexing(res)
+            if not path:
                 continue
             fmt = res['format'].lower()
             if fmt == 'pdf':
-                content = textract.process(path, extension='.pdf')
+                try:
+                    content = textract.process(path, extension='.pdf')
+                except Exception as e:
+                    logger.warn(
+                        'Problem during extracting content from <%s>: %s',
+                        path, e
+                    )
+                    content = ''
             else:
                 with open(path) as f:
                     content = f.read()
             pkg_dict.setdefault('text', []).append(content)
+
+            if res['url_type'] != 'upload':
+                os.remove(path)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
