@@ -244,10 +244,20 @@ def filepath_for_res_indexing(res):
 
 def is_resource_updatable(id):
     res = model.Resource.get(id)
-    org_name = res.package.get_groups('organization')[0].name
-    restricted_orgs = tk.aslist(
-        tk.config.get('ckanext.spc.orgs_with_publications')
+    org = res.package.get_groups('organization')[0]
+    org_names = set(
+        map(attrgetter('name'), org.get_parent_groups('organization'))
     )
-    if org_name in restricted_orgs:
+    include_owner = tk.asbool(
+        tk.config.get('ckanext.spc.orgs_with_publications_include_root')
+    )
+    if include_owner:
+        org_names.add(org.name)
+
+    restricted_orgs = set(
+        tk.aslist(tk.config.get('ckanext.spc.orgs_with_publications'))
+    )
+
+    if org_names & restricted_orgs:
         return res.package.private
     return True
