@@ -242,9 +242,13 @@ def filepath_for_res_indexing(res):
         return dest.name
 
 
-def is_resource_updatable(id):
-    res = model.Resource.get(id)
-    org = res.package.get_groups('organization')[0]
+def is_resource_updatable(id, package_id=None):
+    if package_id:
+        pkg = model.Package.get(package_id)
+    else:
+        pkg = model.Resource.get(id).package
+
+    org = pkg.get_groups('organization')[0]
     org_names = set(
         map(attrgetter('name'), org.get_parent_groups('organization'))
     )
@@ -259,5 +263,5 @@ def is_resource_updatable(id):
     )
 
     if org_names & restricted_orgs:
-        return res.package.private
+        return pkg.private
     return True
