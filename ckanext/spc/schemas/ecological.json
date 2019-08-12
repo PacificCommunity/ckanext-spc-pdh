@@ -147,6 +147,10 @@
           "value": "Economic Development"
         },
         {
+          "label": "Environment",
+          "value": "Environment"
+        },
+        {
           "label": "PCCOS",
           "value": "PCCOS"
         },
@@ -170,7 +174,7 @@
     {
       "field_name": "owner_org",
       "label": "Publisher",
-      "preset": "dataset_organization"
+      "preset": "spc_dataset_organization"
     },
     {
       "field_name": "language",
