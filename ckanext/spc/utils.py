@@ -3,7 +3,7 @@ import os
 import tempfile
 
 import requests
-
+from operator import attrgetter
 import ckan.lib.helpers as h
 import ckan.model as model
 import ckan.plugins.toolkit as tk
@@ -240,3 +240,14 @@ def filepath_for_res_indexing(res):
             resp = requests.get(url)
             dest.write(resp.content)
         return dest.name
+
+
+def is_resource_updatable(id):
+    res = model.Resource.get(id)
+    org_name = res.package.get_groups('organization')[0].name
+    restricted_orgs = tk.aslist(
+        tk.config.get('ckanext.spc.orgs_with_publications')
+    )
+    if org_name in restricted_orgs:
+        return res.package.private
+    return True
