@@ -1,10 +1,8 @@
-import ckan.model as model
 from ckan.logic.auth.delete import resource_delete
+from ckanext.spc.utils import is_resource_updatable
 
 
 def spc_resource_delete(context, data_dict):
-    res = model.Resource.get(data_dict['id'])
-
-    if not res.package.private:
+    if not is_resource_updatable(data_dict['id']):
         return {'success': False}
     return resource_delete(context, data_dict)
