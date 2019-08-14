@@ -111,7 +111,7 @@
     {
       "field_name": "owner_org",
       "label": "Organization",
-      "preset": "dataset_organization"
+      "preset": "spc_dataset_organization"
     },
     {
       "field_name": "publisher",

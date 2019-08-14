@@ -81,7 +81,7 @@
     {
       "field_name": "owner_org",
       "label": "Publisher",
-      "preset": "dataset_organization"
+      "preset": "spc_dataset_organization"
     },
     {
       "field_name": "license_id",
