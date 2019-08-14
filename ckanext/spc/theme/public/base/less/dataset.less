@@ -58,7 +58,7 @@
             line-height: 21px;
             padding: 0 23px;
         }
-        .resources, .additional-info {
+        .resources, .tags {
             border-top: 1px dashed #cccccc;
             clear: both;
             margin: 10px;
@@ -134,7 +134,29 @@
             }
         }
         .tags {
-            display: none;
+            padding-top: 22px;
+            .tag-list {
+                @baseBg: #f8f8f8;
+                @baseColor: #001e73;
+                border: none;
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: none;
+                background-color: @baseBg;
+                .tag {
+                    color: @baseColor;
+                    border-color: $color;
+                    font-size: 12px;
+                    line-height: $font-size;
+                    box-shadow: none;
+                    padding: 8px 11px;
+                    &:hover, &:active, &:focus {
+                        text-decoration: none;
+                        background: @baseColor;
+                        color: @baseBg;
+                    }
+                }
+            }
         }
         .table-bordered {
             border-color: @border-blue;
@@ -380,7 +402,7 @@
 }
 
 .res-format-aac { .res-sprite(0, 0); }
-.res-format-3ds { .res-sprite(1, 0); } 
+.res-format-3ds { .res-sprite(1, 0); }
 .res-format-ai { .res-sprite(2, 0); }
 .res-format-avi { .res-sprite(3, 0); }
 .res-format-bmp { .res-sprite(4, 0); }
