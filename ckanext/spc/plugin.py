@@ -208,6 +208,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         )
 
         for item in results['results']:
+            item['tracking_summary'] = (
+                model.TrackingSummary.get_for_package(item['id']))
+
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
                 item['id']
             )
