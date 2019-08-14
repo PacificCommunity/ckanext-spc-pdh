@@ -14,5 +14,11 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.0"
-  }
+  },
+  "main": "gulpfile.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {},
+  "keywords": []
 }
