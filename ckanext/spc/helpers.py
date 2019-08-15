@@ -52,6 +52,7 @@ def spc_get_available_languages():
 
 
 def url_for_logo(*args, **kw):
+
     def fix_arg(arg):
         url = urlparse.urlparse(str(arg))
         url_is_relative = (
@@ -76,10 +77,15 @@ def get_conf_site_url():
 
 def get_eez_options():
 
-    options = sorted([{
-        'text': feature['properties']['GeoName'],
-        'value': json.dumps(feature['geometry'])
-    } for feature in eez],
+    options = sorted([
+        value for value in {
+            feature['properties']['Territory1']: {
+                'text': feature['properties']['Territory1'],
+                'value': json.dumps(feature['geometry'])
+            }
+            for feature in eez
+        }.values()
+    ],
                      key=lambda o: o['text'])
 
     result = []
@@ -163,6 +169,7 @@ def spc_hotjar_enabled():
     if enabled:
         return True
     return False
+
 
 def spc_link_to_identifier(id):
     if not id:
