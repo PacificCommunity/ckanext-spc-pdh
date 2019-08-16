@@ -652,7 +652,7 @@ table.table tr th.dataset-details {
   padding: 0 23px;
 }
 .dataset-read .primary .resources,
-.dataset-read .primary .additional-info {
+.dataset-read .primary .tags {
   border-top: 1px dashed #cccccc;
   clear: both;
   margin: 10px;
@@ -735,7 +735,29 @@ table.table tr th.dataset-details {
   color: #727474;
 }
 .dataset-read .primary .tags {
-  display: none;
+  padding-top: 22px;
+}
+.dataset-read .primary .tags .tag-list {
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: #f8f8f8;
+}
+.dataset-read .primary .tags .tag-list .tag {
+  color: #001e73;
+  border-color: #001e73;
+  font-size: 12px;
+  line-height: 12px;
+  box-shadow: none;
+  padding: 8px 11px;
+}
+.dataset-read .primary .tags .tag-list .tag:hover,
+.dataset-read .primary .tags .tag-list .tag:active,
+.dataset-read .primary .tags .tag-list .tag:focus {
+  text-decoration: none;
+  background: #001e73;
+  color: #f8f8f8;
 }
 .dataset-read .primary .table-bordered {
   border-color: #bcdfe5;
@@ -1475,15 +1497,84 @@ button.header-menu-btn:focus {
   margin-top: 13px;
 }
 .secondary .filters > div .nav-facet {
+  display: flex;
+  flex-direction: column;
   padding: 0 55px;
+}
+.secondary .filters > div .module .module-content.empty {
+  padding-top: 61px;
+}
+.secondary .filters > div .module .read-more {
+  cursor: pointer;
+  user-select: none;
+}
+.secondary .filters > div .module .all-visible {
+  display: none;
+}
+.secondary .filters > div .module:not(.show-all) .nav-facet {
+  max-height: 320px;
+  overflow: hidden;
+}
+.secondary .filters > div .module.show-all .all-visible {
+  display: inline;
+}
+.secondary .filters > div .module.show-all .not-all-visible {
+  display: none;
 }
 .secondary .filters > div .module .module-heading {
   margin-left: 6px;
   margin-top: 10px;
   z-index: 1;
+  display: flex;
+  align-items: center;
+}
+.secondary .filters > div .module .module-heading .heading-title {
+  margin-left: 5px;
+  flex: 1;
 }
 .secondary .filters > div .module .module-heading .heading-icon {
   background-size: 15px;
+}
+.secondary .filters > div .module .module-heading .clear-all {
+  font-size: 10px;
+  line-height: 20px;
+  color: #0091c7;
+  position: static;
+}
+.secondary .filters > div .module .module-heading .facet-sorter {
+  font-size: 10px;
+  line-height: 10px;
+  color: #0091c7;
+  background-color: #ffffff;
+  border: solid 1px #0091c7;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 8px;
+  position: relative;
+}
+.secondary .filters > div .module .module-heading .facet-sorter .fa {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active {
+  color: #ffffff;
+  background-color: #0091c7;
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active .fa-chevron-down {
+  display: inline-block;
+  bottom: 3px;
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active.reverse .fa-chevron-up {
+  top: -1px;
+  display: inline-block;
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active.reverse .fa-chevron-down {
+  display: none;
+}
+.secondary .filters > div .module .module-heading .facet-sorter:focus {
+  outline: none;
 }
 .secondary .filters .nav-simple > li.nav-item {
   border-bottom: 1px dashed #bdbdbd;
