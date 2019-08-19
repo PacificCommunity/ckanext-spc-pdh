@@ -1668,6 +1668,13 @@ button.header-menu-btn:focus {
   width: 100%;
   display: block;
 }
+.search-form .search-input-group .input-group-btn {
+  position: absolute;
+  right: 10px;
+}
+.search-form .search-input-group .input-group-btn .btn-lg {
+  right: 10px;
+}
 .search-form .search-input-group #field-giant-search {
   height: 40px;
   padding: 0 10px;
