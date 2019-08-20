@@ -12,6 +12,8 @@ from ckan.logic import get_action
 from ckan.model import Session
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
+from operator import attrgetter, eq
+from funcy import some, silent, compose, partial, iffy
 
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\w)')
@@ -56,7 +58,7 @@ class SpcGbifHarvester(HarvesterBase):
             for record in self._fetch_record_outline(url):
 
                 # if record['key'] != 'a38c7d49-5a5d-4aa6-a64e-421178bd06d7':
-                    # continue
+                # continue
                 harvest_obj = HarvestObject(
                     guid=record['key'],
                     content=record['country'],
@@ -64,6 +66,9 @@ class SpcGbifHarvester(HarvesterBase):
                 )
                 harvest_obj.save()
                 harvest_obj_ids.append(harvest_obj.id)
+
+                # TODO: remove
+                # break
         except urllib2.HTTPError, e:
             logger.exception(
                 'Gather stage failed on %s (%s): %s, %s' %
@@ -196,6 +201,7 @@ class SpcGbifHarvester(HarvesterBase):
         data['project'] = [
             _parse_project(e) for e in record.findall('project')
         ]
+        data['integrity'] = gbif[0].find('dateStamp').text
         return data
 
     def fetch_stage(self, harvest_object):
@@ -236,7 +242,6 @@ class SpcGbifHarvester(HarvesterBase):
                 return False
 
             try:
-
                 content_dict = self._eml_to_dict(record, gbif)
                 content_dict['id'] = id
 
@@ -323,8 +328,28 @@ class SpcGbifHarvester(HarvesterBase):
             owner_org = source_dataset.get('owner_org')
             package_dict['owner_org'] = owner_org
 
+            try:
+                prev_dict = iffy(json.loads)(
+                    _get_content(
+                        some(
+                            compose(
+                                partial(eq, package_dict['id']),
+                                attrgetter('guid')
+                            ), harvest_object.source.jobs[-2].objects
+                        )
+                    )
+                )
+                if prev_dict and prev_dict.get('integrity'
+                                               ) == package_dict['integrity']:
+                    logger.info('Package not changed. Skip update')
+                    return False
+            except IndexError:
+                logger.debug('Skip integrity check. No previous data.')
+
             # logger.debug('Create/update package using dict: %s' % package_dict)
-            self._create_or_update_package(package_dict, harvest_object, 'package_show')
+            self._create_or_update_package(
+                package_dict, harvest_object, 'package_show'
+            )
 
             Session.commit()
 
@@ -471,3 +496,6 @@ def unlinkify_para(para):
         result += child_text + child.tail
 
     return result
+
+
+_get_content = silent(attrgetter('content'))

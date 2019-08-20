@@ -44,8 +44,8 @@ function create-sources() {
     # echo Creating user for harvesting
     # paster --plugin=ckan user add harvest email=harvest@example.com password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c12) -c $1
 
-    # echo Creating harvest sources
-    # url=$LIB_URL
+    echo Creating harvest sources
+    url=$LIB_URL
 
     name='spc-cces'
     title='Climate Change and Environmental Sustainability'
