@@ -20,7 +20,7 @@ ckan.module('clonable-fieldset', function($, _) {
       this.updateAvailability();
     },
 
-    updateAvailability() {
+    updateAvailability: function () {
       if (!this.options.multiple && this.el.siblings('fieldset').length) {
         this._addButton.prop('disabled', true);
       } else {
