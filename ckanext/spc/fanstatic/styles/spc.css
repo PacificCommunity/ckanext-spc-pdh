@@ -1764,19 +1764,17 @@ button.header-menu-btn:focus {
   color: black;
   padding-right: 0px;
   cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  appearance: none;
 }
 .search-form .search-additional-control > div .show-filters-wrapper:after,
 .search-form .search-additional-control > div .control-order-by:after {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAABXUlEQVQ4T6WTwVHCQBSGv03GXKEDsQLJheBJqEAYolehArECSxArkLPigBXITcMF7IAS4OpIlnm7QtRAhPHdMtn99r1v/1VI9cd5Fh8VwmBgvvetp1ET52BA3Z+pL9gUyBErn4vSZC9eL6pJS8AM1ztSZnNv1AF9BUxxPV9O2gnafy2wcMZAHqWvaZQ7FmigkXR2DAwIg/qfQKvpBSgCz4SBdEoCtKcJNIdSLRqlbia0F8n/S+Ad16uspkqAslvkan1vfMSqutVnsm5OrCrf1/0E2tFXJ09wvWrK58OoiKPFG5smSQOtm6H1qbuE5dZ6dPtPYAVQd4Sl9m8taaCssF0INAfU1/l8jIYoTo23MJDLSNVmoPH51karW5uv2OfTaaK4Aea4XmFbtLYDrU95OWcmn2ZMQMdVzk+k+42VDbTOJEqH9hJseLPilA1MfMpFrMP7P6AdvYbrDXd5kkswk4SdcZoWOQAAAABJRU5ErkJggg==");
   width: 14px;
-  height: 10px;
   display: inline-block;
   content: '';
-  position: relative;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
   background-color: white;
   background-size: 10px;
   background-repeat: no-repeat;
