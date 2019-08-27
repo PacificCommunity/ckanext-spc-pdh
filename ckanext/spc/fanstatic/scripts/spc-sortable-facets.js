@@ -12,7 +12,7 @@ ckan.module('spc-sortable-facets', function($, _) {
     _findFacets: function() {
       return this.el.parent().find(this.options.selector);
     },
-    _enumerateFacets(facets) {
+    _enumerateFacets: function(facets) {
       facets.each(function(idx, el) {
         el.style.order = idx;
       });
