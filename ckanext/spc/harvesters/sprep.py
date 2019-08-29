@@ -328,7 +328,7 @@ def _map_theme_to_topic(themes):
     if 'Coastal and Marine' in themes:
         topics.add('Fisheries')
     if 'Culture and Heritage' in themes:
-        topics.add('Social')
+        topics.add('Gender and Youth')
     if 'Inland Waters' in themes:
         topics.add('Geoscience')
     return list(topics)

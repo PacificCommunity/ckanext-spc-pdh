@@ -90,7 +90,7 @@ function create-sources() {
     name='spc-sdp'
     title='Social Development Program'
     org='spc-sdp'
-    config='{"set": "SDP_PDH", "topic": "Social"}'
+    config='{"set": "SDP_PDH", "topic": "Gender and Youth"}'
     if ! paster --plugin=ckanext-harvest harvester source "$name" -c $1 2>/dev/null; then
         paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
     fi
@@ -98,7 +98,7 @@ function create-sources() {
     name='spc-sdd'
     title='Statistics for Development Division'
     org='spc-sdd'
-    config='{"set": "SDD_PDH", "topic": "Statistics"}'
+    config='{"set": "SDD_PDH", "topic": "Official Statistics"}'
     if ! paster --plugin=ckanext-harvest harvester source "$name" -c $1 2>/dev/null; then
         paster --plugin=ckanext-harvest harvester source "$name" "$url" OAI-PMH "$title" true "$org" DAILY "$config" -c $1
     fi
@@ -126,7 +126,7 @@ function create-sources() {
     name='sprep'
     title='Inform Regional Data Portal '
     org='sprep'
-    config='{"topic_mapping": {"Atmosphere and Climate": "Climate Change", "Info": null, "Land": "Land Resources", "Biodiversity": "Fisheries", "Build Environment": "Economic Development", "Coastal and Marine": "Fisheries", "Culture and Heritage": "Social", "Inland Waters": "Geoscience"}}'
+    config='{"topic_mapping": {"Atmosphere and Climate": "Climate Change", "Info": null, "Land": "Land Resources", "Biodiversity": "Fisheries", "Build Environment": "Economic Development", "Coastal and Marine": "Fisheries", "Culture and Heritage": "Gender and Youth", "Inland Waters": "Geoscience"}}'
     if ! paster --plugin=ckanext-harvest harvester source "$name" -c $1 2>/dev/null; then
         paster --plugin=ckanext-harvest harvester source "$name" "$url" SPREP "$title" true "$org" DAILY "$config" -c $1
     fi
