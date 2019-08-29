@@ -24,65 +24,7 @@
     {
       "field_name": "thematic_area_string",
       "label": "Topic",
-      "preset": "multiple_select",
-      "choices": [
-        {
-          "label": "Social",
-          "value": "Social"
-        },
-        {
-          "label": "Statistics",
-          "value": "Statistics"
-        },
-        {
-          "label": "Climate Change",
-          "value": "Climate Change"
-        },
-        {
-          "label": "Fisheries",
-          "value": "Fisheries"
-        },
-        {
-          "label": "Geoscience",
-          "value": "Geoscience"
-        },
-        {
-          "label": "Land Resources",
-          "value": "Land Resources"
-        },
-        {
-          "label": "Human Rights",
-          "value": "Human Rights"
-        },
-        {
-          "label": "Health",
-          "value": "Health"
-        },
-        {
-          "label": "Energy",
-          "value": "Energy"
-        },
-        {
-          "label": "Education",
-          "value": "Education"
-        },
-        {
-          "label": "Economic Development",
-          "value": "Economic Development"
-        },
-        {
-          "label": "Environment",
-          "value": "Environment"
-        },
-        {
-          "label": "PCCOS",
-          "value": "PCCOS"
-        },
-        {
-          "label": "Gender and Youth",
-          "value": "Gender and Youth"
-        }
-      ]
+      "preset": "thematic_area"
     },
     {
       "field_name": "license_id",
