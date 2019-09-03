@@ -67,7 +67,7 @@ class SPCCommand(CkanCommand):
         '-f',
         '--formats',
         type=str,
-        default='xml,csv,xlsx',
+        default='xls,csv,xlsx',
         help='Delay between pushes to datastore.'
     )
 
