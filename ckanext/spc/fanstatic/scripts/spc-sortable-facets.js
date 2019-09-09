@@ -45,8 +45,9 @@ ckan.module('spc-sortable-facets', function($, _) {
       );
     },
 
-    _rearrangeFacets: function(facets, comparator, reverse = false) {
+    _rearrangeFacets: function(facets, comparator, reverse) {
       var parent = facets.parent();
+      reverse = reverse || false;
       facets
         .sort(function(l, r) {
           return comparator(l, r) * (reverse ? -1 : 1);
