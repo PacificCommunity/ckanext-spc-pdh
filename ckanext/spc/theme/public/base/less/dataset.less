@@ -104,10 +104,11 @@
                     top: 20px;
                     .dropdown-toggle {
                         border: none;
-                        color: @light-blue;
+                        color: darken(@light-blue, 10%);
                         font-size: 12px;
                         &:focus, &:active, &:hover {
                             box-shadow: none;
+                            color: black;
                         }
                         > i {
                             .spc-bg-icon;
@@ -352,10 +353,17 @@
     }
 }
 
+.dataset-content {
+    .empty {
+        color: #535252;
+    }
+}
+
 .meta-export-select {
     padding: 0px 23px;
     margin: 15px 0px;
     .dropdown-toggle {
+        color: darken(@light-blue, 10%);
         .plain-link-on-hover;
         font-size: 12px;
         &:focus, &:active {

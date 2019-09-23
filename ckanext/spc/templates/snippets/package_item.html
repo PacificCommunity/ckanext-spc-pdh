@@ -78,7 +78,7 @@
                         <div class="dataset-resources">
                             {% block resources_inner %}
                                 {% for resource in package.resources %}
-                                    <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}">
+                                    <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" aria-label="resource">
                                         <div class="res-format res-format-{{ resource.format.lower() or 'data' }}"></div>
                                     </a>
                                 {% endfor %}
