@@ -115,8 +115,7 @@ class SpcNadaHarvester(NadaHarvester):
             pkg_dict['title'] = pkg_dict['title'] + ' ' + pkg_dict['country']
             # Here we make changes to get keys into right format
             
-            # See effect of default extras (do they show up?)
-            #pkg_dict['extras'] = {'test_attrib': 'test_val', 'other_key': 'itsval'}
+            # We won't use 'extras' field
             #pkg_dict = self._convert_to_extras(pkg_dict)
 
             # update URL with NADA catalog link
