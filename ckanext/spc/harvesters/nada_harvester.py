@@ -96,6 +96,7 @@ class SpcNadaHarvester(NadaHarvester):
             return False
 
         try:
+            #print('HARVEST OBJECT:' + harvest_object.content + '\n')
             base_url = harvest_object.source.url.rstrip('/')
             ckan_metadata = DdiCkanMetadata()
             #maps = ckan_metadata.get_mapping()
@@ -106,6 +107,11 @@ class SpcNadaHarvester(NadaHarvester):
             # Alterations to pkg_dict
             # All NADA resources fal under Official Statistics
             pkg_dict['thematic_area_string'] = ["Official Statistics"]
+
+            # update URL with NADA catalog link
+            catalog_path = self._get_catalog_path(harvest_object.guid)
+            pkg_dict['url'] = base_url + catalog_path
+
                       
             # Find country DDI abbreviation
             # Use the mapping of codes to return the right value
@@ -117,10 +123,6 @@ class SpcNadaHarvester(NadaHarvester):
             
             # We won't use 'extras' field
             #pkg_dict = self._convert_to_extras(pkg_dict)
-
-            # update URL with NADA catalog link
-            catalog_path = self._get_catalog_path(harvest_object.guid)
-            pkg_dict['url'] = base_url + catalog_path
 
             # set license from harvester config or use CKAN instance default
             if 'license' in self.config:
@@ -181,10 +183,11 @@ class SpcNadaHarvester(NadaHarvester):
                 return "Skipped package 'under development'"
         
         except Exception, e:
+            location = harvest_object.source.url.rstrip('/') + self._get_catalog_path(harvest_object.guid)
             self._save_object_error(
                 (
-                    'Exception in import stage: %r / %s'
-                    % (e, traceback.format_exc())
+                    'Exception in import stage for package at %s : %r / %s'
+                    % (location, e, traceback.format_exc())
                 ),
                 harvest_object
             )
