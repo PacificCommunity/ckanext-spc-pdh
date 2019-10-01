@@ -56,17 +56,12 @@ country_mapping = {
    None: "Regional"
 }
 
-# Here we define an object to map ckan metadata to ddi metadata
-# DdiCkanMetadata has some defaults, but we will add to them
-#ckan_metadata = DdiCkanMetadata()
-#print(ckan_metadata.get_mapping().keys())
-# Try to get tags
-#ckan_metadata.get_mapping()['tags'] = 
-#ckan_metadata.get_mapping()['issued'] = XPathTextValue("//ddi:codeBook/ddi:docDscr//ddi:citation/ddi:prodStmt/ddi:prodDate/@date")
-#ckan_metadata.get_mapping()['temporal_start'] = XPathTextValue("//ddi:codeBook/ddi:stdyDscr/ddi:stdyInfo/ddi:SumDscr/ddi:collDate[@event='start']/@date")
-#ckan_metadata.get_mapping()['temporal_end'] = XPathTextValue("//ddi:codeBook/ddi:stdyDscr/ddi:stdyInfo/ddi:SumDscr/ddi:collDate[@event='end']/@date")
-
-#print(ckan_metadata.get_mapping().keys())
+'''
+   Harvester uses NadaHarvester class from ckanext-ddi
+   
+   Note on metadata: ckanext.ddi.importer.metadata contains the mapping from
+    ddi standard to ckan standard metadata.
+'''
             
 
 class SpcNadaHarvester(NadaHarvester):
@@ -74,17 +69,16 @@ class SpcNadaHarvester(NadaHarvester):
     Nada Harvester for PDH Microdata Library
     '''
     
-    # Customize default attributes to use dataset.json
-    #dataset_schema = scheming_get_dataset_schema("dataset")
-    #print(dataset_schema)
-
-
     def info(self):
         return {
             'name': 'nada',
             'title': 'Nada',
             'description': 'Harvester for Nada Microdata Library'
         }
+    
+    '''
+    Necessary changes made in import stage
+    '''
 
     def import_stage(self, harvest_object):
         log.debug('In NadaHarvester import_stage')
@@ -96,48 +90,33 @@ class SpcNadaHarvester(NadaHarvester):
             return False
 
         try:
-            #print('HARVEST OBJECT:' + harvest_object.content + '\n')
             base_url = harvest_object.source.url.rstrip('/')
+            # Mapping DDI metadata to CKAN equivalents
             ckan_metadata = DdiCkanMetadata()
-            #maps = ckan_metadata.get_mapping()
-            #print('Metadata keys! \n')
-            #print(maps.keys())
             pkg_dict = ckan_metadata.load(harvest_object.content)
-            #print(pkg_dict)
+        
             # Alterations to pkg_dict
-            # All NADA resources fal under Official Statistics
+            # All NADA resources fal under Official Statistics theme
             pkg_dict['thematic_area_string'] = ["Official Statistics"]
 
-            # update URL with NADA catalog link
+            # Update URL with NADA catalog link
             catalog_path = self._get_catalog_path(harvest_object.guid)
             pkg_dict['url'] = base_url + catalog_path
 
-                      
             # Find country DDI abbreviation
             # Use the mapping of codes to return the right value
             if pkg_dict['member_countries'] not in list(country_mapping.values()):
                 pkg_dict['member_countries'] = country_mapping[(pkg_dict['member_countries'])]   
             # Adjust title to include country
-            pkg_dict['title'] = pkg_dict['title'] + ' ' + pkg_dict['country']
-            # Here we make changes to get keys into right format
-            
-            # We won't use 'extras' field
-            #pkg_dict = self._convert_to_extras(pkg_dict)
-
+            pkg_dict['title'] = pkg_dict['country'] + ' ' + pkg_dict['title']
+               
             # set license from harvester config or use CKAN instance default
             if 'license' in self.config:
                 pkg_dict['license_id'] = self.config['license']
             else:
                 pkg_dict['license_id'] = config.get('ckanext.ddi.default_license','')
-            tags = []
-            for tag in pkg_dict['tags']:
-                if isinstance(tag, basestring):
-                    tags.append(munge_tag(tag[:100]))
-            pkg_dict['tags'] = tags
-            pkg_dict['version'] = pkg_dict['version'][:100]
-            
+          
             # Get owner_org from harvester
-            #pkg_dict['owner_org'] = self.content['owner_org']
             source_dataset = get_action('package_show')({
                 'ignore_auth': True
             }, {
@@ -153,27 +132,32 @@ class SpcNadaHarvester(NadaHarvester):
             # Add resources
             # Gather the name and url of resources
             resources = []
-
+            
             rsc_page = requests.get(pkg_dict['url'] + '/related_materials', verify=False)
+            # Here we find resources related to the study and scrape the relevant information
             if rsc_page:
                 html_cont = BeautifulSoup(rsc_page.content, 'html5lib')
                 for i, rsc in enumerate(html_cont.findAll('a', attrs={'class': 'download', 'target': '_blank'})):
                     resources.append({})
                     resources[i]['url'] = rsc['href']
-                    if rsc['title']:
-                        resources[i]['name'] = rsc['title']
-                    else:
-                        resources[i]['name'] = 'Resource'
-      
+                    resources[i]['mimetype'] = rsc['data-extension']
+                    resources[i]['format'] = resources[i]['mimetype']
+                    resources[i]['description'] = (rsc.find_previous('legend').text)[2:].strip()[:-1]
+                    resources[i]['name'] = rsc.find_previous('span').contents[-1][2:].strip()
+                    # If the type of resource isn't included in the name, we add it
+                    if resources[i]['description'] not in resources[i]['name']:
+                        resources[i]['name'] = resources[i]['description'] + ' - ' + resources[i]['name']
+            # Put the list of dictionaries in 'resources' field
             pkg_dict['resources'] = resources
 
             log.debug('package dict: %s' % pkg_dict)
+
             # To avoid calling 'package_create_rest', we pass the parameter
             # package_dict_form='package_show'
             
             # If "M_DEVELOPMENT" is at end of id_number, the file is under
             #   development, and should not show up in front end
-            # So we delete it
+            # So we skip it
             # Otherwise we create/update as necessary
             if pkg_dict['id'][-13:] != "M_DEVELOPMENT":
                 #p.toolkit.get_action('package_delete')(context, pkg_dict)
