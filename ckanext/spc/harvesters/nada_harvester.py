@@ -133,20 +133,20 @@ class SpcNadaHarvester(NadaHarvester):
             # Gather the name and url of resources
             resources = []
             
+            
             rsc_page = requests.get(pkg_dict['url'] + '/related_materials', verify=False)
             # Here we find resources related to the study and scrape the relevant information
             if rsc_page:
                 html_cont = BeautifulSoup(rsc_page.content, 'html5lib')
                 for i, rsc in enumerate(html_cont.findAll('a', attrs={'class': 'download', 'target': '_blank'})):
                     resources.append({})
-                    resources[i]['url'] = rsc['href']
-                    resources[i]['mimetype'] = rsc['data-extension']
-                    resources[i]['format'] = resources[i]['mimetype']
+                    if rsc['href']:
+                        resources[i]['url'] = rsc['href']
+                    #if rsc['data-extension']:
+                    #    resources[i]['format'] = rsc['data-extension']
                     resources[i]['description'] = (rsc.find_previous('legend').text)[2:].strip()[:-1]
                     resources[i]['name'] = rsc.find_previous('span').contents[-1][2:].strip()
-                    # If the type of resource isn't included in the name, we add it
-                    if resources[i]['description'] not in resources[i]['name']:
-                        resources[i]['name'] = resources[i]['description'] + ' - ' + resources[i]['name']
+            
             # Put the list of dictionaries in 'resources' field
             pkg_dict['resources'] = resources
 
