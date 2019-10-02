@@ -126,7 +126,7 @@ OAI-PMH
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 | Url                                       | Title                           | Settings                                       | Organization |
 +===========================================+=================================+================================================+==============+
-| http://www.spc.int/DigitalLibrary/SPC/OAI | Social Development Program      | {"set": "SDP_PDH", "topic": "Social"}          | spc-sdp      |
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Social Development Program      | {"set": "SDP_PDH", "topic": "Gender and Youth"}          | spc-sdp      |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 | http://www.spc.int/DigitalLibrary/SPC/OAI | Climate Change and              | {"set": "CCES_PDH", "topic": "Climate Change"} | spc-cces     |
 |                                           | Environmental Sustainability    |                                                |              |
@@ -140,7 +140,7 @@ OAI-PMH
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 | http://www.spc.int/DigitalLibrary/SPC/OAI | Public Health Division          | {"set": "PHD_PDH", "topic": "Health"}          | spc-phd      |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
-| http://www.spc.int/DigitalLibrary/SPC/OAI | Statistics for Development      | {"set": "SDD_PDH", "topic": "Statistics"}      | spc-sdd      |
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Statistics for Development      | {"set": "SDD_PDH", "topic": "Official Statistics"}      | spc-sdd      |
 |                                           | Division                        |                                                |              |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 
@@ -218,7 +218,7 @@ SPREP
 |                                           |                                 | "Biodiversity": "Fisheries",                   |              |
 |                                           |                                 | "Build Environment": "Economic Development",   |              |
 |                                           |                                 | "Coastal and Marine": "Fisheries",             |              |
-|                                           |                                 | "Culture and Heritage": "Social",              |              |
+|                                           |                                 | "Culture and Heritage": "Gender and Youth",              |              |
 |                                           |                                 | "Inland Waters": "Geoscience"}}                |              |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 

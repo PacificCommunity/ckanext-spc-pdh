@@ -26,7 +26,6 @@ from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 from ckanext.ingest.interfaces import IIngest
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -92,9 +91,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IIngest
 
     def get_ingesters(self):
-        return [
-            ('mendeley_bib', MendeleyBib())
-        ]
+        return [('mendeley_bib', MendeleyBib())]
 
     # IRouter
 
@@ -152,9 +149,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_ckan_admin_tab(
             config_, 'search_queries.index', 'Search Queries'
         )
-        toolkit.add_ckan_admin_tab(
-            config_, 'ingest.index', 'Ingest'
-        )
+        toolkit.add_ckan_admin_tab(config_, 'ingest.index', 'Ingest')
 
     # IConfigurer
 
@@ -213,6 +208,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         )
 
         for item in results['results']:
+            item['tracking_summary'] = (
+                model.TrackingSummary.get_for_package(item['id']))
+
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
                 item['id']
             )

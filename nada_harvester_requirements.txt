@@ -1,0 +1,9 @@
+Conor Gould (github: roly97/conorg000, email: conorg@spc.int/conor.gould@griffithuni.edu.au)
+3/10/2019
+
+nada_harvester.py requires:
+- nada_harvester branch of ckanext-ddi extension. This branch is found at github.com/roly97/ckanext-ddi/tree/nada_harvester. All requirements for ckanext-ddi are included in its installation process.
+The following files have been changed in the nada_harvester branch of ckanext-ddi:
+- ddiharvester.py
+- metadata.py
+As backup, I've included the updated versions of the two above files in this repo (directory named "ckanext-ddi_changes"). You could use the master ckanext-ddi extension (github.com/liip/ckanext-ddi) and just include those updated files. Feel free to remove these files if you feel they are out of place/unnecessary.
