@@ -42,12 +42,20 @@
         margin-left: 18px;
     }
     .search-input-group {
+
         position: absolute;
         top: -56px;
         left: 0;
         padding: 0 15px;
         width: 100%;
         display: block;
+        .input-group-btn {
+            position: absolute;
+            right: 10px;
+            .btn-lg {
+                right: 10px;
+            }
+        }
         #field-giant-search {
             height: 40px;
             padding: 0 10px;
@@ -67,6 +75,28 @@
             background-position: 50%;
             background-size: 15px;
          }
+    }
+    .filter-list {
+        margin-left: 27px;
+        margin-top: 37px;
+        margin-bottom: 13px;
+        .filtered {
+            margin: 5px 10px 6px 0;
+            padding: 5px 9px 5px 19px;
+            background: #8ca0a6;
+            font-size: 15px;
+            .remove {
+                margin-left: 12px;
+                position: relative;
+                top: -2px;
+                color: transparent;
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background: url("@{relative_root}/base/images/tag-close.png") 50% no-repeat;
+                background-size: contain;
+            }
+        }
     }
     .search-additional-control {
         border-bottom: 1px solid #c2c2c2;
@@ -109,18 +139,21 @@
                     color: black;
                     padding-right: 0px;
                     cursor: pointer;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    -o-appearance: none;
-                    appearance: none;
+                    // -webkit-appearance: none;
+                    // -moz-appearance: none;
+                    // -o-appearance: none;
+                    // appearance: none;
                 }
                 &:after{
                         .spc-icon-chevron-down-blue;
                         width: 14px;
-                        height: 10px;
+                        // height: 10px;
                         display: inline-block;
                         content: '';
-                        position: relative;
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        bottom: 0px;
                         background-color: white;
                         background-size: 10px;
                         background-repeat: no-repeat;
@@ -178,9 +211,6 @@
         }
         .dataset-resources {
             padding: 5px;
-            li {
-                .spc-resource-format-icon;
-            }
         }
         .dataset-info {
             color: @text;

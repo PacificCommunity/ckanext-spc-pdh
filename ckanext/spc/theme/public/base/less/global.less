@@ -34,20 +34,14 @@ header.navbar {
         }
     }
     #main-menu {
-
-
         li {
             .hide-empty-element;
             display: inline-block;
             margin: 15px 17px;
             border-color: transparent;
             a {
-                // .header-link-animated;
                 padding: 2px;
                 font-size: 13px;
-                // &:hover, &:active, &:focus {
-                    // text-decoration: none;
-                // }
             }
         }
         & > ul > li:last-child {
@@ -137,23 +131,40 @@ header.navbar {
         background-color: transparent;
         top: -40px;
         .breadcrumb {
-            a, li:after {
-                color: #ffffff;
-            }
-            li + li:before {
-                content: '';
-                padding: 0px;
-            }
-            li:last-child:after {
-                content: '';
-            }
-            .active {
+            li {
                 a {
-                    color: #ffffff;
-                    font-weight: 900;
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: #fff;
+                    @media (max-width: 767px) {
+                        font-size: 14px;
+                        color: #fff;
+                    }
+                }
+                &.active {
+                    a {
+                        color: #fff;
+                        @media (max-width: 767px) {
+                            color: #fff;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                &:after {
+                    content: '>';
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: #fff;
+                    margin-left: 4px;
+                }
+                & + li:before {
+                    content: '';
+                    padding: 0px;
+                }
+                &:last-child:after {
+                    content: '';
                 }
             }
-
         }
     }
     #content {
@@ -162,17 +173,7 @@ header.navbar {
         box-shadow: 0px 2px 3px #ccc;
     }
 }
-@media(min-width: 1125px) {
-    .container {
-        // width: 1010px;
-        // .span3 {
-            // width: 250px;
-        // }
-        // .span9 {
-            // width: 740px;
-        // }
-    }
-}
+
 .wrapper {
     background: transparent;
     box-shadow: none;
@@ -191,11 +192,6 @@ header.navbar {
         }
         div.module-content {
             padding: 0px;
-            // padding-left: 29px;
-            // padding-right: 29px;
-            // @media (max-width: 767px) {
-                // padding: 0 15px;
-            // }
         }
     }
     .secondary {
@@ -206,42 +202,7 @@ header.navbar {
         }
     }
 }
-.toolbar {
-    .breadcrumb {
-        li {
-            a {
-                font-size: 14px;
-                font-weight: lighter;
-                color: #056199;
-                @media (max-width: 767px) {
-                    font-size: 14px;
-                    color: #fff;
-                }
-            }
-            &.active {
-                a {
-                    color: #434e4e;
-                    font-weight: lighter;
-                    @media (max-width: 767px) {
-                        color: #fff;
-                        text-decoration: underline;
-                    }
-                }
-            }
-            &:after {
-                content: '>';
-                font-size: 14px;
-                font-weight: lighter;
-                color: #056199;
-                margin-left: 4px;
-            }
-        }
-    }
-    @media (max-width: 767px) {
-        background: #003960;
-        margin-bottom: 0;
-    }
-}
+
 .filters {
     .module-footer {
         border-top: none;
@@ -380,6 +341,13 @@ header.navbar {
         }
     }
 }
+
+.page_primary_action {
+    .btn {
+        margin: 15px;
+    }
+}
+
 
 @media(min-width: 769px) {
     .dataset-map-expanded {

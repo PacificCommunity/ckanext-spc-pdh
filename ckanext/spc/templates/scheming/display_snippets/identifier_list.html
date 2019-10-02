@@ -1,0 +1,13 @@
+<ul class="unstyled">
+    {% for value in data[field.field_name] %}
+	<li>
+            {% set link = h.spc_link_to_identifier(value) %}
+            {% if link %}
+                <a href="{{ link }}" target="_blank">{{ value }}</a>
+            {% else %}
+                {{ value }}
+            {% endif %}
+
+        </li>
+    {% endfor %}
+</ul>
