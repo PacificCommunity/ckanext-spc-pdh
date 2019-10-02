@@ -1,13 +1,18 @@
 import logging
+import os
+import tempfile
 
 import requests
-
+from operator import attrgetter
 import ckan.lib.helpers as h
 import ckan.model as model
-from ckan.lib.search import query_for
 import ckan.plugins.toolkit as tk
 
+from ckan.lib.search import query_for
+from ckan.lib.uploader import get_resource_uploader
+
 from ckanext.ga_report.ga_model import GA_Url
+from ckanext.spc.model import SearchQuery
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +78,8 @@ def count_stars(pkg_dict):
         filter(
             None,
             [pkg_dict.get('notes')] + pkg_dict.get('res_description', []) + [
-                res['description'] for res in pkg_dict.get('resources', [])
+                res['description']
+                for res in pkg_dict.get('resources', [])
                 if res.get('description')
             ]
         )
@@ -142,12 +148,14 @@ def normalize_to_dcat(pkg_dict):
 
 
 def ga_view_count(name):
-    return model.Session.query(GA_Url.pageviews).filter(
-        GA_Url.period_name == 'All', GA_Url.package_id == name
-    ).scalar() or 0
+    return model.Session.query(
+        GA_Url.pageviews
+    ).filter(GA_Url.period_name == 'All',
+             GA_Url.package_id == name).scalar() or 0
 
 
 class _EEZ:
+
     def __init__(self, collection):
         self.collection = collection
 
@@ -159,3 +167,101 @@ class _EEZ:
 
 
 eez = _EEZ([])
+
+
+def store_search_query(search_params):
+    logger.debug('after_search {}'.format(search_params))
+    try:
+        q = search_params['q']
+        if not _is_user_text_search(tk.c, q):
+            return
+        # TODO: If a user performs a text-based search and then
+        # continuously refines the result via facets then we end up with
+        # many entries for basically the same search, which might screw up
+        # our scoring.
+        q = _normalize_search_query(q)
+        if not q:
+            return
+        query = SearchQuery.update_or_create(q)
+        model.Session.commit()
+        return query
+    except Exception:
+        # Log exception but don't cause search request to fail
+        logger.exception('An exception occurred while storing a search query')
+
+
+def _normalize_search_query(q):
+    return ' '.join(q.lower().split()).strip()
+
+
+def _is_user_text_search(context, query):
+    '''
+    Decide if a search query is a user-initiated text search.
+    '''
+    # See https://github.com/ckan/ckanext-searchhistory/issues/1#issue-32079108
+    try:
+        if (
+            context.controller != 'package' or context.action != 'search'
+            or (query or '').strip() in (':', '*:*')
+        ):
+            return False
+    except TypeError:
+        # Web context not ready. Happens, for example, in paster commands.
+        return False
+    return True
+
+
+def filepath_for_res_indexing(res):
+    if res['url_type'] == 'upload':
+        uploader = get_resource_uploader(res)
+        path = uploader.get_path(res['id'])
+        if not os.path.exists(path):
+            logger.warn(
+                'Resource "%s" refers to unexisting path "%s"', res['id'], path
+            )
+            return
+        return path
+    url = res['url']
+    try:
+        resp = requests.head(url, timeout=2)
+    except Exception as e:
+        logger.warn(
+            'Unable to make HEAD request for resource %s with url <%s>: %s',
+            res['id'], url, e
+        )
+        return
+    try:
+        size = int(resp.headers.get('content-length', 0))
+    except ValueError as e:
+        logger.warn('Incorrect Content-length header from url <%s>', url)
+        return
+    if 0 < size < 1024 * 1024 * 4:
+        with tempfile.NamedTemporaryFile(delete=False) as dest:
+            resp = requests.get(url)
+            dest.write(resp.content)
+        return dest.name
+
+
+def is_resource_updatable(id, package_id=None):
+    if package_id:
+        pkg = model.Package.get(package_id)
+    else:
+        pkg = model.Resource.get(id).package
+
+    org = pkg.get_groups('organization')[0]
+    org_names = set(
+        map(attrgetter('name'), org.get_parent_groups('organization'))
+    )
+    include_owner = tk.asbool(
+        tk.config.get('ckanext.spc.orgs_with_publications_include_root')
+    )
+    if include_owner:
+        org_names.add(org.name)
+
+    restricted_orgs = set(
+        tk.aslist(tk.config.get('ckanext.spc.orgs_with_publications'))
+    )
+
+    if org_names & restricted_orgs:
+        return pkg.private
+    return True

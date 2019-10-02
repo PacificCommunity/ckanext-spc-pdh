@@ -64,15 +64,91 @@
         border: 1px solid #c3c3c3;
         margin-top: 13px;
         .nav-facet {
+            display: flex;
+            flex-direction: column;
             padding: 0 55px;
         }
         .module {
+            .module-content.empty {
+                padding-top: 61px;
+            }
+            .read-more {
+                cursor: pointer;
+                user-select: none;
+            }
+            .all-visible {
+                display: none;
+            }
+            &:not(.show-all) {
+                .nav-facet {
+                    max-height: 320px;
+                    overflow: hidden;
+                }
+            }
+            &.show-all {
+                .all-visible {
+                    display: inline;
+                }
+                .not-all-visible {
+                    display: none;
+                }
+            }
             .module-heading {
                 margin-left: 6px;
                 margin-top: 10px;
                 z-index: 1;
+                display: flex;
+                align-items: center;
+                .heading-title {
+                    margin-left: 5px;
+                    flex: 1;
+                }
                 .heading-icon {
                     background-size: 15px;
+                }
+
+                .clear-all {
+                    font-size: 10px;
+                    line-height: 20px;
+                    color: @light-blue;
+                    position: static;
+                }
+                .facet-sorter {
+                    font-size: 10px;
+                    line-height: 10px;
+                    color: @light-blue;
+                    background-color: #ffffff;
+                    border: solid 1px @light-blue;
+                    border-radius: 5px;
+                    padding: 10px;
+                    margin-right: 8px;
+                    position: relative;
+                    .fa {
+                        display: none;
+                        position: absolute;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                    &.active {
+                        color: #ffffff;
+                        background-color: @light-blue;
+                        .fa-chevron-down {
+                            display: inline-block;
+                            bottom: 3px;
+                        }
+                        &.reverse {
+                            .fa-chevron-up {
+                                top: -1px;
+                                display: inline-block;
+                            }
+                            .fa-chevron-down {
+                                display: none;
+                            }
+                        }
+                    }
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
         }
@@ -103,13 +179,13 @@
                 a {
                     background-color: transparent;
                     &:after {
-                        transform: rotateZ(45deg);
-                        right: -1px;
-                        color: white;
-                        background: #8b8b8b;
+                        background: url("@{relative_root}/base/images/tag-close-side.png") 50% no-repeat;
+                        background-size: contain;
+                        right: 1px;
+                        color: transparent;
                         border-radius: 50%;
-                        width: 23px;
-                        height: 23px;
+                        width: 20px;
+                        height: 20px;
                         text-align: center;
                      }
                     span {

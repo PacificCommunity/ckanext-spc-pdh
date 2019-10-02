@@ -28,7 +28,9 @@ def get_helpers():
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
-        spc_hotjar_enabled=spc_hotjar_enabled
+        spc_wrap_list=spc_wrap_list,
+        spc_hotjar_enabled=spc_hotjar_enabled,
+        spc_link_to_identifier=spc_link_to_identifier,
     )
 
 
@@ -50,6 +52,7 @@ def spc_get_available_languages():
 
 
 def url_for_logo(*args, **kw):
+
     def fix_arg(arg):
         url = urlparse.urlparse(str(arg))
         url_is_relative = (
@@ -74,10 +77,15 @@ def get_conf_site_url():
 
 def get_eez_options():
 
-    options = sorted([{
-        'text': feature['properties']['GeoName'],
-        'value': json.dumps(feature['geometry'])
-    } for feature in eez],
+    options = sorted([
+        value for value in {
+            feature['properties']['Territory1']: {
+                'text': feature['properties']['Territory1'],
+                'value': json.dumps(feature['geometry'])
+            }
+            for feature in eez
+        }.values()
+    ],
                      key=lambda o: o['text'])
 
     result = []
@@ -145,8 +153,29 @@ def spc_unwrap_list(value):
     return value
 
 
+def spc_wrap_list(value):
+    if isinstance(value, list):
+        return value
+    if value is None:
+        return []
+    if isinstance(value, dict):
+        if list(sorted(value.keys())) == list(range(0, len(value))):
+            return list(value.values())
+    return [value]
+
+
 def spc_hotjar_enabled():
     enabled = toolkit.asbool(config.get('ckan.spc.hotjar_enabled', False))
     if enabled:
         return True
     return False
+
+
+def spc_link_to_identifier(id):
+    if not id:
+        return id
+    if id.startswith('doi'):
+        return 'http://doi.org/' + id[4:]
+    if id.startswith('pmid'):
+        return 'https://europepmc.org/abstract/med/' + id[5:]
+    return None

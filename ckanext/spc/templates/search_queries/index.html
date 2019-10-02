@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+
+{% block primary_content_inner %}
+    <h2>Search queries</h2>
+    <table style="table-layout:auto;" class="table table-striped table-condensed">
+        <thead>
+            <th>Query</th>
+            <th>Counter</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for q in queries %}
+                <tr>
+                    <td>
+                        <code>{{ q.query }}</code>
+                    </td>
+                    <td>
+                        {{ q.count }}
+                    </td>
+                    <td>
+                        <p class="muted">
+                            <a href="{{ h.url_for('search', q=q.query) }}">
+                                <i class="fa fa-search" title="{{ _('Search') }}"></i>
+                            </a>
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ pager.pager() }}
+{% endblock %}
+
+{% block secondary_content %}
+    <div class="module module-narrow module-shallow">
+        <h2 class="module-heading">
+            <i class="fa fa-info-circle"></i>
+            {{ _('Search Queries') }}
+        </h2>
+        <div class="module-content">
+            {% trans %}
+            <p>Show user search queries.</p>
+            {% endtrans %}
+        </div>
+    </div>
+{% endblock %}

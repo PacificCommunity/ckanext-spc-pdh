@@ -18,6 +18,9 @@
     {"value": "otherMaintenancePeriod", "text": "Other maintenance period"},
 ] %}
 
+<!---------------------------------------------------------------------------->
+<!--                              BIODIVERSITY                              -->
+<!---------------------------------------------------------------------------->
 {% macro maintenance_form(field, name, idx, data={}, errors={}) %}
     {{ nested_field(name, idx, 'description', data, errors, type='markdown') }}
     {{ nested_field(name, idx, 'maintenance_update_frequency', data, errors, type='select', additional={'options': maintenance_options}) }}
@@ -40,7 +43,7 @@
 	{{ nested_field(name, idx ~ '__sampling__0', 'sampling_description', sampling, errs) }}
     {% endwith %}
     {{ nested_field(name, idx, 'quality_control', data, errors) }}
-    <!-- <hr/> -->
+    <!-- <hr/><!--  --> -->
 {% endmacro %}
 
 
@@ -127,7 +130,7 @@
 	{% set taxonomic = h.spc_unwrap_list(taxonomic) %}
 	{{ nested_field(name, idx ~ '__taxonomic_coverage__0', 'general_taxonomic_coverage', taxonomic, errs) }}
 	{{ subform('%s__%s__taxonomic_coverage__0__%s'| format(name, idx, 'taxonomic_classification'),
-	    taxonomic['taxonomic_classification'], errs, _('Taxonomic classification'), 'taxonomic_classification_form') }}
+	    taxonomic.get('taxonomic_classification'), errs, _('Taxonomic classification'), 'taxonomic_classification_form') }}
     {% endwith %}
 {% endmacro %}
 
@@ -155,6 +158,134 @@
     {{ nested_field(name, idx, 'id', data, errors) }}
 {% endmacro %}
 
+
+<!---------------------------------------------------------------------------->
+<!--                              GEOGRAPHIC                                -->
+<!---------------------------------------------------------------------------->
+{% macro gmd_code_string_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'code_list', data, errors) }}
+    {{ nested_field(name, idx, 'code_list_value', data, errors) }}
+{% endmacro %}
+{% macro gmd_locale_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__language_code'| format(name, idx), data.get('language_code', {}), errors, _('Language code'), 'gmd_code_string_form') }}
+    {{ subform('%s__%s__country'| format(name, idx), data.get('country', {}), errors, _('Country'), 'gmd_code_string_form') }}
+    {{ subform('%s__%s__character_encoding'| format(name, idx), data.get('character_encoding', {}), errors, _('Encoding'), 'gmd_code_string_form') }}
+{% endmacro %}
+{% macro gmd_cited_responsible_party_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'individual_name', data, errors) }}
+    {{ nested_field(name, idx, 'organisation_name', data, errors) }}
+    {{ nested_field(name, idx, 'position_name', data, errors) }}
+    {{ subform('%s__%s__contact_info'| format(name, idx), h.spc_unwrap_list(data.get('contact_info', {})), errors, _('Contact info'), 'gmd_contact_form', multiple=false) }}
+    {{ subform('%s__%s__role'| format(name, idx), h.spc_unwrap_list(data.get('role', {})), errors, _('Role'), 'gmd_code_string_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_phone_form(field, name, idx, data={}, errors={}) %}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'voice'), 'voice', data, errors, _('Voice')) }}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'facsimile'), 'facsimile', data, errors, _('Fax')) }}
+{% endmacro %}
+{% macro gmd_address_form(field, name, idx, data={}, errors={}) %}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'delivery_point'), 'delivery_point', data, errors, _('Delivery point')) }}
+    {{ nested_field(name, idx, 'city', data, errors) }}
+    {{ nested_field(name, idx, 'administrative_area', data, errors) }}
+    {{ nested_field(name, idx, 'postal_code', data, errors) }}
+    {{ nested_field(name, idx, 'country', data, errors) }}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'electronic_mail_address'), 'electronic_mail_address', data, errors, _('Email')) }}
+{% endmacro %}
+{% macro gmd_online_resource_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'linkage', data, errors) }}
+    {{ nested_field(name, idx, 'protocol', data, errors) }}
+    {{ nested_field(name, idx, 'application_profile', data, errors) }}
+    {{ nested_field(name, idx, 'name', data, errors) }}
+    {{ nested_field(name, idx, 'description', data, errors) }}
+{% endmacro %}
+{% macro gmd_contact_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__phone'| format(name, idx), h.spc_unwrap_list(data.get('phone', {})), errors, _('Phone'), 'gmd_phone_form', multiple=false) }}
+    {{ subform('%s__%s__address'| format(name, idx), h.spc_unwrap_list(data.get('address', {})), errors, _('Address'), 'gmd_address_form', multiple=false) }}
+    {{ subform('%s__%s__online_resource'| format(name, idx), h.spc_unwrap_list(data.get('online_resource', {})), errors, _('Online resource'), 'gmd_online_resource_form', multiple=false) }}
+    {{ nested_field(name, idx, 'hours_of_service', data, errors) }}
+    {{ nested_field(name, idx, 'contact_instructions', data, errors) }}
+{% endmacro %}
+{% macro gmd_vector_spatial_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__topology_level'| format(name, idx), h.spc_wrap_list(data.get('topology_level', {})), errors, _('Topology level'), 'gmd_code_string_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_grid_spatial_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'number_of_dimensions', data, errors, additional={'type': 'number'}) }}
+    {{ subform('%s__%s__cell_geometry'| format(name, idx), data.get('cell_geometry', {}), errors, _('Cell geometry'), 'gmd_code_string_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_spatial_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__vector'| format(name, idx), h.spc_unwrap_list(data.get('vector', {})), errors, _('Vector'), 'gmd_vector_spatial_form', multiple=false) }}
+    {{ subform('%s__%s__grid'| format(name, idx), h.spc_unwrap_list(data.get('grid', {})), errors, _('Grid'), 'gmd_grid_spatial_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_extended_element_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'name', data, errors) }}
+    {{ nested_field(name, idx, 'short_name', data, errors) }}
+    {{ nested_field(name, idx, 'domain_code', data, errors) }}
+    {{ nested_field(name, idx, 'definition', data, errors) }}
+    {{ nested_field(name, idx, 'obligation', data, errors) }}
+    {{ nested_field(name, idx, 'condition', data, errors) }}
+    {{ nested_field(name, idx, 'maximum_occurence', data, errors) }}
+    {{ nested_field(name, idx, 'domain_value', data, errors) }}
+    {{ form.hidden(name ~ '__0__parent_entity', '<unavailable>') }}
+    {{ nested_field(name, idx, 'rule', data, errors) }}
+{% endmacro %}
+{% macro gmd_metadata_extension_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__extension_on_line_resource'| format(name, idx), h.spc_unwrap_list(data.get('extension_on_line_resource', {})), errors, _('Online resource'), 'gmd_online_resource_form', multiple=false) }}
+    {% for info in h.spc_wrap_list(data.get('extended_element_information')) %}
+        {{ subform('%s__%s__extended_element_information'| format(name, idx), info, errors, _('Element information'), 'gmd_extended_element_form') }}
+        {% else %}
+        {{ subform('%s__%s__extended_element_information'| format(name, idx), {}, errors, _('Element information'), 'gmd_extended_element_form') }}
+    {% endfor %}
+{% endmacro %}
+{% macro gmd_identifier_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'code', data, errors) }}
+{% endmacro %}
+{% macro gmd_coverage_description_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'attribute_description', data, errors) }}
+    {{ subform('%s__%s__content_type'| format(name, idx), h.spc_unwrap_list(data.get('content_type', {})), errors, _('Content type'), 'gmd_code_string_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_content_info_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__coverage_description'| format(name, idx), h.spc_unwrap_list(data.get('coverage_description', {})), errors, _('Coverage description'), 'gmd_coverage_description_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_dqt_scope_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__level'| format(name, idx), h.spc_unwrap_list(data.get('level', {})), errors, _('Level'), 'gmd_code_string_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_data_quality_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__scope'| format(name, idx), h.spc_unwrap_list(data.get('scope', {})), errors, _('Scope'), 'gmd_dqt_scope_form', multiple=false) }}
+{% endmacro %}
+{% macro gmd_citation_form(field, name, idx, data={}, errors={}) %}
+    {{ nested_field(name, idx, 'title', data, errors) }}
+{% endmacro %}
+{% macro gmd_metadata_constraints_form(field, name, idx, data={}, errors={}) %}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'use_limitations'), 'use_limitations', data, errors, _('Use limitations')) }}
+{% endmacro %}
+{% macro gmd_application_schema_info_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__name'| format(name, idx), h.spc_unwrap_list(data.get('name', {})), errors, _('Name'), 'gmd_citation_form', multiple=false) }}
+    {{ nested_field(name, idx, 'schema_language', data, errors) }}
+    {{ nested_field(name, idx, 'constraint_language', data, errors) }}
+    {{ nested_field(name, idx, 'schema_ascii', data, errors) }}
+    {{ nested_field(name, idx, 'graphics_file', data, errors) }}
+    {{ nested_field(name, idx, 'software_development_file', data, errors) }}
+    {{ nested_field(name, idx, 'software_development_file_format', data, errors) }}
+{% endmacro %}
+{% macro gmd_maintenance_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__maintenance_and_update_frequency'| format(name, idx), h.spc_unwrap_list(data.get('maintenance_and_update_frequency', {})), errors, _('Maintenance and update frequency'), 'gmd_code_string_form', multiple=false) }}
+    {{ nested_field(name, idx, 'date_of_next_update', data, errs, additional={'type': 'date'}) }}
+    {{ nested_field(name, idx, 'user_defined_maintenance_frequency', data, errors) }}
+    {{ subform('%s__%s__update_scope'| format(name, idx), h.spc_unwrap_list(data.get('update_scope', {})), errors, _('Update scope'), 'gmd_code_string_form', multiple=false) }}
+    {{ multifield('%s__%s__%s'| format(name, idx, 'maintenance_note'), 'maintenance_note', data, errors, _('Maintenance note')) }}
+{% endmacro %}
+{% macro gmd_base_identification_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__citation'| format(name, idx), h.spc_unwrap_list(data.get('citation', {})), errors, _('Citation'), 'gmd_citation_form') }}
+    {{ subform('%s__%s__resource_maintenance'| format(name, idx), h.spc_wrap_list(data.get('resource_maintenance', {})), errors, _('Resource maintenance'), 'gmd_maintenance_form') }}
+    {{ nested_field(name, idx, 'abstract', data, errors) }}
+{% endmacro %}
+{% macro gmd_identification_info_form(field, name, idx, data={}, errors={}) %}
+    {{ subform('%s__%s__identification'| format(name, idx), h.spc_unwrap_list(data.get('identification', {})), errors, _('Identification'), 'gmd_base_identification_form') }}
+{% endmacro %}
+
+<!---------------------------------------------------------------------------->
+<!--                                 GENERAL                                -->
+<!---------------------------------------------------------------------------->
+
 {% macro nested_field(name, idx, key, data={}, errors={}, tpl='%s__%s__%s', label=none, type='input', additional={}, attrs={}) %}
     {% if label is none %}
 	{% set label = key | replace('_', ' ') | capitalize %}
@@ -177,7 +308,7 @@
     %}
 {% endmacro %}
 
-{% macro subform(name, data, errors, label, type, validators='') %}
+{% macro subform(name, data, errors, label, type, validators='', multiple=true) %}
     {% snippet 'scheming/form_snippets/sub_form.html', data={name: data}, errors=errors,
-    field={'field_name': name, 'label': label, 'sub_form': type, 'validators': validators} %}
+    field={'field_name': name, 'label': label, 'sub_form': type, 'validators': validators, 'multiple': multiple} %}
 {% endmacro %}

@@ -53,3 +53,11 @@
     }
 
 }
+
+.res-sprite (@offset, @y) {
+	background-image: url('@{relative_root}/base/images/sprite_res.png');
+	background-repeat: no-repeat;
+	background-position: (-29.88px * @offset) @y;
+	height: 34px;
+	width: 30px;
+}
