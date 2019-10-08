@@ -1,28 +1,11 @@
 # -*- coding: utf-8 -*-
-import urllib
-import urlparse
 import logging
-import json
-import os
 import requests
 import traceback
 from bs4 import BeautifulSoup
-
-import ckan.model as model
-import requests
-from ckanext.harvest.model import HarvestObject
-from ckanext.harvest.model import HarvestObjectExtra as HOExtra
 from ckanext.ddi.harvesters.ddiharvester import NadaHarvester
-from ckanext.ddi.importer.metadata import ( 
-    DdiCkanMetadata, XPathTextValue, XPathValue, ArrayTextValue, XPathMultiTextValue,
-    FirstInOrderValue, DateCollectionValue, CombinedValue, ArrayDictNameValue
-)
+from ckanext.ddi.importer.metadata import DdiCkanMetadata
 from ckan.logic import get_action
-from ckanext.spatial.validation import Validators
-from ckanext.scheming.helpers import (
-    scheming_get_dataset_schema, scheming_field_by_name, scheming_field_choices
-)
-
 from pylons import config
 
 log = logging.getLogger(__name__)
@@ -142,8 +125,8 @@ class SpcNadaHarvester(NadaHarvester):
                     resources.append({})
                     if rsc['href']:
                         resources[i]['url'] = rsc['href']
-                    #if rsc['data-extension']:
-                    #    resources[i]['format'] = rsc['data-extension']
+                    if rsc['data-extension']:
+                        resources[i]['format'] = rsc['data-extension']
                     resources[i]['description'] = (rsc.find_previous('legend').text)[2:].strip()[:-1]
                     resources[i]['name'] = rsc.find_previous('span').contents[-1][2:].strip()
             
