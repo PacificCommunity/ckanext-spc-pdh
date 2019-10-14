@@ -1,6 +1,7 @@
 import logging
 import os
 
+from time import sleep
 import ckan.model as model
 import ckan.plugins.toolkit as tk
 import paste.script
@@ -55,6 +56,20 @@ class SPCCommand(CkanCommand):
         default='../spc.ini',
         help='Config file to use.'
     )
+    parser.add_option(
+        '-d',
+        '--delay',
+        type=int,
+        default=1,
+        help='Delay between pushes to datastore.'
+    )
+    parser.add_option(
+        '-f',
+        '--formats',
+        type=str,
+        default='xls,csv,xlsx',
+        help='Delay between pushes to datastore.'
+    )
 
     def command(self):
         self._load_config()
@@ -81,6 +96,31 @@ class SPCCommand(CkanCommand):
 
     def db_downgrade(self):
         command.downgrade(self.alembic_cfg, 'base')
+        return 'Success'
+
+    def create_datastore(self):
+        resources = model.Session.query(model.Resource)
+        step = 20
+        user = tk.get_action('get_site_user')({'ignore_auth': True})
+        for offset in range(0, resources.count(), step):
+            for res in resources.offset(offset).limit(step):
+                if res.extras.get('datastore_active'):
+                    continue
+                if not res.format or res.format.lower() not in self.options.formats.split(','):
+                    continue
+
+                print('Pushing <{}> into datastore'.format(res.id))
+                tk.get_action('datastore_create')(
+                    {'ignore_auth': True, 'user': user['name']},
+                    {'resource_id': res.id, 'force': True}
+                )
+
+                tk.get_action('datapusher_submit')(
+                    {'ignore_auth': True, 'user': user['name']},
+                    {'resource_id': res.id, 'force': True}
+                )
+                sleep(self.options.delay)
+
         return 'Success'
 
     def fix_missed_licenses(self):
