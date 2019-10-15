@@ -80,7 +80,7 @@ class SpcNadaHarvester(NadaHarvester):
         
             # Alterations to pkg_dict
             # All NADA resources fal under Official Statistics theme
-            pkg_dict['thematic_area_string'] = ["Official Statistics"]
+            pkg_dict['thematic_area_string'] = ["Statistics"]
 
             # Update URL with NADA catalog link
             catalog_path = self._get_catalog_path(harvest_object.guid)
@@ -147,7 +147,7 @@ class SpcNadaHarvester(NadaHarvester):
                 return self._create_or_update_package(pkg_dict, harvest_object,
                 package_dict_form='package_show')
             else:
-                return "Skipped package 'under development'"
+                return False
         
         except Exception, e:
             location = harvest_object.source.url.rstrip('/') + self._get_catalog_path(harvest_object.guid)
