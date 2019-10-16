@@ -22,6 +22,8 @@ import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
 from ckanext.spc.ingesters import MendeleyBib
 
+from ckanext.harvest.model import HarvestObject
+
 from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 from ckanext.ingest.interfaces import IIngest
@@ -49,11 +51,9 @@ class LicenseCreativeCommonsNonCommercial40(DefaultLicense):
 
 class LicenseSprepPublic(DefaultLicense):
     id = "sprep-public-license"
-    url = (
-        "https://pacific-data.sprep.org/dataset/"
-        "data-portal-license-agreements/resource/"
-        "de2a56f5-a565-481a-8589-406dc40b5588"
-    )
+    url = ("https://pacific-data.sprep.org/dataset/"
+           "data-portal-license-agreements/resource/"
+           "de2a56f5-a565-481a-8589-406dc40b5588")
 
     @property
     def title(self):
@@ -67,8 +67,7 @@ def _redefine_create_license_list(self, *args, **kwargs):
     original_create_license_list(self, *args, **kwargs)
     self.licenses.append(License(LicenseCreativeCommonsNonCommercial40()))
     self.licenses.append(
-        License(LicenseCreativeCommonsNonCommercialShareAlice40())
-    )
+        License(LicenseCreativeCommonsNonCommercialShareAlice40()))
     self.licenses.append(License(LicenseSprepPublic()))
 
 
@@ -96,34 +95,27 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IRouter
 
     def after_map(self, map):
-        map.connect(
-            'spc_dataset.new',
-            '/{package_type}/new',
-            controller='package',
-            action='new'
-        )
+        map.connect('spc_dataset.new',
+                    '/{package_type}/new',
+                    controller='package',
+                    action='new')
 
         map.connect(
             'spc_dataset.choose_type',
             '/dataset/new/choose_type',
             controller='ckanext.spc.controllers.spc_package:PackageController',
-            action='choose_type'
-        )
+            action='choose_type')
 
         return map
 
     def before_map(self, map):
 
-        map.connect(
-            'search_queries.index',
-            '/ckan-admin/search-queries',
-            controller=(
-                'ckanext.spc.controllers.search_queries'
-                ':SearchQueryController'
-            ),
-            action='index',
-            ckan_icon='search-plus'
-        )
+        map.connect('search_queries.index',
+                    '/ckan-admin/search-queries',
+                    controller=('ckanext.spc.controllers.search_queries'
+                                ':SearchQueryController'),
+                    action='index',
+                    ckan_icon='search-plus')
 
         return map
 
@@ -134,10 +126,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             (schema['dataset_type'], schema['about'])
             for schema in scheming_helpers.scheming_dataset_schemas().values()
         ])
-        self.member_countries = OrderedDict(
-            [(choice['value'], choice['label']) for choice in scheming_helpers.
-             scheming_get_preset('member_countries')['choices']]
-        )
+        self.member_countries = OrderedDict([
+            (choice['value'], choice['label'])
+            for choice in scheming_helpers.scheming_get_preset(
+                'member_countries')['choices']
+        ])
 
         filepath = os.path.join(os.path.dirname(__file__), 'data/eez.json')
         if os.path.isfile(filepath):
@@ -146,9 +139,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 collection = json.load(file)
                 spc_utils.eez.update(collection['features'])
 
-        toolkit.add_ckan_admin_tab(
-            config_, 'search_queries.index', 'Search Queries'
-        )
+        toolkit.add_ckan_admin_tab(config_, 'search_queries.index',
+                                   'Search Queries')
         toolkit.add_ckan_admin_tab(config_, 'ingest.index', 'Ingest')
 
     # IConfigurer
@@ -162,13 +154,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def get_helpers(self):
         helpers = {
-            'spc_dataset_type_label': lambda type: self.dataset_types.get(type),
-            'spc_type_facet_label': lambda item: self.dataset_types.get(
-                item['display_name'], item['display_name']
-            ),
-            'spc_member_countries_facet_label': lambda item: self.member_countries.get(
-                item['display_name'].upper(), item['display_name']
-            )
+            'spc_dataset_type_label':
+            lambda type: self.dataset_types.get(type),
+            'spc_type_facet_label':
+            lambda item: self.dataset_types.get(item['display_name'], item[
+                'display_name']),
+            'spc_member_countries_facet_label':
+            lambda item: self.member_countries.get(
+                item['display_name'].upper(), item['display_name'])
         }
         helpers.update(spc_helpers.get_helpers())
         return helpers
@@ -194,26 +187,22 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         fq = search_params.get('fq')
         if isinstance(fq, string_types):
             search_params['fq'] = fq.replace(
-                'dataset_type:dataset', 'dataset_type:({})'.format(
-                    ' OR '.join([type for type in self.dataset_types])
-                )
-            )
+                'dataset_type:dataset', 'dataset_type:({})'.format(' OR '.join(
+                    [type for type in self.dataset_types])))
         return search_params
 
     def after_search(self, results, params):
         _org_cache = {}
 
         is_popular_first = toolkit.asbool(
-            params.get('extras', {}).get('ext_popular_first', False)
-        )
+            params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
             item['tracking_summary'] = (
                 model.TrackingSummary.get_for_package(item['id']))
 
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
-                item['id']
-            )
+                item['id'])
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
             item['short_notes'] = h.whtext.truncate(item.get('notes', ''))
 
@@ -223,16 +212,17 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             except KeyError:
                 organization = h.get_organization(org_name)
                 _org_cache[org_name] = organization
-            item['organization_image_url'
-                 ] = organization.get('image_display_url') or h.url_for_static(
-                     '/base/images/placeholder-organization.png',
-                     qualified=True
-                 )
+            item['organization_image_url'] = organization.get(
+                'image_display_url') or h.url_for_static(
+                    '/base/images/placeholder-organization.png',
+                    qualified=True)
+            if _package_is_native(item['id']):
+                item['isPartOf'] = 'pdh.pacificdatahub'
+
 
         if is_popular_first:
-            results['results'].sort(
-                key=lambda i: i.get('ga_view_count', 0), reverse=True
-            )
+            results['results'].sort(key=lambda i: i.get('ga_view_count', 0),
+                                    reverse=True)
 
         spc_utils.store_search_query(params)
 
@@ -240,8 +230,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def before_index(self, pkg_dict):
         pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
-            pkg_dict['name']
-        )
+            pkg_dict['name'])
 
         topic_str = pkg_dict.get('thematic_area_string', '[]')
         if isinstance(topic_str, string_types):
@@ -250,18 +239,16 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             pkg_dict['topic'] = topic_str
 
         pkg_dict.update(
-            extras_five_star_rating=spc_utils.count_stars(pkg_dict)
-        )
+            extras_five_star_rating=spc_utils.count_stars(pkg_dict))
         if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
             pkg_dict['member_countries'] = spc_helpers.countries_list(
-                pkg_dict.get('member_countries', '[]')
-            )
+                pkg_dict.get('member_countries', '[]'))
         # Otherwise you'll get `immense field` error from SOLR
         pkg_dict.pop('data_quality_info', None)
 
         try:
-            resources = json.loads(pkg_dict['validated_data_dict']
-                                   )['resources']
+            resources = json.loads(
+                pkg_dict['validated_data_dict'])['resources']
             resources_to_index = []
             for res in resources:
                 if res.get('format', '').lower() in ('txt', 'pdf'):
@@ -269,8 +256,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         except KeyError as e:
             logger.warn(
                 'Problem during indexind resources of <%s>: key %s not found',
-                pkg_dict['id'], e
-            )
+                pkg_dict['id'], e)
             resources_to_index
         for res in resources_to_index:
             path = spc_utils.filepath_for_res_indexing(res)
@@ -283,8 +269,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 except Exception as e:
                     logger.warn(
                         'Problem during extracting content from <%s>: %s',
-                        path, e
-                    )
+                        path, e)
                     content = ''
             else:
                 with open(path) as f:
@@ -297,8 +282,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def after_show(self, context, pkg_dict):
         pkg_dict['five_star_rating'] = spc_utils._get_stars_from_solr(
-            pkg_dict['id']
-        )
+            pkg_dict['id'])
+
+        if _package_is_native(pkg_dict['id']):
+            pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
         return pkg_dict
 
     # IFacets
@@ -317,11 +304,15 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         facets_dict['member_countries'] = _('Member countries')
         return facets_dict
 
-    def organization_facets(
-        self, facets_dict, organization_type, package_type
-    ):
+    def organization_facets(self, facets_dict, organization_type,
+                            package_type):
         facets_dict.pop('groups', None)
         facets_dict['topic'] = _('Topic')
         facets_dict['type'] = _('Dataset type')
         facets_dict['member_countries'] = _('Member countries')
         return facets_dict
+
+
+def _package_is_native(id):
+    return not model.Session.query(HarvestObject).filter(
+        HarvestObject.package_id == id).count()
