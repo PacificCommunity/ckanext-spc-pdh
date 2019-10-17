@@ -38,7 +38,7 @@ def _map_gdl_to_publication(data_dict, obj):
         # "publication_type": data_dict,
         # "format": data_dict,
         "identifier": data_dict['identifier'],
-        "source": data_dict['source'],
+        "source": data_dict.get('source'),
         # "language": data_dict,
         # "relation": data_dict,
         # "spatial": data_dict,
