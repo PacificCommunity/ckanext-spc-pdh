@@ -129,7 +129,7 @@ class GemLibHarvester(HarvesterBase):
         package_dict['tags'] = self._clean_tags({
             'name': tag,
             'display_name': tag
-        } for tag in data_dict['keywords'].split(', '))
+        } for tag in data_dict.get('keywords', '').split(', ') if tag)
 
         result = self._create_or_update_package(package_dict, obj,
                                                 'package_show')
