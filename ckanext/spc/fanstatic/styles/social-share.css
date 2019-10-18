@@ -1,0 +1,29 @@
+.social-share--panel {
+  list-style: none;
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #115ea3;
+  padding: 0;
+  z-index: 1;
+}
+
+.social-share--tile {
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  margin: 0;
+  transition: 0.3s all;
+  background-color: #115ea3;
+}
+.social-share--tile:hover {
+  transform: translateX(5px);
+}
+.social-share--tile a {
+  color: #fff;
+  font-size: 25px;
+  line-height: 45px;
+  text-decoration: none !important;
+}
