@@ -266,13 +266,7 @@ header.navbar > .container .collapse {
 }
 .site-footer {
   padding: 0;
-  background: #001e73 url(../../../images/footer_gradient.png) 50% 50% no-repeat;
-  background-size: cover;
-}
-@media (max-width: 767px) {
-  .site-footer {
-    background: #003960;
-  }
+  background: unset;
 }
 [role=main],
 .main {
