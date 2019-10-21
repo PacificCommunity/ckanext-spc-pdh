@@ -164,6 +164,9 @@ class SpcDotStatHarvester(HarvesterBase):
             # Make a package dict
             pkg_dict = {}
             pkg_dict['id'] = harvest_object.guid
+
+            # Added thematic string
+            pkg_dict['thematic_area_string'] = ["Statistics"]
             
             # Get owner_org if there is one
             source_dataset = get_action('package_show')({
@@ -179,10 +182,17 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['title'] = structure.find('Name').text
             pkg_dict['publisher_name'] = structure['agencyID']
             pkg_dict['version'] = structure['version']
-
+            
             # Need to change url to point to Data Explorer
             de_url = 'https://stats.pacificdata.org/data-explorer/#/vis?locale=en&endpointId=disseminate&agencyId=SPC&code={}&version=1.0&viewerId=table&data=.&startPeriod=2005&endPeriod=2018'.format(harvest_object.guid)
             pkg_dict['source'] = de_url
+
+            # Set a default resource
+            pkg_dict['resources'] = [{'url': 'https://stats.pacificdata.org/data-nsi/Rest/data/SPC,DF_POP_SUM,1.0/all/?format=csv',
+                                    'format': 'CSV',
+                                    'mimetype': 'CSV',
+                                    'description': 'All data for {}'.format(pkg_dict['title']),
+                                    'name': '{} Data CSV'.format(pkg_dict['title'])}]
 
             # Get notes/description if it exists
             try:
