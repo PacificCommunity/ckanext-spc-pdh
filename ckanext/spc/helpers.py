@@ -4,8 +4,9 @@ import logging
 import requests
 import iso639
 
+from operator import eq, itemgetter
 from beaker.cache import CacheManager
-
+import funcy as F
 from routes import url_for as _routes_default_url_for
 
 from ckan.common import config
@@ -25,6 +26,7 @@ def get_helpers():
         get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
+        spc_national_map_previews=spc_national_map_previews,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
@@ -141,6 +143,25 @@ def get_footer_css_url():
 def get_dqs_explanation_url():
     dqs_explanation_url = config.get('ckan.dqs_explanation_url')
     return dqs_explanation_url
+
+
+_is_cesium_view = F.compose(
+    F.partial(eq, 'cesium_view'),
+    itemgetter('view_type')
+)
+
+
+def spc_national_map_previews(pkg):
+    return F.filter(F.first, [
+        (F.first(F.filter(
+            _is_cesium_view,
+            toolkit.get_action('resource_view_list')(
+                {'user': toolkit.c.user},
+                {'id': res['id']}
+            )
+        )), res) for res in pkg['resources']
+    ])
+
 
 
 def spc_unwrap_list(value):
