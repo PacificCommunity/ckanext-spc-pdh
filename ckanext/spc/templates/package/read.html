@@ -39,3 +39,8 @@
 	</ul>
     </div>
 {% endblock %}
+
+{% block package_resources %}
+    {{ super() }}
+    {% snippet "package/snippets/national_map_previews.html", pkg=pkg %}
+{% endblock %}
