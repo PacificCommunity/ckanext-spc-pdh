@@ -12,15 +12,3 @@
 {%- block scripts %}
     {% resource 'spc/scripts' %}
 {% endblock -%}
-
-{% block meta %}
-    {{ super() }}
-
-    {% block social_meta %}
-        <meta property="og:title" content="{{ self.title() }}">
-        <meta property="og:description" content="{{ g.site_description }}">
-        <!-- <meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg"> -->
-        <meta property="og:url" content="{{ request.url }}">
-        <meta name="twitter:card" content="summary_large_image">
-    {% endblock social_meta %}
-{% endblock meta %}
