@@ -1,7 +1,7 @@
 .social-share--panel {
   list-style: none;
   position: fixed;
-  left: 0;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   background: #115ea3;
@@ -19,7 +19,7 @@
   background-color: #115ea3;
 }
 .social-share--tile:hover {
-  transform: translateX(5px);
+  transform: translateX(-5px);
 }
 .social-share--tile a {
   color: #fff;
