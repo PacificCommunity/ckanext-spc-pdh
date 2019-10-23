@@ -3,15 +3,15 @@
     {% set errors = {} %}
 {% endif %}
 {% set item_data = h.spc_wrap_list(data.get(field.field_name)) %}
-{% set item_errors = errors.get(field.field_name, []) %}
-<style>
- .raised {
-     margin-left: 20px;
-     margin-bottom: 20px;
- }
-</style>
-<fieldset class="raised">
-    <legend>{{ field.label }}</legend>
+{% set item_errors = errors.get(field.field_name) or errors.get(field.field_name.split('__')[-1]) or [] %}
+<fieldset class="raised{% if item_errors %} error{% endif %}">
+    <legend>
+        {% if field.required %}
+            <span title="This field is required" class="control-required">*</span>
+        {% endif %}
+        {{ field.label }}
+    </legend>
+
     <span></span>
     {% for i in range(item_data|length) %}
         {% set uniq=field.field_name ~ '_' ~ i %}
