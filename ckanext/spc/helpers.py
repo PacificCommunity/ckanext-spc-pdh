@@ -33,6 +33,7 @@ def get_helpers():
         spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled,
         spc_link_to_identifier=spc_link_to_identifier,
+        spc_is_valid_cesium_format=spc_is_valid_cesium_format,
     )
 
 
@@ -44,6 +45,9 @@ def countries_list(countries):
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
 
+def spc_is_valid_cesium_format(fmt):
+    if fmt.lower() in ('wms', 'wfs', 'kml', 'kmz', 'gjson', 'geojson', 'czml'):
+        return True
 
 def spc_get_available_languages():
     return filter(
