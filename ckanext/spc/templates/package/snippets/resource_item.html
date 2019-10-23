@@ -7,10 +7,10 @@
 
     {% if h.spc_is_valid_cesium_format(res.format) %}
       <span class="badge badge-info badge-res">
-        Pacific Map <i class="fa fa-globe"></i> 
+        PacificMap <i class="fa fa-globe"></i> 
       </span>
     {% endif %}
-    
+
     {{ h.popular('views', res.tracking_summary.total, min=10) }}
   </a>
 {% endblock %}
