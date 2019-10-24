@@ -4,8 +4,7 @@
   <a href="{{ url }}" title="{{ res.name or res.description }}" class="heading">
     <div class="res-format res-format-{{ res.format.lower() or 'data' }}"></div>
     {{ h.resource_display_name(res) }}
-
-    {% if h.spc_is_valid_cesium_format(res.format) %}
+    {% if h.spc_is_valid_cesium_format(res) %}
       <span class="badge badge-info badge-res">
         PacificMap <i class="fa fa-globe"></i> 
       </span>

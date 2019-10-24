@@ -18,7 +18,6 @@ import ckan.plugins.toolkit as toolkit
 logger = logging.getLogger(__name__)
 cache = CacheManager()
 
-
 def get_helpers():
     return dict(
         spc_get_available_languages=spc_get_available_languages,
@@ -45,8 +44,17 @@ def countries_list(countries):
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
 
-def spc_is_valid_cesium_format(fmt):
-    if fmt.lower() in ('wms', 'wfs', 'kml', 'kmz', 'gjson', 'geojson', 'czml'):
+def spc_is_valid_cesium_format(res):
+    cesium = False
+    if res['has_views']:
+        views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
+        cesium = [
+            view['view_type'] 
+            for view in views 
+            if view['view_type'] == 'cesium_view'
+        ]
+    formats = ('kml', 'kmz')
+    if res['format'].lower() in formats and cesium:
         return True
 
 def spc_get_available_languages():
