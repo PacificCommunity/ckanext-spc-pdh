@@ -14,7 +14,6 @@ from ckan.common import config
 from ckanext.spc.utils import eez
 import ckan.lib.helpers as h
 import ckan.plugins.toolkit as toolkit
-import ckan.logic as logic
 
 logger = logging.getLogger(__name__)
 cache = CacheManager()
