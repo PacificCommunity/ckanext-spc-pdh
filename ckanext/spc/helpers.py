@@ -46,7 +46,7 @@ def countries_list(countries):
 
 def spc_is_valid_cesium_format(res):
     cesium = False
-    if res['has_views']:
+    if res.get('has_views'):
         views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
         cesium = [
             view['view_type'] 
@@ -54,7 +54,7 @@ def spc_is_valid_cesium_format(res):
             if view['view_type'] == 'cesium_view'
         ]
     formats = ('kml', 'kmz')
-    if res['format'].lower() in formats and cesium:
+    if res.get('format').lower() in formats and cesium:
         return True
 
 def spc_get_available_languages():
