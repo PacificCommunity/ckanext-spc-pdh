@@ -188,7 +188,7 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['source'] = de_url
 
             # Set a default resource
-            pkg_dict['resources'] = [{'url': 'https://stats.pacificdata.org/data-nsi/Rest/data/SPC,DF_POP_SUM,1.0/all/?format=csv',
+            pkg_dict['resources'] = [{'url': 'https://stats.pacificdata.org/data-nsi/Rest/data/SPC,{},1.0/all/?format=csv'.format(harvest_object.guid),
                                     'format': 'CSV',
                                     'mimetype': 'CSV',
                                     'description': 'All data for {}'.format(pkg_dict['title']),
