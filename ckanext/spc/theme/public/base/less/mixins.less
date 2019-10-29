@@ -61,3 +61,38 @@
 	height: 34px;
 	width: 30px;
 }
+
+.raised {
+    fieldset&{
+
+        margin-bottom: 20px;
+        padding: 0 10px 10px;
+        border: 1px solid @gray;
+        legend {
+            width: auto;
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+        &.error {
+            border-color: @red;
+            &> legend {
+                color: @red;
+
+            }
+        }
+        fieldset {
+            margin-bottom: 10px;
+            .collapse, .collapsing {
+                padding: 10px;
+            }
+        }
+    }
+}
+
+.dataset-form {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    .stages {
+        margin-right: -20px;
+    }
+}

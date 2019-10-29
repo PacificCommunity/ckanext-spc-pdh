@@ -142,10 +142,26 @@ class SPCCommand(CkanCommand):
             search.rebuild(id)
             print('\t' + id)
 
+    def update_topic_names(self):
+        pairs = (
+            ('"Social"', '"Gender and Youth"'),
+            ('"Statistics"', '"Official Statistics"'),
+        )
+        model.repo.new_revision()
+        for old_name, new_name in pairs:
+            items = model.Session.query(
+                model.PackageExtra
+            ).filter_by(key='thematic_area_string').filter(
+                model.PackageExtra.value != '[]',
+                ~model.PackageExtra.value.is_(None),
+                model.PackageExtra.value.contains(old_name)
+            )
+            for item in items:
+                item.value = item.value.replace(old_name, new_name)
+        model.repo.commit_and_remove()
+
     def create_country_orgs(self):
-        site_user = tk.get_action('get_site_user')({
-            'ignore_auth': True
-        }, {})
+        site_user = tk.get_action('get_site_user')({'ignore_auth': True}, {})
         for name, title in country_orgs.items():
             if model.Session.query(model.Group).filter_by(name=name + '-data'
                                                           ).count():
