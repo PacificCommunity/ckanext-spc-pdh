@@ -18,12 +18,70 @@
     {
       "field_name": "thematic_area_string",
       "label": "Topic",
-      "preset": "thematic_area"
+      "preset": "multiple_select",
+      "choices": [
+        {
+          "label": "Social",
+          "value": "Social"
+        },
+        {
+          "label": "Statistics",
+          "value": "Statistics"
+        },
+        {
+          "label": "Climate Change",
+          "value": "Climate Change"
+        },
+        {
+          "label": "Fisheries",
+          "value": "Fisheries"
+        },
+        {
+          "label": "Geoscience",
+          "value": "Geoscience"
+        },
+        {
+          "label": "Land Resources",
+          "value": "Land Resources"
+        },
+        {
+          "label": "Human Rights",
+          "value": "Human Rights"
+        },
+        {
+          "label": "Health",
+          "value": "Health"
+        },
+        {
+          "label": "Energy",
+          "value": "Energy"
+        },
+        {
+          "label": "Education",
+          "value": "Education"
+        },
+        {
+          "label": "Economic Development",
+          "value": "Economic Development"
+        },
+        {
+          "label": "Environment",
+          "value": "Environment"
+        },
+        {
+          "label": "PCCOS",
+          "value": "PCCOS"
+        },
+        {
+          "label": "Gender and Youth",
+          "value": "Gender and Youth"
+        }
+      ]
     },
     {
       "field_name": "owner_org",
       "label": "Publisher",
-      "preset": "spc_dataset_organization"
+      "preset": "dataset_organization"
     },
     {
       "field_name": "license_id",

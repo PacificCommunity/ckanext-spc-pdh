@@ -39,7 +39,7 @@
                     </h3>
                     <div class="dataset-info">
                         <p class="pull-left">
-                            {{ package.organization.get('title') }}
+                            {{ package.organization.get('title') }} | {{ h.render_datetime(package.metadata_created, date_format='%d %B %Y') }}
                             <span class="dataset-type-label desktop-only badge badge-info ml-5">
 	                        {{ h.spc_dataset_type_label(package.type) }}
 	                    </span>
@@ -60,17 +60,6 @@
                         <p class="empty">{{ _("This dataset has no description") }}</p>
                     {% endif %}
                 {% endblock %}
-                <br/>
-                <div class="dataset-info">
-                    {{ h.render_datetime(package.metadata_modified, date_format='%d %B %Y') }}
-                    <div class="data-quality-tooltip">
-                        <i class="fa fa-question-circle"></i>
-                        <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
-                            This date indicates the date the dataset metadata was last modified on Pacific Data Hub.
-                        </span>
-                    </div>
-
-                </div>
             </div>
             {% block resources %}
                 {% if package.resources and not hide_resources %}
@@ -78,7 +67,7 @@
                         <div class="dataset-resources">
                             {% block resources_inner %}
                                 {% for resource in package.resources %}
-                                    <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" aria-label="resource">
+                                    <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}">
                                         <div class="res-format res-format-{{ resource.format.lower() or 'data' }}"></div>
                                     </a>
                                 {% endfor %}

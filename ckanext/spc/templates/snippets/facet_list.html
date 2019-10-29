@@ -5,56 +5,45 @@
     'topic': 'bulb', 'type': 'raid', 'member_countries': 'human'} %}
 
 {% block facet_list_heading %}
-    <h2 class="module-heading" data-module="spc-sortable-facets" data-module-selector="nav>ul>li">
+    <h2 class="module-heading ">
         <i class="heading-icon spc-icon-{{ facet_icons[name] }}"></i>
-        {% set title = title or h.get_facet_title(name) %}
-        <span class="heading-title">{{ title }}</span>
-        <button class="facet-sorter" data-sort-type="data-name">
-            <i class="fa fa-chevron-up"></i>
-            A-Z
-            <i class="fa fa-chevron-down"></i>
-        </button>
-        <button class="facet-sorter" data-sort-type="data-number">
-            <i class="fa fa-chevron-up"></i>
-            0-9
-            <i class="fa fa-chevron-down"></i>
-        </button>
-        {% set href = h.remove_url_param(name, extras=extras, alternative_url=alternative_url) %}
-        <a class="clear-all" href="{{ href }}">{{ _('Clear') }}</a>
-    </h2>
+  {% set title = title or h.get_facet_title(name) %}
+  {{ title }}
+</h2>
 {% endblock %}
 
 {% block facet_list_items %}
-    {% with items = items or h.get_facet_items_dict(name, 1000) %}
-        {% if items %}
-            <nav>
-                <ul class="{{ nav_class or 'unstyled nav nav-simple nav-facet' }}">
-                    {% for item in items %}
-                        {% set href = h.remove_url_param(name, item.name, extras=extras, alternative_url=alternative_url) if item.active else h.add_url_param(new_params={name: item.name}, extras=extras, alternative_url=alternative_url) %}
-                        {% set label = label_function(item) if label_function else item.display_name %}
-                        {#% set label_truncated = h.truncate(label, 22) if not label_function else label %#}
-                        {% set label_truncated = label %}
-                        {% set count = count_label(item['count']) if count_label else ('(%d)' % item['count']) %}
-                        <li data-name="{{ label }}" data-number="{{ item['count'] }}" class="{{ nav_item_class or 'nav-item' }}{% if item.active %} active{% endif %}">
-                            <a href="{{ href }}" title="{{ label if label != label_truncated else '' }}">
-                                <span>{{ label_truncated }} {{ count }}</span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-            {% if  items|length > 10 %}
-                <p class="module-footer">
-                    <a class="read-more" onclick="this.parentNode.parentNode.classList.toggle('show-all')">
-                        <span class="not-all-visible">{{ _('show more') }}</span>
-                        <span class="all-visible">{{ _('show less') }}</span>
-                        <i class="show-more-icon spc-icon-arrow-down" aria-hidden="true"></i>
-                    </a>
-                </p>
-            {% endif  %}
+  {% with items = items or h.get_facet_items_dict(name) %}
+  {% if items %}
+    <nav>
+      <ul class="{{ nav_class or 'unstyled nav nav-simple nav-facet' }}">
+        {% for item in items %}
+          {% set href = h.remove_url_param(name, item.name, extras=extras, alternative_url=alternative_url) if item.active else h.add_url_param(new_params={name: item.name}, extras=extras, alternative_url=alternative_url) %}
+          {% set label = label_function(item) if label_function else item.display_name %}
+          {#% set label_truncated = h.truncate(label, 22) if not label_function else label %#}
+            {% set label_truncated = label %}
+          {% set count = count_label(item['count']) if count_label else ('(%d)' % item['count']) %}
+            <li class="{{ nav_item_class or 'nav-item' }}{% if item.active %} active{% endif %}">
+              <a href="{{ href }}" title="{{ label if label != label_truncated else '' }}">
+                <span>{{ label_truncated }} {{ count }}</span>
+              </a>
+            </li>
+        {% endfor %}
+      </ul>
+    </nav>
 
+    <p class="module-footer">
+        {% if h.get_param_int('_%s_limit' % name) %}
+            {% if h.has_more_facets(name) %}
+                <a href="{{ h.remove_url_param('_%s_limit' % name, replace=0, extras=extras, alternative_url=alternative_url) }}" class="read-more">{{ _('show more').format(facet_type=title) }} <i class="show-more-icon spc-icon-arrow-down" aria-hidden="true"></i></a>
+
+            {% endif %}
         {% else %}
-            <p class="module-content empty">{{ _('There are no {facet_type} that match this search').format(facet_type=title) }}</p>
-        {% endif %}
-    {% endwith %}
+            <a href="{{ h.remove_url_param('_%s_limit' % name, extras=extras, alternative_url=alternative_url) }}" class="read-more">{{ _('show only popular').format(facet_type=title) }} <i class="show-more-icon spc-icon-arrow-down" aria-hidden="true"></i></a>
+      {% endif %}
+    </p>
+  {% else %}
+    <p class="module-content empty">{{ _('There are no {facet_type} that match this search').format(facet_type=title) }}</p>
+  {% endif %}
+  {% endwith %}
 {% endblock %}

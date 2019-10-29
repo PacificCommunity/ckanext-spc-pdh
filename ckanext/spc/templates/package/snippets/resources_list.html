@@ -1,9 +1,0 @@
-{% ckan_extends %}
-
-{% block resource_list_inner %}
-    {% for resource in resources %}
-        {% set can_edit = h.check_access('resource_update', {'id':resource.id }) %}
-
-        {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
-    {% endfor %}
-{% endblock %}

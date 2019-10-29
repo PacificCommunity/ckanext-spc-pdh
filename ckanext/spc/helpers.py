@@ -4,9 +4,8 @@ import logging
 import requests
 import iso639
 
-from operator import eq, itemgetter
 from beaker.cache import CacheManager
-import funcy as F
+
 from routes import url_for as _routes_default_url_for
 
 from ckan.common import config
@@ -18,6 +17,7 @@ import ckan.plugins.toolkit as toolkit
 logger = logging.getLogger(__name__)
 cache = CacheManager()
 
+
 def get_helpers():
     return dict(
         spc_get_available_languages=spc_get_available_languages,
@@ -25,14 +25,12 @@ def get_helpers():
         get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
-        spc_national_map_previews=spc_national_map_previews,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
         spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled,
         spc_link_to_identifier=spc_link_to_identifier,
-        spc_is_valid_cesium_format=spc_is_valid_cesium_format,
     )
 
 
@@ -44,18 +42,6 @@ def countries_list(countries):
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
 
-def spc_is_valid_cesium_format(res):
-    cesium = False
-    if res.get('has_views'):
-        views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
-        cesium = [
-            view['view_type'] 
-            for view in views 
-            if view['view_type'] == 'cesium_view'
-        ]
-    formats = ('kml', 'kmz')
-    if res.get('format').lower() in formats and cesium:
-        return True
 
 def spc_get_available_languages():
     return filter(
@@ -66,7 +52,6 @@ def spc_get_available_languages():
 
 
 def url_for_logo(*args, **kw):
-
     def fix_arg(arg):
         url = urlparse.urlparse(str(arg))
         url_is_relative = (
@@ -91,15 +76,10 @@ def get_conf_site_url():
 
 def get_eez_options():
 
-    options = sorted([
-        value for value in {
-            feature['properties']['Territory1']: {
-                'text': feature['properties']['Territory1'],
-                'value': json.dumps(feature['geometry'])
-            }
-            for feature in eez
-        }.values()
-    ],
+    options = sorted([{
+        'text': feature['properties']['GeoName'],
+        'value': json.dumps(feature['geometry'])
+    } for feature in eez],
                      key=lambda o: o['text'])
 
     result = []
@@ -157,25 +137,6 @@ def get_dqs_explanation_url():
     return dqs_explanation_url
 
 
-_is_cesium_view = F.compose(
-    F.partial(eq, 'cesium_view'),
-    itemgetter('view_type')
-)
-
-
-def spc_national_map_previews(pkg):
-    return F.filter(F.first, [
-        (F.first(F.filter(
-            _is_cesium_view,
-            toolkit.get_action('resource_view_list')(
-                {'user': toolkit.c.user},
-                {'id': res['id']}
-            )
-        )), res) for res in pkg['resources']
-    ])
-
-
-
 def spc_unwrap_list(value):
     if isinstance(value, list):
         return value[0] if value else {}
@@ -200,7 +161,6 @@ def spc_hotjar_enabled():
     if enabled:
         return True
     return False
-
 
 def spc_link_to_identifier(id):
     if not id:
