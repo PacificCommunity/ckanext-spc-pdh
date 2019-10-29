@@ -198,9 +198,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
-            item['tracking_summary'] = (
-                model.TrackingSummary.get_for_package(item['id']))
-
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
                 item['id'])
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])

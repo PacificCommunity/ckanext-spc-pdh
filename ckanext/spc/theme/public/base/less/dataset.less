@@ -58,7 +58,7 @@
             line-height: 21px;
             padding: 0 23px;
         }
-        .resources, .tags {
+        .resources, .additional-info {
             border-top: 1px dashed #cccccc;
             clear: both;
             margin: 10px;
@@ -104,11 +104,10 @@
                     top: 20px;
                     .dropdown-toggle {
                         border: none;
-                        color: darken(@light-blue, 10%);
+                        color: @light-blue;
                         font-size: 12px;
                         &:focus, &:active, &:hover {
                             box-shadow: none;
-                            color: black;
                         }
                         > i {
                             .spc-bg-icon;
@@ -135,29 +134,7 @@
             }
         }
         .tags {
-            padding-top: 22px;
-            .tag-list {
-                @baseBg: #f8f8f8;
-                @baseColor: #001e73;
-                border: none;
-                padding: 15px;
-                border-radius: 5px;
-                box-shadow: none;
-                background-color: @baseBg;
-                .tag {
-                    color: @baseColor;
-                    border-color: $color;
-                    font-size: 12px;
-                    line-height: $font-size;
-                    box-shadow: none;
-                    padding: 8px 11px;
-                    &:hover, &:active, &:focus {
-                        text-decoration: none;
-                        background: @baseColor;
-                        color: @baseBg;
-                    }
-                }
-            }
+            display: none;
         }
         .table-bordered {
             border-color: @border-blue;
@@ -353,17 +330,10 @@
     }
 }
 
-.dataset-content {
-    .empty {
-        color: #535252;
-    }
-}
-
 .meta-export-select {
     padding: 0px 23px;
     margin: 15px 0px;
     .dropdown-toggle {
-        color: darken(@light-blue, 10%);
         .plain-link-on-hover;
         font-size: 12px;
         &:focus, &:active {
@@ -401,10 +371,7 @@
     }
 }
 
-.badge-res {
-    font-size: 0.8em;
-    padding: 4px 7px 3px 7px;
-}
+
 .res-format {
     display: inline-block;
     position: relative;
@@ -413,7 +380,7 @@
 }
 
 .res-format-aac { .res-sprite(0, 0); }
-.res-format-3ds { .res-sprite(1, 0); }
+.res-format-3ds { .res-sprite(1, 0); } 
 .res-format-ai { .res-sprite(2, 0); }
 .res-format-avi { .res-sprite(3, 0); }
 .res-format-bmp { .res-sprite(4, 0); }
