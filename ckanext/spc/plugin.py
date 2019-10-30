@@ -74,6 +74,11 @@ def _redefine_create_license_list(self, *args, **kwargs):
 
 LicenseRegister._create_license_list = _redefine_create_license_list
 
+# list of stop word for search suggestion plugin
+filepath = os.path.join(os.path.dirname(__file__), 'data/bad_words.csv')
+with open(filepath) as f:
+    STOP_WORDS = {word for word in f.read().splitlines()}
+
 
 class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -89,6 +94,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(IIngest)
     plugins.implements(plugins.IBlueprint)
 
+    # ISearchTermPreprocessor
+    
+    def preprocess_search_term(self, term):
+        if term in STOP_WORDS:
+            # Ignore this term
+            return False
+
+        return term
 
     # IBlueprint
     def get_blueprint(self):
