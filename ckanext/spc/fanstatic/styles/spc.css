@@ -1132,6 +1132,15 @@ table.table tr th.dataset-details {
   word-break: break-word;
   word-wrap: break-word;
 }
+.query-actions {
+  display: flex;
+}
+.query-actions .query-search {
+  margin-right: 10px;
+}
+.query-actions .btn-delete {
+  display: contents;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
@@ -2920,4 +2929,3 @@ button.header-menu-btn:focus {
     margin-left: 5px;
   }
 }
-
