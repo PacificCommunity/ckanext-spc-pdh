@@ -5148,7 +5148,7 @@ input::-ms-clear {
     border-radius: 20px;
   }
   .module-resource + .secondary .resources .nav-item.active a {
-    border-radius: 20px;
+    border-radius: 0;
   }
   .organization-list-page {
     display: flex;
