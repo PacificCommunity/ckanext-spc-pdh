@@ -27,6 +27,7 @@ from ckanext.harvest.model import HarvestObject
 from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 from ckanext.ingest.interfaces import IIngest
+from ckanext.spc.views import blueprints
 
 logger = logging.getLogger(__name__)
 
@@ -86,6 +87,12 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
+    plugins.implements(plugins.IBlueprint)
+
+
+    # IBlueprint
+    def get_blueprint(self):
+        return blueprints
 
     # IIngest
 
@@ -198,6 +205,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
+            item['tracking_summary'] = (
+                model.TrackingSummary.get_for_package(item['id']))
+
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
                 item['id'])
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])

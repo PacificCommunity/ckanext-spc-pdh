@@ -38,11 +38,14 @@ To install ckanext-spc:
    config file (by default the config file is located at
    ``/etc/ckan/default/production.ini``).
 
-4. Update SOLR schema::
+4. For the SpcNadaHarvester to work, install this branch of ckanext-ddi: ``github.com/roly97/ckanext-ddi/tree/nada_harvester``.
+   Alternatively, install the original ckanext-ddi extension ``github.com/liip/ckanext-ddi`` and then replace the files ``ddiharvester.py`` and ``metadata.py`` with the changed files found in ``ckanext-ddi_changes`` directory in this repo. 
+
+5. Update SOLR schema::
 
      <field name="topic" type="string" indexed="true" stored="true" multiValued="true"/>
 
-5. Update DB schema::
+6. Update DB schema::
 
      paster spc db-upgrade -c config.ini
 
@@ -126,7 +129,7 @@ OAI-PMH
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 | Url                                       | Title                           | Settings                                       | Organization |
 +===========================================+=================================+================================================+==============+
-| http://www.spc.int/DigitalLibrary/SPC/OAI | Social Development Program      | {"set": "SDP_PDH", "topic": "Social"}          | spc-sdp      |
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Social Development Program      | {"set": "SDP_PDH", "topic": "Gender and Youth"}          | spc-sdp      |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 | http://www.spc.int/DigitalLibrary/SPC/OAI | Climate Change and              | {"set": "CCES_PDH", "topic": "Climate Change"} | spc-cces     |
 |                                           | Environmental Sustainability    |                                                |              |
@@ -140,7 +143,7 @@ OAI-PMH
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 | http://www.spc.int/DigitalLibrary/SPC/OAI | Public Health Division          | {"set": "PHD_PDH", "topic": "Health"}          | spc-phd      |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
-| http://www.spc.int/DigitalLibrary/SPC/OAI | Statistics for Development      | {"set": "SDD_PDH", "topic": "Statistics"}      | spc-sdd      |
+| http://www.spc.int/DigitalLibrary/SPC/OAI | Statistics for Development      | {"set": "SDD_PDH", "topic": "Official Statistics"}      | spc-sdd      |
 |                                           | Division                        |                                                |              |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 
@@ -218,7 +221,7 @@ SPREP
 |                                           |                                 | "Biodiversity": "Fisheries",                   |              |
 |                                           |                                 | "Build Environment": "Economic Development",   |              |
 |                                           |                                 | "Coastal and Marine": "Fisheries",             |              |
-|                                           |                                 | "Culture and Heritage": "Social",              |              |
+|                                           |                                 | "Culture and Heritage": "Gender and Youth",              |              |
 |                                           |                                 | "Inland Waters": "Geoscience"}}                |              |
 +-------------------------------------------+---------------------------------+------------------------------------------------+--------------+
 
