@@ -32,10 +32,14 @@
 		<li>
 		    <a
 			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='anzlic-xml') }}"
-			      target="_blank">XML</a>
+			target="_blank">XML</a>
 		</li>
 	    {% endif %}
 
 	</ul>
     </div>
+{% endblock %}
+
+{% block package_resources %}
+    {{ super() }}
 {% endblock %}
