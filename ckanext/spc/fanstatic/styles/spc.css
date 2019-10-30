@@ -78,6 +78,9 @@ fieldset.raised fieldset .collapsing {
 .dataset-form .stages {
   margin-right: -20px;
 }
+.display-inline {
+  display: inline;
+}
 .spc-icon-external-link {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAABuElEQVRIS+2W3VnCMBSG34QBZAFrR2AD2UCYQDawWu7Fa0HLBLKBbCBuwAaWsgDcQ+MTCoX0KaSlcue5TXLe5Mv5E/y1OV2PqB/Y3ArbhtLrjq+AEXL9SBgsjp2/FFjzpsh1mzAI8+CXBGveAinahP1JFp6Ar/0WgnfAtUg7JBp46R7Xc4lrd0AHaJw46xENhofrArfbJFZfFuASpTzmb6PNvgT4vAUWDQPj3wU33QlK3Z44PUPKFuHrNFHnqYMQH0VpmX3pvwuSKNzZDETyqp3JVZBGp+PrtfszoXuGXDdMsBDfzPrNXMdOtwdKy1vFUvWKgZPg+6xCRD9KrFo79exg16sT136AegWwmQ2AHXxc4iWoCcgpkn2emhliZsPBzQuAfV32rtIzWrI4HqWplZVhH6xmNmT2nQabf3v09oZPDc78Z94XnQbvZC7gKHXu+IFR3TZ5L+vZjmUBb/IWooEuieVNXwIeQLwQ9XuHDuxSzwfj8kQwK2JZ8FnE7SGjIv6DswVEN25F0oWqmuCg5udJbW+LVa8AijaZIC06CJwPP9LxktFHTyGKnmUgKAufAWPkupc3bf4CCwf0uUNg0nsAAAAASUVORK5CYII=");
 }
@@ -345,6 +348,7 @@ fieldset.raised fieldset .collapsing {
     content: '\f39e';
 }
 */
+
 .fa-tint:before {
   content: '\e938';
 }
@@ -543,50 +547,33 @@ fieldset.raised fieldset .collapsing {
 }
 @font-face {
   font-family: 'Calibri';
-  src: url('../../../fonts/Calibri-Bold.ttf');
-  src: url('../../../fonts/Calibri-Bold.eot?#iefix') format('embedded-opentype'), url('../../../fonts/Calibri-Bold.woff2') format('woff2'), url('../../../fonts/Calibri-Bold.woff') format('woff'), url('../../../fonts/Calibri-Bold.ttf') format('truetype'), url('../../../fonts/Calibri-Bold.svg#Calibri-Bold') format('svg');
+  src: url('../../../../../../fonts/Calibri-Bold.ttf');
+  src: url('../../../../../../fonts/Calibri-Bold.eot?#iefix') format('embedded-opentype'), url('../../../../../../fonts/Calibri-Bold.woff2') format('woff2'), url('../../../../../../fonts/Calibri-Bold.woff') format('woff'), url('../../../../../../fonts/Calibri-Bold.ttf') format('truetype'), url('../../../../../../fonts/Calibri-Bold.svg#Calibri-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: 'Calibri';
-  src: url('../../../fonts/Calibri-Light.ttf');
-  src: url('../../../fonts/Calibri-Light.eot?#iefix') format('embedded-opentype'), url('../../../fonts/Calibri-Light.woff2') format('woff2'), url('../../../fonts/Calibri-Light.woff') format('woff'), url('../../../fonts/Calibri-Light.ttf') format('truetype'), url('../../../fonts/Calibri-Light.svg#Calibri-Light') format('svg');
+  src: url('../../../../../../fonts/Calibri-Light.ttf');
+  src: url('../../../../../../fonts/Calibri-Light.eot?#iefix') format('embedded-opentype'), url('../../../../../../fonts/Calibri-Light.woff2') format('woff2'), url('../../../../../../fonts/Calibri-Light.woff') format('woff'), url('../../../../../../fonts/Calibri-Light.ttf') format('truetype'), url('../../../../../../fonts/Calibri-Light.svg#Calibri-Light') format('svg');
   font-weight: lighter;
   font-style: normal;
 }
 @font-face {
   font-family: 'Calibri';
-  src: url('../../../fonts/Calibri.ttf');
-  src: url('../../../fonts/Calibri.eot?#iefix') format('embedded-opentype'), url('../../../fonts/Calibri.woff2') format('woff2'), url('../../../fonts/Calibri.woff') format('woff'), url('../../../fonts/Calibri.ttf') format('truetype'), url('../../../fonts/Calibri.svg#Calibri') format('svg');
+  src: url('../../../../../../fonts/Calibri.ttf');
+  src: url('../../../../../../fonts/Calibri.eot?#iefix') format('embedded-opentype'), url('../../../../../../fonts/Calibri.woff2') format('woff2'), url('../../../../../../fonts/Calibri.woff') format('woff'), url('../../../../../../fonts/Calibri.ttf') format('truetype'), url('../../../../../../fonts/Calibri.svg#Calibri') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../../../fonts/fontawesome-webfont.ttf');
-  src: url('../../../fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../../../fonts/fontawesome-webfont.woff') format('woff'), url('../../../fonts/fontawesome-webfont.ttf') format('truetype'), url('../../../fonts/fontawesome-webfont.svg#fontawesome-webfont') format('svg');
+  src: url('../../../../../../fonts/fontawesome-webfont.ttf');
+  src: url('../../../../../../fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../../../../../../fonts/fontawesome-webfont.woff') format('woff'), url('../../../../../../fonts/fontawesome-webfont.ttf') format('truetype'), url('../../../../../../fonts/fontawesome-webfont.svg#fontawesome-webfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../../../../fonts/montserrat/Montserrat-Bold.otf');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../../../../fonts/montserrat/Montserrat-SemiBold.otf');
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../../../../fonts/montserrat/Montserrat-Medium.otf');
-  font-weight: 500;
-  font-style: normal;
-}
+
 /* roboto-100 - latin */
 @font-face {
   font-family: 'Roboto';
@@ -667,6 +654,14 @@ fieldset.raised fieldset .collapsing {
   src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url('../../../../../../fonts/roboto/roboto-v20-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../../../../../../fonts/roboto/roboto-v20-latin-700italic.woff') format('woff');
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
+@font-face {
+  font-family: 'PngDataPortal';
+  src: url('../../../../../../../fonts/fa-kit/icons.eot');
+  src: url('../../../../../../fonts/fa-kit/icons.eot?#iefix') format('embedded-opentype'), url('../../../../../../fonts/fa-kit/icons.woff2') format('woff2'), url('../../../../../../fonts/fa-kit/icons.woff') format('woff'), url('../../../../../../fonts/fa-kit/icons.ttf') format('truetype'), url('../../../../../../fonts/fa-kit/icons.otf') format('opentype');
+  font-weight: normal;
+}
+
 body {
   font-family: 'Roboto';
   font-weight: 400;
@@ -704,52 +699,96 @@ header.navbar > .container .collapse {
 }
 .masthead #main-menu li {
   display: inline-block;
-  margin: 15px 17px;
   border-color: transparent;
 }
 .masthead #main-menu li:empty {
   display: none;
 }
 .masthead #main-menu li a {
+  text-transform: uppercase;
   padding: 2px;
   font-size: 13px;
+  text-decoration: none;
+  line-height: 70px;
+  display: inline-block;
+  padding: 0px 24px;
+  transition: all 0.3s;
+}
+@media (max-width: 1199px) {
+  .masthead #main-menu li a {
+    padding: 0 12px;
+  }
+}
+.masthead #main-menu li a:hover {
+  color: #F8DA10;
 }
 .masthead #main-menu > ul > li:last-child {
   display: none;
 }
-.masthead #main-menu .dropdown.open .dropdown-menu {
-  margin-top: 26px;
-  margin-left: -23px;
-  border-radius: 19px;
-  padding: 15px;
+.masthead #main-menu .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+.masthead #main-menu .dropdown .dropdown-menu {
+  margin: 0;
+  border: unset;
+  border-radius: 0px;
+  padding: 0;
+  color: #7B7B7B;
+  box-shadow: none;
+}
+.masthead #main-menu .dropdown .dropdown-menu:before {
+  color: #7B7B7B;
 }
 .masthead #main-menu .dropdown .dropdown-toggle .fa-chevron-down {
   background-repeat: no-repeat;
   background-size: contain;
   color: transparent;
   margin: 0px 10px;
-  vertical-align: sub;
   width: 10px;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAA9UlEQVQ4T42S7VECURRDTyrQEuhA7AArQCpQKlAqUCuQDsQO6EDtACrAErCCOGHu7izLh+bXzpv7zk3yVgC2LyVt8/0fdedl+xl4Aq4lrf4C5DKwAZbALIA58AB8F+SsE9tZcgV8SRqpIjSHS0mTUy46y36AQWI3gAEQyAUwlbToQ2zfA2913sbdAcpFM5AIN90+bA+BDyD5Z5ISe6cWUJBsvis3gWyrtFwO5F1SFrXqA7Lhs0paSJraTttjYA2M+s+9BygX2RRI+sjlWyClDSXlpfZ0ACjII/DamZxICuxARwEFaay/SMrPdlTnAOkjthPnpH4B38VoGjCUhGEAAAAASUVORK5CYII=");
+  height: 1em;
+  width: 0.875em;
+  background-image: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-chevron-down fa-w-14' aria-hidden='true' data-prefix='fa' data-icon='chevron-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' data-fa-i2svg=''%3E%3Cpath fill='%23fff' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'%3E%3C/path%3E%3C/svg%3E");
 }
 .masthead #main-menu .dropdown li {
   display: block;
-  padding: 3px 10px;
+  padding: 0;
   margin: 0px;
 }
 .masthead #main-menu .dropdown li:empty {
   display: none;
 }
+.masthead #main-menu .dropdown li:hover {
+  color: #000 !important;
+}
 .masthead #main-menu .dropdown li a {
-  padding: 2px;
-  border-bottom: 1px dashed #D3D3D3;
+  font-family: 'Roboto';
+  line-height: 1rem;
+  padding: 15px 50px;
+  display: block;
 }
 .masthead #main-menu .dropdown li a:hover {
   background-color: transparent;
-  color: #007AD8;
+  color: #000 !important;
+  background-color: #f5f5f5;
+  border-left: 3px solid #000000;
 }
 .masthead #main-menu .dropdown li:last-child a {
   border-bottom: none;
+}
+.masthead #main-menu .dropdown:hover,
+.masthead #main-menu .dropdown:focus,
+.masthead #main-menu .dropdown:active {
+  background-color: #fff;
+}
+.masthead #main-menu .dropdown:hover > a,
+.masthead #main-menu .dropdown:focus > a,
+.masthead #main-menu .dropdown:active > a {
+  color: #F8DA10;
+}
+.masthead #main-menu .dropdown:hover > a .fa-chevron-down,
+.masthead #main-menu .dropdown:focus > a .fa-chevron-down,
+.masthead #main-menu .dropdown:active > a .fa-chevron-down {
+  background-image: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-chevron-down fa-w-14' aria-hidden='true' data-prefix='fa' data-icon='chevron-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' data-fa-i2svg=''%3E%3Cpath fill='%23F8DA10' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'%3E%3C/path%3E%3C/svg%3E");
 }
 .masthead .navigation .nav-pills li a:hover,
 .masthead .navigation .nav-pills li a:focus,
@@ -1490,6 +1529,11 @@ table.table tr th.dataset-details {
   position: relative;
   top: 14px;
   margin-right: 2px;
+  background-image: url('/data/base/images/sprite_res.png');
+  background-repeat: no-repeat;
+  background-position: -1225.08px 0;
+  height: 34px;
+  width: 30px;
 }
 .res-format-aac {
   background-image: url('/data/base/images/sprite_res.png');
@@ -1905,6 +1949,7 @@ button.header-menu-btn:focus {
 }
 .ma5-menu-panel li {
   border-bottom: 1px solid rgba(246, 240, 234, 0.5);
+  position: relative;
 }
 .ma5-menu-panel li:hover {
   background-color: rgba(246, 240, 234, 0.5);
@@ -1941,8 +1986,20 @@ button.header-menu-btn:focus {
   cursor: pointer;
 }
 .ma5-menu-panel a {
+  font-family: 'Roboto';
   color: #fff;
   font-weight: 300;
+}
+.nav-item.active > a span {
+  white-space: normal;
+  overflow: hidden;
+}
+.ma5-menu-panel a:before {
+  font: normal normal normal 20px/1 'PngDataPortal';
+  display: inline-block;
+  padding: 0 10px;
+  width: 50px;
+  position: initial;
 }
 .js [role='main'] .secondary .filters {
   background: #ffffff;
@@ -2784,7 +2841,7 @@ button.header-menu-btn:focus {
     border-radius: 20px;
   }
   .module-resource + .secondary .resources .nav-item.active a {
-    border-radius: 20px;
+    border-radius: 0;
   }
   .organization-list-page {
     display: flex;
@@ -2863,3 +2920,4 @@ button.header-menu-btn:focus {
     margin-left: 5px;
   }
 }
+

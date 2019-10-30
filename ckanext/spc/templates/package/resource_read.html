@@ -1,7 +1,7 @@
 {% ckan_extends %}
 {% block resource_read_url %}
     {% if res.url and h.is_url(res.url) %}
-        <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+        <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
     {% elif res.url %}
         <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
     {% endif %}
@@ -16,7 +16,7 @@
     {% if res.url and h.is_url(res.url) %}
         <li>
             <div class="btn-group">
-                <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
+                <a class="btn btn-primary resource-url-analytics-downloadable resource-type-{{ res.resource_type }}" href="{{ res.url }}"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
                     {% if res.resource_type in ('listing', 'service') %}
                         <i class="fa fa-eye"></i> {{ _('View') }}
                     {% elif  res.resource_type == 'api' %}
