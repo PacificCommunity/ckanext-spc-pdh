@@ -21,6 +21,7 @@ import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
 from ckanext.spc.ingesters import MendeleyBib
+from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
 
 from ckanext.harvest.model import HarvestObject
 
@@ -93,7 +94,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
     plugins.implements(plugins.IBlueprint)
-
+    plugins.implements(ISearchTermPreprocessor)
+    
     # ISearchTermPreprocessor
     
     def preprocess_search_term(self, term):
