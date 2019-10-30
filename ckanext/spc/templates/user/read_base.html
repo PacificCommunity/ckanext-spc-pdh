@@ -1,0 +1,12 @@
+{% ckan_extends %}
+{% block content_action %}
+    {{ super() }}
+    {% if h.check_access('sysadmin') and c.user != user.name%}
+        <form action="{{ h.url_for('spc_user.switch_admin_state', id=user.id) }}" method="post" class="inline display-inline">
+            <button class="btn btn-default">
+                <i class="fa fa-user"></i>
+                {{ _( ('Remove from' if user.sysadmin else 'Add to') ~ ' admins') }}
+            </button>
+        </form>
+    {% endif %}
+{% endblock %}
