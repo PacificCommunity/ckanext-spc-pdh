@@ -1905,6 +1905,10 @@ button.header-menu-btn:focus {
   color: #fff;
   font-weight: 300;
 }
+.nav-item.active > a span {
+  white-space: normal;
+  overflow: hidden;
+}
 .ma5-menu-panel a:before {
   font: normal normal normal 20px/1 'PngDataPortal';
   display: inline-block;
@@ -2752,7 +2756,7 @@ button.header-menu-btn:focus {
     border-radius: 20px;
   }
   .module-resource + .secondary .resources .nav-item.active a {
-    border-radius: 20px;
+    border-radius: 0;
   }
   .organization-list-page {
     display: flex;
