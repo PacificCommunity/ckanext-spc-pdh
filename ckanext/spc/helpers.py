@@ -129,9 +129,7 @@ def _spc_get_footer_from_drupal(drupal_url=None):
 
 
 def get_footer_css_url():
-    drupal_url = config.get('drupal.site_url')
-    if drupal_url:
-        return drupal_url + '/sites/all/themes/spc/css/footer_css/footer.css'
+    return '/sites/all/themes/spc/css/footer_css/footer.css'
 
 
 def get_dqs_explanation_url():

@@ -268,7 +268,7 @@
 {% endmacro %}
 {% macro gmd_maintenance_form(field, name, idx, data={}, errors={}) %}
     {{ subform('%s__%s__maintenance_and_update_frequency'| format(name, idx), h.spc_unwrap_list(data.get('maintenance_and_update_frequency', {})), errors, _('Maintenance and update frequency'), 'gmd_code_string_form', multiple=false) }}
-    {{ nested_field(name, idx, 'date_of_next_update', data, errors, additional={'type': 'date'}) }}
+    {{ nested_field(name, idx, 'date_of_next_update', data, errs, additional={'type': 'date'}) }}
     {{ nested_field(name, idx, 'user_defined_maintenance_frequency', data, errors) }}
     {{ subform('%s__%s__update_scope'| format(name, idx), h.spc_unwrap_list(data.get('update_scope', {})), errors, _('Update scope'), 'gmd_code_string_form', multiple=false) }}
     {{ multifield('%s__%s__%s'| format(name, idx, 'maintenance_note'), 'maintenance_note', data, errors, _('Maintenance note')) }}
@@ -290,13 +290,9 @@
     {% if label is none %}
 	{% set label = key | replace('_', ' ') | capitalize %}
     {% endif %}
-    {% set input_attrs = {'class': 'form-control'} %}
+    {% set input_attrs = {'class': 'form-controls'} %}
     {% do input_attrs.update(attrs) %}
     {% do additional.update({{'select': 'selected', 'checkbox': 'checked'}.get(type, 'value'): data.get(key)}) %}
-    {% if errors[key] %}
-        {% do additional.update({'error': errors[key]})  %}
-    {% endif %}
-
     {{ form[type](
 	tpl | format(name, idx, key), label=_(label),
 	classes=['control-medium'] if type != 'markdown' else [], attrs=input_attrs,
