@@ -722,12 +722,8 @@ header.navbar > .container .collapse {
 .masthead #main-menu > ul > li:last-child {
   display: none;
 }
-.masthead #main-menu .dropdown:hover > .dropdown-menu,
-.masthead #main-menu .dropdown.open:hover > .dropdown-menu {
+.masthead #main-menu .dropdown:hover > .dropdown-menu {
   display: block;
-}
-.masthead #main-menu .dropdown.open .dropdown-menu {
-  display: none;
 }
 .masthead #main-menu .dropdown .dropdown-menu {
   margin: 0;
@@ -740,11 +736,8 @@ header.navbar > .container .collapse {
 .masthead #main-menu .dropdown .dropdown-menu:before {
   color: #7B7B7B;
 }
-.masthead #main-menu .dropdown .dropdown-toggle .fa-chevron-down {
-  margin: 0px 10px;
-}
-.masthead #main-menu .dropdown .dropdown-toggle .fa-chevron-down:before {
-  content: "\f0d7";
+.masthead #main-menu .dropdown .dropdown-toggle .fa-caret-down {
+  margin-left: 7px;
 }
 .masthead #main-menu .dropdown li {
   display: block;
