@@ -241,9 +241,11 @@ def filepath_for_res_indexing(res):
             dest.write(resp.content)
         return dest.name
 
-
-def is_resource_updatable(id):
-    pkg = model.Resource.get(id).package
+def is_resource_updatable(id, package_id=None):
+    if package_id:
+        pkg = model.Package.get(package_id)
+    else:
+        pkg = model.Resource.get(id).package
 
     org = pkg.get_groups('organization')[0]
     org_names = set(

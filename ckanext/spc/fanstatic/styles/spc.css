@@ -48,6 +48,36 @@
   box-shadow: 4px 6px 4px rgba(30, 30, 30, 0.3);
   margin: 0px;
 }
+fieldset.raised {
+  margin-bottom: 20px;
+  padding: 0 10px 10px;
+  border: 1px solid #525252;
+}
+fieldset.raised legend {
+  width: auto;
+  border-bottom: none;
+  margin-bottom: 10px;
+}
+fieldset.raised.error {
+  border-color: red;
+}
+fieldset.raised.error > legend {
+  color: red;
+}
+fieldset.raised fieldset {
+  margin-bottom: 10px;
+}
+fieldset.raised fieldset .collapse,
+fieldset.raised fieldset .collapsing {
+  padding: 10px;
+}
+.dataset-form {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.dataset-form .stages {
+  margin-right: -20px;
+}
 .spc-icon-external-link {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAABuElEQVRIS+2W3VnCMBSG34QBZAFrR2AD2UCYQDawWu7Fa0HLBLKBbCBuwAaWsgDcQ+MTCoX0KaSlcue5TXLe5Mv5E/y1OV2PqB/Y3ArbhtLrjq+AEXL9SBgsjp2/FFjzpsh1mzAI8+CXBGveAinahP1JFp6Ar/0WgnfAtUg7JBp46R7Xc4lrd0AHaJw46xENhofrArfbJFZfFuASpTzmb6PNvgT4vAUWDQPj3wU33QlK3Z44PUPKFuHrNFHnqYMQH0VpmX3pvwuSKNzZDETyqp3JVZBGp+PrtfszoXuGXDdMsBDfzPrNXMdOtwdKy1vFUvWKgZPg+6xCRD9KrFo79exg16sT136AegWwmQ2AHXxc4iWoCcgpkn2emhliZsPBzQuAfV32rtIzWrI4HqWplZVhH6xmNmT2nQabf3v09oZPDc78Z94XnQbvZC7gKHXu+IFR3TZ5L+vZjmUBb/IWooEuieVNXwIeQLwQ9XuHDuxSzwfj8kQwK2JZ8FnE7SGjIv6DswVEN25F0oWqmuCg5udJbW+LVa8AijaZIC06CJwPP9LxktFHTyGKnmUgKAufAWPkupc3bf4CCwf0uUNg0nsAAAAASUVORK5CYII=");
 }
@@ -632,7 +662,7 @@ body {
   background-color: #f7f7f7;
 }
 a {
-  color: #0091c7;
+  color: #006c94;
 }
 header.navbar {
   position: relative;
@@ -754,7 +784,10 @@ header.navbar > .container .collapse {
   max-width: 172px;
 }
 .account-masthead {
-  background: #0c80bd;
+  background: #0072af;
+}
+.account-masthead .account .list-unstyled li a {
+  color: white;
 }
 .site-footer {
   padding: 0;
@@ -774,8 +807,8 @@ header.navbar > .container .collapse {
 }
 [role=main] .toolbar .breadcrumb li a,
 .main .toolbar .breadcrumb li a {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 500;
   color: #fff;
 }
 @media (max-width: 767px) {
@@ -863,7 +896,7 @@ header.navbar > .container .collapse {
 }
 .filters .module-heading .action,
 .secondary .module-heading .action {
-  color: #fff;
+  color: #000000;
 }
 .filters .nav-item a,
 .secondary .nav-item a {
@@ -1139,7 +1172,7 @@ table.table tr th.dataset-details {
   padding: 0 23px;
 }
 .dataset-read .primary .resources,
-.dataset-read .primary .additional-info {
+.dataset-read .primary .tags {
   border-top: 1px dashed #cccccc;
   clear: both;
   margin: 10px;
@@ -1190,13 +1223,14 @@ table.table tr th.dataset-details {
 }
 .dataset-read .primary .resources .resource-item .btn-group .dropdown-toggle {
   border: none;
-  color: #0091c7;
+  color: #006c94;
   font-size: 12px;
 }
 .dataset-read .primary .resources .resource-item .btn-group .dropdown-toggle:focus,
 .dataset-read .primary .resources .resource-item .btn-group .dropdown-toggle:active,
 .dataset-read .primary .resources .resource-item .btn-group .dropdown-toggle:hover {
   box-shadow: none;
+  color: black;
 }
 .dataset-read .primary .resources .resource-item .btn-group .dropdown-toggle > i {
   background-size: contain;
@@ -1222,7 +1256,29 @@ table.table tr th.dataset-details {
   color: #727474;
 }
 .dataset-read .primary .tags {
-  display: none;
+  padding-top: 22px;
+}
+.dataset-read .primary .tags .tag-list {
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: #f8f8f8;
+}
+.dataset-read .primary .tags .tag-list .tag {
+  color: #001e73;
+  border-color: #001e73;
+  font-size: 12px;
+  line-height: 12px;
+  box-shadow: none;
+  padding: 8px 11px;
+}
+.dataset-read .primary .tags .tag-list .tag:hover,
+.dataset-read .primary .tags .tag-list .tag:active,
+.dataset-read .primary .tags .tag-list .tag:focus {
+  text-decoration: none;
+  background: #001e73;
+  color: #f8f8f8;
 }
 .dataset-read .primary .table-bordered {
   border-color: #bcdfe5;
@@ -1402,11 +1458,15 @@ table.table tr th.dataset-details {
 .dataset-read .additional-info table.nested-table tr.level-data > td {
   padding: 0px;
 }
+.dataset-content .empty {
+  color: #535252;
+}
 .meta-export-select {
   padding: 0px 23px;
   margin: 15px 0px;
 }
 .meta-export-select .dropdown-toggle {
+  color: #006c94;
   font-size: 12px;
 }
 .meta-export-select .dropdown-toggle:hover,
@@ -1441,6 +1501,10 @@ table.table tr th.dataset-details {
 }
 .resource-view .ckanext-datapreview > iframe {
   min-height: auto;
+}
+.badge-res {
+  font-size: 0.8em;
+  padding: 4px 7px 3px 7px;
 }
 .res-format {
   display: inline-block;
@@ -1971,15 +2035,84 @@ button.header-menu-btn:focus {
   margin-top: 13px;
 }
 .secondary .filters > div .nav-facet {
+  display: flex;
+  flex-direction: column;
   padding: 0 55px;
+}
+.secondary .filters > div .module .module-content.empty {
+  padding-top: 61px;
+}
+.secondary .filters > div .module .read-more {
+  cursor: pointer;
+  user-select: none;
+}
+.secondary .filters > div .module .all-visible {
+  display: none;
+}
+.secondary .filters > div .module:not(.show-all) .nav-facet {
+  max-height: 320px;
+  overflow: hidden;
+}
+.secondary .filters > div .module.show-all .all-visible {
+  display: inline;
+}
+.secondary .filters > div .module.show-all .not-all-visible {
+  display: none;
 }
 .secondary .filters > div .module .module-heading {
   margin-left: 6px;
   margin-top: 10px;
   z-index: 1;
+  display: flex;
+  align-items: center;
+}
+.secondary .filters > div .module .module-heading .heading-title {
+  margin-left: 5px;
+  flex: 1;
 }
 .secondary .filters > div .module .module-heading .heading-icon {
   background-size: 15px;
+}
+.secondary .filters > div .module .module-heading .clear-all {
+  font-size: 10px;
+  line-height: 20px;
+  color: #004761;
+  position: static;
+}
+.secondary .filters > div .module .module-heading .facet-sorter {
+  font-size: 10px;
+  line-height: 10px;
+  color: #004761;
+  background-color: #ffffff;
+  border: solid 1px #0091c7;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 8px;
+  position: relative;
+}
+.secondary .filters > div .module .module-heading .facet-sorter .fa {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active {
+  color: #ffffff;
+  background-color: #0091c7;
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active .fa-chevron-down {
+  display: inline-block;
+  bottom: 3px;
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active.reverse .fa-chevron-up {
+  top: -1px;
+  display: inline-block;
+}
+.secondary .filters > div .module .module-heading .facet-sorter.active.reverse .fa-chevron-down {
+  display: none;
+}
+.secondary .filters > div .module .module-heading .facet-sorter:focus {
+  outline: none;
 }
 .secondary .filters .nav-simple > li.nav-item {
   border-bottom: 1px dashed #bdbdbd;
@@ -2053,8 +2186,11 @@ button.header-menu-btn:focus {
   line-height: 35px;
 }
 .search-form label {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: normal;
+}
+.search-form label:after {
+  content: unset;
 }
 .search-form {
   padding-bottom: 0px;
@@ -2072,6 +2208,13 @@ button.header-menu-btn:focus {
   padding: 0 15px;
   width: 100%;
   display: block;
+}
+.search-form .search-input-group .input-group-btn {
+  position: absolute;
+  right: 10px;
+}
+.search-form .search-input-group .input-group-btn .btn-lg {
+  right: 10px;
 }
 .search-form .search-input-group #field-giant-search {
   height: 40px;
@@ -2100,7 +2243,7 @@ button.header-menu-btn:focus {
 .search-form .filter-list .filtered {
   margin: 5px 10px 6px 0;
   padding: 5px 9px 5px 19px;
-  background: #8ca0a6;
+  background: #676d6e;
   font-size: 15px;
 }
 .search-form .filter-list .filtered .remove {
@@ -2220,7 +2363,7 @@ button.header-menu-btn:focus {
   font-weight: normal;
   font-size: 12px;
   padding: 5px 10px;
-  background-color: #00dca0;
+  background-color: #197b60;
 }
 .dataset-list .dataset-item .dataset-content {
   word-wrap: break-word;
@@ -2239,6 +2382,10 @@ button.header-menu-btn:focus {
   vertical-align: middle;
   margin-left: 15px;
   padding-top: 3px;
+  background-color: #197b60;
+}
+.dataset-list .dataset-item .dataset-info .empty {
+  color: #000;
 }
 .api-link {
   display: none;
