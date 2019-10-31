@@ -398,6 +398,52 @@ header.navbar > .container .collapse {
   color: #001e73;
   background: white;
 }
+.btn.btn-suggest,
+.btn.btn-suggestion-close {
+  z-index: 2;
+  color: white;
+  background-color: #009fde;
+  border: 1px solid #009fde;
+}
+.btn.btn-suggest:hover,
+.btn.btn-suggestion-close:hover,
+.btn.btn-suggest:active,
+.btn.btn-suggestion-close:active {
+  background-color: white;
+  color: #009fde;
+}
+.btn.btn-suggest {
+  transition: top 0.4s, right 0.4s;
+  position: relative;
+  margin: -4px 5px 0px 17px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "HelveticaNeue", "Montserrat";
+  padding: 9px 12px;
+  font-weight: 600;
+  box-shadow: none;
+  top: 0px;
+  right: 0px;
+}
+.btn.btn-suggest .fa {
+  vertical-align: top;
+  font-size: 20px;
+  margin-right: 6px;
+}
+.btn.btn-suggest.active {
+  top: 225px;
+  right: 22px;
+}
+.btn.btn-suggestion-close {
+  position: absolute;
+  padding: 2px 7px;
+  right: 13px;
+  top: -12px;
+}
+.btn.btn-suggestion-close .fa {
+  font-size: 14px;
+  margin-right: 0px;
+}
 .clearfix {
   clear: both;
 }
@@ -1770,6 +1816,40 @@ button.header-menu-btn:focus {
 .label[data-format=xlsx],
 .label[data-format*=xlsx] {
   background-color: #b7894c;
+}
+.spc-no-results {
+  margin: 28px 18px;
+  font-family: "Montserrat";
+  line-height: 20px;
+}
+.spc-no-results a {
+  color: #036295;
+}
+.spc-order-by-wrapper {
+  position: relative;
+}
+.spc-order-by-wrapper .suggestion-block {
+  transition: all 0.4s;
+  opacity: 0;
+  transform: scale(0.0001);
+  position: absolute;
+  padding: 33px 27px 69px;
+  width: 320px;
+  border-radius: 3px;
+  right: -50px;
+  top: 48px;
+  box-shadow: 0px 3px 70px 0 rgba(142, 153, 158, 0.45);
+  background-color: #ffffff;
+  z-index: 2;
+}
+.spc-order-by-wrapper .suggestion-block.active {
+  transform: scale(1);
+  opacity: 1;
+}
+.spc-order-by-wrapper .suggestion-block .suggestion-text {
+  font-size: 13px;
+  font-family: "HelveticaNeue", "Montserrat";
+  text-align: center;
 }
 .organization-list-page .organization-list-sidebar {
   border-bottom: 1px dashed #c6c6c6;

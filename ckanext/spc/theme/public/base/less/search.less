@@ -247,3 +247,38 @@
     &[data-format=xls], &[data-format*=xls] { background-color: #42abb3;}
     &[data-format=xlsx], &[data-format*=xlsx] { background-color: #b7894c;}
 }
+
+.spc-no-results {
+    margin: 28px 18px;
+    font-family: "Montserrat";
+    line-height: 20px;
+    a {
+        color: #036295;
+    }
+}
+.spc-order-by-wrapper {
+    position: relative;
+    .suggestion-block {
+        transition: all .4s;
+        opacity: 0;
+        transform: scale(0.0001);
+        position: absolute;
+        padding: 33px 27px 69px;
+        width: 320px;
+        border-radius: 3px;
+        right: -50px;
+        top: 48px;
+        box-shadow: 0px 3px 70px 0 rgba(142, 153, 158, 0.45);
+        background-color: #ffffff;
+        z-index: 2;
+        &.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .suggestion-text {
+            font-size: 13px;
+            font-family: "HelveticaNeue", "Montserrat";
+            text-align: center;
+        }
+    }
+}
