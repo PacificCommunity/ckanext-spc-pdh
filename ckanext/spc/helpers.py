@@ -25,6 +25,8 @@ def get_helpers():
         get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
+        spc_dataset_suggestion_form=spc_dataset_suggestion_form,
+        spc_dataset_suggestion_path=spc_dataset_suggestion_path,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
@@ -41,6 +43,14 @@ def countries_list(countries):
     except ValueError, e:
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
+
+
+def spc_dataset_suggestion_form():
+    return config.get('spc.dataset_suggestion.form', '/dataset-suggestion/new')
+
+
+def spc_dataset_suggestion_path():
+    return config.get('spc.dataset_suggestion.path', '/dataset-suggestion')
 
 
 def spc_get_available_languages():
