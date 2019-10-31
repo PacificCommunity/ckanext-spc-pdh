@@ -80,6 +80,7 @@ class SpcNadaHarvester(NadaHarvester):
         
             # Alterations to pkg_dict
             # All NADA resources fal under Official Statistics theme
+
             pkg_dict['thematic_area_string'] = ["Statistics"]
 
             # Update URL with NADA catalog link

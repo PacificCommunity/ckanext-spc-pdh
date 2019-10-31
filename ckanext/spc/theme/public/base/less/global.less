@@ -4,7 +4,7 @@ body {
     background-color: #f7f7f7;
 }
 a {
-    color: @light-blue;
+    color: darken(@light-blue, 10%);
 }
 header.navbar {
     position: relative;
@@ -148,8 +148,15 @@ header.navbar {
     }
 }
 .account-masthead {
-    background: #0c80bd;
+    background: #0072af;
+    .account {
+        .list-unstyled li a {
+            color: white;
+        }
+    }
 }
+
+
 .site-footer {
     padding: 0;
     background: unset;
@@ -165,8 +172,8 @@ header.navbar {
         .breadcrumb {
             li {
                 a {
-                    font-size: 12px;
-                    font-weight: 400;
+                    font-size: 14px;
+                    font-weight: 500;
                     color: #fff;
                     @media (max-width: 767px) {
                         font-size: 14px;
@@ -257,7 +264,7 @@ header.navbar {
         color: #fff;
         border-radius: 2px;
         .action {
-            color: #fff;
+            color: rgb(0, 0, 0);
         }
     }
     .nav-item {
