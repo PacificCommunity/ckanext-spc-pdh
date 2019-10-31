@@ -727,7 +727,7 @@ header.navbar > .container .collapse {
 }
 .masthead #main-menu .dropdown .dropdown-menu {
   margin: 0;
-  border: unset;
+  border: 0;
   border-radius: 0px;
   padding: 0;
   color: #7B7B7B;
