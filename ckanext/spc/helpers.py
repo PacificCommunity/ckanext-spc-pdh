@@ -26,6 +26,8 @@ def get_helpers():
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
         spc_national_map_previews=spc_national_map_previews,
+        spc_dataset_suggestion_form=spc_dataset_suggestion_form,
+        spc_dataset_suggestion_path=spc_dataset_suggestion_path,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         spc_unwrap_list=spc_unwrap_list,
@@ -49,13 +51,21 @@ def spc_is_valid_cesium_format(res):
     if res.get('has_views'):
         views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
         cesium = [
-            view['view_type'] 
-            for view in views 
+            view['view_type']
+            for view in views
             if view['view_type'] == 'cesium_view'
         ]
     formats = ('kml', 'kmz')
     if res.get('format').lower() in formats and cesium:
         return True
+
+def spc_dataset_suggestion_form():
+    return config.get('spc.dataset_suggestion.form', '/dataset-suggestion/new')
+
+
+def spc_dataset_suggestion_path():
+    return config.get('spc.dataset_suggestion.path', '/dataset-suggestion')
+
 
 def spc_get_available_languages():
     return filter(

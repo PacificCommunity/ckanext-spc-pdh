@@ -1,5 +1,5 @@
 {% ckan_extends %}
-
+{% set show_empty = False %}
 {% set label_map = {
     'Last Modified': 'Modified',
     'Name Ascending': 'Name Asc',
@@ -8,6 +8,20 @@
 
 {% block search_facets %}
     {# 'Filter Results' button and facet pills were here #}
+    {% if count == 0 and not error %}
+        <p class="extra spc-no-results">
+            Please try another search.  Please try another search or
+            you can make use of our
+            <a href="{{ h.spc_dataset_suggestion_form() }}">Suggest a dataset</a>
+            form to request the dataset you would like to make
+            available, but first search the
+            <a href="{{ h.spc_dataset_suggestion_path() }}">Dataset Suggestions</a>
+            page to see if someone else has already requested the same
+            dataset. If you find it there, you can check on its status
+            and add your request by clicking on the upvote button. If
+            you still cannot find the dataset you want,
+        </p>
+    {% endif %}
 {% endblock %}
 
 {% block search_input %}
@@ -55,7 +69,28 @@
                 <div  class="show-filters-wrapper"><a class="show-filters">{{ _('Filter by') }}</a></div>
             </div>
         {% endif %}
-        <div>
+        <div class="spc-order-by-wrapper">
+            <div class="suggestion-block visible-md visible-lg">
+                <p class="suggestion-text">
+                    <button class="btn btn-suggestion-close" type="button">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    Can not find the dataset you want? You can make
+                    use of our Suggest a dataset form to request the
+                    dataset you would like to make available, but
+                    first search the
+                    <a href="{{ h.spc_dataset_suggestion_path() }}">
+                        Dataset Suggestions
+                    </a>
+                    page to see if someone else has already requested the
+                    same dataset, and click on the upvote button.
+                </p>
+            </div>
+            <a href="{{ h.spc_dataset_suggestion_form() }}" data-module="spc-dataset-suggestion-button" class="btn btn-suggest pull-right visible-md visible-lg ">
+                <i class="fa fa-plus-circle"></i>
+                {{ _('Suggest a Dataset') }}
+            </a>
+
             {% if sorting %}
                 <div class="form-select form-group control-order-by">
                     <label for="field-order-by">{{ _('Order by') }}</label>
