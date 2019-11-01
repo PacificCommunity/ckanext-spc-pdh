@@ -35,13 +35,10 @@ def _gl_url(base, resource):
 
 
 def _map_gdl_to_publication(data_dict, obj):
-    thematic_area = data_dict.get('thematicArea', {}).get('area')
-
     dataset = {
         "id": str(uuid.uuid3(uuid.NAMESPACE_DNS, str(data_dict['id']))),
         "type": "publications",
         "title": data_dict['title'],
-        "thematic_area_string": thematic_area_mapping.get(thematic_area),
         "creator": [a['name'] for a in data_dict['authors']],
         # "subject": data_dict,
         "notes": data_dict['description'],
@@ -61,6 +58,9 @@ def _map_gdl_to_publication(data_dict, obj):
         "member_countries": 'other',  # relatedCountry, optional
         "harvest_source": 'GDL'
     }
+    thematic_area = data_dict.get('thematicArea', {}).get('area')
+    if thematic_area:
+        dataset["thematic_area_string"] = thematic_area_mapping.get(thematic_area)
     related_country = data_dict.get('relatedCountry')
     if related_country:
         schema = sh.scheming_get_dataset_schema('publications')
