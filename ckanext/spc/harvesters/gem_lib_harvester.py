@@ -6,14 +6,28 @@ import json
 import logging
 import requests
 import uuid
-from operator import lt, itemgetter
+from operator import lt, itemgetter, contains, eq
 import funcy as F
-
+from os.path import splitext
 from ckanext.harvest.harvesters import HarvesterBase
 from ckanext.harvest.model import HarvestObjectError, HarvestObject
 from six.moves.urllib.parse import urljoin
+import ckanext.scheming.helpers as sh
+from ckanext.spc.helpers import get_eez_options
 
 log = logging.getLogger(__name__)
+thematic_area_mapping = {
+    'Climate Change': ['Climate Change'],
+    'Disaster and Risk': ['Geoscience'],
+    'Energy': ['Energy'],
+    'Environment': ['Environment'],
+    'General': ['Geoscience'],
+    'Geoinformatics': ['Geoscience'],
+    'Georesources': ['Geoscience'],
+    'Maritime Transport': ['Geoscience', 'Economic Development'],
+    'Oceans': ['Geoscience', 'Environment', 'PCCOS'],
+    'Water and Sanitation': ['Health', 'Geoscience', 'Environment'],
+}
 
 
 def _gl_url(base, resource):
@@ -21,13 +35,13 @@ def _gl_url(base, resource):
 
 
 def _map_gdl_to_publication(data_dict, obj):
-    # thematic_area = data_dict.get('thematicArea', {}).get('area')
+    thematic_area = data_dict.get('thematicArea', {}).get('area')
 
     dataset = {
         "id": str(uuid.uuid3(uuid.NAMESPACE_DNS, str(data_dict['id']))),
         "type": "publications",
         "title": data_dict['title'],
-        # "thematic_area_string": thematic_area,
+        "thematic_area_string": thematic_area_mapping.get(thematic_area),
         "creator": [a['name'] for a in data_dict['authors']],
         # "subject": data_dict,
         "notes": data_dict['description'],
@@ -47,10 +61,31 @@ def _map_gdl_to_publication(data_dict, obj):
         "member_countries": 'other',  # relatedCountry, optional
         "harvest_source": 'GDL'
     }
+    related_country = data_dict.get('relatedCountry')
+    if related_country:
+        schema = sh.scheming_get_dataset_schema('publications')
+        choices = sh.scheming_field_by_name(
+            schema['dataset_fields'], 'member_countries'
+        )['choices']
+        member_country = F.first(F.filter(
+            F.compose(F.rpartial(contains, related_country), itemgetter('label')),
+            choices
+        ))
+        if member_country:
+            dataset['member_countries'] = member_country['value']
+            spatial = F.first(F.filter(
+                F.compose(F.partial(eq, member_country['label']), itemgetter('text')),
+                get_eez_options()
+            ))
+            if spatial:
+                dataset['spatial'] = spatial['value']
     if data_dict['file']:
         res_url = _gl_url(obj.source.url, 'download') + '?id=' + str(
             data_dict['id'])
-        dataset['resources'] = [{'name': data_dict['file'], 'url': res_url}]
+        res = {'name': data_dict['file'], 'url': res_url}
+        res['format'] = splitext(res['name'])[1].lstrip('.')
+        dataset['resources'] = [res]
+
     return dataset
 
 
