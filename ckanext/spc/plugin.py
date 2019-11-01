@@ -246,38 +246,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         # Otherwise you'll get `immense field` error from SOLR
         pkg_dict.pop('data_quality_info', None)
 
-        try:
-            resources = json.loads(
-                pkg_dict['validated_data_dict'])['resources']
-            resources_to_index = []
-            for res in resources:
-                if res.get('format', '').lower() in ('txt', 'pdf'):
-                    resources_to_index.append(res)
-        except KeyError as e:
-            logger.warn(
-                'Problem during indexind resources of <%s>: key %s not found',
-                pkg_dict['id'], e)
-            resources_to_index
-        for res in resources_to_index:
-            path = spc_utils.filepath_for_res_indexing(res)
-            if not path:
-                continue
-            fmt = res['format'].lower()
-            if fmt == 'pdf':
-                try:
-                    content = textract.process(path, extension='.pdf')
-                except Exception as e:
-                    logger.warn(
-                        'Problem during extracting content from <%s>: %s',
-                        path, e)
-                    content = ''
-            else:
-                with open(path) as f:
-                    content = f.read()
-            pkg_dict.setdefault('text', []).append(content)
-
-            if res['url_type'] != 'upload':
-                os.remove(path)
         return pkg_dict
 
     def after_show(self, context, pkg_dict):
