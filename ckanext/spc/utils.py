@@ -3,7 +3,7 @@ import os
 import tempfile
 
 import requests
-
+from operator import attrgetter
 import ckan.lib.helpers as h
 import ckan.model as model
 import ckan.plugins.toolkit as tk
@@ -210,33 +210,26 @@ def _is_user_text_search(context, query):
         return False
     return True
 
+def is_resource_updatable(id, package_id=None):
+    if package_id:
+        pkg = model.Package.get(package_id)
+    else:
+        pkg = model.Resource.get(id).package
 
-def filepath_for_res_indexing(res):
-    if res['url_type'] == 'upload':
-        uploader = get_resource_uploader(res)
-        path = uploader.get_path(res['id'])
-        if not os.path.exists(path):
-            logger.warn(
-                'Resource "%s" refers to unexisting path "%s"', res['id'], path
-            )
-            return
-        return path
-    url = res['url']
-    try:
-        resp = requests.head(url, timeout=2)
-    except Exception as e:
-        logger.warn(
-            'Unable to make HEAD request for resource %s with url <%s>: %s',
-            res['id'], url, e
-        )
-        return
-    try:
-        size = int(resp.headers.get('content-length', 0))
-    except ValueError as e:
-        logger.warn('Incorrect Content-length header from url <%s>', url)
-        return
-    if 0 < size < 1024 * 1024 * 4:
-        with tempfile.NamedTemporaryFile(delete=False) as dest:
-            resp = requests.get(url)
-            dest.write(resp.content)
-        return dest.name
+    org = pkg.get_groups('organization')[0]
+    org_names = set(
+        map(attrgetter('name'), org.get_parent_groups('organization'))
+    )
+    include_owner = tk.asbool(
+        tk.config.get('ckanext.spc.orgs_with_publications_include_root')
+    )
+    if include_owner:
+        org_names.add(org.name)
+
+    restricted_orgs = set(
+        tk.aslist(tk.config.get('ckanext.spc.orgs_with_publications'))
+    )
+
+    if org_names & restricted_orgs:
+        return pkg.private
+    return True
