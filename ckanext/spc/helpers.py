@@ -34,7 +34,7 @@ def get_helpers():
         spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled,
         spc_link_to_identifier=spc_link_to_identifier,
-        spc_is_valid_cesium_format=spc_is_valid_cesium_format,
+        spc_has_cesium_view=spc_has_cesium_view,
     )
 
 
@@ -46,7 +46,7 @@ def countries_list(countries):
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
 
-def spc_is_valid_cesium_format(res):
+def spc_has_cesium_view(res):
     is_cesium = False
     if res.get('has_views'):
         views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
