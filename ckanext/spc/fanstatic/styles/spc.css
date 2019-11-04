@@ -4206,6 +4206,13 @@ button.header-menu-btn:focus {
   width: 50px;
   position: initial;
 }
+.nav-item.active > a span {
+  white-space: normal;
+  overflow: hidden;
+}
+.flash-messages {
+  margin-top: 15px;
+}
 .js [role='main'] .secondary .filters {
   background: #ffffff;
   padding: 10px 8px;
