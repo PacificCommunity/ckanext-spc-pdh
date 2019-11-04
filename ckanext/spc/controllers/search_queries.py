@@ -38,6 +38,7 @@ class SearchQueryController(base.BaseController):
             query_name = request.POST['q_name']
             model.Session.query(SearchQuery).filter(SearchQuery.query == query_name).delete()
             model.Session.commit()
+            h.flash_success(_('The query has been removed'))
 
         page = h.get_page_number(request.params)
         total = model.Session.query(SearchQuery).count()
