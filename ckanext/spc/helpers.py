@@ -47,17 +47,15 @@ def countries_list(countries):
     return map(lambda x: x.upper(), countries_list)
 
 def spc_is_valid_cesium_format(res):
-    cesium = False
+    is_cesium = False
     if res.get('has_views'):
         views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
-        cesium = [
-            view['view_type']
+        is_cesium = any(
+            view['view_type'] == 'cesium_view'
             for view in views
-            if view['view_type'] == 'cesium_view'
-        ]
-    formats = ('kml', 'kmz')
-    if res.get('format').lower() in formats and cesium:
-        return True
+        )
+    return is_cesium
+
 
 def spc_dataset_suggestion_form():
     return config.get('spc.dataset_suggestion.form', '/dataset-suggestion/new')
