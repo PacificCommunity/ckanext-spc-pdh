@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block primary_content %}
-    <section class="module">
+    <section class="module" onload="leafletMapAlt()">
         <div class="module-content">
             {% block page_primary_action %}
                 {% if h.check_access('package_create') %}

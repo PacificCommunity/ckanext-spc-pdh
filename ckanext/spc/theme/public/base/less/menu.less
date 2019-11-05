@@ -53,6 +53,7 @@ button.header-menu-btn {
     }
     li {
         border-bottom: 1px solid rgba(246, 240, 234, 0.5);
+        position: relative;
         &:hover {
             background-color: rgba(246, 240, 234, 0.5);
             a {
@@ -89,7 +90,16 @@ button.header-menu-btn {
         }
     }
     a {
+        font-family: 'Roboto';
         color: #fff;
         font-weight: 300;
+
+        &:before {
+            font: normal normal normal 20px/1 'PngDataPortal';
+            display: inline-block;
+            padding: 0 10px;
+            width: 50px;
+            position: initial;
+        }
     }
 }
