@@ -4266,6 +4266,7 @@ button.header-menu-btn:focus {
   z-index: 1;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .secondary .filters > div .module .module-heading .heading-title {
   margin-left: 5px;
@@ -4851,6 +4852,19 @@ button.header-menu-btn:focus {
   }
   .dataset-read .primary .resource-list .resource-item .heading {
     padding-right: 10px;
+  }
+  .search-form .search-additional-control > div {
+    text-align: center;
+  }
+  .search-form .search-additional-control > div .control-order-by {
+    display: inline-block;
+  }
+  .search-form .search-additional-control > div .control-order-by #field-order-by {
+    padding-left: 5px;
+  }
+  .search-form .search-additional-control > div .show-filters-wrapper {
+    width: 105px;
+    margin-bottom: 0px;
   }
 }
 .wrapper:before {
