@@ -4651,6 +4651,11 @@ button.header-menu-btn:focus {
   font-family: "HelveticaNeue", "Montserrat", "Roboto";
   text-align: center;
 }
+input::-ms-clear {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
 .organization-list-page .organization-list-sidebar {
   border-bottom: 1px dashed #c6c6c6;
   margin: 5px;
