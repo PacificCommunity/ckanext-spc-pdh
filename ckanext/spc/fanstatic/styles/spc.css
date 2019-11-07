@@ -4551,6 +4551,12 @@ button.header-menu-btn:focus {
 .search-form .search-additional-control > div .show-filters-wrapper:after {
   left: 7px;
 }
+.search-form .search-additional-control #field-order-by {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 12px;
+  line-height: 22px;
+}
 .dataset-list {
   border: 1px solid #c3c3c3;
   margin: 11px 6px;
