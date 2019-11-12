@@ -308,3 +308,31 @@ input::-ms-clear {
     width: 0px;
     height: 0px;
 }
+.ui-autocomplete {
+    border-radius: 12px;
+    border: solid 2px #dddddd;
+    padding: 18px;
+    background: #ffffff;
+    margin-top: 1px;
+    color: #333333;
+    li {
+        padding: 4px 7px 1px;
+        line-height: 17px;
+        border-radius: 13px;
+        &:hover {
+            background: #e5f5fc;
+        }
+        a, a:hover, a:focus, a:active {
+            color: #33333e!important;
+            border: none!important;
+            background: none !important;
+            &.ui-state-active {
+                margin: 0px;
+            }
+            strong {
+                font-weight: normal;
+            }
+        }
+
+    }
+}
