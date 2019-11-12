@@ -4684,6 +4684,42 @@ input::-ms-clear {
   width: 0px;
   height: 0px;
 }
+.ui-autocomplete {
+  border-radius: 12px;
+  border: solid 2px #dddddd;
+  padding: 18px;
+  background: #ffffff;
+  margin-top: 1px;
+  color: #333333;
+}
+.ui-autocomplete li {
+  padding: 4px 7px 1px;
+  line-height: 17px;
+  border-radius: 13px;
+}
+.ui-autocomplete li:hover {
+  background: #e5f5fc;
+}
+.ui-autocomplete li a,
+.ui-autocomplete li a:hover,
+.ui-autocomplete li a:focus,
+.ui-autocomplete li a:active {
+  color: #33333e !important;
+  border: none!important;
+  background: none !important;
+}
+.ui-autocomplete li a.ui-state-active,
+.ui-autocomplete li a:hover.ui-state-active,
+.ui-autocomplete li a:focus.ui-state-active,
+.ui-autocomplete li a:active.ui-state-active {
+  margin: 0px;
+}
+.ui-autocomplete li a strong,
+.ui-autocomplete li a:hover strong,
+.ui-autocomplete li a:focus strong,
+.ui-autocomplete li a:active strong {
+  font-weight: normal;
+}
 .organization-list-page .organization-list-sidebar {
   border-bottom: 1px dashed #c6c6c6;
   margin: 5px;
