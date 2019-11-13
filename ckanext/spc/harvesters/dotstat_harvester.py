@@ -278,5 +278,6 @@ def _hashify(data):
     elif isinstance(data, dict):
         checksum ^= _hashify(tuple(sorted(data.items())))
     else:
-        checksum ^= adler32(str(data))
+        data = data.encode(errors='ignore') if isinstance(data, unicode) else str(data)
+        checksum ^= adler32(data)
     return checksum
