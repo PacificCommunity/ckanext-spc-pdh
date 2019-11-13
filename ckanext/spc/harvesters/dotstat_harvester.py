@@ -84,7 +84,7 @@ class SpcDotStatHarvester(HarvesterBase):
             # Make a harvest object for each dataset
             # Set the GUID to the dataset's ID (DF_SDG etc.)
 
-            for i, end in enumerate(endpoints[:1]):
+            for i, end in enumerate(endpoints):
                 harvest_obj = HarvestObject(guid=end, job=harvest_job)
                 harvest_obj.save()
                 harvest_obj_ids.append(harvest_obj.id)
