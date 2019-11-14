@@ -1,6 +1,9 @@
 /* Module for handling the spatial querying
  */
 this.ckan.module("spatial-select", function($, _) {
+  if (window.L) {
+    window.L.Browser.touch = false;
+  }
   return {
     options: {
       i18n: {},
