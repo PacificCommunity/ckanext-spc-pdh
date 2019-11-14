@@ -74,6 +74,23 @@ def _redefine_create_license_list(self, *args, **kwargs):
 LicenseRegister._create_license_list = _redefine_create_license_list
 
 
+class LocaleMiddleware(object):
+    def __init__(self, app, config):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        if environ['CKAN_LANG_IS_DEFAULT']:
+            try:
+                lang = environ.get('HTTP_ACCEPT_LANGUAGE', '').split(',')[0].split('-')[0]
+                if len(lang) == 2:
+                    environ['CKAN_LANG'] = lang
+                else:
+                    logger.error('Unknown locale <%s>', lang)
+            except IndexError:
+                pass
+        return self.app(environ, start_response)
+
+
 class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
@@ -86,6 +103,12 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
+    plugins.implements(plugins.IMiddleware, inherit=True)
+
+    # IMiddleware
+
+    def make_middleware(self, app, config):
+        return LocaleMiddleware(app, config)
 
     # IIngest
 

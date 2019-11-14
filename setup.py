@@ -90,7 +90,6 @@ setup(
         spc_pacgeo_harvester=ckanext.spc.harvesters.pacgeo_harvester:PacGeoHarvester
         spc_nada_harvester=ckanext.spc.harvesters.nada_harvester:SpcNadaHarvester
         spc_gem_lib_harvester=ckanext.spc.harvesters.gem_lib_harvester:GemLibHarvester
-        spc_nada_harvester=ckanext.spc.harvesters.nada_harvester:SpcNadaHarvester
         spc_dotstat_harvester=ckanext.spc.harvesters.dotstat_harvester:SpcDotStatHarvester
 
         [babel.extractors]
