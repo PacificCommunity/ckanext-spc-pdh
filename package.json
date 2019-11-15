@@ -4,7 +4,7 @@
   "description": "============= ckanext-spc =============",
   "scripts": {
     "watch": "gulp",
-    "build": "gulp build --prod"
+    "build": "gulp build "
   },
   "repository": {
     "type": "git",
@@ -15,10 +15,7 @@
   "devDependencies": {
     "gulp": "^4.0.0"
   },
-  "main": "gulpfile.js",
-  "directories": {
-    "example": "examples"
-  },
-  "dependencies": {},
-  "keywords": []
+  "dependencies": {
+    "gulp-less": "^4.0.1"
+  }
 }

@@ -9,16 +9,18 @@
         <i class="heading-icon spc-icon-{{ facet_icons[name] }}"></i>
         {% set title = title or h.get_facet_title(name) %}
         <span class="heading-title">{{ title }}</span>
-        <button class="facet-sorter" data-sort-type="data-name">
-            <i class="fa fa-chevron-up"></i>
-            A-Z
-            <i class="fa fa-chevron-down"></i>
-        </button>
-        <button class="facet-sorter" data-sort-type="data-number">
-            <i class="fa fa-chevron-up"></i>
-            0-9
-            <i class="fa fa-chevron-down"></i>
-        </button>
+        <div>
+            <button class="facet-sorter" data-sort-type="data-name">
+                <i class="fa fa-chevron-up"></i>
+                A-Z
+                <i class="fa fa-chevron-down"></i>
+            </button>
+            <button class="facet-sorter" data-sort-type="data-number">
+                <i class="fa fa-chevron-up"></i>
+                0-9
+                <i class="fa fa-chevron-down"></i>
+            </button>
+        </div>
         {% set href = h.remove_url_param(name, extras=extras, alternative_url=alternative_url) %}
         <a class="clear-all" href="{{ href }}">{{ _('Clear') }}</a>
     </h2>

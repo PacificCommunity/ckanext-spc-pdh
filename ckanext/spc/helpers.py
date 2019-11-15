@@ -25,6 +25,8 @@ def get_helpers():
         get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
+        spc_dataset_suggestion_form=spc_dataset_suggestion_form,
+        spc_dataset_suggestion_path=spc_dataset_suggestion_path,
         spc_national_map_previews=spc_national_map_previews,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
@@ -32,7 +34,7 @@ def get_helpers():
         spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled,
         spc_link_to_identifier=spc_link_to_identifier,
-        spc_is_valid_cesium_format=spc_is_valid_cesium_format,
+        spc_has_cesium_view=spc_has_cesium_view,
     )
 
 
@@ -44,18 +46,23 @@ def countries_list(countries):
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
 
-def spc_is_valid_cesium_format(res):
-    cesium = False
+def spc_has_cesium_view(res):
+    is_cesium = False
     if res.get('has_views'):
         views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
-        cesium = [
-            view['view_type'] 
-            for view in views 
-            if view['view_type'] == 'cesium_view'
-        ]
-    formats = ('kml', 'kmz')
-    if res.get('format').lower() in formats and cesium:
-        return True
+        is_cesium = any(
+            view['view_type'] == 'cesium_view'
+            for view in views
+        )
+    return is_cesium
+
+def spc_dataset_suggestion_form():
+    return config.get('spc.dataset_suggestion.form', '/dataset-suggestion/new')
+
+
+def spc_dataset_suggestion_path():
+    return config.get('spc.dataset_suggestion.path', '/dataset-suggestion')
+
 
 def spc_get_available_languages():
     return filter(

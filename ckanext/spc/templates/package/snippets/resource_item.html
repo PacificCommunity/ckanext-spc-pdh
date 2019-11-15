@@ -1,10 +1,10 @@
 {% ckan_extends %}
 
 {% block resource_item_title %}
-  <a href="{{ url }}" title="{{ res.name or res.description }}" class="heading">
-    <div class="res-format res-format-{{ res.format.lower() or 'data' }}"></div>
-    {{ h.resource_display_name(res) }}
-    {% if h.spc_is_valid_cesium_format(res) %}
+    <a href="{{ url }}" title="{{ res.name or res.description }}" class="heading">
+        <div class="res-format res-format-{{ res.format.lower() or 'data' }}"></div>
+        {{ h.resource_display_name(res) }}
+        {% if h.spc_has_cesium_view(res) %}
       <span class="badge badge-info badge-res">
         PacificMap <i class="fa fa-globe"></i>
       </span>
@@ -29,7 +29,7 @@
     </li>
     {% if res.url and h.is_url(res.url) %}
         <li>
-            <a href="{{ res.url }}" class="resource-url-analytics" target="_blank"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
+            <a href="{{ res.url }}" class="resource-url-analytics-downloadable" target="_blank"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
                 {% if res.has_views or res.url_type == 'upload' %}
                     <i class="fa fa-arrow-circle-o-down"></i>
                     {{ _('Download') }}
