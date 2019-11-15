@@ -171,6 +171,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_ckan_admin_tab(config_, 'search_queries.index',
                                    'Search Queries')
         toolkit.add_ckan_admin_tab(config_, 'ingest.index', 'Ingest')
+        toolkit.add_ckan_admin_tab(config_, 'spc_admin.broken_links', 'Reports')
 
     # IConfigurer
 
@@ -178,6 +179,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'spc')
+
+        conf_directive = 'spc.report.broken_links_filepath'
+        if not config_.get(conf_directive):
+            raise KeyError(
+                'Please, specify `{}` inside your config file'.
+                format(conf_directive)
+            )
+
 
     # ITemplateHelpers
 
