@@ -29,7 +29,9 @@ def switch_admin_state(id):
 
 
 def broken_links():
-    QUEUE_NAME = 'broken-links'
+    QUEUE_NAME = 'default'
+    queue = jobs.get_queue(QUEUE_NAME)
+    queue._default_timeout = 3600 * 24
     try:
         toolkit.check_access('sysadmin', {'user': g.user, model: model})
     except toolkit.NotAuthorized:
