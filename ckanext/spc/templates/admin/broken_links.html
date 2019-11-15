@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+
+{% block primary_content_inner %}
+    <div>
+        <h2>{{ _('Broken links') }}</h2>
+        <p>
+	    Date of last check: {{ h.render_datetime(last_check) or _('Not ready yet') }}
+	    <form class="form" action="" method="post">
+	        {% if last_check %}
+	            <button class="btn btn-primary" type="submit" name="action" value="download">{{ _('Download CSV') }}</button>
+	        {% endif %}
+
+	        <button class="btn btn-primary" type="submit" name="action" value="start" {% if active_jobs_count %}disabled{% endif %}>{{ _('Run checker') }}</button>
+	    </form>
+        </p>
+    </div>
+{% endblock %}
+
+{% block secondary_content %}
+    <div class="module module-narrow module-shallow">
+        <h2 class="module-heading">
+            <i class="fa fa-info-sign"></i>
+            {{ _('Broken links report') }}
+        </h2>
+        <div class="module-content">
+            <p>
+	        {{ _('Download report') }}
+	    </p>
+        </div>
+    </div>
+{% endblock %}
