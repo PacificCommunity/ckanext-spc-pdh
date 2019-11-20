@@ -131,8 +131,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         return name
 
     def _drupal_session_name(self):
-        server_name = toolkit.request.environ['SERVER_NAME']
-        name = 'SESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
+        server_name = toolkit.request.environ['HTTP_HOST']
+        name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
         return name
 
     def _login_user(self, user_data):
@@ -141,17 +141,18 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 {'return_minimal': True,
                  'keep_sensitive_data': True,
                  'keep_email': True},
-                {'id': self._sanitize_drupal_username(user_data.name)}
+                {'id': str(user_data.uid)}
             )
         except toolkit.ObjectNotFound:
             user = None
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
-                user['id'] = self._sanitize_drupal_username(user_data.name)
-                user = p.toolkit.get_action('user_update')({'ignore_auth': True}, user)
+                user['name'] = self._sanitize_drupal_username(user_data.name)
+                user = toolkit.get_action('user_update')({'ignore_auth': True}, user)
         else:
             user = {'email': user_data.mail,
+                    'id': str(user_data.uid),
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
             user = toolkit.get_action('user_create')({'ignore_auth': True}, user)
@@ -165,12 +166,11 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         We need to convert this to represent the ckan user. """
 
         # If no drupal session name create one
-
         drupal_sid = toolkit.request.cookies.get(self._drupal_session_name())
         if drupal_sid:
             engine = sa.create_engine(self._connection)
             rows = engine.execute(
-                'SELECT u.name, u.mail, u.uid, role_name FROM users u '
+                'SELECT u.name, u.mail, u.uid FROM users u '
                 'JOIN sessions s on s.uid=u.uid '
                 'WHERE s.sid=%s',
                 [str(drupal_sid)])
