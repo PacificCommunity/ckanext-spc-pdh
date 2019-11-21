@@ -57,11 +57,11 @@ def spc_has_cesium_view(res):
     return is_cesium
 
 def spc_dataset_suggestion_form():
-    return config.get('spc.dataset_suggestion.form', '/dataset-suggestion/new')
+    return config.get('spc.dataset_suggestion.form', '/dataset-suggestions/add')
 
 
 def spc_dataset_suggestion_path():
-    return config.get('spc.dataset_suggestion.path', '/dataset-suggestion')
+    return config.get('spc.dataset_suggestion.path', '/dataset-suggestions')
 
 
 def spc_get_available_languages():
