@@ -48,6 +48,9 @@
   box-shadow: 4px 6px 4px rgba(30, 30, 30, 0.3);
   margin: 0px;
 }
+.display-inline {
+  display: inline;
+}
 fieldset.raised {
   margin-bottom: 20px;
   padding: 0 10px 10px;
@@ -3071,6 +3074,52 @@ header.navbar > .container .collapse {
   color: #001e73;
   background: white;
 }
+.btn.btn-suggest,
+.btn.btn-suggestion-close {
+  z-index: 2;
+  color: white;
+  background-color: #009fde;
+  border: 1px solid #009fde;
+}
+.btn.btn-suggest:hover,
+.btn.btn-suggestion-close:hover,
+.btn.btn-suggest:active,
+.btn.btn-suggestion-close:active {
+  background-color: white;
+  color: #009fde;
+}
+.btn.btn-suggest {
+  transition: top 0.4s, right 0.4s;
+  position: relative;
+  margin: -4px 5px 0px 17px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "HelveticaNeue", "Montserrat";
+  padding: 9px 12px;
+  font-weight: 600;
+  box-shadow: none;
+  top: 0px;
+  right: 0px;
+}
+.btn.btn-suggest .fa {
+  vertical-align: top;
+  font-size: 20px;
+  margin-right: 6px;
+}
+.btn.btn-suggest.active {
+  top: 225px;
+  right: 9px;
+}
+.btn.btn-suggestion-close {
+  position: absolute;
+  padding: 2px 7px;
+  right: 13px;
+  top: -12px;
+}
+.btn.btn-suggestion-close .fa {
+  font-size: 14px;
+  margin-right: 0px;
+}
 .clearfix {
   clear: both;
 }
@@ -3121,6 +3170,7 @@ header.navbar > .container .collapse {
   cursor: help;
 }
 .data-quality-tooltip .tooltiptext {
+  z-index: 2;
   visibility: hidden;
   position: absolute;
   left: -85px;
@@ -3185,7 +3235,7 @@ header.navbar > .container .collapse {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAD80lEQVRYR72YPWxbVRTHf+fadCIkDBWTPxihEiQTGw0SEkMHHBgQEw0bIFrXNhsijioGROy4qpQFRBMhNqDOwsJAOiHBgCsk6IDAfenGgFMYKvB7B933/P2Rd+1EfavvPed/z/mfj7+FWb5sfgk/eR7RHEoWYQlY7phooLQQmqjUSbRv0ay1XM2L08Hse8tosIGSczrfPSTUEbNJ8+NG3L3jgWTzWYLEBnCxb0j3wRxgaIC0ek4sWHSJwEYoWAV5ecD5LsbfpFlrTgM0HUiqmEO4AWH4j0BqmHbNOdw2jUEyD5oHFoEWyjqHlfokMJOBpIuXgVrnwh7GzzsDGPUSAjK7AxHK41WujR4bB5Iu2VdsRwflCt5WF1Bcmo//PcbuMJAoHTdDi6rrHFZ3T+Z95HaqcBERm25Q1gbT1AcSEfOniBOnGInRl/Qj08L4K10C94Gki/b1bwB7eJWBKjnVmETG0oV6hzM9XxEQW3pBYKNxhPGzcxPTFXNI4IQt5UWMWbEtIALSQyibeFtlJ3uZwquovAOsWFYj3EF1B6/6eciAuC9dKoNugO7jVXNChO6v8J7xH3eIhpApfoHy+kRfoh9wt3o1DseQX68iQq9SImSxBuyBTOFNVCqg79J+7GvO/J0m4CvgaeA/ksmz/P7RUaytbiaUNaFH0hkr5ezbj/Lnzj89Z+nSJdCoUQXBM9zb/jkeSK9n7QmZ0gGq5zHyAs2tg9jL0w5kip+FLRwecObfJ/jt+v1YW9nSKoF+h8gtGxFbLcsY/8njhtKxRlPFlxC+sSxD9X0Oqx/Gghiu1oYFEjHcq7itBGMN6so5MN8DC8CXeAuvQTlwAhJWbOT/pEDsfcuFc8CPmIXnaZYfOIMYApIqNhCenSs16dKLoN92CPoc97Z/mAlEt5Eqt09G1lThLUR2gPt4FbtzzPaNkLUzY2Ys39lcTj7dH4B78zW00wAR8qMz/MKGNnuL78PIlNZQ/RT0V5KPXHDqpt3bg37DFj+IjBmGXniv9AvoUx3bl/Aq152DNTb0hhuLXVZsY3PTI/MCiaLxR7iEDa0BUT1HpLVa5G5lzellmeIrKJ8AdzD+BecHZIo3OxppZDEKoxKuilYILT6kVdEuYcvjq6IF8zCX55EhGyMnmKhBnNI2NpMKGyCd7W+8Z00RWAPaJtSv/rpz/kcBWGJq4kZfN09unHGS0xI4kotoDRNccwYUKbzLIFZyRrLVSG7azuMiwm04rcyIPhsh5YAgaJBMHg2J8HbbbuXLCKsj/xxY2VqeT4QPhjickn55ROE7UEX3MYnyyf+WmJRvP7GKkEMkS6BL4QphP+U2RlqoNlHq01T/NPT/A/fWydpXvRBKAAAAAElFTkSuQmCC");
   color: transparent;
   background-position: 50%;
-  background-size: contain;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 .module {
@@ -4216,6 +4266,7 @@ button.header-menu-btn:focus {
   z-index: 1;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .secondary .filters > div .module .module-heading .heading-title {
   margin-left: 5px;
@@ -4479,6 +4530,12 @@ button.header-menu-btn:focus {
 .search-form .search-additional-control > div .show-filters-wrapper:after {
   left: 7px;
 }
+.search-form .search-additional-control #field-order-by {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 12px;
+  line-height: 22px;
+}
 .dataset-list {
   border: 1px solid #c3c3c3;
   margin: 11px 6px;
@@ -4566,6 +4623,81 @@ button.header-menu-btn:focus {
 .label[data-format=xlsx],
 .label[data-format*=xlsx] {
   background-color: #b7894c;
+}
+.spc-no-results {
+  margin: 28px 18px;
+  font-family: "Montserrat", "Roboto";
+  line-height: 20px;
+}
+.spc-no-results a {
+  color: #036295;
+}
+.spc-order-by-wrapper {
+  position: relative;
+}
+.spc-order-by-wrapper .suggestion-block {
+  transition: all 0.4s;
+  opacity: 0;
+  transform: scale(0.0001);
+  position: absolute;
+  padding: 33px 27px 69px;
+  width: 320px;
+  border-radius: 3px;
+  right: -50px;
+  top: 48px;
+  box-shadow: 0px 3px 70px 0 rgba(142, 153, 158, 0.45);
+  background-color: #ffffff;
+  z-index: 2;
+}
+.spc-order-by-wrapper .suggestion-block.active {
+  transform: scale(1);
+  opacity: 1;
+}
+.spc-order-by-wrapper .suggestion-block .suggestion-text {
+  font-size: 13px;
+  font-family: "HelveticaNeue", "Montserrat", "Roboto";
+  text-align: center;
+}
+input::-ms-clear {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+.ui-autocomplete {
+  border-radius: 12px;
+  border: solid 2px #dddddd;
+  padding: 18px;
+  background: #ffffff;
+  margin-top: 1px;
+  color: #333333;
+}
+.ui-autocomplete li {
+  padding: 4px 7px 1px;
+  line-height: 17px;
+  border-radius: 13px;
+}
+.ui-autocomplete li:hover {
+  background: #e5f5fc;
+}
+.ui-autocomplete li a,
+.ui-autocomplete li a:hover,
+.ui-autocomplete li a:focus,
+.ui-autocomplete li a:active {
+  color: #33333e !important;
+  border: none!important;
+  background: none !important;
+}
+.ui-autocomplete li a.ui-state-active,
+.ui-autocomplete li a:hover.ui-state-active,
+.ui-autocomplete li a:focus.ui-state-active,
+.ui-autocomplete li a:active.ui-state-active {
+  margin: 0px;
+}
+.ui-autocomplete li a strong,
+.ui-autocomplete li a:hover strong,
+.ui-autocomplete li a:focus strong,
+.ui-autocomplete li a:active strong {
+  font-weight: normal;
 }
 .organization-list-page .organization-list-sidebar {
   border-bottom: 1px dashed #c6c6c6;
@@ -4767,6 +4899,19 @@ button.header-menu-btn:focus {
   }
   .dataset-read .primary .resource-list .resource-item .heading {
     padding-right: 10px;
+  }
+  .search-form .search-additional-control > div {
+    text-align: center;
+  }
+  .search-form .search-additional-control > div .control-order-by {
+    display: inline-block;
+  }
+  .search-form .search-additional-control > div .control-order-by #field-order-by {
+    padding-left: 5px;
+  }
+  .search-form .search-additional-control > div .show-filters-wrapper {
+    width: 105px;
+    margin-bottom: 0px;
   }
 }
 .wrapper:before {
