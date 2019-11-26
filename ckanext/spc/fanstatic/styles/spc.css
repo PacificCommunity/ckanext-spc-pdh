@@ -360,11 +360,9 @@ li.with-icon:hover .fa {
 .fa-twitter:before {
   content: '\f099';
 }
-/*
 .fa-facebook:before {
-    content: '\f39e';
+  content: '\f39e';
 }
-*/
 .fa-tint:before {
   content: '\e938';
 }
@@ -3391,7 +3389,7 @@ table.table tr th.dataset-details {
   background-color: #001e73;
   color: #ffffff;
   font-weight: 600;
-  padding: 8px 17px 14px;
+  padding: 7px 21px;
 }
 .dataset-read .primary .notes {
   font-size: 13px;
@@ -4206,12 +4204,12 @@ button.header-menu-btn:focus {
   width: 50px;
   position: initial;
 }
+.flash-messages {
+  margin-top: 15px;
+}
 .nav-item.active > a span {
   white-space: normal;
   overflow: hidden;
-}
-.flash-messages {
-  margin-top: 15px;
 }
 .js [role='main'] .secondary .filters {
   background: #ffffff;
