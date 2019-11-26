@@ -4951,6 +4951,9 @@ input::-ms-clear {
     width: 105px;
     margin-bottom: 0px;
   }
+  #dataset-map .module-heading {
+    z-index: 9999;
+  }
 }
 .wrapper:before {
   display: none;
