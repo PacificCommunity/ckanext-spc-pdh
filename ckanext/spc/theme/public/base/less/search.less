@@ -114,7 +114,7 @@
             }
             &:first-child {
                 flex-grow: .8;
-                a {
+                a:not(.btn-suggest) {
                     &:hover, &:focus, &:active {
                         text-decoration: none;
                     }
@@ -126,11 +126,17 @@
             }
             .control-order-by {
                 margin: 0px;
+                > label:hover {
+                    cursor: default;
+                }
                 select {
                     box-shadow: none;
                     border: none;
                     font-weight: 900;
                     font-size: 14px;
+                    &::-ms-expand {
+                        display: none;
+                    }
                 }
             }
             .show-filters-wrapper, .control-order-by {
@@ -161,6 +167,8 @@
                         background-size: 10px;
                         background-repeat: no-repeat;
                         background-position: 50%;
+                        cursor: pointer;
+                        pointer-events: none;
                 }
             }
             .show-filters-wrapper {
