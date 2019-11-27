@@ -360,9 +360,11 @@ li.with-icon:hover .fa {
 .fa-twitter:before {
   content: '\f099';
 }
+/*
 .fa-facebook:before {
-  content: '\f39e';
+    content: '\f39e';
 }
+*/
 .fa-tint:before {
   content: '\e938';
 }
@@ -3109,7 +3111,6 @@ header.navbar > .container .collapse {
   margin: -4px 5px 0px 17px;
   border-radius: 5px;
   font-size: 14px;
-  font-family: "HelveticaNeue", "Montserrat";
   padding: 9px 12px;
   font-weight: 600;
   box-shadow: none;
@@ -3117,7 +3118,7 @@ header.navbar > .container .collapse {
   right: 0px;
 }
 .btn.btn-suggest .fa {
-  vertical-align: top;
+  vertical-align: middle;
   font-size: 20px;
   margin-right: 6px;
 }
@@ -4511,25 +4512,31 @@ button.header-menu-btn:focus {
 .search-form .search-additional-control > div:first-child {
   flex-grow: 0.8;
 }
-.search-form .search-additional-control > div:first-child a {
+.search-form .search-additional-control > div:first-child a:not(.btn-suggest) {
   cursor: pointer;
   line-height: 35px;
   color: black;
   font-weight: 900;
 }
-.search-form .search-additional-control > div:first-child a:hover,
-.search-form .search-additional-control > div:first-child a:focus,
-.search-form .search-additional-control > div:first-child a:active {
+.search-form .search-additional-control > div:first-child a:not(.btn-suggest):hover,
+.search-form .search-additional-control > div:first-child a:not(.btn-suggest):focus,
+.search-form .search-additional-control > div:first-child a:not(.btn-suggest):active {
   text-decoration: none;
 }
 .search-form .search-additional-control > div .control-order-by {
   margin: 0px;
+}
+.search-form .search-additional-control > div .control-order-by > label:hover {
+  cursor: default;
 }
 .search-form .search-additional-control > div .control-order-by select {
   box-shadow: none;
   border: none;
   font-weight: 900;
   font-size: 14px;
+}
+.search-form .search-additional-control > div .control-order-by select::-ms-expand {
+  display: none;
 }
 .search-form .search-additional-control > div .show-filters-wrapper,
 .search-form .search-additional-control > div .control-order-by {
@@ -4558,6 +4565,8 @@ button.header-menu-btn:focus {
   background-size: 10px;
   background-repeat: no-repeat;
   background-position: 50%;
+  cursor: pointer;
+  pointer-events: none;
 }
 .search-form .search-additional-control > div .show-filters-wrapper {
   width: 90px;
@@ -4786,7 +4795,6 @@ input::-ms-clear {
 }
 .organization-list-page #organization-search-form .search-additional-control > div select {
   font-size: 12px;
-  padding-left: 25px;
 }
 .organization-list-page #publisher-tree {
   margin-top: 20px;
