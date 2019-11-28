@@ -360,11 +360,9 @@ li.with-icon:hover .fa {
 .fa-twitter:before {
   content: '\f099';
 }
-/*
 .fa-facebook:before {
   content: '\f39e';
 }
-*/
 .fa-tint:before {
   content: '\e938';
 }
@@ -3627,6 +3625,9 @@ table.table tr th.dataset-details {
   margin: 20px 15px;
   font-size: 15px;
 }
+.dataset-read .additional-info table {
+  table-layout: fixed;
+}
 .dataset-read .additional-info table.table-striped tr.complex-row.label-row {
   background-color: #dfebed;
   cursor: pointer;
@@ -4341,10 +4342,10 @@ button.header-menu-btn:focus {
 }
 .secondary .filters > div .module .module-heading .facet-sorter.active .fa-chevron-down {
   display: inline-block;
-  bottom: 3px;
+  bottom: 1px;
 }
 .secondary .filters > div .module .module-heading .facet-sorter.active.reverse .fa-chevron-up {
-  top: -1px;
+  top: 1px;
   display: inline-block;
 }
 .secondary .filters > div .module .module-heading .facet-sorter.active.reverse .fa-chevron-down {
