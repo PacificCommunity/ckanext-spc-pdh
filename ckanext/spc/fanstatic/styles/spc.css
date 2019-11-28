@@ -362,7 +362,7 @@ li.with-icon:hover .fa {
 }
 /*
 .fa-facebook:before {
-    content: '\f39e';
+  content: '\f39e';
 }
 */
 .fa-tint:before {
@@ -4795,6 +4795,9 @@ input::-ms-clear {
 }
 .organization-list-page #organization-search-form .search-additional-control > div select {
   font-size: 12px;
+}
+.organization-list-page #organization-search-form .search-additional-control .btn-suggest {
+  display: none !important;
 }
 .organization-list-page #publisher-tree {
   margin-top: 20px;
