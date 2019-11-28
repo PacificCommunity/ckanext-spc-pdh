@@ -27,6 +27,7 @@ from ckanext.harvest.model import HarvestObject
 from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 from ckanext.ingest.interfaces import IIngest
+from ckanext.spc.views import blueprints
 
 logger = logging.getLogger(__name__)
 
@@ -86,6 +87,12 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
+    plugins.implements(plugins.IBlueprint)
+
+
+    # IBlueprint
+    def get_blueprint(self):
+        return blueprints
 
     # IIngest
 

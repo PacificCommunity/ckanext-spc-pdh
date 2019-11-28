@@ -118,6 +118,28 @@
       }
     }
   }
+  .search-form {
+    .search-additional-control {
+        & > div {
+            text-align: center;
+            .control-order-by {
+                display: inline-block;
+                #field-order-by {
+                    padding-left: 5px;
+                }
+            }
+            .show-filters-wrapper {
+                width: 105px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+  }
+  #dataset-map {
+    .module-heading {
+        z-index: 9999;
+    }
+  }
 }
 
 .wrapper {
@@ -354,7 +376,7 @@
                     &.active {
                         border-radius: 20px;
                         a {
-                            border-radius: 20px;
+                            border-radius: 0;
                         }
                     }
                 }
