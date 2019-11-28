@@ -2695,6 +2695,11 @@ li.with-icon:hover .fa {
 .fa.fa-meetup:before {
   content: "\f2e0";
 }
+.icon-code:before {
+  font-family: 'FontAwesome';
+  content: "\f121";
+  margin-right: 3px;
+}
 @font-face {
   font-family: 'Calibri';
   font-display: swap;
