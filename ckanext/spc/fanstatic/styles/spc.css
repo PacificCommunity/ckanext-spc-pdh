@@ -4969,6 +4969,10 @@ input::-ms-clear {
   #dataset-map .module-heading {
     z-index: 9999;
   }
+  #organization-datasets-search-form .input-group.search-input-group {
+    position: unset;
+    top: 0;
+  }
 }
 .wrapper:before {
   display: none;
