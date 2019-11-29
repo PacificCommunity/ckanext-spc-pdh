@@ -4565,7 +4565,7 @@ button.header-menu-btn:focus {
   content: '';
   position: absolute;
   right: 0px;
-  top: 0px;
+  top: 4px;
   bottom: 0px;
   background-color: white;
   background-size: 10px;
@@ -4584,7 +4584,7 @@ button.header-menu-btn:focus {
 .search-form .search-additional-control #field-order-by {
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 12px;
+  padding-right: 15px;
   line-height: 22px;
 }
 .dataset-list {
@@ -4801,6 +4801,9 @@ input::-ms-clear {
 }
 .organization-list-page #organization-search-form .search-additional-control > div select {
   font-size: 12px;
+}
+.organization-list-page #organization-search-form .search-additional-control .control-order-by {
+  display: none;
 }
 .organization-list-page #organization-search-form .search-additional-control .btn-suggest {
   display: none !important;
