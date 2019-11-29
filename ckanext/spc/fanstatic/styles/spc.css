@@ -4857,6 +4857,12 @@ input::-ms-clear {
 .organization-list-page #publisher-tree ul.hierarchy-tree-top .hierarchy-tree li:before {
   content: '-';
 }
+@media (max-width: 767px) {
+  section.login,
+  article.register {
+    margin-left: 20px;
+  }
+}
 #user-register-form,
 #user-login-form {
   margin-right: 20px;
@@ -4864,12 +4870,6 @@ input::-ms-clear {
 #user-register-form .form-actions,
 #user-login-form .form-actions {
   margin-bottom: 20px;
-}
-@media (max-width: 767px) {
-  #user-register-form,
-  #user-login-form {
-    margin-left: 20px;
-  }
 }
 @media (max-width: 1124px) {
   header.navbar {
