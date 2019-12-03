@@ -166,7 +166,7 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['id'] = harvest_object.guid
 
             # Added thematic string
-            pkg_dict['thematic_area_string'] = ["Statistics"]
+            pkg_dict['thematic_area_string'] = ["Official Statistics"]
             
             # Get owner_org if there is one
             source_dataset = get_action('package_show')({
