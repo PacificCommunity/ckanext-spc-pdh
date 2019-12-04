@@ -295,7 +295,7 @@ class SpcSprepHarvester(HarvesterBase):
                 )['choices']
                 member_country = sh.scheming_choices_label(choices, data_dict['member_countries'])
                 if member_country:
-                    spatial = get_extent_for_country(member_country['label'])
+                    spatial = get_extent_for_country(member_country)
                     if spatial:
                         data_dict['spatial'] = spatial['value']
 
