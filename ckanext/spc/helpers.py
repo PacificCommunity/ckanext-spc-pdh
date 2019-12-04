@@ -122,6 +122,14 @@ def get_eez_options():
     return result
 
 
+def get_extent_for_country(country):
+    spatial = F.first(F.filter(
+        F.compose(F.partial(eq, country), itemgetter('text')),
+        get_eez_options()
+    ))
+    return spatial
+
+
 def spc_get_footer():
     drupal_url = config.get('drupal.site_url')
     if drupal_url:

@@ -1,21 +1,27 @@
-import uuid
+# -*- coding: utf-8 -*-
+
+import re
 import json
 import logging
-import re
 import urllib2
 import urlparse
-from bs4 import BeautifulSoup
+
 import requests
+
+import ckanext.scheming.helpers as sh
+import funcy as F
+
+from dateutil.parser import parse
+
+import ckan.model as model
+
 from ckan.lib.helpers import markdown_extract
 from ckan.lib.munge import munge_title_to_name, munge_tag
-import ckan.plugins.toolkit as tk
 from ckan.logic import get_action
 from ckan.model import Session
+
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
-from dateutil.parser import parse
-import ckan.model as model
-from ckan.lib.munge import munge_title_to_name
 
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
@@ -247,19 +253,7 @@ class SpcSprepHarvester(HarvesterBase):
                 res['name'] = res['title']
                 res['description'] = markdown_extract(res.get('description'))
                 data_dict['resources'].append(res)
-            if 'spatial' in package_dict:
-                data_dict['spatial'] = package_dict['spatial']
-                try:
-                    data_dict['spatial'] = json.dumps({
-                        "type": "Polygon",
-                        "coordinates": [[[
-                            float(c) for c in pair.split()
-                        ] for pair in RE_SPATIAL.match(data_dict['spatial']).
-                                         group(1).split(', ')]]
-                    })
-                except KeyError:
-                    pass
-                # package_dict.pop('type')
+
             # add owner_org
             source_dataset = get_action('package_show')({
                 'ignore_auth': True
@@ -280,6 +274,33 @@ class SpcSprepHarvester(HarvesterBase):
                 ).filter_by(name=country + '-data').first()
                 if org:
                     data_dict['owner_org'] = org.id
+
+            if 'spatial' in package_dict:
+                data_dict['spatial'] = package_dict['spatial']
+                try:
+                    data_dict['spatial'] = json.dumps({
+                        "type": "Polygon",
+                        "coordinates": [[[
+                            float(c) for c in pair.split()
+                        ] for pair in RE_SPATIAL.match(data_dict['spatial']).
+                                         group(1).split(', ')]]
+                    })
+                except KeyError:
+                    pass
+                # package_dict.pop('type')
+            else:
+                import ipdb; ipdb.set_trace()
+                schema = sh.scheming_get_dataset_schema('dataset')
+                choices = sh.scheming_field_by_name(
+                    schema['dataset_fields'], 'member_countries'
+                )['choices']
+                member_country = F.first(F.filter(
+                    F.compose(F.rpartial(contains, data_dict['member_countries']), itemgetter('label')),
+                    choices
+                ))
+                spatial = get_extent_for_country(member_country['label'])
+                if spatial:
+                    dataset['spatial'] = spatial['value']
 
             data_dict['source'] = package_dict.get('landingPage')
 
