@@ -85,7 +85,7 @@ class Upload(DefaultUpload):
         '''
         Resize and optimize logo image before upload
         '''
-        uploaded_file = data_dict['logo_upload']
+        uploaded_file = data_dict.get('logo_upload')
         
         try:
             img = Image.open(uploaded_file)
