@@ -7,7 +7,7 @@ import urllib2
 import urlparse
 
 import requests
-
+from operator import itemgetter, contains
 import ckanext.scheming.helpers as sh
 import funcy as F
 
@@ -22,7 +22,7 @@ from ckan.model import Session
 
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
-
+from ckanext.spc.helpers import get_extent_for_country
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
 RE_SPATIAL = re.compile(r'POLYGON \(\((.*)\)\)')
@@ -289,7 +289,6 @@ class SpcSprepHarvester(HarvesterBase):
                     pass
                 # package_dict.pop('type')
             else:
-                import ipdb; ipdb.set_trace()
                 schema = sh.scheming_get_dataset_schema('dataset')
                 choices = sh.scheming_field_by_name(
                     schema['dataset_fields'], 'member_countries'
@@ -300,7 +299,7 @@ class SpcSprepHarvester(HarvesterBase):
                 ))
                 spatial = get_extent_for_country(member_country['label'])
                 if spatial:
-                    dataset['spatial'] = spatial['value']
+                    data_dict['spatial'] = spatial['value']
 
             data_dict['source'] = package_dict.get('landingPage')
 
