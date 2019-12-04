@@ -293,13 +293,11 @@ class SpcSprepHarvester(HarvesterBase):
                 choices = sh.scheming_field_by_name(
                     schema['dataset_fields'], 'member_countries'
                 )['choices']
-                member_country = F.first(F.filter(
-                    F.compose(F.rpartial(contains, data_dict['member_countries']), itemgetter('label')),
-                    choices
-                ))
-                spatial = get_extent_for_country(member_country['label'])
-                if spatial:
-                    data_dict['spatial'] = spatial['value']
+                member_country = sh.scheming_choices_label(choices, data_dict['member_countries'])
+                if member_country:
+                    spatial = get_extent_for_country(member_country['label'])
+                    if spatial:
+                        data_dict['spatial'] = spatial['value']
 
             data_dict['source'] = package_dict.get('landingPage')
 
