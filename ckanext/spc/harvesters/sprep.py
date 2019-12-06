@@ -4,6 +4,8 @@ import re
 import json
 import logging
 import urllib2
+import shapely
+
 import urlparse
 
 import requests
@@ -87,7 +89,12 @@ class SpcSprepHarvester(HarvesterBase):
             }
 
             # TODO: switch
+            # with open('/tmp/data.json', 'wb') as file:
+                # file.write(requests.get(
+                    # urlparse.urljoin(harvest_job.source.url, 'data.json')
+                # ).content)
             # for record in json.loads(open('/tmp/data.json').read())['dataset']:
+
             for record in requests.get(
                 urlparse.urljoin(harvest_job.source.url, 'data.json')
             ).json()['dataset']:
@@ -249,10 +256,36 @@ class SpcSprepHarvester(HarvesterBase):
                 #     res.pop('last_modified').replace('Date changed ', '')
                 # )
                 res['url'] = res.get('downloadURL') or res.get('accessURL')
-                res['format'] = res['format']
                 res['name'] = res['title']
                 res['description'] = markdown_extract(res.get('description'))
                 data_dict['resources'].append(res)
+
+            if 'spatial' in package_dict:
+                data_dict['spatial'] = package_dict.pop('spatial')
+
+                try:
+                    geometry = {
+                        "type": "Polygon",
+                        "coordinates": [[[
+                            float(c) for c in pair.split()
+                        ] for pair in RE_SPATIAL.match(data_dict['spatial']).
+                                         group(1).split(', ')]]
+                    }
+                    shape = shapely.geometry.asShape(geometry)
+                    if shape.is_valid and shape.is_closed:
+                        data_dict['spatial'] = json.dumps(geometry)
+                    else:
+                        del data_dict['spatial']
+
+                except KeyError:
+                    pass
+                except (AttributeError, ValueError):
+                    del data_dict['spatial']
+                    # logger.warn('-' * 80)
+                    #
+                    # logger.warn('Failed parsing of spatial field: %s', data_dict['spatial'])
+
+                # package_dict.pop('type')
 
             # add owner_org
             source_dataset = get_action('package_show')({
@@ -312,7 +345,18 @@ class SpcSprepHarvester(HarvesterBase):
                 data_dict, harvest_object, 'package_show'
             )
 
+            # import ipdb; ipdb.set_trace()
             Session.commit()
+            stored_package = get_action('package_show')({
+                'ignore_auth': True
+            }, {
+                'id': data_dict['id']
+            })
+            for res in stored_package.get('resources', []):
+                get_action('resource_create_default_resource_views')(
+                    {'ignore_auth': True},
+                    {'package': stored_package, 'resource': res}
+                )
 
             logger.debug("Finished record")
         except:

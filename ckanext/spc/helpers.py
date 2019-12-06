@@ -35,6 +35,7 @@ def get_helpers():
         spc_hotjar_enabled=spc_hotjar_enabled,
         spc_link_to_identifier=spc_link_to_identifier,
         spc_has_cesium_view=spc_has_cesium_view,
+        spc_get_max_image_size=get_max_image_size,
     )
 
 
@@ -94,6 +95,9 @@ def url_for_logo(*args, **kw):
 def get_conf_site_url():
     site_url = config.get('ckan.site_url', None)
     return site_url
+
+def get_max_image_size():
+    return int(config.get('ckan.max_image_size', 2))
 
 
 def get_eez_options():
