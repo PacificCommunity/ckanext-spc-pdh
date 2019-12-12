@@ -485,4 +485,5 @@ def _get_isPartOf(id):
     config = model.Session.query(HarvestSource.config) \
                           .filter(HarvestSource.id == src_id) \
                           .first()[0]
-    return json.loads(config).get('isPartOf')
+    if config:
+        return json.loads(config).get('isPartOf')
