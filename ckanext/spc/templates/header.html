@@ -13,3 +13,10 @@
 
 {% block header_site_search %}
 {% endblock %}
+
+{% block header_account_notlogged %}
+    <li>{% link_for _('Log in'), named_route='/user/login' %}</li>
+    {% if h.check_access('user_create') %}
+        <li>{% link_for _('Register'), named_route='/user/register', class_='sub' %}</li>
+    {% endif %} 
+{% endblock %}
