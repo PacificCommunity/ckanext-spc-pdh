@@ -16,7 +16,4 @@
 
 {% block header_account_notlogged %}
     <li><a href="{{ h.get_drupal_auth_url('login') }}">{{_('Log in')}}</a></li>
-    {% if h.check_access('user_create') %}
-        <li><a class="sub" href="{{ h.get_drupal_auth_url('register') }}">{{_('Register')}}</a></li>
-    {% endif %} 
 {% endblock %}

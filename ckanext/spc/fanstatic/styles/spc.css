@@ -2960,6 +2960,9 @@ header.navbar > .container .collapse {
 .account-masthead {
   background: #0072af;
 }
+.account-masthead .account .list-unstyled li {
+  border-right: 1px solid #00232e;
+}
 .account-masthead .account .list-unstyled li a {
   color: white;
 }
