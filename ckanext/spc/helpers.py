@@ -30,6 +30,7 @@ def get_helpers():
         spc_national_map_previews=spc_national_map_previews,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
+        get_drupal_auth_url=get_drupal_auth_url,
         spc_unwrap_list=spc_unwrap_list,
         spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled,
@@ -229,3 +230,15 @@ def spc_link_to_identifier(id):
     if id.startswith('pmid'):
         return 'https://europepmc.org/abstract/med/' + id[5:]
     return None
+
+def get_drupal_auth_url(action):
+    drupal_url = config.get('drupal.site_url') or h.full_current_url()
+    url = urlparse.urlparse(str(drupal_url))
+    if action == 'login':
+        path = '/user/login'
+    elif action == 'register':
+        path = '/user/register'
+    else:
+        path = ''
+    result_url = urlparse.urlunparse((url.scheme, url.netloc, path, '', '', ''))
+    return result_url
