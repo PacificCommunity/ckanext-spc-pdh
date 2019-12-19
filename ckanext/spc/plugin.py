@@ -173,6 +173,13 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     action='index',
                     ckan_icon='search-plus')
 
+        # CKAN login form can be accessed in the debug mode
+        if not config.get('debug', False):
+            map.redirect('/user/login', spc_helpers.get_drupal_auth_url('login'))
+        
+        map.redirect('/user/register', spc_helpers.get_drupal_auth_url('register'))
+        map.redirect('/user/reset', '/')
+
         return map
 
     # IConfigurable
