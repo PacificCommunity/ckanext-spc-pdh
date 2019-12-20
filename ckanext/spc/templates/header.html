@@ -15,5 +15,14 @@
 {% endblock %}
 
 {% block header_account_notlogged %}
-    <li><a href="{{ h.get_drupal_auth_url('login') }}">{{_('Log in')}}</a></li>
+    <li><a href="{{ h.get_drupal_user_url('login', h.full_current_url()) }}">{{_('Log in')}}</a></li>
+{% endblock %}
+
+{% block header_account_log_out_link %}
+    <li>
+        <a href="{{ h.get_drupal_user_url('logout', h.full_current_url()) }}" title="{{ _('Log out') }}">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <span class="text">{{ _('Log out') }}</span>
+        </a>
+    </li>
 {% endblock %}
