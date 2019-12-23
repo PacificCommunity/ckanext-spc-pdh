@@ -206,7 +206,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                                      user)
 
             if user_data.name != user['name']:
-                User = model.Session.query(model.User).get(user_data.uid)
+                User = model.Session.query(model.User).get(str(user_data.uid))
                 User.name = self._sanitize_drupal_username(user_data.name)
                 model.Session.commit()
                 # get user again after changes in user model
