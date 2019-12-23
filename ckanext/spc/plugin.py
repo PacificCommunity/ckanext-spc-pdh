@@ -190,7 +190,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                     'keep_sensitive_data': True,
                     'keep_email': True},
                     {'id': id})
-                import pdb; pdb.set_trace()
+
             except (toolkit.ObjectNotFound, TypeError):
                 user = None
 
