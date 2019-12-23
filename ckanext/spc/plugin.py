@@ -165,32 +165,66 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         name = name.strip('-')[:99]
         return name
 
-    def _drupal_session_name(self):
+    @staticmethod
+    def _drupal_session_name():
         server_name = toolkit.request.environ['HTTP_HOST']
         name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
         return name
 
-    def _login_user(self, user_data):
+    @staticmethod
+    def _get_user(id):
         try:
             user = toolkit.get_action('user_show')(
                 {'return_minimal': True,
                  'keep_sensitive_data': True,
                  'keep_email': True},
-                {'id': str(user_data.uid)}
-            )
+                {'id': id})
         except toolkit.ObjectNotFound:
             user = None
+        return user
+
+    def _login_user(self, user_data, perms):
+        # get all drupal roles with admin permissions
+        drupal_perms = [perm.strip() 
+                        for perm 
+                        in config.get('spc.drupal_admin_roles', '').split(',')]
+        user = self._get_user(str(user_data.uuid))
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
-                user['name'] = self._sanitize_drupal_username(user_data.name)
-                user = toolkit.get_action('user_update')({'ignore_auth': True}, user)
+
+            # check admin permissions from DRUPAL
+            for perm in perms:
+                if (perm in drupal_perms and not user['sysadmin']):
+                    user['sysadmin'] = True
+                elif (perm not in drupal_perms and user['sysadmin']):
+                    user['sysadmin'] = False
+
+            user = toolkit.get_action('user_update')(
+                                     {'ignore_auth': True,
+                                     'user': ''},
+                                     user)
+
+            if user_data.name != user['name']:
+                User = model.Session.query(model.User).get(user_data.uuid)
+                User.name = self._sanitize_drupal_username(user_data.name)
+                model.Session.commit()
+                # get user again after changes in user model
+                user = self._get_user(str(user_data.uuid))
+
         else:
             user = {'email': user_data.mail,
-                    'id': str(user_data.uid),
+                    'id': str(user_data.uuid),
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
-            user = toolkit.get_action('user_create')({'ignore_auth': True}, user)
+
+            for perm in perms:
+                if perm in drupal_perms:
+                    user['sysadmin'] = True
+
+            user = toolkit.get_action('user_create')(
+                                      {'ignore_auth': True},
+                                      user)
         toolkit.c.user = user['name']
 
     # IAuthenticator
@@ -204,17 +238,25 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         drupal_sid = toolkit.request.cookies.get(self._drupal_session_name())
         if drupal_sid:
             engine = sa.create_engine(self._connection)
-            rows = engine.execute(
-                'SELECT u.name, u.mail, u.uid FROM users u '
-                'JOIN sessions s on s.uid=u.uid '
+            users = engine.execute(
+                'SELECT u.name, u.mail, u.uuid, r.name as perm_name '
+                'FROM users u '
+                'LEFT JOIN sessions s on s.uid=u.uid '
+                'LEFT JOIN users_roles ur on ur.uid=u.uid '
+                'LEFT JOIN role r on r.rid=ur.rid '
                 'WHERE s.sid=%s',
                 [str(drupal_sid)])
 
-            for row in rows:
-                # check if session has username, otherwise is unauthenticated user session
-                if row.name and row.name != '':
-                    self._login_user(row)
-                    break
+            if users:
+                perms = []
+                for user in users:
+                    user = user
+                    perms.append(user.perm_name)
+
+                # check if session has username, 
+                # otherwise is unauthenticated user session
+                if user.name and user.name != '':
+                    self._login_user(user, perms)
 
     # IConfigurer
 
