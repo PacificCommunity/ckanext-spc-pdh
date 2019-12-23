@@ -172,7 +172,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         return name
 
     @staticmethod
-    def _get_user(id):
+    def _get_user(id, email):
         try:
             user = toolkit.get_action('user_show')(
                 {'return_minimal': True,
@@ -181,6 +181,19 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 {'id': id})
         except toolkit.ObjectNotFound:
             user = None
+        
+        if not user:
+            try:
+                id = model.Session.query(model.User.id).filter(model.User.email==email).first()[0]
+                user = toolkit.get_action('user_show')(
+                    {'return_minimal': True,
+                    'keep_sensitive_data': True,
+                    'keep_email': True},
+                    {'id': id})
+                import pdb; pdb.set_trace()
+            except (toolkit.ObjectNotFound, TypeError):
+                user = None
+
         return user
 
     def _login_user(self, user_data, perms):
@@ -188,7 +201,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         drupal_perms = [perm.strip() 
                         for perm 
                         in config.get('spc.drupal_admin_roles', '').split(',')]
-        user = self._get_user(str(user_data.uid))
+        user = self._get_user(str(user_data.uid), user_data.mail)
+
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
@@ -206,11 +220,18 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                                      user)
 
             if user_data.name != user['name']:
-                User = model.Session.query(model.User).get(str(user_data.uid))
+                User = model.Session.query(model.User).get(user['id'])
                 User.name = self._sanitize_drupal_username(user_data.name)
                 model.Session.commit()
                 # get user again after changes in user model
-                user = self._get_user(str(user_data.uid))
+                user = self._get_user(str(user_data.uid), user_data.mail)
+
+            if user_data.uid != user['id']:
+                User = model.Session.query(model.User).get(user['id'])
+                User.id = str(user_data.uid)
+                model.Session.commit()
+                # get user again after changes in user model
+                user = self._get_user(str(user_data.uid), user_data.mail)
 
         else:
             user = {'email': user_data.mail,
@@ -223,7 +244,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                     user['sysadmin'] = True
 
             user = toolkit.get_action('user_create')(
-                                      {'ignore_auth': True},
+                                      {'ignore_auth': True,
+                                      'user': ''},
                                       user)
         toolkit.c.user = user['name']
 
