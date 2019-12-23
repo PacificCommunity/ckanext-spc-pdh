@@ -188,7 +188,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         drupal_perms = [perm.strip() 
                         for perm 
                         in config.get('spc.drupal_admin_roles', '').split(',')]
-        user = self._get_user(str(user_data.uuid))
+        user = self._get_user(str(user_data.uid))
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
@@ -206,15 +206,15 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                                      user)
 
             if user_data.name != user['name']:
-                User = model.Session.query(model.User).get(user_data.uuid)
+                User = model.Session.query(model.User).get(user_data.uid)
                 User.name = self._sanitize_drupal_username(user_data.name)
                 model.Session.commit()
                 # get user again after changes in user model
-                user = self._get_user(str(user_data.uuid))
+                user = self._get_user(str(user_data.uid))
 
         else:
             user = {'email': user_data.mail,
-                    'id': str(user_data.uuid),
+                    'id': str(user_data.uid),
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
 
@@ -239,7 +239,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         if drupal_sid:
             engine = sa.create_engine(self._connection)
             users = engine.execute(
-                'SELECT u.name, u.mail, u.uuid, r.name as perm_name '
+                'SELECT u.name, u.mail, u.uid, r.name as perm_name '
                 'FROM users u '
                 'LEFT JOIN sessions s on s.uid=u.uid '
                 'LEFT JOIN users_roles ur on ur.uid=u.uid '
