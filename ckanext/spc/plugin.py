@@ -167,8 +167,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
 
     @staticmethod
     def _drupal_session_name():
-        server_name = toolkit.request.environ['HTTP_HOST'].split(':')[0]
-        name = 'SESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
+        server_name = toolkit.request.environ['HTTP_HOST']
+        name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
         return name
 
     @staticmethod
