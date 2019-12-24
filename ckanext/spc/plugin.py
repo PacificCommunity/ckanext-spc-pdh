@@ -167,8 +167,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
 
     @staticmethod
     def _drupal_session_name():
-        server_name = toolkit.request.environ['HTTP_HOST']
-        name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
+        server_name = toolkit.request.environ['HTTP_HOST'].split(':')[0]
+        name = 'SESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
         return name
 
     @staticmethod
@@ -208,11 +208,10 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 user['email'] = user_data.mail
 
             # check admin permissions from DRUPAL
-            for perm in perms:
-                if (perm in drupal_perms and not user['sysadmin']):
-                    user['sysadmin'] = True
-                elif (perm not in drupal_perms and user['sysadmin']):
-                    user['sysadmin'] = False
+            if set(perms) & set(drupal_perms):
+                user['sysadmin'] = True
+            else:
+                user['sysadmin'] = False
 
             user = toolkit.get_action('user_update')(
                                      {'ignore_auth': True,
@@ -226,11 +225,10 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 # get user again after changes in user model
                 user = self._get_user(str(user_data.uid), user_data.mail)
 
-            if user_data.uid != user['id']:
+            if str(user_data.uid) != user['id']:
                 User = model.Session.query(model.User).get(user['id'])
                 User.id = str(user_data.uid)
                 model.Session.commit()
-                # get user again after changes in user model
                 user = self._get_user(str(user_data.uid), user_data.mail)
 
         else:
@@ -239,9 +237,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
 
-            for perm in perms:
-                if perm in drupal_perms:
-                    user['sysadmin'] = True
+            if set(perms) & set(drupal_perms):
+                user['sysadmin'] = True
 
             user = toolkit.get_action('user_create')(
                                       {'ignore_auth': True,
@@ -270,6 +267,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 [str(drupal_sid)])
 
             if users:
+                # getting user roles
                 perms = []
                 for user in users:
                     user = user
