@@ -104,17 +104,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
-    plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
-
-    # IMiddleware
-
-    def make_middleware(self, app, config):
-        return LocaleMiddleware(app, config)
 
 
     # IBlueprint
-
     def get_blueprint(self):
         return blueprints
 

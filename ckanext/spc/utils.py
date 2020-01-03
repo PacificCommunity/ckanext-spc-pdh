@@ -212,7 +212,7 @@ def _is_user_text_search(context, query):
 
 def is_resource_updatable(id, package_id=None):
     if package_id:
-        pkg = model.Package.get(package_id)
+        pkg = model.Package.get(id)
     else:
         pkg = model.Resource.get(id).package
 
