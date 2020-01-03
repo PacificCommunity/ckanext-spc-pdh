@@ -117,6 +117,22 @@ class Upload(DefaultUpload):
 
         super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
 
+class LocaleMiddleware(object):
+    def __init__(self, app, config):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        if environ['CKAN_LANG_IS_DEFAULT']:
+            try:
+                lang = environ.get('HTTP_ACCEPT_LANGUAGE', '').split(',')[0].split('-')[0]
+                if len(lang) == 2:
+                    environ['CKAN_LANG'] = lang
+                else:
+                    logger.error('Unknown locale <%s>', lang)
+            except IndexError:
+                pass
+        return self.app(environ, start_response)
+
 class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
