@@ -6583,6 +6583,7 @@ button.header-menu-btn:focus {
 .search-form .search-input-group .input-group-btn {
   position: absolute;
   right: 10px;
+  top: 0;
 }
 .search-form .search-input-group .input-group-btn .btn-lg {
   right: 10px;
