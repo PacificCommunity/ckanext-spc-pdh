@@ -13,7 +13,7 @@ from ckanext.harvest.harvesters import HarvesterBase
 from ckanext.harvest.model import HarvestObjectError, HarvestObject
 from six.moves.urllib.parse import urljoin
 import ckanext.scheming.helpers as sh
-from ckanext.spc.helpers import get_eez_options
+from ckanext.spc.helpers import get_eez_options, get_extent_for_country
 
 log = logging.getLogger(__name__)
 thematic_area_mapping = {
@@ -73,10 +73,7 @@ def _map_gdl_to_publication(data_dict, obj):
         ))
         if member_country:
             dataset['member_countries'] = member_country['value']
-            spatial = F.first(F.filter(
-                F.compose(F.partial(eq, member_country['label']), itemgetter('text')),
-                get_eez_options()
-            ))
+            spatial = get_extent_for_country(member_country['label'])
             if spatial:
                 dataset['spatial'] = spatial['value']
     if data_dict['file']:
