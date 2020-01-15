@@ -3,14 +3,21 @@ import os
 
 from time import sleep
 import ckan.model as model
+from ckanext.harvest import model as harvest_model
 import ckan.plugins.toolkit as tk
 import paste.script
+import sqlalchemy
 from alembic import command
 from alembic.config import Config
 
 from ckan.common import config
 from ckan.lib.cli import CkanCommand
 import ckan.lib.search as search
+
+_select = sqlalchemy.sql.select
+_func = sqlalchemy.func
+_or_ = sqlalchemy.or_
+_and_ = sqlalchemy.and_
 
 logger = logging.getLogger(__name__)
 country_orgs = {
@@ -192,3 +199,106 @@ class SPCCommand(CkanCommand):
                     print('\tPurged package <{}>'.format(pkg['id']))
             model.Session.commit()
         print('Done')
+   
+    def fix_harvester_duplications(self):
+        # paster spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP' -c /etc/ckan/default/production.ini
+        # paster spc fix_harvester_duplications 'SPREP' -c /etc/ckan/default/production.ini
+
+        # Prepare HarvestObject to have munged ids for search
+        formatted_harvest_objects = model.Session.query(
+            harvest_model.HarvestObject,
+            _func.replace(_func.replace(harvest_model.HarvestObject.guid, ':', '-'), '.', '-').label('possible_id')
+            ).subquery()
+
+        # Find packages with duplications
+        subquery_packages = model.Session.query(
+            model.Package.id.label('pkg_id'),
+            harvest_model.HarvestSource.id.label('hs_id'),
+            harvest_model.HarvestSource.type.label('hs_type'),
+        )\
+        .distinct()\
+        .join(
+            formatted_harvest_objects,
+            _or_(
+                formatted_harvest_objects.c.guid == model.Package.id,
+                formatted_harvest_objects.c.possible_id == model.Package.id,
+                formatted_harvest_objects.c.package_id == model.Package.id
+            )
+        ).join(
+            harvest_model.HarvestSource,
+            formatted_harvest_objects.c.harvest_source_id == harvest_model.HarvestSource.id
+        ).group_by(
+            model.Package.id,
+            formatted_harvest_objects.c.id,
+            harvest_model.HarvestSource.id
+        ).subquery()
+            
+        subquery_count = model.Session.query(
+            subquery_packages.c.pkg_id.label('pkg_id'),
+            _func.count(subquery_packages.c.pkg_id).label('hs_count'),
+            _func.array_agg(subquery_packages.c.hs_id).label('hs_ids'),
+            _func.array_agg(subquery_packages.c.hs_type).label('hs_types')
+        ).group_by(subquery_packages.c.pkg_id).subquery()
+
+        q = model.Session.query(
+            subquery_count.c.pkg_id, 
+            subquery_count.c.hs_ids,
+            subquery_count.c.hs_types)\
+        .filter(subquery_count.c.hs_count > 1) 
+
+        res = q.all()
+
+        package_ids = []
+        harvest_sources_types = []
+        harvest_sources_ids = []
+        for pkg_id, hs_ids, hs_types in res:
+            package_ids.append(pkg_id)
+            harvest_sources_types.extend(x for x in hs_types if x not in harvest_sources_types)
+            harvest_sources_ids.extend(x for x in hs_ids if x not in harvest_sources_ids)
+
+        try:
+            source_type_to_drop = self.args[1]
+            if len(res) == 0 or len(harvest_sources_types) < 2:
+                raise ValueError
+        except IndexError:
+            print('Source type to drop is not defined')
+            print('paster spc fix_harvester_duplications \'SOURCE_TYPE_TO_DROP\' -c /etc/ckan/default/production.ini')
+            return
+        except ValueError:
+            print('No duplications found')
+            return
+
+        print('{} duplications found'.format(len(res)))    
+        print('Duplications found for source types: {}'.format(', '.join(harvest_sources_types)))
+        print('Harvest Sources IDs: {}'.format(', '.join(harvest_sources_ids)))
+
+        # Filter by Source
+        harvest_objects_ids = model.Session.query(formatted_harvest_objects.c.id)\
+        .join(
+            harvest_model.HarvestSource,
+            harvest_model.HarvestSource.id == formatted_harvest_objects.c.harvest_source_id
+            
+        ).filter(harvest_model.HarvestSource.type == source_type_to_drop)\
+        .join(
+            model.Package,
+            _or_(
+                model.Package.id == formatted_harvest_objects.c.guid,
+                model.Package.id == formatted_harvest_objects.c.possible_id,
+                model.Package.id == formatted_harvest_objects.c.package_id
+            )
+        ).filter(model.Package.id.in_(package_ids)).all()
+
+        # Delete Harvest Object Errors
+        if harvest_objects_ids:
+            model.Session.query(harvest_model.HarvestObjectError)\
+            .filter(harvest_model.HarvestObjectError.harvest_object_id.in_(harvest_objects_ids))\
+            .delete(synchronize_session='fetch')
+
+            # Delete Harvest Objects
+            model.Session.query(harvest_model.HarvestObject)\
+            .filter(harvest_model.HarvestObject.id.in_(harvest_objects_ids))\
+            .delete(synchronize_session='fetch')
+
+        model.Session.commit()
+
+        print 'Done'

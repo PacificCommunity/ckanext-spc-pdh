@@ -89,7 +89,7 @@ class SpcSprepHarvester(HarvesterBase):
                                         'cc-by').strip('/').split('/')[-1]
                 if license_id in skip_licenses:
                     continue
-                if 'hub.pacificdata' == record.get('isPartOf'):
+                if 'hub.pacificdata' == record.get('isPartOf') or record.get('isPartOf', '').startswith('pdh'):
                     continue
                 if 'Info' in record.get('theme', []):
                     continue
