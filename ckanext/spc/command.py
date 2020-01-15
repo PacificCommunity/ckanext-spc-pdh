@@ -302,3 +302,31 @@ class SPCCommand(CkanCommand):
         model.Session.commit()
 
         print 'Done'
+
+    def update_dataset_coordinates(self):
+        # EXAMPLE: paster spc update_dataset_coordinates 'COORDINATES_NEW' 'FIND_WITH_CURRENT' -c /etc/ckan/default/production.ini
+        if self.args[1] and self.args[2]:
+            new_coordinates = self.args[1]
+            find_with_current = self.args[2]
+
+            q = model.Session.query(model.PackageExtra)\
+                .filter(model.PackageExtra.key == 'spatial')
+            updated_items = []
+            ds_list = [ds_extra for ds_extra in q.all() if find_with_current in ds_extra.value]
+            if len(ds_list):
+                print('There are items that match, will start to update')
+                for ds in ds_list:
+                    q = model.Session.query(model.PackageExtra)\
+                        .filter(model.PackageExtra.id == ds.id)
+                    if q:
+                        q.update({
+                            'value': new_coordinates
+                            })
+                        updated_items.append(ds.package_id)
+                model.Session.commit()
+                print('{0} items been updated. Here is the list of IDs:{1}'.format(
+                    len(updated_items), updated_items))
+            else:
+                print('No items match found.')
+        else:
+            print('Please provide two arguments.')

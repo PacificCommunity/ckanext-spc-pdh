@@ -1,22 +1,30 @@
-import uuid
+# -*- coding: utf-8 -*-
+
+import re
 import json
 import logging
-import re
 import urllib2
+import shapely
+
 import urlparse
-from bs4 import BeautifulSoup
+
 import requests
+from operator import itemgetter, contains
+import ckanext.scheming.helpers as sh
+import funcy as F
+
+from dateutil.parser import parse
+
+import ckan.model as model
+
 from ckan.lib.helpers import markdown_extract
 from ckan.lib.munge import munge_title_to_name, munge_tag
-import ckan.plugins.toolkit as tk
 from ckan.logic import get_action
 from ckan.model import Session
+
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
-from dateutil.parser import parse
-import ckan.model as model
-from ckan.lib.munge import munge_title_to_name
-
+from ckanext.spc.helpers import get_extent_for_country
 logger = logging.getLogger(__name__)
 RE_SWITCH_CASE = re.compile('_(?P<letter>\\w)')
 RE_SPATIAL = re.compile(r'POLYGON \(\((.*)\)\)')
@@ -81,7 +89,12 @@ class SpcSprepHarvester(HarvesterBase):
             }
 
             # TODO: switch
+            # with open('/tmp/data.json', 'wb') as file:
+                # file.write(requests.get(
+                    # urlparse.urljoin(harvest_job.source.url, 'data.json')
+                # ).content)
             # for record in json.loads(open('/tmp/data.json').read())['dataset']:
+
             for record in requests.get(
                 urlparse.urljoin(harvest_job.source.url, 'data.json')
             ).json()['dataset']:
@@ -243,23 +256,37 @@ class SpcSprepHarvester(HarvesterBase):
                 #     res.pop('last_modified').replace('Date changed ', '')
                 # )
                 res['url'] = res.get('downloadURL') or res.get('accessURL')
-                res['format'] = res['format']
                 res['name'] = res['title']
                 res['description'] = markdown_extract(res.get('description'))
                 data_dict['resources'].append(res)
+
             if 'spatial' in package_dict:
-                data_dict['spatial'] = package_dict['spatial']
+                data_dict['spatial'] = package_dict.pop('spatial')
+
                 try:
-                    data_dict['spatial'] = json.dumps({
+                    geometry = {
                         "type": "Polygon",
                         "coordinates": [[[
                             float(c) for c in pair.split()
                         ] for pair in RE_SPATIAL.match(data_dict['spatial']).
                                          group(1).split(', ')]]
-                    })
+                    }
+                    shape = shapely.geometry.asShape(geometry)
+                    if shape.is_valid and shape.is_closed:
+                        data_dict['spatial'] = json.dumps(geometry)
+                    else:
+                        del data_dict['spatial']
+
                 except KeyError:
                     pass
+                except (AttributeError, ValueError):
+                    del data_dict['spatial']
+                    # logger.warn('-' * 80)
+                    #
+                    # logger.warn('Failed parsing of spatial field: %s', data_dict['spatial'])
+
                 # package_dict.pop('type')
+
             # add owner_org
             source_dataset = get_action('package_show')({
                 'ignore_auth': True
@@ -281,6 +308,30 @@ class SpcSprepHarvester(HarvesterBase):
                 if org:
                     data_dict['owner_org'] = org.id
 
+            if 'spatial' in package_dict:
+                data_dict['spatial'] = package_dict['spatial']
+                try:
+                    data_dict['spatial'] = json.dumps({
+                        "type": "Polygon",
+                        "coordinates": [[[
+                            float(c) for c in pair.split()
+                        ] for pair in RE_SPATIAL.match(data_dict['spatial']).
+                                         group(1).split(', ')]]
+                    })
+                except KeyError:
+                    pass
+                # package_dict.pop('type')
+            else:
+                schema = sh.scheming_get_dataset_schema('dataset')
+                choices = sh.scheming_field_by_name(
+                    schema['dataset_fields'], 'member_countries'
+                )['choices']
+                member_country = sh.scheming_choices_label(choices, data_dict['member_countries'])
+                if member_country:
+                    spatial = get_extent_for_country(member_country)
+                    if spatial:
+                        data_dict['spatial'] = spatial['value']
+
             data_dict['source'] = package_dict.get('landingPage')
 
             data_dict['theme'] = package_dict.get('theme', [])
@@ -294,7 +345,18 @@ class SpcSprepHarvester(HarvesterBase):
                 data_dict, harvest_object, 'package_show'
             )
 
+            # import ipdb; ipdb.set_trace()
             Session.commit()
+            stored_package = get_action('package_show')({
+                'ignore_auth': True
+            }, {
+                'id': data_dict['id']
+            })
+            for res in stored_package.get('resources', []):
+                get_action('resource_create_default_resource_views')(
+                    {'ignore_auth': True},
+                    {'package': stored_package, 'resource': res}
+                )
 
             logger.debug("Finished record")
         except:
