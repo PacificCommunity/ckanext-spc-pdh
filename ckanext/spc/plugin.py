@@ -196,22 +196,12 @@ class SpcUserPlugin(plugins.SingletonPlugin):
 
         return user
 
-    def _login_user(self, user_data, perms):
-        # get all drupal roles with admin permissions
-        drupal_perms = [perm.strip() 
-                        for perm 
-                        in config.get('spc.drupal_admin_roles', '').split(',')]
+    def _login_user(self, user_data):
         user = self._get_user(str(user_data.uid), user_data.mail)
 
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
-
-            # check admin permissions from DRUPAL
-            if set(perms) & set(drupal_perms):
-                user['sysadmin'] = True
-            else:
-                user['sysadmin'] = False
 
             user = toolkit.get_action('user_update')(
                                      {'ignore_auth': True,
@@ -237,9 +227,6 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
 
-            if set(perms) & set(drupal_perms):
-                user['sysadmin'] = True
-
             user = toolkit.get_action('user_create')(
                                       {'ignore_auth': True,
                                       'user': ''},
@@ -255,28 +242,23 @@ class SpcUserPlugin(plugins.SingletonPlugin):
 
         # If no drupal session name create one
         drupal_sid = toolkit.request.cookies.get(self._drupal_session_name())
+
         if drupal_sid:
             engine = sa.create_engine(self._connection)
-            users = engine.execute(
-                'SELECT u.name, u.mail, u.uid, r.name as perm_name '
+            user = engine.execute(
+                'SELECT u.name, u.mail, u.uid '
                 'FROM users u '
-                'LEFT JOIN sessions s on s.uid=u.uid '
-                'LEFT JOIN users_roles ur on ur.uid=u.uid '
-                'LEFT JOIN role r on r.rid=ur.rid '
+                'JOIN sessions s on s.uid=u.uid '
                 'WHERE s.sid=%s',
-                [str(drupal_sid)])
+                [str(drupal_sid)]).first()
 
-            if users:
-                # getting user roles
-                perms = []
-                for user in users:
-                    user = user
-                    perms.append(user.perm_name)
-
-                # check if session has username, 
-                # otherwise is unauthenticated user session
+            # check if session has username, 
+            # otherwise is unauthenticated user session
+            try:
                 if user.name and user.name != '':
-                    self._login_user(user, perms)
+                    self._login_user(user)
+            except AttributeError:
+                pass
 
     # IConfigurer
 
