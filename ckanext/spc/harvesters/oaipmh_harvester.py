@@ -1,5 +1,7 @@
 import logging
 import json
+import datetime
+from uuid import uuid3, NAMESPACE_DNS
 
 import ckan.model as model
 from ckanext.harvest.model import HarvestObject
@@ -22,9 +24,11 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         try:
             config_json = json.loads(source_config)
             self.topic = config_json['topic']
+            self.force_all = config_json['force_all']
 
         except KeyError:
             self.topic = None
+            self.force_all = False
         except ValueError:
             pass
         self.userobj = model.User.get(self.user)
@@ -153,5 +157,9 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         
         harvest_object.current = True
         harvest_object.save()
+
+        if self.force_all:
+            package_dict['metadata_modified'] = datetime.datetime.now().isoformat()
+
         super(SpcOaipmhHarvester, self)._create_or_update_package(package_dict, harvest_object,
                                           package_dict_form)
