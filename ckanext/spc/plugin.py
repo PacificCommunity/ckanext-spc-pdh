@@ -3,6 +3,10 @@ import os
 import json
 import textract
 import StringIO
+import uuid
+import hashlib
+import re
+import sqlalchemy as sa
 
 from PIL import Image
 from collections import OrderedDict
@@ -132,6 +136,94 @@ class LocaleMiddleware(object):
             except IndexError:
                 pass
         return self.app(environ, start_response)
+
+class SpcUserPlugin(plugins.SingletonPlugin):
+    plugins.implements(plugins.IAuthenticator, inherit=True)
+    plugins.implements(plugins.IConfigurer)
+
+    _connection = None
+
+    @staticmethod
+    def _make_password():
+        # create a hard to guess password
+        out = ''
+        for n in xrange(8):
+            out += str(uuid.uuid4())
+        return out
+
+    @staticmethod
+    def _sanitize_drupal_username(name):
+        """Convert a drupal username (which can have spaces and other special characters) into a form that is valid in CKAN
+        """
+        # convert spaces and separators
+        name = re.sub('[ .:/]', '-', name)
+        # take out not-allowed characters
+        name = re.sub('[^a-zA-Z0-9-_]', '', name).lower()
+        # remove doubles
+        name = re.sub('--', '-', name)
+        # remove leading or trailing hyphens
+        name = name.strip('-')[:99]
+        return name
+
+    def _drupal_session_name(self):
+        server_name = toolkit.request.environ['HTTP_HOST']
+        name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
+        return name
+
+    def _login_user(self, user_data):
+        try:
+            user = toolkit.get_action('user_show')(
+                {'return_minimal': True,
+                 'keep_sensitive_data': True,
+                 'keep_email': True},
+                {'id': str(user_data.uid)}
+            )
+        except toolkit.ObjectNotFound:
+            user = None
+        if user:
+            if user_data.mail != user['email']:
+                user['email'] = user_data.mail
+                user['name'] = self._sanitize_drupal_username(user_data.name)
+                user = toolkit.get_action('user_update')({'ignore_auth': True}, user)
+        else:
+            user = {'email': user_data.mail,
+                    'id': str(user_data.uid),
+                    'name': self._sanitize_drupal_username(user_data.name),
+                    'password': self._make_password()}
+            user = toolkit.get_action('user_create')({'ignore_auth': True}, user)
+        toolkit.c.user = user['name']
+
+    # IAuthenticator
+
+    def identify(self):
+        """ This does drupal authorization.
+        The drupal session contains the drupal id of the logged in user.
+        We need to convert this to represent the ckan user. """
+
+        # If no drupal session name create one
+        drupal_sid = toolkit.request.cookies.get(self._drupal_session_name())
+        if drupal_sid:
+            engine = sa.create_engine(self._connection)
+            rows = engine.execute(
+                'SELECT u.name, u.mail, u.uid FROM users u '
+                'JOIN sessions s on s.uid=u.uid '
+                'WHERE s.sid=%s',
+                [str(drupal_sid)])
+
+            for row in rows:
+                # check if session has username, otherwise is unauthenticated user session
+                if row.name and row.name != '':
+                    self._login_user(row)
+                    break
+
+    # IConfigurer
+
+    def update_config(self, config_):
+        toolkit.add_template_directory(config_, 'spc_user/templates')
+        self._connection = config_.get('spc.drupal.db_url')
+
+        if not self._connection:
+            raise Exception('Drupal7 extension has not been configured')
 
 class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
