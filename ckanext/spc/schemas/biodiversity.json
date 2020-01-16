@@ -187,6 +187,14 @@
     {
       "field_name": "scope",
       "label": "Scope"
+    },
+    {
+      "field_name": "map_extent",
+      "label": "Map Extent",
+      "form_placeholder": "{}",
+      "form_snippet": "textarea.html",
+      "display_snippet": null
     }
+
   ]
 }
