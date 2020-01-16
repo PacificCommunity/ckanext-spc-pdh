@@ -66,7 +66,11 @@
     <div class="search-additional-control {% if not facets %}search-without-facets{% endif %}">
         {% if facets %}
             <div>
-                <div  class="show-filters-wrapper"><a class="show-filters">{{ _('Filter by') }}</a></div>
+                <div  class="show-filters-wrapper">
+                    <a class="show-filters">
+                        <div class="spc-icon-chevron-down-blue-div"></div>
+                    {{ _('Filter by') }}</a>
+                </div>
             </div>
         {% endif %}
         <div class="spc-order-by-wrapper">
@@ -104,6 +108,8 @@
                     {% block search_sortby_button %}
                         <button class="btn btn-default js-hide" type="submit">{{ _('Go') }}</button>
                     {% endblock %}
+                    <div class="spc-icon-chevron-down-blue-div">
+                    </div>
                 </div>
             {% endif %}
         </div>

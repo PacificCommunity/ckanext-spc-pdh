@@ -119,6 +119,13 @@
     }
   }
   .search-form {
+    .search-input-group {
+        position: relative;
+        top: 0;
+        #field-giant-search {
+            float: none;
+        }
+    }
     .search-additional-control {
         & > div {
             text-align: center;
@@ -133,6 +140,17 @@
                 margin-bottom: 0px;
             }
         }
+    }
+  }
+  #dataset-map {
+    .module-heading {
+        z-index: 9999;
+    }
+  }
+  #organization-datasets-search-form {
+    .input-group.search-input-group {
+        position: unset;
+        top: 0;
     }
   }
 }
@@ -371,7 +389,7 @@
                     &.active {
                         border-radius: 20px;
                         a {
-                            border-radius: 20px;
+                            border-radius: 0;
                         }
                     }
                 }

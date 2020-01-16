@@ -12,6 +12,11 @@ import ckan.lib.helpers as h
 
 from ckanext.spc.jobs import broken_links_report
 
+import ckan.model as model
+from ckan.common import _, g
+from ckan.plugins import toolkit
+from flask import Blueprint
+
 
 def switch_admin_state(id):
     if not toolkit.check_access('sysadmin', {'user': g.user}):
@@ -77,6 +82,7 @@ spc_admin = Blueprint('spc_admin', __name__)
 spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
                       view_func=switch_admin_state,
                       methods=(u'POST', ))
+
 spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        view_func=broken_links,
                        methods=(u'GET', u'POST'))

@@ -17,12 +17,18 @@
                     <td>
                         {{ q.count }}
                     </td>
-                    <td>
-                        <p class="muted">
-                            <a href="{{ h.url_for('search', q=q.query) }}">
-                                <i class="fa fa-search" title="{{ _('Search') }}"></i>
+                    <td class="query-actions">
+                        <a href="{{ h.url_for('search', q=q.query) }}" class="query-search">
+                            <i class="fa fa-search" title="{{ _('Search') }}"></i>
+                        </a>
+
+                        <form action="search-queries" method="post">  
+                            <a href="">
+                                <button name="q_name" value="{{ q.query }}" type="submit" class="btn-delete" title="{{ _('Delete query') }}">
+                                    <i class="fa fa-trash" title="{{ _('Delete query') }}"></i>
+                                </button>
                             </a>
-                        </p>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

@@ -34,12 +34,17 @@ class SearchQueryController(base.BaseController):
         except logic.NotAuthorized:
             base.abort(403, _('Need to be system administrator'))
 
+        if request.method == 'POST':
+            query_name = request.POST['q_name']
+            model.Session.query(SearchQuery).filter(SearchQuery.query == query_name).delete()
+            model.Session.commit()
+            h.flash_success(_('The query has been removed'))
+
         page = h.get_page_number(request.params)
         total = model.Session.query(SearchQuery).count()
         queries = model.Session.query(SearchQuery).order_by(
             SearchQuery.count.desc()
         ).limit(PER_PAGE).offset((page - 1) * PER_PAGE)
-
         pager = h.Page(
             collection=queries,
             page=page,
