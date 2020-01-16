@@ -1,5 +1,6 @@
 import logging
 import json
+from uuid import uuid3, NAMESPACE_DNS
 
 import ckan.model as model
 from ckan.logic import check_access, get_action
@@ -79,22 +80,25 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         for group_name in groups:
             munged_name = munge_title_to_name(group_name)
             existing = model.Group.get(munged_name)
-            if existing and 'organization' == existing.type:
-                munged_name += '_group'
-            data_dict = {
-                'id': group_name,
-                'name': munged_name,
-                'title': group_name
-            }
-            try:
-                check_access('group_show', context, data_dict)
-                group = get_action('group_show')(context, data_dict)
-                logger.info('found the group ' + group['id'])
-            except Exception as e:
+            if existing:
+                if 'organization' == existing.type:
+                    munged_name += '_group'
+                    existing = model.Group.get(munged_name)
+            if existing:
+                if existing.state != 'active':
+                    existing.state = 'active'
+                    model.Session.commit()
+                group_ids.append({'id': existing.id})
+            else:
+                data_dict = {
+                    'id': uuid3(NAMESPACE_DNS, munged_name),
+                    'name': munged_name,
+                    'title': group_name
+                }
                 context['__auth_audit'] = []
                 group = get_action('group_create')(context, data_dict)
                 logger.info('created the group ' + group['id'])
-            group_ids.append({'id': group['id']})
+                group_ids.append({'id': group['id']})
 
         logger.debug('Group ids: %s' % group_ids)
         return group_ids
@@ -129,3 +133,9 @@ class SpcOaipmhHarvester(OaipmhHarvester):
 
         tags = [{'state': 'active', 'name': munge_tag(tag[:100])} for tag in tags]
         return (tags, extras)
+
+
+    def _create_or_update_package(self, package_dict, harvest_object,
+                                  package_dict_form='package_show'):
+        super(SpcOaipmhHarvester, self)._create_or_update_package(package_dict, harvest_object,
+                                          package_dict_form)

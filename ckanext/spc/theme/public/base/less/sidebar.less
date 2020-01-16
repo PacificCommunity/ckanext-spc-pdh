@@ -135,11 +135,11 @@
                         background-color: @light-blue;
                         .fa-chevron-down {
                             display: inline-block;
-                            bottom: 3px;
+                            bottom: 1px;
                         }
                         &.reverse {
                             .fa-chevron-up {
-                                top: -1px;
+                                top: 1px;
                                 display: inline-block;
                             }
                             .fa-chevron-down {
@@ -198,3 +198,139 @@
     }
   }
 }
+
+
+.nav-simple {
+    > li.nav-item {
+        border-bottom: 1px dashed #bdbdbd;
+        word-break: break-word;
+        a {
+            font-size: 13px;
+            color: #000000;
+            padding: 6px 25px 7px 0px;
+            &:hover:after, &:after {
+                position: absolute;
+                content: '+';
+                font-size: 17px;
+                font-family: Raleway;
+                background: none;
+                top: 5px;
+                right: 6px;
+                width: 10px;
+                height: 10px;
+                margin-top: 0px;
+            }
+        }
+        &.active {
+            background: transparent;
+            a {
+                background-color: transparent;
+                &:after {
+                    background: url("@{relative_root}/base/images/tag-close-side.png") 50% no-repeat;
+                    background-size: contain;
+                    right: 1px;
+                    color: transparent;
+                    border-radius: 50%;
+                    width: 20px;
+                    height: 20px;
+                    text-align: center;
+                 }
+                span {
+                    white-space: normal;
+                }
+            }
+        }
+    }
+}
+
+
+    .nav-facet {
+        display: flex;
+        flex-direction: column;
+        padding: 0 55px;
+    }
+    .module {
+        .module-content.empty {
+            padding-top: 61px;
+        }
+        .read-more {
+            cursor: pointer;
+            user-select: none;
+        }
+        .all-visible {
+            display: none;
+        }
+        &:not(.show-all) {
+            .nav-facet {
+                max-height: 320px;
+                overflow: hidden;
+            }
+        }
+        &.show-all {
+            .all-visible {
+                display: inline;
+            }
+            .not-all-visible {
+                display: none;
+            }
+        }
+        .module-heading {
+            margin-left: 6px;
+            margin-top: 10px;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            .heading-title {
+                margin-left: 5px;
+                flex: 1;
+            }
+            .heading-icon {
+                background-size: 15px;
+            }
+
+            .clear-all {
+                font-size: 10px;
+                line-height: 20px;
+                color: darken(@light-blue, 20%);
+                position: static;
+            }
+            .facet-sorter {
+                font-size: 10px;
+                line-height: 10px;
+                color: darken(@light-blue, 20%);
+                background-color: #ffffff;
+                border: solid 1px @light-blue;
+                border-radius: 5px;
+                padding: 10px;
+                margin-right: 8px;
+                position: relative;
+                .fa {
+                    display: none;
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+                &.active {
+                    color: #ffffff;
+                    background-color: @light-blue;
+                    .fa-chevron-down {
+                        display: inline-block;
+                        bottom: 1px;
+                    }
+                    &.reverse {
+                        .fa-chevron-up {
+                            top: 1px;
+                            display: inline-block;
+                        }
+                        .fa-chevron-down {
+                            display: none;
+                        }
+                    }
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }

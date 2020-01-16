@@ -1,12 +1,14 @@
 import logging
 import os
 import json
+import textract
+import StringIO
 import uuid
 import hashlib
 import re
-
-import textract
 import sqlalchemy as sa
+
+from PIL import Image
 from collections import OrderedDict
 from six import string_types
 
@@ -14,8 +16,11 @@ import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+from ckan.lib.uploader import Upload as DefaultUpload
+from ckan.lib.uploader import ResourceUpload
 from ckan.lib.plugins import DefaultTranslation
 from ckan.common import _
+from ckan.common import config
 import ckanext.scheming.helpers as scheming_helpers
 
 import ckanext.spc.helpers as spc_helpers
@@ -79,6 +84,43 @@ def _redefine_create_license_list(self, *args, **kwargs):
 LicenseRegister._create_license_list = _redefine_create_license_list
 
 
+class Upload(DefaultUpload):
+    def update_data_dict(self, data_dict, url_field, file_field, clear_field):
+        '''
+        Resize and optimize logo image before upload
+        '''
+        uploaded_file = data_dict.get('logo_upload')
+        
+        try:
+            img = Image.open(uploaded_file)
+        except (IOError, AttributeError):
+            super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
+            return
+
+        size = img.size
+        while True:
+            if size[0] < 350:
+                break
+            size = map(lambda x: int(x*0.75), size)
+            
+        img = img.resize(size, Image.LANCZOS)
+        file = StringIO.StringIO()
+
+        format = uploaded_file.filename.split('.')[-1].upper()
+        format = 'JPEG' if format == 'JPG' else 'PNG'
+
+        try:
+            img.save(file,
+                 format=format,
+                 optimize=True,
+                 subsampling=0)
+        except Exception:
+            super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
+            
+        data_dict['logo_upload'].stream = file
+
+        super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
+
 class LocaleMiddleware(object):
     def __init__(self, app, config):
         self.app = app
@@ -94,7 +136,6 @@ class LocaleMiddleware(object):
             except IndexError:
                 pass
         return self.app(environ, start_response)
-
 
 class SpcUserPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IAuthenticator, inherit=True)
@@ -184,7 +225,6 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         if not self._connection:
             raise Exception('Drupal7 extension has not been configured')
 
-
 class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
@@ -199,11 +239,18 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(IIngest)
     plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IUploader, inherit=True)
+    
+    # IUploader
+    def get_uploader(self, upload_to, old_filename):
+        return Upload(upload_to, old_filename)
 
-    # IMiddleware
+    def get_resource_uploader(self, data_dict):
+        return ResourceUpload(data_dict)
 
-    def make_middleware(self, app, config):
-        return LocaleMiddleware(app, config)
+    # IBlueprint
+    def get_blueprint(self):
+        return blueprints
 
     # IBlueprint
     def get_blueprint(self):
@@ -238,6 +285,13 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                                 ':SearchQueryController'),
                     action='index',
                     ckan_icon='search-plus')
+
+        # CKAN login form can be accessed in the debug mode
+        if not config.get('debug', False):
+            map.redirect('/user/login', spc_helpers.get_drupal_user_url('login'))
+        
+        map.redirect('/user/register', spc_helpers.get_drupal_user_url('register'))
+        map.redirect('/user/reset', '/')
 
         return map
 
