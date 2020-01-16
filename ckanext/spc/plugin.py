@@ -145,6 +145,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
+    plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IUploader, inherit=True)
     
@@ -154,6 +155,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def get_resource_uploader(self, data_dict):
         return ResourceUpload(data_dict)
+
+    # IBlueprint
+    def get_blueprint(self):
+        return blueprints
 
     # IBlueprint
     def get_blueprint(self):
@@ -221,6 +226,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_ckan_admin_tab(config_, 'search_queries.index',
                                    'Search Queries')
         toolkit.add_ckan_admin_tab(config_, 'ingest.index', 'Ingest')
+        toolkit.add_ckan_admin_tab(config_, 'spc_admin.broken_links', 'Reports')
 
     # IConfigurer
 
@@ -228,6 +234,14 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'spc')
+
+        conf_directive = 'spc.report.broken_links_filepath'
+        if not config_.get(conf_directive):
+            raise KeyError(
+                'Please, specify `{}` inside your config file'.
+                format(conf_directive)
+            )
+
 
     # ITemplateHelpers
 
