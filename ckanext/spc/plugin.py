@@ -165,32 +165,72 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         name = name.strip('-')[:99]
         return name
 
-    def _drupal_session_name(self):
+    @staticmethod
+    def _drupal_session_name():
         server_name = toolkit.request.environ['HTTP_HOST']
         name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
         return name
 
-    def _login_user(self, user_data):
+    @staticmethod
+    def _get_user(id, email):
         try:
             user = toolkit.get_action('user_show')(
                 {'return_minimal': True,
                  'keep_sensitive_data': True,
                  'keep_email': True},
-                {'id': str(user_data.uid)}
-            )
+                {'id': id})
         except toolkit.ObjectNotFound:
             user = None
+        
+        if not user:
+            try:
+                id = model.Session.query(model.User.id).filter(model.User.email==email).first()[0]
+                user = toolkit.get_action('user_show')(
+                    {'return_minimal': True,
+                    'keep_sensitive_data': True,
+                    'keep_email': True},
+                    {'id': id})
+
+            except (toolkit.ObjectNotFound, TypeError):
+                user = None
+
+        return user
+
+    def _login_user(self, user_data):
+        user = self._get_user(str(user_data.uid), user_data.mail)
+
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
-                user['name'] = self._sanitize_drupal_username(user_data.name)
-                user = toolkit.get_action('user_update')({'ignore_auth': True}, user)
+
+            user = toolkit.get_action('user_update')(
+                                     {'ignore_auth': True,
+                                     'user': ''},
+                                     user)
+
+            if user_data.name != user['name']:
+                User = model.Session.query(model.User).get(user['id'])
+                User.name = self._sanitize_drupal_username(user_data.name)
+                model.Session.commit()
+                # get user again after changes in user model
+                user = self._get_user(str(user_data.uid), user_data.mail)
+
+            if str(user_data.uid) != user['id']:
+                User = model.Session.query(model.User).get(user['id'])
+                User.id = str(user_data.uid)
+                model.Session.commit()
+                user = self._get_user(str(user_data.uid), user_data.mail)
+
         else:
             user = {'email': user_data.mail,
                     'id': str(user_data.uid),
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
-            user = toolkit.get_action('user_create')({'ignore_auth': True}, user)
+
+            user = toolkit.get_action('user_create')(
+                                      {'ignore_auth': True,
+                                      'user': ''},
+                                      user)
         toolkit.c.user = user['name']
 
     # IAuthenticator
@@ -202,19 +242,23 @@ class SpcUserPlugin(plugins.SingletonPlugin):
 
         # If no drupal session name create one
         drupal_sid = toolkit.request.cookies.get(self._drupal_session_name())
+
         if drupal_sid:
             engine = sa.create_engine(self._connection)
-            rows = engine.execute(
-                'SELECT u.name, u.mail, u.uid FROM users u '
+            user = engine.execute(
+                'SELECT u.name, u.mail, u.uid '
+                'FROM users u '
                 'JOIN sessions s on s.uid=u.uid '
                 'WHERE s.sid=%s',
-                [str(drupal_sid)])
+                [str(drupal_sid)]).first()
 
-            for row in rows:
-                # check if session has username, otherwise is unauthenticated user session
-                if row.name and row.name != '':
-                    self._login_user(row)
-                    break
+            # check if session has username, 
+            # otherwise is unauthenticated user session
+            try:
+                if user.name and user.name != '':
+                    self._login_user(user)
+            except AttributeError:
+                pass
 
     # IConfigurer
 
