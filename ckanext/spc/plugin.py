@@ -30,6 +30,8 @@ import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
 import ckanext.spc.controllers.spc_package
 from ckanext.spc.ingesters import MendeleyBib
+from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
+from ckanext.spc.model.drupal_user import DrupalUser
 
 from ckanext.harvest.model import HarvestObject
 
@@ -172,24 +174,35 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         return name
 
     @staticmethod
-    def _get_user(id, email):
-        try:
-            user = toolkit.get_action('user_show')(
-                {'return_minimal': True,
-                 'keep_sensitive_data': True,
-                 'keep_email': True},
-                {'id': id})
-        except toolkit.ObjectNotFound:
-            user = None
+    def _save_drupal_user_id(ckan_user_id, drupal_user_id):
+        user = DrupalUser.create_or_get_user(ckan_user_id, drupal_user_id)
+        model.Session.commit()
+        return user
+
+    @staticmethod
+    def _get_user(user_id, email):
+        user = None
         
-        if not user:
+        if user_id:
             try:
-                id = model.Session.query(model.User.id).filter(model.User.email==email).first()[0]
                 user = toolkit.get_action('user_show')(
                     {'return_minimal': True,
                     'keep_sensitive_data': True,
                     'keep_email': True},
-                    {'id': id})
+                    {'id': user_id})
+            except toolkit.ObjectNotFound:
+                user = None
+        
+        if not user:
+            try:
+                user_id = model.Session.query(model.User.id) \
+                               .filter(model.User.email==email) \
+                               .first()[0]
+                user = toolkit.get_action('user_show')(
+                    {'return_minimal': True,
+                    'keep_sensitive_data': True,
+                    'keep_email': True},
+                    {'id': user_id})
 
             except (toolkit.ObjectNotFound, TypeError):
                 user = None
@@ -197,7 +210,19 @@ class SpcUserPlugin(plugins.SingletonPlugin):
         return user
 
     def _login_user(self, user_data):
-        user = self._get_user(str(user_data.uid), user_data.mail)
+        # getting CKAN user if exists
+
+        ckan_uid = DrupalUser.create_or_get_user(
+            ckan_user=None,
+            drupal_user=str(user_data.uid)
+        )
+
+        try:
+            user_id = ckan_uid.ckan_user
+        except AttributeError:
+            user_id = None
+
+        user = self._get_user(user_id, user_data.mail)
 
         if user:
             if user_data.mail != user['email']:
@@ -214,16 +239,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 model.Session.commit()
                 # get user again after changes in user model
                 user = self._get_user(str(user_data.uid), user_data.mail)
-
-            if str(user_data.uid) != user['id']:
-                User = model.Session.query(model.User).get(user['id'])
-                User.id = str(user_data.uid)
-                model.Session.commit()
-                user = self._get_user(str(user_data.uid), user_data.mail)
-
         else:
             user = {'email': user_data.mail,
-                    'id': str(user_data.uid),
                     'name': self._sanitize_drupal_username(user_data.name),
                     'password': self._make_password()}
 
@@ -231,6 +248,8 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                                       {'ignore_auth': True,
                                       'user': ''},
                                       user)
+            # save drupal user ID
+            self._save_drupal_user_id(user["id"], str(user_data.uid))
         toolkit.c.user = user['name']
 
     # IAuthenticator
