@@ -224,6 +224,10 @@ class SpcUserPlugin(plugins.SingletonPlugin):
 
         user = self._get_user(user_id, user_data.mail)
 
+        # if we found user by email, we should "map" the ids
+        if user and not user_id:
+            self._save_drupal_user_id(user["id"], str(user_data.uid))
+
         if user:
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
@@ -269,13 +273,14 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 'FROM users u '
                 'JOIN sessions s on s.uid=u.uid '
                 'WHERE s.sid=%s',
-                [str(drupal_sid)]).first()
+                [str(drupal_sid)])
 
+            user_data = user.first()
             # check if session has username, 
             # otherwise is unauthenticated user session
             try:
-                if user.name and user.name != '':
-                    self._login_user(user)
+                if user_data.name and user_data.name != '':
+                    self._login_user(user_data)
             except AttributeError:
                 pass
 
