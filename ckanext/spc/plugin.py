@@ -228,17 +228,17 @@ class SpcUserPlugin(plugins.SingletonPlugin):
             if user_data.mail != user['email']:
                 user['email'] = user_data.mail
 
-            user = toolkit.get_action('user_update')(
-                                     {'ignore_auth': True,
-                                     'user': ''},
-                                     user)
+                user = toolkit.get_action('user_update')(
+                                         {'ignore_auth': True,
+                                         'user': ''},
+                                         user)
 
             if user_data.name != user['name']:
                 User = model.Session.query(model.User).get(user['id'])
                 User.name = self._sanitize_drupal_username(user_data.name)
                 model.Session.commit()
                 # get user again after changes in user model
-                user = self._get_user(str(user_data.uid), user_data.mail)
+                user = self._get_user(user_id, user_data.mail)
         else:
             user = {'email': user_data.mail,
                     'name': self._sanitize_drupal_username(user_data.name),
