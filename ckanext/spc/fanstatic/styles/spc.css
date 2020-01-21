@@ -3360,6 +3360,9 @@ table.table tr th.dataset-details {
 .dataset-read .primary .module .module-content form {
   padding: 0px 20px;
 }
+.dataset-read .primary .module .resource-list .resource-item .heading {
+  word-wrap: break-word;
+}
 .dataset-read .primary h1 {
   font-size: 16px;
   font-weight: 600;
