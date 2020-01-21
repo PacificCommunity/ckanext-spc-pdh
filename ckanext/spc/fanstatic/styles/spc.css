@@ -3736,6 +3736,11 @@ table.table tr th.dataset-details {
 .resource-view .ckanext-datapreview > iframe {
   min-height: auto;
 }
+@media (max-width: 768px) {
+  .module-resource .page-heading {
+    margin-top: 45px;
+  }
+}
 .badge-res {
   font-size: 0.8em;
   padding: 4px 7px 3px 7px;
