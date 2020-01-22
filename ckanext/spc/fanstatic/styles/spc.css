@@ -2888,7 +2888,7 @@ header.navbar > .container .collapse {
   }
 }
 .masthead #main-menu li a:hover {
-  color: #ffbc00;
+  color: #F8DA10;
 }
 .masthead #main-menu > ul > li:last-child {
   display: none;
@@ -3533,6 +3533,9 @@ table.table tr th.dataset-details {
 }
 .dataset-read .secondary .module .module-heading .data-quality-tooltip i {
   color: #fff;
+}
+.dataset-read .secondary .module .module-heading .data-quality-tooltip.pull-right {
+  margin-left: auto;
 }
 .dataset-read .secondary .module .module-content {
   padding-top: 60px;
