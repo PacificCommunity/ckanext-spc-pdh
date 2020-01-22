@@ -12,6 +12,8 @@ from alembic.config import Config
 
 from ckan.common import config
 from ckan.lib.cli import CkanCommand
+from ckanext.spc.jobs import broken_links_report
+import ckan.lib.jobs as jobs
 import ckan.lib.search as search
 
 _select = sqlalchemy.sql.select
@@ -20,6 +22,7 @@ _or_ = sqlalchemy.or_
 _and_ = sqlalchemy.and_
 
 logger = logging.getLogger(__name__)
+
 country_orgs = {
     "palau": "Palau Environment Data Portal",
     "fsm": "Federated States of Micronesia Environment Data Portal",
@@ -49,6 +52,7 @@ class SPCCommand(CkanCommand):
         db-upgrade    Upgrade database to the state of the latest migration
         fix-missed-licenses
         drop-mendeley-publications
+        broken_links_report
     ...
     """
 
@@ -199,7 +203,11 @@ class SPCCommand(CkanCommand):
                     print('\tPurged package <{}>'.format(pkg['id']))
             model.Session.commit()
         print('Done')
-   
+
+    def broken_links_report(self):
+        logger.warning("Broken links checker job started")
+        jobs.enqueue(broken_links_report)
+
     def fix_harvester_duplications(self):
         # paster spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP' -c /etc/ckan/default/production.ini
         # paster spc fix_harvester_duplications 'SPREP' -c /etc/ckan/default/production.ini
