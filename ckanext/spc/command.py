@@ -205,7 +205,6 @@ class SPCCommand(CkanCommand):
         print('Done')
 
     def broken_links_report(self):
-        logger.warning("Broken links checker job started")
         jobs.enqueue(broken_links_report)
 
     def fix_harvester_duplications(self):
