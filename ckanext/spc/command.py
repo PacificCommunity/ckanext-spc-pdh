@@ -205,7 +205,7 @@ class SPCCommand(CkanCommand):
         print('Done')
 
     def broken_links_report(self):
-        jobs.enqueue(broken_links_report)
+        jobs.enqueue(broken_links_report, timeout=7200)
 
     def fix_harvester_duplications(self):
         # paster spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP' -c /etc/ckan/default/production.ini
