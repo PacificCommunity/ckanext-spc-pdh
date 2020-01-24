@@ -3270,8 +3270,8 @@ header.navbar > .container .collapse {
   color: #000;
   border-radius: 25px 5px 5px 25px;
   border: none;
-  position: absolute;
   margin: 12px 16px 0 13px;
+  position: absolute;
   top: 0;
   left: 0px;
   right: 0px;
@@ -3342,6 +3342,9 @@ table.table tr th.dataset-details {
 }
 .query-actions .btn-delete {
   display: contents;
+}
+.module .module-heading.resource {
+  position: initial;
 }
 .dataset-read {
   display: flex;
@@ -4225,6 +4228,14 @@ button.header-menu-btn:focus {
 .nav-item.active > a span {
   white-space: normal;
   overflow: hidden;
+}
+.nav-item > a span {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.module-content .page-heading {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 .js [role='main'] .secondary .filters {
   background: #ffffff;
