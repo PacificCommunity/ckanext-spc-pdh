@@ -4479,6 +4479,11 @@ button.header-menu-btn:focus {
   background-position: 50%;
   background-size: 15px;
 }
+@media (max-width: 767px) {
+  .search-form .input-group-btn {
+    position: unset;
+  }
+}
 .search-form .filter-list {
   margin-left: 27px;
   margin-top: 37px;
