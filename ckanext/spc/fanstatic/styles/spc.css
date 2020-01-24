@@ -3271,6 +3271,7 @@ header.navbar > .container .collapse {
   border-radius: 25px 5px 5px 25px;
   border: none;
   margin: 12px 16px 0 13px;
+  position: absolute;
   top: 0;
   left: 0px;
   right: 0px;
@@ -3341,6 +3342,9 @@ table.table tr th.dataset-details {
 }
 .query-actions .btn-delete {
   display: contents;
+}
+.module .module-heading.resource {
+  position: initial;
 }
 .dataset-read {
   display: flex;
