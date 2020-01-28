@@ -2,7 +2,7 @@ import logging
 import os
 import json
 import textract
-import StringIO
+from io import StringIO
 import uuid
 import hashlib
 import re
@@ -28,7 +28,6 @@ import ckanext.spc.utils as spc_utils
 import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
-import ckanext.spc.controllers.spc_package
 from ckanext.spc.ingesters import MendeleyBib
 from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
 from ckanext.spc.model.drupal_user import DrupalUser
@@ -337,11 +336,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='package',
                     action='new')
 
-        map.connect(
-            'spc_dataset.choose_type',
-            '/dataset/new/choose_type',
-            controller='ckanext.spc.controllers.spc_package:PackageController',
-            action='choose_type')
+        # map.connect(
+        #     'spc_dataset.choose_type',
+        #     '/dataset/new/choose_type',
+        #     controller='ckanext.spc.controllers.spc_package:PackageController',
+        #     action='choose_type')
 
         return map
 

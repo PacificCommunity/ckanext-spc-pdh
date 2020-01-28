@@ -62,7 +62,7 @@ class _Implementation(CatalogueServiceWeb, object):
         ]
 
         if self._exml.getroot().tag not in valid_xpaths:
-            raise RuntimeError, 'Document is XML, but not CSW-ish'
+            raise RuntimeError('Document is XML, but not CSW-ish')
 
         # check if it's an OGC Exception
         val = self._exml.find(util.nspath_eval('ows:Exception', namespaces))
@@ -152,7 +152,7 @@ class PacGeoHarvester(CSWHarvester):
                     uuid = obj['uuid']
                     logger.info('Got identifier %s from the PacGeo', uuid)
                     guids_in_harvest.add(uuid)
-                except Exception, e:
+                except Exception as e:
                     self._save_gather_error(
                         'Error for the identifier from <%r>: %s' % (obj, e),
                         harvest_job

@@ -3,10 +3,10 @@
 import re
 import json
 import logging
-import urllib2
+from urllib.error import HTTPError
 import shapely
 
-import urlparse
+from urllib.parse import urlparse, urljoin
 
 import requests
 from operator import itemgetter, contains
@@ -96,7 +96,7 @@ class SpcSprepHarvester(HarvesterBase):
             # for record in json.loads(open('/tmp/data.json').read())['dataset']:
 
             for record in requests.get(
-                urlparse.urljoin(harvest_job.source.url, 'data.json')
+                urljoin(harvest_job.source.url, 'data.json')
             ).json()['dataset']:
                 license_id = record.get('license',
                                         'cc-by').strip('/').split('/')[-1]
@@ -113,7 +113,7 @@ class SpcSprepHarvester(HarvesterBase):
                 )
                 harvest_obj.save()
                 harvest_obj_ids.append(harvest_obj.id)
-        except urllib2.HTTPError, e:
+        except (HTTPError) as e:
             logger.exception(
                 'Gather stage failed on %s (%s): %s, %s' %
                 (harvest_job.source.url, e.fp.read(), e.reason, e.hdrs)

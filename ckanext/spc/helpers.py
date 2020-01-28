@@ -1,5 +1,5 @@
 import json
-import urlparse
+from urllib.parse import urlparse
 import logging
 import requests
 import iso639
@@ -44,7 +44,7 @@ def countries_list(countries):
     countries_list = []
     try:
         countries_list = json.loads(countries)
-    except ValueError, e:
+    except (ValueError) as e:
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
 
@@ -69,7 +69,7 @@ def spc_dataset_suggestion_path():
 
 def spc_get_available_languages():
     return filter(
-        lambda (n, _): n,
+        lambda n, _: n,
         [(lang['iso639_1'] or lang['iso639_1'], lang['name'])
          for lang in iso639.data]
     )

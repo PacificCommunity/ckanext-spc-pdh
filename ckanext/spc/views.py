@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
+import logging
 from datetime import datetime
-
 from flask import Blueprint, send_file
 
 import ckan.lib.jobs as jobs
@@ -9,13 +9,16 @@ import ckan.model as model
 from ckan.common import _, g, request
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
+import ckan.lib.plugins
+import ckan.lib.base as base
 
 from ckanext.spc.jobs import broken_links_report
+import ckanext.scheming.helpers as scheming_helpers
 
-import ckan.model as model
-from ckan.common import _, g
-from ckan.plugins import toolkit
-from flask import Blueprint
+
+log = logging.getLogger(__name__)
+render = base.render
+abort = base.abort
 
 
 def switch_admin_state(id):
@@ -76,8 +79,57 @@ def broken_links():
     return toolkit.render('admin/broken_links.html', extra_vars)
 
 
+def choose_type():
+    context = {
+        'model': model,
+        'session': model.Session,
+        'user': g.user,
+        'auth_user_obj': g.userobj
+    }
+    # Package needs to have a organization group in the call to
+    # check_access and also to save it
+    try:
+        logic.check_access('package_create', context)
+    except logic.NotAuthorized:
+        abort(403, _('Unauthorized to create a package'))
+
+    errors = {}
+    error_summary = {}
+    if 'POST' == request.method:
+        try:
+            dataset_type = request.params['type']
+        except KeyError:
+            errors = {'type': [_('Dataset type must be provided')]}
+            error_summary = {
+                key.title(): value[0]
+                for key, value in errors.items()
+            }
+        else:
+            return h.redirect_to(
+                'spc_dataset.new', package_type=dataset_type
+            )
+
+    options = [
+        {
+            'text': schema['about'],
+            'value': schema['dataset_type']
+        } for schema in
+        sorted(scheming_helpers.scheming_dataset_schemas().values())
+    ]
+    data = {
+        'form_vars': {
+            'options': options,
+            'error_summary': error_summary,
+            'errors': errors,
+        },
+        'form_snippet': 'package/snippets/choose_type_form.html'
+    }
+    return render('package/choose_type.html', data)
+
+
 spc_user = Blueprint('spc_user', __name__)
 spc_admin = Blueprint('spc_admin', __name__)
+spc_package = Blueprint('spc_package', __name__)
 
 spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
                       view_func=switch_admin_state,
@@ -86,4 +138,10 @@ spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
 spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        view_func=broken_links,
                        methods=(u'GET', u'POST'))
-blueprints = [spc_user, spc_admin]
+
+
+spc_package.add_url_rule(
+    "/dataset/new/choose_type", view_func=choose_type
+)
+
+blueprints = [spc_user, spc_admin, spc_package]

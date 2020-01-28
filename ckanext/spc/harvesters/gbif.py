@@ -1,8 +1,8 @@
 import json
 import logging
 import re
-import urllib2
-from urlparse import urljoin, urlparse
+from urllib.error import HTTPError
+from urllib.parse import urlparse, urljoin
 
 import lxml.etree as et
 import requests
@@ -69,7 +69,7 @@ class SpcGbifHarvester(HarvesterBase):
 
                 # TODO: remove
                 # break
-        except urllib2.HTTPError, e:
+        except (HTTPError) as e:
             logger.exception(
                 'Gather stage failed on %s (%s): %s, %s' %
                 (harvest_job.source.url, e.fp.read(), e.reason, e.hdrs)
@@ -79,7 +79,7 @@ class SpcGbifHarvester(HarvesterBase):
                 harvest_job
             )
             return None
-        except Exception, e:
+        except (Exception) as e:
             logger.exception(
                 'Gather stage failed on %s: %s' % (
                     harvest_job.source.url,
