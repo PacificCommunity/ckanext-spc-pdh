@@ -91,6 +91,8 @@ class PRDRPublicationsHarvester(HarvesterBase):
             length = 0
             content = ''
             for chunk in r.iter_content(chunk_size=self.CHUNK_SIZE):
+                if isinstance(chunk, bytes):
+                    chunk = chunk.decode()
                 content = content + chunk
                 length += len(chunk)
 
@@ -425,7 +427,7 @@ class PRDRPublicationsHarvester(HarvesterBase):
             # context['schema'] = package_schema
 
             # We need to explicitly provide a package ID
-            package_dict['id'] = unicode(uuid.uuid4())
+            package_dict['id'] = uuid.uuid4()
             # package_schema['id'] = [unicode]
 
             # Save reference to the package on the object
@@ -451,7 +453,7 @@ class PRDRPublicationsHarvester(HarvesterBase):
             except NotFound:
                 log.info('Update returned NotFound, trying to create new Dataset.')
                 if not harvest_object.package_id:
-                    package_dict['id'] = unicode(uuid.uuid4())
+                    package_dict['id'] = uuid.uuid4()
                     harvest_object.package_id = package_dict['id']
                     harvest_object.add()
                 else:

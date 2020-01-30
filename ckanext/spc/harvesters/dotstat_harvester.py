@@ -9,7 +9,7 @@ from ckan.lib.munge import munge_tag
 from ckanext.harvest.model import HarvestObject, HarvestObjectExtra
 from ckanext.harvest.harvesters import HarvesterBase
 from ckan.logic import get_action
-from pylons import config
+from ckantoolkit import config
 
 import logging
 log = logging.getLogger(__name__)
@@ -93,7 +93,7 @@ class SpcDotStatHarvester(HarvesterBase):
 
             return harvest_obj_ids
 
-        except Exception, e:
+        except Exception as e:
             self._save_gather_error(
                 'Unable to get content for URL: %s: %s / %s' %
                 (base_url, str(e), traceback.format_exc()), harvest_job)
@@ -127,7 +127,7 @@ class SpcDotStatHarvester(HarvesterBase):
             log.debug('successfully processed ' + harvest_object.guid)
             return True
 
-        except Exception, e:
+        except Exception as e:
             self._save_object_error(
                 ('Unable to get content for package: %s: %r / %s' %
                  (metadata_url, e, traceback.format_exc())), harvest_object)
@@ -249,7 +249,7 @@ class SpcDotStatHarvester(HarvesterBase):
                     HarvestObject.import_finished.desc()).first()
             if prev_object is not None:
                 for extra in prev_object.extras:
-                    print(extra.key, extra.value, content_hash)
+                    print((extra.key, extra.value, content_hash))
 
                     if extra.key != 'content_hash':
                         continue
@@ -278,6 +278,6 @@ def _hashify(data):
     elif isinstance(data, dict):
         checksum ^= _hashify(tuple(sorted(data.items())))
     else:
-        data = data.encode(errors='ignore') if isinstance(data, unicode) else str(data)
+        data = data.encode(errors='ignore') if isinstance(data, str) else str(data)
         checksum ^= adler32(data)
     return checksum

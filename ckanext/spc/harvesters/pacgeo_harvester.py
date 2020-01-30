@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import urllib
-import urlparse
+from urllib.parse import urlparse, urljoin, urlunparse, urlencode
 import logging
 import json
-import StringIO
+from io import StringIO
 import requests
 
 import ckan.model as model
@@ -18,7 +18,7 @@ from owslib.csw import CatalogueServiceWeb
 from owslib.etree import etree
 from owslib import util
 from owslib.namespaces import Namespaces
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 
 logger = logging.getLogger(__name__)
 
@@ -123,13 +123,13 @@ class PacGeoHarvester(CSWHarvester):
         url = harvest_job.source.url
         self._set_source_config(harvest_job.source.config)
 
-        parts = urlparse.urlparse(url)
+        parts = urlparse(url)
 
         params = {'keywords__slug__in': self.keywords, 'limit': 10000}
 
-        url = urlparse.urlunparse((
+        url = urlunparse((
             parts.scheme, parts.netloc, '/api/layers', None,
-            urllib.urlencode(params, True), None
+            urlencode(params, True), None
         ))
 
         query = model.Session.query(

@@ -38,6 +38,7 @@ from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 from ckanext.ingest.interfaces import IIngest
 from ckanext.spc.views import blueprints
+from ckanext.spc.cli import get_commnads
 
 logger = logging.getLogger(__name__)
 
@@ -307,6 +308,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IUploader, inherit=True)
+    plugins.implements(plugins.IClick)
     
     # IUploader
     def get_uploader(self, upload_to, old_filename):
@@ -330,28 +332,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IRouter
 
-    def after_map(self, map):
-        map.connect('spc_dataset.new',
-                    '/{package_type}/new',
-                    controller='package',
-                    action='new')
-
-        # map.connect(
-        #     'spc_dataset.choose_type',
-        #     '/dataset/new/choose_type',
-        #     controller='ckanext.spc.controllers.spc_package:PackageController',
-        #     action='choose_type')
-
-        return map
-
     def before_map(self, map):
-
-        map.connect('search_queries.index',
-                    '/ckan-admin/search-queries',
-                    controller=('ckanext.spc.controllers.search_queries'
-                                ':SearchQueryController'),
-                    action='index',
-                    ckan_icon='search-plus')
 
         # CKAN login form can be accessed in the debug mode
         if not config.get('debug', False):
@@ -456,7 +437,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
                 item['id'])
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
-            item['short_notes'] = h.whtext.truncate(item.get('notes', ''))
+            item['short_notes'] = h.truncate(item.get('notes', ''))
 
             org_name = item['organization']['name']
             try:
@@ -539,6 +520,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         facets_dict['type'] = _('Dataset type')
         facets_dict['member_countries'] = _('Member countries')
         return facets_dict
+
+
+    # IClick
+    def get_commands(self):
+        return get_commnads()
 
 
 def _package_is_native(id):

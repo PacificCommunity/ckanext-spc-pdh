@@ -115,3 +115,11 @@
         </div>
     </div>
 {% endblock %}
+
+  {% block search_title %}
+    {% if not error %}
+      <h2><strong>{% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}</strong></h2>
+    {% else %}
+      <h2>Error</h2>
+    {% endif %}
+  {% endblock %}

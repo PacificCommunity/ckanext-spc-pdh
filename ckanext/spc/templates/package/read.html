@@ -16,7 +16,7 @@
 		{% set format = {'publications': 'dc-rdf', 'dataset': 'dcat-rdf', 'biodiversity_data': 'eml-rdf'}[pkg.type] %}
 		<li>
 		    <a
-			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format=format) }}"
+			href="{{ h.url_for('metaexport.export', id=pkg.id, format=format) }}"
 			      target="_blank">RDF/XML</a>
 
 		</li>
@@ -24,14 +24,14 @@
 	    {% if pkg.type in ['biodiversity_data'] %}
 		<li>
 		    <a
-			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='eml-xml') }}"
+			href="{{ h.url_for('metaexport.export', id=pkg.id, format='eml-xml') }}"
 			      target="_blank">EML/XML </a>
 		</li>
 	    {% endif %}
 	    {% if pkg.type in ['geographic_data'] %}
 		<li>
 		    <a
-			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='anzlic-xml') }}"
+			href="{{ h.url_for('metaexport.export', id=pkg.id, format='anzlic-xml') }}"
 			target="_blank">XML</a>
 		</li>
 	    {% endif %}

@@ -2,7 +2,7 @@
 
 {% block page_primary_action %}
     {% if h.check_access('package_create') %}
-	<a class="btn btn-primary" href="{{ h.url_for('spc_dataset.choose_type') }}" >
+	<a class="btn btn-primary" href="{{ h.url_for('spc_package.choose_type') }}" >
 	    <i class=" fa fa-plus-square"></i>
 	    {{ _('Add Dataset') }}
 	</a>

@@ -1,5 +1,5 @@
 import json
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 import logging
 import requests
 import iso639
@@ -21,8 +21,6 @@ cache = CacheManager()
 def get_helpers():
     return dict(
         spc_get_available_languages=spc_get_available_languages,
-        url_for_logo=url_for_logo,
-        get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
         spc_dataset_suggestion_form=spc_dataset_suggestion_form,
@@ -69,34 +67,11 @@ def spc_dataset_suggestion_path():
 
 def spc_get_available_languages():
     return filter(
-        lambda n, _: n,
+        F.first,
         [(lang['iso639_1'] or lang['iso639_1'], lang['name'])
          for lang in iso639.data]
     )
 
-
-def url_for_logo(*args, **kw):
-
-    def fix_arg(arg):
-        url = urlparse.urlparse(str(arg))
-        url_is_relative = (
-            url.scheme == '' and url.netloc == ''
-            and not url.path.startswith('/')
-        )
-        if url_is_relative:
-            return '/' + url.geturl()
-        return url.geturl()
-
-    if args:
-        args = (fix_arg(args[0]), ) + args[1:]
-
-    my_url = _routes_default_url_for(*args, **kw)
-    return my_url
-
-
-def get_conf_site_url():
-    site_url = config.get('ckan.site_url', None)
-    return site_url
 
 def get_max_image_size():
     return int(config.get('ckan.max_image_size', 2))
@@ -234,9 +209,9 @@ def spc_link_to_identifier(id):
 
 def get_drupal_user_url(action, current_url=''):
 
-    current_url_parsed = urlparse.urlparse(str(current_url))
+    current_url_parsed = urlparse(str(current_url))
     drupal_url = config.get('drupal.site_url') or current_url
-    url = urlparse.urlparse(str(drupal_url))
+    url = urlparse(str(drupal_url))
     return_url = 'destination=' + current_url_parsed.path if current_url_parsed.path else '' 
     
     if action == 'login':
@@ -247,6 +222,6 @@ def get_drupal_user_url(action, current_url=''):
         path = '/user/logout'
     else:
         path = ''
-    result_url = urlparse.urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
+    result_url = urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
     
     return result_url

@@ -383,7 +383,7 @@ def _dumb_parse(e, keys, with_empty=False):
                 t.strip() for t in e.xpath(selector + '/text()') +
                 e.xpath(selector + '/para/text()')
             ]
-            value = filter(None, value)
+            value = list(filter(None, value))
         else:
             value = _text(e.find(selector)) or '\n\n'.join(
                 e.xpath(selector + '//para/text()') or []
