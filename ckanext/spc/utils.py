@@ -93,8 +93,7 @@ def count_stars(pkg_dict):
 
     data_dict = dict(
         url=h.url_for(
-            controller='package',
-            action='read',
+            'dataset.read',
             id=pkg_dict['id'],
             qualified=True
         ),

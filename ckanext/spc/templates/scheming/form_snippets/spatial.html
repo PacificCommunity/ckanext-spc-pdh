@@ -40,5 +40,6 @@
     </div>
 </section>
 
-{% resource 'ckanext-spatial/spatial_query' %}
+{% set type = 'asset' if h.ckan_version() > '2.9' else 'resource' %}
+{% include 'spatial/snippets/spatial_query_' ~ type ~ '.html' %}
 {#{% resource 'ckanext-anzlic/scripts/anzlic-spatial-select.js' %} #}

@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from ckanext.ddi.harvesters.ddiharvester import NadaHarvester
 from ckanext.ddi.importer.metadata import DdiCkanMetadata
 from ckan.logic import get_action
-from pylons import config
+from ckantoolkit import config
 
 log = logging.getLogger(__name__)
 
@@ -150,7 +150,7 @@ class SpcNadaHarvester(NadaHarvester):
             else:
                 return False
         
-        except Exception, e:
+        except Exception as e:
             location = harvest_object.source.url.rstrip('/') + self._get_catalog_path(harvest_object.guid)
             self._save_object_error(
                 (

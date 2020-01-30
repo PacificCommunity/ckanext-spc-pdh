@@ -11,14 +11,18 @@ from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckan.lib.plugins
 import ckan.lib.base as base
+import ckan.logic as logic
 
 from ckanext.spc.jobs import broken_links_report
 import ckanext.scheming.helpers as scheming_helpers
+from ckanext.spc.model.search_query import SearchQuery
 
 
 log = logging.getLogger(__name__)
 render = base.render
 abort = base.abort
+
+PER_PAGE = 20
 
 
 def switch_admin_state(id):
@@ -97,7 +101,7 @@ def choose_type():
     error_summary = {}
     if 'POST' == request.method:
         try:
-            dataset_type = request.params['type']
+            dataset_type = request.form['type']
         except KeyError:
             errors = {'type': [_('Dataset type must be provided')]}
             error_summary = {
@@ -106,7 +110,7 @@ def choose_type():
             }
         else:
             return h.redirect_to(
-                'spc_dataset.new', package_type=dataset_type
+                dataset_type + '.new'
             )
 
     options = [
@@ -114,7 +118,7 @@ def choose_type():
             'text': schema['about'],
             'value': schema['dataset_type']
         } for schema in
-        sorted(scheming_helpers.scheming_dataset_schemas().values())
+        scheming_helpers.scheming_dataset_schemas().values()
     ]
     data = {
         'form_vars': {
@@ -127,9 +131,51 @@ def choose_type():
     return render('package/choose_type.html', data)
 
 
+def index():
+    context = {
+        'model': model,
+        'session': model.Session,
+        'user': g.user,
+        'auth_user_obj': g.userobj
+    }
+    # Package needs to have a organization group in the call to
+    # check_access and also to save it
+    try:
+        logic.check_access('sysadmin', context, {})
+    except logic.NotAuthorized:
+        base.abort(403, _('Need to be system administrator'))
+
+    if request.method == 'POST':
+        query_name = request.POST['q_name']
+        model.Session.query(SearchQuery).filter(SearchQuery.query == query_name).delete()
+        model.Session.commit()
+        h.flash_success(_('The query has been removed'))
+
+    page = h.get_page_number(request.params)
+    total = model.Session.query(SearchQuery).count()
+    queries = model.Session.query(SearchQuery).order_by(
+        SearchQuery.count.desc()
+    ).limit(PER_PAGE).offset((page - 1) * PER_PAGE)
+    pager = h.Page(
+        collection=queries,
+        page=page,
+        url=lambda page: h.url_for('search_queries.index', page=page),
+        item_count=total,
+        items_per_page=PER_PAGE
+    )
+
+    return render(
+        'search_queries/index.html', {
+            'queries': queries,
+            'pager': pager
+        }
+    )
+
+
 spc_user = Blueprint('spc_user', __name__)
 spc_admin = Blueprint('spc_admin', __name__)
 spc_package = Blueprint('spc_package', __name__)
+search_queries = Blueprint('search_queries', __name__)
 
 spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
                       view_func=switch_admin_state,
@@ -139,9 +185,12 @@ spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        view_func=broken_links,
                        methods=(u'GET', u'POST'))
 
-
 spc_package.add_url_rule(
-    "/dataset/new/choose_type", view_func=choose_type
+    "/dataset/new/choose_type", view_func=choose_type, methods=(u'GET', u'POST')
 )
 
-blueprints = [spc_user, spc_admin, spc_package]
+search_queries.add_url_rule(
+    "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
+)
+
+blueprints = [spc_user, spc_admin, spc_package, search_queries]

@@ -33,14 +33,14 @@
                       {% set dataset = h.dataset_display_name(pkg) %}
                       {% if pkg.organization %}
                         {% set organization = h.get_translated(pkg.organization, 'title') or pkg.organization.name %}
-                        <li>{% link_for _('Organizations'), controller='organization', action='index' %}</li>
-                        <li>{% link_for organization|truncate(30), controller='organization', action='read', id=pkg.organization.name %}</li>
+                        <li>{% link_for _('Organizations'), named_route='organization.index' %}</li>
+                        <li>{% link_for organization|truncate(30), named_route='organization.index', id=pkg.organization.name %}</li>
                       {% else %}
-                        <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
+                        <li>{% link_for _('Datasets'), named_route='dataset.search' %}</li>
                       {% endif %}
-                      <li {{ self.breadcrumb_content_selected() }}>{% link_for dataset|truncate(30), controller='package', action='read', id=pkg.name %}</li>
+                      <li {{ self.breadcrumb_content_selected() }}>{% link_for dataset|truncate(30), 'dataset.read', id=pkg.name %}</li>
                     {% else %}
-                      <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
+                      <li>{% link_for _('Datasets'), named_route='dataset.search' %}</li>
                       <li class="active"><a href="">{{ _('Create Dataset') }}</a></li>
                     {% endif %}
                   {% endblock %}
@@ -73,13 +73,13 @@
                     {% block primary_content_inner %}
                       {% block package_revision_info %}
                         {% if h.check_access('package_update', {'id':pkg.id }) %}
-                          {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-primary manage', icon='wrench' %}
+                          {% link_for _('Manage'), named_route='dataset.edit', id=pkg.name, class_='btn btn-primary manage', icon='wrench' %}
                         {% endif %}
                         {% if c.revision_date %}
                           <div class="module info alert alert-info">
                             <p class="module-content">
                               {% set timestamp = h.render_datetime(c.revision_date, with_hours=True) %}
-                              {% set url = h.url_for(controller='package', action='read', id=pkg.name) %}
+                              {% set url = h.url_for('dataset.read', id=pkg.name) %}
                               {% trans timestamp=timestamp, url=url %}This is an old revision of this dataset, as edited at {{ timestamp }}. It may differ significantly from the <a href="{{ url }}">current revision</a>.{% endtrans %}
                             </p>
                           </div>

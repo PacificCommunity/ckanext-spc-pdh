@@ -2,7 +2,7 @@
 
 {% block styles %}
     {{ super() }}
-    {% resource 'spc/styles' %}
+    {% asset 'spc/spc_css' %}
     {% set footer_url = h.get_footer_css_url() %}
     {% if footer_url %}
     	<link rel="stylesheet" href="{{ footer_url }}">
@@ -10,5 +10,5 @@
 {% endblock %}
 
 {%- block scripts %}
-    {% resource 'spc/scripts' %}
+    {% asset 'spc/spc_js' %}
 {% endblock -%}
