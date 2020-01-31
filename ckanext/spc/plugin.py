@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 from PIL import Image
 from collections import OrderedDict
-from six import string_types
+from six import string_types, ensure_binary
 
 import ckan.model as model
 import ckan.plugins as plugins
@@ -170,7 +170,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
     @staticmethod
     def _drupal_session_name():
         server_name = toolkit.request.environ['HTTP_HOST']
-        name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
+        name = 'SSESS%s' % hashlib.sha256(ensure_binary(server_name)).hexdigest()[:32]
         return name
 
     @staticmethod
