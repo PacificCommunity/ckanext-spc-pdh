@@ -106,7 +106,7 @@ class Upload(DefaultUpload):
             size = map(lambda x: int(x*0.75), size)
             
         img = img.resize(size, Image.LANCZOS)
-        file = StringIO.StringIO()
+        file = StringIO()
 
         format = uploaded_file.filename.split('.')[-1].upper()
         format = 'JPEG' if format == 'JPG' else 'PNG'
