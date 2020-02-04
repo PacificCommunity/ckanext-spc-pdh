@@ -63,8 +63,8 @@
         width: 100%;
         display: block;
         .input-group-btn {
-            position: absolute;
-            right: 10px;
+            // position: absolute;
+            // right: 10px;
             top: 0;
             .btn-lg {
                 right: 10px;
@@ -89,6 +89,12 @@
             background-position: 50%;
             background-size: 15px;
          }
+    }
+    // fix icon search responsive
+    @media (max-width: 767px) {
+        .input-group-btn {
+            position: unset;
+        }
     }
     .filter-list {
         margin-left: 27px;

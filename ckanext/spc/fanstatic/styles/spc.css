@@ -2888,7 +2888,7 @@ header.navbar > .container .collapse {
   }
 }
 .masthead #main-menu li a:hover {
-  color: #ffbc00;
+  color: #F8DA10;
 }
 .masthead #main-menu > ul > li:last-child {
   display: none;
@@ -4588,8 +4588,6 @@ button.header-menu-btn:focus {
   display: block;
 }
 .search-form .search-input-group .input-group-btn {
-  position: absolute;
-  right: 10px;
   top: 0;
 }
 .search-form .search-input-group .input-group-btn .btn-lg {
@@ -4613,6 +4611,11 @@ button.header-menu-btn:focus {
   color: transparent;
   background-position: 50%;
   background-size: 15px;
+}
+@media (max-width: 767px) {
+  .search-form .input-group-btn {
+    position: unset;
+  }
 }
 .search-form .filter-list {
   margin-left: 27px;
@@ -5044,7 +5047,7 @@ input::-ms-clear {
     padding: 15px 2px;
   }
   .masthead .logo img {
-    max-width: 72px;
+    max-width: 180px;
   }
   .navbar-toggle {
     margin: 0px;
@@ -5115,7 +5118,7 @@ input::-ms-clear {
     z-index: 9999;
   }
   #organization-datasets-search-form .input-group.search-input-group {
-    position: unset;
+    position: relative;
     top: 0;
   }
 }
