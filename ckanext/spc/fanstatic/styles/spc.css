@@ -2850,6 +2850,11 @@ header.navbar > .container {
 header.navbar > .container .collapse {
   position: unset;
 }
+@media (max-width: 767px) {
+  .header-search-wrapper .masthead {
+    height: 585px;
+  }
+}
 .masthead {
   background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 100%), url("/base/images/header.jpg");
   background-size: cover;
@@ -3533,6 +3538,9 @@ table.table tr th.dataset-details {
 }
 .dataset-read .secondary .module .module-heading .data-quality-tooltip i {
   color: #fff;
+}
+.dataset-read .secondary .module .module-heading .data-quality-tooltip.pull-right {
+  margin-left: auto;
 }
 .dataset-read .secondary .module .module-content {
   padding-top: 60px;
