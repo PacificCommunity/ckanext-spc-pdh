@@ -290,4 +290,4 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
 def _package_is_native(id):
     return not model.Session.query(HarvestObject).filter(
-        HarvestObject.package_id == id).count()
+        HarvestObject.package_id == id).first()
