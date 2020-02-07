@@ -308,6 +308,13 @@
     {
       "field_name": "hash_algorithm",
       "label": "Hash Algorithm"
+    },
+    {
+      "field_name": "map_extent",
+      "label": "Map Extent",
+      "form_placeholder": "{}",
+      "form_snippet": "textarea.html",
+      "display_snippet": null
     }
   ]
 }

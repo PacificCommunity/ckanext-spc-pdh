@@ -18,6 +18,13 @@ header.navbar {
         }
     }
 }
+@media(max-width: 767px) {
+    .header-search-wrapper {
+        .masthead {
+            height: 585px;
+        }
+    }
+}
 .masthead {
     background-image: linear-gradient(135deg, rgba(0,198,236,0.85) 0%, rgba(0,3,102,0.95) 100%), url("@{relative_root}/base/images/header.jpg");
     background-size: cover;
@@ -54,7 +61,7 @@ header.navbar {
                 }
 
                 &:hover {
-                    color: #F8DA10;
+                    color: #ffbc00;
                 }
             }
         }
@@ -471,8 +478,8 @@ header.navbar {
         color: #000;
         border-radius: 25px 5px 5px 25px;
         border: none;
-        position: absolute;
         margin: 12px 16px 0 13px;
+        position: absolute;
         top: 0;
         left: 0px;
         right: 0px;
@@ -543,5 +550,12 @@ table.table {
     }
     .btn-delete {
         display: contents;
+    }
+}
+
+// fix resource heading on resource page
+.module {
+    & .module-heading.resource {
+        position: initial;
     }
 }
