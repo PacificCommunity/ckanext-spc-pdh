@@ -3275,8 +3275,8 @@ header.navbar > .container .collapse {
   color: #000;
   border-radius: 25px 5px 5px 25px;
   border: none;
-  position: absolute;
   margin: 12px 16px 0 13px;
+  position: absolute;
   top: 0;
   left: 0px;
   right: 0px;
@@ -3348,6 +3348,9 @@ table.table tr th.dataset-details {
 .query-actions .btn-delete {
   display: contents;
 }
+.module .module-heading.resource {
+  position: initial;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
@@ -3365,6 +3368,9 @@ table.table tr th.dataset-details {
 .dataset-read .primary .module .module-content .add-to-group,
 .dataset-read .primary .module .module-content form {
   padding: 0px 20px;
+}
+.dataset-read .primary .module .resource-list .resource-item .heading {
+  word-wrap: break-word;
 }
 .dataset-read .primary h1 {
   font-size: 16px;
@@ -3741,6 +3747,11 @@ table.table tr th.dataset-details {
 }
 .resource-view .ckanext-datapreview > iframe {
   min-height: auto;
+}
+@media (max-width: 768px) {
+  .module-resource .page-heading {
+    margin-top: 45px;
+  }
 }
 .badge-res {
   font-size: 0.8em;
@@ -4225,6 +4236,14 @@ button.header-menu-btn:focus {
 .nav-item.active > a span {
   white-space: normal;
   overflow: hidden;
+}
+.nav-item > a span {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.module-content .page-heading {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 .js [role='main'] .secondary .filters {
   background: #ffffff;
