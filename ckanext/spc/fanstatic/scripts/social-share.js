@@ -55,6 +55,8 @@
       tile.classList.add('social-share--tile');
       panel.appendChild(point(tile));
     });
-    document.body.appendChild(panel);
+    if (window.parent == window) {
+      document.body.appendChild(panel);
+    }
   });
 })(jQuery);
