@@ -5,7 +5,7 @@
   display: inline-block;
   height: 45px;
   width: 32px;
-  background: url("/base/images/format-base.png") 50% no-repeat;
+  background: url("../../base/images/format-base.png") 50% no-repeat;
   background-size: cover;
   position: relative;
   margin-right: 25px;
@@ -2856,7 +2856,7 @@ header.navbar > .container .collapse {
   }
 }
 .masthead {
-  background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 100%), url("/base/images/header.jpg");
+  background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 100%), url("../../base/images/header.jpg");
   background-size: cover;
   background-position: 50% 0;
   background-attachment: fixed;
@@ -4396,7 +4396,7 @@ button.header-menu-btn:focus {
   background-color: transparent;
 }
 .secondary .filters .nav-simple > li.nav-item.active a:after {
-  background: url("/base/images/tag-close-side.png") 50% no-repeat;
+  background: url("../../base/images/tag-close-side.png") 50% no-repeat;
   background-size: contain;
   right: 1px;
   color: transparent;
@@ -4437,7 +4437,7 @@ button.header-menu-btn:focus {
   background-color: transparent;
 }
 .nav-simple > li.nav-item.active a:after {
-  background: url("/base/images/tag-close-side.png") 50% no-repeat;
+  background: url("../../base/images/tag-close-side.png") 50% no-repeat;
   background-size: contain;
   right: 1px;
   color: transparent;
@@ -4641,7 +4641,7 @@ button.header-menu-btn:focus {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: url("/base/images/tag-close.png") 50% no-repeat;
+  background: url("../../base/images/tag-close.png") 50% no-repeat;
   background-size: contain;
 }
 .search-form .search-additional-control {
