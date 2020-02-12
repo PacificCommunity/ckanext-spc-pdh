@@ -4413,14 +4413,13 @@ button.header-menu-btn:focus {
   word-break: break-word;
 }
 .nav-simple > li.nav-item a {
-  font-size: 13px;
+  font-size: 16px;
   color: #000000;
-  padding: 6px 25px 7px 0px;
+  padding: 10px 15px;
 }
 .nav-simple > li.nav-item a:hover:after,
 .nav-simple > li.nav-item a:after {
   position: absolute;
-  content: '+';
   font-size: 17px;
   font-family: Raleway;
   background: none;
@@ -4429,15 +4428,16 @@ button.header-menu-btn:focus {
   width: 10px;
   height: 10px;
   margin-top: 0px;
+  color: #000000;
 }
 .nav-simple > li.nav-item.active {
   background: transparent;
 }
 .nav-simple > li.nav-item.active a {
-  background-color: transparent;
+  background-color: #8ca0a6;
+  color: #fff;
 }
 .nav-simple > li.nav-item.active a:after {
-  background: url("../../base/images/tag-close-side.png") 50% no-repeat;
   background-size: contain;
   right: 1px;
   color: transparent;
