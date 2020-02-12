@@ -35,12 +35,19 @@
     top: 0;
     right: 0;
 }
-
 .control-group .leaflet-right.leaflet-top {
     right: 10px;
 }
+.control-group .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+    width: 26px;
+    height: 26px;
+}
 #dataset-map .module-heading {
     margin: 12px 16px 0 14px;
+}
+#dataset-map .module-heading .heading-icon {
+    background-size: 11px;
+    margin: 4px 7px 4px 3px;
 }
 .dataset-map .module-narrow #dataset-map-container {
     height: 328px;
@@ -200,6 +207,11 @@
         width: 970px;
     }
 }
+@media(max-width: 992px) {
+    #dataset-map .module-heading {
+        margin: 12px 5px 0 5px;
+    }
+}
 @media(min-width: 1200px) {
     #dataset-map #dataset-map-container {
         height: 328px;
@@ -229,4 +241,5 @@
         height: 328px;
         border-radius: 4px;
     }
+
 }
