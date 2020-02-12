@@ -3248,7 +3248,6 @@ header.navbar > .container .collapse {
   }
   .dataset-map-expanded #dataset-map .btn.apply.disabled {
     line-height: 16px;
-    background-color: transparent;
     opacity: 0.8;
   }
 }
