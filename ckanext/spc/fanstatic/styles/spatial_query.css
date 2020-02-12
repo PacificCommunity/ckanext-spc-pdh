@@ -93,6 +93,7 @@
     .leaflet-control-container .leaflet-control-zoom a:hover {
         width: 30px;
         height: 30px;
+        line-height: 32px;
     }
 }
 .dataset-map .module-content #dataset-map-container {
@@ -132,8 +133,6 @@
   display: none;
 }
 .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
-  background-image: url("../../../../../../../base/images/pencil.png");
-  background-image: url("/data/base/images/pencil.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 12px 12px;
@@ -144,7 +143,7 @@
 }
 
 .control-group .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
-    background-image: url("../../../../../../../base/images/pencil.png");
+    background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEJQTFRFODg4aWlp/Pz8x8fHcnJyZGRkQUFBU1NTc3NzmJiYhISEOTk5mZmZ+fn5v7+/g4ODbGxsZWVla2tr+Pj4MzMz////6aHwswAAABZ0Uk5T////////////////////////////AAHSwOQAAABVSURBVHjaNMxXEsAgCEVRNL3Y4LH/rcaA8nUPw0Dqk+4iSgMnwOKQKxNQDMIHdxmEWwPn9T+zBl7tD0ZX6RDeZitx2GcrIS4PalIHYvC9Ye5VPwEGABMKCgtNpfUFAAAAAElFTkSuQmCC");
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: 12px 12px;
@@ -229,8 +228,8 @@
     .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
         width: 47px;
         height: 47px;
-        background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAADR0lEQVRoQ9XaP2gTURzA8e/vKt1KRRA6mDSKg4tUBBenuvln0KLSDlpbrINisW0igoMUxMXmahFRQag6OCgVQycR1KroJsRNJ9MLOKeuNvfkekmTpmnurk0uL29s3939Pnm/3/td7iLoPGLXD2Db14AFLPP5RqGKtgYX8BHYXogxjWEMk5lKV8asJ2I9oBh3DsUwWTNVDtEPsTGgFLdSw2SnnxX/oB8iEk8j9HimeRlEH0Tsehe2PYRhvMW2F4BOD0gOwzji1IgeCBfwBdiLUg9A3iO88VwNyGCZu5uPKAcUo16B8B2Rp54QRV9zEdUAgSEy3jxELYB/yBJGPtYcRNfoTtrbv63UgNfYOLWWMIze5hS2C/gM7POK3/2/msGaHicyMVRWI6sAZ0a4KxEUIPKIxeQVIvHbCNtQ6hfIGG35U2RmMuE3u6AAJ42y06N0x++guOkGLP1YyVfNuXcKClhdgcQUohJuVjFL1rxYLQUbn04NBjS+JkIANBYREqBxiBABjUHUAwAvsMxz/vpIvfvErvEdGMZX342suONEynahgID6roQLcL4H7Pf1CbqAESIT9xG5Wjgm0ArUt9k1EVCflWgyYOsIDQBbQ2gC2DxCI8DmEJoBgiOCAtw9/3zFNjqHZZ71tQ37nOT/LnbPjU6Wl53HKv76wAqgY5Do38cglwrx1B3gfyVWAP8+gBz0+eGEBvCH0BzgjWgBQG1EiwA2RrQQoDqixQDrEcEBc1gd/WFso7V2xbV9ojvxEKUu+9xGX2KZA0TjT4AR9xh5jZU84/P4uk0rIaKJScR+h5IZ4JDHFeawrAGi3bOgBgtz57HMk3WLLMCJSojuxAJK9SDqhAdEK8DamojGVQGfqwHRDlBCxBK92Mp5Z1wcRcgUcLh036NPCpVnm5tO0cQYqHsVaZjDlqMYahr4o1MNVJZLATGRAqlWlO6K5NVPRO4i4j7QFVIsmn0Baq+hUwuIeK7GK9fyFXFSax6r4zRMLjc0sgAnF2JjMey23x7H5DDUMfLGcbLJWwHOH8pUqXiNtP6iih8IaRSpyt9UhBKhj4sI0bjzG4kLq3NFPqFwekaatvwCmRkn1bQegtOpIYdBmkzSeQzZcuM/sq/Yw1D571gAAAAASUVORK5CYII=") 50% no-repeat;
-        background-size: 25px;
+        background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEJQTFRFODg4aWlp/Pz8x8fHcnJyZGRkQUFBU1NTc3NzmJiYhISEOTk5mZmZ+fn5v7+/g4ODbGxsZWVla2tr+Pj4MzMz////6aHwswAAABZ0Uk5T////////////////////////////AAHSwOQAAABVSURBVHjaNMxXEsAgCEVRNL3Y4LH/rcaA8nUPw0Dqk+4iSgMnwOKQKxNQDMIHdxmEWwPn9T+zBl7tD0ZX6RDeZitx2GcrIS4PalIHYvC9Ye5VPwEGABMKCgtNpfUFAAAAAElFTkSuQmCC") 50% no-repeat;
+        background-size: 12px;
     
     }
     .control-group .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
