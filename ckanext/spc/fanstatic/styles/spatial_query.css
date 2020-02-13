@@ -341,10 +341,17 @@
     .dataset-map-expanded .wrapper #dataset-map {
         position: relative;
         width: auto;
+        height: 328px;
         top: 0;
         left: 0px;
         background-color: white;
-        border: 1px solid #CCC;
+        border: none;
         margin: 0;
+    }
+    .dataset-map-expanded #dataset-map .dataset-map #dataset-map-container {
+        height: 328px;
+    }
+    .dataset-map-expanded #dataset-map.module.module-narrow.module-shallow #dataset-map-edit-buttons {
+        display: none;
     }
 }
