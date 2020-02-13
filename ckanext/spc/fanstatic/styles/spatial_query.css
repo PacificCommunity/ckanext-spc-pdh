@@ -6,6 +6,10 @@
     display: none;
 } */
 
+/* .control-group class persist only at dataset creation page
+    so we need to count it
+ */
+
 /* move pencil to bottom */
 .leaflet-right.leaflet-top {
     top: auto;
@@ -243,7 +247,7 @@
         height: 250px;
     }
     .dataset-map-expanded .wrapper #dataset-map {
-        width: 970px;
+        width: 971px;
     }
     .leaflet-bar a, .leaflet-bar a:hover {
         width: 30px;
@@ -276,8 +280,8 @@
         height: 328px;
     }
     .dataset-map-expanded .wrapper #dataset-map {
-        width: 1238px;
-        max-width: 1238px;
+        width: 1239px;
+        max-width: 1239px;
     }
 }
 
@@ -295,9 +299,12 @@
         width: 30px;
         height: 30px;
     }
-    #dataset-map #dataset-map-container {
+    .control-group #dataset-map #dataset-map-container {
         height: 250px;
         border-radius: 4px;
+    }
+    #dataset-map #dataset-map-container {
+        height: 328px;
     }
     .control-group .leaflet-bar a, .leaflet-bar a:hover {
         width: 30px;
@@ -330,5 +337,14 @@
     }
     .control-group .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
         background-position: -240px 0px;
+    }
+    .dataset-map-expanded .wrapper #dataset-map {
+        position: relative;
+        width: auto;
+        top: 0;
+        left: 0px;
+        background-color: white;
+        border: 1px solid #CCC;
+        margin: 0;
     }
 }
