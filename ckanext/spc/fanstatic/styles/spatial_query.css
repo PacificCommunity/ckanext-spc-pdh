@@ -5,20 +5,41 @@
 /* .leaflet-left.leaflet-top {
     display: none;
 } */
+
 /* move pencil to bottom */
 .leaflet-right.leaflet-top {
     top: auto;
     bottom: 30px;
     right: 23px;
 }
+
 /* update pencil styles */
-#dataset-map .leaflet-draw-toolbar, #dataset-map .leaflet-control {
+#dataset-map:not(.control-group) .leaflet-bar {
     box-shadow: none;
 }
 .leaflet-touch .leaflet-control-layers,
 .leaflet-touch .leaflet-bar {
     border-color: white;
 }
+
+/* Border-radius after click on draw and remove button */
+.leaflet-draw-section .leaflet-draw-toolbar-notop a:first-child {
+	border-top-right-radius: 4px;
+}
+.leaflet-draw-section .leaflet-draw-toolbar-nobottom a:last-child {
+    border-bottom-right-radius: 4px;
+}
+
+/* No border radius on map window at ds creation page */
+.control-group .dataset-map #dataset-map-container {
+    border-radius: unset;
+}
+
+/* Hide dataset map attribution */
+#dataset-map-attribution {
+    display: none;
+}
+
 .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
     width: 30px;
     height: 30px;
@@ -41,6 +62,9 @@
 .control-group .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
     width: 26px;
     height: 26px;
+}
+.control-group .leaflet-draw.leaflet-control {
+    margin-right: 0;
 }
 #dataset-map .module-heading {
     margin: 12px 16px 0 14px;
@@ -75,29 +99,29 @@
         right: 11px;
     }
     .leaflet-bar a, .leaflet-bar a:hover {
-        width: 30px;
-        height: 30px;
+        width: 26px;
+        height: 26px;
         line-height: 32px;
     }
     .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
-        height: 30px;
-        width: 30px;
+        height: 26px;
+        width: 26px;
         background-size: 15px;
     }
     .leaflet-control-container .leaflet-control-zoom a {
-        width: 30px;
-        height: 30px;
+        width: 26px;
+        height: 26px;
         font-size: 18px;
         line-height: 32px;
     }
     .leaflet-control-container .leaflet-control-zoom a:hover {
-        width: 30px;
-        height: 30px;
+        width: 26px;
+        height: 26px;
         line-height: 32px;
     }
 }
-.dataset-map .module-content #dataset-map-container {
-  height: 280px;
+.control-group .dataset-map .module-content #dataset-map-container {
+  height: 250px;
 }
 #dataset-map-attribution {
   font-size: 11px;
@@ -147,6 +171,19 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: 12px 12px;
+}
+
+/* sprite for buttons */
+.leaflet-draw-toolbar a {
+	background-image: url('base/images/spritesheet-2x.png');
+	background-image: linear-gradient(transparent, transparent), url('base/images/spritesheet.svg');
+	background-repeat: no-repeat;
+	background-size: 270px 30px;
+}
+
+.leaflet-retina .leaflet-draw-toolbar a {
+	background-image: url('base/images/spritesheet-2x.png');
+	background-image: linear-gradient(transparent, transparent), url('base/images/spritesheet.svg');
 }
 
 @media(min-width: 768px) {
@@ -202,8 +239,31 @@
     #dataset-map #dataset-map-container {
         height: 280px;
     }
+    #dataset-map.control-group #dataset-map-container {
+        height: 250px;
+    }
     .dataset-map-expanded .wrapper #dataset-map {
         width: 970px;
+    }
+    .leaflet-bar a, .leaflet-bar a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        width: 30px;
+        height: 30px;
+    }
+    .leaflet-control-container .leaflet-control-zoom a {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        line-height: 32px;
+    }
+    .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
     }
 }
 @media(max-width: 992px) {
@@ -222,14 +282,13 @@
 }
 
 @media(max-width: 767px) {
-    .leaflet-left.leaflet-top {
+    #dataset-map:not(.control-group) .leaflet-left.leaflet-top {
         display: none;
     }
-    .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+    #dataset-map:not(.control-group) .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
         width: 47px;
         height: 47px;
-        background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEJQTFRFODg4aWlp/Pz8x8fHcnJyZGRkQUFBU1NTc3NzmJiYhISEOTk5mZmZ+fn5v7+/g4ODbGxsZWVla2tr+Pj4MzMz////6aHwswAAABZ0Uk5T////////////////////////////AAHSwOQAAABVSURBVHjaNMxXEsAgCEVRNL3Y4LH/rcaA8nUPw0Dqk+4iSgMnwOKQKxNQDMIHdxmEWwPn9T+zBl7tD0ZX6RDeZitx2GcrIS4PalIHYvC9Ye5VPwEGABMKCgtNpfUFAAAAAElFTkSuQmCC") 50% no-repeat;
-        background-size: 12px;
+        background-size: 25px;
     
     }
     .control-group .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
@@ -237,8 +296,39 @@
         height: 30px;
     }
     #dataset-map #dataset-map-container {
-        height: 328px;
+        height: 250px;
         border-radius: 4px;
     }
-
+    .control-group .leaflet-bar a, .leaflet-bar a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        height: 30px;
+        width: 30px;
+    }
+    #dataset-map.control-group .leaflet-control-layers, #dataset-map.control-group .leaflet-bar {
+        border: 2px solid rgba(0,0,0,0.2);
+    }
+    #dataset-map .leaflet-bar {
+        box-shadow: none;
+    }
+    .control-group .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+        background-position: -29px 0px;
+    }
+    .control-group .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
+        background-position: -240px 0px;
+    }
 }
