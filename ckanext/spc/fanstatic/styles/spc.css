@@ -3347,6 +3347,25 @@ table.table tr th.dataset-details {
 .query-actions .btn-delete {
   display: contents;
 }
+.module .module-heading.resource {
+  position: initial;
+}
+@media (max-width: 767px) {
+  .module-resource .page-heading {
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+  #dataset-resources .resource-list .resource-item {
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+  .secondary .resources .module-heading {
+    display: none;
+  }
+  .wrapper .primary div.module-content {
+    padding: 10px;
+  }
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
@@ -5051,7 +5070,7 @@ input::-ms-clear {
     padding: 15px 2px;
   }
   .masthead .logo img {
-    max-width: 72px;
+    max-width: 100px;
   }
   .navbar-toggle {
     margin: 0px;
