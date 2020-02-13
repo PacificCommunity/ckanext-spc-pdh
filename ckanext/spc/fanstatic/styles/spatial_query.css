@@ -269,6 +269,17 @@
         height: 30px;
         line-height: 32px;
     }
+    .control-group .leaflet-control-container .leaflet-control-zoom a {
+        width: 26px;
+        height: 26px;
+        font-size: 18px;
+        line-height: 26px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 26px;
+        height: 26px;
+        line-height: 26px;
+    }
 }
 @media(max-width: 992px) {
     #dataset-map .module-heading {
