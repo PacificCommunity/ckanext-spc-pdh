@@ -4667,7 +4667,7 @@ button.header-menu-btn:focus {
   background-size: contain;
 }
 .search-form .search-additional-control {
-  border: 1px solid #c2c2c2;
+  border: none;
   display: flex;
   align-items: center;
   margin: 0 6px;
@@ -4910,6 +4910,12 @@ input::-ms-clear {
   .module-content .search-input-group .input-group-btn .btn-lg {
     right: 10px;
   }
+}
+#organization-search-form.search-form .search-without-facets {
+  border: none;
+}
+#organization-search-form.search-form .spc-order-by-wrapper {
+  display: none;
 }
 .organization-list-page .organization-list-sidebar {
   border-bottom: 1px dashed #c6c6c6;
@@ -5339,7 +5345,7 @@ input::-ms-clear {
   }
   .module-resource + .secondary {
     margin: 10px;
-    padding: 10px 10px 20px;
+    padding: 10px;
     border: 1px solid #cdcdcd;
     border-radius: 5px;
   }
@@ -5348,7 +5354,7 @@ input::-ms-clear {
     padding-right: 10px;
   }
   .module-resource + .secondary .resources {
-    padding-bottom: 20px;
+    padding-bottom: 0;
   }
   .module-resource + .secondary .resources .module-heading {
     display: none;
