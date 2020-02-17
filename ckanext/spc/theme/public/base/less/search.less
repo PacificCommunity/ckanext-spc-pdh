@@ -109,7 +109,7 @@
         }
     }
     .search-additional-control {
-        border: 1px solid #c2c2c2;
+        border: none;
         display: flex;
         align-items: center;
         margin: 0 6px;
@@ -359,6 +359,7 @@ input::-ms-clear {
     }
 }
 
+// fix search icon position responsive
 @media(max-width: 767px) {
     .module-content {
         .search-input-group {
@@ -371,5 +372,15 @@ input::-ms-clear {
                 }
             }
         }
+    }
+}
+
+// hide wrapper border since the ordering was hidden
+#organization-search-form.search-form {
+    .search-without-facets {
+        border: none
+    }
+    .spc-order-by-wrapper {
+        display: none;
     }
 }
