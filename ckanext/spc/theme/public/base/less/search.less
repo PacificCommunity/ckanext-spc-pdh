@@ -56,19 +56,15 @@
         margin-left: 18px;
     }
     .search-input-group {
-        position: absolute;
         top: -56px;
         left: 0;
         padding: 0 15px;
         width: 100%;
         display: block;
-        .input-group-btn {
-            position: absolute;
+        & .input-group-btn {
+            position: relative;
             right: 10px;
             top: 0;
-            .btn-lg {
-                right: 10px;
-            }
         }
         #field-giant-search {
             height: 40px;
@@ -360,5 +356,20 @@ input::-ms-clear {
             }
         }
 
+    }
+}
+
+@media(max-width: 767px) {
+    .module-content {
+        .search-input-group {
+            & .input-group-btn {
+                position: absolute;
+                right: 10px;
+                top: 0;
+                .btn-lg {
+                    right: 10px;
+                }
+            }
+        }
     }
 }
