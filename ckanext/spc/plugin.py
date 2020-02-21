@@ -149,7 +149,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
     def _make_password():
         # create a hard to guess password
         out = ''
-        for n in xrange(8):
+        for n in range(8):
             out += str(uuid.uuid4())
         return out
 
