@@ -4437,6 +4437,7 @@ button.header-menu-btn:focus {
 .nav-simple > li.nav-item {
   border-bottom: 1px dashed #bdbdbd;
   word-break: break-word;
+  word-wrap: break-word;
 }
 .nav-simple > li.nav-item a {
   font-size: 16px;
