@@ -4622,9 +4622,8 @@ button.header-menu-btn:focus {
   display: block;
 }
 .search-form .search-input-group .input-group-btn {
-  position: relative;
-  right: 10px;
-  top: 0;
+  position: absolute;
+  right: 20px;
 }
 .search-form .search-input-group .input-group-btn button {
   position: absolute;
