@@ -147,9 +147,10 @@
         z-index: 9999;
     }
   }
-  #organization-datasets-search-form {
+  #organization-datasets-search-form,
+  #group-datasets-search-form {
     .input-group.search-input-group {
-        position: unset;
+        position: relative;
         top: 0;
     }
   }
@@ -166,13 +167,13 @@
     }
 }
 
-@media(max-width: 471px) {
-    .page-header {
-        .content_action {
-            float: left;
-        }
-    }
-}
+// @media(max-width: 471px) {
+//     .page-header {
+//         .content_action {
+//             float: left;
+//         }
+//     }
+// }
 @media(min-width: 768px) {
     .mobile-only { display: none;}
     .desktop-only { display: initial;}
