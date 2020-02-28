@@ -110,7 +110,7 @@ class SpcOaipmhHarvester(OaipmhHarvester):
     def _extract_tags_and_extras(self, content):
         extras = []
         tags = []
-        for key, value in content.iteritems():
+        for key, value in content.items():
             if key in self._get_mapping().values():
                 continue
             if key in ['type', 'subject']:
