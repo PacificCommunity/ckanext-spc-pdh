@@ -8,6 +8,13 @@
 		  src: url({{h.url_for_static_or_external('/vendor/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.eot')}});
 		  src: url({{h.url_for_static_or_external('/vendor/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.eot?#iefix')}}) format('embedded-opentype'), url({{h.url_for_static_or_external('/vendor/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.woff')}}) format('woff'), url({{h.url_for_static_or_external('/vendor/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.ttf')}}) format('truetype'), url({{h.url_for_static_or_external('/vendor/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')}}) format('svg');
 		}
+		.data-view-container .slick-sort-indicator-desc {
+		  background: url({{h.url_for_static_or_external('/vendor/slickgrid/2.2/images/sort-desc.gif')}});
+		}
+
+		.data-view-container .slick-sort-indicator-asc {
+		  background: url({{h.url_for_static_or_external('/vendor/slickgrid/2.2/images/sort-asc.gif')}});
+		}
 	</style>
 	{{ super() }}
 {% endblock -%}
