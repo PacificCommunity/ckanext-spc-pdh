@@ -22,11 +22,11 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         try:
             config_json = json.loads(source_config)
             self.topic = config_json['topic']
-
         except KeyError:
             self.topic = None
         except ValueError:
             pass
+        self.force_all = config_json('force_all', False)
         self.userobj = model.User.get(self.user)
 
 
