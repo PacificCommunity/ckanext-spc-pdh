@@ -469,8 +469,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 'image_display_url') or h.url_for_static(
                     '/base/images/placeholder-organization.png',
                     qualified=True)
-            if _package_is_native(item['id']):
+            # if package is native - provide next isPartof value
+            if _package_is_native(item):
                 item['isPartOf'] = 'pdh.pacificdatahub'
+            # if not - get the isPartOf value from source config
+            # or the isPartOf won't be provided!!!
             else:
                 src_type = _get_isPartOf(item['id'])
                 if src_type:
@@ -509,7 +512,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict['five_star_rating'] = spc_utils._get_stars_from_solr(
             pkg_dict['id'])
 
-        if _package_is_native(pkg_dict['id']):
+        if _package_is_native(pkg_dict):
             pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
         else:
             src_type = _get_isPartOf(pkg_dict['id'])
@@ -542,16 +545,22 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return facets_dict
 
 
-def _package_is_native(id):
-    return not model.Session.query(HarvestObject).filter(
-        HarvestObject.package_id == id).first()
+def _package_is_native(pkg_dict):
+    if pkg_dict.get('harvest_source'):
+        return False
 
-def _get_isPartOf(id):
+    return not model.Session.query(HarvestObject).filter(
+        HarvestObject.package_id == pkg_dict['id']).one_or_none()
+
+def _get_isPartOf(pkg_id):
+    # returns in this format (u'921aaa26-98fa-4c58-b2d5-bd6aebea54d1',)
+    # so we need to get 0 element
     src_id = model.Session.query(HarvestObject.harvest_source_id) \
-                             .filter(HarvestObject.package_id == id) \
-                             .first()[0]
-    config = model.Session.query(HarvestSource.config) \
-                          .filter(HarvestSource.id == src_id) \
-                          .first()[0]
+                          .filter(HarvestObject.package_id == pkg_id) \
+                          .one_or_none()[0]
+    if src_id:
+        config = model.Session.query(HarvestSource.config) \
+                              .filter(HarvestSource.id == src_id) \
+                              .one_or_none()[0]
     if config:
         return json.loads(config).get('isPartOf')
