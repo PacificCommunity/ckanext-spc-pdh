@@ -43,7 +43,7 @@ country_orgs = {
 alembic_ini = os.path.normpath(
     os.path.join(__file__, '../../../alembic.ini')
 )
-
+import pdb; pdb.set_trace()
 alembic_cfg = Config(alembic_ini)
 alembic_cfg.set_section_option(
     'alembic', 'sqlalchemy.url', config.get('sqlalchemy.url')
@@ -114,7 +114,7 @@ def fix_missed_licenses():
     broken_count = q.update({
         'license_id': 'notspecified'
     },
-                            synchronize_session=False)
+        synchronize_session=False)
     model.Session.commit()
     click.secho('{} packages were updated:'.format(broken_count))
     for id in ids:
