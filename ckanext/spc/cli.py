@@ -62,18 +62,20 @@ def spc():
 
 @spc.command('db_upgrade')
 def db_upgrade():
-    command.upgrade(self.alembic_cfg, 'head')
+    command.upgrade(alembic_cfg, 'head')
     return 'Success'
 
 
 @spc.command('db_downgrade')
 def db_downgrade():
-    command.downgrade(self.alembic_cfg, 'base')
+    command.downgrade(alembic_cfg, 'base')
     return 'Success'
 
 
 @spc.command('create_datastore')
-def create_datastore():
+@click.option('-f', '--formats', help='File formats to be pushed', default='xls,csv,xlsx')
+@click.option('-d', '--delay', help='Delay between pushes to datastore', default=1)
+def create_datastore(formats, delay):
     resources = model.Session.query(model.Resource)
     step = 20
     user = tk.get_action('get_site_user')({'ignore_auth': True})
@@ -81,10 +83,10 @@ def create_datastore():
         for res in resources.offset(offset).limit(step):
             if res.extras.get('datastore_active'):
                 continue
-            if not res.format or res.format.lower() not in self.options.formats.split(','):
+            if not res.format or res.format.lower() not in formats.lower().split(','):
                 continue
 
-            print('Pushing <{}> into datastore'.format(res.id))
+            click.secho('Pushing <{}> into datastore'.format(res.id), fg='green')
             tk.get_action('datastore_create')(
                 {'ignore_auth': True, 'user': user['name']},
                 {'resource_id': res.id, 'force': True}
@@ -94,7 +96,7 @@ def create_datastore():
                 {'ignore_auth': True, 'user': user['name']},
                 {'resource_id': res.id, 'force': True}
             )
-            sleep(self.options.delay)
+            sleep(delay)
 
     return 'Success'
 
@@ -107,17 +109,17 @@ def fix_missed_licenses():
     )
     ids = [pkg.id for pkg in q]
     if not ids:
-        print('There are no packages with missed license_id')
+        click.secho('There are no packages with missed license_id')
         return
     broken_count = q.update({
         'license_id': 'notspecified'
     },
-                            synchronize_session=False)
+        synchronize_session=False)
     model.Session.commit()
-    print('{} packages were updated:'.format(broken_count))
+    click.secho('{} packages were updated:'.format(broken_count))
     for id in ids:
         search.rebuild(id)
-        print('\t' + id)
+        click.secho('\t' + id)
 
 
 @spc.command('update_topic_names')
@@ -167,14 +169,14 @@ def drop_mendeley_publications():
         )
         if not results['count']:
             break
-        print('{} packages left'.format(results['count']))
+        click.secho('{} packages left'.format(results['count']))
         for pkg in results['results']:
             package = model.Package.get(pkg['id'])
             if package:
                 package.purge()
-                print('\tPurged package <{}>'.format(pkg['id']))
+                click.secho('\tPurged package <{}>'.format(pkg['id']))
         model.Session.commit()
-    print('Done')
+    click.secho('Done', fg='green', bold=True)
 
 
 @spc.command('broken_links_report')
@@ -185,8 +187,8 @@ def broken_links_report():
 @spc.command('fix_harvester_duplications')
 @click.argument(u'drop_source', required=True)
 def fix_harvester_duplications(drop_source):
-    # paster spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP' -c /etc/ckan/default/production.ini
-    # paster spc fix_harvester_duplications 'SPREP' -c /etc/ckan/default/production.ini
+    # ckan -c /etc/ckan/default/production.ini spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP' 
+    # ckan -c /etc/ckan/default/production.ini spc fix_harvester_duplications 'SPREP' 
 
     # Prepare HarvestObject to have munged ids for search
     formatted_harvest_objects = model.Session.query(
@@ -245,16 +247,18 @@ def fix_harvester_duplications(drop_source):
         if len(res) == 0 or len(harvest_sources_types) < 2:
             raise ValueError
     except IndexError:
-        print('Source type to drop is not defined')
-        print('paster spc fix_harvester_duplications \'SOURCE_TYPE_TO_DROP\' -c /etc/ckan/default/production.ini')
+        click.secho('Source type to drop is not defined', fg='red')
+        click.secho(
+            "ckan -c /path/to/production.ini spc fix_harvester_duplications 'src type to drop'"
+        )
         return
     except ValueError:
-        print('No duplications found')
+        click.secho('No duplications found')
         return
 
-    print('{} duplications found'.format(len(res)))    
-    print('Duplications found for source types: {}'.format(', '.join(harvest_sources_types)))
-    print('Harvest Sources IDs: {}'.format(', '.join(harvest_sources_ids)))
+    click.secho('{} duplications found'.format(len(res)))    
+    click.secho('Duplications found for source types: {}'.format(', '.join(harvest_sources_types)))
+    click.secho('Harvest Sources IDs: {}'.format(', '.join(harvest_sources_ids)))
 
     # Filter by Source
     harvest_objects_ids = model.Session.query(formatted_harvest_objects.c.id)\
@@ -285,14 +289,14 @@ def fix_harvester_duplications(drop_source):
 
     model.Session.commit()
 
-    print('Done')
+    click.secho('Done', fg='green')
 
 
 @spc.command('update_dataset_coordinates')
 @click.argument(u'new_coordinates', required=True)
 @click.argument(u'current_coordinates', required=True)
 def update_dataset_coordinates(new_coordinates, current_coordinates):
-    # EXAMPLE: paster spc update_dataset_coordinates 'COORDINATES_NEW' 'FIND_WITH_CURRENT' -c /etc/ckan/default/production.ini
+    # EXAMPLE: ckan -c /etc/ckan/default/production.ini spc update_dataset_coordinates 'COORDINATES_NEW' 'FIND_WITH_CURRENT' 
     if new_coordinates and current_coordinates:
         new_coordinates = new_coordinates
         find_with_current = current_coordinates
@@ -302,7 +306,7 @@ def update_dataset_coordinates(new_coordinates, current_coordinates):
         updated_items = []
         ds_list = [ds_extra for ds_extra in q.all() if find_with_current in ds_extra.value]
         if len(ds_list):
-            print('There are items that match, will start to update')
+            click.secho('There are items that match, will start to update.')
             for ds in ds_list:
                 q = model.Session.query(model.PackageExtra)\
                     .filter(model.PackageExtra.id == ds.id)
@@ -312,9 +316,11 @@ def update_dataset_coordinates(new_coordinates, current_coordinates):
                         })
                     updated_items.append(ds.package_id)
             model.Session.commit()
-            print('{0} items been updated. Here is the list of IDs:{1}'.format(
-                len(updated_items), updated_items))
+            click.secho(
+                '{} items been updated. Here is the list of IDs: {}'.format(
+                len(updated_items), updated_items)
+            )
         else:
-            print('No items match found.')
+            click.secho('No items match found.')
     else:
-        print('Please provide two arguments.')
+        click.secho('Please provide two arguments.')
