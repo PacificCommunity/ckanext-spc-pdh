@@ -359,11 +359,12 @@ def _get_isPartOf(pkg_id):
     # returns in this format (u'921aaa26-98fa-4c58-b2d5-bd6aebea54d1',)
     # so we need to get 0 element
     src_id = model.Session.query(HarvestObject.harvest_source_id) \
+                          .filter(HarvestObject.current == True) \
                           .filter(HarvestObject.package_id == pkg_id) \
-                          .one_or_none()
+                          .first()
     if src_id:
         config = model.Session.query(HarvestSource.config) \
                               .filter(HarvestSource.id == src_id[0]) \
-                              .one_or_none()
+                              .first()
         if config:
             return json.loads(config[0]).get('isPartOf')
