@@ -3,10 +3,12 @@ import os
 from time import sleep
 import sqlalchemy
 import logging
+import csv
 
 import ckan.model as model
 from ckanext.harvest import model as harvest_model
 import ckan.plugins.toolkit as tk
+import ckan.logic as logic
 
 from alembic import command
 from alembic.config import Config
@@ -324,3 +326,22 @@ def update_dataset_coordinates(new_coordinates, current_coordinates):
             click.secho('No items match found.')
     else:
         click.secho('Please provide two arguments.')
+
+
+@spc.command('spc_user_deletion')
+@click.argument(u'file', required=True)
+def spc_user_deletion(file):
+    site_user = logic.get_action(u'get_site_user')({u'ignore_auth': True}, {})
+    context = {u'user': site_user[u'name']}
+
+    with open(file, newline='') as csvfile:
+        read = csv.reader(csvfile)
+        for row in read:
+            usr_id = row[0]
+            user = model.User.get(usr_id)
+            if user:
+                print("Removing {0} user".format(user.name))
+                tk.get_action(u'user_delete')(context, {u'id': usr_id})
+            else:
+                print('User with ID "{0}" no exstis on the portal. Skipping...'.format(usr_id))
+    click.secho('User deletion finished.', fg='green')
