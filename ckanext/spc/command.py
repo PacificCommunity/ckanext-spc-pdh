@@ -1,10 +1,12 @@
 import logging
 import os
+import csv
 
 from time import sleep
 import ckan.model as model
 from ckanext.harvest import model as harvest_model
 import ckan.plugins.toolkit as tk
+import ckan.logic as logic
 import paste.script
 import sqlalchemy
 from alembic import command
@@ -337,3 +339,23 @@ class SPCCommand(CkanCommand):
                 print('No items match found.')
         else:
             print('Please provide two arguments.')
+
+    def spc_user_deletion(self):
+        if self.args and len(self.args) == 2:
+            file = self.args[1]
+            site_user = logic.get_action(u'get_site_user')({u'ignore_auth': True}, {})
+            context = {u'user': site_user[u'name']}
+
+            with open(file) as csvfile:
+                read = csv.reader(csvfile)
+                for row in read:
+                    usr_id = row[0]
+                    user = model.User.get(usr_id)
+                    if user:
+                        print("Removing {0} user".format(user.name))
+                        tk.get_action(u'user_delete')(context, {u'id': usr_id})
+                    else:
+                        print('User with ID "{0}" no exstis on the portal. Skipping...'.format(usr_id))
+            print('User deletion finished.')
+        else:
+            print('Please provide path to the CSV file.')
