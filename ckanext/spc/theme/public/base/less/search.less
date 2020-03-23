@@ -55,9 +55,9 @@
         color: #000000;
         margin-left: 18px;
     }
-    .search-input-group {
+    & .search-input-group {
         position: absolute;
-        top: -56px;
+        top: 0;
         left: 0;
         padding: 0 15px;
         width: 100%;
@@ -65,7 +65,9 @@
         .input-group-btn {
             position: absolute;
             right: 10px;
-            top: 0;
+            button {
+                position: absolute;
+            }
             .btn-lg {
                 right: 10px;
             }
@@ -76,13 +78,12 @@
             border-radius: 20px;
             font-size: 15px;
         }
-        .btn-lg {
+        & .btn-lg {
             background: transparent;
             box-shadow: none;
             border: none;
             position: absolute;
-            right: -7px;
-            top: -1px;
+            right: 10px;
             .spc-icon-lense;
             background-repeat: no-repeat;
             color: transparent;
@@ -360,5 +361,14 @@ input::-ms-clear {
             }
         }
 
+    }
+}
+@media(max-width: 765px) {
+    .search-form {
+        & .search-input-group {
+            .input-group-btn {
+                top: 0;
+            }
+        }
     }
 }
