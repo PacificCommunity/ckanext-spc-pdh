@@ -477,6 +477,7 @@ header.navbar {
         left: 0px;
         right: 0px;
         padding: 2px;
+        z-index: 5;
         a {
             position: absolute;
             right: 10px;
@@ -550,5 +551,61 @@ table.table {
 .module {
     & .module-heading.resource {
         position: initial;
+    }
+}
+
+// fix resource heading on resource page
+.module {
+    & .module-heading.resource {
+        position: initial;
+    }
+}
+
+@media(max-width: 767px) {
+    // break resource name to prevent overlap
+    .module-resource {
+        & .page-heading {
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+    }
+    #dataset-resources {
+        .resource-list {
+            .resource-item {
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+        }
+    }
+    // hide Resource heading on mobile view
+    .secondary {
+        .resources {
+            & .module-heading {
+                display: none;
+            }
+        }
+    }
+    .wrapper {
+        & .primary {
+            div.module-content {
+                padding: 10px;
+            }
+        }
+    }
+}
+
+// fix select2 styling
+.form-group {
+    & .controls {
+        & .select2-container {
+            height: unset;
+            padding: unset;
+            border: none;
+            .select2-search-choice {
+                a {
+                    top: 4px;
+                }
+            }
+        }
     }
 }
