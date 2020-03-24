@@ -26,7 +26,7 @@ class SpcOaipmhHarvester(OaipmhHarvester):
             self.topic = None
         except ValueError:
             pass
-        self.force_all = config_json('force_all', False)
+        self.force_all = config_json.get('force_all', False)
         self.userobj = model.User.get(self.user)
 
 
