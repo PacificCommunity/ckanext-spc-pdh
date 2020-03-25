@@ -478,12 +478,13 @@ header.navbar {
         color: #000;
         border-radius: 25px 5px 5px 25px;
         border: none;
-        position: absolute;
         margin: 12px 16px 0 13px;
+        position: absolute;
         top: 0;
         left: 0px;
         right: 0px;
         padding: 2px;
+        z-index: 5;
         a {
             position: absolute;
             right: 10px;
@@ -550,5 +551,68 @@ table.table {
     }
     .btn-delete {
         display: contents;
+    }
+}
+
+// fix resource heading on resource page
+.module {
+    & .module-heading.resource {
+        position: initial;
+    }
+}
+
+// fix resource heading on resource page
+.module {
+    & .module-heading.resource {
+        position: initial;
+    }
+}
+
+@media(max-width: 767px) {
+    // break resource name to prevent overlap
+    .module-resource {
+        & .page-heading {
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+    }
+    #dataset-resources {
+        .resource-list {
+            .resource-item {
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+        }
+    }
+    // hide Resource heading on mobile view
+    .secondary {
+        .resources {
+            & .module-heading {
+                display: none;
+            }
+        }
+    }
+    .wrapper {
+        & .primary {
+            div.module-content {
+                padding: 10px;
+            }
+        }
+    }
+}
+
+// fix select2 styling
+.form-group {
+    & .controls {
+        & .select2-container {
+            height: unset;
+            padding: unset;
+            border: none;
+            .select2-search-choice {
+                a {
+                    top: 4px;
+                }
+            }
+        }
     }
 }

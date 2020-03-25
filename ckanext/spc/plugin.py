@@ -33,7 +33,7 @@ from ckanext.spc.ingesters import MendeleyBib
 from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
 from ckanext.spc.model.drupal_user import DrupalUser
 
-from ckanext.harvest.model import HarvestObject
+from ckanext.harvest.model import HarvestObject, HarvestSource
 
 from ckan.model.license import DefaultLicense, LicenseRegister, License
 
@@ -471,6 +471,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     qualified=True)
             if _package_is_native(item['id']):
                 item['isPartOf'] = 'pdh.pacificdatahub'
+            else:
+                src_type = _get_isPartOf(item['id'])
+                if src_type:
+                    item['isPartOf'] = src_type
 
 
         if is_popular_first:
@@ -507,6 +511,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         if _package_is_native(pkg_dict['id']):
             pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
+        else:
+            src_type = _get_isPartOf(pkg_dict['id'])
+            if src_type:
+                pkg_dict['isPartOf'] = src_type
         return pkg_dict
 
     # IFacets
@@ -537,3 +545,13 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 def _package_is_native(id):
     return not model.Session.query(HarvestObject).filter(
         HarvestObject.package_id == id).count()
+
+def _get_isPartOf(id):
+    src_id = model.Session.query(HarvestObject.harvest_source_id) \
+                             .filter(HarvestObject.package_id == id) \
+                             .first()[0]
+    config = model.Session.query(HarvestSource.config) \
+                          .filter(HarvestSource.id == src_id) \
+                          .first()[0]
+    if config:
+        return json.loads(config).get('isPartOf')
