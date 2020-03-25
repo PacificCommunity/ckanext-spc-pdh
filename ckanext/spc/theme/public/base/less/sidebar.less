@@ -205,12 +205,11 @@
         border-bottom: 1px dashed #bdbdbd;
         word-break: break-word;
         a {
-            font-size: 13px;
-            color: #000000;
-            padding: 6px 25px 7px 0px;
+            font-size: 16px;
+            padding: 10px 15px;
             &:hover:after, &:after {
                 position: absolute;
-                content: '+';
+                content: '';
                 font-size: 17px;
                 font-family: Raleway;
                 background: none;
@@ -219,12 +218,14 @@
                 width: 10px;
                 height: 10px;
                 margin-top: 0px;
-            }
+                columns: #000000;
         }
         &.active {
             background: transparent;
+            color: #fff;
             a {
-                background-color: transparent;
+                background-color: #8ca0a6;
+                color: #fff;
                 &:after {
                     background: url("@{relative_root}/base/images/tag-close-side.png") 50% no-repeat;
                     background-size: contain;
@@ -334,3 +335,4 @@
             }
         }
     }
+}
