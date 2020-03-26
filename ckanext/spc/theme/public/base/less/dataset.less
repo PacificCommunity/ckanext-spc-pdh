@@ -12,6 +12,9 @@
                     padding: 0px 20px;
                 }
             }
+            .resource-list .resource-item .heading {
+                word-wrap: break-word;
+            }
         }
 
         h1 {
@@ -185,6 +188,9 @@
                 .data-quality-tooltip {
                     i {
                         color: #fff;
+                    }
+                    &.pull-right {
+                        margin-left: auto;
                     }
                 }
             }
@@ -399,6 +405,12 @@
 .resource-view {
     .ckanext-datapreview>iframe {
         min-height: auto;
+    }
+}
+
+.module-resource .page-heading {
+    @media (max-width: 768px) {
+        margin-top: 45px;
     }
 }
 

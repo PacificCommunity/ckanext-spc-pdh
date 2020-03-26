@@ -1,8 +1,10 @@
 import logging
 import json
+import datetime
 from uuid import uuid3, NAMESPACE_DNS
 
 import ckan.model as model
+from ckanext.harvest.model import HarvestObject
 from ckan.logic import check_access, get_action
 from ckan.lib.munge import munge_title_to_name, munge_tag
 import ckan.plugins.toolkit as tk
@@ -137,5 +139,28 @@ class SpcOaipmhHarvester(OaipmhHarvester):
 
     def _create_or_update_package(self, package_dict, harvest_object,
                                   package_dict_form='package_show'):
+        
+        previous_objects = model.Session.query(HarvestObject) \
+            .filter(HarvestObject.guid == harvest_object.guid) \
+            .filter(HarvestObject.current == True)
+
+        # Mark previous object as not current anymore
+        for previous_object in previous_objects:
+            previous_object.current = False
+            previous_object.add()
+
+        try:
+            existing_package_dict = self._find_existing_package(package_dict)
+            if existing_package_dict.get('id'):
+                harvest_object.package_id = munge_title_to_name(package_dict['id'])
+        except:
+            pass
+        
+        harvest_object.current = True
+        harvest_object.save()
+
+        if self.force_all:
+            package_dict['metadata_modified'] = datetime.datetime.now().isoformat()
+
         super(SpcOaipmhHarvester, self)._create_or_update_package(package_dict, harvest_object,
                                           package_dict_form)
