@@ -548,9 +548,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 def _package_is_native(pkg_dict):
     if pkg_dict.get('harvest_source'):
         return False
-
+    # if at least one harvest_object with such package id exists
+    # it's not a native package
     return not model.Session.query(HarvestObject).filter(
-        HarvestObject.package_id == pkg_dict['id']).one_or_none()
+        HarvestObject.package_id == pkg_dict['id']).first()
 
 def _get_isPartOf(pkg_id):
     # returns in this format (u'921aaa26-98fa-4c58-b2d5-bd6aebea54d1',)
