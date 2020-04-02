@@ -1,0 +1,347 @@
+# French translations for ckanext-spc.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the ckanext-spc
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-spc 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-09-05 16:20+0300\n"
+"PO-Revision-Date: 2020-04-02 12:50+0300\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.3\n"
+
+#: ckan/controllers/feed.py:244 ckan/logic/action/create.py:1396
+msgid "Organization not found"
+msgstr "Organisation non trouvée"
+
+#: ckan/controllers/group.py:305 ckan/controllers/home.py:61
+#: ckan/controllers/package.py:240 ckan/lib/helpers.py:833
+#: ckan/templates/header.html:104 ckan/templates/organization/edit_base.html:5
+#: ckan/templates/organization/edit_base.html:8
+#: ckan/templates/organization/index.html:3
+#: ckan/templates/organization/index.html:6
+#: ckan/templates/organization/index.html:18
+#: ckan/templates/organization/read_base.html:3
+#: ckan/templates/organization/read_base.html:6
+#: ckan/templates/package/base.html:14
+msgid "Organizations"
+msgstr "Organisations"
+
+#: ckan/controllers/group.py:620
+msgid "Organization has been deleted."
+msgstr "L’organisation a été supprimée."
+
+#: ckan/lib/activity_streams.py:66
+msgid "{actor} updated the organization {organization}"
+msgstr "{actor} a mis à jour l’organisation {organization}"
+
+#: ckan/lib/activity_streams.py:84
+msgid "{actor} deleted the organization {organization}"
+msgstr "{actor} a supprimé l’organisation {organization}"
+
+#: ckan/lib/activity_streams.py:100
+msgid "{actor} created the organization {organization}"
+msgstr "{actor} a créé l’organisation {organization}"
+
+#: ckan/lib/mailer.py:127 ckan/templates/home/snippets/stats.html:17
+msgid "organization"
+msgstr "organisation"
+
+#: ckan/logic/validators.py:33 ckan/logic/validators.py:42
+msgid "An organization must be provided"
+msgstr "Une organisation doit être indiquée"
+
+#: ckan/logic/validators.py:47
+msgid "Organization does not exist"
+msgstr "L’organisation n’existe pas"
+
+#: ckan/logic/validators.py:52
+msgid "You cannot add a dataset to this organization"
+msgstr "Vous ne pouvez pas ajouter de jeu de données à cette organisation"
+
+#: ckan/logic/validators.py:741
+msgid "Datasets with no organization can't be private."
+msgstr "Les jeux de données sans organisation ne peuvent pas être privés."
+
+#: ckan/logic/action/create.py:804
+msgid "Trying to create an organization as a group"
+msgstr "Tentative de création d’une organisation en tant que groupe"
+
+#: ckan/logic/action/update.py:1059
+msgid "Organization was not found."
+msgstr "L’organisation n’a pas été trouvée."
+
+#: ckan/logic/auth/create.py:38
+#, python-format
+msgid "User %s not authorized to add dataset to this organization"
+msgstr ""
+"Utilisateur %s non autorisé à ajouter des jeux de données à cette "
+"organisation"
+
+#: ckan/logic/auth/create.py:129
+#, python-format
+msgid "User %s not authorized to create organizations"
+msgstr "Utilisateur %s non autorisé à créer des organisations"
+
+#: ckan/logic/auth/delete.py:103
+#, python-format
+msgid "User %s not authorized to delete organizations"
+msgstr "Utilisateur %s non autorisé à supprimer des organisations"
+
+#: ckan/logic/auth/delete.py:107
+#, python-format
+msgid "User %s not authorized to delete organization %s"
+msgstr "Utilisateur %s non autorisé à supprimer l’organisation %s"
+
+#: ckan/logic/auth/update.py:128
+#, python-format
+msgid "User %s not authorized to edit organization %s"
+msgstr "Utilisateur %s non autorisé à modifier l’organisation %s"
+
+#: ckan/templates/group/member_new.html:80
+msgid ""
+" <p><strong>Admin:</strong> Can edit group information, as well as manage "
+"organization members.</p> <p><strong>Member:</strong> Can add/remove "
+"datasets from groups</p> "
+msgstr ""
+" <p><strong>Admin:</strong> peut modifier les informations d’un groupe et "
+"gérer les membres d’une organisation.</p> <p><strong>Membre :</strong> peut "
+"ajouter des jeux de données à des groupes et en supprimer.</p> "
+
+#: ckan/templates/home/snippets/about_text.html:1
+msgid ""
+" <p>CKAN is the world’s leading open-source data portal platform.</p> "
+"<p>CKAN is a complete out-of-the-box software solution that makes data "
+"accessible and usable – by providing tools to streamline publishing, "
+"sharing, finding and using data (including storage of data and provision of "
+"robust data APIs). CKAN is aimed at data publishers (national and regional "
+"governments, companies and organizations) wanting to make their data open "
+"and available.</p> <p>CKAN is used by governments and user groups worldwide "
+"and powers a variety of official and community data portals including "
+"portals for local, national and international government, such as the UK’s "
+"<a href=\"http://data.gov.uk\">data.gov.uk</a> and the European Union’s <a "
+"href=\"http://publicdata.eu/\">publicdata.eu</a>, the Brazilian <a href="
+"\"http://dados.gov.br/\">dados.gov.br</a>, Dutch and Netherland government "
+"portals, as well as city and municipal sites in the US, UK, Argentina, "
+"Finland and elsewhere.</p> <p>CKAN: <a href=\"http://ckan.org/\">http://"
+"ckan.org/</a><br /> CKAN Tour: <a href=\"http://ckan.org/tour/\">http://"
+"ckan.org/tour/</a><br /> Features overview: <a href=\"http://ckan.org/"
+"features/\">http://ckan.org/features/</a></p> "
+msgstr ""
+" <p>Numéro un mondial dans son domaine, CKAN est une plateforme permettant "
+"de créer des portails de données ouvertes.</p><p>Solution logicielle "
+"complète fournie clés en main, CKAN rend les données accessibles et "
+"utilisables par le biais d’outils qui en simplifient la publication, le "
+"partage, la recherche et l’utilisation (y compris le stockage de données et "
+"la fourniture d’API de données performantes). CKAN est conçu pour les "
+"éditeurs de données (administrations, entreprises et organisations "
+"nationales et régionales) souhaitant ouvrir leurs données et les mettre à "
+"disposition du public.</p> <p>CKAN est utilisé par des administrations et "
+"des groupes d’utilisateurs à travers le monde, sur différents portails de "
+"données officiels et communautaires, à savoir :des portails pour des "
+"administrations locales, nationales et internationales, comme au Royaume-"
+"Uni <a href=\\\"http://data.gov.uk\\\">data.gov.uk</a> et en Union "
+"européenne <a href=\\\"http://publicdata.eu/\\\">publicdata.eu</a>, des "
+"portails gouvernementaux, comme au Brésil<a href=\\\"http://dados.gov.br/\\"
+"\">dados.gov.br</a> et aux Pays-Bas, et des sites pour des villes et "
+"municipalités aux États-Unis, au Royaume-Uni, en Argentine, en Finlande et "
+"dans d’autres pays.</p> <p>CKAN : <a href=\\\"http://ckan.org/\\\">http://"
+"ckan.org/</a><br /> CKAN Tour : <a href=\\\"http://ckan.org/tour/\\"
+"\">http://ckan.org/tour/</a><br /> Aperçu des fonctionnalités : <a href=\\"
+"\"http://ckan.org/features/\\\">http://ckan.org/features/</a></p> "
+
+#: ckan/templates/home/snippets/stats.html:17
+msgid "organizations"
+msgstr "organisations"
+
+#: ckan/templates/organization/base_form_page.html:5
+msgid "Organization Form"
+msgstr "Formulaire organisation"
+
+#: ckan/templates/organization/bulk_process.html:88
+msgid "This organization has no datasets associated to it"
+msgstr "Aucun jeu de données n’est associé à cette organisation"
+
+#: ckan/templates/organization/confirm_delete.html:11
+msgid "Are you sure you want to delete organization - {name}?"
+msgstr "Souhaitez-vous vraiment supprimer l’organisation – {name}?"
+
+#: ckan/templates/organization/edit.html:6
+#: ckan/templates/organization/snippets/info.html:13
+#: ckan/templates/organization/snippets/info.html:16
+msgid "Edit Organization"
+msgstr "Modifier l’organisation"
+
+#: ckan/templates/organization/index.html:13
+#: ckan/templates/user/dashboard_organizations.html:7
+msgid "Add Organization"
+msgstr "Ajouter l’organisation"
+
+#: ckan/templates/organization/index.html:20
+msgid "Search organizations..."
+msgstr "Rechercher des organisations..."
+
+#: ckan/templates/organization/index.html:29
+msgid "There are currently no organizations for this site"
+msgstr "Il n’y a actuellement pas d’organisations pour ce site"
+
+#: ckan/templates/organization/member_new.html:81
+msgid ""
+" <p><strong>Admin:</strong> Can add/edit and delete datasets, as well as "
+"manage organization members.</p> <p><strong>Editor:</strong> Can add and "
+"edit datasets, but not manage organization members.</p> <p><strong>Member:</"
+"strong> Can view the organization's private datasets, but not add new "
+"datasets.</p> "
+msgstr ""
+" <p><strong>Admin :</strong>peut ajouter/modifier et supprimer des jeux de "
+"données, et gérer les membres d’une organisation.</p> <p><strong>Editeur :</"
+"strong> peut ajouter et modifier des jeux de données, mais ne peut pas "
+"gérer les membres d’une organisation.</p> <p><strong>Membre :</strong> peut "
+"visualiser les jeux de données privés d’une organisation, mais ne peut pas "
+"y ajouter de nouveaux jeux de données.</p> "
+
+#: ckan/templates/organization/new.html:3
+#: ckan/templates/organization/new.html:5
+#: ckan/templates/organization/new.html:7
+#: ckan/templates/organization/new.html:12
+msgid "Create an Organization"
+msgstr "Créer une organisation"
+
+#: ckan/templates/organization/new_organization_form.html:17
+msgid "Update Organization"
+msgstr "Mettre à jour l’organisation"
+
+#: ckan/templates/organization/new_organization_form.html:19
+msgid "Create Organization"
+msgstr "Créer l’organisation"
+
+#: ckan/templates/organization/snippets/help.html:4
+#: ckan/templates/organization/snippets/helper.html:4
+msgid "What are Organizations?"
+msgstr "Qu’est-ce qu’une organisation?"
+
+#: ckan/templates/organization/snippets/help.html:7
+msgid ""
+" <p>Organizations act like publishing departments for datasets (for "
+"example, the Department of Health). This means that datasets can be "
+"published by and belong to a department instead of an individual user.</p> "
+"<p>Within organizations, admins can assign roles and authorise its members, "
+"giving individual users the right to publish datasets from that particular "
+"organisation (e.g. Office of National Statistics).</p> "
+msgstr ""
+" <p>Une organisation est un service qui publie des jeux de données (service "
+"de santé, par exemple). Cela signifie que des jeux de données peuvent être "
+"publiés par et appartiennent à un service, et non un utilisateur.</p> <p> "
+"Au sein des organisations, les administrateurs peuvent attribuer des rôles "
+"et accorder des autorisations à leurs membres, donnant aux utilisateurs le "
+"droit de publier des jeux de données à partir d’une organisation donnée "
+"(ex. Bureau des statistiques nationales).</p> "
+
+#: ckan/templates/organization/snippets/helper.html:8
+msgid ""
+" CKAN Organizations are used to create, manage and publish collections of "
+"datasets. Users can have different roles within an Organization, depending "
+"on their level of authorisation to create, edit and publish. "
+msgstr ""
+" Les organisations CKAN permettent de créer, gérer et publier des "
+"catalogues de jeux de données. Les utilisateurs peuvent avoir différents "
+"rôles au sein d’une organisation, en fonction du niveau d’autorisation dont "
+"ils disposent pour créer, éditer et publier des données. "
+
+#: ckan/templates/organization/snippets/organization_form.html:10
+msgid "My Organization"
+msgstr "Mon organisation"
+
+#: ckan/templates/organization/snippets/organization_form.html:18
+msgid "my-organization"
+msgstr "mon-organisation"
+
+#: ckan/templates/organization/snippets/organization_form.html:20
+msgid "A little information about my organization..."
+msgstr "Quelques informations sur mon organisation..."
+
+#: ckan/templates/organization/snippets/organization_form.html:60
+msgid ""
+"Are you sure you want to delete this Organization? This will delete all the "
+"public and private datasets belonging to this organization."
+msgstr ""
+"Souhaitez-vous vraiment supprimer cette organisation ? Cette action "
+"supprimera tous les jeux de données publics et privés appartenant à cette "
+"organisation."
+
+#: ckan/templates/organization/snippets/organization_form.html:63
+msgid "Save Organization"
+msgstr "Enregistrer l’organisation"
+
+#: ckan/templates/package/snippets/cannot_create_package.html:10
+msgid "Before you can create a dataset you need to create an organization."
+msgstr ""
+"Avant de pouvoir créer un jeu de données, vous devez créer une organisation."
+
+#: ckan/templates/package/snippets/cannot_create_package.html:13
+msgid "Create a new organization"
+msgstr "Créer une nouvelle organisation"
+
+#: ckan/templates/package/snippets/cannot_create_package.html:18
+msgid "There are no organizations to which you can assign this dataset."
+msgstr "Il n’y a pas d’organisations auxquelles associer ce jeu de données."
+
+#: ckan/templates/package/snippets/cannot_create_package.html:19
+msgid ""
+"Ask a system administrator to create an organization before you can "
+"continue."
+msgstr ""
+"Demandez à un administrateur système de créer une organisation pour pouvoir "
+"continuer."
+
+#: ckan/templates/package/snippets/package_basic_fields.html:70
+#: ckan/templates/snippets/organization.html:23
+msgid "Organization"
+msgstr "Organisation"
+
+#: ckan/templates/package/snippets/package_basic_fields.html:74
+msgid "No organization"
+msgstr "Aucune organisation"
+
+#: ckan/templates/snippets/organization.html:48
+msgid "There is no description for this organization"
+msgstr "Il n’y a pas de description pour cette organisation"
+
+#: ckan/templates/snippets/search_result_text.html:27
+msgid "{number} organization found for \"{query}\""
+msgid_plural "{number} organizations found for \"{query}\""
+msgstr[0] "{number} organisation trouvée pour \"{query}\""
+msgstr[1] "{number} organisations trouvées pour \\\"{query}\\\""
+
+#: ckan/templates/snippets/search_result_text.html:28
+msgid "No organizations found for \"{query}\""
+msgstr "Aucune organisation trouvée pour \"{query}\""
+
+#: ckan/templates/snippets/search_result_text.html:29
+msgid "{number} organization found"
+msgid_plural "{number} organizations found"
+msgstr[0] "{number} organisation trouvée"
+msgstr[1] "{number} organisations trouvées"
+
+#: ckan/templates/snippets/search_result_text.html:30
+msgid "No organizations found"
+msgstr "Aucune organisation trouvée"
+
+#: ckan/templates/user/dashboard.html:21
+#: ckan/templates/user/dashboard_organizations.html:12
+msgid "My Organizations"
+msgstr "Mes organisations"
+
+#: ckan/templates/user/dashboard_organizations.html:21
+msgid "You are not a member of any organizations."
+msgstr "Vous n’êtes membre d’aucune organisation."
