@@ -415,7 +415,7 @@ class SPCCommand(CkanCommand):
             file = self.args[1]
             site_user = logic.get_action(u'get_site_user')(
                 {u'ignore_auth': True}, {})
-            context = {u'user': site_user[u'name']}
+
         else:
             error('Please, provide only a file path to CSV file with package IDs.')
 
@@ -434,10 +434,10 @@ class SPCCommand(CkanCommand):
         for idx, pkg_id in enumerate(pkg_ids, start=1):
             print('Purging packages in progress: {}/{}'.format(idx, len(pkg_ids)))
             try:
+                context = {u'user': site_user[u'name']}
                 tk.get_action('dataset_purge')(context, {'id': pkg_id})
                 print('Package {} was purged'.format(pkg_id))
             except logic.NotFound:
                 print('Dataset with id {} wasn\'t found. Skipping...'.format(pkg_id))
-                logic.check_access('dataset_purge', context, {'id': pkg_id})
 
         print('DONE')
