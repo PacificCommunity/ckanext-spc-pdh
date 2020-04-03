@@ -3352,9 +3352,6 @@ table.table tr th.dataset-details {
 .module .module-heading.resource {
   position: initial;
 }
-.module .module-heading.resource {
-  position: initial;
-}
 @media (max-width: 767px) {
   .module-resource .page-heading {
     word-wrap: break-word;
@@ -4680,6 +4677,11 @@ button.header-menu-btn:focus {
   background-position: 50%;
   background-size: 15px;
 }
+@media (max-width: 767px) {
+  .search-form .input-group-btn {
+    position: unset;
+  }
+}
 .search-form .filter-list {
   margin-left: 27px;
   margin-top: 37px;
@@ -5115,7 +5117,7 @@ input::-ms-clear {
     padding: 15px 2px;
   }
   .masthead .logo img {
-    max-width: 150px;
+    max-width: 180px;
   }
   .navbar-toggle {
     margin: 0px;
