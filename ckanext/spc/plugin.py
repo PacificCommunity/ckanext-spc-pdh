@@ -470,7 +470,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     '/base/images/placeholder-organization.png',
                     qualified=True)
             # if package is native - provide next isPartof value
-            if _package_is_native(item):
+            if _package_is_native(item['id']):
                 item['isPartOf'] = 'pdh.pacificdatahub'
             else:
                 src_type = _get_isPartOf(item['id'])
@@ -510,7 +510,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict['five_star_rating'] = spc_utils._get_stars_from_solr(
             pkg_dict['id'])
 
-        if _package_is_native(pkg_dict):
+        if _package_is_native(pkg_dict['id']):
             pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
         else:
             src_type = _get_isPartOf(pkg_dict['id'])
