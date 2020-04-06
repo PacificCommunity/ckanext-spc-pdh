@@ -402,14 +402,15 @@ class SPCCommand(CkanCommand):
         # generating report with detached datasets
         try:
             self._generate_detached_report(pkg_list)
-        except Exception as e:
-            error('Failed. An error occured: {}'.format(e))
+        except csv.Error as e:
+            error('Failed. An error occured during writing report: {}'.format(e))
 
         print('DONE')
 
     def _generate_detached_report(self, pkg_list):
         filename = 'detached_datasets.csv'
         fieldnames = (
+            'id',
             'title',
             'creator_username',
             'org_name',
@@ -417,7 +418,7 @@ class SPCCommand(CkanCommand):
             'metadata_modified'
         )
         with open(filename, 'w') as file:
-            writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=";")
+            writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()
 
             for pkg in pkg_list:
@@ -426,6 +427,7 @@ class SPCCommand(CkanCommand):
 
                 writer.writerow(
                     {
+                        'id': pkg.id,
                         'title': pkg.title.strip().encode('utf8'),
                         'creator_username': creator.name,
                         'org_name': org.name,
@@ -450,8 +452,11 @@ class SPCCommand(CkanCommand):
 
         # read all package ids from file
         with open(file) as file:
-            file = csv.reader(file)
-            pkg_ids = {id[0] for id in file}
+            file = csv.reader(file, quoting=csv.QUOTE_NONE)
+            next(file)  # skip headers
+            pkg_ids = {pkg[0].split(';')[0] for pkg in file}
+            for i in pkg_ids:
+                print(i)
 
         print('Are you sure you want to purge {} packages?'.format(len(pkg_ids)))
         print('This action is irreversible!')
