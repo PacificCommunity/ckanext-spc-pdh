@@ -390,22 +390,51 @@ class SPCCommand(CkanCommand):
             .filter(pkg.creator_user_id.in_(creator_user_ids),
                     subquery.c.package_id.is_(None))
 
-        pkg_ids = {pkg.id for pkg in detached_pkgs.all()}
-        print('{} detached datasets found'.format(len(pkg_ids)))
+        pkg_list = detached_pkgs.all()
 
-        if not pkg_ids:
+        if not pkg_list:
             print('There is no detached datasets at all')
             return
 
-        filename = 'detached_datasets.csv'
-        with open(filename, 'w') as file:
-            writer = csv.writer(file, delimiter=',')
+        print('{} detached datasets found'.format(len(pkg_list)))
+        print('Creating report .csv file')
 
-            for id in pkg_ids:
-                writer.writerow([id])
-        print('{} file created'.format(filename))
+        # generating report with detached datasets
+        try:
+            self._generate_detached_report(pkg_list)
+        except Exception as e:
+            error('Failed. An error occured: {}'.format(e))
 
         print('DONE')
+
+    def _generate_detached_report(self, pkg_list):
+        filename = 'detached_datasets.csv'
+        fieldnames = (
+            'title',
+            'creator_username',
+            'org_name',
+            'metadata_created',
+            'metadata_modified'
+        )
+        with open(filename, 'w') as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=";")
+            writer.writeheader()
+
+            for pkg in pkg_list:
+                creator = model.Session.query(model.User).get(pkg.creator_user_id)
+                org = model.Session.query(model.Group).get(pkg.owner_org)
+
+                writer.writerow(
+                    {
+                        'title': pkg.title.strip().encode('utf8'),
+                        'creator_username': creator.name,
+                        'org_name': org.name,
+                        'metadata_created': pkg.metadata_created,
+                        'metadata_modified': pkg.metadata_modified
+                    }
+                )
+
+        print('{} file created'.format(filename))
 
     def spc_del_datasets_from_list(self):
         """
