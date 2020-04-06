@@ -455,8 +455,6 @@ class SPCCommand(CkanCommand):
             file = csv.reader(file, quoting=csv.QUOTE_NONE)
             next(file)  # skip headers
             pkg_ids = {pkg[0].split(';')[0] for pkg in file}
-            for i in pkg_ids:
-                print(i)
 
         print('Are you sure you want to purge {} packages?'.format(len(pkg_ids)))
         print('This action is irreversible!')
