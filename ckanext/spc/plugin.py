@@ -472,8 +472,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             # if package is native - provide next isPartof value
             if _package_is_native(item):
                 item['isPartOf'] = 'pdh.pacificdatahub'
-            # if not - get the isPartOf value from source config
-            # or the isPartOf won't be provided!!!
             else:
                 src_type = _get_isPartOf(item['id'])
                 if src_type:
@@ -545,24 +543,17 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return facets_dict
 
 
-def _package_is_native(pkg_dict):
-    if pkg_dict.get('harvest_source'):
-        return False
-    # if at least one harvest_object with such package id exists
-    # it's not a native package
+def _package_is_native(id):
     return not model.Session.query(HarvestObject).filter(
-        HarvestObject.package_id == pkg_dict['id']).first()
+        HarvestObject.package_id == id).count()
 
-def _get_isPartOf(pkg_id):
-    # returns in this format (u'921aaa26-98fa-4c58-b2d5-bd6aebea54d1',)
-    # so we need to get 0 element
+def _get_isPartOf(id):
     src_id = model.Session.query(HarvestObject.harvest_source_id) \
-                          .filter(HarvestObject.current == True) \
-                          .filter(HarvestObject.package_id == pkg_id) \
-                          .first()
-    if src_id:
-        config = model.Session.query(HarvestSource.config) \
-                              .filter(HarvestSource.id == src_id[0]) \
-                              .first()
-        if config:
-            return json.loads(config[0]).get('isPartOf')
+                             .filter(HarvestObject.package_id == id) \
+                             .first()[0]
+    config = model.Session.query(HarvestSource.config) \
+                          .filter(HarvestSource.id == src_id) \
+                          .first()[0]
+    if config:
+        return json.loads(config).get('isPartOf')
+
