@@ -4482,15 +4482,15 @@ button.header-menu-btn:focus {
   margin-top: 0px;
   columns: #000000;
 }
-.nav-simple > li.nav-item a.active {
+.nav-simple > li.nav-item a a.active {
   background: transparent;
   color: #fff;
 }
-.nav-simple > li.nav-item a.active a {
+.nav-simple > li.nav-item a a.active a {
   background-color: #8ca0a6;
   color: #fff;
 }
-.nav-simple > li.nav-item a.active a:after {
+.nav-simple > li.nav-item a a.active a:after {
   background: url("/data/base/images/tag-close-side.png") 50% no-repeat;
   background-size: contain;
   right: 1px;
@@ -4500,7 +4500,7 @@ button.header-menu-btn:focus {
   height: 20px;
   text-align: center;
 }
-.nav-simple > li.nav-item a.active a span {
+.nav-simple > li.nav-item a a.active a span {
   white-space: normal;
 }
 .nav-simple .nav-facet {
