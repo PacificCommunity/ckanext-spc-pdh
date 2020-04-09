@@ -13,7 +13,7 @@ from alembic import command
 from alembic.config import Config
 
 from ckan.common import config
-from ckan.lib.cli import CkanCommand
+from ckan.lib.cli import CkanCommand, query_yes_no, error
 from ckanext.spc.jobs import broken_links_report
 import ckan.lib.jobs as jobs
 import ckan.lib.search as search
@@ -55,6 +55,7 @@ class SPCCommand(CkanCommand):
         fix-missed-licenses
         drop-mendeley-publications
         broken_links_report
+        spc_find_duplicate
     ...
     """
 
@@ -359,3 +360,116 @@ class SPCCommand(CkanCommand):
             print('User deletion finished.')
         else:
             print('Please provide path to the CSV file.')
+
+    def spc_find_detached_datasets(self):
+        """
+        You must provide the creator_user_id
+        Use a comma as a separator to provide multiple ids
+        """
+        if self.args and len(self.args) == 2:
+            creator_user_ids = self.args[1].split(',')
+        else:
+            error('Please, provide only the creator_user_id(s)')
+
+        # check if the file is already exist
+        # ask for rewrite confirmation
+        if os.path.isfile('detached_datasets.csv'):
+            print('File detached_datasets.csv is already exist.')
+            confirm = query_yes_no('Do you want to rewrite it?:', default='no')
+            if confirm == 'no':
+                error('Command aborted by user')
+                return
+
+        obj = harvest_model.HarvestObject
+        pkg = model.Package
+
+        # getting all packages that have no related harvest_object
+        subquery = model.Session.query(obj.package_id).distinct().subquery()
+        detached_pkgs = model.Session.query(pkg) \
+            .outerjoin(subquery, pkg.id == subquery.c.package_id) \
+            .filter(pkg.creator_user_id.in_(creator_user_ids),
+                    subquery.c.package_id.is_(None))
+
+        pkg_list = detached_pkgs.all()
+
+        if not pkg_list:
+            print('There is no detached datasets at all')
+            return
+
+        print('{} detached datasets found'.format(len(pkg_list)))
+        print('Creating report .csv file')
+
+        # generating report with detached datasets
+        try:
+            self._generate_detached_report(pkg_list)
+        except csv.Error as e:
+            error('Failed. An error occured during writing report: {}'.format(e))
+
+        print('DONE')
+
+    def _generate_detached_report(self, pkg_list):
+        filename = 'detached_datasets.csv'
+        fieldnames = (
+            'id',
+            'title',
+            'creator_username',
+            'org_name',
+            'metadata_created',
+            'metadata_modified'
+        )
+        with open(filename, 'w') as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=';')
+            writer.writeheader()
+
+            for pkg in pkg_list:
+                creator = model.Session.query(model.User).get(pkg.creator_user_id)
+                org = model.Session.query(model.Group).get(pkg.owner_org)
+
+                writer.writerow(
+                    {
+                        'id': pkg.id,
+                        'title': pkg.title.strip().encode('utf8'),
+                        'creator_username': creator.name,
+                        'org_name': org.name,
+                        'metadata_created': pkg.metadata_created,
+                        'metadata_modified': pkg.metadata_modified
+                    }
+                )
+
+        print('{} file created'.format(filename))
+
+    def spc_del_datasets_from_list(self):
+        """
+        Purge all datasets from provided list of IDs
+        """
+        if self.args and len(self.args) == 2:
+            file = self.args[1]
+            site_user = logic.get_action(u'get_site_user')(
+                {u'ignore_auth': True}, {})
+
+        else:
+            error('Please, provide only a file path to CSV file with package IDs.')
+
+        # read all package ids from file
+        with open(file) as file:
+            file = csv.reader(file, quoting=csv.QUOTE_NONE)
+            next(file)  # skip headers
+            pkg_ids = {pkg[0].split(';')[0] for pkg in file}
+
+        print('Are you sure you want to purge {} packages?'.format(len(pkg_ids)))
+        print('This action is irreversible!')
+        confirm = query_yes_no('Do you want to proceed?:', default='no')
+        if confirm == 'no':
+            error('Command aborted by user')
+            return
+
+        for idx, pkg_id in enumerate(pkg_ids, start=1):
+            print('Purging packages in progress: {}/{}'.format(idx, len(pkg_ids)))
+            try:
+                context = {u'user': site_user[u'name']}
+                tk.get_action('dataset_purge')(context, {'id': pkg_id})
+                print('Package {} was purged'.format(pkg_id))
+            except logic.NotFound:
+                print('Dataset with id {} wasn\'t found. Skipping...'.format(pkg_id))
+
+        print('DONE')
