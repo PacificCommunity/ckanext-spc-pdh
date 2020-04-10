@@ -388,7 +388,8 @@ class SPCCommand(CkanCommand):
         detached_pkgs = model.Session.query(pkg) \
             .outerjoin(subquery, pkg.id == subquery.c.package_id) \
             .filter(pkg.creator_user_id.in_(creator_user_ids),
-                    subquery.c.package_id.is_(None))
+                    subquery.c.package_id.is_(None)) \
+            .filter(pkg.type != 'harvest')
 
         pkg_list = detached_pkgs.all()
 
