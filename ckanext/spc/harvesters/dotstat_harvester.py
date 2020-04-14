@@ -2,10 +2,11 @@
 import requests
 import traceback
 from bs4 import BeautifulSoup
-
+from zlib import adler32
+import ckan.model as model
 from ckan.lib.helpers import json
 from ckan.lib.munge import munge_tag
-from ckanext.harvest.model import HarvestObject
+from ckanext.harvest.model import HarvestObject, HarvestObjectExtra
 from ckanext.harvest.harvesters import HarvesterBase
 from ckan.logic import get_action
 from pylons import config
@@ -28,14 +29,11 @@ class SpcDotStatHarvester(HarvesterBase):
         'open_data': 7,
     }
 
-
     def info(self):
         return {
             'name': 'dotstat',
             'title': '.Stat harvester for SDMX',
-            'description': (
-                'Harvests SDMX data from a .Stat instance '
-            ),
+            'description': ('Harvests SDMX data from a .Stat instance '),
             'form_config_interface': 'Text'
         }
 
@@ -49,7 +47,7 @@ class SpcDotStatHarvester(HarvesterBase):
             self.config['user'] = self.HARVEST_USER
 
         log.debug('Using config: %r' % self.config)
-    
+
     def get_endpoints(self, base_url):
         '''
         Finds all Dataflows under SPC
@@ -82,27 +80,23 @@ class SpcDotStatHarvester(HarvesterBase):
 
             except (AccessTypeNotAvailableError, KeyError):
                 log.debug('Endpoint function failed')
-                
+
             # Make a harvest object for each dataset
             # Set the GUID to the dataset's ID (DF_SDG etc.)
+
             for i, end in enumerate(endpoints):
-                harvest_obj = HarvestObject(
-                    guid=end,
-                    job=harvest_job
-                )
+                harvest_obj = HarvestObject(guid=end, job=harvest_job)
                 harvest_obj.save()
                 harvest_obj_ids.append(harvest_obj.id)
 
             log.debug('IDs: %r' % harvest_obj_ids)
 
             return harvest_obj_ids
-        
+
         except Exception, e:
             self._save_gather_error(
-                'Unable to get content for URL: %s: %s / %s'
-                % (base_url, str(e), traceback.format_exc()),
-                harvest_job
-            )
+                'Unable to get content for URL: %s: %s / %s' %
+                (base_url, str(e), traceback.format_exc()), harvest_job)
 
     # Get the SDMX formatted resource for the GUID
     # Put this in harvest_object's 'content' as text
@@ -112,16 +106,16 @@ class SpcDotStatHarvester(HarvesterBase):
 
         if not harvest_object:
             log.error('No harvest object received')
-            self._save_object_error(
-                'No harvest object received',
-                harvest_object
-            )
+            self._save_object_error('No harvest object received',
+                                    harvest_object)
             return False
 
         base_url = harvest_object.source.url
         # Build the url where we'll fetch basic metadata
         meta_suffix = '1.0/?references=all&detail=referencepartial'
-        metadata_url = '{}dataflow/SPC/{}/{}'.format(base_url, harvest_object.guid, meta_suffix)
+        metadata_url = '{}dataflow/SPC/{}/{}'.format(base_url,
+                                                     harvest_object.guid,
+                                                     meta_suffix)
 
         try:
             log.debug('Fetching content from %s' % metadata_url)
@@ -135,14 +129,10 @@ class SpcDotStatHarvester(HarvesterBase):
 
         except Exception, e:
             self._save_object_error(
-                (
-                    'Unable to get content for package: %s: %r / %s'
-                    % (metadata_url, e, traceback.format_exc())
-                ),
-                harvest_object
-            )
+                ('Unable to get content for package: %s: %r / %s' %
+                 (metadata_url, e, traceback.format_exc())), harvest_object)
             return False
-    
+
     # Parse the SDMX text and assign to correct fields of package dict
     def import_stage(self, harvest_object):
         log.debug('In DotStatHarvester import_stage')
@@ -150,10 +140,8 @@ class SpcDotStatHarvester(HarvesterBase):
 
         if not harvest_object:
             log.error('No harvest object received')
-            self._save_object_error(
-                'No harvest object received',
-                harvest_object
-            )
+            self._save_object_error('No harvest object received',
+                                    harvest_object)
             return False
 
         try:
@@ -166,69 +154,78 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['id'] = harvest_object.guid
 
             # Added thematic string
-            pkg_dict['thematic_area_string'] = ["Statistics"]
+            pkg_dict['thematic_area_string'] = ["Official Statistics"]
             
             # Get owner_org if there is one
-            source_dataset = get_action('package_show')({
-                'ignore_auth': True
-            }, {
-                'id': harvest_object.source.id
-            })
+            source_dataset = get_action('package_show')(
+                {
+                    'ignore_auth': True
+                }, {
+                    'id': harvest_object.source.id
+                })
             owner_org = source_dataset.get('owner_org')
             pkg_dict['owner_org'] = owner_org
 
             # Match other fields with tags in XML structure
-            structure = soup.find('Dataflow', attrs= {'id': pkg_dict['id']})
+            structure = soup.find('Dataflow', attrs={'id': pkg_dict['id']})
             pkg_dict['title'] = structure.find('Name').text
             pkg_dict['publisher_name'] = structure['agencyID']
             pkg_dict['version'] = structure['version']
-            
+
             # Need to change url to point to Data Explorer
-            de_url = 'https://stats.pacificdata.org/data-explorer/#/vis?locale=en&endpointId=disseminate&agencyId=SPC&code={}&version=1.0&viewerId=table&data=.&startPeriod=2005&endPeriod=2018'.format(harvest_object.guid)
+            de_url = 'https://stats.pacificdata.org/data-explorer/#/vis?locale=en&endpointId=disseminate&agencyId=SPC&code={}&version=1.0&viewerId=table&data=.&startPeriod=2005&endPeriod=2018'.format(
+                harvest_object.guid)
             pkg_dict['source'] = de_url
 
             # Set a default resource
-            pkg_dict['resources'] = [{'url': 'https://stats.pacificdata.org/data-nsi/Rest/data/SPC,{},1.0/all/?format=csv'.format(harvest_object.guid),
-                                    'format': 'CSV',
-                                    'mimetype': 'CSV',
-                                    'description': 'All data for {}'.format(pkg_dict['title']),
-                                    'name': '{} Data CSV'.format(pkg_dict['title'])}]
+            pkg_dict['resources'] = [{
+                'url':
+                'https://stats.pacificdata.org/data-nsi/Rest/data/SPC,{},1.0/all/?format=csv'
+                .format(harvest_object.guid),
+                'format':
+                'CSV',
+                'mimetype':
+                'CSV',
+                'description':
+                'All data for {}'.format(pkg_dict['title']),
+                'name':
+                '{} Data CSV'.format(pkg_dict['title'])
+            }]
 
             # Get notes/description if it exists
             try:
                 pkg_dict['notes'] = structure.find('Description').text
-            except:  
+            except:
                 pkg_dict['notes'] = ''
-            
             '''
             May need modifying when DF_SDG is broken into several DFs
             This gets the list of indicators for SDG-related dataflows
             Stores the list of strings in 'alternate_identifier' field
             '''
-            if soup.find('Codelist', attrs={'id': 'CL_SDG_SERIES'}) is not None:
+            if soup.find('Codelist', attrs={'id': 'CL_SDG_SERIES'
+                                            }) is not None:
                 pkg_dict['alternate_identifier'] = []
                 codelist = soup.find('Codelist', attrs={'id': 'CL_SDG_SERIES'})
                 for indic in codelist.findAll('Name'):
                     if indic.text == 'SDG Indicator or Series':
                         continue
                     pkg_dict['alternate_identifier'].append(indic.text)
-
             '''
             When support for metadata endpoints arrives in .Stat, here is how more metadata may be found:
             # Use the metadata/flow endpoint
             metadata = requests.get('{}metadata/data/{}/all?detail=full'.format(base_url, harvest_object.guid))
-            
+
             # Parse with bs4
             parsed = BeautifulSoup(metadata.text, 'xml')
-            
+
             # Now search for tags which may be useful as metadata
             # example: getting the name and definition of metadata set
             # (may need tweaking depending on SPC's metadata setup)
-            
+
             # We can get name from the metadata structure
             set = parsed.find('MetadataSet')
             pkg_dict['name'] = set.find('Name').text
-            
+
             # Then we can go to the reported attribute structure for more details
             detail = set.find('ReportedAttribute', attrs={'id': 'DEF'})
             pkg_dict['notes'] = detail.find('StructuredText', attrs={'lang': 'en'})
@@ -237,20 +234,50 @@ class SpcDotStatHarvester(HarvesterBase):
             '''
 
             log.debug('package dict: %s' % pkg_dict)
+            content_hash = str(_hashify(pkg_dict))
+            harvest_object.extras = [
+                HarvestObjectExtra(key='content_hash',
+                                   value=content_hash)
+            ]
 
+            harvest_object.save()
+
+            prev_object = model.Session.query(HarvestObject).filter(
+                HarvestObject.source == harvest_object.source,
+                HarvestObject.guid == harvest_object.guid,
+                ~HarvestObject.import_finished.is_(None)).order_by(
+                    HarvestObject.import_finished.desc()).first()
+            if prev_object is not None:
+                for extra in prev_object.extras:
+                    print(extra.key, extra.value, content_hash)
+
+                    if extra.key != 'content_hash':
+                        continue
+                    if extra.value == content_hash:
+                        log.debug('Content is not changed. Skip..')
+                        return True
             # Now create the package
-            return self._create_or_update_package(pkg_dict, harvest_object,
-                package_dict_form='package_show')
-        except Exception, e:
-            self._save_object_error(
-                (
-                    'Exception in import stage: %r / %s'
-                    % (e, traceback.format_exc())
-                ),
-                harvest_object
-            )
+            return self._create_or_update_package(
+                pkg_dict, harvest_object, package_dict_form='package_show')
+        except Exception as e:
+            self._save_object_error(('Exception in import stage: %r / %s' %
+                                     (e, traceback.format_exc())),
+                                    harvest_object)
             return False
+
 
 class AccessTypeNotAvailableError(Exception):
     pass
 
+
+def _hashify(data):
+    checksum = 0
+    if isinstance(data, (list, tuple)):
+        for item in data:
+            checksum ^= _hashify(item)
+    elif isinstance(data, dict):
+        checksum ^= _hashify(tuple(sorted(data.items())))
+    else:
+        data = data.encode(errors='ignore') if isinstance(data, unicode) else str(data)
+        checksum ^= adler32(data)
+    return checksum

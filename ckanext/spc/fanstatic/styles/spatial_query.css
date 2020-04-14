@@ -100,6 +100,7 @@
 }
 .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
   background-image: url("../../../../../../../base/images/pencil.png");
+  background-image: url("/data/base/images/pencil.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 12px 12px;

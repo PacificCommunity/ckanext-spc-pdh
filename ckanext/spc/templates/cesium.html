@@ -1,0 +1,11 @@
+{% ckan_extends %}
+
+{% block cesium_home_camera %}
+    {% if resource.map_extent %}
+        data-module-home-camera="{{ resource.map_extent.replace("\n","") }}"
+    {% elif package.spatial %}
+        data-module-home-camera="{{ package.spatial.replace("\n","") }}"
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock cesium_home_camera %}

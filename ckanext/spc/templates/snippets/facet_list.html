@@ -2,7 +2,7 @@
 
 {% set facet_icons = {
     'map': 'marker', 'organization': 'organization', 'tags': 'tag', 'res_format': 'format', 'license_id': 'license',
-    'topic': 'bulb', 'type': 'raid', 'member_countries': 'human'} %}
+    'topic': 'bulb', 'type': 'raid', 'member_countries': 'human', 'source_type': 'format', 'frequency': 'star'} %}
 
 {% block facet_list_heading %}
     <h2 class="module-heading" data-module="spc-sortable-facets" data-module-selector="nav>ul>li">
@@ -10,6 +10,7 @@
         {% set title = title or h.get_facet_title(name) %}
         <span class="heading-title">{{ title }}</span>
         <div>
+            {% if not harvester %}
             <button class="facet-sorter" data-sort-type="data-name">
                 <i class="fa fa-chevron-up"></i>
                 A-Z
@@ -20,6 +21,7 @@
                 0-9
                 <i class="fa fa-chevron-down"></i>
             </button>
+            {% endif %}
         </div>
         {% set href = h.remove_url_param(name, extras=extras, alternative_url=alternative_url) %}
         <a class="clear-all" href="{{ href }}">{{ _('Clear') }}</a>

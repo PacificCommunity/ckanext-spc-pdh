@@ -34,6 +34,17 @@
             content: unset;
         }
     }
+    .spc-icon-chevron-down-blue-div {
+        .spc-icon-chevron-down-blue;
+        width: 12px;
+        height: 10px;
+        display: inline-block;
+        background-size: 10px;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        cursor: pointer;
+        pointer-events: none;
+    }
 }
 
 .search-form {
@@ -44,10 +55,9 @@
         color: #000000;
         margin-left: 18px;
     }
-    .search-input-group {
-
+    & .search-input-group {
         position: absolute;
-        top: -56px;
+        top: 0;
         left: 0;
         padding: 0 15px;
         width: 100%;
@@ -55,7 +65,9 @@
         .input-group-btn {
             position: absolute;
             right: 10px;
-            top: 0;
+            button {
+                position: absolute;
+            }
             .btn-lg {
                 right: 10px;
             }
@@ -66,19 +78,24 @@
             border-radius: 20px;
             font-size: 15px;
         }
-        .btn-lg {
+        & .btn-lg {
             background: transparent;
             box-shadow: none;
             border: none;
             position: absolute;
-            right: -7px;
-            top: -1px;
+            right: 10px;
             .spc-icon-lense;
             background-repeat: no-repeat;
             color: transparent;
             background-position: 50%;
             background-size: 15px;
          }
+    }
+    // fix icon search responsive
+    @media (max-width: 767px) {
+        .input-group-btn {
+            position: unset;
+        }
     }
     .filter-list {
         margin-left: 27px;
@@ -103,13 +120,15 @@
         }
     }
     .search-additional-control {
-        border-bottom: 1px solid #c2c2c2;
+        border: 1px solid #c2c2c2;
         display: flex;
         align-items: center;
+        margin: 0 6px;
+        border-radius: 4px;
         > div {
             flex: 1;
             flex-direction: row;
-            padding: 5px 5px 12px;
+            padding: 5px 5px 5px;
             &:not(:first-child) {
                 border-left: 1px solid #c2c2c2;
             }
@@ -140,6 +159,11 @@
                     }
                 }
             }
+            .show-filters {
+                .spc-icon-chevron-down-blue-div {
+                    margin-right: 10px;
+                }
+            }
             .show-filters-wrapper, .control-order-by {
                 position: relative;
                 margin: auto;
@@ -154,23 +178,23 @@
                     // -o-appearance: none;
                     // appearance: none;
                 }
-                &:after{
-                        .spc-icon-chevron-down-blue;
-                        width: 14px;
-                        // height: 10px;
-                        display: inline-block;
-                        content: '';
-                        position: absolute;
-                        right: 0px;
-                        top: 0px;
-                        bottom: 0px;
-                        background-color: white;
-                        background-size: 10px;
-                        background-repeat: no-repeat;
-                        background-position: 50%;
-                        cursor: pointer;
-                        pointer-events: none;
-                }
+                // &:after{
+                //         .spc-icon-chevron-down-blue;
+                //         width: 14px;
+                //         // height: 10px;
+                //         display: inline-block;
+                //         content: '';
+                //         position: absolute;
+                //         right: 0px;
+                //         top: 4px;
+                //         bottom: 0px;
+                //         background-color: white;
+                //         background-size: 10px;
+                //         background-repeat: no-repeat;
+                //         background-position: 50%;
+                //         cursor: pointer;
+                //         pointer-events: none;
+                // }
             }
             .show-filters-wrapper {
                 width: 90px;
@@ -184,7 +208,7 @@
         #field-order-by {
             -webkit-appearance: none;
             -moz-appearance: none;
-            padding-right: 12px;
+            // padding-right: 15px;
             line-height: 22px;
         }
     }
@@ -343,5 +367,14 @@ input::-ms-clear {
             }
         }
 
+    }
+}
+@media(max-width: 765px) {
+    .search-form {
+        & .search-input-group {
+            .input-group-btn {
+                top: 0;
+            }
+        }
     }
 }

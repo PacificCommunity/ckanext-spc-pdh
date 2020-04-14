@@ -12,6 +12,9 @@
                     padding: 0px 20px;
                 }
             }
+            .resource-list .resource-item .heading {
+                word-wrap: break-word;
+            }
         }
 
         h1 {
@@ -185,6 +188,9 @@
                 .data-quality-tooltip {
                     i {
                         color: #fff;
+                    }
+                    &.pull-right {
+                        margin-left: auto;
                     }
                 }
             }
@@ -402,6 +408,12 @@
     }
 }
 
+.module-resource .page-heading {
+    @media (max-width: 768px) {
+        margin-top: 45px;
+    }
+}
+
 .badge-res {
     font-size: 0.8em;
     padding: 4px 7px 3px 7px;
@@ -414,6 +426,24 @@
     .res-sprite(41, 0);
 }
 
+// fix Next: Add Data button position
+#dataset-edit {
+    .form-actions {
+        .btn-primary {
+            float: right;
+        }
+    }
+}
+
+// move 'all recources' and 'view resource' buttons left
+// on mobile view
+@media(max-width: 470px) {
+    .page-header {
+        .content_action {
+            float: left;
+        }
+    }
+}
 .res-format-aac { .res-sprite(0, 0); }
 .res-format-3ds { .res-sprite(1, 0); }
 .res-format-ai { .res-sprite(2, 0); }

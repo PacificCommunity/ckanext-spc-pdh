@@ -30,11 +30,13 @@ def get_helpers():
         spc_national_map_previews=spc_national_map_previews,
         get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
+        get_drupal_user_url=get_drupal_user_url,
         spc_unwrap_list=spc_unwrap_list,
         spc_wrap_list=spc_wrap_list,
         spc_hotjar_enabled=spc_hotjar_enabled,
         spc_link_to_identifier=spc_link_to_identifier,
         spc_has_cesium_view=spc_has_cesium_view,
+        spc_get_max_image_size=get_max_image_size,
     )
 
 
@@ -62,6 +64,7 @@ def spc_dataset_suggestion_form():
 
 def spc_dataset_suggestion_path():
     return config.get('spc.dataset_suggestion.path', '/dataset-suggestions')
+
 
 
 def spc_get_available_languages():
@@ -95,6 +98,9 @@ def get_conf_site_url():
     site_url = config.get('ckan.site_url', None)
     return site_url
 
+def get_max_image_size():
+    return int(config.get('ckan.max_image_size', 2))
+
 
 def get_eez_options():
 
@@ -120,6 +126,14 @@ def get_eez_options():
         result.append(option)
     # result.append({'text': 'All countries', 'value': 'all'})
     return result
+
+
+def get_extent_for_country(country):
+    spatial = F.first(F.filter(
+        F.compose(F.partial(eq, country), itemgetter('text')),
+        get_eez_options()
+    ))
+    return spatial
 
 
 def spc_get_footer():
@@ -217,3 +231,22 @@ def spc_link_to_identifier(id):
     if id.startswith('pmid'):
         return 'https://europepmc.org/abstract/med/' + id[5:]
     return None
+
+def get_drupal_user_url(action, current_url=''):
+
+    current_url_parsed = urlparse.urlparse(str(current_url))
+    drupal_url = config.get('drupal.site_url') or current_url
+    url = urlparse.urlparse(str(drupal_url))
+    return_url = 'destination=' + current_url_parsed.path if current_url_parsed.path else '' 
+    
+    if action == 'login':
+        path = '/user/login'
+    elif action == 'register':
+        path = '/user/register'
+    elif action == 'logout':
+        path = '/user/logout'
+    else:
+        path = ''
+    result_url = urlparse.urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
+    
+    return result_url

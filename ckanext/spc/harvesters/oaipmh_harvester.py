@@ -1,7 +1,10 @@
 import logging
 import json
+import datetime
+from uuid import uuid3, NAMESPACE_DNS
 
 import ckan.model as model
+from ckanext.harvest.model import HarvestObject
 from ckan.logic import check_access, get_action
 from ckan.lib.munge import munge_title_to_name, munge_tag
 import ckan.plugins.toolkit as tk
@@ -21,11 +24,11 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         try:
             config_json = json.loads(source_config)
             self.topic = config_json['topic']
-
         except KeyError:
             self.topic = None
         except ValueError:
             pass
+        self.force_all = config_json.get('force_all', False)
         self.userobj = model.User.get(self.user)
 
 
@@ -79,22 +82,25 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         for group_name in groups:
             munged_name = munge_title_to_name(group_name)
             existing = model.Group.get(munged_name)
-            if existing and 'organization' == existing.type:
-                munged_name += '_group'
-            data_dict = {
-                'id': group_name,
-                'name': munged_name,
-                'title': group_name
-            }
-            try:
-                check_access('group_show', context, data_dict)
-                group = get_action('group_show')(context, data_dict)
-                logger.info('found the group ' + group['id'])
-            except Exception as e:
+            if existing:
+                if 'organization' == existing.type:
+                    munged_name += '_group'
+                    existing = model.Group.get(munged_name)
+            if existing:
+                if existing.state != 'active':
+                    existing.state = 'active'
+                    model.Session.commit()
+                group_ids.append({'id': existing.id})
+            else:
+                data_dict = {
+                    'id': uuid3(NAMESPACE_DNS, munged_name),
+                    'name': munged_name,
+                    'title': group_name
+                }
                 context['__auth_audit'] = []
                 group = get_action('group_create')(context, data_dict)
                 logger.info('created the group ' + group['id'])
-            group_ids.append({'id': group['id']})
+                group_ids.append({'id': group['id']})
 
         logger.debug('Group ids: %s' % group_ids)
         return group_ids
@@ -129,3 +135,32 @@ class SpcOaipmhHarvester(OaipmhHarvester):
 
         tags = [{'state': 'active', 'name': munge_tag(tag[:100])} for tag in tags]
         return (tags, extras)
+
+
+    def _create_or_update_package(self, package_dict, harvest_object,
+                                  package_dict_form='package_show'):
+        
+        previous_objects = model.Session.query(HarvestObject) \
+            .filter(HarvestObject.guid == harvest_object.guid) \
+            .filter(HarvestObject.current == True)
+
+        # Mark previous object as not current anymore
+        for previous_object in previous_objects:
+            previous_object.current = False
+            previous_object.add()
+
+        try:
+            existing_package_dict = self._find_existing_package(package_dict)
+            if existing_package_dict.get('id'):
+                harvest_object.package_id = munge_title_to_name(package_dict['id'])
+        except:
+            pass
+        
+        harvest_object.current = True
+        harvest_object.save()
+
+        if self.force_all:
+            package_dict['metadata_modified'] = datetime.datetime.now().isoformat()
+
+        super(SpcOaipmhHarvester, self)._create_or_update_package(package_dict, harvest_object,
+                                          package_dict_form)

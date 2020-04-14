@@ -1,6 +1,6 @@
 {% import 'macros/form.html' as form %}
 
-{{ form.select('predefined_areas', label="Areas", options=[{}] + h.get_eez_options(), attrs={'data-module': 'autocomplete'}) }}
+{{ form.select('predefined_areas', label="Areas", options=[{}] + h.get_eez_options(), attrs={'multiple': true, 'data-module': 'autocomplete', 'data-module-tags': true}) }}
 
 
 {% call form.textarea(
