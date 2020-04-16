@@ -556,4 +556,3 @@ def _get_isPartOf(id):
                           .first()[0]
     if config:
         return json.loads(config).get('isPartOf')
-
