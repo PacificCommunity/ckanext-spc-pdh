@@ -2893,7 +2893,7 @@ header.navbar > .container .collapse {
   }
 }
 .masthead #main-menu li a:hover {
-  color: #F8DA10;
+  color: #ffbc00;
 }
 .masthead #main-menu > ul > li:last-child {
   display: none;
@@ -4652,7 +4652,6 @@ button.header-menu-btn:focus {
 .search-form .search-input-group .input-group-btn {
   position: absolute;
   right: 10px;
-  top: 0;
 }
 .search-form .search-input-group .input-group-btn button {
   position: absolute;
