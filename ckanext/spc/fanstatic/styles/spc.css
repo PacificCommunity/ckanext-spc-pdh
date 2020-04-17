@@ -4278,6 +4278,15 @@ button.header-menu-btn:focus {
   word-wrap: break-word;
   word-break: break-word;
 }
+.module-content p {
+  margin: 25px 0 10px;
+}
+.module.context-info .module-content p {
+  margin: 0 0 10px;
+}
+.module.context-info .module-content .followers.edit {
+  margin: 40px 0 10px;
+}
 .js [role='main'] .secondary .filters {
   background: #ffffff;
   padding: 10px 8px;
@@ -4972,6 +4981,9 @@ input::-ms-clear {
   padding: 7px 50px;
   text-align: center;
   font-size: 12px;
+}
+.organization-list-page .organization-list-sidebar .module-content p {
+  margin: 0 0 10px;
 }
 .organization-list-page #organization-search-form {
   margin-top: 14px;
