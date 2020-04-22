@@ -1,3 +1,16 @@
+{% if on_create %}
+<section class="module module-narrow module-shallow">
+    <h2 class="module-heading"><i class="fa fa-info-circle"></i>{{ _('What are Organizations?') }}</h2>
+    <div class="module-content">
+      <p>
+          {% trans %}
+          CKAN Organizations are used to create, manage and publish collections
+          of datasets. Users can have different roles within an Organization,
+          depending on their level of authorisation to create, edit and publish.
+          {% endtrans %}
+      </p>
+    </div>
+{% else %}
 <div class="module module-narrow module-shallow organization-list-sidebar">
     <h2 class="module-heading">
         <i class="heading-icon spc-icon-light-bulb"></i> Tip
@@ -14,3 +27,4 @@
         </p>
     </div>
 </div>
+{% endif %}
