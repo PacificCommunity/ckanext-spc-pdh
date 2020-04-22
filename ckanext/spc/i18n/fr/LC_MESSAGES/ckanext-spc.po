@@ -346,3 +346,34 @@ msgstr "Mes organisations"
 #: ckan/templates/user/dashboard_organizations.html:21
 msgid "You are not a member of any organizations."
 msgstr "Vous n’êtes membre d’aucune organisation."
+
+#: ckan/templates/snippets/spatial_query.html:21
+msgid "Filter by location"
+msgstr "Filtrer par emplacement"
+
+msgid "Clear"
+msgstr "Nettoyer"
+
+msgid "Suggest a Dataset"
+msgstr "Suggérer un jeu de données"
+
+msgid "Member countries"
+msgstr "Pays membres"
+
+msgid "Dataset type"
+msgstr "Type d'ensemble de données"
+
+msgid "Topic"
+msgstr "Sujet"
+
+msgid "Formats"
+msgstr "Les formats"
+
+msgid "Licenses"
+msgstr "Licences"
+
+msgid "Dataset"
+msgstr "Jeu de données"
+
+msgid "Tip"
+msgstr "Le conseil"
