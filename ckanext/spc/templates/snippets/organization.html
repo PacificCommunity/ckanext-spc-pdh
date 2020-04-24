@@ -22,7 +22,9 @@
                         {% endif %}
                     </h1>
                 {% endblock %}
-                {% block description %}
+
+                {# Omit block and hide organization-tree from ckanext=hierarchy #}
+                {#% block description %#}
                     {% if organization.description %}
                         <p>
                             {{ h.markdown_extract(organization.description, 180) }}
@@ -36,7 +38,7 @@
                     {% else %}
                         <p class="empty">{{ _('There is no description for this organization') }}</p>
                     {% endif %}
-                {% endblock %}
+                {#% endblock %#}
                 {% if show_nums %}
                     {% block nums %}
                         <div class="nums">
