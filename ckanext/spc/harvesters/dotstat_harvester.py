@@ -114,7 +114,7 @@ class SpcDotStatHarvester(HarvesterBase):
         Helper function for retrieving the value from a harvest object extra,
         given the key
         '''
-        for extra in harvest_object.extras:
+        if harvest_object:
             if extra.key == key:
                 return extra.value
         return None
