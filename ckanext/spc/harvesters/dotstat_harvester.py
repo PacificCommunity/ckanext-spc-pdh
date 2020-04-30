@@ -45,6 +45,8 @@ class SpcDotStatHarvester(HarvesterBase):
 
         if 'user' not in self.config:
             self.config['user'] = self.HARVEST_USER
+        if 'agencyId' not in self.config:
+            self.config['agencyId'] = 'SPC'
 
         log.debug('Using config: %r' % self.config)
 
@@ -55,12 +57,16 @@ class SpcDotStatHarvester(HarvesterBase):
         Returns a list of strings
         '''
         endpoints = []
-        resources_url = base_url + 'dataflow/SPC/all'
+        # https://stats-nsi-stable.pacificdata.org/rest/dataflow/SPC/all
+        resources_url = "{}dataflow/{}/all".format(
+            base_url,
+            self.config['agencyId']
+        )
         resp = requests.get(resources_url)
         soup = BeautifulSoup(resp.text, 'xml')
 
         for name in soup.findAll('Dataflow'):
-            endpoints.append((name['agencyID'], name['id']))
+            endpoints.append((name['agencyID'], name['id'], name['version']))
         return endpoints
 
     def gather_stage(self, harvest_job):
@@ -83,7 +89,7 @@ class SpcDotStatHarvester(HarvesterBase):
             # Make a harvest object for each dataset
             # Set the GUID to the dataset's ID (DF_SDG etc.)
 
-            for agency_id, _id in endpoints:
+            for agency_id, _id, version in endpoints:
                 harvest_obj = HarvestObject(
                     guid="{}-{}".format(agency_id, _id),
                     job=harvest_job
@@ -92,8 +98,8 @@ class SpcDotStatHarvester(HarvesterBase):
                 harvest_obj.extras = [
                     HarvestObjectExtra(key='stats_guid',
                                        value=_id),
-                    HarvestObjectExtra(key='agency_id',
-                                       value=agency_id)
+                    HarvestObjectExtra(key='version',
+                                       value=version)
                 ]
                 harvest_obj.save()
 
@@ -115,8 +121,9 @@ class SpcDotStatHarvester(HarvesterBase):
         given the key
         '''
         if harvest_object:
-            if extra.key == key:
-                return extra.value
+            for extra in harvest_object.extras:
+                if extra.key == key:
+                    return extra.value
         return None
 
     def fetch_stage(self, harvest_object):
@@ -135,10 +142,13 @@ class SpcDotStatHarvester(HarvesterBase):
 
         base_url = harvest_object.source.url
         # Build the url where we'll fetch basic metadata
-        meta_suffix = '2.0/?references=all&detail=referencepartial'
 
-        agency_id = self._get_object_extra(harvest_object, 'agency_id')
+        agency_id = self.config['agencyId']
         obj_guid = self._get_object_extra(harvest_object, 'stats_guid')
+        version = self._get_object_extra(harvest_object, 'version')
+        meta_suffix = '{}/?references=all&detail=referencepartial'.format(
+            version)
+
         metadata_url = '{}dataflow/{}/{}/{}'.format(base_url,
                                                     agency_id,
                                                     obj_guid,
@@ -194,20 +204,30 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['owner_org'] = owner_org
 
             # Match other fields with tags in XML structure
+            agency_id = self.config['agencyId']
             stats_guid = self._get_object_extra(harvest_object, 'stats_guid')
+
             structure = soup.find('Dataflow', attrs={'id': stats_guid})
             pkg_dict['title'] = structure.find('Name').text
             pkg_dict['publisher_name'] = structure['agencyID']
             pkg_dict['version'] = structure['version']
 
             # Need to change url to point to Data Explorer
-            de_url = 'https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]={}&dataflow[version]=2.0'.format(stats_guid)
+            de_url = 'https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]={}&dataflow[dataflowId]={}&dataflow[version]={}'.format(
+                agency_id,
+                stats_guid,
+                structure['version']
+            )
             pkg_dict['source'] = de_url
 
             # Set a default resource
             pkg_dict['resources'] = [{
                 'url':
-                'https://stats-nsi-stable.pacificdata.org/rest/data/SPC,{},2.0/all/?format=csv'.format(stats_guid),
+                'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
+                    agency_id,
+                    stats_guid,
+                    structure['version']
+                ),
                 'format': 'CSV',
                 'mimetype': 'CSV',
                 'description': 'All data for {}'.format(pkg_dict['title']),
