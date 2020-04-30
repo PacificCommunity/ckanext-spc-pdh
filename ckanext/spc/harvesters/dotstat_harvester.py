@@ -9,7 +9,7 @@ from ckan.lib.munge import munge_tag
 from ckanext.harvest.model import HarvestObject, HarvestObjectExtra
 from ckanext.harvest.harvesters import HarvesterBase
 from ckan.logic import get_action
-from pylons import config
+from ckantoolkit import config
 
 import logging
 log = logging.getLogger(__name__)
