@@ -2,6 +2,7 @@
 
 {% block package_info %}
   {% if pkg %}
+  <aside>
     <section class="module module-narrow">
       <div class="module context-info">
           <h2 class="module-heading"><i class="heading-icon spc-icon-follow"></i> Follow</h2>
@@ -9,7 +10,7 @@
           {% block package_info_inner %}
             {% block heading %}{% endblock %}
             {% block nums %}
-                <p class="followers">
+                <p class="followers {% if hide_follow_button %}edit{% endif %}">
                     {{ h.SI_number_span(h.follow_count('dataset', pkg.id)) }}
                     {{ _('Followers') }}
                 </p>
@@ -25,5 +26,6 @@
         </div>
       </div>
     </section>
+  </aside>
   {% endif %}
 {% endblock %}
