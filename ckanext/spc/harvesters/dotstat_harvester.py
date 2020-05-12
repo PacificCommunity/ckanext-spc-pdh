@@ -208,7 +208,7 @@ class SpcDotStatHarvester(HarvesterBase):
             stats_guid = self._get_object_extra(harvest_object, 'stats_guid')
 
             structure = soup.find('Dataflow', attrs={'id': stats_guid})
-            pkg_dict['title'] = structure.find('Name').text
+            pkg_dict['title'] = structure.find('Name', {"xml:lang" : "en"}).text
             pkg_dict['publisher_name'] = structure['agencyID']
             pkg_dict['version'] = structure['version']
 
