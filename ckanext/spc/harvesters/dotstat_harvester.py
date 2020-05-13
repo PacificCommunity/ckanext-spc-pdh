@@ -236,7 +236,8 @@ class SpcDotStatHarvester(HarvesterBase):
 
             # Get notes/description if it exists
             try:
-                pkg_dict['notes'] = structure.find('Description').text
+                pkg_dict['notes'] = structure.find(
+                    'Description', {"xml:lang": "en"}).text
             except Exception as e:
                 log.error("An error occured: {}".format(e))
                 pkg_dict['notes'] = ''
@@ -249,8 +250,8 @@ class SpcDotStatHarvester(HarvesterBase):
                                             }) is not None:
                 pkg_dict['alternate_identifier'] = []
                 codelist = soup.find('Codelist', attrs={'id': 'CL_SDG_SERIES'})
-                for indic in codelist.findAll('Name'):
-                    if indic.text == 'SDG Indicator or Series':
+                for indic in codelist.findAll('Name', {"xml:lang" : "en"}):
+                    if not indic or indic.text == 'SDG Indicator or Series':
                         continue
                     pkg_dict['alternate_identifier'].append(indic.text)
             '''
