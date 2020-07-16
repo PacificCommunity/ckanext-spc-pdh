@@ -3431,6 +3431,9 @@ table.table tr th.dataset-details {
   line-height: 21px;
   padding: 0 23px;
 }
+.dataset-read .primary .notes img {
+  max-width: 100%;
+}
 .dataset-read .primary .resources,
 .dataset-read .primary .tags {
   border-top: 1px dashed #cccccc;
@@ -4678,7 +4681,7 @@ button.header-menu-btn:focus {
   background-size: contain;
 }
 .search-form .search-additional-control {
-  border: none;
+  border: 1px solid #c2c2c2;
   display: flex;
   align-items: center;
   margin: 0 6px;
@@ -5117,26 +5120,26 @@ input::-ms-clear {
     margin-left: 0;
     margin-right: 0;
   }
-  [role=main] #content {
+  .main #content {
     margin: 0px 7px;
   }
-  [role=main] #content .primary.span9 {
+  .main #content .primary.span9 {
     width: 100%;
   }
-  [role=main] #content .show-filters.btn {
+  .main #content .show-filters.btn {
     background: linear-gradient(0deg, #0c436b 0%, #036295 100%);
     font-weight: normal;
     border: none;
     border-radius: 5px;
     color: #fff;
   }
-  [role=main] #content .show-filters.btn:hover,
-  [role=main] #content .show-filters.btn:focus,
-  [role=main] #content .show-filters.btn:active {
+  .main #content .show-filters.btn:hover,
+  .main #content .show-filters.btn:focus,
+  .main #content .show-filters.btn:active {
     background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
     color: #fff;
   }
-  [role=main] #content .toolbar {
+  .main #content .toolbar {
     display: none;
   }
   .dataset-read {
@@ -5193,28 +5196,28 @@ input::-ms-clear {
   .desktop-only {
     display: initial;
   }
-  .js [role=main] {
+  .main {
     padding-top: 17px;
   }
-  .js [role=main] .secondary {
+  .main .secondary {
     width: 31%;
   }
-  .js [role=main] .secondary .filters {
+  .main .secondary .filters {
     padding: 18px 10px 18px 20px;
   }
-  .js [role=main] .secondary .filters .module .module-heading .heading-icon {
+  .main .secondary .filters .module .module-heading .heading-icon {
     margin: 4px 3px;
   }
-  .js [role=main] .secondary .filters .module .module-footer {
+  .main .secondary .filters .module .module-footer {
     margin-left: 40px;
   }
-  .js [role=main] .secondary .filters .module .module-footer a {
+  .main .secondary .filters .module .module-footer a {
     font-size: 13px;
   }
-  .js [role=main] .secondary .filters > div .module .module-heading {
+  .main .secondary .filters > div .module .module-heading {
     margin: 13px;
   }
-  .js [role=main] .secondary .filters > div .nav-facet {
+  .main .secondary .filters > div .nav-facet {
     padding: 0 30px 0 55px;
   }
   .primary {
@@ -5338,13 +5341,13 @@ input::-ms-clear {
     padding-top: 10px;
     margin-bottom: -536px;
   }
-  [role=main] .toolbar {
+  .main .toolbar {
     top: -30px;
   }
-  [role=main] .toolbar li:after {
+  .main .toolbar li:after {
     margin-left: 1px;
   }
-  [role=main] .toolbar li a {
+  .main .toolbar li a {
     font-size: 12px;
   }
   .pagination-wrapper {
@@ -5448,10 +5451,10 @@ input::-ms-clear {
   .secondary .filters .module .module-heading {
     margin: 12px 4px 0 5px;
   }
-  .js [role=main] .secondary .filters .module .nav-facet {
+  .js .main .secondary .filters .module .nav-facet {
     padding: 0 15px 0 20px;
   }
-  .js [role=main] .secondary .filters .module .module-footer {
+  .js .main .secondary .filters .module .module-footer {
     margin-left: 5px;
   }
 }
