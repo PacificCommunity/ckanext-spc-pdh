@@ -13,3 +13,4 @@ iso639
 mysqlclient
 ckanext-ingest==0.0.2
 ckanext-create-typed-package==0.0.4.post1
+pyoai==2.5.0
