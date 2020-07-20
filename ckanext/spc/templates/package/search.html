@@ -10,14 +10,7 @@
     <section class="module" onload="leafletMapAlt()">
         <div class="module-content">
             {% block page_primary_action %}
-                {% if h.check_access('package_create') %}
-                    <div class="page_primary_action">
-                        <a class="btn btn-primary" href="{{ h.url_for('spc_package.choose_type') }}" >
-                            <i class=" fa fa-plus-square"></i>
-                            {{ _('Add Dataset') }}
-                        </a>
-                    </div>
-                {% endif %}
+                {{ super() }}
             {% endblock %}
             {% block form %}
                 {% snippet 'ckanext-discovery/snippets/search_suggestions.html' %}

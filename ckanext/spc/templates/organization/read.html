@@ -10,12 +10,7 @@
 	    {% if self.page_primary_action() | trim %}
 		<div class="page_primary_action">
 		    {% block page_primary_action %}
-			{% if h.check_access('package_create', {'owner_org': c.group_dict.id}) %}
-			    <a class="btn btn-primary" href="{{ h.url_for('spc_package.choose_type', group=c.group_dict.id) }}" >
-				<i class=" fa fa-plus-square"></i>
-				{{ _('Add Dataset') }}
-			    </a>
-			{% endif %}
+                        {{ super() }}
 		    {% endblock %}
 		</div>
 	    {% endif %}

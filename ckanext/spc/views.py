@@ -83,53 +83,6 @@ def broken_links():
     return toolkit.render('admin/broken_links.html', extra_vars)
 
 
-def choose_type():
-    context = {
-        'model': model,
-        'session': model.Session,
-        'user': g.user,
-        'auth_user_obj': g.userobj
-    }
-    # Package needs to have a organization group in the call to
-    # check_access and also to save it
-    try:
-        logic.check_access('package_create', context)
-    except logic.NotAuthorized:
-        abort(403, _('Unauthorized to create a package'))
-
-    errors = {}
-    error_summary = {}
-    if 'POST' == request.method:
-        try:
-            dataset_type = request.form['type']
-        except KeyError:
-            errors = {'type': [_('Dataset type must be provided')]}
-            error_summary = {
-                key.title(): value[0]
-                for key, value in errors.items()
-            }
-        else:
-            return h.redirect_to(
-                dataset_type + '.new'
-            )
-
-    options = [
-        {
-            'text': schema['about'],
-            'value': schema['dataset_type']
-        } for schema in
-        scheming_helpers.scheming_dataset_schemas().values()
-    ]
-    data = {
-        'form_vars': {
-            'options': options,
-            'error_summary': error_summary,
-            'errors': errors,
-        },
-        'form_snippet': 'package/snippets/choose_type_form.html'
-    }
-    return render('package/choose_type.html', data)
-
 
 def index():
     context = {
@@ -184,10 +137,6 @@ spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
 spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        view_func=broken_links,
                        methods=(u'GET', u'POST'))
-
-spc_package.add_url_rule(
-    "/dataset/new/choose_type", view_func=choose_type, methods=(u'GET', u'POST')
-)
 
 search_queries.add_url_rule(
     "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')

@@ -37,6 +37,22 @@ msgstr "Organisation non trouvée"
 msgid "Organizations"
 msgstr "Organisations"
 
+
+msgid "biodiversity_data"
+msgstr "Biodiversity data"
+
+msgid "ecological_data"
+msgstr "Ecological data"
+
+msgid "dataset"
+msgstr "Dataset"
+
+msgid "geographic_data"
+msgstr "Geographic data"
+
+msgid "publications"
+msgstr "Publications"
+
 #: ckan/controllers/group.py:620
 msgid "Organization has been deleted."
 msgstr "L’organisation a été supprimée."
@@ -376,4 +392,4 @@ msgid "Dataset"
 msgstr "Jeu de données"
 
 msgid "Tip"
-msgstr "Le conseil" 
+msgstr "Le conseil"
