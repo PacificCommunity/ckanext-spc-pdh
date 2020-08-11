@@ -4,7 +4,8 @@
   "description": "============= ckanext-spc =============",
   "scripts": {
     "watch": "gulp",
-    "build": "gulp build "
+    "build": "gulp build ",
+    "dev": "DEBUG=1 gulp watch"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,9 @@
     "gulp": "^4.0.0"
   },
   "dependencies": {
-    "gulp-less": "^4.0.1"
+    "gulp-if": "^3.0.0",
+    "gulp-less": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-touch-cmd": "0.0.1"
   }
 }
