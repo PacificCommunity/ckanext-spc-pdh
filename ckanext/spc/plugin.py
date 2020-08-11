@@ -92,7 +92,7 @@ class Upload(DefaultUpload):
         Resize and optimize logo image before upload
         '''
         uploaded_file = data_dict.get('logo_upload')
-        
+
         try:
             img = Image.open(uploaded_file)
         except (IOError, AttributeError):
@@ -104,7 +104,7 @@ class Upload(DefaultUpload):
             if size[0] < 350:
                 break
             size = map(lambda x: int(x*0.75), size)
-            
+
         img = img.resize(size, Image.LANCZOS)
         file = StringIO()
 
@@ -118,7 +118,7 @@ class Upload(DefaultUpload):
                  subsampling=0)
         except Exception:
             super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
-            
+
         data_dict['logo_upload'].stream = file
 
         super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
@@ -182,7 +182,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
     @staticmethod
     def _get_user(user_id, email):
         user = None
-        
+
         if user_id:
             try:
                 user = toolkit.get_action('user_show')(
@@ -192,7 +192,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                     {'id': user_id})
             except toolkit.ObjectNotFound:
                 user = None
-        
+
         if not user:
             try:
                 user_id = model.Session.query(model.User.id) \
@@ -276,7 +276,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 [str(drupal_sid)])
 
             user_data = user.first()
-            # check if session has username, 
+            # check if session has username,
             # otherwise is unauthenticated user session
             try:
                 if user_data.name and user_data.name != '':
@@ -309,7 +309,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IUploader, inherit=True)
     plugins.implements(plugins.IClick)
-    
+
     # IUploader
     def get_uploader(self, upload_to, old_filename):
         return Upload(upload_to, old_filename)
@@ -337,7 +337,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         # CKAN login form can be accessed in the debug mode
         if not config.get('debug', False):
             map.redirect('/user/login', spc_helpers.get_drupal_user_url('login'))
-        
+
         map.redirect('/user/register', spc_helpers.get_drupal_user_url('register'))
         map.redirect('/user/reset', '/')
 
@@ -431,30 +431,34 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
-            item['tracking_summary'] = (
-                model.TrackingSummary.get_for_package(item['id']))
+            if 'id' in item:
+                item['tracking_summary'] = (
+                    model.TrackingSummary.get_for_package(item['id']))
 
-            item['five_star_rating'] = spc_utils._get_stars_from_solr(
-                item['id'])
-            item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
-            item['short_notes'] = h.truncate(item.get('notes', ''))
-
-            org_name = item['organization']['name']
-            try:
-                organization = _org_cache[org_name]
-            except KeyError:
-                organization = h.get_organization(org_name)
-                _org_cache[org_name] = organization
-            item['organization_image_url'] = organization.get(
-                'image_display_url') or h.url_for_static(
-                    '/base/images/placeholder-organization.png',
-                    qualified=True)
-            if _package_is_native(item['id']):
-                item['isPartOf'] = 'pdh.pacificdatahub'
-            else:
-                src_type = _get_isPartOf(item['id'])
-                if src_type:
-                    item['isPartOf'] = src_type
+                item['five_star_rating'] = spc_utils._get_stars_from_solr(
+                    item['id'])
+            if 'name' in item:
+                item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
+            if 'notes' in item:
+                item['short_notes'] = h.truncate(item.get('notes', ''))
+            if 'organization' in item:
+                org_name = item['organization']['name']
+                try:
+                    organization = _org_cache[org_name]
+                except KeyError:
+                    organization = h.get_organization(org_name)
+                    _org_cache[org_name] = organization
+                item['organization_image_url'] = organization.get(
+                    'image_display_url') or h.url_for_static(
+                        '/base/images/placeholder-organization.png',
+                        qualified=True)
+            if 'id' in item:
+                if _package_is_native(item['id']):
+                    item['isPartOf'] = 'pdh.pacificdatahub'
+                else:
+                    src_type = _get_isPartOf(item['id'])
+                    if src_type:
+                        item['isPartOf'] = src_type
 
 
         if is_popular_first:
