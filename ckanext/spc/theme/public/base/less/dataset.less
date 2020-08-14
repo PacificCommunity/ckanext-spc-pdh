@@ -34,7 +34,7 @@
                     font-size: 13px;
                     color: @gray;
                     border-radius: 20px;
-                    margin-right: 35px;
+                    margin-right: 28px;
                     padding: 8px 0px;
                     &:hover, &:focus, &:active {
                         background: none;
@@ -472,3 +472,24 @@
 .res-format-rdf { .res-sprite(49, 0); }
 .res-format-wms { .res-sprite(50, 0); }
 .res-format-xlsx { .res-sprite(51, 0); }
+
+.form-actions {
+    .control-required-message {
+        margin-left: 0px;
+        margin-right: 20px;
+    }
+}
+
+.slug-preview {
+    word-break: break-word;
+}
+
+@media (max-width: 767px) {
+    [role=main] {
+        padding-left: 5px;
+        padding-right: 5px;
+         #content .toolbar {
+             display: none;
+         }
+    }
+}
