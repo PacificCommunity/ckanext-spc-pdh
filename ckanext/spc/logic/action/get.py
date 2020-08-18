@@ -1,10 +1,20 @@
+import math
+
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
+import ckan.lib.base as base
+import ckan.logic as logic
+
+from ckan.model import Package
+from ckan.authz import get_user_id_for_username
 
 import ckanext.scheming.helpers as scheming_helpers
 import ckanext.spc.utils as utils
 
-import math
+from ckanext.spc.model import AccessRequest
+
+_get_or_bust = logic.get_or_bust
+_check_access = logic.check_access
 
 
 @tk.side_effect_free
@@ -96,6 +106,7 @@ def spc_package_search(context, data_dict):
         revice_all_data = True
 
     types_count = {}
+
     def _countTypes(item):
         if item['type'] not in types_count:
             types_count[item['type']] = 1
@@ -120,3 +131,53 @@ def spc_package_search(context, data_dict):
     results['types_count'] = types_count
 
     return results
+
+
+@tk.side_effect_free
+def get_access_requests_for_pkg(context, data_dict):
+    """
+    returns the list of all access requests for a package 
+    """
+    pkg_id = _get_or_bust(data_dict, 'id')
+    org_id = Package.get(pkg_id).owner_org
+    _check_access('manage_access_requests', context, {'owner_org': org_id})
+
+    state = data_dict.get('state')
+
+    return _dictize_access_requests_list(pkg_id, state, package=True)
+
+
+@tk.side_effect_free
+def get_access_requests_for_org(context, data_dict):
+    """
+    returns the list of all access requests for an organization 
+    """
+    org_id = _get_or_bust(data_dict, 'id')
+    _check_access('manage_access_requests', context, data_dict)
+    state = data_dict.get('state')
+
+    return _dictize_access_requests_list(org_id, state)
+
+
+def _dictize_access_requests_list(_id, state, package=False):
+    if package:
+        reqs = AccessRequest.get_access_requests_for_pkg(_id, state)
+    else:
+        reqs = AccessRequest.get_access_requests_for_org(_id, state)
+
+    return [req.as_dict() for req in reqs]
+
+
+def get_access_request(context, data_dict):
+    pkg_id_or_name, user = _get_or_bust(data_dict, ['id', 'user'])
+    # check if the package with such id exists to use it's ID
+    pkg = Package.get(pkg_id_or_name)
+
+    if not pkg:
+        raise tk.ObjectNotFound()
+
+    _check_access('get_access_request', context, data_dict)
+
+    req = AccessRequest.get(user_id=user, package_id=pkg.id)
+    if req:
+        return req.as_dict()
