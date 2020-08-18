@@ -1,0 +1,16 @@
+Dear {{ user.fullname or user.name }},
+
+You have been requested an access to a dataset - "{{ pkg.title }}".
+
+Your access request to a dataset "{{ pkg.title }}" has been rejected.
+
+   {{ g.site_url }}{{ h.url_for('dataset.read', id=pkg.id) }}
+
+{% if reason %}
+Rejection reason: {{ reason }}
+{% endif %}
+
+You can try to request the access again in a 3 days. Have a nice day.
+
+--
+Message sent by {{ g.site_title }} ({{ g.site_url }})

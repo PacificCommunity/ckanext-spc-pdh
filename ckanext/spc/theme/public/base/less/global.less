@@ -165,11 +165,12 @@ header.navbar {
 [role=main], .main {
     background: transparent;
     padding-bottom: 25px;
+    padding-top: 17px;
     .toolbar {
         position: absolute;;
         margin-left: -15px;
         background-color: transparent;
-        top: -40px;
+        top: -30px;
         .breadcrumb {
             li {
                 a {
@@ -506,7 +507,7 @@ header.navbar {
             vertical-align: middle;
             background-size: 11px;
             margin: 4px 11px;
-            margin-right: 3px;
+            margin-right: 6px;
         }
     }
 }
@@ -542,6 +543,15 @@ table.table {
     }
 }
 
+// request list table styles for org and pkg pages
+.request-list-table {
+    td.package-name {
+        width: 33%;
+    }
+    td.reason {
+        width: 25%;
+    }
+}
 // search-queries
 .query-actions {
     display: flex;

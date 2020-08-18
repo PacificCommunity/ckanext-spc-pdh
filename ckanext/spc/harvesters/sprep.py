@@ -345,7 +345,6 @@ class SpcSprepHarvester(HarvesterBase):
                 data_dict, harvest_object, 'package_show'
             )
 
-            # import ipdb; ipdb.set_trace()
             Session.commit()
             stored_package = get_action('package_show')({
                 'ignore_auth': True

@@ -1,0 +1,8 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+    {{ super() }}
+    {% if h.check_access('manage_access_requests', data_dict=group_dict) %}
+        {{ h.build_nav_icon('spc_access_request.org_requests', _('Pending Requests'), org_id=group_dict.id, icon='clock-o') }}
+    {% endif %}
+{% endblock %}

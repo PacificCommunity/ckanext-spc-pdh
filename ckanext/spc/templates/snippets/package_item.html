@@ -18,6 +18,12 @@
 
                     <h3 class="dataset-heading">
                         {% block heading_private %}
+                            {% if package.access == 'restricted' %}
+                                <span class="dataset-private label label-inverse">
+                                    <i class="fa fa-ban"></i>
+                                    {{ _('Restricted') }}
+                                </span>
+                            {% endif %}
                             {% if package.private %}
                                 <span class="dataset-private label label-inverse">
                                     <i class="fa fa-lock"></i>

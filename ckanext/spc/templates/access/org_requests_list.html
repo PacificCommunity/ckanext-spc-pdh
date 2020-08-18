@@ -1,0 +1,24 @@
+{% extends 'organization/read_base.html' %}
+
+{% block primary_content %}
+<article class="module">
+  {% block page_header %}
+  {{ super() }}
+  {% endblock %}
+  <div class="module-content">
+    {% block primary_content_inner_spc %}
+      {% if requests %}
+        {% with is_org_list = True %}
+          {% include 'access/snippets/request_list_table.html' %}
+        {% endwith %}
+      {% else %}
+        <p class="empty">
+          {% trans %}
+          There are no pending requests for this organization
+          {% endtrans %}
+        </p>
+      {% endif %}
+    {% endblock %}
+  </div>
+</article>
+{% endblock %}

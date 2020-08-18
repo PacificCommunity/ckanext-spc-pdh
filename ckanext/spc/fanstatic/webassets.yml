@@ -15,6 +15,7 @@ spc_js:
     - scripts/main.js
     - scripts/spc-dataset-suggestion-button.js
     - scripts/spc-sortable-facets.js
+    - scripts/spc-request-access.js
 
 
 spc_css:

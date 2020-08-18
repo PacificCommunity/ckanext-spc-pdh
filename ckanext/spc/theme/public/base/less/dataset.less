@@ -80,6 +80,24 @@
                     top: 14px;
                     left: 11px;
                 }
+                .empty {
+                    margin-left: 0;
+                }
+                .restricted-access-info {
+                    cursor: pointer;
+
+                    .tooltiptext {
+                        width: 160px;
+                        &:after {
+                            margin-left: 2px;
+                        }
+                    }
+                }
+                .restricted-access-lock {
+                    float: left;
+                    position: relative;
+                    top: 7px;
+                }
                 .btn-primary.dropdown-toggle {
                     line-height: 1.3;
                     color: @heading-blue;
@@ -420,6 +438,104 @@
     .res-sprite(41, 0);
 }
 
+#dataset-resources {
+    .resources-header {
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h2 {
+            margin-top: 10px;
+        }
+        .btn-access {
+            border-radius: 5px;
+            padding: 5px 25px;
+
+            color: white;
+            font-weight: bold;
+            &:hover {
+                color: @dark-blue;
+            }
+        }
+    }
+}
+#request-access-modal-success, #request-access-modal{
+    & .modal-content {
+        padding: 30px 50px;
+        border-radius: 30px;
+        width: 580px;
+        & .modal-header {
+            border: 0;
+            .modal-title {
+                font-weight: 600;
+                font-size: 24px;
+                text-align: center;
+            }
+            .close {
+                position: relative;
+                top: -20px;
+                right: -20px;
+                opacity: 1;
+                color: rgb(45, 45, 179);
+            }
+        }
+        & .modal-body {
+            text-align: center;
+            .modal-body-form {
+                text-align: initial;
+                & > .form-group {
+                    margin-bottom: 0;
+                    .control-label {
+                        color: #002B7F;
+                        padding-left: 10px;
+                        .control-required {
+                            float: right;
+                        }
+                    }
+                    .form-control {
+                        padding: 6px 9px;
+                    }
+                }
+                .org-helper-text {
+                    font-size: 12px;
+                    opacity: .6;
+                    margin-bottom: 20px;
+                    padding-left: 10px;
+                }
+            }
+            .body-image {
+                width: 35%;
+                margin-bottom: 25px;
+            }
+            .body-text {
+                font-family: "Montserrat", "Roboto";
+                font-weight: normal;
+                font-size: 16px;
+                color: #7E7E7E;
+    
+                max-width: 270px;
+                margin: 0 auto;
+            }
+        }
+        & .modal-footer {
+            border: 0;
+            text-align: center;
+            .btn {
+                min-width: 200px;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+#request-access-modal {
+    & .modal-content {
+        padding: 30px;
+        .modal-body {
+            padding: 10px 0;
+        }
+    }
+}
 .res-format-aac { .res-sprite(0, 0); }
 .res-format-3ds { .res-sprite(1, 0); }
 .res-format-ai { .res-sprite(2, 0); }

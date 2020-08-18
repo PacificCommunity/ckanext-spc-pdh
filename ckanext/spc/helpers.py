@@ -18,6 +18,7 @@ import ckan.plugins.toolkit as toolkit
 logger = logging.getLogger(__name__)
 cache = CacheManager()
 
+
 def get_helpers():
     return dict(
         spc_get_available_languages=spc_get_available_languages,
@@ -35,6 +36,7 @@ def get_helpers():
         spc_link_to_identifier=spc_link_to_identifier,
         spc_has_cesium_view=spc_has_cesium_view,
         spc_get_max_image_size=get_max_image_size,
+        spc_get_package_name_by_id=get_package_name_by_id,
     )
 
 
@@ -42,19 +44,22 @@ def countries_list(countries):
     countries_list = []
     try:
         countries_list = json.loads(countries)
-    except (ValueError) as e:
+    except ValueError:
         countries_list.append(countries)
     return map(lambda x: x.upper(), countries_list)
+
 
 def spc_has_cesium_view(res):
     is_cesium = False
     if res.get('has_views'):
-        views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
+        views = toolkit.get_action('resource_view_list')(
+            {'user': toolkit.c.user}, {'id': res['id']})
         is_cesium = any(
             view['view_type'] == 'cesium_view'
             for view in views
         )
     return is_cesium
+
 
 def spc_dataset_suggestion_form():
     return config.get('spc.dataset_suggestion.form', '/dataset-suggestions/add')
@@ -62,7 +67,6 @@ def spc_dataset_suggestion_form():
 
 def spc_dataset_suggestion_path():
     return config.get('spc.dataset_suggestion.path', '/dataset-suggestions')
-
 
 
 def spc_get_available_languages():
@@ -87,8 +91,7 @@ def get_eez_options():
             }
             for feature in eez
         }.values()
-    ],
-                     key=lambda o: o['text'])
+    ], key=lambda o: o['text'])
 
     result = []
     for option in options:
@@ -171,7 +174,6 @@ def spc_national_map_previews(pkg):
     ])
 
 
-
 def spc_unwrap_list(value):
     if isinstance(value, list):
         return value[0] if value else {}
@@ -207,13 +209,15 @@ def spc_link_to_identifier(id):
         return 'https://europepmc.org/abstract/med/' + id[5:]
     return None
 
+
 def get_drupal_user_url(action, current_url=''):
 
     current_url_parsed = urlparse(str(current_url))
     drupal_url = config.get('drupal.site_url') or current_url
     url = urlparse(str(drupal_url))
-    return_url = 'destination=' + current_url_parsed.path if current_url_parsed.path else '' 
-    
+    return_url = 'destination=' + \
+        current_url_parsed.path if current_url_parsed.path else ''
+
     if action == 'login':
         path = '/user/login'
     elif action == 'register':
@@ -223,5 +227,13 @@ def get_drupal_user_url(action, current_url=''):
     else:
         path = ''
     result_url = urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
-    
+
     return result_url
+
+
+def get_package_name_by_id(package_id):
+    """
+    returns package title by its id
+    """
+    from ckan.model import Package
+    return Package.get(package_id).title

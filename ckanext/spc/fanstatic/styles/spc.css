@@ -2976,13 +2976,14 @@ header.navbar > .container .collapse {
 .main {
   background: transparent;
   padding-bottom: 25px;
+  padding-top: 17px;
 }
 [role=main] .toolbar,
 .main .toolbar {
   position: absolute;
   margin-left: -15px;
   background-color: transparent;
-  top: -40px;
+  top: -30px;
 }
 [role=main] .toolbar .breadcrumb li a,
 .main .toolbar .breadcrumb li a {
@@ -3303,7 +3304,7 @@ header.navbar > .container .collapse {
   vertical-align: middle;
   background-size: 11px;
   margin: 4px 11px;
-  margin-right: 3px;
+  margin-right: 6px;
 }
 table.table {
   table-layout: auto;
@@ -3337,6 +3338,12 @@ table.table tr th.dataset-details {
   font-weight: lighter;
   word-break: break-word;
   word-wrap: break-word;
+}
+.request-list-table td.package-name {
+  width: 33%;
+}
+.request-list-table td.reason {
+  width: 25%;
 }
 .query-actions {
   display: flex;
@@ -3453,6 +3460,23 @@ table.table tr th.dataset-details {
   position: absolute;
   top: 14px;
   left: 11px;
+}
+.dataset-read .primary .resources .resource-item .empty {
+  margin-left: 0;
+}
+.dataset-read .primary .resources .resource-item .restricted-access-info {
+  cursor: pointer;
+}
+.dataset-read .primary .resources .resource-item .restricted-access-info .tooltiptext {
+  width: 160px;
+}
+.dataset-read .primary .resources .resource-item .restricted-access-info .tooltiptext:after {
+  margin-left: 2px;
+}
+.dataset-read .primary .resources .resource-item .restricted-access-lock {
+  float: left;
+  position: relative;
+  top: 7px;
 }
 .dataset-read .primary .resources .resource-item .btn-primary.dropdown-toggle {
   line-height: 1.3;
@@ -3785,6 +3809,111 @@ table.table tr th.dataset-details {
   background-position: -1225.08px 0;
   height: 34px;
   width: 30px;
+}
+#dataset-resources .resources-header {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#dataset-resources .resources-header h2 {
+  margin-top: 10px;
+}
+#dataset-resources .resources-header .btn-access {
+  border-radius: 5px;
+  padding: 5px 25px;
+  color: white;
+  font-weight: bold;
+}
+#dataset-resources .resources-header .btn-access:hover {
+  color: #001e73;
+}
+#request-access-modal-success .modal-content,
+#request-access-modal .modal-content {
+  padding: 30px 50px;
+  border-radius: 30px;
+  width: 580px;
+}
+#request-access-modal-success .modal-content .modal-header,
+#request-access-modal .modal-content .modal-header {
+  border: 0;
+}
+#request-access-modal-success .modal-content .modal-header .modal-title,
+#request-access-modal .modal-content .modal-header .modal-title {
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+}
+#request-access-modal-success .modal-content .modal-header .close,
+#request-access-modal .modal-content .modal-header .close {
+  position: relative;
+  top: -20px;
+  right: -20px;
+  opacity: 1;
+  color: #2d2db3;
+}
+#request-access-modal-success .modal-content .modal-body,
+#request-access-modal .modal-content .modal-body {
+  text-align: center;
+}
+#request-access-modal-success .modal-content .modal-body .modal-body-form,
+#request-access-modal .modal-content .modal-body .modal-body-form {
+  text-align: initial;
+}
+#request-access-modal-success .modal-content .modal-body .modal-body-form > .form-group,
+#request-access-modal .modal-content .modal-body .modal-body-form > .form-group {
+  margin-bottom: 0;
+}
+#request-access-modal-success .modal-content .modal-body .modal-body-form > .form-group .control-label,
+#request-access-modal .modal-content .modal-body .modal-body-form > .form-group .control-label {
+  color: #002B7F;
+  padding-left: 10px;
+}
+#request-access-modal-success .modal-content .modal-body .modal-body-form > .form-group .control-label .control-required,
+#request-access-modal .modal-content .modal-body .modal-body-form > .form-group .control-label .control-required {
+  float: right;
+}
+#request-access-modal-success .modal-content .modal-body .modal-body-form > .form-group .form-control,
+#request-access-modal .modal-content .modal-body .modal-body-form > .form-group .form-control {
+  padding: 6px 9px;
+}
+#request-access-modal-success .modal-content .modal-body .modal-body-form .org-helper-text,
+#request-access-modal .modal-content .modal-body .modal-body-form .org-helper-text {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+#request-access-modal-success .modal-content .modal-body .body-image,
+#request-access-modal .modal-content .modal-body .body-image {
+  width: 35%;
+  margin-bottom: 25px;
+}
+#request-access-modal-success .modal-content .modal-body .body-text,
+#request-access-modal .modal-content .modal-body .body-text {
+  font-family: "Montserrat", "Roboto";
+  font-weight: normal;
+  font-size: 16px;
+  color: #7E7E7E;
+  max-width: 270px;
+  margin: 0 auto;
+}
+#request-access-modal-success .modal-content .modal-footer,
+#request-access-modal .modal-content .modal-footer {
+  border: 0;
+  text-align: center;
+}
+#request-access-modal-success .modal-content .modal-footer .btn,
+#request-access-modal .modal-content .modal-footer .btn {
+  min-width: 200px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+#request-access-modal .modal-content {
+  padding: 30px;
+}
+#request-access-modal .modal-content .modal-body {
+  padding: 10px 0;
 }
 .res-format-aac {
   background-image: url('../../base/images/sprite_res.png');
