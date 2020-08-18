@@ -1,15 +1,19 @@
 import logging
 import os
 import tempfile
-
 import requests
+
 from operator import attrgetter
+
 import ckan.lib.helpers as h
 import ckan.model as model
 import ckan.plugins.toolkit as tk
+import ckan.logic as logic
 
+from ckan.common import config
 from ckan.lib.search import query_for
 from ckan.lib.uploader import get_resource_uploader
+from ckan.lib import mailer
 
 from ckanext.ga_report.ga_model import GA_Url
 from ckanext.spc.model import SearchQuery
@@ -118,7 +122,7 @@ def normalize_to_dcat(pkg_dict):
     pkg_dict['identifier'] = pkg_dict.pop('id')
     pkg_dict['description'] = pkg_dict.pop('notes', '')
     pkg_dict['landingPage'] = h.url_for(
-        'dataset_read', id=pkg_dict['name'], qualified=True
+        'dataset.read', id=pkg_dict['name'], qualified=True
     )
     pkg_dict['keyword'] = [tag['name'] for tag in pkg_dict.pop('tags', [])]
 
@@ -209,6 +213,7 @@ def _is_user_text_search(context, query):
         return False
     return True
 
+
 def is_resource_updatable(id, package_id=None):
     if package_id:
         pkg = model.Package.get(id)
@@ -232,3 +237,88 @@ def is_resource_updatable(id, package_id=None):
     if org_names & restricted_orgs:
         return pkg.private
     return True
+
+
+def notify_user(user, state, extra_vars):
+    """
+    Notifies the user about changes in the status of his request
+    """
+    messages = {
+        'approved': 'access/email/spc_request_approved.txt',
+        'rejected': 'access/email/spc_request_rejected.txt'
+    }
+    extra_vars['request_timeout'] = int(
+        config.get('spc.access_request.request_timeout_days', 3))
+    try:
+        mailer.mail_user(
+            user,
+            "Access request",
+            tk.render(messages[state], extra_vars),
+        )
+    except mailer.MailerException as e:
+        logger.debug(e.message)
+
+
+def _get_org_members(org_id):
+    data_dict = {
+        'id': org_id,
+        'include_groups': False,
+        'include_tags': False,
+        'include_followers': False,
+        'include_extras': False
+    }
+    orgs = logic.get_action('organization_show')(
+        {'ignore_auth': True}, data_dict)
+
+    member_ids = (
+        member['id'] for member in orgs['users']
+        if member['capacity'] in ('admin', 'editor')
+    )
+    members = (model.User.get(_id) for _id in member_ids)
+
+    return [
+        {
+            'name': member.name,
+            'email': member.email
+        } for member in members
+    ]
+
+
+def _send_notifications(admins, extra_vars):
+    for admin in admins:
+        extra_vars['member'] = admin['name']
+        try:
+            mailer.mail_recipient(
+                admin['name'],
+                admin['email'],
+                "Access request from - {}".format(extra_vars['user']),
+                tk.render('access/email/spc_access_requested.txt', extra_vars),
+            )
+        except mailer.MailerException as e:
+            logger.debug(e.message)
+
+
+def notify_org_members(org_id, extra_vars):
+    """
+    When user submits data access request notification is sent
+    to data custodians (org admins of the owning org) and SPC datahub@spc.int
+    """
+    members = _get_org_members(org_id)
+    datahub_email = config.get('spc.access_request.datahub_email')
+    if datahub_email:
+        members.append({'name': 'Datahub SPC', 'email': datahub_email})
+    _send_notifications(members, extra_vars)
+
+
+def delete_res_urls_if_restricted(context, data_dict):
+    try:
+        logic.check_access('restrict_dataset_show', context, data_dict)
+        return data_dict
+    except logic.NotAuthorized:
+        pass
+
+    for resource in data_dict['resources']:
+        resource['url'] = None
+        resource.pop('url_type')
+
+    return data_dict

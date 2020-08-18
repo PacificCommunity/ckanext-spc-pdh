@@ -2,12 +2,12 @@ import logging
 import os
 import json
 import textract
-from io import StringIO
 import uuid
 import hashlib
 import re
 import sqlalchemy as sa
 
+from io import StringIO
 from PIL import Image
 from collections import OrderedDict
 from six import string_types, ensure_binary
@@ -16,29 +16,31 @@ import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+
 from ckan.lib.uploader import Upload as DefaultUpload
 from ckan.lib.uploader import ResourceUpload
 from ckan.lib.plugins import DefaultTranslation
+from ckan.logic import check_access
 from ckan.common import _
 from ckan.common import config
-import ckanext.scheming.helpers as scheming_helpers
+from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
 import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
-from ckanext.spc.ingesters import MendeleyBib
-from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
-from ckanext.spc.model.drupal_user import DrupalUser
 
-from ckanext.harvest.model import HarvestObject, HarvestSource
-
-from ckan.model.license import DefaultLicense, LicenseRegister, License
-
-from ckanext.ingest.interfaces import IIngest
 from ckanext.spc.views import blueprints
 from ckanext.spc.cli import get_commnads
+from ckanext.spc.model.drupal_user import DrupalUser
+from ckanext.spc.ingesters import MendeleyBib
+
+import ckanext.scheming.helpers as scheming_helpers
+
+from ckanext.ingest.interfaces import IIngest
+from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
+from ckanext.harvest.model import HarvestObject, HarvestSource
 
 logger = logging.getLogger(__name__)
 
@@ -309,7 +311,8 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IUploader, inherit=True)
     plugins.implements(plugins.IClick)
-
+    plugins.implements(plugins.IResourceController, inherit=True)
+    
     # IUploader
     def get_uploader(self, upload_to, old_filename):
         return Upload(upload_to, old_filename)
@@ -431,34 +434,31 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
-            if 'id' in item:
-                item['tracking_summary'] = (
-                    model.TrackingSummary.get_for_package(item['id']))
+            item['tracking_summary'] = (
+                model.TrackingSummary.get_for_package(item['id']))
 
-                item['five_star_rating'] = spc_utils._get_stars_from_solr(
-                    item['id'])
-            if 'name' in item:
-                item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
-            if 'notes' in item:
-                item['short_notes'] = h.truncate(item.get('notes', ''))
-            if 'organization' in item:
-                org_name = item['organization']['name']
-                try:
-                    organization = _org_cache[org_name]
-                except KeyError:
-                    organization = h.get_organization(org_name)
-                    _org_cache[org_name] = organization
-                item['organization_image_url'] = organization.get(
-                    'image_display_url') or h.url_for_static(
-                        '/base/images/placeholder-organization.png',
-                        qualified=True)
-            if 'id' in item:
-                if _package_is_native(item['id']):
-                    item['isPartOf'] = 'pdh.pacificdatahub'
-                else:
-                    src_type = _get_isPartOf(item['id'])
-                    if src_type:
-                        item['isPartOf'] = src_type
+            item['five_star_rating'] = spc_utils._get_stars_from_solr(
+                item['id'])
+            item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
+            item['short_notes'] = h.truncate(item.get('notes', ''))
+
+            org_name = item['organization']['name']
+            try:
+                organization = _org_cache[org_name]
+            except KeyError:
+                organization = h.get_organization(org_name)
+                _org_cache[org_name] = organization
+            item['organization_image_url'] = organization.get(
+                'image_display_url') or h.url_for_static(
+                    '/base/images/placeholder-organization.png',
+                    qualified=True)
+                    
+            if _package_is_native(item['id']):
+                item['isPartOf'] = 'pdh.pacificdatahub'
+            else:
+                src_type = _get_isPartOf(item['id'])
+                if src_type:
+                    item['isPartOf'] = src_type
 
 
         if is_popular_first:
@@ -470,8 +470,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return results
 
     def before_index(self, pkg_dict):
-        pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
-            pkg_dict['name'])
+        if plugins.plugin_loaded('ga-report'):
+            pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
+                pkg_dict['name'])
 
         topic_str = pkg_dict.get('thematic_area_string', '[]')
         if isinstance(topic_str, string_types):
@@ -493,12 +494,18 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict['five_star_rating'] = spc_utils._get_stars_from_solr(
             pkg_dict['id'])
 
-        if _package_is_native(pkg_dict['id']):
+        if not plugins.plugin_loaded('harvest'):
+            pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
+        elif _package_is_native(pkg_dict['id']):
             pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
         else:
             src_type = _get_isPartOf(pkg_dict['id'])
             if src_type:
                 pkg_dict['isPartOf'] = src_type
+
+        if pkg_dict.get('access') == 'restricted':
+            pkg_dict = spc_utils.delete_res_urls_if_restricted(context, pkg_dict)
+
         return pkg_dict
 
     # IFacets
