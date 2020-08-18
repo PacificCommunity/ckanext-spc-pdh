@@ -1,0 +1,62 @@
+<form method="POST" data-module="basic-form">
+    <table class="table table-header table-hover table-bulk-edit table-edit-hover request-list-table"
+        data-module="table-selectable-rows">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="table-actions" colspan="3">
+                    <div class="btn-group">
+                        {% if is_org_list %}
+                            <button name="bulk_action" value="approve" class="btn btn-danger" type="submit">
+                                <i class="fa fa-check"></i>
+                                {{ _('Approve') }}
+                            </button>
+                        {% endif %}
+                        <button name="bulk_action" value="reject" class="btn btn-danger" type="submit">
+                            <i class="fa fa-times"></i>
+                            {{ _('Reject request') }}
+                        </button>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><input type="hidden" name="package_id" value="{{pkg_id}}"></td>
+                {% if is_org_list %}
+                    <td class="package-name"> {{ _('Package name') }} </td>
+                {% endif %}
+                <td class="reason"> {{ _('Request reason') }} </td>
+                <td>{{ _('User') }}</td>
+                <td>{{ _('Data modified') }}</td>
+            </tr>
+            {% for request in requests %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="req_{{ request.id }}">
+                </td>
+                {% if is_org_list %}
+                    <td class="context">
+                        <a href="{% url_for 'dataset.read', id=request.package_id %}">
+                            {{ h.spc_get_package_name_by_id(request.package_id) }}
+                        </a>
+                    </td>
+                {% endif %}
+                <td> {{ request.reason }} </td>
+                <td>{{ h.linked_user(request.user_id) }}</td>
+                <td>{{ h.render_datetime(request.data_modified, with_hours=True) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if not is_org_list %}
+        <div class="form-group control-full">
+            <label class="control-label" for="reject-reason">Reject Reason</label>
+            <div class="controls">
+                <textarea id="reject-reason" required name="reject-reason"
+                cols="20" rows="5" placeholder="Reject reason" class="form-control"></textarea>
+            </div>
+        </div>
+    {% endif %}
+</form>

@@ -1,0 +1,9 @@
+Dear {{ member }},
+
+User {{ user }} has been requested an access to a dataset "{{ pkg.title }}".
+{{ g.site_url }}{{ h.url_for('dataset.read', id=pkg.id) }}
+
+User organisation: {{ user_org }}
+Reason for the request: {{ reason }}
+--
+Message sent by {{ g.site_title }} ({{ g.site_url }})
