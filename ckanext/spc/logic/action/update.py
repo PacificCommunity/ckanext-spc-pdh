@@ -5,17 +5,7 @@ from ckan.plugins.toolkit import ObjectNotFound
 
 from ckanext.spc.model import AccessRequest
 from ckanext.spc.utils import notify_user
-
-
-def _get_package_by_id(data_dict):
-    pkg_id_or_name = get_or_bust(data_dict, 'id')
-    # check if the package with such id exists to use it's ID
-
-    pkg = Package.get(pkg_id_or_name)
-
-    if not pkg:
-        raise ObjectNotFound()
-    return pkg
+from ckanext.spc.utils import get_package_by_id_or_bust
 
 
 def _get_user_obj(username):
@@ -28,25 +18,30 @@ def _get_user_obj(username):
 
 
 def _reject_or_approve(context, data_dict, state):
-    user = get_or_bust(data_dict, 'user')
-    req_id = data_dict.get('req_id')
+    user = data_dict.get('user')
+    request_id = data_dict.get('request_id')
     reject_reason = data_dict.get('reject_reason')
     
     if not context.get('ignore_auth'):
         check_access('manage_access_requests', context, data_dict)
 
-    if req_id:
-        pkg_id = AccessRequest.get_by_id(req_id).package_id
-        pkg = _get_package_by_id({'id': pkg_id})
+    if request_id:
+        access_request = AccessRequest.get_by_id(request_id)
+        if access_request:
+            pkg = get_package_by_id_or_bust({'id': access_request.package_id})
     else:
-        pkg = _get_package_by_id(data_dict)
+        pkg = get_package_by_id_or_bust(data_dict)
+        access_request = AccessRequest.get(user, pkg.id)
+
+    if not access_request:
+        raise ObjectNotFound
 
     req = AccessRequest.set_access_request_state(
         user_id=user,
         package_id=pkg.id,
         state=state,
         reason=reject_reason,
-        req_id=req_id
+        request_id=request_id
     )
 
     user_obj = _get_user_obj(user)

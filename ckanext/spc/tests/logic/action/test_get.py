@@ -1,16 +1,17 @@
 import pytest
+
+import ckan.tests.factories as factories
+
+from ckan.logic import ValidationError, NotAuthorized
+
 import ckanext.spc.logic.action.get as get
-import ckan.plugins.toolkit as tk
-import ckan.logic as logic
 
 from ckanext.spc.model import AccessRequest
 from ckanext.spc.tests.factories import create_request
 
-import ckan.tests.factories as factories
-
 
 def test_spc_dcat_show_id_required():
-    with pytest.raises(tk.ValidationError):
+    with pytest.raises(ValidationError):
         get.spc_dcat_show(None, {})
 
 
@@ -48,7 +49,7 @@ class TestGetAccessRequest:
         user = factories.User()
         create_request(package_id=pkg['id'], user_id=user['id'])
 
-        with pytest.raises(logic.NotAuthorized):
+        with pytest.raises(NotAuthorized):
             get.get_access_request(
                 {},
                 {'id': pkg['id'], 'user': user['name']}
@@ -59,7 +60,7 @@ class TestGetAccessRequest:
         pkg = factories.Dataset()
         create_request(user_id=user['name'], package_id=pkg['id'])
 
-        with pytest.raises(logic.ValidationError):
+        with pytest.raises(ValidationError):
             get.get_access_request({'user': user['name']}, {})
 
     def test_get_access_requests_list_for_pkg(self):
@@ -80,14 +81,14 @@ class TestGetAccessRequest:
     def test_get_access_requests_list_for_pkg_by_anon(self):
         pkg = factories.Dataset()
 
-        with pytest.raises(logic.NotAuthorized):
+        with pytest.raises(NotAuthorized):
             get.get_access_requests_for_pkg({}, {'id': pkg['id']})
 
     def test_get_access_requests_list_for_pkg_by_user(self):
         pkg = factories.Dataset()
         user = factories.User()
 
-        with pytest.raises(logic.NotAuthorized):
+        with pytest.raises(NotAuthorized):
             get.get_access_requests_for_pkg(
                 {'user': user['id']}, {'id': pkg['id']})
 
@@ -101,6 +102,6 @@ class TestGetAccessRequest:
         create_request(package_id=dataset['id'], org_id=org['id'])
 
         res = get.get_access_requests_for_org(
-                {'user': user['name']}, {'id': org['id']})
-        
+            {'user': user['name']}, {'id': org['id']})
+
         assert len(res) == 1

@@ -1,8 +1,8 @@
-from ckan.authz import is_authorized, is_sysadmin
+from ckan.authz import is_authorized, get_user_id_for_username, has_user_permission_for_group_or_org
 import ckan.plugins.toolkit as tk
 from ckan.model import Member
 from ckanext.spc.model import AccessRequest
-from ckan.authz import get_user_id_for_username, is_sysadmin
+from ckan.authz import get_user_id_for_username
 
 
 def spc_dcat_show(context, data_dict):
@@ -24,7 +24,10 @@ def get_access_request(context, data_dict):
 
 
 def manage_access_requests(context, data_dict):
-    return {'success': _check_admin_or_member(context, data_dict)}
+    org_id = data_dict.get('owner_org') or data_dict.get('id')
+    authorized = has_user_permission_for_group_or_org(
+        org_id, context['user'], 'manage_group')
+    return {'success': authorized}
 
 
 def _check_admin_or_member(context, data_dict):
@@ -47,11 +50,13 @@ def restrict_dataset_show(context, data_dict):
     if not context['user']:
         return {'success': False}
 
-    is_admin_or_member = _check_admin_or_member(context, data_dict)
+    org_id = data_dict.get('owner_org') or data_dict.get('id')
+    is_admin_or_member = has_user_permission_for_group_or_org(
+        org_id, context['user'], 'manage_group')
     is_accessed = AccessRequest.check_access_to_dataset(
         context['user'],
         data_dict['id']
     )
 
-    authorized = any((is_admin_or_member, is_accessed))
-    return {'success': True} if authorized else {'success': False}
+    authorized = is_admin_or_member or is_accessed
+    return {'success': authorized}

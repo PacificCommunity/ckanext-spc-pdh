@@ -5,7 +5,7 @@
     {% block page_header %}
     {{ super() }}
     {% endblock %}
-    <div class="module-content">
+    <div class="module-content pkg-request-list-table">
         {% block primary_content_inner_spc %}
             {% if requests %}
                 {% include 'access/snippets/request_list_table.html' %}

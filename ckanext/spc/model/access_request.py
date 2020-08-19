@@ -59,16 +59,16 @@ class AccessRequest(Base):
         return True if req else False
 
     @classmethod
-    def set_access_request_state(cls, user_id, package_id, state, req_id=None, reason=None):
+    def set_access_request_state(cls, user_id, package_id, state, request_id=None, reason=None):
         """
         tries to set a specified state to an access_request entity
         if there is no such entity - raises ObjectNotFound
         """
-        if not req_id:
-            req_id = cls._generate_uuid(user_id, package_id)
-        req = meta.Session.query(cls).get(req_id)
+        if not request_id:
+            request_id = cls._generate_uuid(user_id, package_id)
+        req = meta.Session.query(cls).get(request_id)
         if not req:
-            raise tk.ObjectNotFound()
+            return
         req.state = state
         req.data_modified = dt.utcnow()
 
@@ -84,8 +84,8 @@ class AccessRequest(Base):
         return meta.Session.query(cls).get(_id)
 
     @classmethod
-    def get_by_id(cls, req_id):
-        return meta.Session.query(cls).get(req_id)
+    def get_by_id(cls, request_id):
+        return meta.Session.query(cls).get(request_id)
 
     @classmethod
     def create(cls, user_id, package_id, reason, org_id, state='pending'):

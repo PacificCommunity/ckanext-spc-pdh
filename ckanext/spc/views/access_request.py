@@ -11,6 +11,7 @@ import ckan.lib.helpers as h
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.logic as logic
 
+from ckan.plugins.toolkit import ObjectNotFound
 from ckan.lib.base import abort, render
 from ckan.common import _, g, request, config
 
@@ -31,10 +32,13 @@ def request_for_access():
 
     try:
         req = logic.get_action('get_access_request')(context, data_dict)
-    except logic.NotFound:
-        abort(404, _('Package not found'))
+    except ObjectNotFound:
+        # if access request doesn't exist - create it
+        pass
     except logic.NotAuthorized:
         abort(403, _('You must be authorized'))
+    except logic.ValidationError as e:
+        abort(403, e)
 
     # if request was previously rejected
     if req and req.get('state') == 'rejected':
@@ -100,7 +104,7 @@ class OrganizationRequests(BulkRequest):
                 data_dict={'id': org_id, 'state': 'pending'}
             )
         except logic.NotAuthorized:
-            abort(403, 'You need to be sysadmin or data custodian')
+            abort(403, _('You need to be sysadmin or data custodian'))
 
         group_dict = self._prepare_entity_dict(org_id)
 
@@ -119,35 +123,43 @@ class OrganizationRequests(BulkRequest):
             'reject': 'reject_access'
         }
         act = request.form.get('bulk_action', '')
+        reject_reason = request.form.get('reject-reason')
+
         action = actions.get(act)
+
+        if action == 'reject_access' and not reject_reason:
+            h.flash_error(_('Reject reason isn\'t provided'))
+            return self._redirect(org_id)
+
         if not action:
             h.flash_error(_('Action not implemented.'))
             return self._redirect(org_id)
 
         # get the access_request ids from the form
         # they are prefixed by req_ in the form data
-        req_ids = [
+        request_ids = [
             i.replace('req_', '')
             for i in request.form.keys()
             if i.startswith('req_')
         ]
 
-        if not req_ids:
+        if not request_ids:
             h.flash_error(_('Select at least one to proceed.'))
             return self._redirect(org_id)
 
-        for _id in req_ids:
+        for _id in request_ids:
             try:
                 logic.get_action(action)(self.context, {
-                    'req_id': _id,
-                    'user': g.user
+                    'request_id': _id,
+                    'user': g.user,
+                    'reject_reason': reject_reason
                 })
             except logic.NotFound:
-                abort(404, _(u'User or pkg not found'))
+                abort(404, _('User or pkg not found'))
             except logic.NotAuthorized:
-                abort(403, 'You need to be sysadmin or data custodian')
+                abort(403, _('You need to be sysadmin or data custodian'))
 
-        h.flash_success(_(self.messages[act].format(number=len(req_ids))))
+        h.flash_success(_(self.messages[act].format(number=len(request_ids))))
 
         return self._redirect(org_id)
 
@@ -160,7 +172,7 @@ class PackageRequests(BulkRequest):
                 data_dict={'id': pkg_id, 'state': 'approved'}
             )
         except logic.NotAuthorized:
-            abort(403, 'You need to be sysadmin or data custodian')
+            abort(403, _('You need to be sysadmin or data custodian'))
 
         pkg_dict = self._prepare_entity_dict(pkg_id, package=True)
 
@@ -177,23 +189,30 @@ class PackageRequests(BulkRequest):
             h.flash_error(_('Reject reason isn\'t provided'))
             return self._redirect(pkg_id)
 
-        req_ids = [
+        request_ids = [
             i.replace('req_', '')
             for i in request.form.keys()
             if i.startswith('req_')
         ]
 
-        if not req_ids:
+        if not request_ids:
             h.flash_error(_('Select at least one to proceed.'))
             return self._redirect(pkg_id)
 
-        for _id in req_ids:
-            logic.get_action('reject_access')(self.context, {
-                'req_id': _id,
-                'reject_reason': reject_reason
-            })
+        for _id in request_ids:
+            try:
+                logic.get_action('reject_access')(self.context, {
+                    'request_id': _id,
+                    'reject_reason': reject_reason,
+                    'user': g.user
+                })
+            except logic.NotFound:
+                abort(404, _('Access request not found'))
+            except logic.NotAuthorized:
+                abort(403, _('You need to be sysadmin or data custodian'))
+
         h.flash_success(
-            _('{} access request(s) have been rejected'.format(len(req_ids))))
+            _('{} access request(s) have been rejected'.format(len(request_ids))))
         return self._redirect(pkg_id)
 
     @staticmethod
@@ -201,20 +220,19 @@ class PackageRequests(BulkRequest):
         return h.redirect_to('spc_access_request.pkg_requests', pkg_id=pkg_id)
 
 
-spc_access_request.add_url_rule(u'/dataset/<pkg_id>/request_access',
+spc_access_request.add_url_rule('/dataset/<pkg_id>/request_access',
                                 'request',
                                 view_func=request_for_access,
                                 methods=('POST', ))
 
-spc_access_request.add_url_rule(u'/organization/<org_id>/access_requests',
+spc_access_request.add_url_rule('/organization/<org_id>/access_requests',
                                 'org_requests',
                                 view_func=OrganizationRequests.as_view(
-                                    str(u'org_bulk_process')),
+                                    str('org_bulk_process')),
                                 methods=('GET', 'POST'))
 
-# TODO: org_id=None, pkg_id=pkg_id
-spc_access_request.add_url_rule(u'/dataset/<pkg_id>/access_requests/',
+spc_access_request.add_url_rule('/dataset/<pkg_id>/access_requests/',
                                 'pkg_requests',
                                 view_func=PackageRequests.as_view(
-                                    str(u'pkg_bulk_process')),
+                                    str('pkg_bulk_process')),
                                 methods=('GET', 'POST'))

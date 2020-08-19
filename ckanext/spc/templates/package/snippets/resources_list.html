@@ -2,7 +2,7 @@
     <div class="resources-header">
         <h2>{{ _('Data and Resources') }}</h2>
         {% if not h.check_access('restrict_dataset_show', data_dict=pkg)
-          and pkg.access == 'restricted'
+          and h.spc_is_restricted(pkg)
           and h.check_access('create_access_request') %}
             <button class="btn btn-info btn-access" data-toggle="modal" data-target="#request-access-modal">Request an Access</button>
         {% endif %}

@@ -503,7 +503,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             if src_type:
                 pkg_dict['isPartOf'] = src_type
 
-        if pkg_dict.get('access') == 'restricted':
+        if spc_helpers.is_restricted(pkg_dict):
             pkg_dict = spc_utils.delete_res_urls_if_restricted(context, pkg_dict)
 
         return pkg_dict

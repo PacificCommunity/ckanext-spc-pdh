@@ -57,7 +57,7 @@
                   {{ h.build_nav_icon('dataset.read', _('Dataset'), id=pkg.name) }}
                   {{ h.build_nav_icon('dataset.groups', _('Groups'), id=pkg.name) }}
                   {{ h.build_nav_icon('dataset.activity', _('Activity Stream'), id=pkg.name) }}
-                  {% if pkg.access == 'restricted' and h.check_access('manage_access_requests', data_dict=pkg) %}
+                  {% if h.spc_is_restricted(pkg) and h.check_access('manage_access_requests', data_dict=pkg) %}
                     {{ h.build_nav_icon('spc_access_request.pkg_requests', _('Approved Requests'), pkg_id=pkg.id, icon='clock-o') }}
                   {% endif %}
                 {% endblock %}

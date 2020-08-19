@@ -37,6 +37,7 @@ def get_helpers():
         spc_has_cesium_view=spc_has_cesium_view,
         spc_get_max_image_size=get_max_image_size,
         spc_get_package_name_by_id=get_package_name_by_id,
+        spc_is_restricted=is_restricted,
     )
 
 
@@ -232,8 +233,16 @@ def get_drupal_user_url(action, current_url=''):
 
 
 def get_package_name_by_id(package_id):
-    """
-    returns package title by its id
-    """
     from ckan.model import Package
     return Package.get(package_id).title
+
+def is_restricted(package):
+    access = package.get('access')
+
+    if 'extras' in package:
+        for field in package['extras']:
+            if field['key'] == 'access':
+                access = field['value']
+                break
+        
+    return True if access == 'restricted' else False

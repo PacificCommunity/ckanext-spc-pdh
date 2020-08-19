@@ -3357,6 +3357,12 @@ table.table tr th.dataset-details {
 .module .module-heading.resource {
   position: initial;
 }
+.module-content.pkg-request-list-table {
+  padding: 0 !important;
+}
+.module-content.request-list-table-org {
+  padding-right: 20px !important;
+}
 @media (max-width: 767px) {
   .module-resource .page-heading {
     word-wrap: break-word;

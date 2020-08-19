@@ -322,3 +322,13 @@ def delete_res_urls_if_restricted(context, data_dict):
         resource.pop('url_type')
 
     return data_dict
+
+def get_package_by_id_or_bust(data_dict):
+    pkg_id_or_name = tk.get_or_bust(data_dict, 'id')
+    # check if the package with such id exists to use it's ID
+
+    pkg = model.Package.get(pkg_id_or_name)
+
+    if not pkg:
+        raise tk.ObjectNotFound()
+    return pkg

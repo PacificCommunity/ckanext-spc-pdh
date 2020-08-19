@@ -11,7 +11,6 @@ ckan.module("spc-request-access", function ($) {
     _onSubmit: function (e) {
       var self = this;
       e.preventDefault();
-      this._afterRequest.bind(this);
       this.sandbox.ajax(ckan.url("/dataset/request_for_access"), {
         method: "POST",
         data: this.el.serialize(),
