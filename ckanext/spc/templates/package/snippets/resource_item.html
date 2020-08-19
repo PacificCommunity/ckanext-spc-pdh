@@ -12,7 +12,7 @@
 
     {{ h.popular('views', res.tracking_summary.total, min=10) }}
   </a>
-    {% if pkg.access == 'restricted' and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
+    {% if h.spc_is_restricted(pkg) and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
         <p class="description">
             <span class="restricted-access-info data-quality-tooltip">
                 <i class="fa fa-info-circle"></i>
@@ -29,7 +29,7 @@
 {% block resource_item_explore %}
 {% if not url_is_edit %}
 <div class="dropdown btn-group">
-    {% if pkg.access == 'restricted' and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
+    {% if h.spc_is_restricted(pkg) and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
     <span class="restricted-access-lock" style="float: left">
         <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.00002 0C4.23854 0 2 2.23859 2 5.00002V11.344H3.87804V5.00002C3.87804 3.27853 5.27853 1.87804 7.00002 1.87804C8.72147 1.87804 10.122 3.27853 10.122 5.00002V11.344H12V5.00002C12 2.23859 9.76141 0 7.00002 0Z" fill="#DA2128"/>

@@ -37,7 +37,7 @@ def test_approve_request():
 
 
 @pytest.mark.usefixtures("clean_db")
-def test_approve_request_by_req_id():
+def test_approve_request_by_request_id():
     req = create_request()
     assert req.state == "pending"
 
@@ -45,7 +45,7 @@ def test_approve_request_by_req_id():
         user_id='user',
         package_id='package',
         state='approved',
-        req_id=req.id
+        request_id=req.id
     )
     assert req.state == 'approved'
 
@@ -64,7 +64,7 @@ def test_reject_request():
 
 
 @pytest.mark.usefixtures("clean_db")
-def test_reject_request_by_req_id():
+def test_reject_request_by_request_id():
     req = create_request(state='approved')
     assert req.state == "approved"
 
@@ -72,9 +72,19 @@ def test_reject_request_by_req_id():
         user_id='user',
         package_id='package',
         state='rejected',
-        req_id=req.id
+        request_id=req.id
     )
     assert req.state == 'rejected'
+
+
+@pytest.mark.usefixtures("clean_db")
+def test_approve_not_existing_request():
+    req = AccessRequest.set_access_request_state(
+        user_id='user',
+        package_id='package',
+        state='rejected'
+    )
+    assert not req
 
 
 @pytest.mark.usefixtures("clean_db")

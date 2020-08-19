@@ -1,3 +1,5 @@
+{% import 'macros/form.html' as form %}
+
 <form method="POST" data-module="basic-form">
     <table class="table table-header table-hover table-bulk-edit table-edit-hover request-list-table"
         data-module="table-selectable-rows">
@@ -50,13 +52,13 @@
             {% endfor %}
         </tbody>
     </table>
-    {% if not is_org_list %}
-        <div class="form-group control-full">
-            <label class="control-label" for="reject-reason">Reject Reason</label>
-            <div class="controls">
-                <textarea id="reject-reason" required name="reject-reason"
-                cols="20" rows="5" placeholder="Reject reason" class="form-control"></textarea>
-            </div>
-        </div>
-    {% endif %}
+    <div class="form-group control-full">
+        {{ form.textarea('reject-reason', id='reject-reason', is_required=true if not is_org_list else false, label=_('Reject Reason'), error=error, placeholder=_('Reject reason'), cols=20, rows=5) }}
+    </div>
 </form>
+
+<p class="text-danger">
+    {% trans %}
+    Attention, the execution speed depends on the number of selected records. Mailing slows down the process.
+    {% endtrans %}
+</p>

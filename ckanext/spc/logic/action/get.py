@@ -11,6 +11,7 @@ from ckan.authz import get_user_id_for_username
 import ckanext.scheming.helpers as scheming_helpers
 import ckanext.spc.utils as utils
 
+from ckanext.spc.utils import get_package_by_id_or_bust
 from ckanext.spc.model import AccessRequest
 
 _get_or_bust = logic.get_or_bust
@@ -138,13 +139,14 @@ def get_access_requests_for_pkg(context, data_dict):
     """
     returns the list of all access requests for a package 
     """
-    pkg_id = _get_or_bust(data_dict, 'id')
-    org_id = Package.get(pkg_id).owner_org
-    _check_access('manage_access_requests', context, {'owner_org': org_id})
+    pkg = get_package_by_id_or_bust(data_dict)
+
+    _check_access('manage_access_requests', context,
+                  {'owner_org': pkg.owner_org})
 
     state = data_dict.get('state')
 
-    return _dictize_access_requests_list(pkg_id, state, package=True)
+    return _dictize_access_requests_list(pkg.id, state, package=True)
 
 
 @tk.side_effect_free
@@ -168,13 +170,11 @@ def _dictize_access_requests_list(_id, state, package=False):
     return [req.as_dict() for req in reqs]
 
 
+@tk.side_effect_free
 def get_access_request(context, data_dict):
-    pkg_id_or_name, user = _get_or_bust(data_dict, ['id', 'user'])
+    user = _get_or_bust(data_dict, 'user')
     # check if the package with such id exists to use it's ID
-    pkg = Package.get(pkg_id_or_name)
-
-    if not pkg:
-        raise tk.ObjectNotFound()
+    pkg = get_package_by_id_or_bust(data_dict)
 
     _check_access('get_access_request', context, data_dict)
 
