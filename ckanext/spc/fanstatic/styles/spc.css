@@ -4170,6 +4170,9 @@ table.table tr th.dataset-details {
 .wrapper--dataset-type--harvest .module:not(.show-all) .nav-facet {
   max-height: none;
 }
+.wrapper--dataset-type--harvest .module:not(.show-all) .read-more {
+  display: none;
+}
 #mobile-menu {
   display: none;
 }
