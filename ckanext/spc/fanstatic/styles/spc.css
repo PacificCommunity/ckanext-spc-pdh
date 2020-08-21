@@ -4167,6 +4167,9 @@ table.table tr th.dataset-details {
     display: none;
   }
 }
+.wrapper--dataset-type--harvest .module:not(.show-all) .nav-facet {
+  max-height: none;
+}
 #mobile-menu {
   display: none;
 }
