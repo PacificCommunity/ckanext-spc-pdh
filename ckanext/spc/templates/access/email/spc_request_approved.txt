@@ -1,6 +1,6 @@
 Dear {{ user.fullname or user.name }},
 
-You have been granted data access to the following dataset: "{{ pkg.title }}".
+Previously, you requested data access to the following dataset: "{{ pkg.title }}".
 
 Your request has been approved and you can browse the data now:
 
