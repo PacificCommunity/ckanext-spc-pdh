@@ -1,6 +1,6 @@
 Dear {{ member }},
 
-User {{ user }} has been requested an access to a dataset "{{ pkg.title }}".
+User {{ user }} has requested a data access to dataset "{{ pkg.title }}".
 {{ g.site_url }}{{ h.url_for('dataset.read', id=pkg.id) }}
 
 User organisation: {{ user_org }}
