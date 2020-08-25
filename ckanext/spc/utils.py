@@ -2,8 +2,9 @@ import logging
 import os
 import tempfile
 import requests
+import re
 
-from operator import attrgetter
+from operator import attrgetter, itemgetter
 
 import ckan.lib.helpers as h
 import ckan.model as model
@@ -332,3 +333,40 @@ def get_package_by_id_or_bust(data_dict):
     if not pkg:
         raise tk.ObjectNotFound()
     return pkg
+
+
+def params_into_advanced_search(params):
+    if not params.get('extras'):
+        return params
+    try:
+        filters = list(zip(*itemgetter('ext_advanced_value', 'ext_advanced_type', 'ext_advanced_operator')(
+            tk.request.params.to_dict(False)
+        )))
+    except KeyError:
+        return params
+    params.setdefault('fq', '')
+    fq = ''
+
+    for value, type, operator in reversed(filters):
+        if not value:
+            continue
+        if type == 'any':
+            fragment = f'text:"{value}"'
+        elif type == 'title':
+            fragment = f'title:"{value}"'
+        elif type == 'solr':
+            fragment = f'({value})'
+        else:
+            if re.search(f'\\b{type}\\b', params['fq']):
+                continue
+            fragment = f'{type}:"{value}"'
+        if not fq:
+            if operator == 'or':
+                fq = 'never:match'
+            else:
+                fq = '*:*'
+
+        fq = f'{fragment} {operator.upper()} ({fq})'
+
+    params.setdefault('fq_list', []).append(fq)
+    return params

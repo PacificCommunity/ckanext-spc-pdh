@@ -292,13 +292,15 @@ header.navbar {
         background: white;
     }
     &.btn-suggest, &.btn-suggestion-close {
-        z-index: 2;
         color: white;
         background-color: #009fde;
         border: 1px solid $background-color;
         &:hover, &:active {
             background-color: white;
             color: #009fde;
+        }
+        .active ~ & {
+          z-index: 2;
         }
     }
 

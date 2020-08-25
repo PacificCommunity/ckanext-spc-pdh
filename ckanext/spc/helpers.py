@@ -47,7 +47,7 @@ def countries_list(countries):
         countries_list = json.loads(countries)
     except ValueError:
         countries_list.append(countries)
-    return map(lambda x: x.upper(), countries_list)
+    return list(map(lambda x: x.upper(), countries_list))
 
 
 def spc_has_cesium_view(res):
@@ -244,5 +244,5 @@ def is_restricted(package):
             if field['key'] == 'access':
                 access = field['value']
                 break
-        
+
     return True if access == 'restricted' else False

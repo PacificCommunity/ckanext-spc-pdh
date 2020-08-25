@@ -90,8 +90,8 @@
     }
     .filter-list {
         margin-left: 27px;
-        margin-top: 37px;
-        margin-bottom: 13px;
+        margin-top: 0px;
+        margin-bottom: 0px;
         .filtered {
             margin: 5px 10px 6px 0;
             padding: 5px 9px 5px 19px;
@@ -363,4 +363,16 @@ input::-ms-clear {
     .spc-order-by-wrapper {
         display: none;
     }
+}
+
+.advanced-filters {
+  .advanced-form-control {
+    .enable-advanced-search {
+      input:checked + label {
+        &:after {
+          content: url("../../base/images/check.svg");
+        }
+      }
+    }
+  }
 }

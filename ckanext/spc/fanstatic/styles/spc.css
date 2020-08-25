@@ -3102,7 +3102,6 @@ header.navbar > .container .collapse {
 }
 .btn.btn-suggest,
 .btn.btn-suggestion-close {
-  z-index: 2;
   color: white;
   background-color: #009fde;
   border: 1px solid #009fde;
@@ -3113,6 +3112,10 @@ header.navbar > .container .collapse {
 .btn.btn-suggestion-close:active {
   background-color: white;
   color: #009fde;
+}
+.active ~ .btn.btn-suggest,
+.active ~ .btn.btn-suggestion-close {
+  z-index: 2;
 }
 .btn.btn-suggest {
   transition: top 0.4s, right 0.4s;
@@ -4795,8 +4798,8 @@ button.header-menu-btn:focus {
 }
 .search-form .filter-list {
   margin-left: 27px;
-  margin-top: 37px;
-  margin-bottom: 13px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .search-form .filter-list .filtered {
   margin: 5px 10px 6px 0;
@@ -5065,6 +5068,9 @@ input::-ms-clear {
 }
 #organization-search-form.search-form .spc-order-by-wrapper {
   display: none;
+}
+.advanced-filters .advanced-form-control .enable-advanced-search input:checked + label:after {
+  content: url("../../base/images/check.svg");
 }
 .organization-list-page .organization-list-sidebar {
   border-bottom: 1px dashed #c6c6c6;
@@ -5368,8 +5374,8 @@ input::-ms-clear {
   }
   .search-form .search-input-group {
     position: static;
-    margin-top: 22px;
-    padding-bottom: 28px;
+    margin-top: 17px;
+    margin-bottom: 0px;
   }
   .search-form .search-input-group #field-giant-search {
     background-color: #f7f7f7;

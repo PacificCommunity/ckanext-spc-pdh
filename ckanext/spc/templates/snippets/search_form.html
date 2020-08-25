@@ -28,7 +28,8 @@
 
 
 {% block search_input %}
-    <div class="input-group search-input-group">
+    <div class="input-group search-input-group" data-module="spc-advanced-search">
+        {#
         <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg search" name="q" value="{{ query }}" autocomplete="off" placeholder="{{ placeholder }}">
         {% block search_input_button %}
             <span class="input-group-btn">
@@ -37,6 +38,7 @@
                 </button>
             </span>
         {% endblock %}
+        #}
     </div>
 {% endblock %}
 

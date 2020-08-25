@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+        <style>
+         .widget-container:empty:after {content: 'Loading...'}
+        </style>
+    </head>
+    <body>
+        <h1>Examples</h1>
+        <fieldset>
+            <legend>Search form</legend>
+            <div id="search-form" class="widget-container"></div>
+        </fieldset>
+        <script>
+         function getUrlVars() {
+             return window.location.search.slice(1).split("&").map(function(param) {
+                 var pair = param.split('=')
+                 if (pair[0].indexOf('ext_advanced_') === 0) {
+                     return [pair[0].slice(13), pair[1]]
+                 }
+
+             }).filter(Boolean)
+         }
+
+         window.addEventListener('load', ()=> {
+             SPCWidgets.SearchForm.facets$.set(
+                 fetch(
+                     "http://127.0.0.1:5000/api/action/package_search?rows=0&facet.field=[%22type%22,%22topic%22,%22member_countries%22,%22res_format%22,%22organization%22]"
+                 )
+                     .then((resp) => resp.json())
+                     .then((data) => data.result.search_facets)
+             )
+
+             var grouped = getUrlVars().reduce(function(result, next) {
+                 result[next[0]].push(next[1])
+                 return result;
+             }, {operator: [], type: [], value: []})
+             var filters = []
+             for (var i = 0; i < grouped.type.length; ++i) {
+                 filters.push({
+                     operator: grouped.operator[i],
+                     type: grouped.type[i],
+                     value: grouped.value[i],
+                 })
+             }
+
+             SPCWidgets.SearchForm.filters.init(filters)
+
+                 new SPCWidgets.SearchForm({
+                     target: document.getElementById("search-form"),
+                     props: {  },
+                 });
+         })
+        </script>
+    </body>
+</html>

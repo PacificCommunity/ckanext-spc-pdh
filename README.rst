@@ -39,7 +39,7 @@ To install ckanext-spc:
    ``/etc/ckan/default/production.ini``).
 
 4. For the SpcNadaHarvester to work, install this branch of ckanext-ddi: ``github.com/roly97/ckanext-ddi/tree/nada_harvester``.
-   Alternatively, install the original ckanext-ddi extension ``github.com/liip/ckanext-ddi`` and then replace the files ``ddiharvester.py`` and ``metadata.py`` with the changed files found in ``ckanext-ddi_changes`` directory in this repo. 
+   Alternatively, install the original ckanext-ddi extension ``github.com/liip/ckanext-ddi`` and then replace the files ``ddiharvester.py`` and ``metadata.py`` with the changed files found in ``ckanext-ddi_changes`` directory in this repo.
 
 5. Update SOLR schema::
 
@@ -98,18 +98,34 @@ Recently updated dataset(within thematic area)::
 Most popular dataset(within thematic area)::
   http://site.url/api/action/package_search?q=extras_thematic_area_string:%22Climate%20Change%22&sort=extras_ga_view_count+desc
 
+
+-------------------
+Interactive widgets
+-------------------
+
+Develeopment server with the examples started via::
+
+  npm run dev-widgets
+
+When development phase completed, build widgets with::
+
+  npm run build-widgets
+
+Widgets registered inside `SPCWidgets` global JS variable. Use them
+form your CKAN JS modules as following::
+
+  var widget = new SPCWidgets.SearchForm({target: document.querySelector(selector)})
+
+Search form
+###########
+
 -----------------
 Running the Tests
 -----------------
 
 To run the tests, do::
 
-    nosetests --nologcapture --with-pylons=test.ini
-
-To run the tests and produce a coverage report, first make sure you have
-coverage installed in your virtualenv (``pip install coverage``) then run::
-
-    nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.spc --cover-inclusive --cover-erase --cover-tests
+        pytest --ckan-ini test.ini ckanext/spc
 
 -------------------
 General Information

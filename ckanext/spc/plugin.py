@@ -312,7 +312,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IUploader, inherit=True)
     plugins.implements(plugins.IClick)
     plugins.implements(plugins.IResourceController, inherit=True)
-    
+
     # IUploader
     def get_uploader(self, upload_to, old_filename):
         return Upload(upload_to, old_filename)
@@ -425,10 +425,16 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             search_params['fq'] = fq.replace(
                 'dataset_type:dataset', 'dataset_type:({})'.format(' OR '.join(
                     [type for type in self.dataset_types])))
+        search_params = spc_utils.params_into_advanced_search(search_params)
         return search_params
 
     def after_search(self, results, params):
         _org_cache = {}
+        try:
+            for item in results['search_facets']['type']['items']:
+                item['display_name'] = toolkit._(item['display_name'])
+        except KeyError:
+            pass
 
         is_popular_first = toolkit.asbool(
             params.get('extras', {}).get('ext_popular_first', False))
@@ -452,7 +458,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 'image_display_url') or h.url_for_static(
                     '/base/images/placeholder-organization.png',
                     qualified=True)
-                    
+
             if _package_is_native(item['id']):
                 item['isPartOf'] = 'pdh.pacificdatahub'
             else:
