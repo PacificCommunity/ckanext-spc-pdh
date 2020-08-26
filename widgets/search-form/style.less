@@ -213,6 +213,7 @@
           margin-bottom: 10px;
           cursor: pointer;
           position: relative;
+          padding-left: 20px;
           &:before, &:after {
             content: '';
             display: inline-block;
@@ -226,12 +227,14 @@
             margin-right: 5px;
             border: 1px solid @blue;
             background: #fff;
+            position: absolute;
+            left: 0px;
           }
           &.active {
             &:after {
               position: absolute;
               left: 3px;
-              top: 5px;
+              top: 3px;
               width: 8px;
               height: 8px;
               background: @blue;

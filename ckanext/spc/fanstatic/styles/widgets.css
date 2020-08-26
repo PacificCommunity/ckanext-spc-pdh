@@ -321,6 +321,7 @@
   margin-bottom: 10px;
   cursor: pointer;
   position: relative;
+  padding-left: 20px;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown .dropdown-options .option-item:before,
 .advanced-filters .advanced-filter-row .filter-input-dropdown .dropdown-options .option-item:after {
@@ -336,11 +337,13 @@
   margin-right: 5px;
   border: 1px solid #001E73;
   background: #fff;
+  position: absolute;
+  left: 0px;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown .dropdown-options .option-item.active:after {
   position: absolute;
   left: 3px;
-  top: 5px;
+  top: 3px;
   width: 8px;
   height: 8px;
   background: #001E73;
