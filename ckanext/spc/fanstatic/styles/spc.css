@@ -3394,6 +3394,22 @@ table.table tr th.dataset-details {
   display: flex;
   margin-bottom: 60px;
 }
+.dataset-read .dataset-info {
+  margin-bottom: 10px;
+  color: #1d1d1e;
+  font-weight: 600;
+  font-size: 13px;
+}
+.dataset-read .dataset-info .badge {
+  font-size: 14px;
+  vertical-align: middle;
+  margin-left: 15px;
+  padding-top: 3px;
+  background-color: #197b60;
+}
+.dataset-read .dataset-info .empty {
+  color: #000;
+}
 .dataset-read .primary {
   position: relative;
   color: #2a2c2d;
@@ -5432,6 +5448,7 @@ input::-ms-clear {
   .dataset-read .primary .module .module-content {
     padding: 0px 29px;
   }
+  .dataset-read .primary .module .module-content .dataset-info,
   .dataset-read .primary .module .module-content .notes {
     padding: 0px 10px;
   }
