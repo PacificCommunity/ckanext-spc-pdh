@@ -67,16 +67,6 @@
                     {% endif %}
                 {% endblock %}
                 <br/>
-                <div class="dataset-info">
-                    {{ h.render_datetime(package.metadata_modified, date_format='%d %B %Y') }}
-                    <div class="data-quality-tooltip">
-                        <i class="fa fa-question-circle"></i>
-                        <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
-                            This date indicates the date the dataset metadata was last modified on Pacific Data Hub.
-                        </span>
-                    </div>
-
-                </div>
             </div>
             {% block resources %}
                 {% if package.resources and not hide_resources %}
