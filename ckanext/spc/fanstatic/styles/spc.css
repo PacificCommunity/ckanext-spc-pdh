@@ -3441,7 +3441,7 @@ table.table tr th.dataset-details {
   font-size: 13px;
   color: #525252;
   border-radius: 20px;
-  margin-right: 35px;
+  margin-right: 28px;
   padding: 8px 0px;
 }
 .dataset-read .primary .nav-tabs li a:hover,
@@ -4304,6 +4304,28 @@ table.table tr th.dataset-details {
   height: 34px;
   width: 30px;
 }
+.form-actions .control-required-message {
+  margin-left: 0px;
+  margin-right: 20px;
+}
+.slug-preview {
+  word-break: break-word;
+}
+@media (max-width: 767px) {
+  [role=main] {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  [role=main] #content .toolbar {
+    display: none;
+  }
+}
+.wrapper--dataset-type--harvest .module:not(.show-all) .nav-facet {
+  max-height: none;
+}
+.wrapper--dataset-type--harvest .module:not(.show-all) .read-more {
+  display: none;
+}
 #mobile-menu {
   display: none;
 }
@@ -4433,6 +4455,9 @@ button.header-menu-btn:focus {
   margin: 14px;
   font-size: 14px;
   font-weight: 300;
+}
+.js body.filters-modal .secondary .filters {
+  background: #fff;
 }
 .js body.filters-modal .secondary .filters .hide-filters {
   right: 25px;
