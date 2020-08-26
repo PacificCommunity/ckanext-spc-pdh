@@ -435,6 +435,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 item['display_name'] = toolkit._(item['display_name'])
         except KeyError:
             pass
+        try:
+            for item in results['search_facets']['member_countries']['items']:
+                item['display_name'] = toolkit.h.spc_member_countries_facet_label(item)
+        except KeyError:
+            pass
 
         is_popular_first = toolkit.asbool(
             params.get('extras', {}).get('ext_popular_first', False))

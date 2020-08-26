@@ -220,6 +220,7 @@
 }
 .advanced-filters .advanced-filter-row .search-btn,
 .advanced-filters .advanced-filter-row .remove-btn {
+  cursor: pointer;
   margin-left: 10px;
   display: flex;
   position: absolute;
@@ -254,6 +255,7 @@
   margin-right: 10px;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown .dropdown-value .remove-icon {
+  cursor: pointer;
   margin-left: 15px;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown .dropdown-value .remove-icon svg {
@@ -365,6 +367,7 @@
   box-shadow: none;
   border: none;
   outline: none;
+  margin-right: 5px;
 }
 .advanced-filters .btn:hover {
   background: #001E73;

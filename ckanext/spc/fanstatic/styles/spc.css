@@ -3127,7 +3127,7 @@ header.navbar > .container .collapse {
   font-weight: 600;
   box-shadow: none;
   top: 0px;
-  right: 0px;
+  right: -10px;
 }
 .btn.btn-suggest .fa {
   vertical-align: middle;
