@@ -1,8 +1,11 @@
-from ckan.authz import is_authorized, get_user_id_for_username, has_user_permission_for_group_or_org
 import ckan.plugins.toolkit as tk
+
+from ckan.authz import is_authorized, get_user_id_for_username, has_user_permission_for_group_or_org
 from ckan.model import Member
-from ckanext.spc.model import AccessRequest
 from ckan.authz import get_user_id_for_username
+from ckan.logic import NotFound
+
+from ckanext.spc.model import AccessRequest
 
 
 def spc_dcat_show(context, data_dict):
@@ -60,3 +63,14 @@ def restrict_dataset_show(context, data_dict):
 
     authorized = is_admin_or_member or is_accessed
     return {'success': authorized}
+
+
+def resource_view_show(context, data_dict):
+    model = context['model']
+
+    resource_view = model.ResourceView.get(data_dict['id'])
+    if not resource_view:
+        raise NotFound(_('Resource view not found, cannot check auth.'))
+
+    package = context['package']
+    return is_authorized('restrict_dataset_show', context, package.as_dict())

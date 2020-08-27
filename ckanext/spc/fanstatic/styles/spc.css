@@ -2912,8 +2912,14 @@ header.navbar > .container .collapse {
 .masthead #main-menu .dropdown .dropdown-menu:before {
   color: #7B7B7B;
 }
+.masthead #main-menu .dropdown .dropdown-toggle {
+  background-color: red;
+}
 .masthead #main-menu .dropdown .dropdown-toggle .fa-caret-down {
   margin-left: 7px;
+}
+.masthead #main-menu .dropdown .dropdown-toggle.restricted {
+  color: #8C8C8C;
 }
 .masthead #main-menu .dropdown li {
   display: block;
@@ -3390,6 +3396,29 @@ table.table tr th.dataset-details {
 .form-group .controls .select2-container .select2-search-choice a {
   top: 4px;
 }
+.dropdown .dropdown-toggle .explore {
+  position: relative;
+  top: 2px;
+}
+.dropdown .dropdown-toggle .explore svg path {
+  fill: #036295;
+}
+.dropdown .dropdown-toggle .tick {
+  position: relative;
+  bottom: 1px;
+}
+.dropdown .dropdown-toggle .tick svg path {
+  fill: #036295;
+}
+.dropdown.restricted .dropdown-toggle {
+  color: #8C8C8C !important;
+}
+.dropdown.restricted .dropdown-toggle .explore svg path {
+  fill: #8C8C8C;
+}
+.dropdown.restricted .dropdown-toggle .tick svg path {
+  fill: #8C8C8C;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
@@ -3493,15 +3522,20 @@ table.table tr th.dataset-details {
   cursor: pointer;
 }
 .dataset-read .primary .resources .resource-item .restricted-access-info .tooltiptext {
-  width: 160px;
+  background-color: white;
+  color: #000;
+  font-size: 14px;
+  width: 420px;
 }
 .dataset-read .primary .resources .resource-item .restricted-access-info .tooltiptext:after {
-  margin-left: 2px;
+  left: 15%;
+  border-color: transparent;
+  border-top-color: white;
 }
 .dataset-read .primary .resources .resource-item .restricted-access-lock {
   float: left;
   position: relative;
-  top: 7px;
+  top: 5px;
 }
 .dataset-read .primary .resources .resource-item .btn-primary.dropdown-toggle {
   line-height: 1.3;

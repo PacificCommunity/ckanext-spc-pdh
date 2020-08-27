@@ -3,6 +3,8 @@ ckan.module("spc-request-access", function ($) {
   return {
     initialize: function () {
       this.el.on("submit", this._onSubmit.bind(this));
+
+      $('#request-reason').prop('required', true);
     },
     teardown: function () {
       this.el.off("submit");

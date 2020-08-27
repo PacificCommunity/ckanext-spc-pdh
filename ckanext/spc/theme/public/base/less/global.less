@@ -85,8 +85,12 @@ header.navbar {
                 }
             }
             .dropdown-toggle {
+                background-color: red;
                 .fa-caret-down {
                     margin-left: 7px;
+                }
+                &.restricted {
+                    color: #8C8C8C;
                 }
             }
 
@@ -623,6 +627,42 @@ table.table {
             .select2-search-choice {
                 a {
                     top: 4px;
+                }
+            }
+        }
+    }
+}
+
+.dropdown {
+    .dropdown-toggle {
+        .explore {
+            position: relative;
+            top: 2px;
+            svg {
+                path {
+                    fill: @heading-blue;
+                }
+            }
+        }
+        .tick {
+            position: relative;
+            bottom: 1px;
+            svg {
+                path {
+                    fill: @heading-blue;
+                }
+            }
+        }
+    }
+    &.restricted {
+        .dropdown-toggle {
+            color: #8C8C8C !important;
+            .explore svg path{
+                fill: #8C8C8C;
+            }
+            .tick {
+                svg path{
+                    fill: #8C8C8C;
                 }
             }
         }
