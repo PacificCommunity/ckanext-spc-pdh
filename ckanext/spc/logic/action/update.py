@@ -45,10 +45,12 @@ def _reject_or_approve(context, data_dict, state):
     )
 
     user_obj = _get_user_obj(user)
+    timeout = config.get('spc.access_request.request_timeout', 3)
     if config.get('spc.access_request.send_user_notification') and req.state != 'pending':
         notify_user(user_obj, state, {'pkg': pkg,
                                       'user': user_obj,
-                                      'reason': reject_reason})
+                                      'reason': reject_reason,
+                                      'timeout': timeout})
     return req.as_dict()
 
 

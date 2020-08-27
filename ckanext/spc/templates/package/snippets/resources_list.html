@@ -1,10 +1,12 @@
 <section id="dataset-resources" class="resources">
     <div class="resources-header">
         <h2>{{ _('Data and Resources') }}</h2>
-        {% if not h.check_access('restrict_dataset_show', data_dict=pkg)
+        {% if not h.check_access('create_access_request') %}
+          {% link_for _('Request an Access'), class_="btn btn-info btn-access", named_route='user.login', came_from=h.url_for('dataset.read',id=pkg.id) %}
+        {% elif not h.check_access('restrict_dataset_show', data_dict=pkg)
           and h.spc_is_restricted(pkg)
           and h.check_access('create_access_request') %}
-            <button class="btn btn-info btn-access" data-toggle="modal" data-target="#request-access-modal">Request an Access</button>
+            <button class="btn btn-info btn-access" data-toggle="modal" data-target="#request-access-modal">{{ _('Request an Access') }}</button>
         {% endif %}
     </div>
     {% block resource_list %}

@@ -16,7 +16,7 @@
                         {% endif %}
                         <button name="bulk_action" value="reject" class="btn btn-danger" type="submit">
                             <i class="fa fa-times"></i>
-                            {{ _('Reject request') }}
+                            {{ _('Revoke access') }}
                         </button>
                     </div>
                 </th>
@@ -53,12 +53,6 @@
         </tbody>
     </table>
     <div class="form-group control-full">
-        {{ form.textarea('reject-reason', id='reject-reason', is_required=true if not is_org_list else false, label=_('Reject Reason'), error=error, placeholder=_('Reject reason'), cols=20, rows=5) }}
+        {{ form.textarea('reject-reason', id='reject-reason', is_required=true if not is_org_list else false, label=_('Reason to revoke access'), error=error, placeholder=_('Reason to revoke access'), cols=20, rows=5) }}
     </div>
 </form>
-
-<p class="text-danger">
-    {% trans %}
-    Attention, the execution speed depends on the number of selected records. Mailing slows down the process.
-    {% endtrans %}
-</p>

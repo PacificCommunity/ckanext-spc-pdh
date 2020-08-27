@@ -57,3 +57,10 @@
   {% endblock %}
 
 {% endblock %}
+
+<!-- if resource is restricted - don't show res view -->
+{% block resource_view %}
+    {% if h.spc_is_restricted(pkg) and h.check_access('restrict_dataset_show', data_dict=pkg) %}
+        {{ super() }}
+    {% endif %}
+{% endblock %}

@@ -36,9 +36,9 @@ def request_for_access():
         # if access request doesn't exist - create it
         pass
     except logic.NotAuthorized:
-        abort(403, _('You must be authorized'))
+        return abort(403, _('You must be authorized'))
     except logic.ValidationError as e:
-        abort(403, e)
+        return abort(403, e)
 
     # if request was previously rejected
     if req and req.get('state') == 'rejected':
