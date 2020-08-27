@@ -2912,9 +2912,6 @@ header.navbar > .container .collapse {
 .masthead #main-menu .dropdown .dropdown-menu:before {
   color: #7B7B7B;
 }
-.masthead #main-menu .dropdown .dropdown-toggle {
-  background-color: red;
-}
 .masthead #main-menu .dropdown .dropdown-toggle .fa-caret-down {
   margin-left: 7px;
 }
