@@ -215,7 +215,7 @@ def get_drupal_user_url(action, current_url=''):
     current_url_parsed = urlparse(str(current_url))
     drupal_url = config.get('drupal.site_url') or current_url
     url = urlparse(str(drupal_url))
-    return_url = f"came_from={current_url_parsed.path or ''}"
+    return_url = f"destination={current_url_parsed.path or ''}"
 
     if action in ('login', 'register', 'logout'):
         path = f'/user/{action}'
