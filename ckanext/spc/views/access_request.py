@@ -117,6 +117,15 @@ class OrganizationRequests(BulkRequest):
     def _redirect(org_id):
         return h.redirect_to('spc_access_request.org_requests', org_id=org_id)
 
+    @staticmethod
+    def _get_request_ids(form):
+        # they are prefixed by req_ in the form data
+        return [
+            i.replace('req_', '')
+            for i in form.keys()
+            if i.startswith('req_')
+        ]
+
     def post(self, org_id):
         actions = {
             'approve': 'approve_access',
@@ -125,26 +134,20 @@ class OrganizationRequests(BulkRequest):
         act = request.form.get('bulk_action', '')
         reject_reason = request.form.get('reject-reason')
 
-        action = actions.get(act)
+        request_ids = self._get_request_ids(request.form)
 
-        if action == 'reject_access' and not reject_reason:
-            h.flash_error(_('Reject reason isn\'t provided'))
+        if not request_ids:
+            h.flash_error(_('Select at least one to proceed.'))
             return self._redirect(org_id)
+
+        action = actions.get(act)
 
         if not action:
             h.flash_error(_('Action not implemented.'))
             return self._redirect(org_id)
 
-        # get the access_request ids from the form
-        # they are prefixed by req_ in the form data
-        request_ids = [
-            i.replace('req_', '')
-            for i in request.form.keys()
-            if i.startswith('req_')
-        ]
-
-        if not request_ids:
-            h.flash_error(_('Select at least one to proceed.'))
+        if action == 'reject_access' and not reject_reason:
+            h.flash_error(_('Reject reason isn\'t provided'))
             return self._redirect(org_id)
 
         for _id in request_ids:

@@ -212,29 +212,23 @@ def spc_link_to_identifier(id):
 
 
 def get_drupal_user_url(action, current_url=''):
-
     current_url_parsed = urlparse(str(current_url))
     drupal_url = config.get('drupal.site_url') or current_url
     url = urlparse(str(drupal_url))
-    return_url = 'destination=' + \
-        current_url_parsed.path if current_url_parsed.path else ''
+    return_url = f"came_from={current_url_parsed.path or ''}"
 
-    if action == 'login':
-        path = '/user/login'
-    elif action == 'register':
-        path = '/user/register'
-    elif action == 'logout':
-        path = '/user/logout'
+    if action in ('login', 'register', 'logout'):
+        path = f'/user/{action}'
     else:
         path = ''
-    result_url = urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
 
-    return result_url
+    return urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
 
 
 def get_package_name_by_id(package_id):
     from ckan.model import Package
     return Package.get(package_id).title
+
 
 def is_restricted(package):
     access = package.get('access')

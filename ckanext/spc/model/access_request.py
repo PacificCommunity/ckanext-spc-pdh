@@ -37,6 +37,10 @@ class AccessRequest(Base):
             'data_modified': self.data_modified.isoformat()
         }
 
+    @property
+    def is_pending(self):
+        return True if self.state == 'pending' else False
+
     @staticmethod
     def _generate_uuid(user_id, package_id):
         return str(uuid.uuid5(uuid.NAMESPACE_DNS, (user_id + package_id)))
@@ -77,7 +81,7 @@ class AccessRequest(Base):
 
         meta.Session.commit()
         return req
-        
+
     @classmethod
     def get(cls, user_id, package_id):
         _id = cls._generate_uuid(user_id, package_id)
@@ -111,7 +115,7 @@ class AccessRequest(Base):
 
         ID build up with uuid5(user_id + package_id)
         """
-        
+
         req = AccessRequest.get(user_id, package_id)
 
         # if we found an access_request then return it

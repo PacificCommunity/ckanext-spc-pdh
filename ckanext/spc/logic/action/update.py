@@ -8,20 +8,11 @@ from ckanext.spc.utils import notify_user
 from ckanext.spc.utils import get_package_by_id_or_bust
 
 
-def _get_user_obj(username):
-    user = User.get(username)
-
-    if not user:
-        raise ObjectNotFound()
-
-    return user
-
-
 def _reject_or_approve(context, data_dict, state):
     user = data_dict.get('user')
     request_id = data_dict.get('request_id')
     reject_reason = data_dict.get('reject_reason')
-    
+
     if not context.get('ignore_auth'):
         check_access('manage_access_requests', context, data_dict)
 
@@ -44,21 +35,49 @@ def _reject_or_approve(context, data_dict, state):
         request_id=request_id
     )
 
-    user_obj = _get_user_obj(user)
-    timeout = config.get('spc.access_request.request_timeout', 3)
-    if config.get('spc.access_request.send_user_notification') and req.state != 'pending':
-        notify_user(user_obj, state, {'pkg': pkg,
-                                      'user': user_obj,
-                                      'reason': reject_reason,
-                                      'timeout': timeout})
+    _notify_on_state_change(req)
     return req.as_dict()
+
+
+def _notify_on_state_change(request):
+    data_dict = _prepare_data_for_email(request)
+    send_user_notifications = config.get(
+        'spc.access_request.send_user_notification')
+
+    if send_user_notifications and not request.is_pending:
+        notify_user(data_dict['user'], request.state, data_dict)
+
+
+def _prepare_data_for_email(request):
+    pkg_obj = _get_package_obj(request.package_id)
+    user_obj = _get_user_obj(request.user_id)
+    timeout = config.get('spc.access_request.request_timeout', 3)
+
+    return {'pkg': pkg_obj, 'user': user_obj,
+            'reason': request.reason, 'timeout': timeout}
+
+
+def _get_user_obj(username):
+    user = User.get(username)
+    if not user:
+        raise ObjectNotFound()
+    return user
+
+
+def _get_package_obj(package_id):
+    pkg = Package.get(package_id)
+    if not pkg:
+        raise ObjectNotFound
+    return pkg
 
 
 def approve_access(context, data_dict):
     return _reject_or_approve(context, data_dict, 'approved')
 
+
 def update_access(context, data_dict):
     return _reject_or_approve(context, data_dict, 'pending')
+
 
 def reject_access(context, data_dict):
     return _reject_or_approve(context, data_dict, 'rejected')
