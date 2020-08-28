@@ -318,7 +318,7 @@ def delete_res_urls_if_restricted(context, data_dict):
         pass
 
     for resource in data_dict['resources']:
-        resource['url'] = None
+        resource.pop('url')
         resource.pop('url_type')
 
     return data_dict

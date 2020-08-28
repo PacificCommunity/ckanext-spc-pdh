@@ -39,6 +39,7 @@
     {
       "field_name": "access",
       "label": "Access",
+      "validators": "ignore_missing",
       "preset": "select",
       "choices": [
         {

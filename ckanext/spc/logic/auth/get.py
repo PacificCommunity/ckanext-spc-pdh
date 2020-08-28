@@ -1,9 +1,8 @@
 import ckan.plugins.toolkit as tk
 
-from ckan.authz import is_authorized, get_user_id_for_username, has_user_permission_for_group_or_org
-from ckan.model import Member
-from ckan.authz import get_user_id_for_username
+from ckan.authz import is_authorized, is_sysadmin, has_user_permission_for_group_or_org
 from ckan.logic import NotFound
+from ckan.common import _
 
 from ckanext.spc.model import AccessRequest
 
@@ -27,42 +26,33 @@ def get_access_request(context, data_dict):
 
 
 def manage_access_requests(context, data_dict):
+    if not context['user']:
+        return {'success': False}
+
+    is_sys = is_sysadmin(context['user'])
+    is_member = _check_permission_for_org(context, data_dict)
+
+    return {'success': is_sys or is_member}
+
+
+def _check_permission_for_org(context, data_dict):
     org_id = data_dict.get('owner_org') or data_dict.get('id')
     authorized = has_user_permission_for_group_or_org(
         org_id, context['user'], 'manage_group')
-    return {'success': authorized}
-
-
-def _check_admin_or_member(context, data_dict):
-    session = context['session']
-    user_id = get_user_id_for_username(context['user'])
-    model = context['model']
-
-    is_sys = is_sysadmin(context['user'])
-
-    org_id = data_dict.get('owner_org') or data_dict.get('id')
-    is_member = session.query(model.Member) \
-        .filter_by(group_id=org_id, table_id=user_id) \
-        .filter((model.Member.capacity == 'editor') | (model.Member.capacity == 'admin')) \
-        .first()
-
-    return any((is_sys, is_member))
+    return authorized
 
 
 def restrict_dataset_show(context, data_dict):
     if not context['user']:
         return {'success': False}
 
-    org_id = data_dict.get('owner_org') or data_dict.get('id')
-    is_admin_or_member = has_user_permission_for_group_or_org(
-        org_id, context['user'], 'manage_group')
+    is_member = _check_permission_for_org(context, data_dict)
     is_accessed = AccessRequest.check_access_to_dataset(
         context['user'],
         data_dict['id']
     )
 
-    authorized = is_admin_or_member or is_accessed
-    return {'success': authorized}
+    return {'success': is_member or is_accessed}
 
 
 def resource_view_show(context, data_dict):
