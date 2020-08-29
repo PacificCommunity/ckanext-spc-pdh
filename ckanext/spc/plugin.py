@@ -44,6 +44,15 @@ from ckanext.harvest.model import HarvestObject, HarvestSource
 
 logger = logging.getLogger(__name__)
 
+new_order_facet_dict = {
+    'topic': _('Topic'),
+    'member_countries':  _('Member countries'),
+    'organization': _('Organisations'),
+    'tags': _('Tags'),
+    'res_format': _('Formats'),
+    'type': _('Dataset type'),
+    'license_id': _('Licenses')
+}
 
 class LicenseCreativeCommonsNonCommercialShareAlice40(DefaultLicense):
     id = "cc-nc-sa-4.0"
@@ -522,25 +531,30 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IFacets
 
     def dataset_facets(self, facets_dict, package_type):
-        facets_dict.pop('groups', None)
-        facets_dict['topic'] = _('Topic')
-        facets_dict['type'] = _('Dataset type')
-        facets_dict['member_countries'] = _('Member countries')
+        # facets_dict.pop('groups', None)
+        # facets_dict['topic'] = _('Topic')
+        # facets_dict['type'] = _('Dataset type')
+        # facets_dict['member_countries'] = _('Member countries')
+
+        facets_dict = new_order_facet_dict
         return facets_dict
 
     def group_facets(self, facets_dict, group_type, package_type):
-        facets_dict.pop('groups', None)
-        facets_dict['topic'] = _('Topic')
-        facets_dict['type'] = _('Dataset type')
-        facets_dict['member_countries'] = _('Member countries')
-        return facets_dict
+        # facets_dict.pop('groups', None)
+        # facets_dict['topic'] = _('Topic')
+        # facets_dict['type'] = _('Dataset type')
+        # facets_dict['member_countries'] = _('Member countries')
 
+        facets_dict = new_order_facet_dict
+        return facets_dict
     def organization_facets(self, facets_dict, organization_type,
                             package_type):
-        facets_dict.pop('groups', None)
-        facets_dict['topic'] = _('Topic')
-        facets_dict['type'] = _('Dataset type')
-        facets_dict['member_countries'] = _('Member countries')
+        # facets_dict.pop('groups', None)
+        # facets_dict['topic'] = _('Topic')
+        # facets_dict['type'] = _('Dataset type')
+        # facets_dict['member_countries'] = _('Member countries')
+
+        facets_dict = new_order_facet_dict
         return facets_dict
 
 

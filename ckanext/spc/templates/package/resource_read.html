@@ -1,7 +1,11 @@
 {% ckan_extends %}
 {% block resource_read_url %}
     {% if res.url and h.is_url(res.url) %}
-        <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+        {% if res.datastore_active %}
+            <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ h.url_for('datastore.dump', resource_id=res.id, bom=True) }}" title="{{ h.url_for('datastore.dump', resource_id=res.id, bom=True) }}">{{ h.url_for('datastore.dump', resource_id=res.id, bom=True) }}</a></p>
+        {% else %}
+            <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+        {% endif %}
     {% elif res.url %}
         <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
     {% endif %}
