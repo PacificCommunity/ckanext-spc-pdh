@@ -242,7 +242,7 @@ def download(id, resource_id, filename=None, package_type="dataset"):
         pkg = tk.get_action("package_show")(context, {"id": id})
         # Possible NotAuthorized from listeners
 
-        if tk.h.spc_is_restricted(pkg):
+        if tk.h.spc_is_restricted(pkg) and context['user']:
             utils.track_resource_download(context['user'], rsc['id'])
     except (tk.ObjectNotFound, tk.NotAuthorized):
         return tk.abort(404, tk._("Resource not found"))
