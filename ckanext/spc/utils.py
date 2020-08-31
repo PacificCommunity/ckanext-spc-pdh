@@ -17,7 +17,7 @@ from ckan.lib.uploader import get_resource_uploader
 from ckan.lib import mailer
 
 from ckanext.ga_report.ga_model import GA_Url
-from ckanext.spc.model import SearchQuery
+from ckanext.spc.model import SearchQuery, DownloadTracking
 
 logger = logging.getLogger(__name__)
 
@@ -370,3 +370,8 @@ def params_into_advanced_search(params):
 
     params.setdefault('fq_list', []).append(fq)
     return params
+
+def track_resource_download(user, id):
+    record = DownloadTracking.download(user, id)
+    record.save()
+    return record

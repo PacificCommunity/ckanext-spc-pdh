@@ -35,6 +35,10 @@ def manage_access_requests(context, data_dict):
     return {'success': is_sys or is_member}
 
 
+def spc_download_tracking_list(context, data_dict):
+    return manage_access_requests(context, data_dict)
+
+
 def _check_permission_for_org(context, data_dict):
     org_id = data_dict.get('owner_org') or data_dict.get('id')
     authorized = has_user_permission_for_group_or_org(

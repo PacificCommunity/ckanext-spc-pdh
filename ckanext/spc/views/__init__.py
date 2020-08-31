@@ -130,7 +130,6 @@ def index():
 
 spc_user = Blueprint('spc_user', __name__)
 spc_admin = Blueprint('spc_admin', __name__)
-spc_package = Blueprint('spc_package', __name__)
 search_queries = Blueprint('search_queries', __name__)
 
 spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
@@ -145,5 +144,5 @@ search_queries.add_url_rule(
     "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
 )
 
-blueprints = [spc_user, spc_admin, spc_package,
+blueprints = [spc_user, spc_admin,
               search_queries, spc_access_request]

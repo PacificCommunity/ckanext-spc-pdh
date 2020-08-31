@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import datetime as dt
-
+from functools import partial
 from dateutil import parser
 from flask import Blueprint, jsonify
 from flask.views import MethodView
@@ -11,9 +11,13 @@ import ckan.lib.helpers as h
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.logic as logic
 
+import ckan.plugins.toolkit as tk
+
 from ckan.plugins.toolkit import ObjectNotFound
 from ckan.lib.base import abort, render
 from ckan.common import _, g, request, config
+import ckan.views.resource as resource_view
+import ckanext.spc.utils as utils
 
 spc_access_request = Blueprint('spc_access_request', __name__)
 
@@ -221,6 +225,67 @@ class PackageRequests(BulkRequest):
     @staticmethod
     def _redirect(pkg_id):
         return h.redirect_to('spc_access_request.pkg_requests', pkg_id=pkg_id)
+
+
+@spc_access_request.route("/<package_type>/<id>/resource/<resource_id>/download")
+@spc_access_request.route("/<package_type>/<id>/resource/<resource_id>/download/<filename>")
+def download(id, resource_id, filename=None, package_type="dataset"):
+    context = {
+        "model": model,
+        "session": model.Session,
+        "user": tk.c.user,
+        "auth_user_obj": tk.c.userobj,
+    }
+
+    try:
+        rsc = tk.get_action("resource_show")(context, {"id": resource_id})
+        pkg = tk.get_action("package_show")(context, {"id": id})
+        # Possible NotAuthorized from listeners
+
+        if tk.h.spc_is_restricted(pkg):
+            utils.track_resource_download(context['user'], rsc['id'])
+    except (tk.ObjectNotFound, tk.NotAuthorized):
+        return tk.abort(404, tk._("Resource not found"))
+
+    return resource_view.download(package_type, id, resource_id, filename)
+
+
+@spc_access_request.route("/<package_type>/<id>/download-tracking", defaults={'package_type': 'dataset'})
+def package_download_tracking(id, package_type):
+    context = {"user": tk.c.user}
+    data_dict = {'id': id}
+    try:
+        tk.check_access('spc_download_tracking_list', context, data_dict)
+        pkg_dict = tk.get_action('package_show')(context.copy(), data_dict)
+    except tk.NotAuthorized:
+        return tk.abort(403, tk._("Not authorized to read reports"))
+    except tk.ObjectNotFound:
+        return tk.abort(404, tk._("Dataset not found"))
+    limit = 20
+    page = tk.h.get_page_number(tk.request.args)
+    resp = tk.get_action('spc_download_tracking_list')(context.copy(), {
+        'id': id, 'limit': limit, 'offset': page * limit - limit
+    })
+    params_nopage = dict(
+        [(k, v) for k, v in tk.request.args.items() if k != "page"]
+        + [(k, v) for k, v in tk.request.view_args.items()]
+    )
+
+    pager = h.Page(
+        resp['results'],
+        page=page,
+        item_count=resp['count'],
+        url=partial(tk.h.pager_url, **params_nopage),
+        items_per_page=limit,
+        presliced_list=True
+    )
+
+    extra_vars = {
+        'pkg_dict': pkg_dict,
+        'pager': pager,
+        'records': resp['results']
+    }
+    return tk.render('package/spc_download_tracking.html', extra_vars)
 
 
 spc_access_request.add_url_rule('/dataset/<pkg_id>/request_access',

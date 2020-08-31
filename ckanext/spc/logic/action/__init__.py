@@ -13,9 +13,10 @@ def get_actions():
         get_access_request=get.get_access_request,
         get_access_requests_for_org=get.get_access_requests_for_org,
         get_access_requests_for_pkg=get.get_access_requests_for_pkg,
+        spc_download_tracking_list=get.spc_download_tracking_list,
 
         create_access_request=create.create_access_request,
-        
+
         approve_access=update.approve_access,
         reject_access=update.reject_access,
         update_access=update.update_access,
