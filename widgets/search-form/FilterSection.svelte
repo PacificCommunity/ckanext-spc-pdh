@@ -26,7 +26,7 @@
   </div>
 {/if}
 {#if $advancedMode}
-  <div class="remove-btn" on:click={() => filters.remove(filter)}>
+  <div class="remove-btn {$filters.length == 1 ? 'disabled' : ''}" on:click={() => filters.remove(filter)}>
     <Icons.Close/>
   </div>
 {:else}
