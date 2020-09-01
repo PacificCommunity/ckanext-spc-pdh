@@ -117,10 +117,10 @@
 
 .advanced-filters .advanced-filter-row {
   position: relative;
-  font-family: Montserrat;
+  font-family: inherit;
   width: 100%;
   background: #F7F7F7;
-  border-radius: 20px;
+  border-radius: 4px;
   color: #999999;
   line-height: 18px;
   font-size: 14px;
@@ -226,6 +226,11 @@
   position: absolute;
   right: 20px;
   top: 20px;
+}
+.advanced-filters .advanced-filter-row .search-btn.disabled,
+.advanced-filters .advanced-filter-row .remove-btn.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown,
 .advanced-filters .advanced-filter-row .filter-input-text {
@@ -349,6 +354,7 @@
   background: #001E73;
 }
 .advanced-filters .advanced-filter-row.add-filter {
+  background: #eaeaea;
   cursor: pointer;
 }
 .advanced-filters .advanced-filter-row.add-filter .input-placeholder {

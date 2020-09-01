@@ -8,10 +8,10 @@
 .advanced-filters {
   .advanced-filter-row {
     position: relative;
-    font-family: Montserrat;
+    font-family: inherit;
     width: 100%;
     background: @light-gray;
-    border-radius: 20px;
+    border-radius: 4px;
     color: @gray;
     line-height: 18px; font-size: 14px;
     padding: 4px 15px;
@@ -115,12 +115,16 @@
       }
     }
     .search-btn, .remove-btn {
-        cursor: pointer;
+      cursor: pointer;
       margin-left: 10px;
       display: flex;
       position: absolute;
       right: 20px;
       top: 20px;
+      &.disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
     }
     .filter-input-dropdown,
     .filter-input-text {
@@ -244,6 +248,7 @@
       }
     }
     &.add-filter {
+      background: darken(@light-gray, 5%);
       cursor: pointer;
       .input-placeholder {
         margin-left: 5px;
