@@ -4,6 +4,7 @@ import tempfile
 import requests
 import re
 
+from smtplib import SMTPServerDisconnected
 from operator import attrgetter, itemgetter
 
 import ckan.lib.helpers as h
@@ -257,7 +258,9 @@ def notify_user(user, state, extra_vars):
             tk.render(messages[state], extra_vars),
         )
     except mailer.MailerException as e:
-        logger.debug(e.message)
+        logger.error(e)
+    except SMTPServerDisconnected as e:
+        logger.error(e)
 
 
 def _get_org_members(org_id):
@@ -296,7 +299,9 @@ def _send_notifications(admins, extra_vars):
                 tk.render('access/email/spc_access_requested.txt', extra_vars),
             )
         except mailer.MailerException as e:
-            logger.debug(e.message)
+            logger.error(e)
+        except SMTPServerDisconnected as e:
+            logger.error(e)
 
 
 def notify_org_members(org_id, extra_vars):
