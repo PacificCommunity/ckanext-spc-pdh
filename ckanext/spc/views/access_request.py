@@ -253,10 +253,9 @@ def download(id, resource_id, filename=None, package_type="dataset"):
 @spc_access_request.route("/<package_type>/<id>/download-tracking", defaults={'package_type': 'dataset'})
 def package_download_tracking(id, package_type):
     context = {"user": tk.c.user}
-    data_dict = {'id': id}
     try:
-        tk.check_access('spc_download_tracking_list', context, data_dict)
-        pkg_dict = tk.get_action('package_show')(context.copy(), data_dict)
+        pkg_dict = tk.get_action('package_show')(context.copy(), {'id': id})
+        tk.check_access('spc_download_tracking_list', context, pkg_dict.copy())
     except tk.NotAuthorized:
         return tk.abort(403, tk._("Not authorized to read reports"))
     except tk.ObjectNotFound:

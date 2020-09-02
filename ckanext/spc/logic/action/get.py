@@ -187,8 +187,11 @@ def get_access_request(context, data_dict):
 @tk.side_effect_free
 def spc_download_tracking_list(context, data_dict):
     id = tk.get_or_bust(data_dict, 'id')
-    _check_access('spc_download_tracking_list', context, data_dict)
     pkg = model.Package.get(id)
+    _check_access('spc_download_tracking_list', context, {
+        'id': id,
+        'owner_org': pkg.owner_org
+    })
     limit = tk.asint(data_dict.get('limit', 20))
     offset = tk.asint(data_dict.get('offset', 0))
     query = DownloadTracking.query(id=pkg.id)
