@@ -18,6 +18,7 @@ const makeFilters = (initial) => {
     add: () => update((filters) => [...filters, new Filter()]),
     remove: (filter) =>
       update((filters) => {
+        if (filters.length == 1) {return filters}
         let updated = filters.filter((f) => f !== filter);
         return updated.length ? updated : [new Filter()];
       }),
