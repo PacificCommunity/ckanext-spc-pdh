@@ -14,7 +14,9 @@
                     {% if h.check_access('package_create') %}
                         {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }}
                     {% endif %}
-                    {% if h.check_access('spc_bulk_download') %}
+
+                    {# just in case you'll ever want to download search results #}
+                    {% if h.check_access('spc_bulk_download') and false %}
                         <button class="btn btn-primary"
                                 data-module="spc-bulk-download"
                                 data-module-query-string="{{ h.url_for('spc_package.list_ids') }}?{{ request.query_string.decode() }}" >
