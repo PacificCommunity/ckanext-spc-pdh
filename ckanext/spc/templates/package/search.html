@@ -10,7 +10,19 @@
     <section class="module" onload="leafletMapAlt()">
         <div class="module-content">
             {% block page_primary_action %}
-                {{ super() }}
+                <div class="page_primary_action">
+                    {% if h.check_access('package_create') %}
+                        {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }}
+                    {% endif %}
+                    {% if h.check_access('spc_bulk_download') %}
+                        <button class="btn btn-primary"
+                                data-module="spc-bulk-download"
+                                data-module-query-string="{{ h.url_for('spc_package.list_ids') }}?{{ request.query_string.decode() }}" >
+                            <i class=" fa fa-download"></i>
+                            {{ _('Download files') }}
+                        </button>
+                    {% endif %}
+                </div>
             {% endblock %}
             {% block form %}
                 {% snippet 'ckanext-discovery/snippets/search_suggestions.html' %}

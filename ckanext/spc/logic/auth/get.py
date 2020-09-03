@@ -68,3 +68,8 @@ def resource_view_show(context, data_dict):
 
     package = context['package']
     return is_authorized('restrict_dataset_show', context, package.as_dict())
+
+
+@tk.auth_allow_anonymous_access
+def spc_bulk_download(context, data_dict):
+    return {'success': True}

@@ -19,7 +19,7 @@ spc_js:
     - scripts/spc-sortable-facets.js
     - scripts/spc-request-access.js
     - scripts/spc-advanced-search.js
-
+    - scripts/spc-bulk-download.js
 
 spc_css:
   output: ckanext-spc/%(version)s_spc.css

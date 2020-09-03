@@ -330,10 +330,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return ResourceUpload(data_dict)
 
     # IBlueprint
-    def get_blueprint(self):
-        return blueprints
 
-    # IBlueprint
     def get_blueprint(self):
         return blueprints
 
@@ -454,6 +451,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
+            if len(item) == 1:
+                # it's shortened search, probably initiated by bulk download
+                continue
             item['tracking_summary'] = (
                 model.TrackingSummary.get_for_package(item['id']))
 
