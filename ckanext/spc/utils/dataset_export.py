@@ -54,7 +54,7 @@ def _fill_sheet(data, sheet: Worksheet, fields):
     row = sheet.max_row + 1
     for col, field in enumerate(fields, 1):
         value = data.get(field["name"])
-        if isinstance(value, (list,)):
+        if isinstance(value, (list, dict)):
             value = json.dumps(value)
         sheet.cell(row, col, value)
 
