@@ -1,4 +1,6 @@
+import datetime
 import logging
+
 from flask import Blueprint, jsonify
 from ckan.plugins import toolkit as tk
 from ckan.common import g, request, streaming_response
@@ -74,6 +76,10 @@ def export_datasets(id):
     resp.headers[
         "content-disposition"
     ] = 'attachment; filename="data_export.xlsx"'
+    resp.headers['Last-Modified'] = datetime.datetime.now()
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    resp.headers['Expires'] = '-1'
     return resp
 
 
