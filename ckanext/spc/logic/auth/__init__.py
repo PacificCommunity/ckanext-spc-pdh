@@ -17,6 +17,7 @@ def get_auth_functions():
         get_access_request=get.get_access_request,
         manage_access_requests=get.manage_access_requests,
         spc_download_tracking_list=get.spc_download_tracking_list,
+        spc_export_datasets=get.spc_export_datasets,
 
         create_access_request=create.create_access_request,
         restrict_dataset_show=get.restrict_dataset_show,
