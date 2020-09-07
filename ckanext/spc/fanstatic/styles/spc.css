@@ -5257,6 +5257,12 @@ input::-ms-clear {
 .organization-list-page #publisher-tree ul.hierarchy-tree-top .hierarchy-tree li:before {
   content: '-';
 }
+.import-datasets-form {
+  display: inline;
+}
+.import-datasets-form .file-input-label:after {
+  content: none;
+}
 @media (max-width: 767px) {
   section.login,
   article.register {

@@ -42,7 +42,7 @@
 	  {
             "label": "Fisheries",
             "value": "Fisheries"
-          },	
+          },
           {
             "label": "Fisheries",
             "value": "Fisheries"
@@ -84,7 +84,7 @@
       "values": {
 	"form_snippet": "select.html",
 	"display_snippet": "select.html",
-	"validators": "scheming_required scheming_choices",
+	"validators": "scheming_required ignore_empty scheming_choices",
 	"choices": [
 	  {
 	    "value": "AS",
