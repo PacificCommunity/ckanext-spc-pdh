@@ -63,7 +63,7 @@ def get_default_gmd_identification_info_schema():
             get_validator('convert_to_json_if_string'),
             get_validator('list_of_strings')
         ],
-        'environment_description': [im, strs],
+        'environment_description': [im, str],
         'extent': get_default_gmd_extent_schema(),
         'supplemental_information': [im, str],
         '__extras': [get_validator('ignore')],
