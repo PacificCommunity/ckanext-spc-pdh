@@ -357,5 +357,13 @@ def spc_groups_delete():
         for group in group_list:
             if group not in delete_excluded:
                 logic.get_action(u'group_delete')(context, {'id': group})
-    
+        
+    deleted_groups = model.Session.query(model.Group)\
+        .filter(model.Group.state == 'deleted')\
+        .all()
+    if deleted_groups:
+        for gr in deleted_groups:
+            print('Purging {0}'.format(gr.name))
+            logic.get_action(u'group_purge')(context, {'id': gr.name})
+
     click.secho('Groups deletion finished.', fg='green')
