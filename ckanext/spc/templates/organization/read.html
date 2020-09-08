@@ -12,7 +12,7 @@
 		    {% block page_primary_action %}
                         {{ super() }}
                         {% if h.check_access('spc_export_datasets', {'id': group_dict.id}) %}
-                            <a class="btn btn-default" href="{{ h.url_for('spc_package.export_datasets', id=group_dict.id) }}?{{ request.query_string.decode() }}">
+                            <a class="btn btn-default" href="{{ h.url_for('spc_package.export_datasets', id=group_dict.id) }}?{{ request.query_string.decode() }}&ext_req_time={{ session._accessed_time }}">
                                 <i class="fa fa-code-fork"></i>
                                 {{ _('Export Datasets') }}
                             </a>
