@@ -1,22 +1,23 @@
 <section id="dataset-resources" class="resources">
     <div class="resources-header">
         <h2>{{ _('Data and Resources') }}</h2>
+
+    {% if not h.check_access('create_access_request')
+        and h.spc_is_restricted(pkg) %}
+        <a href="{{ h.get_drupal_user_url('login', h.full_current_url()) }}"
+      class="btn btn-info btn-access">{{ _('Request an Access') }}</a>
+    {% elif not h.check_access('restrict_dataset_show', data_dict=pkg)
+        and h.spc_is_restricted(pkg)
+        and h.check_access('create_access_request') %}
+        <button class="btn btn-info btn-access" data-toggle="modal"
+                data-target="#request-access-modal">{{ _('Request an Access') }}</button>
+    {% else %}
         <button class="btn btn-primary pull-right"
                 data-module="spc-bulk-download"
                 data-module-query-string="{{ h.url_for('spc_package.list_ids') }}?q=id:{{ pkg.id }}" >
             <i class=" fa fa-download"></i>
             {{ _('Download All') }}
         </button>
-
-    {% if not h.check_access('create_access_request')
-        and h.spc_is_restricted(pkg) %}
-    <a href="{{ h.get_drupal_user_url('login', h.full_current_url()) }}"
-      class="btn btn-info btn-access">{{ _('Request an Access') }}</a>
-    {% elif not h.check_access('restrict_dataset_show', data_dict=pkg)
-        and h.spc_is_restricted(pkg)
-        and h.check_access('create_access_request') %}
-    <button class="btn btn-info btn-access" data-toggle="modal"
-      data-target="#request-access-modal">{{ _('Request an Access') }}</button>
     {% endif %}
   </div>
   {% block resource_list %}
