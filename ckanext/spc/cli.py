@@ -345,3 +345,17 @@ def spc_user_deletion(file):
             else:
                 print('User with ID "{0}" no exstis on the portal. Skipping...'.format(usr_id))
     click.secho('User deletion finished.', fg='green')
+
+
+@spc.command('spc_groups_delete')
+def spc_groups_delete():
+    delete_excluded = ['vanuatu-ocean-data']
+    site_user = logic.get_action(u'get_site_user')({u'ignore_auth': True}, {})
+    context = {u'user': site_user[u'name']}
+    group_list = logic.get_action(u'group_list')({u'ignore_auth': True}, {})
+    if group_list:
+        for group in group_list:
+            if group not in delete_excluded:
+                logic.get_action(u'group_delete')(context, {'id': group})
+    
+    click.secho('Groups deletion finished.', fg='green')
