@@ -261,3 +261,8 @@ This Dataset type has multiple fields which includes subfields:
 * **Dataset** - DCAT schema
 * **Geographic data** - ANZLIC schema
 * **Publications** - Dublin Core schema
+
+CKAN Patches
+##############
+curl https://patch-diff.githubusercontent.com/raw/ckan/ckan/pull/5546.diff | git apply
+curl https://patch-diff.githubusercontent.com/raw/ckan/ckan/pull/5594.diff | git apply
