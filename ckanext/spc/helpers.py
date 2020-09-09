@@ -235,7 +235,7 @@ def is_restricted(package):
 
     if 'extras' in package:
         for field in package['extras']:
-            if field['key'] == 'access':
+            if field.get('key') == 'access':
                 access = field['value']
                 break
 

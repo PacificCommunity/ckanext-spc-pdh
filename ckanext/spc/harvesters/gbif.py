@@ -142,10 +142,10 @@ class SpcGbifHarvester(HarvesterBase):
         nsmap['oai'] = nsmap.pop(None)
         id = root.find('*//oai:identifier', namespaces=nsmap).text
         dataset = root.find('*//dataset')
-        gbif = root.findall('*//gbif')
-        return id, dataset, gbif
+        modified_date = root.find('.//header/datestamp', namespaces=root.nsmap).text
+        return id, dataset, modified_date
 
-    def _eml_to_dict(self, record, gbif):
+    def _eml_to_dict(self, record):
         data = {}
         data['type'] = 'biodiversity_data'
 
@@ -201,7 +201,6 @@ class SpcGbifHarvester(HarvesterBase):
         data['project'] = [
             _parse_project(e) for e in record.findall('project')
         ]
-        data['integrity'] = gbif[0].find('dateStamp').text
         return data
 
     def fetch_stage(self, harvest_object):
@@ -229,7 +228,7 @@ class SpcGbifHarvester(HarvesterBase):
                     (harvest_object.guid, 'eml')
                 )
 
-                id, record, gbif = self._fetch_record(
+                id, record, modified_date = self._fetch_record(
                     urljoin(
                         harvest_object.job.source.url, '/v1/oai-pmh/registry'
                     ), harvest_object.guid
@@ -242,8 +241,9 @@ class SpcGbifHarvester(HarvesterBase):
                 return False
 
             try:
-                content_dict = self._eml_to_dict(record, gbif)
+                content_dict = self._eml_to_dict(record)
                 content_dict['id'] = id
+                content_dict['integrity'] = modified_date
 
                 content_dict[
                     'resources'
