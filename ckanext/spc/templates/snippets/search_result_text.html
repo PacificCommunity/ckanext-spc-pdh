@@ -44,16 +44,14 @@ Example:
 {%- endif -%}
 
 {% if query %}
-    {% with query = '<strong>%s</strong>' % query %}
-        {%- if count -%}
-            {{ text_query.format(number='<strong>%s</strong>' % h.localised_number(count), query=query, type=type)|safe }}
-        {%- else -%}
-            {{ text_query_none.format(query=query, type=type)|safe }}
-        {%- endif -%}
-    {% endwith %}
+    {%- if count -%}
+        {{ text_query.format(number=h.localised_number(count), query=query, type=type)|safe }}
+    {%- else -%}
+        {{ text_query_none.format(query=query, type=type)|safe }}
+    {%- endif -%}
 {%- else -%}
     {%- if count -%}
-        {{ text_no_query.format(number='<strong>%s</strong>' % h.localised_number(count), type=type)|safe }}
+        {{ text_no_query.format(number=h.localised_number(count), type=type)|safe }}
     {%- else -%}
         {{ text_no_query_none.format(type=type) }}
     {%- endif -%}

@@ -1,9 +1,35 @@
-{% ckan_extends %}
-
-{% block resource_list_inner %}
-    {% for resource in resources %}
-        {% set can_edit = h.check_access('resource_update', {'id':resource.id }) %}
-
-        {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
-    {% endfor %}
-{% endblock %}
+<section id="dataset-resources" class="resources">
+  <div class="resources-header">
+    <h2>{{ _('Data and Resources') }}</h2>
+    {% if not h.check_access('create_access_request') 
+        and h.spc_is_restricted(pkg) %}
+    <a href="{{ h.get_drupal_user_url('login', h.full_current_url()) }}"
+      class="btn btn-info btn-access">{{ _('Request an Access') }}</a>
+    {% elif not h.check_access('restrict_dataset_show', data_dict=pkg)
+        and h.spc_is_restricted(pkg)
+        and h.check_access('create_access_request') %}
+    <button class="btn btn-info btn-access" data-toggle="modal"
+      data-target="#request-access-modal">{{ _('Request an Access') }}</button>
+    {% endif %}
+  </div>
+  {% block resource_list %}
+    {% if resources %}
+    <ul class="{% block resource_list_class %}resource-list{% endblock %}">
+      {% block resource_list_inner %}
+        {% set can_edit = h.check_access('package_update', {'id':pkg.id }) and not is_activity_archive %}
+        {% for resource in resources %}
+          {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit, is_activity_archive=is_activity_archive %}
+        {% endfor %}
+      {% endblock %}
+    </ul>
+    {% else %}
+      {% if h.check_access('resource_create', {'package_id': pkg['id']}) and not is_activity_archive %}
+        {% trans url=h.url_for(pkg.type ~ '_resource.new', id=pkg.name) %}
+        <p class="empty">This dataset has no data, <a href="{{ url }}">why not add some?</a></p>
+        {% endtrans %}
+      {% else %}
+        <p class="empty">{{ _('This dataset has no data') }}</p>
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+</section>

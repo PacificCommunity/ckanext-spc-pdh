@@ -1,0 +1,10 @@
+Dear {{ user.fullname or user.name }},
+
+Previously, you requested data access to the following dataset: "{{ pkg.title }}".
+
+Your request has been approved and you can browse the data now:
+
+   {{ g.site_url }}{{ h.url_for('dataset.read', id=pkg.id) }}
+
+--
+Message sent by {{ g.site_title }} ({{ g.site_url }})

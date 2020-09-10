@@ -58,7 +58,7 @@
       padding: 15px 2px;
       .logo {
           img {
-              max-width: 180px;
+              max-width: 150px;
           }
       }
 
@@ -74,7 +74,7 @@
     margin-left: 0;
     margin-right: 0;
   }
-  [role=main] #content {
+  .main #content {
       margin: 0px 7px;
     .primary.span9 {
       width: 100%;
@@ -147,7 +147,8 @@
         z-index: 9999;
     }
   }
-  #organization-datasets-search-form {
+  #organization-datasets-search-form,
+  #group-datasets-search-form {
     .input-group.search-input-group {
         position: relative;
         top: 0;
@@ -166,11 +167,10 @@
     }
 }
 
-
 @media(min-width: 768px) {
     .mobile-only { display: none;}
     .desktop-only { display: initial;}
-    .js [role=main] {
+    .main {
         padding-top: 17px;
         .secondary {
             width: 31%;
@@ -211,8 +211,8 @@
     .search-form {
         .search-input-group {
             position: static;
-            margin-top: 22px;
-            padding-bottom: 28px;
+            margin-top: 17px;
+            margin-bottom: 0px;
             #field-giant-search {
                 background-color: #f7f7f7;
                 border: none;
@@ -278,6 +278,7 @@
             .module {
                 .module-content {
                     padding: 0px 29px;
+                    .dataset-info, 
                     .notes {
                         padding: 0px 10px;
                     }
@@ -346,7 +347,7 @@
         padding-top: 10px;
         margin-bottom: -536px;
     }
-    [role=main] {
+    .main {
         .toolbar {
             top: -30px;
             li {
@@ -487,7 +488,7 @@
     .secondary .filters .module .module-heading {
         margin: 12px 4px 0 5px;
     }
-    .js [role=main] .secondary .filters .module {
+    .js .main .secondary .filters .module {
         .nav-facet {
             padding: 0 15px 0 20px;
         }

@@ -24,11 +24,13 @@ class SpcOaipmhHarvester(OaipmhHarvester):
         try:
             config_json = json.loads(source_config)
             self.topic = config_json['topic']
+            self.force_all = config_json['force_all']
+
         except KeyError:
             self.topic = None
+            self.force_all = False
         except ValueError:
             pass
-        self.force_all = config_json.get('force_all', False)
         self.userobj = model.User.get(self.user)
 
 
@@ -91,16 +93,16 @@ class SpcOaipmhHarvester(OaipmhHarvester):
                     existing.state = 'active'
                     model.Session.commit()
                 group_ids.append({'id': existing.id})
-            else:
-                data_dict = {
-                    'id': uuid3(NAMESPACE_DNS, munged_name),
-                    'name': munged_name,
-                    'title': group_name
-                }
-                context['__auth_audit'] = []
-                group = get_action('group_create')(context, data_dict)
-                logger.info('created the group ' + group['id'])
-                group_ids.append({'id': group['id']})
+            # else:
+            #     data_dict = {
+            #         'id': uuid3(NAMESPACE_DNS, munged_name),
+            #         'name': munged_name,
+            #         'title': group_name
+            #     }
+            #     context['__auth_audit'] = []
+            #     group = get_action('group_create')(context, data_dict)
+            #     logger.info('created the group ' + group['id'])
+            #     group_ids.append({'id': group['id']})
 
         logger.debug('Group ids: %s' % group_ids)
         return group_ids
@@ -108,7 +110,7 @@ class SpcOaipmhHarvester(OaipmhHarvester):
     def _extract_tags_and_extras(self, content):
         extras = []
         tags = []
-        for key, value in content.iteritems():
+        for key, value in content.items():
             if key in self._get_mapping().values():
                 continue
             if key in ['type', 'subject']:

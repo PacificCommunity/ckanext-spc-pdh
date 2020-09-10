@@ -1,0 +1,33 @@
+spc_js:
+  output: ckanext-spc/%(version)s_spc.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - scripts/fetch.js
+    - scripts/widgets.js
+    - scripts/jquery.touchSwipe.js
+    - scripts/ma5-mobile-menu.js
+    - scripts/friendly-coords.js
+    - scripts/spatial-select.js
+    - scripts/spc-spatial-query.js
+    - scripts/clonable-fieldset.js
+    - scripts/jquery.json-browse.js
+    - scripts/social-share.js
+    - scripts/main.js
+    - scripts/spc-dataset-suggestion-button.js
+    - scripts/spc-sortable-facets.js
+    - scripts/spc-request-access.js
+    - scripts/spc-advanced-search.js
+
+
+spc_css:
+  output: ckanext-spc/%(version)s_spc.css
+  filter: cssrewrite
+  contents:
+    - styles/widgets.css
+    - styles/ma5-mobile-menu.css
+    - styles/jquery.json-browse.css
+    - styles/spc.css
+    - styles/social-share.css
+    - styles/spatial_query.css

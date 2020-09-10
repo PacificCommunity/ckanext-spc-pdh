@@ -53,8 +53,7 @@ def broken_links_report(recepients=[]):
             code, reason = 520, 'Invalid URL'
 
         page = h.url_for(
-            controller='package',
-            action='resource_read',
+            'resource.read',
             id=res.package_id,
             resource_id=res.id,
             qualified=True
@@ -66,7 +65,7 @@ def broken_links_report(recepients=[]):
     users = model.Session.query(
         model.User
     ).filter(model.User.name.in_(recepients), ~model.User.email.is_(None))
-    url = h.url_for('spc_admin.broken_links', qualified=True)
+    url = h.url_for('broken_links_report', qualified=True)
     message = u'There is new report available at {}'.format(url)
     for user in users:
         mail_user(user, 'Broken links report', message)

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ckanext-spc 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-09-05 16:20+0300\n"
-"PO-Revision-Date: 2020-04-02 12:50+0300\n"
+"PO-Revision-Date: 2020-04-02 15:39+0300\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -36,6 +36,28 @@ msgstr "Organisation non trouvée"
 #: ckan/templates/package/base.html:14
 msgid "Organizations"
 msgstr "Organisations"
+
+msgid "dataset"
+msgstr "Dataset"
+
+msgid "publications"
+msgstr "Publications"
+
+msgid "biodiversity_data"
+msgstr "Biodiversity data"
+msgid "Biodiversity_Data"
+msgstr "Biodiversity data"
+
+msgid "ecological_data"
+msgstr "Ecological data"
+msgid "Ecological_Data"
+msgstr "Ecological data"
+
+msgid "geographic_data"
+msgstr "Geographic data"
+msgid "Geographic_Data"
+msgstr "Geographic data"
+
 
 #: ckan/controllers/group.py:620
 msgid "Organization has been deleted."
@@ -110,11 +132,11 @@ msgstr "Utilisateur %s non autorisé à modifier l’organisation %s"
 
 #: ckan/templates/group/member_new.html:80
 msgid ""
-" <p><strong>Admin:</strong> Can edit group information, as well as manage "
-"organization members.</p> <p><strong>Member:</strong> Can add/remove "
-"datasets from groups</p> "
+"\n<p><strong>Admin:</strong> Can edit group information, as well as\nmanage "
+"organization members.</p>\n<p><strong>Member:</strong> Can add/remove "
+"datasets from groups</p>\n"
 msgstr ""
-" <p><strong>Admin:</strong> peut modifier les informations d’un groupe et "
+" <p><strong>Admin :</strong> peut modifier les informations d’un groupe et "
 "gérer les membres d’une organisation.</p> <p><strong>Membre :</strong> peut "
 "ajouter des jeux de données à des groupes et en supprimer.</p> "
 
@@ -139,7 +161,7 @@ msgid ""
 "overview: <a "
 "href=\"http://ckan.org/features/\">http://ckan.org/features/</a></p>\n"
 msgstr ""
-" <p>Numéro un mondial dans son domaine, CKAN est une plateforme permettant "
+" <p>Numéro un mondial dans son dmaine, CKAN est une plateforme permettant "
 "de créer des portails de données ouvertes.</p><p>Solution logicielle "
 "complète fournie clés en main, CKAN rend les données accessibles et "
 "utilisables par le biais d’outils qui en simplifient la publication, le "
@@ -198,11 +220,11 @@ msgstr "Il n’y a actuellement pas d’organisations pour ce site"
 
 #: ckan/templates/organization/member_new.html:81
 msgid ""
-" <p><strong>Admin:</strong> Can add/edit and delete datasets, as well as "
-"manage organization members.</p> <p><strong>Editor:</strong> Can add and "
-"edit datasets, but not manage organization members.</p> <p><strong>Member:</"
-"strong> Can view the organization's private datasets, but not add new "
-"datasets.</p> "
+"\n<p><strong>Admin:</strong> Can add/edit and delete datasets, as well as\n"
+"manage organization members.</p>\n<p><strong>Editor:</strong> Can add and "
+"edit datasets, but not manage\norganization members.</p>\n<p><strong>Member:</"
+"strong> Can view the organization's private\ndatasets, but not add new "
+"datasets.</p>\n"
 msgstr ""
 " <p><strong>Admin :</strong>peut ajouter/modifier et supprimer des jeux de "
 "données, et gérer les membres d’une organisation.</p> <p><strong>Editeur :</"
@@ -250,9 +272,9 @@ msgstr ""
 
 #: ckan/templates/organization/snippets/helper.html:8
 msgid ""
-" CKAN Organizations are used to create, manage and publish collections of "
-"datasets. Users can have different roles within an Organization, depending "
-"on their level of authorisation to create, edit and publish. "
+"\nCKAN Organizations are used to create, manage and publish collections\nof "
+"datasets. Users can have different roles within an Organization,\ndepending "
+"on their level of authorisation to create, edit and publish.\n"
 msgstr ""
 " Les organisations CKAN permettent de créer, gérer et publier des "
 "catalogues de jeux de données. Les utilisateurs peuvent avoir différents "
@@ -321,12 +343,12 @@ msgstr "Il n’y a pas de description pour cette organisation"
 #: ckan/templates/snippets/search_result_text.html:27
 msgid "{number} organization found for \"{query}\""
 msgid_plural "{number} organizations found for \"{query}\""
-msgstr[0] "{number} organisation trouvée pour \"{query}\""
+msgstr[0] "{number} organisation trouvée pour \\\"{query}\\\""
 msgstr[1] "{number} organisations trouvées pour \\\"{query}\\\""
 
 #: ckan/templates/snippets/search_result_text.html:28
 msgid "No organizations found for \"{query}\""
-msgstr "Aucune organisation trouvée pour \"{query}\""
+msgstr "Aucune organisation trouvée pour \\\"{query}\\\""
 
 #: ckan/templates/snippets/search_result_text.html:29
 msgid "{number} organization found"

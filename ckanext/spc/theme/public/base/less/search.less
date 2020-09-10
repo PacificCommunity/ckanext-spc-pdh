@@ -56,20 +56,17 @@
         margin-left: 18px;
     }
     & .search-input-group {
-        position: absolute;
-        top: 0;
+        top: -56px;
         left: 0;
         padding: 0 15px;
         width: 100%;
         display: block;
-        .input-group-btn {
+        & .input-group-btn {
             position: absolute;
-            right: 10px;
+            right: 20px;
+            // top: 0;
             button {
                 position: absolute;
-            }
-            .btn-lg {
-                right: 10px;
             }
         }
         #field-giant-search {
@@ -91,16 +88,10 @@
             background-size: 15px;
          }
     }
-    // fix icon search responsive
-    @media (max-width: 767px) {
-        .input-group-btn {
-            position: unset;
-        }
-    }
     .filter-list {
         margin-left: 27px;
-        margin-top: 37px;
-        margin-bottom: 13px;
+        margin-top: 0px;
+        margin-bottom: 0px;
         .filtered {
             margin: 5px 10px 6px 0;
             padding: 5px 9px 5px 19px;
@@ -109,12 +100,12 @@
             .remove {
                 margin-left: 12px;
                 position: relative;
-                top: -2px;
+                top: -1px;
                 color: transparent;
                 display: inline-block;
                 width: 20px;
                 height: 20px;
-                background: url("@{relative_root}/base/images/tag-close.png") 50% no-repeat;
+                background: url("../../base/images/tag-close.png") 50% no-repeat;
                 background-size: contain;
             }
         }
@@ -173,28 +164,7 @@
                     color: black;
                     padding-right: 0px;
                     cursor: pointer;
-                    // -webkit-appearance: none;
-                    // -moz-appearance: none;
-                    // -o-appearance: none;
-                    // appearance: none;
                 }
-                // &:after{
-                //         .spc-icon-chevron-down-blue;
-                //         width: 14px;
-                //         // height: 10px;
-                //         display: inline-block;
-                //         content: '';
-                //         position: absolute;
-                //         right: 0px;
-                //         top: 4px;
-                //         bottom: 0px;
-                //         background-color: white;
-                //         background-size: 10px;
-                //         background-repeat: no-repeat;
-                //         background-position: 50%;
-                //         cursor: pointer;
-                //         pointer-events: none;
-                // }
             }
             .show-filters-wrapper {
                 width: 90px;
@@ -203,7 +173,6 @@
                     left: 7px;
                 }
             }
-
         }
         #field-order-by {
             -webkit-appearance: none;
@@ -369,12 +338,41 @@ input::-ms-clear {
 
     }
 }
-@media(max-width: 765px) {
-    .search-form {
-        & .search-input-group {
-            .input-group-btn {
+
+// fix search icon position responsive
+@media(max-width: 767px) {
+    .module-content {
+        .search-input-group {
+            & .input-group-btn {
+                position: absolute;
+                right: 10px;
                 top: 0;
+                .btn-lg {
+                    right: 10px;
+                }
             }
         }
     }
+}
+
+// hide wrapper border since the ordering was hidden
+#organization-search-form.search-form {
+    .search-without-facets {
+        border: none
+    }
+    .spc-order-by-wrapper {
+        display: none;
+    }
+}
+
+.advanced-filters {
+  .advanced-form-control {
+    .enable-advanced-search {
+      input:checked + label {
+        &:after {
+          content: url("../../base/images/check.svg");
+        }
+      }
+    }
+  }
 }

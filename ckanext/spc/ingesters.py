@@ -1,5 +1,4 @@
 from bibtexparser import load
-from bibtexparser.customization import convert_to_unicode
 
 import ckan.plugins.toolkit as tk
 from ckan.lib.munge import munge_title_to_name, munge_tag
@@ -17,7 +16,7 @@ class MendeleyBib(object):
         return load(source).entries
 
     def process(self, record):
-        record = convert_to_unicode(record)
+        record = record
         data_dict = {
             'id': record['ID'],
             'title': record['title'].strip('{}'),

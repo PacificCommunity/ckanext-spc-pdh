@@ -104,7 +104,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
 
             return content, content_type
 
-        except requests.exceptions.HTTPError, error:
+        except (requests.exceptions.HTTPError) as error:
             if page > 1 and error.response.status_code == 404:
                 # We want to catch these ones later on
                 raise
@@ -113,12 +113,12 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
                 % (url, error.response.status_code, error.response.reason)
             self._save_gather_error(msg, harvest_job)
             return None, None
-        except requests.exceptions.ConnectionError, error:
+        except (requests.exceptions.ConnectionError) as error:
             msg = '''Could not get content from %s because a
                                 connection error occurred. %s''' % (url, error)
             self._save_gather_error(msg, harvest_job)
             return None, None
-        except requests.exceptions.Timeout, error:
+        except (requests.exceptions.Timeout) as error:
             msg = 'Could not get content from %s because the connection timed'\
                 ' out.' % url
             self._save_gather_error(msg, harvest_job)
@@ -233,7 +233,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
             try:
                 content, content_type = \
                     self._get_content_and_type(url, harvest_job, page)
-            except requests.exceptions.HTTPError, error:
+            except (requests.exceptions.HTTPError) as error:
                 if error.response.status_code == 404:
                     if page > 1:
                         # Server returned a 404 after the first page, no more
@@ -288,7 +288,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
                     # Empty document, no more ids
                     break
 
-            except ValueError, e:
+            except (ValueError) as e:
                 msg = 'Error parsing file: {0}'.format(str(e))
                 self._save_gather_error(msg, harvest_job)
                 return None
@@ -425,7 +425,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
             # context['schema'] = package_schema
 
             # We need to explicitly provide a package ID
-            package_dict['id'] = unicode(uuid.uuid4())
+            package_dict['id'] = uuid.uuid4()
             # package_schema['id'] = [unicode]
 
             # Save reference to the package on the object
@@ -451,7 +451,7 @@ class PRDREngergyResourcesHarvester(HarvesterBase):
             except NotFound:
                 log.info('Update returned NotFound, trying to create new Dataset.')
                 if not harvest_object.package_id:
-                    package_dict['id'] = unicode(uuid.uuid4())
+                    package_dict['id'] = uuid.uuid4()
                     harvest_object.package_id = package_dict['id']
                     harvest_object.add()
                 else:

@@ -30,7 +30,8 @@
 	</fieldset>
     {% endfor %}
 
-    {% with wildcard = field.field_name ~ '_CLONABLE_INDEX_',  uniq=field.field_name ~ '_' ~ wildcard %}
+    {% with wildcard = field.field_name ~ '_CLONABLE_INDEX_' %}
+        {% with uniq=field.field_name ~ '_' ~ wildcard %}
 	<fieldset
 	    disabled hidden
 	    data-module="clonable-fieldset"
@@ -51,5 +52,6 @@
 		{{ spc_form[field.sub_form](field, field.field_name, wildcard) }}
 	    </div>
 	</fieldset>
+        {% endwith %}
     {% endwith %}
 </fieldset>

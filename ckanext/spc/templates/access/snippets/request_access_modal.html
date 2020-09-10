@@ -1,0 +1,49 @@
+{% import 'macros/form.html' as form %}
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="request-access-modal">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" data-module='spc-request-access'>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{ _('Request permission for full access.') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-form">
+                    {{ form.input('request-org', label=_('Organisation'), placeholder=_('Organisation')) }}
+                    <p class="org-helper-text">Enter your Organization (Optional)</p>
+                    {{ form.hidden('package-id', pkg.id) }}
+                    {{ form.textarea('request-reason', id='', label=_('Reason for the request'), value='', placeholder=_('Enter text'), error="", classes=[], attrs={'class': 'form-control'}, is_required=true, rows=3, cols=20) }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">{{ _('Send Request') }}</button>
+            </div>
+        </form><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="request-access-modal-success">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" data-module="gsq-delivery-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    {% trans %}
+                    Your request has been sent. Wait for an answer from our managers. 
+                    {% endtrans %}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <img class="body-image" alt="clock image" src="{{ h.url_for_static_or_external('/base/images/clock.png') }}">
+                <div class="body-text">
+                    {% trans %}
+                    This window will automatically close in 10 seconds or click ok
+                    {% endtrans %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Ok') }}</button>
+            </div>
+        </form><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

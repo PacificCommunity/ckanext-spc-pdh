@@ -1,5 +1,5 @@
 {% set truncate = truncate or 0 %}
-{% set url = h.url_for(controller='organization', action='read', id=organization.name) %}
+{% set url = h.url_for('organization.read', id=organization.name) %}
 
 {% block info %}
     <div class="module module-narrow module-shallow context-info organization-info">
@@ -22,21 +22,23 @@
                         {% endif %}
                     </h1>
                 {% endblock %}
-                {% block description %}
+
+                {# Omit block and hide organization-tree from ckanext=hierarchy #}
+                {#% block description %#}
                     {% if organization.description %}
                         <p>
                             {{ h.markdown_extract(organization.description, 180) }}
                         </p>
                         <div class="read-more">
                             <div class="">
-                                {% link_for _('Read More'), controller='organization', action='about', id=organization.name %}
+                                {% link_for _('Read More'), named_route='organization.about', id=organization.name %}
                                 <i class="fa fa-angle-right" aria-hidden="true"></i>
                             </div>
                         </div>
                     {% else %}
                         <p class="empty">{{ _('There is no description for this organization') }}</p>
                     {% endif %}
-                {% endblock %}
+                {#% endblock %#}
                 {% if show_nums %}
                     {% block nums %}
                         <div class="nums">

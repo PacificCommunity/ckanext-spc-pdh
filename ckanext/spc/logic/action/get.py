@@ -1,10 +1,22 @@
+import math
+
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
+import ckan.lib.base as base
+import ckan.logic as logic
+import ckan.model as model
+
+from ckan.model import Package
+from ckan.authz import get_user_id_for_username
 
 import ckanext.scheming.helpers as scheming_helpers
 import ckanext.spc.utils as utils
 
-import math
+from ckanext.spc.utils import get_package_by_id_or_bust
+from ckanext.spc.model import AccessRequest, DownloadTracking
+
+_get_or_bust = logic.get_or_bust
+_check_access = logic.check_access
 
 
 @tk.side_effect_free
@@ -96,6 +108,7 @@ def spc_package_search(context, data_dict):
         revice_all_data = True
 
     types_count = {}
+
     def _countTypes(item):
         if item['type'] not in types_count:
             types_count[item['type']] = 1
@@ -120,3 +133,83 @@ def spc_package_search(context, data_dict):
     results['types_count'] = types_count
 
     return results
+
+
+@tk.side_effect_free
+def get_access_requests_for_pkg(context, data_dict):
+    """
+    returns the list of all access requests for a package
+    """
+    pkg = get_package_by_id_or_bust(data_dict)
+
+    _check_access('manage_access_requests', context,
+                  {'owner_org': pkg.owner_org})
+
+    state = data_dict.get('state')
+
+    return _dictize_access_requests_list(pkg.id, state, package=True)
+
+
+@tk.side_effect_free
+def get_access_requests_for_org(context, data_dict):
+    """
+    returns the list of all access requests for an organization
+    """
+    org_id = _get_or_bust(data_dict, 'id')
+    _check_access('manage_access_requests', context, data_dict)
+    state = data_dict.get('state')
+
+    return _dictize_access_requests_list(org_id, state)
+
+
+def _dictize_access_requests_list(_id, state, package=False):
+    if package:
+        reqs = AccessRequest.get_access_requests_for_pkg(_id, state)
+    else:
+        reqs = AccessRequest.get_access_requests_for_org(_id, state)
+
+    return [req.as_dict() for req in reqs]
+
+
+@tk.side_effect_free
+def get_access_request(context, data_dict):
+    user = _get_or_bust(data_dict, 'user')
+    # check if the package with such id exists to use it's ID
+    pkg = get_package_by_id_or_bust(data_dict)
+
+    _check_access('get_access_request', context, data_dict)
+
+    req = AccessRequest.get(user_id=user, package_id=pkg.id)
+    if req:
+        return req.as_dict()
+
+
+@tk.side_effect_free
+def spc_download_tracking_list(context, data_dict):
+    id = tk.get_or_bust(data_dict, 'id')
+    pkg = model.Package.get(id)
+    _check_access('spc_download_tracking_list', context, {
+        'id': id,
+        'owner_org': pkg.owner_org
+    })
+    limit = tk.asint(data_dict.get('limit', 20))
+    offset = tk.asint(data_dict.get('offset', 0))
+    query = DownloadTracking.query(id=pkg.id)
+
+    total = query.count()
+    query = query.offset(offset).limit(limit)
+
+    results = [
+        {
+            'package_id': resource.package_id,
+            'user': user.name,
+            'resource_id': resource.id,
+            'resource_name': resource.name,
+            'downloaded_at': track.downloaded_at.isoformat()
+        }
+        for (track, resource, user) in query
+    ]
+    return {
+        'results': results,
+        'count': total
+    }

@@ -18,6 +18,12 @@
 
                     <h3 class="dataset-heading">
                         {% block heading_private %}
+                            {% if h.spc_is_restricted(package) %}
+                                <span class="dataset-private label label-inverse">
+                                    <i class="fa fa-ban"></i>
+                                    {{ _('Restricted') }}
+                                </span>
+                            {% endif %}
                             {% if package.private %}
                                 <span class="dataset-private label label-inverse">
                                     <i class="fa fa-lock"></i>
@@ -26,7 +32,7 @@
                             {% endif %}
                         {% endblock %}
                         {% block heading_title %}
-                            {{ h.link_to(title, h.url_for(controller='package', action='read', id=package.name)) }}
+                            {{ h.link_to(title, h.url_for('dataset.read', id=package.name)) }}
                         {% endblock %}
                         {% block heading_meta %}
                             {% if package.get('state', '').startswith('draft') %}
@@ -61,16 +67,6 @@
                     {% endif %}
                 {% endblock %}
                 <br/>
-                <div class="dataset-info">
-                    {{ h.render_datetime(package.metadata_modified, date_format='%d %B %Y') }}
-                    <div class="data-quality-tooltip">
-                        <i class="fa fa-question-circle"></i>
-                        <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
-                            This date indicates the date the dataset metadata was last modified on Pacific Data Hub.
-                        </span>
-                    </div>
-
-                </div>
             </div>
             {% block resources %}
                 {% if package.resources and not hide_resources %}
@@ -78,7 +74,7 @@
                         <div class="dataset-resources">
                             {% block resources_inner %}
                                 {% for resource in package.resources %}
-                                    <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" aria-label="resource">
+                                    <a href="{{ h.url_for('dataset.read', id=package.name) }}" aria-label="resource">
                                         <div class="res-format res-format-{{ resource.format.lower() or 'data' }}"></div>
                                     </a>
                                 {% endfor %}

@@ -1,0 +1,26 @@
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+
+{% set user = user_dict %}
+
+{% block primary_content_inner %}
+ {{ super() }}
+{% endblock %}
+
+{% block secondary_content %}
+{% snippet "group/snippets/info.html", group=group_dict, show_nums=false %}
+  <div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+      <i class="fa fa-lg fa-info-circle"></i>
+      {{ _('What are roles?') }}
+    </h2>
+    <div class="module-content">
+{% trans %}
+<p><strong>Admin:</strong> Can edit group information, as well as
+manage organization members.</p>
+<p><strong>Member:</strong> Can add/remove datasets from groups</p>
+{% endtrans %}
+    </div>
+  </div>
+{% endblock %}

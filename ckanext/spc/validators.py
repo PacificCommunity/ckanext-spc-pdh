@@ -73,7 +73,7 @@ def spc_to_json(key, data, errors, context):
     string_value = data.get(extras_key, {}).pop(key[-1] + '_string', None)
     value = data.get(key)
     if string_value is not None:
-        value = filter(None, string_value.split(','))
+        value = list(filter(None, string_value.split(',')))
 
     if not isinstance(value, (list, dict)):
         value = [value]

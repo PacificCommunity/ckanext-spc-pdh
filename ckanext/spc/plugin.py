@@ -2,46 +2,57 @@ import logging
 import os
 import json
 import textract
-import StringIO
 import uuid
 import hashlib
 import re
 import sqlalchemy as sa
 
+from io import StringIO
 from PIL import Image
 from collections import OrderedDict
-from six import string_types
+from six import string_types, ensure_binary
 
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as h
+
 from ckan.lib.uploader import Upload as DefaultUpload
 from ckan.lib.uploader import ResourceUpload
 from ckan.lib.plugins import DefaultTranslation
+from ckan.logic import check_access
 from ckan.common import _
 from ckan.common import config
-import ckanext.scheming.helpers as scheming_helpers
+from ckan.model.license import DefaultLicense, LicenseRegister, License
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
 import ckanext.spc.logic.action as spc_action
 import ckanext.spc.logic.auth as spc_auth
 import ckanext.spc.validators as spc_validators
-import ckanext.spc.controllers.spc_package
-from ckanext.spc.ingesters import MendeleyBib
-from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
+
+from ckanext.spc.views import blueprints
+from ckanext.spc.cli import get_commnads
 from ckanext.spc.model.drupal_user import DrupalUser
+from ckanext.spc.ingesters import MendeleyBib
 
-from ckanext.harvest.model import HarvestObject, HarvestSource
-
-from ckan.model.license import DefaultLicense, LicenseRegister, License
+import ckanext.scheming.helpers as scheming_helpers
 
 from ckanext.ingest.interfaces import IIngest
-from ckanext.spc.views import blueprints
+from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
+from ckanext.harvest.model import HarvestObject, HarvestSource
 
 logger = logging.getLogger(__name__)
 
+new_order_facet_dict = {
+    'topic': _('Topic'),
+    'member_countries':  _('Member countries'),
+    'organization': _('Organisations'),
+    'tags': _('Tags'),
+    'res_format': _('Formats'),
+    'type': _('Dataset type'),
+    'license_id': _('Licenses')
+}
 
 class LicenseCreativeCommonsNonCommercialShareAlice40(DefaultLicense):
     id = "cc-nc-sa-4.0"
@@ -92,7 +103,7 @@ class Upload(DefaultUpload):
         Resize and optimize logo image before upload
         '''
         uploaded_file = data_dict.get('logo_upload')
-        
+
         try:
             img = Image.open(uploaded_file)
         except (IOError, AttributeError):
@@ -104,9 +115,9 @@ class Upload(DefaultUpload):
             if size[0] < 350:
                 break
             size = map(lambda x: int(x*0.75), size)
-            
+
         img = img.resize(size, Image.LANCZOS)
-        file = StringIO.StringIO()
+        file = StringIO()
 
         format = uploaded_file.filename.split('.')[-1].upper()
         format = 'JPEG' if format == 'JPG' else 'PNG'
@@ -118,7 +129,7 @@ class Upload(DefaultUpload):
                  subsampling=0)
         except Exception:
             super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
-            
+
         data_dict['logo_upload'].stream = file
 
         super(Upload, self).update_data_dict(data_dict, url_field, file_field, clear_field)
@@ -149,7 +160,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
     def _make_password():
         # create a hard to guess password
         out = ''
-        for n in xrange(8):
+        for n in range(8):
             out += str(uuid.uuid4())
         return out
 
@@ -170,7 +181,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
     @staticmethod
     def _drupal_session_name():
         server_name = toolkit.request.environ['HTTP_HOST']
-        name = 'SSESS%s' % hashlib.sha256(server_name).hexdigest()[:32]
+        name = 'SSESS%s' % hashlib.sha256(ensure_binary(server_name)).hexdigest()[:32]
         return name
 
     @staticmethod
@@ -182,7 +193,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
     @staticmethod
     def _get_user(user_id, email):
         user = None
-        
+
         if user_id:
             try:
                 user = toolkit.get_action('user_show')(
@@ -192,7 +203,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                     {'id': user_id})
             except toolkit.ObjectNotFound:
                 user = None
-        
+
         if not user:
             try:
                 user_id = model.Session.query(model.User.id) \
@@ -276,7 +287,7 @@ class SpcUserPlugin(plugins.SingletonPlugin):
                 [str(drupal_sid)])
 
             user_data = user.first()
-            # check if session has username, 
+            # check if session has username,
             # otherwise is unauthenticated user session
             try:
                 if user_data.name and user_data.name != '':
@@ -308,7 +319,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IUploader, inherit=True)
-    
+    plugins.implements(plugins.IClick)
+    plugins.implements(plugins.IResourceController, inherit=True)
+
     # IUploader
     def get_uploader(self, upload_to, old_filename):
         return Upload(upload_to, old_filename)
@@ -331,33 +344,12 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IRouter
 
-    def after_map(self, map):
-        map.connect('spc_dataset.new',
-                    '/{package_type}/new',
-                    controller='package',
-                    action='new')
-
-        map.connect(
-            'spc_dataset.choose_type',
-            '/dataset/new/choose_type',
-            controller='ckanext.spc.controllers.spc_package:PackageController',
-            action='choose_type')
-
-        return map
-
     def before_map(self, map):
-
-        map.connect('search_queries.index',
-                    '/ckan-admin/search-queries',
-                    controller=('ckanext.spc.controllers.search_queries'
-                                ':SearchQueryController'),
-                    action='index',
-                    ckan_icon='search-plus')
 
         # CKAN login form can be accessed in the debug mode
         if not config.get('debug', False):
             map.redirect('/user/login', spc_helpers.get_drupal_user_url('login'))
-        
+
         map.redirect('/user/register', spc_helpers.get_drupal_user_url('register'))
         map.redirect('/user/reset', '/')
 
@@ -442,10 +434,21 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             search_params['fq'] = fq.replace(
                 'dataset_type:dataset', 'dataset_type:({})'.format(' OR '.join(
                     [type for type in self.dataset_types])))
+        search_params = spc_utils.params_into_advanced_search(search_params)
         return search_params
 
     def after_search(self, results, params):
         _org_cache = {}
+        try:
+            for item in results['search_facets']['type']['items']:
+                item['display_name'] = toolkit._(item['display_name'])
+        except KeyError:
+            pass
+        try:
+            for item in results['search_facets']['member_countries']['items']:
+                item['display_name'] = toolkit.h.spc_member_countries_facet_label(item)
+        except KeyError:
+            pass
 
         is_popular_first = toolkit.asbool(
             params.get('extras', {}).get('ext_popular_first', False))
@@ -457,7 +460,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             item['five_star_rating'] = spc_utils._get_stars_from_solr(
                 item['id'])
             item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
-            item['short_notes'] = h.whtext.truncate(item.get('notes', ''))
+            item['short_notes'] = h.truncate(item.get('notes', ''))
 
             org_name = item['organization']['name']
             try:
@@ -469,7 +472,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 'image_display_url') or h.url_for_static(
                     '/base/images/placeholder-organization.png',
                     qualified=True)
-            # if package is native - provide next isPartof value
+
             if _package_is_native(item['id']):
                 item['isPartOf'] = 'pdh.pacificdatahub'
             else:
@@ -487,8 +490,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return results
 
     def before_index(self, pkg_dict):
-        pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
-            pkg_dict['name'])
+        if plugins.plugin_loaded('ga-report'):
+            pkg_dict['extras_ga_view_count'] = spc_utils.ga_view_count(
+                pkg_dict['name'])
 
         topic_str = pkg_dict.get('thematic_area_string', '[]')
         if isinstance(topic_str, string_types):
@@ -510,42 +514,58 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         pkg_dict['five_star_rating'] = spc_utils._get_stars_from_solr(
             pkg_dict['id'])
 
-        if _package_is_native(pkg_dict['id']):
+        if not plugins.plugin_loaded('harvest'):
+            pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
+        elif _package_is_native(pkg_dict['id']):
             pkg_dict['isPartOf'] = 'pdh.pacificdatahub'
         else:
             src_type = _get_isPartOf(pkg_dict['id'])
             if src_type:
                 pkg_dict['isPartOf'] = src_type
+
+        if spc_helpers.is_restricted(pkg_dict):
+            pkg_dict = spc_utils.delete_res_urls_if_restricted(context, pkg_dict)
+
         return pkg_dict
 
     # IFacets
 
     def dataset_facets(self, facets_dict, package_type):
-        facets_dict.pop('groups', None)
-        facets_dict['topic'] = _('Topic')
-        facets_dict['type'] = _('Dataset type')
-        facets_dict['member_countries'] = _('Member countries')
+        # facets_dict.pop('groups', None)
+        # facets_dict['topic'] = _('Topic')
+        # facets_dict['type'] = _('Dataset type')
+        # facets_dict['member_countries'] = _('Member countries')
+
+        facets_dict = new_order_facet_dict
         return facets_dict
 
     def group_facets(self, facets_dict, group_type, package_type):
-        facets_dict.pop('groups', None)
-        facets_dict['topic'] = _('Topic')
-        facets_dict['type'] = _('Dataset type')
-        facets_dict['member_countries'] = _('Member countries')
-        return facets_dict
+        # facets_dict.pop('groups', None)
+        # facets_dict['topic'] = _('Topic')
+        # facets_dict['type'] = _('Dataset type')
+        # facets_dict['member_countries'] = _('Member countries')
 
+        facets_dict = new_order_facet_dict
+        return facets_dict
     def organization_facets(self, facets_dict, organization_type,
                             package_type):
-        facets_dict.pop('groups', None)
-        facets_dict['topic'] = _('Topic')
-        facets_dict['type'] = _('Dataset type')
-        facets_dict['member_countries'] = _('Member countries')
+        # facets_dict.pop('groups', None)
+        # facets_dict['topic'] = _('Topic')
+        # facets_dict['type'] = _('Dataset type')
+        # facets_dict['member_countries'] = _('Member countries')
+
+        facets_dict = new_order_facet_dict
         return facets_dict
+
+
+    # IClick
+    def get_commands(self):
+        return get_commnads()
 
 
 def _package_is_native(id):
     return not model.Session.query(HarvestObject).filter(
-        HarvestObject.package_id == id).first()
+        HarvestObject.package_id == id).count()
 
 def _get_isPartOf(id):
     src_id = model.Session.query(HarvestObject.harvest_source_id) \
