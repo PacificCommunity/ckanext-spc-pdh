@@ -12,5 +12,5 @@ iso639
 mysqlclient
 ckanext-ingest==0.0.2
 ckanext-create-typed-package==0.0.4.post1
-ckanext-resource-indexer[pdf]==0.0.3
+ckanext-resource-indexer[pdf]==0.0.4
 pyoai==2.5.0
