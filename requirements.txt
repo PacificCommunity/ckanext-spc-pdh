@@ -3,7 +3,6 @@ rdflib==4.2.2
 beautifulsoup4==4.8.0
 alembic==1.0.5
 #pocketsphinx
-pdf2text==1.0.0
 pdfminer>=20140328
 bibtexparser==1.1.0
 pyparsing==2.3.0
@@ -13,5 +12,5 @@ iso639
 mysqlclient
 ckanext-ingest==0.0.2
 ckanext-create-typed-package==0.0.4.post1
-ckanext-resource-indexer==0.0.2
+ckanext-resource-indexer[pdf]==0.0.3
 pyoai==2.5.0
