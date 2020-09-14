@@ -1,3 +1,4 @@
+six>=0.13
 rdflib==4.2.2
 beautifulsoup4==4.8.0
 alembic==1.0.5
