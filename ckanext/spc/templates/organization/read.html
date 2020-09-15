@@ -12,10 +12,20 @@
 		    {% block page_primary_action %}
                         {{ super() }}
                         {% if h.check_access('spc_export_datasets', {'id': group_dict.id}) %}
-                            <a class="btn btn-default" href="{{ h.url_for('spc_package.export_datasets', id=group_dict.id) }}?{{ request.query_string.decode() }}">
+                            <a class="btn btn-default" href="{{ h.url_for('spc_package.export_datasets', id=group_dict.id) }}?{{ request.query_string.decode() }}&ext_req_time={{ session._accessed_time }}">
                                 <i class="fa fa-code-fork"></i>
-                                Export Datasets
+                                {{ _('Export Datasets') }}
                             </a>
+                        {% endif %}
+                        {% if h.check_access('spc_import_datasets', {'id': group_dict.id}) %}
+                            <form class="import-datasets-form" data-module="spc-import-datasets" action="{{ h.url_for('spc_package.import_datasets', id=group_dict.id) }}" method="post" enctype="multipart/form-data">
+                                <label class="btn btn-default file-input-label" >
+                                    <input name="snapshot" type="file" value="" accept=".xlsx" class="hidden" />
+                                    <i class="fa fa-cubes"></i>
+                                    {{ _('Import Datasets') }}
+                                </label>
+
+                            </form>
                         {% endif %}
 
 		    {% endblock %}
