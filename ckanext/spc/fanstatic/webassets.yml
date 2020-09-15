@@ -21,6 +21,7 @@ spc_js:
     - scripts/spc-advanced-search.js
     - scripts/spc-bulk-download.js
     - scripts/spc-import-datasets.js
+    - scripts/spc-resource-download-picker.js
 spc_css:
   output: ckanext-spc/%(version)s_spc.css
   filter: cssrewrite
