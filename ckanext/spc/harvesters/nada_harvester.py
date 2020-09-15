@@ -90,7 +90,7 @@ class SpcNadaHarvester(NadaHarvester):
             # Find country DDI abbreviation
             # Use the mapping of codes to return the right value
             if not hasattr(pkg_dict, 'member_countries'):
-                pkg_dict['member_countries'] = country_mapping[None]
+                pkg_dict['member_countries'] = []
             elif pkg_dict['member_countries'] not in list(country_mapping.values()):
                 pkg_dict['member_countries'] = country_mapping[(pkg_dict['member_countries'])]
             # Adjust title to include country
