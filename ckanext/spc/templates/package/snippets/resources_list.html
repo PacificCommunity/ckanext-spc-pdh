@@ -1,6 +1,7 @@
 <section id="dataset-resources" class="resources">
-  <div class="resources-header">
-    <h2>{{ _('Data and Resources') }}</h2>
+    <div class="resources-header">
+        <h2>{{ _('Data and Resources') }}</h2>
+
     {% if not h.check_access('create_access_request')
         and h.spc_is_restricted(pkg) %}
     <a href="{{ h.get_drupal_user_url('login', h.full_current_url()) }}"

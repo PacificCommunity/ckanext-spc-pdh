@@ -4,15 +4,25 @@
     <div class="page-wrapper ma5-page">
 	{{ super() }}
     </div>
+    {% snippet 'fpx/snippets/download_starting_toast.html' %}
+    {% snippet 'fpx/snippets/position_tracker_toast.html' %}
 {% endblock -%}
 
 {% block wrapper_class -%}
     {{ super() }}{% if dataset_type is defined %} wrapper--dataset-type--{{ dataset_type }}{% endif %}
 {%- endblock wrapper_class %}
+
 {% block flash_inner %}
-{% for message in h.flash.pop_messages() | list %}
-  <div class="alert {{ message.category }}">
-    {{ h.literal(message) }}
-  </div>
-{% endfor %}
+    {% for message in h.flash.pop_messages() | list %}
+        <div class="alert {{ message.category }}">
+            {{ h.literal(message) }}
+        </div>
+    {% endfor %}
+
 {% endblock %}
+
+
+{% block styles %}
+    {{ super() }}
+    {% snippet 'fpx/snippets/static.html', name='fpx_toast' %}
+{% endblock styles %}
