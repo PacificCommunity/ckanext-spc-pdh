@@ -1,6 +1,11 @@
 {% ckan_extends %}
 
 {% block resource_item_title %}
+    <div class="resource-picker hidden-xs hidden-sm">
+        <input hidden data-id="{{ res.id }}" type="checkbox" id="resource-picker-{{ res.id }}" />
+        <label class="checkbox-label" for="resource-picker-{{ res.id }}"></label>
+    </div>
+
     <a href="{{ url }}" title="{{ res.name or res.description }}" class="heading">
         <div class="res-format res-format-{{ res.format.lower() or 'data' }}"></div>
         {{ h.resource_display_name(res) }}
