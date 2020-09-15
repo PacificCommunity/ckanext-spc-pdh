@@ -3236,8 +3236,11 @@ header.navbar > .container .collapse {
 .data-quality-tooltip:hover .tooltiptext {
   visibility: visible;
 }
+.page_primary_action {
+  padding-left: 15px;
+}
 .page_primary_action .btn {
-  margin: 15px;
+  margin: 15px 5px;
 }
 @media (min-width: 769px) {
   .dataset-map-expanded #dataset-map {

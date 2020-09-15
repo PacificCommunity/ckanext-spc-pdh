@@ -11,6 +11,13 @@
 		<div class="page_primary_action">
 		    {% block page_primary_action %}
                         {{ super() }}
+                        {% if h.check_access('spc_export_datasets', {'id': group_dict.id}) %}
+                            <a class="btn btn-default" href="{{ h.url_for('spc_package.export_datasets', id=group_dict.id) }}?{{ request.query_string.decode() }}">
+                                <i class="fa fa-code-fork"></i>
+                                Export Datasets
+                            </a>
+                        {% endif %}
+
 		    {% endblock %}
 		</div>
 	    {% endif %}

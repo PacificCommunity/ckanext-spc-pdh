@@ -3,7 +3,7 @@ import os
 import logging
 
 from datetime import datetime
-from flask import Blueprint, send_file, jsonify
+from flask import Blueprint, send_file
 
 import ckan.lib.jobs as jobs
 import ckan.model as model
@@ -24,6 +24,7 @@ import ckanext.scheming.helpers as scheming_helpers
 from ckanext.spc.jobs import broken_links_report
 from ckanext.spc.model.search_query import SearchQuery
 from ckanext.spc.views.access_request import spc_access_request
+from ckanext.spc.views.package import spc_package
 
 log = logging.getLogger(__name__)
 render = base.render
@@ -132,44 +133,9 @@ def index():
     )
 
 
-def list_ids():
-    ignore = {'page', 'sort', 'q'}
-    extras = {}
-    fq = ''
-    for k, v in request.args.items(multi=True):
-        if k in ignore:
-            continue
-        if k.startswith('ext_'):
-            extras[k] = v
-        else:
-            fq += u' %s:"%s"' % (k, v)
-    context = {
-        u'model': model,
-        u'session': model.Session,
-        u'user': g.user,
-        u'for_view': True,
-        u'auth_user_obj': g.userobj
-    }
-    data_dict = {
-        u'q': request.args.get('q', '*:*'),
-        u'fq': fq.strip(),
-        u'fl': 'id',
-        u'rows': 1000,
-        u'extras': extras,
-        u'include_private': True
-    }
-
-    query = toolkit.get_action(u'package_search')(context, data_dict)
-    ids = [r['id'] for r in query['results']]
-    return jsonify(ids)
-
-
-
-
 spc_user = Blueprint('spc_user', __name__)
 spc_admin = Blueprint('spc_admin', __name__)
 search_queries = Blueprint('search_queries', __name__)
-spc_package = Blueprint('spc_package', __name__)
 
 spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
                       view_func=switch_admin_state,
@@ -179,9 +145,6 @@ spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        view_func=broken_links,
                        methods=(u'GET', u'POST'))
 
-spc_package.add_url_rule(
-    '/dataset/ids/list', view_func=list_ids
-)
 search_queries.add_url_rule(
     "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
 )

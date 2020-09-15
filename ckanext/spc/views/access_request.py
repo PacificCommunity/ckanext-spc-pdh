@@ -250,7 +250,7 @@ def download(id, resource_id, filename=None, package_type="dataset"):
     return resource_view.download(package_type, id, resource_id, filename)
 
 
-@spc_access_request.route("/<package_type>/<id>/download-tracking", defaults={'package_type': 'dataset'})
+@spc_access_request.route("/<package_type>/<id>/download-tracking")
 def package_download_tracking(id, package_type):
     context = {"user": tk.c.user}
     try:

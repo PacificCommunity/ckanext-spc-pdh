@@ -8,6 +8,7 @@ ckanext-resource-indexer[pdf]==0.0.4
 funcy==1.13
 iso639
 mysqlclient
+openpyxl==3.0.5
 pdfminer>=20140328
 pyoai==2.5.0
 pyparsing==2.3.0
