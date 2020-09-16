@@ -115,7 +115,7 @@
       {% if not is_activity_archive %}
       {% block data_preview %}
       {% block resource_view %}
-        {% if not h.spc_is_restricted(pkg) or h.check_access('restrict_dataset_show', data_dict=pkg) %}
+        {% if not c.user and not h.spc_is_restricted(pkg) or h.check_access('restrict_dataset_show', data_dict=pkg) %}
         {% block resource_view_nav %}
           {% set resource_preview = h.resource_preview(resource, package) %}
           {% snippet "package/snippets/resource_views_list.html",
