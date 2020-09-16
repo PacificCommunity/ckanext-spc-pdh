@@ -55,8 +55,9 @@ def restrict_dataset_show(context, data_dict):
         context['user'],
         data_dict['id']
     )
+    restricted = data_dict.get('access', None) == 'restricted'
 
-    return {'success': is_member or is_accessed}
+    return {'success': is_member or is_accessed or not restricted}
 
 
 def resource_view_show(context, data_dict):
