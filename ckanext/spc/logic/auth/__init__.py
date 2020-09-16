@@ -23,7 +23,7 @@ def get_auth_functions():
 
         create_access_request=create.create_access_request,
         restrict_dataset_show=get.restrict_dataset_show,
-        resource_view_show=get.resource_view_show,
+        #resource_view_show=get.resource_view_show,
 
         spc_bulk_download=get.spc_bulk_download,
     )
