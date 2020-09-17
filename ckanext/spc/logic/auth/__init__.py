@@ -18,8 +18,13 @@ def get_auth_functions():
         manage_access_requests=get.manage_access_requests,
         spc_download_tracking_list=get.spc_download_tracking_list,
 
+        spc_export_datasets=get.spc_export_datasets,
+        spc_import_datasets=update.spc_import_datasets,
+
         create_access_request=create.create_access_request,
         restrict_dataset_show=get.restrict_dataset_show,
         #resource_view_show=get.resource_view_show,
+
+        spc_bulk_download=get.spc_bulk_download,
     )
     return auth_functions

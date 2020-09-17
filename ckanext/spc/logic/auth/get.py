@@ -39,6 +39,12 @@ def spc_download_tracking_list(context, data_dict):
     return manage_access_requests(context, data_dict)
 
 
+def spc_export_datasets(context, data_dict):
+    return {'success': has_user_permission_for_group_or_org(
+        data_dict['id'], context['user'], 'admin'
+    )}
+
+
 def _check_permission_for_org(context, data_dict):
     org_id = data_dict.get('owner_org') or data_dict.get('id')
     authorized = has_user_permission_for_group_or_org(
@@ -69,3 +75,8 @@ def resource_view_show(context, data_dict):
 
     package = context['package']
     return is_authorized('restrict_dataset_show', context, package.as_dict())
+
+
+@tk.auth_allow_anonymous_access
+def spc_bulk_download(context, data_dict):
+    return {'success': True}
