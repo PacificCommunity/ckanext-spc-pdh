@@ -3416,6 +3416,30 @@ table.table tr th.dataset-details {
 .dropdown.restricted .dropdown-toggle .tick svg path {
   fill: #8C8C8C;
 }
+.spc-open-on-pacific-map {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  padding: 5px;
+  color: #fff;
+  display: block;
+  min-height: 28px;
+  font-family: "Calibri", sans-serif;
+  font-size: 16px;
+  opacity: 0.95;
+  background: #33404A;
+  padding: 10px 10px 5px 10px;
+  border-radius: 2px;
+  border: 0;
+}
+.spc-open-on-pacific-map i {
+  font-weight: bold;
+  color: #9ca1aa;
+}
+.spc-open-on-pacific-map:hover {
+  cursor: pointer;
+  background: #006FC6;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
@@ -3847,9 +3871,6 @@ table.table tr th.dataset-details {
 }
 .meta-export-select.btn-group.open .btn-primary.dropdown-toggle {
   background-color: #0c436b;
-}
-.resource-view .ckanext-datapreview > iframe {
-  min-height: auto;
 }
 .badge-res {
   font-size: 0.8em;
