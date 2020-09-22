@@ -89,8 +89,10 @@ class SpcNadaHarvester(NadaHarvester):
 
             # Find country DDI abbreviation
             # Use the mapping of codes to return the right value
-            if pkg_dict['member_countries'] not in list(country_mapping.values()):
-                pkg_dict['member_countries'] = country_mapping[(pkg_dict['member_countries'])]   
+            if not hasattr(pkg_dict, 'member_countries'):
+                pkg_dict['member_countries'] = []
+            elif pkg_dict['member_countries'] not in list(country_mapping.values()):
+                pkg_dict['member_countries'] = country_mapping[(pkg_dict['member_countries'])]
             # Adjust title to include country
             pkg_dict['title'] = pkg_dict['country'] + ' ' + pkg_dict['title']
                
@@ -121,7 +123,7 @@ class SpcNadaHarvester(NadaHarvester):
             rsc_page = requests.get(pkg_dict['url'] + '/related_materials', verify=False)
             # Here we find resources related to the study and scrape the relevant information
             if rsc_page:
-                html_cont = BeautifulSoup(rsc_page.content, 'html5lib')
+                html_cont = BeautifulSoup(rsc_page.content, 'html.parser')
                 for i, rsc in enumerate(html_cont.findAll('a', attrs={'class': 'download', 'target': '_blank'})):
                     resources.append({})
                     if rsc['href']:
