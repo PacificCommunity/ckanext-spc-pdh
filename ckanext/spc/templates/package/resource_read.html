@@ -277,11 +277,3 @@
     {% snippet "package/snippets/resources.html", pkg=pkg, active=res.id, action='read', is_activity_archive=is_activity_archive %}
   {% endblock %}
 {% endblock %}
-
-{% block secondary_content %}
-
-  {% block resources_list %}
-    {% snippet "package/snippets/resources.html", pkg=pkg, active=res.id, is_activity_archive=is_activity_archive %}
-  {% endblock %}
-
-{% endblock %} 
