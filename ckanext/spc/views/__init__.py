@@ -1,21 +1,31 @@
 # -*- coding: utf-8 -*-
 import os
-from datetime import datetime
+import logging
 
+from datetime import datetime
 from flask import Blueprint, send_file
 
 import ckan.lib.jobs as jobs
 import ckan.model as model
+import ckan.lib.helpers as h
+import ckan.lib.plugins
+import ckan.lib.base as base
+
 from ckan.common import _, g, request
 from ckan.plugins import toolkit
-import ckan.lib.helpers as h
+from ckan.logic import NotAuthorized, check_access
+
+import ckanext.scheming.helpers as scheming_helpers
 
 from ckanext.spc.jobs import broken_links_report
+from ckanext.spc.model.search_query import SearchQuery
+from ckanext.spc.views.access_request import spc_access_request
 
-import ckan.model as model
-from ckan.common import _, g
-from ckan.plugins import toolkit
-from flask import Blueprint
+log = logging.getLogger(__name__)
+render = base.render
+abort = base.abort
+
+PER_PAGE = 20
 
 
 def switch_admin_state(id):
@@ -76,8 +86,51 @@ def broken_links():
     return toolkit.render('admin/broken_links.html', extra_vars)
 
 
+def index():
+    context = {
+        'model': model,
+        'session': model.Session,
+        'user': g.user,
+        'auth_user_obj': g.userobj
+    }
+    # Package needs to have a organization group in the call to
+    # check_access and also to save it
+    try:
+        logic.check_access('sysadmin', context, {})
+    except logic.NotAuthorized:
+        base.abort(403, _('Need to be system administrator'))
+
+    if request.method == 'POST':
+        query_name = request.POST['q_name']
+        model.Session.query(SearchQuery).filter(
+            SearchQuery.query == query_name).delete()
+        model.Session.commit()
+        h.flash_success(_('The query has been removed'))
+
+    page = h.get_page_number(request.params)
+    total = model.Session.query(SearchQuery).count()
+    queries = model.Session.query(SearchQuery).order_by(
+        SearchQuery.count.desc()
+    ).limit(PER_PAGE).offset((page - 1) * PER_PAGE)
+    pager = h.Page(
+        collection=queries,
+        page=page,
+        url=lambda page: h.url_for('search_queries.index', page=page),
+        item_count=total,
+        items_per_page=PER_PAGE
+    )
+
+    return render(
+        'search_queries/index.html', {
+            'queries': queries,
+            'pager': pager
+        }
+    )
+
+
 spc_user = Blueprint('spc_user', __name__)
 spc_admin = Blueprint('spc_admin', __name__)
+search_queries = Blueprint('search_queries', __name__)
 
 spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
                       view_func=switch_admin_state,
@@ -86,4 +139,10 @@ spc_user.add_url_rule(u'/user/switch_admin_state/<id>',
 spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        view_func=broken_links,
                        methods=(u'GET', u'POST'))
-blueprints = [spc_user, spc_admin]
+
+search_queries.add_url_rule(
+    "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
+)
+
+blueprints = [spc_user, spc_admin,
+              search_queries, spc_access_request]

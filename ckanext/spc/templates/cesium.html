@@ -1,11 +1,17 @@
 {% ckan_extends %}
 
-{% block cesium_home_camera %}
-    {% if resource.map_extent %}
-        data-module-home-camera="{{ resource.map_extent.replace("\n","") }}"
-    {% elif package.spatial %}
-        data-module-home-camera="{{ package.spatial.replace("\n","") }}"
-    {% else %}
-        {{ super() }}
-    {% endif %}
-{% endblock cesium_home_camera %}
+{% block pre_inner %}
+    data-module="cesiumpreview spc-cesium-preview"
+    data-module-server="{{ h.cesiumpreview_server_url('default') }}"
+    {% block cesium_home_camera %}
+        {% if resource.map_extent %}
+            data-module-home-camera="{{ resource.map_extent.replace("\n","") }}"
+        {% elif package.spatial %}
+            data-module-home-camera="{{ package.spatial.replace("\n","") }}"
+        {% else %}
+            {{ super() }}
+        {% endif %}
+    {% endblock cesium_home_camera %}
+    {% asset 'spc/spc_js' %}
+    {% asset 'spc/spc_css' %}
+{% endblock pre_inner %}

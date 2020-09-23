@@ -1,5 +1,5 @@
 import json
-import urlparse
+from urllib.parse import urlparse, urlunparse
 import logging
 import requests
 import iso639
@@ -18,11 +18,10 @@ import ckan.plugins.toolkit as toolkit
 logger = logging.getLogger(__name__)
 cache = CacheManager()
 
+
 def get_helpers():
     return dict(
         spc_get_available_languages=spc_get_available_languages,
-        url_for_logo=url_for_logo,
-        get_conf_site_url=get_conf_site_url,
         get_eez_options=get_eez_options,
         spc_get_footer=spc_get_footer,
         spc_dataset_suggestion_form=spc_dataset_suggestion_form,
@@ -37,6 +36,8 @@ def get_helpers():
         spc_link_to_identifier=spc_link_to_identifier,
         spc_has_cesium_view=spc_has_cesium_view,
         spc_get_max_image_size=get_max_image_size,
+        spc_get_package_name_by_id=get_package_name_by_id,
+        spc_is_restricted=is_restricted,
     )
 
 
@@ -44,19 +45,22 @@ def countries_list(countries):
     countries_list = []
     try:
         countries_list = json.loads(countries)
-    except ValueError, e:
+    except ValueError:
         countries_list.append(countries)
-    return map(lambda x: x.upper(), countries_list)
+    return list(map(lambda x: x.upper(), countries_list))
+
 
 def spc_has_cesium_view(res):
     is_cesium = False
     if res.get('has_views'):
-        views = toolkit.get_action('resource_view_list')({'user': toolkit.c.user}, {'id': res['id']})
+        views = toolkit.get_action('resource_view_list')(
+            {'user': toolkit.c.user}, {'id': res['id']})
         is_cesium = any(
             view['view_type'] == 'cesium_view'
             for view in views
         )
     return is_cesium
+
 
 def spc_dataset_suggestion_form():
     return config.get('spc.dataset_suggestion.form', '/dataset-suggestions/add')
@@ -66,37 +70,13 @@ def spc_dataset_suggestion_path():
     return config.get('spc.dataset_suggestion.path', '/dataset-suggestions')
 
 
-
 def spc_get_available_languages():
     return filter(
-        lambda (n, _): n,
+        F.first,
         [(lang['iso639_1'] or lang['iso639_1'], lang['name'])
          for lang in iso639.data]
     )
 
-
-def url_for_logo(*args, **kw):
-
-    def fix_arg(arg):
-        url = urlparse.urlparse(str(arg))
-        url_is_relative = (
-            url.scheme == '' and url.netloc == ''
-            and not url.path.startswith('/')
-        )
-        if url_is_relative:
-            return '/' + url.geturl()
-        return url.geturl()
-
-    if args:
-        args = (fix_arg(args[0]), ) + args[1:]
-
-    my_url = _routes_default_url_for(*args, **kw)
-    return my_url
-
-
-def get_conf_site_url():
-    site_url = config.get('ckan.site_url', None)
-    return site_url
 
 def get_max_image_size():
     return int(config.get('ckan.max_image_size', 2))
@@ -112,8 +92,7 @@ def get_eez_options():
             }
             for feature in eez
         }.values()
-    ],
-                     key=lambda o: o['text'])
+    ], key=lambda o: o['text'])
 
     result = []
     for option in options:
@@ -196,7 +175,6 @@ def spc_national_map_previews(pkg):
     ])
 
 
-
 def spc_unwrap_list(value):
     if isinstance(value, list):
         return value[0] if value else {}
@@ -232,21 +210,33 @@ def spc_link_to_identifier(id):
         return 'https://europepmc.org/abstract/med/' + id[5:]
     return None
 
-def get_drupal_user_url(action, current_url=''):
 
-    current_url_parsed = urlparse.urlparse(str(current_url))
+def get_drupal_user_url(action, current_url=''):
+    current_url_parsed = urlparse(str(current_url))
     drupal_url = config.get('drupal.site_url') or current_url
-    url = urlparse.urlparse(str(drupal_url))
-    return_url = 'destination=' + current_url_parsed.path if current_url_parsed.path else '' 
-    
-    if action == 'login':
-        path = '/user/login'
-    elif action == 'register':
-        path = '/user/register'
-    elif action == 'logout':
-        path = '/user/logout'
+    url = urlparse(str(drupal_url))
+    return_url = f"destination={current_url_parsed.path or ''}"
+
+    if action in ('login', 'register', 'logout'):
+        path = f'/user/{action}'
     else:
         path = ''
-    result_url = urlparse.urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
-    
-    return result_url
+
+    return urlunparse((url.scheme, url.netloc, path, '', return_url, ''))
+
+
+def get_package_name_by_id(package_id):
+    from ckan.model import Package
+    return Package.get(package_id).title
+
+
+def is_restricted(package):
+    access = package.get('access')
+
+    if 'extras' in package:
+        for field in package['extras']:
+            if field.get('key') == 'access':
+                access = field['value']
+                break
+
+    return True if access == 'restricted' else False

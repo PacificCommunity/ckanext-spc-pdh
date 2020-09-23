@@ -18,6 +18,7 @@
         font-weight: 300;
     }
     .js body.filters-modal & {
+        background: #fff;
         .hide-filters {
             right: 25px;
             top: 21px;
@@ -180,7 +181,7 @@
                 a {
                     background-color: transparent;
                     &:after {
-                        background: url("@{relative_root}/base/images/tag-close-side.png") 50% no-repeat;
+                        background: url("../../base/images/tag-close-side.png") 50% no-repeat;
                         background-size: contain;
                         right: 1px;
                         color: transparent;
@@ -204,12 +205,14 @@
     > li.nav-item {
         border-bottom: 1px dashed #bdbdbd;
         word-break: break-word;
+        word-wrap: break-word;
         a {
             font-size: 16px;
+            color: #000000;
             padding: 10px 15px;
+
             &:hover:after, &:after {
                 position: absolute;
-                content: '';
                 font-size: 17px;
                 font-family: Raleway;
                 background: none;
@@ -218,7 +221,8 @@
                 width: 10px;
                 height: 10px;
                 margin-top: 0px;
-                columns: #000000;
+                color: #000000;
+            }
         }
         a.active {
             background: transparent;
@@ -227,7 +231,6 @@
                 background-color: #8ca0a6;
                 color: #fff;
                 &:after {
-                    background: url("@{relative_root}/base/images/tag-close-side.png") 50% no-repeat;
                     background-size: contain;
                     right: 1px;
                     color: transparent;
@@ -335,4 +338,4 @@
             }
         }
     }
-}
+

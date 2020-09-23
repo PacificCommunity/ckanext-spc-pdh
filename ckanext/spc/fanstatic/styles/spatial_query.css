@@ -2,40 +2,91 @@
 /*                           Configure SPC controls                          */
 /*****************************************************************************/
 /* hide zoom */
-.leaflet-left.leaflet-top {
+/* .leaflet-left.leaflet-top {
     display: none;
-}
+} */
+
+/* .control-group class persist only at dataset creation page
+    so we need to count it
+ */
+
 /* move pencil to bottom */
 .leaflet-right.leaflet-top {
     top: auto;
     bottom: 30px;
     right: 23px;
 }
+
 /* update pencil styles */
-.leaflet-draw-toolbar, .leaflet-control {
+#dataset-map:not(.control-group) .leaflet-bar {
     box-shadow: none;
 }
 .leaflet-touch .leaflet-control-layers,
 .leaflet-touch .leaflet-bar {
     border-color: white;
 }
+
+/* Border-radius after click on draw and remove button */
+.leaflet-draw-section .leaflet-draw-toolbar-notop a:first-child {
+	border-top-right-radius: 4px;
+}
+.leaflet-draw-section .leaflet-draw-toolbar-nobottom a:last-child {
+    border-bottom-right-radius: 4px;
+}
+
+/* No border radius on map window at ds creation page */
+.control-group .dataset-map #dataset-map-container {
+    border-radius: unset;
+}
+
+/* Hide dataset map attribution */
+#dataset-map-attribution {
+    display: none;
+}
+
 .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
-    width: 47px;
-    height: 47px;
+    width: 30px;
+    height: 30px;
     background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAADR0lEQVRoQ9XaP2gTURzA8e/vKt1KRRA6mDSKg4tUBBenuvln0KLSDlpbrINisW0igoMUxMXmahFRQag6OCgVQycR1KroJsRNJ9MLOKeuNvfkekmTpmnurk0uL29s3939Pnm/3/td7iLoPGLXD2Db14AFLPP5RqGKtgYX8BHYXogxjWEMk5lKV8asJ2I9oBh3DsUwWTNVDtEPsTGgFLdSw2SnnxX/oB8iEk8j9HimeRlEH0Tsehe2PYRhvMW2F4BOD0gOwzji1IgeCBfwBdiLUg9A3iO88VwNyGCZu5uPKAcUo16B8B2Rp54QRV9zEdUAgSEy3jxELYB/yBJGPtYcRNfoTtrbv63UgNfYOLWWMIze5hS2C/gM7POK3/2/msGaHicyMVRWI6sAZ0a4KxEUIPKIxeQVIvHbCNtQ6hfIGG35U2RmMuE3u6AAJ42y06N0x++guOkGLP1YyVfNuXcKClhdgcQUohJuVjFL1rxYLQUbn04NBjS+JkIANBYREqBxiBABjUHUAwAvsMxz/vpIvfvErvEdGMZX342suONEynahgID6roQLcL4H7Pf1CbqAESIT9xG5Wjgm0ArUt9k1EVCflWgyYOsIDQBbQ2gC2DxCI8DmEJoBgiOCAtw9/3zFNjqHZZ71tQ37nOT/LnbPjU6Wl53HKv76wAqgY5Do38cglwrx1B3gfyVWAP8+gBz0+eGEBvCH0BzgjWgBQG1EiwA2RrQQoDqixQDrEcEBc1gd/WFso7V2xbV9ojvxEKUu+9xGX2KZA0TjT4AR9xh5jZU84/P4uk0rIaKJScR+h5IZ4JDHFeawrAGi3bOgBgtz57HMk3WLLMCJSojuxAJK9SDqhAdEK8DamojGVQGfqwHRDlBCxBK92Mp5Z1wcRcgUcLh036NPCpVnm5tO0cQYqHsVaZjDlqMYahr4o1MNVJZLATGRAqlWlO6K5NVPRO4i4j7QFVIsmn0Baq+hUwuIeK7GK9fyFXFSax6r4zRMLjc0sgAnF2JjMey23x7H5DDUMfLGcbLJWwHOH8pUqXiNtP6iih8IaRSpyt9UhBKhj4sI0bjzG4kLq3NFPqFwekaatvwCmRkn1bQegtOpIYdBmkzSeQzZcuM/sq/Yw1D571gAAAAASUVORK5CYII=") 50% no-repeat;
     background-size: 25px;
 
 }
-
-
-.module-narrow #dataset-map-container {
+/* fix zoom and pencil position at ds creation page */
+.control-group .leaflet-left.leaflet-top{
+    top: 0;
+    left: 0;
+}
+.control-group .leaflet-right.leaflet-top {
+    top: 0;
+    right: 0;
+}
+.control-group .leaflet-right.leaflet-top {
+    right: 10px;
+}
+.control-group .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+    width: 26px;
+    height: 26px;
+}
+.control-group .leaflet-draw.leaflet-control {
+    margin-right: 0;
+}
+#dataset-map .module-heading {
+    margin: 12px 16px 0 14px;
+}
+#dataset-map .module-heading .heading-icon {
+    background-size: 11px;
+    margin: 4px 7px 4px 3px;
+}
+.dataset-map .module-narrow #dataset-map-container {
     height: 328px;
     border-radius: 4px;
 }
+.module-narrow #dataset-map-container {
+    border-radius: 4px;
+}
+
 @media(min-width: 768px) {
-    .module-narrow #dataset-map-container {
-        height: 220px;
-    }
+
     .leaflet-left.leaflet-top {
         display: block;
         top: auto;
@@ -49,20 +100,31 @@
     .leaflet-right.leaflet-top {
         top: 60px;
         bottom: auto;
-        right: 23px;
+        right: 11px;
     }
     .leaflet-bar a, .leaflet-bar a:hover {
-        width: 30px;
-        height: 30px;
+        width: 26px;
+        height: 26px;
         line-height: 32px;
     }
     .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
-        height: 30px;
-        width: 30px;
+        height: 26px;
+        width: 26px;
         background-size: 15px;
     }
+    .leaflet-control-container .leaflet-control-zoom a {
+        width: 26px;
+        height: 26px;
+        font-size: 18px;
+        line-height: 32px;
+    }
+    .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 26px;
+        height: 26px;
+        line-height: 32px;
+    }
 }
-.module-content #dataset-map-container {
+.control-group .dataset-map .module-content #dataset-map-container {
   height: 250px;
 }
 #dataset-map-attribution {
@@ -99,8 +161,6 @@
   display: none;
 }
 .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
-  background-image: url("../../../../../../../base/images/pencil.png");
-  background-image: url("/data/base/images/pencil.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 12px 12px;
@@ -109,8 +169,29 @@
 .leaflet-draw-actions li {
   display: none;
 }
+
+.control-group .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+    background: #ffffff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEJQTFRFODg4aWlp/Pz8x8fHcnJyZGRkQUFBU1NTc3NzmJiYhISEOTk5mZmZ+fn5v7+/g4ODbGxsZWVla2tr+Pj4MzMz////6aHwswAAABZ0Uk5T////////////////////////////AAHSwOQAAABVSURBVHjaNMxXEsAgCEVRNL3Y4LH/rcaA8nUPw0Dqk+4iSgMnwOKQKxNQDMIHdxmEWwPn9T+zBl7tD0ZX6RDeZitx2GcrIS4PalIHYvC9Ye5VPwEGABMKCgtNpfUFAAAAAElFTkSuQmCC");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 12px 12px;
+}
+
+/* sprite for buttons */
+.leaflet-draw-toolbar a {
+	background-image: url('base/images/spritesheet-2x.png');
+	background-image: linear-gradient(transparent, transparent), url('base/images/spritesheet.svg');
+	background-repeat: no-repeat;
+	background-size: 270px 30px;
+}
+
+.leaflet-retina .leaflet-draw-toolbar a {
+	background-image: url('base/images/spritesheet-2x.png');
+	background-image: linear-gradient(transparent, transparent), url('base/images/spritesheet.svg');
+}
+
 @media(min-width: 768px) {
-    .dataset-map-expanded #dataset-map {
+    .dataset-map .dataset-map-expanded #dataset-map {
         position: absolute;
         width: 740px;
         height: 384px;
@@ -120,8 +201,11 @@
         border: 1px solid #CCC;
         margin: 0;
     }
-    .dataset-map-expanded #dataset-map #dataset-map-container {
-        height: 300px;
+    #dataset-map #dataset-map-container {
+        height: 220px;
+    }
+    .dataset-map-expanded .wrapper #dataset-map {
+        width: 740px;
     }
     .dataset-map-expanded #dataset-map #dataset-map-attribution {
         *zoom: 1;
@@ -156,19 +240,129 @@
 }
 
 @media(min-width: 992px) {
-    .module-narrow #dataset-map-container {
+    #dataset-map #dataset-map-container {
         height: 280px;
     }
-    .dataset-map-expanded #dataset-map {
-        width: 970px;
+    #dataset-map.control-group #dataset-map-container {
+        height: 250px;
+    }
+    .dataset-map-expanded .wrapper #dataset-map {
+        width: 971px;
+    }
+    .leaflet-bar a, .leaflet-bar a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        width: 30px;
+        height: 30px;
+    }
+    .leaflet-control-container .leaflet-control-zoom a {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        line-height: 32px;
+    }
+    .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a {
+        width: 26px;
+        height: 26px;
+        font-size: 18px;
+        line-height: 26px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 26px;
+        height: 26px;
+        line-height: 26px;
+    }
+}
+@media(max-width: 992px) {
+    #dataset-map .module-heading {
+        margin: 12px 5px 0 5px;
     }
 }
 @media(min-width: 1200px) {
-    .module-narrow #dataset-map-container {
+    #dataset-map #dataset-map-container {
         height: 328px;
     }
-    .dataset-map-expanded #dataset-map {
-        width: 1170px;
-        max-width: 1170px;
+    .dataset-map-expanded .wrapper #dataset-map {
+        width: 1239px;
+        max-width: 1239px;
+    }
+}
+
+@media(max-width: 767px) {
+    #dataset-map:not(.control-group) .leaflet-left.leaflet-top {
+        display: none;
+    }
+    #dataset-map:not(.control-group) .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        width: 47px;
+        height: 47px;
+        background-size: 25px;
+    
+    }
+    .control-group .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        width: 30px;
+        height: 30px;
+    }
+    .control-group #dataset-map #dataset-map-container {
+        height: 250px;
+        border-radius: 4px;
+    }
+    #dataset-map #dataset-map-container {
+        height: 328px;
+    }
+    .control-group .leaflet-bar a, .leaflet-bar a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-control-zoom a:hover {
+        width: 30px;
+        height: 30px;
+        line-height: 32px;
+    }
+    .control-group .leaflet-control-container .leaflet-draw-toolbar a.leaflet-draw-draw-rectangle {
+        height: 30px;
+        width: 30px;
+    }
+    #dataset-map.control-group .leaflet-control-layers, #dataset-map.control-group .leaflet-bar {
+        border: 2px solid rgba(0,0,0,0.2);
+    }
+    #dataset-map .leaflet-bar {
+        box-shadow: none;
+    }
+    .control-group .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+        background-position: -29px 0px;
+    }
+    .control-group .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
+        background-position: -240px 0px;
+    }
+    .dataset-map-expanded .wrapper #dataset-map {
+        position: relative;
+        width: auto;
+        height: 328px;
+        top: 0;
+        left: 0px;
+        background-color: white;
+        border: none;
+        margin: 0;
+    }
+    .dataset-map-expanded #dataset-map .dataset-map #dataset-map-container {
+        height: 328px;
+    }
+    .dataset-map-expanded #dataset-map.module.module-narrow.module-shallow #dataset-map-edit-buttons {
+        display: none;
     }
 }
