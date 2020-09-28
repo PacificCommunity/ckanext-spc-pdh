@@ -10,7 +10,7 @@
       </span>
     {% endif %}
 
-    {{ h.popular('views', res.tracking_summary.total, min=10) }}
+    {{ h.popular('views', res.tracking_summary.total, min=10) if res.tracking_summary }}
   </a>
     {% if h.spc_is_restricted(pkg) and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
         <p class="description">
