@@ -220,19 +220,53 @@ class SpcDotStatHarvester(HarvesterBase):
             )
             pkg_dict['source'] = de_url
 
-            # Set a default resource
-            pkg_dict['resources'] = [{
-                'url':
-                'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
-                    agency_id,
-                    stats_guid,
-                    structure['version']
-                ),
-                'format': 'CSV',
-                'mimetype': 'CSV',
-                'description': 'All data for {}'.format(pkg_dict['title']),
-                'name': '{} Data CSV'.format(pkg_dict['title'])
-            }]
+
+            # Set resource to metadata data dictionary (if available)
+            annotation = structure.find('Annotations')
+            annots = annotation.find_all('Annotation')
+            metaurl = None
+            for annot in annots:
+                metalink = annot.find('AnnotationType')
+                if metalink.text == 'EXT_RESOURCE':
+                    metaurl = annot.find('AnnotationText', {'xml:lang':'en'}).text.split('|')[1]
+            
+            # Set default resource, and metadata pdf if it exists
+            if metaurl:
+                pkg_dict['resources'] = [
+                {
+                    'url':
+                    'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
+                        agency_id,
+                        stats_guid,
+                        structure['version']
+                    ),
+                    'format': 'CSV',
+                    'mimetype': 'CSV',
+                    'description': 'All data for {}'.format(pkg_dict['title']),
+                    'name': '{} Data CSV'.format(pkg_dict['title'])
+                },
+                {
+                    'url': metaurl,
+                    'format': 'PDF',
+                    'mimetype': 'PDF',
+                    'description': 'Detailed metadata dictionary for {}'.format(pkg_dict['title']),
+                    'name': '{} Metadata PDF'.format(pkg_dict['title'])
+                }]
+            else:
+                pkg_dict['resources'] = [
+                {
+                    'url':
+                    'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
+                        agency_id,
+                        stats_guid,
+                        structure['version']
+                    ),
+                    'format': 'CSV',
+                    'mimetype': 'CSV',
+                    'description': 'All data for {}'.format(pkg_dict['title']),
+                    'name': '{} Data CSV'.format(pkg_dict['title'])
+                }]
+            
 
             # Get notes/description if it exists
             try:
