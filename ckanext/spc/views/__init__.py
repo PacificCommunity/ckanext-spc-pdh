@@ -3,7 +3,7 @@ import os
 import logging
 
 from datetime import datetime
-from flask import Blueprint, send_file
+from flask import Blueprint, send_file, make_response
 
 import ckan.lib.jobs as jobs
 import ckan.model as model
@@ -17,7 +17,7 @@ import ckan.lib.base as base
 
 from ckan.common import _, g, request
 from ckan.plugins import toolkit
-from ckan.logic import NotAuthorized, check_access
+from ckan import logic
 
 import ckanext.scheming.helpers as scheming_helpers
 
@@ -133,6 +133,19 @@ def index():
     )
 
 
+def download_search_queries():
+    queries = model.Session.query(SearchQuery).order_by(
+        SearchQuery.count.desc()
+    )
+    csv = ''.join(('{},{}\n'.format(
+        x.query, x.count) for x in queries))
+    response = make_response(csv)
+    cd = 'attachment; filename=queries.csv'
+    response.headers['Content-Disposition'] = cd
+    response.mimetype='text/csv'
+    return response
+
+
 spc_user = Blueprint('spc_user', __name__)
 spc_admin = Blueprint('spc_admin', __name__)
 search_queries = Blueprint('search_queries', __name__)
@@ -148,6 +161,11 @@ spc_admin.add_url_rule(u'/ckan-admin/broken-links',
 search_queries.add_url_rule(
     "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
 )
+
+search_queries.add_url_rule(
+    "/ckan-admin/search-queries/download", view_func=download_search_queries, methods=(u'GET',)
+)
+
 
 blueprints = [spc_user, spc_admin, spc_package,
               search_queries, spc_access_request]
