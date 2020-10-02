@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
+import csv
+from io import StringIO
+from werkzeug.wrappers import Response
 
 from datetime import datetime
-from flask import Blueprint, send_file, make_response
+from flask import Blueprint, send_file
 
 import ckan.lib.jobs as jobs
 import ckan.model as model
@@ -134,15 +137,23 @@ def index():
 
 
 def download_search_queries():
-    queries = model.Session.query(SearchQuery).order_by(
-        SearchQuery.count.desc()
-    )
-    csv = ''.join(('{},{}\n'.format(
-        x.query, x.count) for x in queries))
-    response = make_response(csv)
-    cd = 'attachment; filename=queries.csv'
-    response.headers['Content-Disposition'] = cd
-    response.mimetype='text/csv'
+    def generate():
+        data = StringIO()
+        w = csv.writer(data)
+        queries = model.Session.query(SearchQuery).order_by(
+            SearchQuery.count.desc())
+        w.writerow(('Query', 'Counter'))
+        yield data.getvalue()
+        data.seek(0)
+        data.truncate(0)
+        for item in queries:
+            w.writerow((item.query, item.count))
+            yield data.getvalue()
+            data.seek(0)
+            data.truncate(0)
+
+    response = Response(generate(), mimetype='text/csv')
+    response.headers.set("Content-Disposition", "attachment", filename="queries.csv")
     return response
 
 
