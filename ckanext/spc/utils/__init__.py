@@ -420,4 +420,6 @@ def _get_local_resource_size(res):
     path = uploader.get_path(res['id'])
     if os.path.isfile(path):
         return os.stat(path).st_size
+    else:
+        logger.warning(f"File for Resource<{id}> was not found in local filesystem at {path}")
     return 0

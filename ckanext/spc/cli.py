@@ -375,11 +375,16 @@ def spc_groups_delete():
 def refresh_resource_size(ids):
     total = len(ids)
     if not ids:
-        query = model.Session.query(model.Resource.id)
+        query = model.Session.query(model.Resource.id).filter(
+            model.Resource.state == 'active'
+        ).join(
+            model.Package,
+            model.Resource.package_id == model.Package.id
+        )
         total = query.count()
         ids = map(attrgetter('id'), query)
     for id in progressbar(
-            ids, length=total,
+            ids, max_value=total,
             redirect_stdout=True
     ):
         utils.refresh_resource_size(id)
