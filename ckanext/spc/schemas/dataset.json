@@ -279,11 +279,7 @@
       "field_name": "status",
       "label": "Status"
     },
-    {
-      "field_name": "size",
-      "label": "Size",
-      "validators": "default(0)"
-    },
+    { "preset": "spc_resource_size" },
     {
       "field_name": "issued",
       "label": "Issued",

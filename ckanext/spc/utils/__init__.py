@@ -380,3 +380,44 @@ def track_resource_download(user, id):
     record = DownloadTracking.download(user, id)
     record.save()
     return record
+
+
+def refresh_resource_size(id):
+    try:
+        res = tk.get_action('resource_show')({'ignore_auth': True}, {'id': id})
+    except tk.ObjectNotFound:
+        logger.error(f'Resource<{id}> was not found')
+        return
+    entity = model.Resource.get(res['id'])
+    if res['url_type'] == 'upload':
+        size = _get_local_resource_size(res)
+    else:
+        size = _get_remote_resource_size(res)
+    # Do not change file size to 0 - it may be only temporary unavailable
+    if entity.size != size and size:
+        entity.size = size
+        model.Session.commit()
+    return res
+
+
+def _get_remote_resource_size(res):
+    url = res.get('url')
+    if not url:
+        return 0
+    try:
+        resp = requests.head(url, timeout=5)
+    except requests.exceptions.RequestException:
+        logger.exception("Cannot fetch remote metadata for Resource<%s>", res['id'])
+        return 0
+    try:
+        return tk.asint(resp.headers['content-length'])
+    except KeyError:
+        return 0
+
+
+def _get_local_resource_size(res):
+    uploader = get_resource_uploader(res)
+    path = uploader.get_path(res['id'])
+    if os.path.isfile(path):
+        return os.stat(path).st_size
+    return 0
