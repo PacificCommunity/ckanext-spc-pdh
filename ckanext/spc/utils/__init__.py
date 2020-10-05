@@ -405,7 +405,7 @@ def _get_remote_resource_size(res):
     if not url:
         return 0
     try:
-        resp = requests.head(url, timeout=5)
+        resp = requests.head(url, timeout=5, allow_redirects=True)
     except requests.exceptions.RequestException:
         logger.exception("Cannot fetch remote metadata for Resource<%s>", res['id'])
         return 0
