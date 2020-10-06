@@ -29,7 +29,8 @@ def _simplified_schemas() -> Dict[str, List[Dict[str, Any]]]:
             "dataset": _simplify_fields(options["dataset_fields"])
             + [{"name": "id"}, {"name": "type"}],
             "resource": _simplify_fields(options["resource_fields"])
-            + [{"name": "id"}, {"name": "url_type"}, {"name": "package_id"}],
+            + [{"name": "id"}, {"name": "url_type"}, {"name": "package_id"},
+               {"name": "download_location"}],
         }
         for name, options in tk.h.scheming_dataset_schemas().items()
     }
@@ -81,7 +82,7 @@ def _read_sheet(sheet: Worksheet):
                 [
                     F.iffy(F.notnone, F.identity, identity(cell.value))(
                         safe_loads(
-                            (cell.value or "")
+                            (str(cell.value) or "")
                             .replace("‘", "'")
                             .replace("’", "'")
                             .replace("´", "'")
@@ -140,14 +141,19 @@ class Importer(object):
         self.doc = load_workbook(stream, read_only=True)
         self.schemas = _simplified_schemas()
         self.collection = []
+        self.resources_to_upload = []
 
     def _generate(self):
         for sheet in self.doc.worksheets:
             if sheet.title in self.schemas:
                 datasets = _read_sheet(sheet)
-                resources = _read_sheet(
-                    self.doc[_resource_sheet_name(sheet.title)]
-                )
+                resources = (x for x in _read_sheet(
+                    self.doc[_resource_sheet_name(sheet.title)])
+                    if x.get('id', None))
+                self.resources_to_upload += [x for x in _read_sheet(
+                    self.doc[_resource_sheet_name(sheet.title)])
+                    if x.get('download_location', None)]
+                
                 _attach_resources(resources, {d["id"]: d for d in datasets})
                 self.collection.extend(datasets)
 
