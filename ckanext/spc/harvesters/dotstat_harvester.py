@@ -193,6 +193,9 @@ class SpcDotStatHarvester(HarvesterBase):
             # Added thematic string
             pkg_dict['thematic_area_string'] = ["Official Statistics"]
 
+            # Open license for all dotStat resources
+            pkg_dict['license_id'] = "Open (Other)"
+
             # Get owner_org if there is one
             source_dataset = get_action('package_show')(
                 {
@@ -229,7 +232,7 @@ class SpcDotStatHarvester(HarvesterBase):
                 metalink = annot.find('AnnotationType')
                 if metalink.text == 'EXT_RESOURCE':
                     metaurl = annot.find('AnnotationText', {'xml:lang':'en'}).text.split('|')[1]
-            
+
             # Set default resource, and metadata pdf if it exists
             if metaurl:
                 pkg_dict['resources'] = [
@@ -266,7 +269,7 @@ class SpcDotStatHarvester(HarvesterBase):
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 }]
-            
+
 
             # Get notes/description if it exists
             try:
