@@ -194,7 +194,7 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['thematic_area_string'] = ["Official Statistics"]
 
             # Open license for all dotStat resources
-            pkg_dict['license_id'] = "Open (Other)"
+            pkg_dict['license_id'] = "Other (Open)"
 
             # Get owner_org if there is one
             source_dataset = get_action('package_show')(
