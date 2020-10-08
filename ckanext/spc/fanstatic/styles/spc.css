@@ -3310,12 +3310,13 @@ header.navbar > .container .collapse {
   color: #000;
   border-radius: 25px 5px 5px 25px;
   border: none;
-  position: absolute;
   margin: 12px 16px 0 13px;
+  position: absolute;
   top: 0;
   left: 0px;
   right: 0px;
   padding: 2px;
+  z-index: 5;
 }
 .module .module-heading a {
   position: absolute;
@@ -3502,6 +3503,9 @@ table.table tr th.dataset-details {
 .dataset-read .primary .module .module-content .add-to-group,
 .dataset-read .primary .module .module-content form {
   padding: 0px 20px;
+}
+.dataset-read .primary .module .resource-list .resource-item .heading {
+  word-wrap: break-word;
 }
 .dataset-read .primary h1 {
   font-size: 16px;
@@ -4785,14 +4789,15 @@ button.header-menu-btn:focus {
   margin-top: 0px;
   color: #000000;
 }
-.nav-simple > li.nav-item.active {
+.nav-simple > li.nav-item a.active {
   background: transparent;
+  color: #fff;
 }
-.nav-simple > li.nav-item.active a {
+.nav-simple > li.nav-item a.active a {
   background-color: #8ca0a6;
   color: #fff;
 }
-.nav-simple > li.nav-item.active a:after {
+.nav-simple > li.nav-item a.active a:after {
   background-size: contain;
   right: 1px;
   color: transparent;
@@ -4801,7 +4806,7 @@ button.header-menu-btn:focus {
   height: 20px;
   text-align: center;
 }
-.nav-simple > li.nav-item.active a span {
+.nav-simple > li.nav-item a.active a span {
   white-space: normal;
 }
 .nav-facet {
@@ -4973,6 +4978,11 @@ button.header-menu-btn:focus {
   color: transparent;
   background-position: 50%;
   background-size: 15px;
+}
+@media (max-width: 767px) {
+  .search-form .input-group-btn {
+    position: unset;
+  }
 }
 .search-form .filter-list {
   margin-left: 27px;
