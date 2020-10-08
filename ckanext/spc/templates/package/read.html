@@ -1,7 +1,41 @@
 {% ckan_extends %}
 
 {% block package_description %}
-    {{ super() }}
+    {% if pkg.private %}
+      <span class="dataset-private label label-inverse pull-right">
+        <i class="fa fa-lock"></i>
+        {{ _('Private') }}
+      </span>
+    {% endif %}
+    {% block package_archive_notice %}
+    	{{ super() }}
+    {% endblock %}
+    <h1>
+      {% block page_heading %}
+      	{{ super() }}
+      {% endblock %}
+    </h1>
+
+    <div class="dataset-info">
+        Date created: {{ h.render_datetime(pkg.metadata_created, date_format='%d %B %Y') }}
+        <div class="data-quality-tooltip">
+            <i class="fa fa-question-circle"></i>
+            <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
+                This date indicates the date the dataset metadata was created on Pacific Data Hub.
+            </span>
+        </div>
+
+    </div>
+
+
+    {% block package_notes %}
+    	{{ super() }}
+    {% endblock %}
+    {# FIXME why is this here? seems wrong #}
+    <span class="insert-comment-thread"></span>
+
+
+
     <div class="dropdown btn-group meta-export-select">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	    <i class="fa spc-icon-external-link meta-export-icon"></i>
@@ -16,7 +50,7 @@
 		{% set format = {'publications': 'dc-rdf', 'dataset': 'dcat-rdf', 'biodiversity_data': 'eml-rdf'}[pkg.type] %}
 		<li>
 		    <a
-			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format=format) }}"
+			href="{{ h.url_for('metaexport.export', id=pkg.id, format=format) }}"
 			      target="_blank">RDF/XML</a>
 
 		</li>
@@ -24,14 +58,14 @@
 	    {% if pkg.type in ['biodiversity_data'] %}
 		<li>
 		    <a
-			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='eml-xml') }}"
+			href="{{ h.url_for('metaexport.export', id=pkg.id, format='eml-xml') }}"
 			      target="_blank">EML/XML </a>
 		</li>
 	    {% endif %}
 	    {% if pkg.type in ['geographic_data'] %}
 		<li>
 		    <a
-			href="{{ h.url_for(controller='ckanext.metaexport.controller:MetaexportController', action='export', id=pkg.id, format='anzlic-xml') }}"
+			href="{{ h.url_for('metaexport.export', id=pkg.id, format='anzlic-xml') }}"
 			target="_blank">XML</a>
 		</li>
 	    {% endif %}

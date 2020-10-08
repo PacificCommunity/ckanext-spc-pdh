@@ -1,0 +1,45 @@
+{% extends 'package/read_base.html' %}
+
+{% block primary_content_inner %}
+
+    {% if pager %}
+        <br/>
+        <div class="report">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ _('Resource') }}</th>
+                        <th>{{ _('User') }}</th>
+                        <th>{{ _('Date') }}</th>
+                    </tr>
+                </thead>
+                {% for row in pager %}
+                    <tr>
+                        <td>
+                            <a href="{{ h.url_for('resource.read', id=pkg_dict.id, resource_id=row.resource_id) }}">
+                                {{ row.resource_name or _('Unnamed') }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ h.url_for('user.read', id=row.user) }}">
+                                {{ row.user }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ h.render_datetime(h.date_str_to_datetime(row.downloaded_at), with_hours=True) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        {{ pager.pager() }}
+    {% else %}
+        <p class="empty">
+            {{ _('There is no download records here yet.') }}
+        </p>
+    {% endif %}
+
+
+
+{% endblock %}

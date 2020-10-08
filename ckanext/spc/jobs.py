@@ -53,8 +53,7 @@ def broken_links_report(recepients=[]):
             code, reason = 520, 'Invalid URL'
 
         page = h.url_for(
-            controller='package',
-            action='resource_read',
+            'resource.read',
             id=res.package_id,
             resource_id=res.id,
             qualified=True

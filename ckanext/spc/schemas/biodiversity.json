@@ -33,6 +33,18 @@
       "help_text": "License definitions and additional information can be found at http://opendefinition.org/"
     },
     {
+      "field_name": "access",
+      "label": "Access",
+      "validators": "ignore_missing",
+      "preset": "select",
+      "choices": [
+        {
+          "value": "restricted",
+          "label": "Restricted"
+        }
+      ]
+    },
+    {
       "field_name": "owner_org",
       "label": "Publisher",
       "preset": "spc_dataset_organization"

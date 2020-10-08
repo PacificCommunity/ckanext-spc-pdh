@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import urllib
-import urlparse
+from urllib.parse import urlparse, urljoin, urlunparse, urlencode
 import logging
 import json
-import StringIO
+from io import StringIO
 import requests
 
 import ckan.model as model
@@ -18,7 +18,7 @@ from owslib.csw import CatalogueServiceWeb
 from owslib.etree import etree
 from owslib import util
 from owslib.namespaces import Namespaces
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +62,7 @@ class _Implementation(CatalogueServiceWeb, object):
         ]
 
         if self._exml.getroot().tag not in valid_xpaths:
-            raise RuntimeError, 'Document is XML, but not CSW-ish'
+            raise RuntimeError('Document is XML, but not CSW-ish')
 
         # check if it's an OGC Exception
         val = self._exml.find(util.nspath_eval('ows:Exception', namespaces))
@@ -123,13 +123,13 @@ class PacGeoHarvester(CSWHarvester):
         url = harvest_job.source.url
         self._set_source_config(harvest_job.source.config)
 
-        parts = urlparse.urlparse(url)
+        parts = urlparse(url)
 
         params = {'keywords__slug__in': self.keywords, 'limit': 10000}
 
-        url = urlparse.urlunparse((
+        url = urlunparse((
             parts.scheme, parts.netloc, '/api/layers', None,
-            urllib.urlencode(params, True), None
+            urlencode(params, True), None
         ))
 
         query = model.Session.query(
@@ -152,7 +152,7 @@ class PacGeoHarvester(CSWHarvester):
                     uuid = obj['uuid']
                     logger.info('Got identifier %s from the PacGeo', uuid)
                     guids_in_harvest.add(uuid)
-                except Exception, e:
+                except Exception as e:
                     self._save_gather_error(
                         'Error for the identifier from <%r>: %s' % (obj, e),
                         harvest_job

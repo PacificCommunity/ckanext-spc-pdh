@@ -1,8 +1,8 @@
 import json
 import logging
 import re
-import urllib2
-from urlparse import urljoin, urlparse
+from urllib.error import HTTPError
+from urllib.parse import urlparse, urljoin
 
 import lxml.etree as et
 import requests
@@ -69,7 +69,7 @@ class SpcGbifHarvester(HarvesterBase):
 
                 # TODO: remove
                 # break
-        except urllib2.HTTPError, e:
+        except (HTTPError) as e:
             logger.exception(
                 'Gather stage failed on %s (%s): %s, %s' %
                 (harvest_job.source.url, e.fp.read(), e.reason, e.hdrs)
@@ -79,7 +79,7 @@ class SpcGbifHarvester(HarvesterBase):
                 harvest_job
             )
             return None
-        except Exception, e:
+        except (Exception) as e:
             logger.exception(
                 'Gather stage failed on %s: %s' % (
                     harvest_job.source.url,
@@ -142,10 +142,10 @@ class SpcGbifHarvester(HarvesterBase):
         nsmap['oai'] = nsmap.pop(None)
         id = root.find('*//oai:identifier', namespaces=nsmap).text
         dataset = root.find('*//dataset')
-        gbif = root.findall('*//gbif')
-        return id, dataset, gbif
+        modified_date = root.find('.//header/datestamp', namespaces=root.nsmap).text
+        return id, dataset, modified_date
 
-    def _eml_to_dict(self, record, gbif):
+    def _eml_to_dict(self, record):
         data = {}
         data['type'] = 'biodiversity_data'
 
@@ -201,7 +201,6 @@ class SpcGbifHarvester(HarvesterBase):
         data['project'] = [
             _parse_project(e) for e in record.findall('project')
         ]
-        data['integrity'] = gbif[0].find('dateStamp').text
         return data
 
     def fetch_stage(self, harvest_object):
@@ -229,7 +228,7 @@ class SpcGbifHarvester(HarvesterBase):
                     (harvest_object.guid, 'eml')
                 )
 
-                id, record, gbif = self._fetch_record(
+                id, record, modified_date = self._fetch_record(
                     urljoin(
                         harvest_object.job.source.url, '/v1/oai-pmh/registry'
                     ), harvest_object.guid
@@ -242,8 +241,9 @@ class SpcGbifHarvester(HarvesterBase):
                 return False
 
             try:
-                content_dict = self._eml_to_dict(record, gbif)
+                content_dict = self._eml_to_dict(record)
                 content_dict['id'] = id
+                content_dict['integrity'] = modified_date
 
                 content_dict[
                     'resources'
@@ -383,7 +383,7 @@ def _dumb_parse(e, keys, with_empty=False):
                 t.strip() for t in e.xpath(selector + '/text()') +
                 e.xpath(selector + '/para/text()')
             ]
-            value = filter(None, value)
+            value = list(filter(None, value))
         else:
             value = _text(e.find(selector)) or '\n\n'.join(
                 e.xpath(selector + '//para/text()') or []

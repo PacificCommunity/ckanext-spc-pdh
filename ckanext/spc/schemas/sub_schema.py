@@ -1,4 +1,5 @@
 from ckantoolkit import get_validator
+from ckan.lib.navl.validators import unicode_safe
 
 from ckanext.spc.schemas.gmd import *
 
@@ -37,20 +38,20 @@ def get_default_individual_name_schema():
 
 def get_default_sampling_schema():
     return {
-        'study_extent': [get_validator('ignore_empty'), unicode],
-        'sampling_description': [get_validator('not_empty'), unicode],
+        'study_extent': [get_validator('ignore_empty'), unicode_safe],
+        'sampling_description': [get_validator('not_empty'), unicode_safe],
         '__extras': [get_validator('ignore')],
     }
 
 
 def get_default_methods_schema():
     return {
-        'method_step': [get_validator('ignore_empty'), unicode],
+        'method_step': [get_validator('ignore_empty'), unicode_safe],
         'sampling': [
             get_validator('ignore_empty'),
             get_validator('construct_sub_schema')('sampling')
         ],
-        'quality_control': [get_validator('ignore_empty'), unicode],
+        'quality_control': [get_validator('ignore_empty'), unicode_safe],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -87,7 +88,7 @@ def get_default_agent_schema():
                 'individual_name', 'position_name'
             ),
             get_validator('not_empty'),
-            unicode,
+            unicode_safe,
         ],
         'individual_name': [
             get_validator('construct_sub_schema')('individual_name'),
@@ -101,13 +102,13 @@ def get_default_agent_schema():
                 'individual_name', 'organization_name'
             ),
             get_validator('not_empty'),
-            unicode,
+            unicode_safe,
         ],
         'address': [
             get_validator('construct_sub_schema')('address'),
             get_validator('ignore_empty'),
         ],
-        'phone': [get_validator('ignore_empty'), unicode],
+        'phone': [get_validator('ignore_empty'), unicode_safe],
         'electronic_mail_address': [
             get_validator('ignore_missing'),
             get_validator('email_validator'),
@@ -171,7 +172,7 @@ def get_default_bounding_coordinates_schema():
 
 def get_default_geographic_coverage_schema():
     return {
-        'geographic_description': [get_validator('not_empty'), unicode],
+        'geographic_description': [get_validator('not_empty'), unicode_safe],
         'bounding_coordinates': [
             get_validator('not_empty'),
             get_validator('construct_sub_schema')('bounding_coordinates')
@@ -219,7 +220,7 @@ def get_default_temporal_coverage_schema():
 
 def get_default_taxonomic_coverage_schema():
     return {
-        'general_taxonomic_coverage': [get_validator('ignore_empty'), unicode],
+        'general_taxonomic_coverage': [get_validator('ignore_empty'), unicode_safe],
         'taxonomic_classification': get_default_taxonomic_class_schema(),
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
@@ -228,9 +229,9 @@ def get_default_taxonomic_coverage_schema():
 
 def get_default_taxonomic_class_schema():
     return {
-        'taxon_rank_name': [get_validator('ignore_empty'), unicode],
-        'taxon_rank_value': [get_validator('not_empty'), unicode],
-        'common_name': [get_validator('ignore_empty'), unicode],
+        'taxon_rank_name': [get_validator('ignore_empty'), unicode_safe],
+        'taxon_rank_value': [get_validator('not_empty'), unicode_safe],
+        'common_name': [get_validator('ignore_empty'), unicode_safe],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -239,16 +240,16 @@ def get_default_taxonomic_class_schema():
 
 def get_default_project_schema():
     return {
-        'title': [get_validator('not_empty'), unicode],
+        'title': [get_validator('not_empty'), unicode_safe],
         'personnel': get_default_agent_with_role_schema(),
-        'abstract': [get_validator('ignore_empty'), unicode],
-        'funding': [get_validator('ignore_empty'), unicode],
+        'abstract': [get_validator('ignore_empty'), unicode_safe],
+        'funding': [get_validator('ignore_empty'), unicode_safe],
         'study_area_description': [
             get_validator('ignore_empty'),
             get_validator('construct_sub_schema')('study_area_description')
         ],
-        'design_description': [get_validator('ignore_empty'), unicode],
-        'id': [get_validator('ignore_empty'), unicode],
+        'design_description': [get_validator('ignore_empty'), unicode_safe],
+        'id': [get_validator('ignore_empty'), unicode_safe],
         '__extras': [get_validator('ignore')],
         '__junk': [get_validator('ignore')],
     }
@@ -256,7 +257,7 @@ def get_default_project_schema():
 
 def get_default_study_area_description_schema():
     return {
-        'descriptor_value': [get_validator('not_empty'), unicode],
+        'descriptor_value': [get_validator('not_empty'), unicode_safe],
         'citable_classification_system': [get_validator('boolean_validator')],
         'name': [
             get_validator('ignore_empty'),
@@ -271,6 +272,6 @@ def get_default_agent_with_role_schema():
     schema = get_default_agent_schema()
     schema['role'] = [
         get_validator('not_empty'),
-        unicode,
+        unicode_safe,
     ]
     return schema

@@ -4,6 +4,6 @@
 
 
 {% block breadcrumb_content %}
-    <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
+    <li>{% link_for _('Datasets'), named_route='dataset.search' %}</li>
     <li class="active"><a href="">{{ _('Dataset Type') }}</a></li>
 {% endblock %}

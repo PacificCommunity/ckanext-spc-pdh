@@ -42,7 +42,7 @@ class DKANHarvester(CKANHarvester):
         log.debug('Getting all DKAN packages: %s', url)
         try:
             content = self._get_content(url)
-        except Exception, e:
+        except (Exception) as e:
             self._save_gather_error(
                 'Unable to get content for URL: %s - %s' % (url, e),
                 harvest_job
@@ -60,7 +60,7 @@ class DKANHarvester(CKANHarvester):
         # Get contents
         try:
             content = self._get_content(url)
-        except Exception, e:
+        except (Exception) as e:
             self._save_object_error(
                 'Unable to get content for package: %s - %r' % (url, e),
                 harvest_object
@@ -112,7 +112,7 @@ class DKANHarvester(CKANHarvester):
                 package['private'] = False
 
             return package
-        except Exception, e:
+        except (Exception) as e:
             cls._save_object_error(
                 'Unable to get convert DKAN to CKAN package: %s' % e,
                 harvest_object

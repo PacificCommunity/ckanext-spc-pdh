@@ -10,10 +10,42 @@
       </span>
     {% endif %}
 
-    {{ h.popular('views', res.tracking_summary.total, min=10) }}
+    {{ h.popular('views', res.tracking_summary.total, min=10) if res.tracking_summary }}
   </a>
+    {% if h.spc_is_restricted(pkg) and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
+        <p class="description">
+            <span class="restricted-access-info data-quality-tooltip">
+                <i class="fa fa-info-circle"></i>
+                <span class="tooltiptext tooltiptext-above data-quality-tooltip-inner">
+                    {{ _('Please click on the button "Request Access"  for full access.') }}
+                </span>
+            </span>
+            {{ _('This data needs additional permissions for full access') }}
+        </p>
+    {% endif %}
+
 {% endblock %}
 
+{% block resource_item_explore %}
+{% if not url_is_edit %}
+{% if h.spc_is_restricted(pkg) and not h.check_access('restrict_dataset_show', data_dict=pkg) %}
+<div class="dropdown btn-group restricted">
+    <span class="restricted-access-lock">
+        {% snippet 'snippets/svg/lock.svg' %}
+    </span>
+{% else %}
+<div class="dropdown btn-group">
+{% endif %}
+  <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="explore">
+        {% snippet 'snippets/svg/explore.svg' %}
+    </span>
+    {{ _('Explore') }}
+    <span class="tick">
+        {% snippet 'snippets/svg/tick.svg' %}
+    </span>
+  </a>
+  <ul class="dropdown-menu">
 
 {% block resource_item_explore_links %}
     <li>
@@ -42,10 +74,15 @@
     {% endif %}
     {% if can_edit %}
         <li>
-            <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}">
+            <a href="{{ h.url_for('resource.edit', id=pkg.name, resource_id=res.id) }}">
                 <i class="fa fa-pencil-square-o"></i>
                 {{ _('Edit') }}
                </a>
         </li>
     {% endif %}
+{% endblock %}
+
+</ul>
+</div>
+{% endif %}
 {% endblock %}
