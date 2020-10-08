@@ -3,6 +3,7 @@ import os
 import tempfile
 import requests
 import re
+import hashlib
 
 from smtplib import SMTPServerDisconnected
 from operator import attrgetter, itemgetter
@@ -391,12 +392,13 @@ def refresh_resource_size(id):
     entity = model.Resource.get(res['id'])
     if res['url_type'] == 'upload':
         size = _get_local_resource_size(res)
+        entity.hash = _get_local_resource_hash(res)
     else:
         size = _get_remote_resource_size(res)
     # Do not change file size to 0 - it may be only temporary unavailable
     if entity.size != size and size:
         entity.size = size
-        model.Session.commit()
+    model.Session.commit()
     return res
 
 
@@ -415,9 +417,27 @@ def _get_remote_resource_size(res):
         return 0
 
 
-def _get_local_resource_size(res):
+def _get_local_resource_path(res):
     uploader = get_resource_uploader(res)
-    path = uploader.get_path(res['id'])
+    return uploader.get_path(res['id'])
+
+
+def _get_local_resource_hash(res):
+    path = _get_local_resource_path(res)
+    if os.path.isfile(path):
+        blocksize = 65_536
+        with open(path, 'rb') as file:
+            buf = file.read(blocksize)
+            hash = hashlib.md5()
+            while len(buf):
+                hash.update(buf)
+                buf = file.read(blocksize)
+            return hash.hexdigest()
+    return ''
+
+
+def _get_local_resource_size(res):
+    path = _get_local_resource_path(res)
     if os.path.isfile(path):
         return os.stat(path).st_size
     else:
