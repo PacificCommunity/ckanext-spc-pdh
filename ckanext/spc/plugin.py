@@ -527,6 +527,19 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         return pkg_dict
 
+    # IPackageController
+    # IResourceController
+
+    def after_create(context, data_dict):
+        # call this only for resources and ignore package hooks
+        if 'package_id' in data_dict:
+            spc_utils.refresh_resource_size(data_dict['id'])
+
+    def after_update(self, context, data_dict):
+        # call this only for resources and ignore package hooks
+        if 'package_id' in data_dict:
+            spc_utils.refresh_resource_size(data_dict['id'])
+
     # IFacets
 
     def dataset_facets(self, facets_dict, package_type):

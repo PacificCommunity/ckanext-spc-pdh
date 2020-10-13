@@ -1,10 +1,12 @@
 import click
 import os
 from time import sleep
+
 import sqlalchemy
 import logging
 import csv
-
+from operator import attrgetter
+from progressbar import progressbar
 import ckan.model as model
 from ckanext.harvest import model as harvest_model
 import ckan.plugins.toolkit as tk
@@ -17,11 +19,10 @@ from ckan.common import config
 from ckanext.spc.jobs import broken_links_report
 import ckan.lib.jobs as jobs
 import ckan.lib.search as search
+import ckanext.spc.utils as utils
 
-_select = sqlalchemy.sql.select
 _func = sqlalchemy.func
 _or_ = sqlalchemy.or_
-_and_ = sqlalchemy.and_
 
 logger = logging.getLogger(__name__)
 
@@ -189,8 +190,8 @@ def broken_links_report():
 @spc.command('fix_harvester_duplications')
 @click.argument(u'drop_source', required=True)
 def fix_harvester_duplications(drop_source):
-    # ckan -c /etc/ckan/default/production.ini spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP' 
-    # ckan -c /etc/ckan/default/production.ini spc fix_harvester_duplications 'SPREP' 
+    # ckan -c /etc/ckan/default/production.ini spc fix_harvester_duplications 'SOURCE_TYPE_TO_DROP'
+    # ckan -c /etc/ckan/default/production.ini spc fix_harvester_duplications 'SPREP'
 
     # Prepare HarvestObject to have munged ids for search
     formatted_harvest_objects = model.Session.query(
@@ -220,7 +221,7 @@ def fix_harvester_duplications(drop_source):
         formatted_harvest_objects.c.id,
         harvest_model.HarvestSource.id
     ).subquery()
-        
+
     subquery_count = model.Session.query(
         subquery_packages.c.pkg_id.label('pkg_id'),
         _func.count(subquery_packages.c.pkg_id).label('hs_count'),
@@ -229,10 +230,10 @@ def fix_harvester_duplications(drop_source):
     ).group_by(subquery_packages.c.pkg_id).subquery()
 
     q = model.Session.query(
-        subquery_count.c.pkg_id, 
+        subquery_count.c.pkg_id,
         subquery_count.c.hs_ids,
         subquery_count.c.hs_types)\
-    .filter(subquery_count.c.hs_count > 1) 
+    .filter(subquery_count.c.hs_count > 1)
 
     res = q.all()
 
@@ -258,7 +259,7 @@ def fix_harvester_duplications(drop_source):
         click.secho('No duplications found')
         return
 
-    click.secho('{} duplications found'.format(len(res)))    
+    click.secho('{} duplications found'.format(len(res)))
     click.secho('Duplications found for source types: {}'.format(', '.join(harvest_sources_types)))
     click.secho('Harvest Sources IDs: {}'.format(', '.join(harvest_sources_ids)))
 
@@ -267,7 +268,7 @@ def fix_harvester_duplications(drop_source):
     .join(
         harvest_model.HarvestSource,
         harvest_model.HarvestSource.id == formatted_harvest_objects.c.harvest_source_id
-        
+
     ).filter(harvest_model.HarvestSource.type == source_type_to_drop)\
     .join(
         model.Package,
@@ -298,7 +299,7 @@ def fix_harvester_duplications(drop_source):
 @click.argument(u'new_coordinates', required=True)
 @click.argument(u'current_coordinates', required=True)
 def update_dataset_coordinates(new_coordinates, current_coordinates):
-    # EXAMPLE: ckan -c /etc/ckan/default/production.ini spc update_dataset_coordinates 'COORDINATES_NEW' 'FIND_WITH_CURRENT' 
+    # EXAMPLE: ckan -c /etc/ckan/default/production.ini spc update_dataset_coordinates 'COORDINATES_NEW' 'FIND_WITH_CURRENT'
     if new_coordinates and current_coordinates:
         new_coordinates = new_coordinates
         find_with_current = current_coordinates
@@ -357,7 +358,7 @@ def spc_groups_delete():
         for group in group_list:
             if group not in delete_excluded:
                 logic.get_action(u'group_delete')(context, {'id': group})
-        
+
     deleted_groups = model.Session.query(model.Group)\
         .filter(model.Group.state == 'deleted')\
         .all()
@@ -367,3 +368,23 @@ def spc_groups_delete():
             logic.get_action(u'group_purge')(context, {'id': gr.name})
 
     click.secho('Groups deletion finished.', fg='green')
+
+
+@spc.command()
+@click.argument('ids', nargs=-1)
+def refresh_resource_size(ids):
+    total = len(ids)
+    if not ids:
+        query = model.Session.query(model.Resource.id).filter(
+            model.Resource.state == 'active'
+        ).join(
+            model.Package,
+            model.Resource.package_id == model.Package.id
+        )
+        total = query.count()
+        ids = map(attrgetter('id'), query)
+    for id in progressbar(
+            ids, max_value=total,
+            redirect_stdout=True
+    ):
+        utils.refresh_resource_size(id)
