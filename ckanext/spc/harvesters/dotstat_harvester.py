@@ -210,7 +210,7 @@ class SpcDotStatHarvester(HarvesterBase):
             agency_id = self.config['agencyId']
             stats_guid = self._get_object_extra(harvest_object, 'stats_guid')
 
-            structure = soup.find('Dataflow', attrs={'id': stats_guid})
+            structure = soup.find('Dataflow')
             pkg_dict['title'] = structure.find('Name', {"xml:lang" : "en"}).text
             pkg_dict['publisher_name'] = structure['agencyID']
             pkg_dict['version'] = structure['version']
@@ -278,6 +278,40 @@ class SpcDotStatHarvester(HarvesterBase):
             except Exception as e:
                 log.error("An error occured: {}".format(e))
                 pkg_dict['notes'] = ''
+
+            # Add tags from CategoryScheme and ConceptScheme
+            # List of uninteresting tags
+            generic_schemes = ['Time', 'Frequency', 'Observation value', 'Observation Status', 'Confidentiality status', 'Unit of measure', 'Unit multiplier', 'Base period', 'Comment',
+                'Decimals', 'Data source', 'Pacific Island Countries and territories', 'Indicator', 'Transformation', 'Reporting type', 'Multi-domain']
+            tag_strings = []
+            
+            # For finding Category Schemes for tags
+            schemes = soup.find('CategorySchemes')
+            if schemes is not None:
+                catschemes = schemes.find_all('CategoryScheme')
+                for catscheme in catschemes:
+                    cats = catscheme.find_all('Category')
+                    for cat in cats:
+                        found = cat.find('Name', {'xml:lang': 'en'}).text
+                        if found not in tag_strings:
+                            tag_strings.append(found)
+           
+            # For finding Concept Schemes for tags
+            concepts = soup.find('Concepts')
+            if concepts is not None:
+                concschemes = concepts.find_all('ConceptScheme')
+                for concscheme in concschemes:
+                    concepts = concscheme.find_all('Concept')
+                    for concept in concepts:
+                        found = concept.find('Name', {'xml:lang': 'en'}).text
+                        if found not in tag_strings:
+                            tag_strings.append(found)
+
+            if len(tag_strings) > 0:
+                tags = [x.lower() for x in tag_strings if x not in generic_schemes]
+                pkg_dict['tag_string'] = ', '.join([munge_tag(tag) for tag in tags])
+
+            
             '''
             May need modifying when DF_SDG is broken into several DFs
             This gets the list of indicators for SDG-related dataflows
