@@ -244,14 +244,14 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'text/csv',
+                    'mimetype': 'application/vnd.sdmx.data+csv',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 },
                 {
                     'url': metaurl,
                     'format': 'PDF',
-                    'mimetype': 'PDF',
+                    'mimetype': 'application/pdf',
                     'description': 'Detailed metadata dictionary for {}'.format(pkg_dict['title']),
                     'name': '{} Metadata PDF'.format(pkg_dict['title'])
                 }]
@@ -265,7 +265,7 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'text/csv',
+                    'mimetype': 'application/vnd.sdmx.data+csv',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 }]
@@ -283,7 +283,7 @@ class SpcDotStatHarvester(HarvesterBase):
             # Add tags from CategoryScheme and ConceptScheme
             # List of uninteresting tags
             generic_schemes = ['Time', 'Frequency', 'Observation value', 'Observation Status', 'Confidentiality status', 'Unit of measure', 'Unit multiplier', 'Base period', 'Comment',
-                'Decimals', 'Data source', 'Pacific Island Countries and territories', 'Indicator', 'Transformation', 'Reporting type', 'Multi-domain', 'Composite breakdown']
+                'Decimals', 'Data source', 'Pacific Island Countries and territories', 'Indicator', 'Transformation', 'Reporting type', 'Composite breakdown']
             tag_strings = []
             
             # For finding Category Schemes for tags
