@@ -194,7 +194,7 @@ class SpcDotStatHarvester(HarvesterBase):
             pkg_dict['thematic_area_string'] = ["Official Statistics"]
 
             # Open license for all dotStat resources
-            pkg_dict['license_id'] = "Other (Open)"
+            pkg_dict['license_id'] = "other-open"
 
             # Get owner_org if there is one
             source_dataset = get_action('package_show')(
@@ -244,7 +244,7 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'CSV',
+                    'mimetype': 'text/csv',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 },
@@ -265,7 +265,7 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'CSV',
+                    'mimetype': 'text/csv',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 }]
@@ -273,16 +273,17 @@ class SpcDotStatHarvester(HarvesterBase):
 
             # Get notes/description if it exists
             try:
-                pkg_dict['notes'] = structure.find(
-                    'Description', {"xml:lang": "en"}).text
+                desc = structure.find('Description', {"xml:lang": "en"}).text
+                desc += '\nFind more Pacific data on PDH.stat : https://stats.pacificdata.org/'
+                pkg_dict['notes'] = desc
             except Exception as e:
                 log.error("An error occured: {}".format(e))
-                pkg_dict['notes'] = ''
+                pkg_dict['notes'] = 'Find more Pacific data on PDH.stat : https://stats.pacificdata.org/'
 
             # Add tags from CategoryScheme and ConceptScheme
             # List of uninteresting tags
             generic_schemes = ['Time', 'Frequency', 'Observation value', 'Observation Status', 'Confidentiality status', 'Unit of measure', 'Unit multiplier', 'Base period', 'Comment',
-                'Decimals', 'Data source', 'Pacific Island Countries and territories', 'Indicator', 'Transformation', 'Reporting type', 'Multi-domain']
+                'Decimals', 'Data source', 'Pacific Island Countries and territories', 'Indicator', 'Transformation', 'Reporting type', 'Multi-domain', 'Composite breakdown']
             tag_strings = []
             
             # For finding Category Schemes for tags
@@ -307,8 +308,28 @@ class SpcDotStatHarvester(HarvesterBase):
                         if found not in tag_strings:
                             tag_strings.append(found)
 
+            # Tag cleaning
+            psp_mapping = {
+                'Industry and Services': ['pacific-skills', 'industry', 'training'],
+                'Education level': ['pacific-skills', 'education', 'training'],
+                'Occupation': ['pacific-skills', 'occupation'],
+                'Disability': ['pacific-skills', 'disability'],
+                'Economic sector': ['pacific-skills', 'industry', 'training'],
+                'Labour force status': ['pacific-skills', 'employment'],
+                'Employment status': ['pacific-skills', 'employment'],
+                'Labour and employment status': ['pacific-skills', 'employment']
+            }
+
             if len(tag_strings) > 0:
+                # Bring in PSP tags
+                for tag in tag_strings:
+                    if tag in list(psp_mapping.keys()):
+                        tag_strings.extend(psp_mapping[tag])
+                # Remove duplicates
+                tag_strings = list(set(tag_strings))
+                # Remove tags found in generic_schemes list
                 tags = [x.lower() for x in tag_strings if x not in generic_schemes]
+                # Make a string of tags for CKAN
                 pkg_dict['tag_string'] = ', '.join([munge_tag(tag) for tag in tags])
 
             
