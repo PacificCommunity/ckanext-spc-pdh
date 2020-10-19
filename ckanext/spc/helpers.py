@@ -244,5 +244,5 @@ def is_restricted(package):
 
 
 def spc_is_digital_library_resource(res):
-    lib_host = toolkit.config.get('spc.digital-library.host', 'library.gem.spc.int')
+    lib_host = toolkit.config.get('spc.digital-library.host', 'spc.int')
     return lib_host in res.get('url', '')
