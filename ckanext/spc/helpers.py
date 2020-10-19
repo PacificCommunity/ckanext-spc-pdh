@@ -38,6 +38,7 @@ def get_helpers():
         spc_get_max_image_size=get_max_image_size,
         spc_get_package_name_by_id=get_package_name_by_id,
         spc_is_restricted=is_restricted,
+        spc_is_digital_library_resource=spc_is_digital_library_resource,
     )
 
 
@@ -240,3 +241,8 @@ def is_restricted(package):
                 break
 
     return True if access == 'restricted' else False
+
+
+def spc_is_digital_library_resource(res):
+    lib_host = toolkit.config.get('spc.digital-library.host', 'library.gem.spc.int')
+    return lib_host in res.get('url', '')

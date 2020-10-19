@@ -313,7 +313,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
-    plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
     plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
@@ -337,19 +336,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def get_ingesters(self):
         return [('mendeley_bib', MendeleyBib())]
-
-    # IRouter
-
-    def before_map(self, map):
-
-        # CKAN login form can be accessed in the debug mode
-        if not config.get('debug', False):
-            map.redirect('/user/login', spc_helpers.get_drupal_user_url('login'))
-
-        map.redirect('/user/register', spc_helpers.get_drupal_user_url('register'))
-        map.redirect('/user/reset', '/')
-
-        return map
 
     # IConfigurable
 

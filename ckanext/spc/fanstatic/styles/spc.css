@@ -3445,6 +3445,10 @@ table.table tr th.dataset-details {
 .dropdown.restricted .dropdown-toggle .tick svg path {
   fill: #8C8C8C;
 }
+.dropdown-menu {
+  min-width: initial;
+  min-width: auto;
+}
 .dataset-read {
   display: flex;
   margin-bottom: 60px;
