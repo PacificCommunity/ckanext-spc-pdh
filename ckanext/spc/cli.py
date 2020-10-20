@@ -388,3 +388,50 @@ def refresh_resource_size(ids):
             redirect_stdout=True
     ):
         utils.refresh_resource_size(id)
+
+
+@spc.command()
+@click.option('--id', multiple=True)
+@click.option('--url')
+def push_to_datastore(id, url):
+    query = model.Session.query(model.Resource).filter(
+        model.Resource.state=='active'
+    )
+    if id:
+        query = query.filter(model.Resource.id.in_(id))
+    if url:
+        query = query.filter(model.Resource.url.contains(url))
+
+    user = tk.get_action('get_site_user')({'ignore_auth': True})
+    for res in query:
+        tk.get_action('xloader_submit')(
+            {'ignore_auth': True, 'user': user['name']},
+            {'resource_id': res.id}
+        )
+
+@spc.command()
+@click.option('--id', multiple=True)
+@click.option('--url')
+def create_default_views(id, url):
+    query = model.Session.query(model.Resource.package_id).filter(
+        model.Resource.state=='active'
+    )
+    if id:
+        query = query.filter(model.Resource.id.in_(id))
+    if url:
+        query = query.filter(model.Resource.url.contains(url))
+
+    query = query.outerjoin(model.ResourceView).filter(
+        model.ResourceView.id.is_(None)
+    ).distinct()
+
+
+    for res in query:
+        pkg = tk.get_action('package_show')(
+            {'ignore_auth': True},
+            {'id': res.package_id}
+        )
+        tk.get_action('package_create_default_resource_views')(
+            {'ignore_auth': True},
+            {'package': pkg}
+        )
