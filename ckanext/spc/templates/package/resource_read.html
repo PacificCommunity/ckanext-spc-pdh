@@ -10,6 +10,9 @@
 
 {% set res = resource %}
 
+{#% set download_url = h.url_for('datastore.dump', resource_id=res.id, bom=True, format='csv', qualified=True)  if h.spc_is_digital_library_resource(res) and res.datastore_active else res.url %#}
+{% set download_url = res.url %}
+
 {% block head_extras -%}
   {{ super() }}
   {% set description = h.markdown_extract(h.get_translated(res, 'description'), extract_length=200) if res.description else h.markdown_extract(h.get_translated(package, 'notes'), extract_length=200) %}
