@@ -72,7 +72,7 @@
                     <i class="fa fa-arrow-circle-o-down"></i>
                     {{ _('Download') }}
                     {% set res_size = h.spc_get_resource_size(res) %}
-                    {% if res_size %} {{ res_size }} {% endif %}
+                    {% if res_size != '0 B' %} {{ res_size }} {% endif %}
                 {% else %}
                     <i class="fa fa-external-link"></i>
                     {{ _('Go to resource') }}
