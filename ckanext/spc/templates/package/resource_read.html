@@ -50,10 +50,12 @@
                                     <i class="fa fa-eye"></i> {{ _('View') }}
                                 {% elif  res.resource_type == 'api' %}
                                     <i class="fa fa-key"></i> {{ _('API Endpoint') }}
-                                {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
-                                    <i class="fa fa-external-link"></i> {{ _('Go to resource') }}
+                                {% elif (not res.has_views or not res.can_be_previewed)
+                                        and not res.url_type == 'upload'
+                                        and not res.size %}
+                                      <i class="fa fa-external-link"></i> {{ _('Go to resource') }}
                                 {% else %}
-                                    <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }}
+                                    <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }} {{ h.spc_get_resource_size(res) }}
                                 {% endif %}
                             </a>
                             {% block download_resource_button %}
@@ -120,6 +122,14 @@
               <p>{% trans dataset=package.title, url=h.url_for(package.type ~ '.read', id=package.id if is_activity_archive else package.name) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
             {% endif %}
           </div>
+          {% if 'resource_proxy' in g.plugins
+             and h.spc_is_preview_maxsize_exceeded(res.size) %}
+          <div class="preview-maxsize-info">
+            {% snippet 'snippets/svg/alert.svg' %}
+            {{ _('Maximum file size limit for the preview is') }}
+            {{ h.spc_convert_bytes(h.spc_get_proxy_res_max_size()) }}
+          </div>
+          {% endif %}
         {% endblock %}
       {% if not is_activity_archive %}
       {% block data_preview %}
