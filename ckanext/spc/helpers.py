@@ -270,24 +270,25 @@ def get_package_size(pkg):
 
 
 def convert_bytes(B):
-    if (B):
-        B = float(B)
-        KB = float(1024)
-        MB = float(KB ** 2)  # 1,048,576
-        GB = float(KB ** 3)  # 1,073,741,824
-        TB = float(KB ** 4)  # 1,099,511,627,776
+    if not B:
+        return '0 B'
 
-        if B < KB:
-            return '{0} {1}'.format(B, 'B')
-        elif KB <= B < MB:
-            return '{0:.2f} KB'.format(B/KB)
-        elif MB <= B < GB:
-            return '{0:.2f} MB'.format(B/MB)
-        elif GB <= B < TB:
-            return '{0:.2f} GB'.format(B/GB)
-        elif TB <= B:
-            return '{0:.2f} TB'.format(B/TB)
-    return
+    B = float(B)
+    KB = float(1024)
+    MB = float(KB ** 2)  # 1,048,576
+    GB = float(KB ** 3)  # 1,073,741,824
+    TB = float(KB ** 4)  # 1,099,511,627,776
+
+    if B < KB:
+        return '{0} {1}'.format(B, 'B')
+    elif KB <= B < MB:
+        return '{0:.2f} KB'.format(B/KB)
+    elif MB <= B < GB:
+        return '{0:.2f} MB'.format(B/MB)
+    elif GB <= B < TB:
+        return '{0:.2f} GB'.format(B/GB)
+    elif TB <= B:
+        return '{0:.2f} TB'.format(B/TB)
 
 
 def is_preview_maxsize_exceeded(res_size):
