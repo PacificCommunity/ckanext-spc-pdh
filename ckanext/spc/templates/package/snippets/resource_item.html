@@ -70,7 +70,9 @@
             <a href="{{ res.url }}" class="resource-url-analytics-downloadable" target="_blank"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
                 {% if res.has_views or res.url_type == 'upload' or res.size %}
                     <i class="fa fa-arrow-circle-o-down"></i>
-                    {{ _('Download') }} {{ h.spc_get_resource_size(res) }}
+                    {{ _('Download') }}
+                    {% set res_size = h.spc_get_resource_size(res) %}
+                    {% if res_size %} {{ res_size }} {% endif %}
                 {% else %}
                     <i class="fa fa-external-link"></i>
                     {{ _('Go to resource') }}

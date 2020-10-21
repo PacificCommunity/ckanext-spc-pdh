@@ -83,7 +83,9 @@
                 data-module="spc-bulk-download"
                 data-module-query-string="{{ h.url_for('spc_package.list_ids') }}?q=id:{{ pkg.id }}"
         >
-            {{ _('Download all') }} ({{ h.spc_get_package_size(pkg) }})
+            {{ _('Download all') }}
+            {% set pkg_size = h.spc_get_package_size(pkg) %}
+            {% if pkg_size %} ({{ pkg_size }}) {% endif %}
             <i class="spc-icon spc-icon-zip-folder"></i>
 
         </button>

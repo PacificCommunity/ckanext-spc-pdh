@@ -7,7 +7,6 @@ import funcy as F
 from urllib.parse import urlparse, urlunparse
 from operator import eq, itemgetter
 from beaker.cache import CacheManager
-from routes import url_for as _routes_default_url_for
 
 import ckan.lib.helpers as h
 import ckan.plugins.toolkit as toolkit
@@ -253,31 +252,31 @@ def spc_is_digital_library_resource(res):
     return lib_host in res.get('url', '')
 
 
-def get_resource_size(res):
-    res_bytes = res.get('size', 0)
-    if res_bytes:
-        return convert_bytes(res_bytes)
+def get_resource_size(res: dict) -> str:
+    res_bytes: int = res.get('size', 0)
+    return convert_bytes(res_bytes)
 
 
-def get_package_size(pkg):
-    pkg_size = 0
+def get_package_size(pkg: dict) -> str:
+    pkg_size: int = 0
+
     for res in pkg.get('resources', None):
-        res_size = res.get('size', 0)
-        if (res_size):
+        res_size: int = res.get('size', 0)
+        if res_size:
             pkg_size += res_size
-    if pkg_size:
-        return convert_bytes(pkg_size)
+
+    return convert_bytes(pkg_size)
 
 
-def convert_bytes(B):
+def convert_bytes(B: int) -> str:
     if not B:
         return '0 B'
 
-    B = float(B)
-    KB = float(1024)
-    MB = float(KB ** 2)  # 1,048,576
-    GB = float(KB ** 3)  # 1,073,741,824
-    TB = float(KB ** 4)  # 1,099,511,627,776
+    B: float = float(B)
+    KB: float = float(1024)
+    MB: float = float(KB ** 2)  # 1,048,576
+    GB: float = float(KB ** 3)  # 1,073,741,824
+    TB: float = float(KB ** 4)  # 1,099,511,627,776
 
     if B < KB:
         return '{0} {1}'.format(B, 'B')
@@ -291,9 +290,9 @@ def convert_bytes(B):
         return '{0:.2f} TB'.format(B/TB)
 
 
-def is_preview_maxsize_exceeded(res_size):
+def is_preview_maxsize_exceeded(res_size: int) -> bool:
     return res_size > get_proxy_res_max_size()
 
 
-def get_proxy_res_max_size():
+def get_proxy_res_max_size() -> int:
     return int(config.get('ckan.resource_proxy.max_file_size', 1024 ** 2))

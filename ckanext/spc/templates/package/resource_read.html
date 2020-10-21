@@ -55,7 +55,9 @@
                                         and not res.size %}
                                       <i class="fa fa-external-link"></i> {{ _('Go to resource') }}
                                 {% else %}
-                                    <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }} {{ h.spc_get_resource_size(res) }}
+                                    <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }}
+                                    {% set res_size = h.spc_get_resource_size(res) %}
+                                    {% if res_size %} {{ res_size }} {% endif %}
                                 {% endif %}
                             </a>
                             {% block download_resource_button %}
