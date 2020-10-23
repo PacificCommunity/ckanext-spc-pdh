@@ -291,7 +291,8 @@ def convert_bytes(B: int) -> str:
 
 
 def is_preview_maxsize_exceeded(res_size: int) -> bool:
-    return res_size > get_proxy_res_max_size()
+    if isinstance(res_size, int):
+        return res_size > get_proxy_res_max_size()
 
 
 def get_proxy_res_max_size() -> int:
