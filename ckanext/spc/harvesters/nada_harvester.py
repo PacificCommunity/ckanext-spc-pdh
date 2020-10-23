@@ -89,19 +89,29 @@ class SpcNadaHarvester(NadaHarvester):
 
             # Find country DDI abbreviation
             # Use the mapping of codes to return the right value
-            if not hasattr(pkg_dict, 'member_countries'):
-                pkg_dict['member_countries'] = []
-            elif pkg_dict['member_countries'] not in list(country_mapping.values()):
-                pkg_dict['member_countries'] = country_mapping[(pkg_dict['member_countries'])]
+            if ('member_countries' in pkg_dict) and (pkg_dict['member_countries'] != ''):
+                if pkg_dict['member_countries'] in list(country_mapping.keys()):
+                    code = country_mapping[(pkg_dict['member_countries'])]
+                    pkg_dict['member_countries'] = code
+                elif pkg_dict['member_countries'] in list(country_mapping.values()):
+                    pass
+                else:
+                    pkg_dict['member_countries'] = ''
+
             # Adjust title to include country
             pkg_dict['title'] = pkg_dict['country'] + ' ' + pkg_dict['title']
-               
+
             # set license from harvester config or use CKAN instance default
             if 'license' in self.config:
                 pkg_dict['license_id'] = self.config['license']
             else:
                 pkg_dict['license_id'] = config.get('ckanext.ddi.default_license','')
-          
+
+            # Ensure version field isn't too long (max 100 char)
+            if (len(pkg_dict['version']) >= 100):
+                log.debug('Version too long, removing')
+                pkg_dict['version'] = ''
+
             # Get owner_org from harvester
             source_dataset = get_action('package_show')({
                 'ignore_auth': True
@@ -110,6 +120,10 @@ class SpcNadaHarvester(NadaHarvester):
             })
             owner_org = source_dataset.get('owner_org')
             pkg_dict['owner_org'] = owner_org
+
+            # Specify publisher
+            if 'author' in pkg_dict:
+                pkg_dict['publisher_name'] = pkg_dict['author']
                 
             # Add url as source
             pkg_dict['source'] = pkg_dict['url']
