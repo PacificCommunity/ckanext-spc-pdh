@@ -3,7 +3,7 @@ import logging
 import requests
 import iso639
 import funcy as F
-
+from typing import List
 from urllib.parse import urlparse, urlunparse
 from operator import eq, itemgetter
 from beaker.cache import CacheManager
@@ -258,14 +258,8 @@ def get_resource_size(res: dict) -> str:
 
 
 def get_package_size(pkg: dict) -> str:
-    pkg_size: int = 0
-
-    for res in pkg.get('resources', None):
-        res_size: int = res.get('size', 0)
-        if res_size:
-            pkg_size += res_size
-
-    return convert_bytes(pkg_size)
+    sizes: List[int] = [r.get('size') for r in pkg.get('resources')]
+    return convert_bytes(sum(sizes)) if all(sizes) else convert_bytes(0)
 
 
 def convert_bytes(B: int) -> str:
