@@ -4446,6 +4446,13 @@ table.table tr th.dataset-details {
   width: 16px;
   height: 12px;
 }
+.preview-maxsize-info {
+  display: flex;
+  margin-bottom: 20px;
+}
+.preview-maxsize-info svg {
+  margin-right: 5px;
+}
 #mobile-menu {
   display: none;
 }

@@ -1,19 +1,18 @@
 import json
-from urllib.parse import urlparse, urlunparse
 import logging
 import requests
 import iso639
-
+import funcy as F
+from typing import List
+from urllib.parse import urlparse, urlunparse
 from operator import eq, itemgetter
 from beaker.cache import CacheManager
-import funcy as F
-from routes import url_for as _routes_default_url_for
 
+import ckan.lib.helpers as h
+import ckan.plugins.toolkit as toolkit
 from ckan.common import config
 
 from ckanext.spc.utils import eez
-import ckan.lib.helpers as h
-import ckan.plugins.toolkit as toolkit
 
 logger = logging.getLogger(__name__)
 cache = CacheManager()
@@ -39,6 +38,11 @@ def get_helpers():
         spc_get_package_name_by_id=get_package_name_by_id,
         spc_is_restricted=is_restricted,
         spc_is_digital_library_resource=spc_is_digital_library_resource,
+        spc_get_package_size=get_package_size,
+        spc_get_resource_size=get_resource_size,
+        spc_is_preview_maxsize_exceeded=is_preview_maxsize_exceeded,
+        spc_get_proxy_res_max_size=get_proxy_res_max_size,
+        spc_convert_bytes=convert_bytes,
     )
 
 
@@ -246,3 +250,44 @@ def is_restricted(package):
 def spc_is_digital_library_resource(res):
     lib_host = toolkit.config.get('spc.digital-library.host', 'spc.int')
     return lib_host in res.get('url', '')
+
+
+def get_resource_size(res: dict) -> str:
+    res_bytes: int = res.get('size', 0)
+    return convert_bytes(res_bytes)
+
+
+def get_package_size(pkg: dict) -> str:
+    sizes: List[int] = [r.get('size') for r in pkg.get('resources')]
+    return convert_bytes(sum(sizes)) if all(sizes) else convert_bytes(0)
+
+
+def convert_bytes(B: int) -> str:
+    if not B:
+        return '0 B'
+
+    B: float = float(B)
+    KB: float = float(1024)
+    MB: float = float(KB ** 2)  # 1,048,576
+    GB: float = float(KB ** 3)  # 1,073,741,824
+    TB: float = float(KB ** 4)  # 1,099,511,627,776
+
+    if B < KB:
+        return '{0} {1}'.format(B, 'B')
+    elif KB <= B < MB:
+        return '{0:.2f} KB'.format(B/KB)
+    elif MB <= B < GB:
+        return '{0:.2f} MB'.format(B/MB)
+    elif GB <= B < TB:
+        return '{0:.2f} GB'.format(B/GB)
+    elif TB <= B:
+        return '{0:.2f} TB'.format(B/TB)
+
+
+def is_preview_maxsize_exceeded(res_size: int) -> bool:
+    if isinstance(res_size, int):
+        return res_size > get_proxy_res_max_size()
+
+
+def get_proxy_res_max_size() -> int:
+    return int(config.get('ckan.resource_proxy.max_file_size', 1024 ** 2))
