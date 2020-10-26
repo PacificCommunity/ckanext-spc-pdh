@@ -244,7 +244,7 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'application/vnd.sdmx.data+csv',
+                    'mimetype': 'text/csv',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 },
@@ -265,7 +265,7 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'application/vnd.sdmx.data+csv',
+                    'mimetype': 'text/csv',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 }]
