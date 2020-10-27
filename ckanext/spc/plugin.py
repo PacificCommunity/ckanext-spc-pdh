@@ -500,7 +500,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             pkg_dict['topic'] = topic_str
 
         pkg_dict.update(
-            extras_five_star_rating=spc_utils.count_stars(pkg_dict))
+            extras_five_star_rating=spc_utils.count_stars(
+                json.loads(pkg_dict['validated_data_dict'])
+                if 'validated_data_dict' in pkg_dict
+                else pkg_dict
+            ))
         if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
             pkg_dict['member_countries'] = spc_helpers.countries_list(
                 pkg_dict.get('member_countries', '[]'))
