@@ -7,6 +7,10 @@ from flask import Blueprint, send_file
 
 import ckan.lib.jobs as jobs
 import ckan.model as model
+from ckan.common import _, g, request
+from ckan.plugins import toolkit
+import ckan.views.api as api
+
 import ckan.lib.helpers as h
 import ckan.lib.plugins
 import ckan.lib.base as base
@@ -20,6 +24,7 @@ import ckanext.scheming.helpers as scheming_helpers
 from ckanext.spc.jobs import broken_links_report
 from ckanext.spc.model.search_query import SearchQuery
 from ckanext.spc.views.access_request import spc_access_request
+from ckanext.spc.views.package import spc_package
 
 log = logging.getLogger(__name__)
 render = base.render
@@ -144,5 +149,5 @@ search_queries.add_url_rule(
     "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
 )
 
-blueprints = [spc_user, spc_admin,
+blueprints = [spc_user, spc_admin, spc_package,
               search_queries, spc_access_request]

@@ -99,3 +99,33 @@
         margin-right: -20px;
     }
 }
+
+.checkbox-label {
+    position: relative;
+    &:before {
+        content: ' ';
+        border: 1px solid @dark-blue;
+        border-radius: 2px;
+        width: 12px;
+        height: $width;
+        box-sizing: border-box;
+        display: inline-block;
+        margin-bottom: -1px;
+        margin-right: 6px;
+    }
+    &:after {
+        content: '';
+    }
+
+    input:checked + & {
+        &:after {
+            content: url("../../base/images/dark-check.svg");
+            left: 2px;
+            top: -2px;
+            position: absolute;
+        }
+    }
+}
+div.fpx-toast {
+    transition: none;
+}

@@ -58,7 +58,7 @@ def _get_stars_from_solr(id):
 def check_link(url):
     try:
         if not h.url_is_local(url):
-            requests.head(url, timeout=2).raise_for_status()
+            requests.get(url, timeout=2, stream=True).raise_for_status()
     except Exception:
         return False
     return True

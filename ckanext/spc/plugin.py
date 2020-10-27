@@ -1,7 +1,6 @@
 import logging
 import os
 import json
-import textract
 import uuid
 import hashlib
 import re
@@ -330,10 +329,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return ResourceUpload(data_dict)
 
     # IBlueprint
-    def get_blueprint(self):
-        return blueprints
 
-    # IBlueprint
     def get_blueprint(self):
         return blueprints
 
@@ -454,6 +450,9 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             params.get('extras', {}).get('ext_popular_first', False))
 
         for item in results['results']:
+            if len(item) == 1:
+                # it's shortened search, probably initiated by bulk download
+                continue
             item['tracking_summary'] = (
                 model.TrackingSummary.get_for_package(item['id']))
 
@@ -501,7 +500,11 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             pkg_dict['topic'] = topic_str
 
         pkg_dict.update(
-            extras_five_star_rating=spc_utils.count_stars(pkg_dict))
+            extras_five_star_rating=spc_utils.count_stars(
+                json.loads(pkg_dict['validated_data_dict'])
+                if 'validated_data_dict' in pkg_dict
+                else pkg_dict
+            ))
         if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
             pkg_dict['member_countries'] = spc_helpers.countries_list(
                 pkg_dict.get('member_countries', '[]'))
