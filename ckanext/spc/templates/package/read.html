@@ -72,13 +72,15 @@
 
 	</ul>
     </div>
-    <div class="pull-right bulk-resource-download-controll hidden-xs hidden-sm">
+
+    <!-- <div class="pull-right bulk-resource-download-controll hidden-xs hidden-sm"> -->
         {#
         <button class="btn btn-bulk-download " data-module="spc-resource-download-picker" >
             {{ _('Download choosen data') }}
             <span class="picked-counter" data-count="0"></span>
         </button>
         #}
+        {#
         <button class="btn btn-bulk-download btn-bulk-download-dark"
                 data-module="spc-bulk-download"
                 data-module-query-string="{{ h.url_for('spc_package.list_ids') }}?q=id:{{ pkg.id }}"
@@ -87,7 +89,8 @@
             <i class="spc-icon spc-icon-zip-folder"></i>
 
         </button>
-    </div>
+        #}
+        <!-- </div> -->
 
 
 {% endblock %}
