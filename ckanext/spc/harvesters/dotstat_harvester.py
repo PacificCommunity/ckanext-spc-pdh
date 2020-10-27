@@ -244,14 +244,14 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'application/vnd.sdmx.data+csv',
+                    'mimetype': 'CSV',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 },
                 {
                     'url': metaurl,
                     'format': 'PDF',
-                    'mimetype': 'application/pdf',
+                    'mimetype': 'PDF',
                     'description': 'Detailed metadata dictionary for {}'.format(pkg_dict['title']),
                     'name': '{} Metadata PDF'.format(pkg_dict['title'])
                 }]
@@ -265,7 +265,7 @@ class SpcDotStatHarvester(HarvesterBase):
                         structure['version']
                     ),
                     'format': 'CSV',
-                    'mimetype': 'application/vnd.sdmx.data+csv',
+                    'mimetype': 'CSV',
                     'description': 'All data for {}'.format(pkg_dict['title']),
                     'name': '{} Data CSV'.format(pkg_dict['title'])
                 }]
