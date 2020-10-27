@@ -1,4 +1,5 @@
 from ckantoolkit import get_validator
+from ckan.lib.navl.validators import unicode_safe
 
 ne = get_validator('not_empty')
 im = get_validator('ignore_empty')
