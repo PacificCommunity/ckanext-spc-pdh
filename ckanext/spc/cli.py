@@ -403,10 +403,17 @@ def push_to_datastore(id, url):
 
     user = tk.get_action('get_site_user')({'ignore_auth': True})
     for res in query:
-        tk.get_action('xloader_submit')(
-            {'ignore_auth': True, 'user': user['name']},
-            {'resource_id': res.id}
-        )
+        try:
+            tk.get_action('xloader_submit')(
+                {'ignore_auth': True, 'user': user['name']},
+                {'resource_id': res.id}
+            )
+        except KeyError:
+            tk.get_action('datapusher_submit')(
+                {'ignore_auth': True, 'user': user['name']},
+                {'resource_id': res.id, 'force': True}
+            )
+
 
 @spc.command()
 @click.option('--id', multiple=True)
