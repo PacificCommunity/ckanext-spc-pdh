@@ -95,11 +95,7 @@
           {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
           {% block resource_read_url %}
             {% if res.url and h.is_url(res.url) %}
-                {% if res.datastore_active %}
-                    <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ h.url_for('datastore.dump', resource_id=res.id, bom=True, format='csv', qualified=True) }}" title="{{ h.url_for('datastore.dump', resource_id=res.id, bom=True) }}">{{ h.url_for('datastore.dump', resource_id=res.id, bom=True, format='csv', qualified=True) }}</a></p>
-                {% else %}
-                    <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
-                {% endif %}
+                <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
             {% elif res.url %}
                 <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
             {% endif %}
