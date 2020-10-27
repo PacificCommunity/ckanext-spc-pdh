@@ -389,10 +389,11 @@ def refresh_resource_size(ids):
         utils.refresh_resource_size(id)
 
 
-@spc.command()
+@spc.command('push-to-datastore')
+@click.option('--timeout', '-t', type=int, default=5)
 @click.option('--id', multiple=True)
 @click.option('--url')
-def push_to_datastore(id, url):
+def push_to_datastore(id, url, timeout):
     query = model.Session.query(model.Resource).filter(
         model.Resource.state=='active'
     )
@@ -402,7 +403,11 @@ def push_to_datastore(id, url):
         query = query.filter(model.Resource.url.contains(url))
 
     user = tk.get_action('get_site_user')({'ignore_auth': True})
+    total = query.count()
+    i = 0
     for res in query:
+        i += 1
+        print('Pushing {} of {} to datastore'.format(i, total))
         try:
             tk.get_action('xloader_submit')(
                 {'ignore_auth': True, 'user': user['name']},
@@ -415,7 +420,7 @@ def push_to_datastore(id, url):
             )
 
 
-@spc.command()
+@spc.command('create-default-views')
 @click.option('--id', multiple=True)
 @click.option('--url')
 def create_default_views(id, url):

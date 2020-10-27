@@ -3549,6 +3549,9 @@ table.table tr th.dataset-details {
 .dataset-read .primary .notes img {
   max-width: 100%;
 }
+.dataset-read .primary .notes a {
+  word-break: break-word;
+}
 .dataset-read .primary .resources,
 .dataset-read .primary .tags {
   border-top: 1px dashed #cccccc;
