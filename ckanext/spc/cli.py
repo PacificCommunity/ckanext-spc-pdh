@@ -407,6 +407,7 @@ def push_to_datastore(id, url, timeout):
     i = 0
     for res in query:
         i += 1
+        sleep(timeout)
         print('Pushing {} of {} to datastore'.format(i, total))
         try:
             tk.get_action('xloader_submit')(
