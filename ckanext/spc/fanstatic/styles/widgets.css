@@ -242,6 +242,7 @@
   border: none;
   outline: none;
   margin-left: 5px;
+  color: initial;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown::placeholder,
 .advanced-filters .advanced-filter-row .filter-input-text::placeholder {
@@ -271,6 +272,7 @@
   display: inline-block;
   cursor: pointer;
   user-select: none;
+  color: #999999;
 }
 .advanced-filters .advanced-filter-row .filter-input-dropdown .dropdown-handle .blue-stroke {
   margin-left: 10px;
