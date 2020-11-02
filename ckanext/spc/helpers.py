@@ -68,7 +68,7 @@ def spc_has_cesium_view(res):
 
 
 def spc_dataset_suggestion_form():
-    return config.get('spc.dataset_suggestion.form', '/dataset-suggestions/add')
+    return config.get('spc.dataset_suggestion.form', '/dataset-suggestions')
 
 
 def spc_dataset_suggestion_path():
