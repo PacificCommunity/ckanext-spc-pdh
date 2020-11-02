@@ -4,7 +4,7 @@ bibtexparser==1.1.0
 ckanext-create-typed-package==0.0.4.post1
 ckanext-fpx==0.2.2
 ckanext-ingest==0.0.2
-ckanext-resource-indexer[pdf]==0.0.4
+ckanext-resource-indexer[pdf]==0.0.5
 funcy==1.13
 iso639
 mysqlclient
