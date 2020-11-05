@@ -98,18 +98,8 @@
           {% endblock %}
           {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
           {% block resource_read_url %}
-              {% if res.url and h.is_url(res.url) %}
-                      <p class="text-muted ellipsis">
-                          {{ _('URL:') }}
-                          <a
-                              {% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}
-                              class="resource-url-analytics-downloadable"
-                              href="{{ download_url }}"
-                              title="{{ download_url }}"
-                          >
-                              {{ download_url }}
-                          </a>
-                      </p>
+            {% if res.url and h.is_url(res.url) %}
+                <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
             {% elif res.url %}
                 <p class="text-muted break-word">{{ _('URL:') }} {{ download_url }}</p>
             {% endif %}
@@ -136,7 +126,7 @@
       {% if not is_activity_archive %}
       {% block data_preview %}
       {% block resource_view %}
-        {% if not h.spc_is_restricted(pkg) or h.check_access('restrict_dataset_show', data_dict=pkg) %}
+        {% if not c.user and not h.spc_is_restricted(pkg) or h.check_access('restrict_dataset_show', data_dict=pkg) %}
         {% block resource_view_nav %}
           {% set resource_preview = h.resource_preview(resource, package) %}
           {% snippet "package/snippets/resource_views_list.html",

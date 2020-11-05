@@ -1,3 +1,5 @@
+// main: spc.less
+
 .dataset-read {
     display: flex;
     margin-bottom: 60px;
@@ -27,6 +29,9 @@
                 .empty, .activity, .add-to-group, form {
                     padding: 0px 20px;
                 }
+            }
+            .resource-list .resource-item .heading {
+                word-wrap: break-word;
             }
         }
 
@@ -75,6 +80,9 @@
             padding: 0 23px;
             img {
                 max-width: 100%;
+            }
+            a {
+                word-break: break-word;
             }
         }
         .resources, .tags {
@@ -438,12 +446,6 @@
         .btn-primary.dropdown-toggle {
             background-color: #0c436b;
         }
-    }
-}
-
-.resource-view {
-    .ckanext-datapreview>iframe {
-        min-height: auto;
     }
 }
 

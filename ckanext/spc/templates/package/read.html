@@ -72,7 +72,8 @@
 
 	</ul>
     </div>
-    <div class="pull-right bulk-resource-download-controll hidden-xs hidden-sm">
+
+    <!-- <div class="pull-right bulk-resource-download-controll hidden-xs hidden-sm"> -->
         {#
         <button class="btn btn-bulk-download " data-module="spc-resource-download-picker" >
         {{ _('Download choosen data') }}
@@ -88,7 +89,6 @@
             {% set pkg_size = h.spc_get_package_size(pkg) %}
             {% if pkg_size != '0 B' %} ({{ pkg_size }}) {% endif %}
             <i class="spc-icon spc-icon-zip-folder"></i>
-
             </button>
         {% endif %}
     </div>

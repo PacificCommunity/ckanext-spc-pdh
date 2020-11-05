@@ -104,8 +104,8 @@ def index():
     # Package needs to have a organization group in the call to
     # check_access and also to save it
     try:
-        logic.check_access('sysadmin', context, {})
-    except logic.NotAuthorized:
+        check_access('sysadmin', context, {})
+    except NotAuthorized:
         base.abort(403, _('Need to be system administrator'))
 
     if request.method == 'POST':

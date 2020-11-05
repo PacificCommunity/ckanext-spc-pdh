@@ -193,6 +193,9 @@ class SpcDotStatHarvester(HarvesterBase):
             # Added thematic string
             pkg_dict['thematic_area_string'] = ["Official Statistics"]
 
+            # Open license for all dotStat resources
+            pkg_dict['license_id'] = "other-open"
+
             # Get owner_org if there is one
             source_dataset = get_action('package_show')(
                 {
@@ -207,7 +210,7 @@ class SpcDotStatHarvester(HarvesterBase):
             agency_id = self.config['agencyId']
             stats_guid = self._get_object_extra(harvest_object, 'stats_guid')
 
-            structure = soup.find('Dataflow', attrs={'id': stats_guid})
+            structure = soup.find('Dataflow')
             pkg_dict['title'] = structure.find('Name', {"xml:lang" : "en"}).text
             pkg_dict['publisher_name'] = structure['agencyID']
             pkg_dict['version'] = structure['version']
@@ -220,27 +223,116 @@ class SpcDotStatHarvester(HarvesterBase):
             )
             pkg_dict['source'] = de_url
 
-            # Set a default resource
-            pkg_dict['resources'] = [{
-                'url':
-                'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
-                    agency_id,
-                    stats_guid,
-                    structure['version']
-                ),
-                'format': 'CSV',
-                'mimetype': 'CSV',
-                'description': 'All data for {}'.format(pkg_dict['title']),
-                'name': '{} Data CSV'.format(pkg_dict['title'])
-            }]
+
+            # Set resource to metadata data dictionary (if available)
+            annotation = structure.find('Annotations')
+            annots = annotation.find_all('Annotation')
+            metaurl = None
+            for annot in annots:
+                metalink = annot.find('AnnotationType')
+                if metalink.text == 'EXT_RESOURCE':
+                    metaurl = annot.find('AnnotationText', {'xml:lang':'en'}).text.split('|')[1]
+
+            # Set default resource, and metadata pdf if it exists
+            if metaurl:
+                pkg_dict['resources'] = [
+                {
+                    'url':
+                    'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
+                        agency_id,
+                        stats_guid,
+                        structure['version']
+                    ),
+                    'format': 'CSV',
+                    'mimetype': 'CSV',
+                    'description': 'All data for {}'.format(pkg_dict['title']),
+                    'name': '{} Data CSV'.format(pkg_dict['title'])
+                },
+                {
+                    'url': metaurl,
+                    'format': 'PDF',
+                    'mimetype': 'PDF',
+                    'description': 'Detailed metadata dictionary for {}'.format(pkg_dict['title']),
+                    'name': '{} Metadata PDF'.format(pkg_dict['title'])
+                }]
+            else:
+                pkg_dict['resources'] = [
+                {
+                    'url':
+                    'https://stats-nsi-stable.pacificdata.org/rest/data/{},{},{}/all/?format=csv'.format(
+                        agency_id,
+                        stats_guid,
+                        structure['version']
+                    ),
+                    'format': 'CSV',
+                    'mimetype': 'CSV',
+                    'description': 'All data for {}'.format(pkg_dict['title']),
+                    'name': '{} Data CSV'.format(pkg_dict['title'])
+                }]
+
 
             # Get notes/description if it exists
             try:
-                pkg_dict['notes'] = structure.find(
-                    'Description', {"xml:lang": "en"}).text
+                desc = structure.find('Description', {"xml:lang": "en"}).text
+                desc += '\nFind more Pacific data on PDH.stat : https://stats.pacificdata.org/'
+                pkg_dict['notes'] = desc
             except Exception as e:
                 log.error("An error occured: {}".format(e))
-                pkg_dict['notes'] = ''
+                pkg_dict['notes'] = 'Find more Pacific data on PDH.stat : https://stats.pacificdata.org/'
+
+            # Add tags from CategoryScheme and ConceptScheme
+            # List of uninteresting tags
+            generic_schemes = ['Time', 'Frequency', 'Observation value', 'Observation Status', 'Confidentiality status', 'Unit of measure', 'Unit multiplier', 'Base period', 'Comment',
+                'Decimals', 'Data source', 'Pacific Island Countries and territories', 'Indicator', 'Transformation', 'Reporting type', 'Composite breakdown']
+            tag_strings = []
+            
+            # For finding Category Schemes for tags
+            schemes = soup.find('CategorySchemes')
+            if schemes is not None:
+                catschemes = schemes.find_all('CategoryScheme')
+                for catscheme in catschemes:
+                    cats = catscheme.find_all('Category')
+                    for cat in cats:
+                        found = cat.find('Name', {'xml:lang': 'en'}).text
+                        if found not in tag_strings:
+                            tag_strings.append(found)
+           
+            # For finding Concept Schemes for tags
+            concepts = soup.find('Concepts')
+            if concepts is not None:
+                concschemes = concepts.find_all('ConceptScheme')
+                for concscheme in concschemes:
+                    concepts = concscheme.find_all('Concept')
+                    for concept in concepts:
+                        found = concept.find('Name', {'xml:lang': 'en'}).text
+                        if found not in tag_strings:
+                            tag_strings.append(found)
+
+            # Tag cleaning
+            psp_mapping = {
+                'Industry and Services': ['pacific-skills', 'industry', 'training'],
+                'Education level': ['pacific-skills', 'education', 'training'],
+                'Occupation': ['pacific-skills', 'occupation'],
+                'Disability': ['pacific-skills', 'disability'],
+                'Economic sector': ['pacific-skills', 'industry', 'training'],
+                'Labour force status': ['pacific-skills', 'employment'],
+                'Employment status': ['pacific-skills', 'employment'],
+                'Labour and employment status': ['pacific-skills', 'employment']
+            }
+
+            if len(tag_strings) > 0:
+                # Bring in PSP tags
+                for tag in tag_strings:
+                    if tag in list(psp_mapping.keys()):
+                        tag_strings.extend(psp_mapping[tag])
+                # Remove duplicates
+                tag_strings = list(set(tag_strings))
+                # Remove tags found in generic_schemes list
+                tags = [x.lower() for x in tag_strings if x not in generic_schemes]
+                # Make a string of tags for CKAN
+                pkg_dict['tag_string'] = ', '.join([munge_tag(tag) for tag in tags])
+
+            
             '''
             May need modifying when DF_SDG is broken into several DFs
             This gets the list of indicators for SDG-related dataflows
