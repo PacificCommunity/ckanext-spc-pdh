@@ -3382,9 +3382,11 @@ table.table tr th.dataset-details {
   width: 25%;
 }
 .query-actions {
+  color: #006c94;
   display: flex;
 }
-.query-actions .query-search {
+.query-actions .query-search,
+.query-actions .query-delete {
   margin-right: 10px;
 }
 .query-actions .btn-delete {
@@ -3449,7 +3451,7 @@ table.table tr th.dataset-details {
 .dropdown-menu {
   min-width: initial;
   min-width: auto;
-}  
+}
 .spc-open-on-pacific-map {
   position: absolute;
   top: 100px;
@@ -4803,15 +4805,14 @@ button.header-menu-btn:focus {
   margin-top: 0px;
   color: #000000;
 }
-.nav-simple > li.nav-item a.active {
+.nav-simple > li.nav-item.active {
   background: transparent;
-  color: #fff;
 }
-.nav-simple > li.nav-item a.active a {
+.nav-simple > li.nav-item.active a {
   background-color: #8ca0a6;
   color: #fff;
 }
-.nav-simple > li.nav-item a.active a:after {
+.nav-simple > li.nav-item.active a:after {
   background-size: contain;
   right: 1px;
   color: transparent;
@@ -4820,7 +4821,7 @@ button.header-menu-btn:focus {
   height: 20px;
   text-align: center;
 }
-.nav-simple > li.nav-item a.active a span {
+.nav-simple > li.nav-item.active a span {
   white-space: normal;
 }
 .nav-facet {
