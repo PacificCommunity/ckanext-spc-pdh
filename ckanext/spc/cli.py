@@ -448,3 +448,35 @@ def create_default_views(id, url):
             {'ignore_auth': True},
             {'package': pkg}
         )
+
+
+@spc.command('remove-views')
+@click.option('--id', multiple=True)
+@click.option('--url')
+def remove_views(id, url):
+    query = model.Session.query(model.Resource.id).filter(
+        model.Resource.state=='active'
+    )
+    if id:
+        query = query.filter(model.Resource.id.in_(id))
+    if url:
+        query = query.filter(model.Resource.url.contains(url))
+
+    query = query.outerjoin(model.ResourceView).filter(
+        model.ResourceView.id.isnot(None)
+    ).distinct()
+
+    total = query.count()
+    if not total:
+        click.secho('There are no views created for specified query', fg='green')
+        return
+    for res in progressbar(query, max_value=total, redirect_stdout=True):
+        views = tk.get_action('resource_view_list')(
+            {'ignore_auth': True},
+            {'id': res.id}
+        )
+        for view in views:
+            tk.get_action('resource_view_delete')(
+                {'ignore_auth': True},
+                {'id': view['id']}
+            )
