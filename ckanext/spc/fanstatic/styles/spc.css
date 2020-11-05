@@ -3382,9 +3382,11 @@ table.table tr th.dataset-details {
   width: 25%;
 }
 .query-actions {
+  color: #006c94;
   display: flex;
 }
-.query-actions .query-search {
+.query-actions .query-search,
+.query-actions .query-delete {
   margin-right: 10px;
 }
 .query-actions .btn-delete {
