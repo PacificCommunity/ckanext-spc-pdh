@@ -8,19 +8,15 @@ from werkzeug.wrappers import Response
 from datetime import datetime
 from flask import Blueprint, send_file
 
-import ckan.lib.jobs as jobs
 import ckan.model as model
-from ckan.common import _, g, request
-from ckan.plugins import toolkit
 import ckan.views.api as api
-
+import ckan.lib.jobs as jobs
 import ckan.lib.helpers as h
 import ckan.lib.plugins
 import ckan.lib.base as base
 
 from ckan.common import _, g, request
 from ckan.plugins import toolkit
-from ckan import logic
 
 import ckanext.scheming.helpers as scheming_helpers
 
@@ -104,8 +100,8 @@ def index():
     # Package needs to have a organization group in the call to
     # check_access and also to save it
     try:
-        check_access('sysadmin', context, {})
-    except NotAuthorized:
+        toolkit.check_access('sysadmin', context, {})
+    except toolkit.NotAuthorized:
         base.abort(403, _('Need to be system administrator'))
 
     if request.method == 'POST':
