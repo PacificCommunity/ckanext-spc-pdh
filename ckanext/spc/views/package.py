@@ -1,12 +1,21 @@
 import datetime
 import logging
 import enum
+import io
+import os
+import urllib
+import uuid
+import magic
+import requests
 
 import funcy as F
+from werkzeug.datastructures import FileStorage
 from flask import Blueprint, jsonify
 from ckan.plugins import toolkit as tk
-from ckan.common import g, request, streaming_response
+from ckan.common import g, request, streaming_response, config
+import ckan.logic as logic
 import ckan.model as model
+import ckan.lib.jobs as jobs
 
 from ckanext.spc.utils.xlsx import Exporter, Importer
 
@@ -135,6 +144,80 @@ def _handle_imported_dataset(context, dataset):
     return _import_dataset(context.copy(), dataset)
 
 
+def _get_format(c_type):
+    if c_type:
+        ct = c_type.split(';')[0]
+        ft = ct.split('/')[-1]
+        return {'content_type': ct, 'format': ft}
+    return {}
+
+
+def _get_action(upload, extra):
+    action = None
+    extra_dict = {}
+    frm = _get_format(extra.get('content-type', None))
+    if upload.get('id', None):
+        action = 'resource_update'
+        for key, _ in upload.items():
+            if key == 'format':
+                upload[key] = frm.get('format', '')
+            if key == 'mimetype':
+                upload[key] = frm.get('content_type', '')
+        extra_dict = upload
+    else:
+        action = 'resource_create'
+        extra_dict = {key: value for (key, value) in upload.items() if key not in (
+                     'id', 'url', 'format', 'mimetype', 'modified', 'download_location')}
+    return action, extra_dict
+
+
+def _upload_resources(context, resources):
+
+    context.update({"model": model})
+    total_uploaded = 0
+    for upload in resources:
+        package_id = upload['package_id']
+        pkg = model.Package.get(package_id)
+        if not pkg:
+            log.error(f"* Was trying to upload a resource to a dataset which doesn't exist (id: {package_id}). Skipping.")
+            continue
+        resource_location = upload['download_location'].strip()
+        log.info(f"* Uploading {resource_location} to {pkg.name}")
+        filename = os.path.basename(resource_location)
+        local_file = os.path.isfile(resource_location)
+        stream, extra = None, None
+        if local_file:
+            with open(resource_location, 'rb') as f:
+                data = f.read()
+                stream = io.BytesIO(data)
+                mime = magic.Magic(mime=True)
+                extra = {'content-type': mime.from_file(resource_location)}
+        else:
+            try:
+                req = requests.get(resource_location, stream=True)
+                extra = req.headers
+            except:
+                log.error(f"Invalid location provided: {resource_location}. Skipping.")
+                continue
+            stream = io.BytesIO(req.content)
+                
+        data_dict = dict(upload=FileStorage(stream, filename, name='file'))
+        action, extra_dict = _get_action(upload, extra)
+        data_dict.update(extra_dict)
+
+        try:
+            m = {'resource_create': 'created', 'resource_update': 'updated'}
+            message = f"Resource {resource_location} was successfuly {m[action]} on {pkg.name}"
+            logic.get_action(action)(context, data_dict)
+            log.info(message)
+            total_uploaded += 1
+        except Exception as e:
+            log.error(e)
+            continue
+
+    log.info(f"Total uploaded {total_uploaded} of {len(resources)}.")
+
+
 def import_datasets(id):
     context = {
         "model": model,
@@ -166,6 +249,14 @@ def import_datasets(id):
         [f"{state.value}: {len(results[state])}" for state in ImportState]
     )
     tk.h.flash_notice(status_msg)
+    res_to_upload = len(importer.resources_to_upload)
+    if res_to_upload:
+        jobs.enqueue(_upload_resources, kwargs={
+            'context': { "user": g.user },
+            'resources': importer.resources_to_upload},
+            queue='default'
+        )
+        tk.h.flash_notice(f"Uploading {res_to_upload} resources. This can take some time. Please check default worker log file for details.")
     failed = results[ImportState.FAIL]
     if failed:
         fail_msg = '<br/>'.join([

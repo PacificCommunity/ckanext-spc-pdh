@@ -2,7 +2,10 @@
 
 {% block primary_content_inner %}
     <h2>Search queries</h2>
-    <table style="table-layout:auto;" class="table table-striped table-condensed">
+    <a href="{{ h.url_for('search_queries.download_search_queries') }}">
+        <button class="btn btn-primary">{{ _('Download as CSV') }}</button>
+    </a>
+    <table style="table-layout:auto; margin-top: 20px;" class="table table-striped table-condensed">
         <thead>
             <th>Query</th>
             <th>Counter</th>

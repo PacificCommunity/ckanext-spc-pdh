@@ -3446,6 +3446,10 @@ table.table tr th.dataset-details {
 .dropdown.restricted .dropdown-toggle .tick svg path {
   fill: #8C8C8C;
 }
+.dropdown-menu {
+  min-width: initial;
+  min-width: auto;
+}  
 .spc-open-on-pacific-map {
   position: absolute;
   top: 100px;
@@ -4469,6 +4473,13 @@ table.table tr th.dataset-details {
   content: url("../../base/images/zip-folder.svg");
   width: 16px;
   height: 12px;
+}
+.preview-maxsize-info {
+  display: flex;
+  margin-bottom: 20px;
+}
+.preview-maxsize-info svg {
+  margin-right: 5px;
 }
 #mobile-menu {
   display: none;

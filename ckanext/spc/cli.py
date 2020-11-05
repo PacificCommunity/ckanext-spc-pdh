@@ -1,10 +1,12 @@
 import click
 import os
 from time import sleep
+
 import sqlalchemy
 import logging
 import csv
-
+from operator import attrgetter
+from progressbar import progressbar
 import ckan.model as model
 from ckanext.harvest import model as harvest_model
 import ckan.plugins.toolkit as tk
@@ -17,11 +19,10 @@ from ckan.common import config
 from ckanext.spc.jobs import broken_links_report
 import ckan.lib.jobs as jobs
 import ckan.lib.search as search
+import ckanext.spc.utils as utils
 
-_select = sqlalchemy.sql.select
 _func = sqlalchemy.func
 _or_ = sqlalchemy.or_
-_and_ = sqlalchemy.and_
 
 logger = logging.getLogger(__name__)
 

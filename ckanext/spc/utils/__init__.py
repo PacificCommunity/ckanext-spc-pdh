@@ -3,6 +3,7 @@ import os
 import tempfile
 import requests
 import re
+import hashlib
 
 from smtplib import SMTPServerDisconnected
 from operator import attrgetter, itemgetter
@@ -380,3 +381,65 @@ def track_resource_download(user, id):
     record = DownloadTracking.download(user, id)
     record.save()
     return record
+
+
+def refresh_resource_size(id):
+    try:
+        res = tk.get_action('resource_show')({'ignore_auth': True}, {'id': id})
+    except tk.ObjectNotFound:
+        logger.error(f'Resource<{id}> was not found')
+        return
+    entity = model.Resource.get(res['id'])
+    if res['url_type'] == 'upload':
+        size = _get_local_resource_size(res)
+        entity.hash = _get_local_resource_hash(res)
+    else:
+        size = _get_remote_resource_size(res)
+    # Do not change file size to 0 - it may be only temporary unavailable
+    if entity.size != size and size:
+        entity.size = size
+    model.Session.commit()
+    return res
+
+
+def _get_remote_resource_size(res):
+    url = res.get('url')
+    if not url:
+        return 0
+    try:
+        resp = requests.head(url, timeout=5, allow_redirects=True)
+    except requests.exceptions.RequestException:
+        logger.exception("Cannot fetch remote metadata for Resource<%s>", res['id'])
+        return 0
+    try:
+        return tk.asint(resp.headers['content-length'])
+    except KeyError:
+        return 0
+
+
+def _get_local_resource_path(res):
+    uploader = get_resource_uploader(res)
+    return uploader.get_path(res['id'])
+
+
+def _get_local_resource_hash(res):
+    path = _get_local_resource_path(res)
+    if os.path.isfile(path):
+        blocksize = 65_536
+        with open(path, 'rb') as file:
+            buf = file.read(blocksize)
+            hash = hashlib.md5()
+            while len(buf):
+                hash.update(buf)
+                buf = file.read(blocksize)
+            return hash.hexdigest()
+    return ''
+
+
+def _get_local_resource_size(res):
+    path = _get_local_resource_path(res)
+    if os.path.isfile(path):
+        return os.stat(path).st_size
+    else:
+        logger.warning(f"File for Resource<{id}> was not found in local filesystem at {path}")
+    return 0
