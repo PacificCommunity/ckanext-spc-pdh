@@ -254,10 +254,10 @@
                     <td>{{ h.render_datetime(res.created) or _('unknown') }}</td>
                   </tr>
                 {%- endblock -%}
-                {%- block resource_format -%}
+                {%- block resource_format_spc -%}
                   <tr>
                     <th scope="row">{{ _('Format') }}</th>
-                    <td>{{ res.mimetype_inner or res.mimetype or res.format or _('unknown') }}</td>
+                    <td>{{ res.format or res.mimetype_inner or res.mimetype or _('unknown') }}</td>
                   </tr>
                 {%- endblock -%}
                 {%- block resource_license -%}
