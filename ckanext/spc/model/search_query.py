@@ -11,8 +11,13 @@ class SearchQuery(Base):
     count = Column(Integer, default=0)
 
     @classmethod
+    def get(cls, query):
+        return meta.Session.query(cls).filter_by(query=query).first()
+
+
+    @classmethod
     def update_or_create(cls, query):
-        existing = meta.Session.query(cls).filter_by(query=query).first()
+        existing = cls.get(query)
         if existing is None:
             existing = SearchQuery()
             existing.query, existing.count = query, 0

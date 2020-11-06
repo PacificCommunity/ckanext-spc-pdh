@@ -119,6 +119,11 @@ class IndexView(MethodView):
         elif action == 'update':
             value = request.form.get('q_value')
             if value:
+                existing = SearchQuery.get(value)
+                if existing and existing is not query:
+                    existing.count += query.count
+                    model.Session.delete(query)
+                    query = existing
                 query.query = value
                 h.flash_success(_('The query has been updated'))
         model.Session.commit()
