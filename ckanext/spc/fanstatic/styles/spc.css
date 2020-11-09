@@ -344,226 +344,226 @@ li.with-icon:hover .fa {
 .fa-inverse {
   color: #ffffff;
 }
-.fa-water:before {
+.fp.fa-water:before {
   content: '\e918';
 }
-.fa-landscape:before {
+.fp.fa-landscape:before {
   content: '\e900';
 }
-.fa-mountains:before {
+.fp.fa-mountains:before {
   content: '\e917';
 }
-.fa-day-cloudy:before {
+.fp.fa-day-cloudy:before {
   content: '\e915';
 }
-.fa-building-o:before {
+.fp.fa-building-o:before {
   content: '\e914';
 }
-.fa-building:before {
+.fp.fa-building:before {
   content: '\e913';
 }
-.fa-building-bts:before {
+.fp.fa-building-bts:before {
   content: '\e912';
 }
-.fa-location-city:before {
+.fp.fa-location-city:before {
   content: '\e979';
 }
-.fa-solar-eclipse:before {
+.fp.fa-solar-eclipse:before {
   content: '\e910';
 }
-.fa-pagelines:before {
+.fp.fa-pagelines:before {
   content: '\e932';
 }
-.fa-sitemap:before {
+.fp.fa-sitemap:before {
   content: '\e90e';
 }
-.fa-users:before {
+.fp.fa-users:before {
   content: '\e90d';
 }
-.fa-leaf:before {
+.fp.fa-leaf:before {
   content: '\e931';
 }
-.fa-twitter:before {
+.fp.fa-twitter:before {
   content: '\f099';
 }
-.fa-facebook:before {
+.fp.fa-facebook:before {
   content: '\f39e';
 }
-.fa-tint:before {
+.fp.fa-tint:before {
   content: '\e938';
 }
-.fa-download:before {
+.fp.fa-download:before {
   content: '\f011';
 }
-.fa-bar-chart:before {
+.fp.fa-bar-chart:before {
   content: '\e97d';
 }
-.fa-tachometer:before {
+.fp.fa-tachometer:before {
   content: '\f013';
 }
-.fa-bolt:before {
+.fp.fa-bolt:before {
   content: '\e90c';
 }
-.fa-caret-left:before {
+.fp.fa-caret-left:before {
   content: '\f0d9';
 }
-.fa-caret-right:before {
+.fp.fa-caret-right:before {
   content: '\f016';
 }
-.fa-sort:before {
+.fp.fa-sort:before {
   content: '\f017';
 }
-.fa-sort-desc:before {
+.fp.fa-sort-desc:before {
   content: '\f0d7';
 }
-.fa-sort-asc:before {
+.fp.fa-sort-asc:before {
   content: '\f0d8';
 }
-.fa-university:before {
+.fp.fa-university:before {
   content: '\e90b';
 }
-.fa-tree:before {
+.fp.fa-tree:before {
   content: '\e90a';
 }
-.fa-group:before {
+.fp.fa-group:before {
   content: '\e981';
 }
-.fa-climate:before {
+.fp.fa-climate:before {
   content: '\e919';
 }
-.fa-land:before {
+.fp.fa-land:before {
   content: '\e935';
 }
-.fa-book:before {
+.fp.fa-book:before {
   content: '\e908';
 }
-.fa-book-entypo:before {
+.fp.fa-book-entypo:before {
   content: '\e909';
 }
-.fa-radioactive:before {
+.fp.fa-radioactive:before {
   content: '\e907';
 }
-.fa-orchid:before {
+.fp.fa-orchid:before {
   content: '\e933';
 }
-.fa-culture:before {
+.fp.fa-culture:before {
   content: '\e968';
 }
-.fa-data-story:before {
+.fp.fa-data-story:before {
   content: '\e97f';
 }
-.fa-file-o:before {
+.fp.fa-file-o:before {
   content: '\e906';
 }
-.fa-files-o:before {
+.fp.fa-files-o:before {
   content: '\e904';
 }
-.fa-paperclip:before {
+.fp.fa-paperclip:before {
   content: '\e982';
 }
-.fa-line-chart:before {
+.fp.fa-line-chart:before {
   content: '\e903';
 }
-.fa-pie-chart:before {
+.fp.fa-pie-chart:before {
   content: '\e97c';
 }
-.fa-linkedin:before {
+.fp.fa-linkedin:before {
   content: '\f08c';
 }
-.fa-eye:before {
+.fp.fa-eye:before {
   content: '\f06e';
 }
-.fa-plus:before {
+.fp.fa-plus:before {
   content: '\f067';
 }
-.fa-folder-open:before {
+.fp.fa-folder-open:before {
   content: '\f07c';
 }
-.fa-download-fas:before {
+.fp.fa-download-fas:before {
   content: '\f019';
 }
-.fa-download-mdc:before {
+.fp.fa-download-mdc:before {
   content: '\f030';
 }
-.fa-file-text:before {
+.fp.fa-file-text:before {
   content: '\e905';
 }
-.fa-file:before {
+.fp.fa-file:before {
   content: '\e984';
 }
-.fa-edit:before {
+.fp.fa-edit:before {
   content: '\f044';
 }
-.fa-edit-fas:before {
+.fp.fa-edit-fas:before {
   content: '\f033';
 }
-.fa-cogs:before {
+.fp.fa-cogs:before {
   content: '\f085';
 }
-.fa-home:before {
+.fp.fa-home:before {
   content: '\f015';
 }
-.fa-search:before {
+.fp.fa-search:before {
   content: '\f002';
 }
-.fa-chart-pie:before {
+.fp.fa-chart-pie:before {
   content: '\e980';
 }
-.fa-graduation-cap:before {
+.fp.fa-graduation-cap:before {
   content: '\e901';
 }
-.fa-envelope:before {
+.fp.fa-envelope:before {
   content: '\f0e0';
 }
-.fa-times:before {
+.fp.fa-times:before {
   content: '\f00d';
 }
-.fa-angle-down:before {
+.fp.fa-angle-down:before {
   content: '\f078';
 }
-.fa-angle-up:before {
+.fp.fa-angle-up:before {
   content: '\f077';
 }
-.fa-chevron-circle-down:before {
+.fp.fa-chevron-circle-down:before {
   content: '\f150';
 }
-.fa-chevron-circle-up:before {
+.fp.fa-chevron-circle-up:before {
   content: '\f151';
 }
-.fa-check-circle:before {
+.fp.fa-check-circle:before {
   content: '\f058';
 }
-.fa-check:before {
+.fp.fa-check:before {
   content: '\f99f';
 }
-.fa-exclamation-circle:before {
+.fp.fa-exclamation-circle:before {
   content: '\f06a';
 }
-.fa-info-circle:before {
+.fp.fa-info-circle:before {
   content: '\f05a';
 }
-.fa-database:before {
+.fp.fa-database:before {
   content: '\e91d';
 }
-.fa-layer-group:before {
+.fp.fa-layer-group:before {
   content: '\e97e';
 }
-.fa-cubes:before {
+.fp.fa-cubes:before {
   content: '\e91b';
 }
-.fa-cube:before {
+.fp.fa-cube:before {
   content: '\e91a';
 }
-.fa-folder-open-far:before {
+.fp.fa-folder-open-far:before {
   content: '\e902';
 }
-.fa-tanoa:before {
+.fp.fa-tanoa:before {
   content: '\e967';
 }
-.fa-waves:before {
+.fp.fa-waves:before {
   content: '\e911';
 }
-.fa-turtle:before {
+.fp.fa-turtle:before {
   content: '\e916';
 }
 .sr-only {
