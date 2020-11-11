@@ -40,9 +40,8 @@ def spc_download_tracking_list(context, data_dict):
 
 
 def spc_export_datasets(context, data_dict):
-    return {'success': has_user_permission_for_group_or_org(
-        data_dict['id'], context['user'], 'admin'
-    )}
+    is_sys = is_sysadmin(context['user'])
+    return {'success': is_sys}
 
 
 def _check_permission_for_org(context, data_dict):
