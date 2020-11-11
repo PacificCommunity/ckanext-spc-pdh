@@ -80,7 +80,7 @@
         <span class="picked-counter" data-count="0"></span>
         </button>
         #}
-        {% if g.userobj and (not h.spc_is_restricted(pkg) or h.check_access('restrict_dataset_show', data_dict=pkg)) %}
+        {% if not h.spc_is_restricted(pkg) or h.check_access('restrict_dataset_show', data_dict=pkg) %}
             <button class="btn btn-bulk-download btn-bulk-download-dark"
                     data-module="spc-bulk-download"
                     data-module-query-string="{{ h.url_for('spc_package.list_ids') }}?q=id:{{ pkg.id }}"
