@@ -505,6 +505,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 if 'validated_data_dict' in pkg_dict
                 else pkg_dict
             ))
+        pkg_dict.update(_five_star_rating=spc_utils.count_stars(
+                json.loads(pkg_dict['validated_data_dict'])
+                if 'validated_data_dict' in pkg_dict
+                else pkg_dict))
         if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
             pkg_dict['member_countries'] = spc_helpers.countries_list(
                 pkg_dict.get('member_countries', '[]'))

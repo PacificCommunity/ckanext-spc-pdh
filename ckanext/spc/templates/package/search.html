@@ -36,6 +36,7 @@
                     'remove_field': c.remove_field }
                 %}
                 {% set sorting = [
+                    (_('Open Data Rating'), '_five_star_rating desc, metadata_modified desc'),
                     (_('Relevance'), 'score desc, metadata_modified desc'),
                     (_('Name Ascending'), 'title_string asc'),
                     (_('Name Descending'), 'title_string desc'),
