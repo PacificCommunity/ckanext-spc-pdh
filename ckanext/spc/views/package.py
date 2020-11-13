@@ -7,6 +7,7 @@ import urllib
 import uuid
 import magic
 import requests
+import json
 
 import funcy as F
 from werkzeug.datastructures import FileStorage
@@ -105,6 +106,8 @@ def export_datasets(id):
 
 def _import_dataset(context, dataset, action="package_update"):
     try:
+        if dataset.get('spatial', None):
+            dataset['spatial'] = json.dumps(dataset['spatial'])
         pkg = tk.get_action(action)(context, dataset)
         if action == "package_update":
             return ImportState.UPDATE, pkg
