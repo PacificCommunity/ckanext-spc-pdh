@@ -313,7 +313,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IValidators)
     plugins.implements(plugins.IPackageController, inherit=True)
-    plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(IIngest)
     plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
@@ -337,19 +336,6 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def get_ingesters(self):
         return [('mendeley_bib', MendeleyBib())]
-
-    # IRouter
-
-    def before_map(self, map):
-
-        # CKAN login form can be accessed in the debug mode
-        if not config.get('debug', False):
-            map.redirect('/user/login', spc_helpers.get_drupal_user_url('login'))
-
-        map.redirect('/user/register', spc_helpers.get_drupal_user_url('register'))
-        map.redirect('/user/reset', '/')
-
-        return map
 
     # IConfigurable
 
@@ -505,6 +491,10 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 if 'validated_data_dict' in pkg_dict
                 else pkg_dict
             ))
+        pkg_dict.update(_five_star_rating=spc_utils.count_stars(
+                json.loads(pkg_dict['validated_data_dict'])
+                if 'validated_data_dict' in pkg_dict
+                else pkg_dict))
         if isinstance(pkg_dict.get('member_countries', '[]'), string_types):
             pkg_dict['member_countries'] = spc_helpers.countries_list(
                 pkg_dict.get('member_countries', '[]'))
@@ -530,6 +520,19 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             pkg_dict = spc_utils.delete_res_urls_if_restricted(context, pkg_dict)
 
         return pkg_dict
+
+    # IPackageController
+    # IResourceController
+
+    def after_create(self, context, data_dict):
+        # call this only for resources and ignore package hooks
+        if 'package_id' in data_dict:
+            spc_utils.refresh_resource_size(data_dict['id'])
+
+    def after_update(self, context, data_dict):
+        # call this only for resources and ignore package hooks
+        if 'package_id' in data_dict:
+            spc_utils.refresh_resource_size(data_dict['id'])
 
     # IFacets
 

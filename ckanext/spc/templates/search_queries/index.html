@@ -2,7 +2,10 @@
 
 {% block primary_content_inner %}
     <h2>Search queries</h2>
-    <table style="table-layout:auto;" class="table table-striped table-condensed">
+    <a href="{{ h.url_for('search_queries.download_search_queries') }}">
+        <button class="btn btn-primary">{{ _('Download as CSV') }}</button>
+    </a>
+    <table style="table-layout:auto; margin-top: 20px;" class="table table-striped table-condensed" data-module="spc-editable-container" data-module-events='["input"]'>
         <thead>
             <th>Query</th>
             <th>Counter</th>
@@ -12,7 +15,7 @@
             {% for q in queries %}
                 <tr>
                     <td>
-                        <code>{{ q.query }}</code>
+                        <code contenteditable data-edit-destination="[data-destination={{ loop.index }}]">{{ q.query }}</code>
                     </td>
                     <td>
                         {{ q.count }}
@@ -22,12 +25,18 @@
                             <i class="fa fa-search" title="{{ _('Search') }}"></i>
                         </a>
 
-                        <form action="search-queries" method="post">  
-                            <a href="">
-                                <button name="q_name" value="{{ q.query }}" type="submit" class="btn-delete" title="{{ _('Delete query') }}">
-                                    <i class="fa fa-trash" title="{{ _('Delete query') }}"></i>
-                                </button>
-                            </a>
+                        <form action="{{ h.url_for('search_queries.index') }}" method="POST" class="query-delete">
+                            <input name="q_name" type="hidden" value="{{ q.query }}"/>
+                            <button name="action" value="delete" type="submit" class="btn-delete" title="{{ _('Delete query') }}">
+                                <i class="fa fa-trash" title="{{ _('Delete query') }}"></i>
+                            </button>
+                        </form>
+                        <form action="{{ h.url_for('search_queries.index') }}" method="POST">
+                            <input name="q_value" type="hidden" value="{{ q.query }}" data-destination="{{ loop.index }}"/>
+                            <input name="q_name" type="hidden" value="{{ q.query }}"/>
+                            <button name="action" value="update" type="submit" class="btn-delete" title="{{ _('Update query') }}">
+                                <i class="fa fa-save" title="{{ _('Update query') }}"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>

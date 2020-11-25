@@ -5,7 +5,7 @@
     'description',
     'url',
     'format',
-    ] -%}
+] -%}
 {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
 
 {% set res = resource %}
@@ -45,15 +45,19 @@
                 {% if res.url and h.is_url(res.url) %}
                     <li>
                         <div class="btn-group">
-                            <a class="btn btn-primary resource-url-analytics-downloadable resource-type-{{ res.resource_type }}" href="{{ res.url }}"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
+                            <a class="btn btn-primary resource-url-analytics-downloadable resource-type-{{ res.resource_type }}" href="{{ download_url }}"{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}>
                                 {% if res.resource_type in ('listing', 'service') %}
                                     <i class="fa fa-eye"></i> {{ _('View') }}
                                 {% elif  res.resource_type == 'api' %}
                                     <i class="fa fa-key"></i> {{ _('API Endpoint') }}
-                                {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
-                                    <i class="fa fa-external-link"></i> {{ _('Go to resource') }}
+                                {% elif (not res.has_views or not res.can_be_previewed)
+                                        and not res.url_type == 'upload'
+                                        and not res.size %}
+                                      <i class="fa fa-external-link"></i> {{ _('Go to resource') }}
                                 {% else %}
                                     <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }}
+                                    {% set res_size = h.spc_get_resource_size(res) %}
+                                    {% if res_size != '0 B' %} {{ res_size }} {% endif %}
                                 {% endif %}
                             </a>
                             {% block download_resource_button %}
@@ -84,12 +88,12 @@
         {% block resource_content %}
           {% block package_archive_notice %}
             {% if is_activity_archive %}
-              <div id="activity-archive-notice" class="alert alert-danger">
-                {% trans url=h.url_for(pkg.type ~ '.read', id=pkg.id) %}
-                You're currently viewing an old version of this dataset. To see the
-                current version, click <a href="{{ url }}">here</a>.
+                <div id="activity-archive-notice" class="alert alert-danger">
+                    {% trans url=h.url_for(pkg.type ~ '.read', id=pkg.id) %}
+                    You're currently viewing an old version of this dataset. To see the
+                    current version, click <a href="{{ url }}">here</a>.
                 {% endtrans %}
-              </div>
+                </div>
             {% endif %}
           {% endblock %}
           {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
@@ -97,7 +101,7 @@
             {% if res.url and h.is_url(res.url) %}
                 <p class="text-muted ellipsis">{{ _('URL:') }} <a{% if 'json' in res.format|lower %} download="{{ res.name or 'resource.json' }}"{% endif %}        class="resource-url-analytics-downloadable" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
             {% elif res.url %}
-                <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
+                <p class="text-muted break-word">{{ _('URL:') }} {{ download_url }}</p>
             {% endif %}
           {% endblock %}
           <div class="prose notes" property="rdfs:label">
@@ -110,6 +114,14 @@
               <p>{% trans dataset=package.title, url=h.url_for(package.type ~ '.read', id=package.id if is_activity_archive else package.name) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
             {% endif %}
           </div>
+          {% if 'resource_proxy' in g.plugins
+             and h.spc_is_preview_maxsize_exceeded(res.size) %}
+          <div class="preview-maxsize-info">
+            {% snippet 'snippets/svg/alert.svg' %}
+            {{ _('Maximum file size limit for the preview is') }}
+            {{ h.spc_convert_bytes(h.spc_get_proxy_res_max_size()) }}
+          </div>
+          {% endif %}
         {% endblock %}
       {% if not is_activity_archive %}
       {% block data_preview %}
@@ -232,10 +244,10 @@
                     <td>{{ h.render_datetime(res.created) or _('unknown') }}</td>
                   </tr>
                 {%- endblock -%}
-                {%- block resource_format -%}
+                {%- block resource_format_spc -%}
                   <tr>
                     <th scope="row">{{ _('Format') }}</th>
-                    <td>{{ res.mimetype_inner or res.mimetype or res.format or _('unknown') }}</td>
+                    <td>{{ res.format or res.mimetype_inner or res.mimetype or _('unknown') }}</td>
                   </tr>
                 {%- endblock -%}
                 {%- block resource_license -%}

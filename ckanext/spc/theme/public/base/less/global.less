@@ -563,8 +563,9 @@ table.table {
 }
 // search-queries
 .query-actions {
+    color: #006c94;
     display: flex;
-    .query-search {
+    .query-search, .query-delete {
         margin-right: 10px;
     }
     .btn-delete {
@@ -672,11 +673,16 @@ table.table {
     }
 }
 
+.dropdown-menu {
+    min-width: initial;
+    min-width: auto;
+}
+
 .spc-open-on-pacific-map {
     i {
         font-weight: bold;
         color: #9ca1aa;
-      }
+    }
     position: absolute;
     top: 100px;
     right: 100px;
@@ -691,9 +697,9 @@ table.table {
     padding: 10px 10px 5px 10px;
     border-radius: 2px;
     border: 0;
-  }
+}
 
-  .spc-open-on-pacific-map:hover {
-   cursor: pointer;
+.spc-open-on-pacific-map:hover {
+    cursor: pointer;
     background:#006FC6;
 }

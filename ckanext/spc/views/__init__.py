@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
+import csv
+from io import StringIO
+from werkzeug.wrappers import Response
 
 from datetime import datetime
 from flask import Blueprint, send_file
+from flask.views import MethodView
 
-import ckan.lib.jobs as jobs
 import ckan.model as model
-from ckan.common import _, g, request
-from ckan.plugins import toolkit
 import ckan.views.api as api
-
+import ckan.lib.jobs as jobs
 import ckan.lib.helpers as h
 import ckan.lib.plugins
 import ckan.lib.base as base
 
 from ckan.common import _, g, request
 from ckan.plugins import toolkit
-from ckan.logic import NotAuthorized, check_access
 
 import ckanext.scheming.helpers as scheming_helpers
 
@@ -91,46 +91,85 @@ def broken_links():
     return toolkit.render('admin/broken_links.html', extra_vars)
 
 
-def index():
-    context = {
-        'model': model,
-        'session': model.Session,
-        'user': g.user,
-        'auth_user_obj': g.userobj
-    }
-    # Package needs to have a organization group in the call to
-    # check_access and also to save it
-    try:
-        check_access('sysadmin', context, {})
-    except NotAuthorized:
-        base.abort(403, _('Need to be system administrator'))
-
-    if request.method == 'POST':
-        query_name = request.POST['q_name']
-        model.Session.query(SearchQuery).filter(
-            SearchQuery.query == query_name).delete()
-        model.Session.commit()
-        h.flash_success(_('The query has been removed'))
-
-    page = h.get_page_number(request.params)
-    total = model.Session.query(SearchQuery).count()
-    queries = model.Session.query(SearchQuery).order_by(
-        SearchQuery.count.desc()
-    ).limit(PER_PAGE).offset((page - 1) * PER_PAGE)
-    pager = h.Page(
-        collection=queries,
-        page=page,
-        url=lambda page: h.url_for('search_queries.index', page=page),
-        item_count=total,
-        items_per_page=PER_PAGE
-    )
-
-    return render(
-        'search_queries/index.html', {
-            'queries': queries,
-            'pager': pager
+class IndexView(MethodView):
+    def __init__(self):
+        context= {
+            'model': model,
+            'session': model.Session,
+            'user': g.user,
+            'auth_user_obj': g.userobj
         }
-    )
+        try:
+            toolkit.check_access('sysadmin', context)
+        except toolkit.NotAuthorized:
+            base.abort(403, _('Need to be system administrator'))
+
+    def post(self):
+        action = request.form.get('action')
+        query_name = request.form.get('q_name')
+        if not action or not query_name:
+            return base.abort(409, _('Missing request parameter'))
+        query = model.Session.query(SearchQuery).filter(
+            SearchQuery.query == query_name).first()
+        if query is None:
+            return base.abort(404, _('Search query not found'))
+        if action == 'delete':
+            model.Session.delete(query)
+            h.flash_success(_('The query has been removed'))
+        elif action == 'update':
+            value = request.form.get('q_value')
+            if value:
+                existing = SearchQuery.get(value)
+                if existing and existing is not query:
+                    existing.count += query.count
+                    model.Session.delete(query)
+                    query = existing
+                query.query = value
+                h.flash_success(_('The query has been updated'))
+        model.Session.commit()
+        return toolkit.redirect_to('search_queries.index')
+
+    def get(self):
+        page = h.get_page_number(request.params)
+        total = model.Session.query(SearchQuery).count()
+        queries = model.Session.query(SearchQuery).order_by(
+            SearchQuery.count.desc()
+        ).limit(PER_PAGE).offset((page - 1) * PER_PAGE)
+        pager = h.Page(
+            collection=queries,
+            page=page,
+            url=lambda page: h.url_for('search_queries.index', page=page),
+            item_count=total,
+            items_per_page=PER_PAGE
+        )
+
+        return render(
+            'search_queries/index.html', {
+                'queries': queries,
+                'pager': pager
+            }
+        )
+
+
+def download_search_queries():
+    def generate():
+        data = StringIO()
+        w = csv.writer(data)
+        queries = model.Session.query(SearchQuery).order_by(
+            SearchQuery.count.desc())
+        w.writerow(('Query', 'Counter'))
+        yield data.getvalue()
+        data.seek(0)
+        data.truncate(0)
+        for item in queries:
+            w.writerow((item.query, item.count))
+            yield data.getvalue()
+            data.seek(0)
+            data.truncate(0)
+
+    response = Response(generate(), mimetype='text/csv')
+    response.headers.set("Content-Disposition", "attachment", filename="queries.csv")
+    return response
 
 
 spc_user = Blueprint('spc_user', __name__)
@@ -146,8 +185,13 @@ spc_admin.add_url_rule(u'/ckan-admin/broken-links',
                        methods=(u'GET', u'POST'))
 
 search_queries.add_url_rule(
-    "/ckan-admin/search-queries", view_func=index, methods=(u'GET', u'POST')
+    "/ckan-admin/search-queries", view_func=IndexView.as_view('index'), methods=(u'GET', u'POST')
 )
+
+search_queries.add_url_rule(
+    "/ckan-admin/search-queries/download", view_func=download_search_queries, methods=(u'GET',)
+)
+
 
 blueprints = [spc_user, spc_admin, spc_package,
               search_queries, spc_access_request]

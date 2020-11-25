@@ -21,8 +21,19 @@ ckan.module("spc-bulk-download", function ($) {
     },
     _bulkDownload: function () {
       var sandbox = this.sandbox;
+      var items = window.package.resources.map(function (res) {
+        var name = res.name || res.url.split("/").pop();
+        if (!~name.indexOf(".") && res.format) {
+          name += "." + res.format.toLowerCase();
+        }
+        return {
+          path: window.package.name,
+          name: name,
+          url: res.url,
+        };
+      });
       sandbox.ajax(this.options.queryString).then(function (ids) {
-        sandbox.publish(ckan.TOPICS.FPX_ORDER_TICKET, "package", ids);
+        sandbox.publish(ckan.TOPICS.FPX_ORDER_TICKET, "items", items);
       });
       this.el.attr("disabled", true);
     },

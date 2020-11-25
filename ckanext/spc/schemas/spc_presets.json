@@ -4,6 +4,15 @@
   "about_url": "http://github.com/ckan/ckanext-scheming#preset",
   "presets": [
     {
+      "preset_name": "spc_resource_size",
+      "values": {
+        "field_name": "size",
+        "label": "Size",
+        "validators": "default(0)",
+        "display_snippet": "filesize.html"
+      }
+    },
+    {
       "preset_name": "spc_dataset_organization",
       "values": {
         "validators": "owner_org_validator unicode",
