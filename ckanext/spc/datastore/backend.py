@@ -6,6 +6,8 @@ information. For all non-dotstat resources, default CKAN's PostgreSQL
 backend is used.
 
 """
+import os
+import tempfile
 import sdmx
 from sdmx.model import AttributeValue
 import ckan.model as model
@@ -40,6 +42,7 @@ def _request():
         backend="sqlite",
         fast_save=True,
         expire_after=tk.asint(tk.config.get(CONFIG_DOTSTAT_CACHE_AGE, 60)),
+        cache_name=os.path.join(tempfile.gettempdir(), 'spc_dotstat_cache')
     )
 
 
