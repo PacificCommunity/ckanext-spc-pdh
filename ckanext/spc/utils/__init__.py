@@ -21,6 +21,8 @@ from ckan.lib import mailer
 from ckanext.ga_report.ga_model import GA_Url
 from ckanext.spc.model import SearchQuery, DownloadTracking
 
+CONFIG_DOTSTAT_RESTAPI = "spc.dotstat.restapi"
+
 logger = logging.getLogger(__name__)
 
 open_licenses = [
@@ -443,3 +445,12 @@ def _get_local_resource_size(res):
     else:
         logger.warning(f"File for Resource<{id}> was not found in local filesystem at {path}")
     return 0
+
+
+def dotstat_api_url() -> str:
+    return tk.config.get(CONFIG_DOTSTAT_RESTAPI, "").rstrip("/")
+
+
+def is_dotstat_url(url: str):
+    api = dotstat_api_url()
+    return bool(api) and url.startswith(api)

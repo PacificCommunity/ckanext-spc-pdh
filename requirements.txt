@@ -1,4 +1,4 @@
-alembic==1.0.5
+alembic>=1.0.0
 beautifulsoup4==4.8.0
 bibtexparser==1.1.0
 ckanext-create-typed-package==0.0.4.post1
@@ -15,3 +15,5 @@ pyparsing==2.3.0
 rdflib==4.2.2
 six>=0.13
 progressbar2==3.53.1
+Pillow==8.0.1
+sdmx1[cache]==1.6.0

@@ -81,6 +81,7 @@ setup(
     entry_points='''
         [ckan.plugins]
         spc=ckanext.spc.plugin:SpcPlugin
+        dotstat_datastore=ckanext.spc.datastore:DotstatDatastorePlugin
         spc_user=ckanext.spc.plugin:SpcUserPlugin
         spc_oaipmh_harvester=ckanext.spc.harvesters.oaipmh_harvester:SpcOaipmhHarvester
         spc_gbif_harvester=ckanext.spc.harvesters.gbif:SpcGbifHarvester
