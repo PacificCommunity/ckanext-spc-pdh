@@ -8,12 +8,13 @@ from ckan.exceptions import CkanConfigurationException
 from ckanext.datastore.interfaces import IDatastoreBackend
 
 from .backend import DotstatDatastoreBackend
-from ckanext.spc.utils import dotstat_api_url, CONFIG_DOTSTAT_RESTAPI
+from ckanext.spc.utils import dotstat_api_url, CONFIG_DOTSTAT_RESTAPI, is_dotstat_url
 
 
 class DotstatDatastorePlugin(p.SingletonPlugin):
     p.implements(IDatastoreBackend)
     p.implements(p.IConfigurer)
+    p.implements(p.IResourceController, inherit=True)
 
     # IDatastoreBackend
 
@@ -41,3 +42,10 @@ class DotstatDatastorePlugin(p.SingletonPlugin):
                     "name": "Pacific Data Hub DotStat",
                 }
             )
+
+    # IResourceController
+
+    def before_show(self, resource_dict):
+        if is_dotstat_url(resource_dict['url']):
+            resource_dict['datastore_active'] = True
+        return resource_dict

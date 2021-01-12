@@ -18,7 +18,7 @@ from ckanext.datastore.backend.postgres import DatastorePostgresqlBackend
 import ckanext.spc.utils as utils
 
 CONFIG_DOTSTAT_CACHE_AGE = "spc.dotstat.cache.seconds"
-
+CONFIG_DOTSTAT_FAST_SEARCH = "spc.dotstat.fast_search"
 
 def _as_dataframe(data):
     return (
@@ -66,6 +66,13 @@ def sdmx_serializer(obj):
 
 
 class DotstatDatastoreBackend(DatastorePostgresqlBackend):
+    def resource_id_from_alias(self, res_id):
+        if _stat_id_by_res_id(res_id):
+            return True, res_id
+
+        return super(DotstatDatastoreBackend, self).resource_id_from_alias(res_id)
+
+
     def resource_fields(self, id):
         stat_id = _stat_id_by_res_id(id)
         if stat_id:
@@ -83,8 +90,13 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
         stat_id = _stat_id_by_res_id(data_dict.get("resource_id"))
         if stat_id:
             data_dict["records"] = []
+            data_dict["fields"] = []
+            include_total = data_dict.get("include_total")
             limit = data_dict.get("limit", 100)
             offset = data_dict.get("offset", 0)
+            fast_search = tk.asbool(tk.config.get(CONFIG_DOTSTAT_FAST_SEARCH, True))
+            if not limit and not include_total and fast_search:
+                return data_dict
             data = _get_data(stat_id)
             fields = _get_fields(data)
             data_dict["fields"] = [
@@ -114,7 +126,7 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
                         )
                     ]
 
-                if data_dict.get("include_total"):
+                if include_total:
                     data_dict["total"] = len(dataframe)
 
                 dataframe = dataframe[offset : offset + limit]
