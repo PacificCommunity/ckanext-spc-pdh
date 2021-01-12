@@ -22,6 +22,8 @@ import ckanext.spc.utils as utils
 CONFIG_DOTSTAT_CACHE_AGE = "spc.dotstat.cache.seconds"
 CACHE_PATH = os.path.join(tempfile.gettempdir(), "spc_dotstat_cache")
 
+CONFIG_DOTSTAT_FAST_SEARCH = "spc.dotstat.fast_search"
+
 
 def _get_csv_reader(id: str):
     res = model.Resource.get(id)
@@ -37,6 +39,13 @@ def _get_csv_reader(id: str):
 
 
 class DotstatDatastoreBackend(DatastorePostgresqlBackend):
+    def resource_id_from_alias(self, res_id):
+        if _stat_id_by_res_id(res_id):
+            return True, res_id
+
+        return super(DotstatDatastoreBackend, self).resource_id_from_alias(res_id)
+
+
     def resource_fields(self, id):
         reader = _get_csv_reader(id)
         if reader:
@@ -55,8 +64,15 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
         reader = _get_csv_reader(data_dict.get("resource_id"))
         if reader:
             data_dict["records"] = []
+            data_dict["fields"] = []
+            include_total = data_dict.get("include_total")
             limit = data_dict.get("limit", 100)
             offset = data_dict.get("offset", 0)
+
+            fast_search = tk.asbool(tk.config.get(CONFIG_DOTSTAT_FAST_SEARCH, True))
+            if not limit and not include_total and fast_search:
+                return data_dict
+
             data_dict["fields"] = [
                 {"id": id, "type": "text"} for id in reader.fieldnames
             ]
@@ -85,7 +101,7 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
                         )
                     ]
 
-                if data_dict.get("include_total"):
+                if include_total:
                     data_dict["total"] = len(dataframe)
 
                 dataframe = dataframe[offset : offset + limit]
