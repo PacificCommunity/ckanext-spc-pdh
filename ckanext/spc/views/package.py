@@ -199,6 +199,9 @@ def _upload_resources(context, resources):
             try:
                 req = requests.get(resource_location, stream=True)
                 extra = req.headers
+                dct = dict(extra)
+                dct['content-type'] = dct['Content-Type']
+                dct.pop('Content-Type')
             except:
                 log.error(f"Invalid location provided: {resource_location}. Skipping.")
                 continue
@@ -211,13 +214,25 @@ def _upload_resources(context, resources):
         try:
             m = {'resource_create': 'created', 'resource_update': 'updated'}
             message = f"Resource {resource_location} was successfuly {m[action]} on {pkg.name}"
+            cnt_type = extra.get('content-type', None)
+            mime_type = upload.get('mimetype', None)
+            mimetype = cnt_type if not mime_type else mime_type
+            data_dict['mimetype'] = mimetype
+            fmt = upload.get('format', None)
+            if not fmt:
+                try:
+                    fmt = mimetype.split('/')[1].upper()
+                    data_dict['format'] = fmt
+                except:
+                    pass
+            else:
+                data_dict['format'] = fmt
             logic.get_action(action)(context, data_dict)
             log.info(message)
             total_uploaded += 1
         except Exception as e:
             log.error(e)
             continue
-
     log.info(f"Total uploaded {total_uploaded} of {len(resources)}.")
 
 
