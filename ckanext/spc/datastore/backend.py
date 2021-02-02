@@ -40,7 +40,7 @@ def _get_csv_reader(id: str):
 
 class DotstatDatastoreBackend(DatastorePostgresqlBackend):
     def resource_id_from_alias(self, res_id):
-        if _get_csv_reader(res_id)
+        if _get_csv_reader(res_id):
             return True, res_id
 
         return super(DotstatDatastoreBackend, self).resource_id_from_alias(res_id)
