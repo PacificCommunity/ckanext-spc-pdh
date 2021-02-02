@@ -197,10 +197,10 @@
       <section class="module">
         {% block spc_resource_additional_information_inner %}
           {% if res.datastore_active %}
-            {% block resource_data_dictionary %}
+              {% block resource_data_dictionary %}
               <div class="module-content">
-                <h2>{{ _('Data Dictionary') }}</h2>
-                <table class="table table-striped table-bordered table-condensed" data-module="table-toggle-more">
+                  <h2>{{ _('Data Dictionary') }}</h2>
+                  <table class="table table-striped table-bordered table-condensed" data-module="table-toggle-more">
                   <thead>
                     {% block resouce_data_dictionary_headers %}
                     <tr>
@@ -219,7 +219,7 @@
                   {% endblock %}
                 </table>
               </div>
-            {% endblock %}
+              {% endblock %}
           {% endif %}
 
           <div class="module-content">

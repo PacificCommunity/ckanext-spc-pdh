@@ -32,7 +32,6 @@ def _get_csv_reader(id: str):
             CACHE_PATH,
             expire_after=tk.asint(tk.config.get(CONFIG_DOTSTAT_CACHE_AGE, 60)),
         ):
-
             resp = requests.get(res.url, stream=True)
             if resp.ok:
                 return csv.DictReader(resp.iter_lines(decode_unicode=True))
@@ -40,7 +39,8 @@ def _get_csv_reader(id: str):
 
 class DotstatDatastoreBackend(DatastorePostgresqlBackend):
     def resource_id_from_alias(self, res_id):
-        if _stat_id_by_res_id(res_id):
+
+        if _get_csv_reader(res_id):
             return True, res_id
 
         return super(DotstatDatastoreBackend, self).resource_id_from_alias(res_id)
@@ -61,7 +61,8 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
         return super().resource_fields(id)
 
     def search(self, context, data_dict):
-        reader = _get_csv_reader(data_dict.get("resource_id"))
+        id = data_dict.get("resource_id")
+        reader = _get_csv_reader(id)
         if reader:
             data_dict["records"] = []
             data_dict["fields"] = []
@@ -69,13 +70,20 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
             limit = data_dict.get("limit", 100)
             offset = data_dict.get("offset", 0)
 
-            fast_search = tk.asbool(tk.config.get(CONFIG_DOTSTAT_FAST_SEARCH, True))
-            if not limit and not include_total and fast_search:
-                return data_dict
+            # fast_search = tk.asbool(tk.config.get(CONFIG_DOTSTAT_FAST_SEARCH, True))
+            # if not limit and not include_total and fast_search:
+                # return data_dict
+            datastore_active, _ = super(DotstatDatastoreBackend, self).resource_id_from_alias(id)
+
+            field_info = {f['id']: f.get('info', {}) for f in super(DotstatDatastoreBackend, self).search(
+                context,
+                {'limit': 0, 'include_total': 0, 'resource_id': id, 'records_format': 'objects'}
+            )['fields']} if datastore_active else {}
 
             data_dict["fields"] = [
-                {"id": id, "type": "text"} for id in reader.fieldnames
+                {"id": id, "type": "text", "info": field_info.get(id, {})} for id in reader.fieldnames
             ]
+
             dataframe = pandas.DataFrame(reader)
 
             if limit:
@@ -88,14 +96,15 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
                         sort_column, ascending=sort_direction == "asc"
                     )
                 # dataframe = dataframe.fillna("").applymap(str)
-                q = str(data_dict.get("q"))
+                q = str(data_dict.get("q", ''))
                 for fkey, fvalue in data_dict.get("filters", {}).items():
                     dataframe = dataframe[dataframe[fkey] == fvalue]
+
                 if q:
                     dataframe = dataframe[
                         dataframe.apply(
                             lambda row: row.astype(str)
-                            .str.contains(q, case=False)
+                            .str.contains(q)
                             .any(),
                             axis=1,
                         )
