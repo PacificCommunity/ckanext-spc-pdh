@@ -7,9 +7,11 @@ backend is used.
 
 """
 import os
+import csv
 import tempfile
-import sdmx
-from sdmx.model import AttributeValue
+import requests_cache
+import requests
+import pandas
 import ckan.model as model
 import ckan.plugins.toolkit as tk
 
@@ -18,68 +20,40 @@ from ckanext.datastore.backend.postgres import DatastorePostgresqlBackend
 import ckanext.spc.utils as utils
 
 CONFIG_DOTSTAT_CACHE_AGE = "spc.dotstat.cache.seconds"
+CACHE_PATH = os.path.join(tempfile.gettempdir(), "spc_dotstat_cache")
+
 CONFIG_DOTSTAT_FAST_SEARCH = "spc.dotstat.fast_search"
 
-def _as_dataframe(data):
-    return (
-        sdmx.to_pandas(data, attributes="o")
-        .reset_index()
-        .rename(columns={"value": "OBS_VALUE"})
-    )
 
-
-def _stat_id_by_res_id(id):
+def _get_csv_reader(id: str):
     res = model.Resource.get(id)
     if res and utils.is_dotstat_url(res.url):
-        key = res.url[len(utils.dotstat_api_url() + "/data/") :]
-        key = key.replace("format=csv", "format=structure")
-        return key
+        with requests_cache.enabled(
+            CACHE_PATH,
+            expire_after=tk.asint(tk.config.get(CONFIG_DOTSTAT_CACHE_AGE, 60)),
+        ):
 
-
-def _request():
-    return sdmx.Request(
-        "SPC",
-        backend="sqlite",
-        fast_save=True,
-        expire_after=tk.asint(tk.config.get(CONFIG_DOTSTAT_CACHE_AGE, 60)),
-        cache_name=os.path.join(tempfile.gettempdir(), 'spc_dotstat_cache')
-    )
-
-
-def _get_data(id):
-    req = _request()
-    data = req.data(id)
-    return data
-
-
-def _get_fields(data):
-    fields = {field: "text" for field in _as_dataframe(data).keys()}
-    fields["DATAFLOW"] = "text"
-    fields["OBS_VALUE"] = fields.pop("value", "text")
-    return fields
-
-
-def sdmx_serializer(obj):
-    if isinstance(obj, AttributeValue):
-        return obj.value
-    return obj
+            resp = requests.get(res.url, stream=True)
+            if resp.ok:
+                return csv.DictReader(resp.iter_lines(decode_unicode=True))
 
 
 class DotstatDatastoreBackend(DatastorePostgresqlBackend):
     def resource_id_from_alias(self, res_id):
-        if _stat_id_by_res_id(res_id):
+        if _get_csv_reader(res_id)
             return True, res_id
 
         return super(DotstatDatastoreBackend, self).resource_id_from_alias(res_id)
 
 
     def resource_fields(self, id):
-        stat_id = _stat_id_by_res_id(id)
-        if stat_id:
-            data = _get_data(stat_id)
+        reader = _get_csv_reader(id)
+        if reader:
+            for _ in reader:
+                pass
             info = {
-                "schema": _get_fields(data),
-                "meta": {"count": len(data.data[0].obs)},
+                "schema": {field: "text" for field in reader.fieldnames},
+                "meta": {"count": reader.line_num},
             }
 
             return info
@@ -87,23 +61,24 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
         return super().resource_fields(id)
 
     def search(self, context, data_dict):
-        stat_id = _stat_id_by_res_id(data_dict.get("resource_id"))
-        if stat_id:
+        reader = _get_csv_reader(data_dict.get("resource_id"))
+        if reader:
             data_dict["records"] = []
             data_dict["fields"] = []
             include_total = data_dict.get("include_total")
             limit = data_dict.get("limit", 100)
             offset = data_dict.get("offset", 0)
+
             fast_search = tk.asbool(tk.config.get(CONFIG_DOTSTAT_FAST_SEARCH, True))
             if not limit and not include_total and fast_search:
                 return data_dict
-            data = _get_data(stat_id)
-            fields = _get_fields(data)
+
             data_dict["fields"] = [
-                #    {"id": "_id", "type": "int"}
-            ] + [{"id": id, "type": type} for id, type in fields.items()]
+                {"id": id, "type": "text"} for id in reader.fieldnames
+            ]
+            dataframe = pandas.DataFrame(reader)
+
             if limit:
-                dataframe = _as_dataframe(data).applymap(sdmx_serializer)
                 sort = data_dict.get("sort")
                 if sort:
                     sort_column, sort_direction = (
@@ -112,7 +87,7 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
                     dataframe = dataframe.sort_values(
                         sort_column, ascending=sort_direction == "asc"
                     )
-                dataframe = dataframe.fillna("").applymap(str)
+                # dataframe = dataframe.fillna("").applymap(str)
                 q = str(data_dict.get("q"))
                 for fkey, fvalue in data_dict.get("filters", {}).items():
                     dataframe = dataframe[dataframe[fkey] == fvalue]
@@ -132,9 +107,9 @@ class DotstatDatastoreBackend(DatastorePostgresqlBackend):
                 dataframe = dataframe[offset : offset + limit]
                 records = dataframe.to_dict("records")
 
-                dataflow_id = f"{data.structure.maintainer.id}:{data.structure.id}(data.structure.version)"
-                for record in records:
-                    record["DATAFLOW"] = dataflow_id
+                # dataflow_id = f"{data.structure.maintainer.id}:{data.structure.id}(data.structure.version)"
+                # for record in records:
+                # record["DATAFLOW"] = dataflow_id
                 data_dict["records"] = records
             return data_dict
 
