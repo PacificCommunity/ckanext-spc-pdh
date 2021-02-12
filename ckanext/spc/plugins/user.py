@@ -2,12 +2,13 @@ import hashlib
 import base64
 import re
 import secrets
+import logging
 
 from typing import Any, Optional
 
 import six
 import sqlalchemy as sa
-
+from sqlalchemy.exc import OperationalError
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as tk
@@ -15,6 +16,8 @@ import ckan.plugins.toolkit as tk
 from ckan.exceptions import CkanConfigurationException
 
 from ckanext.spc.model.drupal_user import DrupalUser
+
+log = logging.getLogger(__name__)
 
 
 def _db_url() -> Optional[str]:
@@ -73,16 +76,20 @@ def _get_user_data_by_sid(sid: str) -> Optional[Any]:
 
     """
     engine = sa.create_engine(_db_url())
-    user = engine.execute(
-        """
+    try:
+        user = engine.execute(
+            """
         SELECT d.name, d.mail, d.uid
         FROM sessions s
         JOIN users_field_data d
         ON s.uid = d.uid
         WHERE s.sid = %s
         """,
-        [sid],
-    )
+            [sid],
+        )
+    except OperationalError:
+        log.exception("Cannot get a user from Drupal's database")
+        return
     return user.first()
 
 
