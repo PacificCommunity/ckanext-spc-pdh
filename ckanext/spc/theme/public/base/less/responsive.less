@@ -13,7 +13,7 @@
 
 
 @media(max-width: 991px) {
-  #main-menu {
+  #block-mainmenu {
     display: none;
   }
   #mobile-menu {
@@ -494,6 +494,23 @@
         }
         .module-footer {
             margin-left: 5px;
+        }
+    }
+}
+
+// FOOTER MOBILE STYLE
+@media (max-width: 569px) {
+    #mini-panel-footer {
+        nav.container {
+            ul {
+                flex-direction: column;
+                align-items   : center;
+                float         : none;
+
+                li {
+                    margin-bottom: 5px;
+                }
+            }
         }
     }
 }

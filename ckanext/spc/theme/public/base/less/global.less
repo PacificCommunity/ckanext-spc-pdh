@@ -43,7 +43,11 @@ header.navbar {
             max-width: 230px;
         }
     }
-    #main-menu {
+    #block-mainmenu {
+        float: right;
+        .visually-hidden {
+            display: none;
+        }
         li {
             .hide-empty-element;
             display: inline-block;
@@ -56,7 +60,7 @@ header.navbar {
                 line-height: 70px;
                 display: inline-block;
                 padding: 0px 24px;
-                transition: all 0.3s;
+                transition: all 0.1s;
 
                 @media (max-width: 1199px) {
                       padding: 0 12px;
@@ -702,4 +706,124 @@ table.table {
 .spc-open-on-pacific-map:hover {
     cursor: pointer;
     background:#006FC6;
+}
+
+// FOOTER STYLES
+#mini-panel-footer {
+    background           : url("../../base/images/footer-background.svg") top center no-repeat;
+    background-attachment: fixed;
+    background-size      : cover;
+    padding              : 0;
+    min-height           : 250px;
+    position             : relative;
+    display              : block;
+    margin-top           : auto;
+    margin               : 0;
+    box-sizing           : border-box;
+
+    &::before {
+        background-image: linear-gradient(to right, rgba(17, 94, 163, 0.97), rgba(86, 95, 202, 0.97));
+        content         : "";
+        top             : 0;
+        left            : 0;
+        bottom          : 0;
+        right           : 0;
+        position        : absolute;
+        z-index         : 0;
+        display         : block;
+        height          : 100%;
+        visibility      : initial;
+    }
+    #two-50-top-wrapper {
+        z-index       : 1;
+        position      : relative;
+        min-height    : 170px;
+        padding       : 40px 0 0 0;
+        display       : -ms-flexbox;
+        display       : flex;
+        -ms-flex-align: center;
+        align-items   : center;
+        -ms-flex-flow : row wrap;
+        flex-flow     : row wrap;
+        margin        : 0 auto;
+
+        .two-50-top {
+            float: left;
+            width: 100%;
+        }
+
+        .region-inner {
+            .field-items {
+                display                : -ms-flexbox;
+                display                : flex;
+                -ms-flex-pack          : distribute;
+                justify-content        : space-around;
+                max-width              : 950px;
+                margin                 : 0 auto;
+                -ms-flex-wrap          : wrap;
+                flex-wrap              : wrap;
+                -ms-flex-preferred-size: 100%;
+                flex-basis             : 100%;
+                padding                : 0 40px;
+
+                a {
+                    -ms-flex-preferred-size: auto;
+                    flex-basis             : auto;
+                    display                : block;
+                    transform              : scale(1);
+                    transition             : transform 0.3s ease-in-out;
+                    opacity                : 1;
+                    transform              : translateY(0);
+                    margin                 : 0 40px 0 0;
+                    text-align             : center;
+                    display                : -ms-flexbox;
+                    display                : flex;
+                    -ms-flex-align         : center;
+                    align-items            : center;
+                    min-height             : 55px;
+
+                    &:hover {
+                        transform: translateY(-10%);
+                        opacity  : 1;
+                    }
+
+                    img {
+                        max-height: 55px;
+                        max-width : 120px;
+                    }
+                }
+            }
+
+            .contextual-links-wrapper {
+                display: none;
+            }
+        }
+    }
+
+    nav {
+        padding  : 0 40px;
+        max-width: 950px;
+        margin   : 0 auto;
+        ul {
+            color      : rgba(255, 255, 255, 0.6);
+            -ms-flex   : 0 0 100%;
+            flex       : 0 0 100%;
+            text-align : right;
+            font-size  : 11px;
+            font-weight: 400;
+            margin     : 0;
+            list-style : none;
+            float      : left;
+            display    : flex;
+            padding    : 0;
+
+            li {
+                margin-right: 10px;
+
+                a {
+                    color: rgba(255, 255, 255, .6);
+                }
+            }
+        }
+    }
 }
