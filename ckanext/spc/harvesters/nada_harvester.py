@@ -36,7 +36,7 @@ country_mapping = {
    "VAN": "VU",
    "VUT": "VU",
    "WLF": "WF",
-   None: "Regional"
+   "REG": "Regional"
 }
 
 '''
