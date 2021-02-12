@@ -4,7 +4,7 @@ import re
 import secrets
 import logging
 
-from typing import Any, Optional
+from typing import Any, NamedTuple, Optional
 
 import six
 import sqlalchemy as sa
@@ -18,6 +18,12 @@ from ckan.exceptions import CkanConfigurationException
 from ckanext.spc.model.drupal_user import DrupalUser
 
 log = logging.getLogger(__name__)
+
+
+class UserData(NamedTuple):
+    name: str
+    mail: str
+    uid: str
 
 
 def _db_url() -> Optional[str]:
@@ -67,7 +73,7 @@ def _sanitize_username(name):
     return name
 
 
-def _get_user_data_by_sid(sid: str) -> Optional[Any]:
+def _get_user_data_by_sid(sid: str) -> Optional[UserData]:
     """Fetch user data from Drupal's database.
 
     Only necessary fields are taken in order to reduce maintenance
@@ -120,7 +126,7 @@ def _get_sid_from_cookies(cookies) -> Optional[str]:
     return sid
 
 
-def _get_user(user_id, email):
+def _get_user(user_id, email) -> dict:
     user = None
 
     if user_id:
@@ -136,7 +142,6 @@ def _get_user(user_id, email):
             user = None
 
     if not user:
-        try:
             user_id = (
                 model.Session.query(model.User.id)
                 .filter(model.User.email == email)
@@ -150,9 +155,6 @@ def _get_user(user_id, email):
                 {"id": user_id},
             )
 
-        except (tk.ObjectNotFound, TypeError):
-            user = None
-
     return user
 
 
@@ -162,7 +164,51 @@ def _save_drupal_user_id(ckan_user_id, drupal_user_id):
     return user
 
 
-def _login_user(user_data):
+def _sync_user_fields(user: dict, user_data: UserData) -> dict:
+    """Make sure that user's name and email are in sync with Drupal's
+    values.
+
+    Raises:
+    ValidationError if email is not unique
+    """
+    if user_data.mail != user["email"]:
+        user["email"] = user_data.mail
+
+        user = tk.get_action("user_update")(
+            {"ignore_auth": True, "user": ""}, user
+        )
+
+    if user_data.name != user["name"]:
+        User = model.Session.query(model.User).get(user["id"])
+        User.name = _sanitize_username(user_data.name)
+        model.Session.commit()
+        # get user again after changes in user model
+        user = _get_user(user["id"], user_data.mail)
+
+    return user
+
+
+def _create_user_from_user_data(user_data: UserData) -> dict:
+    """Create a user with random password using Drupal's data.
+
+    Raises:
+    ValidationError if email is not unique
+    """
+    user = {
+        "email": user_data.mail,
+        "name": _sanitize_username(user_data.name),
+        "password": _make_password(),
+    }
+
+    user = tk.get_action("user_create")(
+        {"ignore_auth": True, "user": ""}, user
+    )
+    # save drupal user ID
+    _save_drupal_user_id(user["id"], str(user_data.uid))
+    return user
+
+
+def _login_user(user_data: UserData):
     # getting CKAN user if exists
 
     ckan_uid = DrupalUser.get_or_add(
@@ -174,38 +220,23 @@ def _login_user(user_data):
     except AttributeError:
         user_id = None
 
-    user = _get_user(user_id, user_data.mail)
+    try:
+        user = _get_user(user_id, user_data.mail)
+    except tk.ObjectNotFound:
+        user = None
 
     # if we found user by email, we should "map" the ids
     if user and not user_id:
         _save_drupal_user_id(user["id"], str(user_data.uid))
-
-    if user:
-        if user_data.mail != user["email"]:
-            user["email"] = user_data.mail
-
-            user = tk.get_action("user_update")(
-                {"ignore_auth": True, "user": ""}, user
-            )
-
-        if user_data.name != user["name"]:
-            User = model.Session.query(model.User).get(user["id"])
-            User.name = _sanitize_username(user_data.name)
-            model.Session.commit()
-            # get user again after changes in user model
-            user = _get_user(user_id, user_data.mail)
-    else:
-        user = {
-            "email": user_data.mail,
-            "name": _sanitize_username(user_data.name),
-            "password": _make_password(),
-        }
-
-        user = tk.get_action("user_create")(
-            {"ignore_auth": True, "user": ""}, user
-        )
-        # save drupal user ID
-        _save_drupal_user_id(user["id"], str(user_data.uid))
+        user_id = user["id"]
+    try:
+        if user:
+            user = _sync_user_fields(user, user_data)
+        else:
+            user = _create_user_from_user_data(user_data)
+    except tk.ValidationError as e:
+        log.error('Cannot save user: %s', e)
+        return
     tk.c.user = user["name"]
 
 
