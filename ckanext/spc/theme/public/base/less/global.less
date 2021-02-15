@@ -60,7 +60,7 @@ header.navbar {
                 line-height: 70px;
                 display: inline-block;
                 padding: 0px 24px;
-                transition: all 0.1s;
+                transition: all 0.3s;
 
                 @media (max-width: 1199px) {
                       padding: 0 12px;
@@ -68,6 +68,9 @@ header.navbar {
 
                 &:hover {
                     color: #ffbc00;
+                }
+                &:hover:before {
+                    color: #000 !important;
                 }
             }
         }
@@ -86,8 +89,17 @@ header.navbar {
                 padding: 0;
                 color: #7B7B7B;
                 box-shadow: none;
-                &:before {
+                li a {
                     color: #7B7B7B;
+                    &:before {
+                        position: absolute;
+                        font-size: 20px;
+                        color: #7B7B7B;
+                        top: 15px;
+                        left: 15px;
+                        z-index: 1;
+                        font-family: 'FontAwesome';
+                    }
                 }
             }
             .dropdown-toggle {
@@ -112,6 +124,7 @@ header.navbar {
                     line-height: 1rem;
                     padding: 15px 50px;
                     display: block;
+                    border-left: 3px solid #fff;
 
                     &:hover {
                         background-color: transparent;
