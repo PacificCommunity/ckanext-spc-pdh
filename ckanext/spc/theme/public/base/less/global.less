@@ -52,6 +52,7 @@ header.navbar {
             .hide-empty-element;
             display: inline-block;
             border-color: transparent;
+            padding: 0px 24px;
             a {
                 text-transform: uppercase;
                 padding: 2px;
@@ -59,21 +60,22 @@ header.navbar {
                 text-decoration: none;
                 line-height: 70px;
                 display: inline-block;
-                padding: 0px 24px;
                 transition: all 0.3s;
 
-                @media (max-width: 1199px) {
-                      padding: 0 12px;
+            }
+            &:hover {
+                a, i {
+                    color: @black;
                 }
-
-                &:hover {
+            }
+            a:hover {
+                color: #ffbc00;
+                & + i {
                     color: #ffbc00;
-                }
-                &:hover:before {
-                    color: #000 !important;
                 }
             }
         }
+
         & > ul > li:last-child {
             display: none;
         }
@@ -117,7 +119,7 @@ header.navbar {
                 padding: 0;
                 margin: 0px;
                 &:hover {
-                    color: #000 !important;
+                    color: @black !important;
                 }
                 a {
                     font-family: 'Roboto';
@@ -128,9 +130,12 @@ header.navbar {
 
                     &:hover {
                         background-color: transparent;
-                        color: #000 !important;
+                        color: @black !important;
                         background-color: #f5f5f5;
-                        border-left: 3px solid #000000;
+                        border-left: 3px solid @black;
+                        &:before {
+                            color: @black;
+                        }
                     }
                 }
                 &:last-child {
@@ -140,11 +145,8 @@ header.navbar {
                 }
             }
 
-            &:hover, &:focus, &:active {
+            &:hover {
                 background-color: #fff;
-                &>a{
-                    color: #ffbc00;
-                }
             }
         }
     }
@@ -457,32 +459,6 @@ header.navbar {
     }
 }
 
-
-@media(min-width: 769px) {
-    .dataset-map-expanded {
-        #dataset-map {
-            width: 100%;
-            max-width: 1008px;
-            left: 0;
-            border-color: @border-blue;
-            border-radius: 2px;
-            .btn.cancel {
-                color: #036295;
-                background: #fff;
-                border: 2px solid #036295;
-                line-height: 16px;
-            }
-            .btn.apply {
-                &.disabled {
-                    line-height: 16px;
-                    // background-color: transparent;
-                    opacity: 0.8;
-                }
-            }
-        }
-    }
-}
-
 .desktop-only { display: none;}
 .fa-question-circle:before {
     .spc-icon-question;
@@ -501,7 +477,7 @@ header.navbar {
         background: #f8f8f8;
         font-size: 16px;
         font-weight: 600;
-        color: #000;
+        color: @black;
         border-radius: 25px 5px 5px 25px;
         border: none;
         margin: 12px 16px 0 13px;
@@ -603,39 +579,6 @@ table.table {
     }
     &.request-list-table-org {
         padding-right: 20px !important;
-    }
-}
-
-@media(max-width: 767px) {
-    // break resource name to prevent overlap
-    .module-resource {
-        & .page-heading {
-            word-wrap: break-word;
-            word-break: break-word;
-        }
-    }
-    #dataset-resources {
-        .resource-list {
-            .resource-item {
-                word-wrap: break-word;
-                word-break: break-word;
-            }
-        }
-    }
-    // hide Resource heading on mobile view
-    .secondary {
-        .resources {
-            & .module-heading {
-                display: none;
-            }
-        }
-    }
-    .wrapper {
-        & .primary {
-            div.module-content {
-                padding: 10px;
-            }
-        }
     }
 }
 
