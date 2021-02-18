@@ -14,7 +14,7 @@ from ckantoolkit import config
 import logging
 log = logging.getLogger(__name__)
 
-
+# Uses ckanext-harvest base harvester class
 class SpcDotStatHarvester(HarvesterBase):
     HARVEST_USER = 'harvest'
 
