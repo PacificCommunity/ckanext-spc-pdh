@@ -142,18 +142,19 @@ def _get_user(user_id, email) -> dict:
             user = None
 
     if not user:
-            user_id = (
+            user_obj = (
                 model.Session.query(model.User.id)
                 .filter(model.User.email == email)
-                .first()[0]
+                .first()
             )
-            user = tk.get_action("user_show")(
-                {
-                    "keep_sensitive_data": True,
-                    "keep_email": True,
-                },
-                {"id": user_id},
-            )
+            if user_obj is not None:
+                user = tk.get_action("user_show")(
+                    {
+                        "keep_sensitive_data": True,
+                        "keep_email": True,
+                    },
+                    {"id": user_obj.id},
+                )
 
     return user
 
