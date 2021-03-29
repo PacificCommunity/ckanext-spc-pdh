@@ -11,9 +11,21 @@
   }
 }
 
+@media(max-width: 1200px) {
+    header.masthead {
+        & #block-mainmenu {
+            & li {
+                padding: 0px 5px !important;
+                a {
+                    font-size: 11px !important;
+                }
+            }
+        }
+    }
+}
 
 @media(max-width: 991px) {
-  #main-menu {
+  #block-mainmenu {
     display: none;
   }
   #mobile-menu {
@@ -494,6 +506,80 @@
         }
         .module-footer {
             margin-left: 5px;
+        }
+    }
+}
+
+// FOOTER MOBILE STYLE
+@media (max-width: 569px) {
+    #mini-panel-footer {
+        nav.container {
+            ul {
+                flex-direction: column;
+                align-items   : center;
+                float         : none;
+
+                li {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 769px) {
+    .dataset-map-expanded {
+        #dataset-map {
+            width: 100%;
+            max-width: 1008px;
+            left: 0;
+            border-color: @border-blue;
+            border-radius: 2px;
+            .btn.cancel {
+                color: #036295;
+                background: #fff;
+                border: 2px solid #036295;
+                line-height: 16px;
+            }
+            .btn.apply {
+                &.disabled {
+                    line-height: 16px;
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    // break resource name to prevent overlap
+    .module-resource {
+        & .page-heading {
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+    }
+    #dataset-resources {
+        .resource-list {
+            .resource-item {
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+        }
+    }
+    // hide Resource heading on mobile view
+    .secondary {
+        .resources {
+            & .module-heading {
+                display: none;
+            }
+        }
+    }
+    .wrapper {
+        & .primary {
+            div.module-content {
+                padding: 10px;
+            }
         }
     }
 }
