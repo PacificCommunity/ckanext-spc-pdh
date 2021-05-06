@@ -4633,7 +4633,7 @@ button.header-menu-btn:focus {
   margin-top: 70px;
   border-top: 1px solid rgba(246, 240, 234, 0.5);
 }
-.ma5-menu-panel div.ma5-leave-bar {
+.ma5-menu-panel li.ma5-leave-bar {
   text-align: left;
   color: #fff;
   font-size: 16px;
@@ -4642,7 +4642,7 @@ button.header-menu-btn:focus {
   text-transform: none;
   padding: 0 0 0 90px;
 }
-.ma5-menu-panel div.ma5-leave-bar .ma5-btn-leave {
+.ma5-menu-panel li.ma5-leave-bar .ma5-btn-leave {
   display: inline-block;
   position: absolute;
   left: 0;
