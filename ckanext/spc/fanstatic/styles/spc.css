@@ -184,7 +184,8 @@ li.with-icon .fa:before {
 li.with-icon:hover .fa {
   color: #000;
 }
-.fp {
+.fp,
+.fp:before {
   display: inline-block;
   font: normal normal normal 14px/1 'PngDataPortal';
   font-size: inherit;
@@ -193,7 +194,8 @@ li.with-icon:hover .fa {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
-.fp:before {
+.fp:before,
+.fp:before:before {
   position: absolute;
   font-size: 20px;
   top: 10px;
@@ -2929,9 +2931,6 @@ header.navbar > .container .collapse {
 .masthead #block-mainmenu li a:hover + i {
   color: #ffbc00;
 }
-.masthead #block-mainmenu > ul > li:last-child {
-  display: none;
-}
 .masthead #block-mainmenu .dropdown:hover > .dropdown-menu {
   display: block;
 }
@@ -2950,10 +2949,14 @@ header.navbar > .container .collapse {
   position: absolute;
   font-size: 20px;
   color: #7B7B7B;
-  top: 15px;
+  top: 10px;
   left: 15px;
   z-index: 1;
-  font-family: 'FontAwesome';
+}
+.masthead #block-mainmenu .dropdown .dropdown-menu .fa-caret-down {
+  position: absolute;
+  top: 12px;
+  right: 10px;
 }
 .masthead #block-mainmenu .dropdown .dropdown-toggle .fa-caret-down {
   margin-left: 7px;
@@ -4630,7 +4633,7 @@ button.header-menu-btn:focus {
   margin-top: 70px;
   border-top: 1px solid rgba(246, 240, 234, 0.5);
 }
-.ma5-menu-panel div.ma5-leave-bar {
+.ma5-menu-panel li.ma5-leave-bar {
   text-align: left;
   color: #fff;
   font-size: 16px;
@@ -4639,7 +4642,7 @@ button.header-menu-btn:focus {
   text-transform: none;
   padding: 0 0 0 90px;
 }
-.ma5-menu-panel div.ma5-leave-bar .ma5-btn-leave {
+.ma5-menu-panel li.ma5-leave-bar .ma5-btn-leave {
   display: inline-block;
   position: absolute;
   left: 0;
@@ -5503,10 +5506,10 @@ input::-ms-clear {
   }
 }
 @media (max-width: 1200px) {
-  header.masthead #block-mainmenu li {
-    padding: 0px 5px !important;
+  header.masthead #block-mainmenu ul > li {
+    padding: 0px 5px;
   }
-  header.masthead #block-mainmenu li a {
+  header.masthead #block-mainmenu ul > li a {
     font-size: 11px !important;
   }
 }
