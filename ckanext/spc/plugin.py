@@ -1,15 +1,12 @@
 import logging
 import os
 import json
-import uuid
-import hashlib
-import re
-import sqlalchemy as sa
 
 from io import StringIO
 from PIL import Image
 from collections import OrderedDict
-from six import string_types, ensure_binary
+
+from six import string_types
 
 import ckan.model as model
 import ckan.plugins as plugins
@@ -19,10 +16,10 @@ import ckan.lib.helpers as h
 from ckan.lib.uploader import Upload as DefaultUpload
 from ckan.lib.uploader import ResourceUpload
 from ckan.lib.plugins import DefaultTranslation
-from ckan.logic import check_access
+
 from ckan.common import _
-from ckan.common import config
 from ckan.model.license import DefaultLicense, LicenseRegister, License
+
 
 import ckanext.spc.helpers as spc_helpers
 import ckanext.spc.utils as spc_utils
@@ -32,13 +29,11 @@ import ckanext.spc.validators as spc_validators
 
 from ckanext.spc.views import blueprints
 from ckanext.spc.cli import get_commnads
-from ckanext.spc.model.drupal_user import DrupalUser
 from ckanext.spc.ingesters import MendeleyBib
 
 import ckanext.scheming.helpers as scheming_helpers
 
 from ckanext.ingest.interfaces import IIngest
-from ckanext.discovery.plugins.search_suggestions.interfaces import ISearchTermPreprocessor
 from ckanext.harvest.model import HarvestObject, HarvestSource
 
 logger = logging.getLogger(__name__)
@@ -113,7 +108,7 @@ class Upload(DefaultUpload):
         while True:
             if size[0] < 350:
                 break
-            size = map(lambda x: int(x*0.75), size)
+            size = list(map(lambda x: int(x*0.75), size))
 
         img = img.resize(size, Image.LANCZOS)
         file = StringIO()
@@ -149,159 +144,6 @@ class LocaleMiddleware(object):
                 pass
         return self.app(environ, start_response)
 
-class SpcUserPlugin(plugins.SingletonPlugin):
-    plugins.implements(plugins.IAuthenticator, inherit=True)
-    plugins.implements(plugins.IConfigurer)
-
-    _connection = None
-
-    @staticmethod
-    def _make_password():
-        # create a hard to guess password
-        out = ''
-        for n in range(8):
-            out += str(uuid.uuid4())
-        return out
-
-    @staticmethod
-    def _sanitize_drupal_username(name):
-        """Convert a drupal username (which can have spaces and other special characters) into a form that is valid in CKAN
-        """
-        # convert spaces and separators
-        name = re.sub('[ .:/]', '-', name)
-        # take out not-allowed characters
-        name = re.sub('[^a-zA-Z0-9-_]', '', name).lower()
-        # remove doubles
-        name = re.sub('--', '-', name)
-        # remove leading or trailing hyphens
-        name = name.strip('-')[:99]
-        return name
-
-    @staticmethod
-    def _drupal_session_name():
-        server_name = toolkit.request.environ['HTTP_HOST']
-        name = 'SSESS%s' % hashlib.sha256(ensure_binary(server_name)).hexdigest()[:32]
-        return name
-
-    @staticmethod
-    def _save_drupal_user_id(ckan_user_id, drupal_user_id):
-        user = DrupalUser.create_or_get_user(ckan_user_id, drupal_user_id)
-        model.Session.commit()
-        return user
-
-    @staticmethod
-    def _get_user(user_id, email):
-        user = None
-
-        if user_id:
-            try:
-                user = toolkit.get_action('user_show')(
-                    {'return_minimal': True,
-                    'keep_sensitive_data': True,
-                    'keep_email': True},
-                    {'id': user_id})
-            except toolkit.ObjectNotFound:
-                user = None
-
-        if not user:
-            try:
-                user_id = model.Session.query(model.User.id) \
-                               .filter(model.User.email==email) \
-                               .first()[0]
-                user = toolkit.get_action('user_show')(
-                    {'return_minimal': True,
-                    'keep_sensitive_data': True,
-                    'keep_email': True},
-                    {'id': user_id})
-
-            except (toolkit.ObjectNotFound, TypeError):
-                user = None
-
-        return user
-
-    def _login_user(self, user_data):
-        # getting CKAN user if exists
-
-        ckan_uid = DrupalUser.create_or_get_user(
-            ckan_user=None,
-            drupal_user=str(user_data.uid)
-        )
-
-        try:
-            user_id = ckan_uid.ckan_user
-        except AttributeError:
-            user_id = None
-
-        user = self._get_user(user_id, user_data.mail)
-
-        # if we found user by email, we should "map" the ids
-        if user and not user_id:
-            self._save_drupal_user_id(user["id"], str(user_data.uid))
-
-        if user:
-            if user_data.mail != user['email']:
-                user['email'] = user_data.mail
-
-                user = toolkit.get_action('user_update')(
-                                         {'ignore_auth': True,
-                                         'user': ''},
-                                         user)
-
-            if user_data.name != user['name']:
-                User = model.Session.query(model.User).get(user['id'])
-                User.name = self._sanitize_drupal_username(user_data.name)
-                model.Session.commit()
-                # get user again after changes in user model
-                user = self._get_user(user_id, user_data.mail)
-        else:
-            user = {'email': user_data.mail,
-                    'name': self._sanitize_drupal_username(user_data.name),
-                    'password': self._make_password()}
-
-            user = toolkit.get_action('user_create')(
-                                      {'ignore_auth': True,
-                                      'user': ''},
-                                      user)
-            # save drupal user ID
-            self._save_drupal_user_id(user["id"], str(user_data.uid))
-        toolkit.c.user = user['name']
-
-    # IAuthenticator
-
-    def identify(self):
-        """ This does drupal authorization.
-        The drupal session contains the drupal id of the logged in user.
-        We need to convert this to represent the ckan user. """
-
-        # If no drupal session name create one
-        drupal_sid = toolkit.request.cookies.get(self._drupal_session_name())
-
-        if drupal_sid:
-            engine = sa.create_engine(self._connection)
-            user = engine.execute(
-                'SELECT u.name, u.mail, u.uid '
-                'FROM users u '
-                'JOIN sessions s on s.uid=u.uid '
-                'WHERE s.sid=%s',
-                [str(drupal_sid)])
-
-            user_data = user.first()
-            # check if session has username,
-            # otherwise is unauthenticated user session
-            try:
-                if user_data.name and user_data.name != '':
-                    self._login_user(user_data)
-            except AttributeError:
-                pass
-
-    # IConfigurer
-
-    def update_config(self, config_):
-        toolkit.add_template_directory(config_, 'spc_user/templates')
-        self._connection = config_.get('spc.drupal.db_url')
-
-        if not self._connection:
-            raise Exception('Drupal7 extension has not been configured')
 
 class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)

@@ -11,16 +11,20 @@ class DrupalUser(Base):
     drupal_user = Column(Integer)
 
     @classmethod
-    def create_or_get_user(cls, ckan_user, drupal_user):
+    def get_or_add(cls, ckan_user, drupal_user):
         if not ckan_user:
-            user = meta.Session.query(cls) \
-                       .filter_by(drupal_user=drupal_user) \
-                       .first()
+            user = (
+                meta.Session.query(cls)
+                .filter_by(drupal_user=drupal_user)
+                .one_or_none()
+            )
             return user
 
-        user = meta.Session.query(cls) \
-                   .filter_by(ckan_user=ckan_user) \
-                   .first()
+        user = (
+            meta.Session.query(cls)
+            .filter_by(ckan_user=ckan_user)
+            .one_or_none()
+        )
         if user is None:
             user = DrupalUser()
             user.ckan_user, user.drupal_user = ckan_user, drupal_user

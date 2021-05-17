@@ -82,7 +82,7 @@ setup(
         [ckan.plugins]
         spc=ckanext.spc.plugin:SpcPlugin
         dotstat_datastore=ckanext.spc.datastore:DotstatDatastorePlugin
-        spc_user=ckanext.spc.plugin:SpcUserPlugin
+        spc_user=ckanext.spc.plugins:SpcUserPlugin
         spc_oaipmh_harvester=ckanext.spc.harvesters.oaipmh_harvester:SpcOaipmhHarvester
         spc_gbif_harvester=ckanext.spc.harvesters.gbif:SpcGbifHarvester
         spc_sprep_harvester=ckanext.spc.harvesters.sprep:SpcSprepHarvester
