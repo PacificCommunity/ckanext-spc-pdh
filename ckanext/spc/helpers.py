@@ -22,11 +22,9 @@ def get_helpers():
     return dict(
         spc_get_available_languages=spc_get_available_languages,
         get_eez_options=get_eez_options,
-        spc_get_footer=spc_get_footer,
         spc_dataset_suggestion_form=spc_dataset_suggestion_form,
         spc_dataset_suggestion_path=spc_dataset_suggestion_path,
         spc_national_map_previews=spc_national_map_previews,
-        get_footer_css_url=get_footer_css_url,
         get_dqs_explanation_url=get_dqs_explanation_url,
         get_drupal_user_url=get_drupal_user_url,
         spc_unwrap_list=spc_unwrap_list,
@@ -108,7 +106,7 @@ def get_eez_options():
             ).format(option['text']))
             continue
         result.append(option)
-    # result.append({'text': 'All countries', 'value': 'all'})
+
     return result
 
 
@@ -118,43 +116,6 @@ def get_extent_for_country(country):
         get_eez_options()
     ))
     return spatial
-
-
-def spc_get_footer():
-    drupal_url = config.get('drupal.site_url')
-    if drupal_url:
-        get_html = _spc_get_footer_from_drupal(drupal_url)
-        return get_html
-
-
-@cache.cache('footer_from_drupal', expire=3600)
-def _spc_get_footer_from_drupal(drupal_url=None):
-    if drupal_url is None or drupal_url == h.full_current_url(
-    ).split('?')[0][:-1]:
-        return None
-    r = None
-    try:
-        r = requests.get(
-            drupal_url + '/footer_export', verify=False, timeout=10
-        )
-    except requests.exceptions.Timeout:
-        logger.warning(drupal_url + '/footer_export connection timeout')
-    except requests.exceptions.TooManyRedirects:
-        logger.warning(drupal_url + '/footer_export too many redirects')
-    except requests.exceptions.RequestException as e:
-        logger.error(e.message)
-
-    if r:
-        footer = r.json()
-    else:
-        return None
-
-    if footer and 'main' in footer:
-        return footer['main'][0]
-
-
-def get_footer_css_url():
-    return '/sites/all/themes/spc/css/footer_css/footer.css'
 
 
 def get_dqs_explanation_url():
