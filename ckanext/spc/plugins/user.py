@@ -180,6 +180,13 @@ def _sync_user_fields(user: dict, user_data: UserData) -> dict:
         )
 
     if user_data.name != user["name"]:
+        # If there are some old(deleted, maybe) users with the same name -
+        # rename them
+        name_theft = model.User.by_name(user_data.name)
+        if name_theft:
+            name_theft.name = name_theft.name + secrets.token_urlsafe(5)
+            model.Session.commit()
+
         User = model.Session.query(model.User).get(user["id"])
         User.name = _sanitize_username(user_data.name)
         model.Session.commit()
@@ -211,7 +218,6 @@ def _create_user_from_user_data(user_data: UserData) -> dict:
 
 def _login_user(user_data: UserData):
     # getting CKAN user if exists
-
     ckan_uid = DrupalUser.get_or_add(
         ckan_user=None, drupal_user=str(user_data.uid)
     )
