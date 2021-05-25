@@ -7,6 +7,7 @@ let filterTypeOptions = [
   { value: "res_format", label: "Format", type: "dropdown" },
   { value: "organization", label: "Organisation", type: "dropdown" },
   { value: "solr", label: "SOLR Query" },
+  { value: "extras_res_attachment", label: "Data documents" },
 ];
 const operatorOptions = [
   { value: "or", label: "Or" },
@@ -50,6 +51,8 @@ export class Filter {
         return "Enter any title";
       case "solr":
         return "Enter SOLR query";
+      case "extras_res_attachment":
+        return "Enter document data";
 
       case "type":
         return "Choose Dataset type";
