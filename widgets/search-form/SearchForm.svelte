@@ -20,12 +20,12 @@
 </script>
 
 <div class="advanced-filters">
+  {#if $advancedMode}
   {#each $filters as filter }
     <div class="advanced-filter-row">
       <FilterSection {filter}/>
     </div>
   {/each}
-  {#if $advancedMode}
     <div class="advanced-filter-row add-filter" on:click={() => filters.add()}>
       <span class="input-placeholder">Add search field</span>
     </div>
