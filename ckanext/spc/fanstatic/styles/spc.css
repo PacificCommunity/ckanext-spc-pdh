@@ -42,7 +42,7 @@
 .header-link-animated:hover,
 .header-link-animated:active,
 .header-link-animated:focus {
-  border: 2px solid #ffffff;
+  border: 2px solid #fff;
   border-left-color: transparent;
   border-top-color: transparent;
   box-shadow: 4px 6px 4px rgba(30, 30, 30, 0.3);
@@ -344,7 +344,7 @@ li.with-icon:hover .fa {
   font-size: 2em;
 }
 .fa-inverse {
-  color: #ffffff;
+  color: #fff;
 }
 .fp.fa-water:before {
   content: '\e918';
@@ -3074,7 +3074,7 @@ header.navbar > .container .collapse {
 }
 [role=main] #content,
 .main #content {
-  background: #ffffff;
+  background: #fff;
   border-radius: 5px;
   box-shadow: 0px 2px 3px #ccc;
 }
@@ -3631,7 +3631,7 @@ table.table tr th.dataset-details {
 }
 .dataset-read .primary .nav-tabs li.active a {
   background-color: #001e73;
-  color: #ffffff;
+  color: #fff;
   font-weight: 600;
   padding: 7px 21px;
 }
@@ -4517,7 +4517,7 @@ table.table tr th.dataset-details {
 }
 .btn-bulk-download {
   font-weight: 400;
-  background: #FFFFFF;
+  background: #fff;
   border: 1px solid #031F79;
   box-sizing: border-box;
   border-radius: 3px;
@@ -4686,7 +4686,7 @@ button.header-menu-btn:focus {
   margin: 40px 0 10px;
 }
 .js [role='main'] .secondary .filters {
-  background: #ffffff;
+  background: #fff;
   padding: 10px 8px;
 }
 .secondary .filters .mobile-filters-heading {
@@ -4798,7 +4798,7 @@ button.header-menu-btn:focus {
   font-size: 10px;
   line-height: 10px;
   color: #004761;
-  background-color: #ffffff;
+  background-color: #fff;
   border: solid 1px #0091c7;
   border-radius: 5px;
   padding: 10px;
@@ -4812,7 +4812,7 @@ button.header-menu-btn:focus {
   transform: translateX(-50%);
 }
 .secondary .filters > div .module .module-heading .facet-sorter.active {
-  color: #ffffff;
+  color: #fff;
   background-color: #0091c7;
 }
 .secondary .filters > div .module .module-heading .facet-sorter.active .fa-chevron-down {
@@ -4962,7 +4962,7 @@ button.header-menu-btn:focus {
   font-size: 10px;
   line-height: 10px;
   color: #004761;
-  background-color: #ffffff;
+  background-color: #fff;
   border: solid 1px #0091c7;
   border-radius: 5px;
   padding: 10px;
@@ -4976,7 +4976,7 @@ button.header-menu-btn:focus {
   transform: translateX(-50%);
 }
 .module .module-heading .facet-sorter.active {
-  color: #ffffff;
+  color: #fff;
   background-color: #0091c7;
 }
 .module .module-heading .facet-sorter.active .fa-chevron-down {
@@ -5053,6 +5053,8 @@ button.header-menu-btn:focus {
 .search-form .search-input-group {
   padding: 0 15px;
   width: 100%;
+  margin-bottom: 10px;
+  position: relative;
 }
 .search-form .search-input-group .input-group-btn {
   position: absolute;
@@ -5068,7 +5070,6 @@ button.header-menu-btn:focus {
   font-size: 14px;
   font-weight: 500;
   color: #000;
-  margin-bottom: 10px;
 }
 .search-form .search-input-group .clear-results,
 .search-form .search-input-group .btn-lg {
@@ -5089,6 +5090,31 @@ button.header-menu-btn:focus {
   background-position: 50%;
   background-size: 15px;
   color: transparent;
+}
+.search-form .search-input-group .suggestion-box {
+  display: none;
+}
+.search-form .search-input-group .pending-request {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  display: none;
+  color: #000;
+  transform: translateY(-50%);
+  transform-origin: 50%;
+}
+.search-form .search-input-group .pending-request .fa {
+  animation: rotate 1s infinite linear;
+}
+.search-form .search-input-group.active-suggestions {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.search-form .search-input-group.active-suggestions .suggestion-box {
+  display: block;
+}
+.search-form .search-input-group.pending-suggestions .pending-request {
+  display: block;
 }
 @media (max-width: 767px) {
   .search-form .input-group-btn {
@@ -5299,7 +5325,7 @@ button.header-menu-btn:focus {
   right: -50px;
   top: 48px;
   box-shadow: 0px 3px 70px 0 rgba(142, 153, 158, 0.45);
-  background-color: #ffffff;
+  background-color: #fff;
   z-index: 2;
 }
 .spc-order-by-wrapper .suggestion-block.active {
@@ -5320,7 +5346,7 @@ input::-ms-clear {
   border-radius: 12px;
   border: solid 2px #dddddd;
   padding: 18px;
-  background: #ffffff;
+  background: #fff;
   margin-top: 1px;
   color: #333333;
 }
@@ -5503,6 +5529,68 @@ input::-ms-clear {
 #user-register-form .form-actions,
 #user-login-form .form-actions {
   margin-bottom: 20px;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+.suggestion-box {
+  position: absolute;
+  z-index: 2000;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0px;
+  background: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  list-style: none;
+  transform: translate(0, 100%);
+  border: 2px solid #c3c3c3;
+  border-radius: 4px;
+  margin: 0 15px;
+}
+.suggestion-box .suggestion-section .suggestions {
+  padding: 0px;
+  margin: 20px 24px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 19px;
+  list-style: none;
+}
+.suggestion-box .suggestion-section .suggestions:empty {
+  display: none;
+}
+.suggestion-box .suggestion-section .suggestions:before {
+  display: block;
+  color: #001e73;
+  content: attr(data-label);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+.suggestion-box .suggestion-section .suggestions li {
+  margin-top: 8px;
+}
+.suggestion-box .suggestion-section .suggestions li a {
+  color: #000;
+}
+.suggestion-box .suggestion-section .suggestions li a.selected {
+  text-decoration: underline;
+}
+.suggestion-box .suggestion-section .suggestions li:first-child {
+  margin-top: 12px;
+}
+.suggestion-box .suggestion-section .suggestions li .muted {
+  margin-left: 6px;
+  color: #c6c6c6;
+}
+.suggestion-box .suggestion-section .suggestions li strong {
+  font-weight: 700;
 }
 @media (max-width: 1124px) {
   header.navbar {
@@ -5691,9 +5779,7 @@ input::-ms-clear {
     background: transparent;
   }
   .search-form .search-input-group {
-    position: static;
     margin-top: 17px;
-    margin-bottom: 0px;
   }
   .search-form .search-input-group #field-giant-search {
     background-color: #f7f7f7;

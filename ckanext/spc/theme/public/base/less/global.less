@@ -127,7 +127,7 @@ header.navbar {
                     line-height: 1rem;
                     padding: 15px 50px;
                     display: block;
-                    border-left: 3px solid #fff;
+                    border-left: 3px solid @white;
 
                     &:hover {
                         background-color: transparent;
@@ -147,7 +147,7 @@ header.navbar {
             }
 
             &:hover {
-                background-color: #fff;
+                background-color: @white;
             }
         }
     }
@@ -201,17 +201,17 @@ header.navbar {
                 a {
                     font-size: 14px;
                     font-weight: 500;
-                    color: #fff;
+                    color: @white;
                     @media (max-width: 767px) {
                         font-size: 14px;
-                        color: #fff;
+                        color: @white;
                     }
                 }
                 &.active {
                     a {
-                        color: #fff;
+                        color: @white;
                         @media (max-width: 767px) {
-                            color: #fff;
+                            color: @white;
                             text-decoration: underline;
                         }
                     }
@@ -220,7 +220,7 @@ header.navbar {
                     content: '>';
                     font-size: 12px;
                     font-weight: 400;
-                    color: #fff;
+                    color: @white;
                     margin-left: 4px;
                 }
                 & + li:before {
@@ -234,7 +234,7 @@ header.navbar {
         }
     }
     #content {
-        background: #ffffff;
+        background: @white;
         border-radius: 5px;
         box-shadow: 0px 2px 3px #ccc;
     }
@@ -288,7 +288,7 @@ header.navbar {
         background-color: @heading-blue;
         font-size: 19px;
         font-weight: normal;
-        color: #fff;
+        color: @white;
         border-radius: 2px;
         .action {
             color: rgb(0, 0, 0);
@@ -379,7 +379,7 @@ header.navbar {
         &>li {
             display: inline-block;
             a {
-                color: #fff;
+                color: @white;
                 background-color: #bcdfe5;
                 border: none;
                 border-radius: 5px;
@@ -390,7 +390,7 @@ header.navbar {
             }
             &.active {
                 a {
-                    color: #fff;
+                    color: @white;
                     background-color: #036295;
                     border-radius: 5px;
                 }
@@ -422,14 +422,14 @@ header.navbar {
         width: 120px;
         font-size: 14px;
         line-height: 1;
-        color: #fff;
+        color: @white;
         text-align: center;
         background-color: #3a87ad;
         border-radius: 4px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
         padding: 12px;
         a {
-            color: #fff;
+            color: @white;
             text-decoration: underline;
             &:hover {
                 text-shadow: 1px 1px @heading-blue;
@@ -648,7 +648,7 @@ table.table {
     top: 100px;
     right: 100px;
     padding: 5px;
-    color: #fff;
+    color: @white;
     display: block;
     min-height: 28px;
     font-family: "Calibri", sans-serif;
