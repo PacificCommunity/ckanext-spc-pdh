@@ -281,32 +281,34 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
             if len(item) == 1:
                 # it's shortened search, probably initiated by bulk download
                 continue
-            item['tracking_summary'] = (
-                model.TrackingSummary.get_for_package(item['id']))
 
-            item['five_star_rating'] = spc_utils._get_stars_from_solr(
-                item['id'])
-            item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
+            if item.get('id'):
+                item['tracking_summary'] = (
+                    model.TrackingSummary.get_for_package(item['id']))
+                item['five_star_rating'] = spc_utils._get_stars_from_solr(
+                    item['id'])
+                if _package_is_native(item['id']):
+                    item['isPartOf'] = 'pdh.pacificdatahub'
+                else:
+                    src_type = _get_isPartOf(item['id'])
+                    if src_type:
+                        item['isPartOf'] = src_type
+
+            if item.get('name'):
+                item['ga_view_count'] = spc_utils.ga_view_count(item['name'])
             item['short_notes'] = h.truncate(item.get('notes', ''))
 
-            org_name = item['organization']['name']
-            try:
-                organization = _org_cache[org_name]
-            except KeyError:
-                organization = h.get_organization(org_name)
-                _org_cache[org_name] = organization
-            item['organization_image_url'] = organization.get(
-                'image_display_url') or h.url_for_static(
-                    '/base/images/placeholder-organization.png',
-                    qualified=True)
-
-            if _package_is_native(item['id']):
-                item['isPartOf'] = 'pdh.pacificdatahub'
-            else:
-                src_type = _get_isPartOf(item['id'])
-                if src_type:
-                    item['isPartOf'] = src_type
-
+            if item.get('organization'):
+                org_name = item['organization']['name']
+                try:
+                    organization = _org_cache[org_name]
+                except KeyError:
+                    organization = h.get_organization(org_name)
+                    _org_cache[org_name] = organization
+                item['organization_image_url'] = organization.get(
+                    'image_display_url') or h.url_for_static(
+                        '/base/images/placeholder-organization.png',
+                        qualified=True)
 
         if is_popular_first:
             results['results'].sort(key=lambda i: i.get('ga_view_count', 0),

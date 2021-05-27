@@ -96,10 +96,10 @@
       font-weight: normal;
       border: none;
       border-radius: 5px;
-      color: #fff;
+      color: @white;
       &:hover, &:focus, &:active {
         background: linear-gradient(0deg, #0c436b 20%, #036295 80%);
-        color: #fff;
+        color: @white;
       }
     }
     .toolbar {
@@ -109,7 +109,7 @@
   .dataset-read {
     display: block;
     .primary {
-      background: #fff;
+      background: @white;
     }
   }
   .dataset-list {
@@ -225,9 +225,7 @@
     .js [role='main'] .secondary .filters {background: transparent;}
     .search-form {
         .search-input-group {
-            position: static;
             margin-top: 17px;
-            margin-bottom: 0px;
             #field-giant-search {
                 background-color: #f7f7f7;
                 border: none;
@@ -540,7 +538,7 @@
             border-radius: 2px;
             .btn.cancel {
                 color: #036295;
-                background: #fff;
+                background: @white;
                 border: 2px solid #036295;
                 line-height: 16px;
             }
