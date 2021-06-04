@@ -38,6 +38,15 @@ from ckanext.harvest.model import HarvestObject, HarvestSource
 
 logger = logging.getLogger(__name__)
 
+DATASETS_QUERY = "res_format:(CSV OR XML OR XLS OR XLSX OR ODS OR MDB OR MDE \
+                  OR DBF OR SQL OR SQLITE OR DB OR DBF OR DBS OR ODB OR JSON \
+                  OR GEOJSON OR KML OR KMZ OR SHP OR SHX OR WMS OR WFS OR WCS OR CSW) OR \
+                  dcat_type:(dataset OR service) OR \
+                  type:(dataset OR biodiversity_data)"
+PUBLICATIONS_QUERY = "res_format:(PDF OR DOC OR DOCX OR ODF OR ODT OR EPUB OR MOBI) OR \
+                      dcat_type:(text) OR \
+                      type:(publications)"
+
 new_order_facet_dict = {
     'topic': _('Topic'),
     'member_countries':  _('Member countries'),
@@ -253,11 +262,15 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IPackageController
 
     def before_search(self, search_params):
+        gen_type_datasets = 'general_type:"Datasets"'
+        gen_type_publications = 'general_type:"Publications"'
         fq = search_params.get('fq')
         if isinstance(fq, string_types):
             search_params['fq'] = fq.replace(
                 'dataset_type:dataset', 'dataset_type:({})'.format(' OR '.join(
-                    [type for type in self.dataset_types])))
+                    [type for type in self.dataset_types]))).replace(
+                        gen_type_datasets, DATASETS_QUERY).replace(
+                           gen_type_publications, PUBLICATIONS_QUERY)
         search_params = spc_utils.params_into_advanced_search(search_params)
         return search_params
 
