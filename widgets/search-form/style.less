@@ -1,3 +1,4 @@
+@white: #FFFFFF;
 @gray: #999999;
 @light-gray: #F7F7F7;
 @black: black;
@@ -274,14 +275,14 @@
     box-shadow: none;
     border: none;
     outline: none;
-    margin-right: 5px;
+    margin: -33px 5px 0px 0px;
+    float: right;
     &:hover {
       background: @blue;
       color: @white;
     }
   }
   .advanced-form-control {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     .enable-advanced-search {
@@ -352,4 +353,16 @@
     border: none;
     background: none;
   }
+}
+
+.hdn {
+  visibility: hidden;
+}
+
+.info-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0px 4px;
+  vertical-align: top;
 }

@@ -6,7 +6,6 @@ let filterTypeOptions = [
   { value: "member_countries", label: "Country", type: "dropdown" },
   { value: "res_format", label: "Format", type: "dropdown" },
   { value: "organization", label: "Organisation", type: "dropdown" },
-  { value: "solr", label: "SOLR Query" },
 ];
 const operatorOptions = [
   { value: "or", label: "Or" },
@@ -48,9 +47,6 @@ export class Filter {
         return "Search datasets...";
       case "title":
         return "Enter any title";
-      case "solr":
-        return "Enter SOLR query";
-
       case "type":
         return "Choose Dataset type";
       case "topic":
