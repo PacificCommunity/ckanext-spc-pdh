@@ -1,6 +1,8 @@
 import { writable } from "svelte/store";
 import { Filter } from "./Filter";
 
+export const solrMode = writable(false);
+
 const makeAdvancedStore = () => {
   const { set, update, subscribe } = writable(false);
 
