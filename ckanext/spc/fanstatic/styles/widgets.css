@@ -378,14 +378,14 @@
   box-shadow: none;
   border: none;
   outline: none;
-  margin-right: 5px;
+  margin: -33px 5px 0px 0px;
+  float: right;
 }
 .advanced-filters .btn:hover {
   background: #001E73;
   color: #FFFFFF;
 }
 .advanced-filters .advanced-form-control {
-  display: flex;
   align-items: center;
   justify-content: space-between;
 }

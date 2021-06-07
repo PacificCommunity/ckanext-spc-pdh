@@ -266,7 +266,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         ext_solr_query = search_params.get('extras', {}).get('ext_solr_query', '')
         if ext_solr_query:
             q += ' ' + ext_solr_query
-        search_params['q'] = ext_solr_query
+        search_params['q'] = q
         gen_type_datasets = 'general_type:"Datasets"'
         gen_type_publications = 'general_type:"Publications"'
         fq = search_params.get('fq')
