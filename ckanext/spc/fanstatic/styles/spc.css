@@ -5050,6 +5050,45 @@ button.header-menu-btn:focus {
   color: #000;
   margin-left: 18px;
 }
+.search-form h2 .looking_data {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 28px;
+}
+.search-form h2 .looking_data span {
+  display: inline-block;
+  font-weight: 400;
+  margin-top: 15px;
+}
+.search-form h2 .looking_data .structured-data {
+  display: inline-block;
+  border: 1px solid #009FDE;
+  border-radius: 4px;
+  color: #009FDE;
+  font-weight: 500;
+  padding: 0 10px;
+  margin-left: 10px;
+}
+@media screen and (max-width: 447px) {
+  .search-form h2 .looking_data .structured-data {
+    margin-left: 0px;
+  }
+}
+.search-form h2 .looking_data .structured-data:hover {
+  text-decoration: none;
+}
+.search-form h2 .looking_data .struct-data-tooltip {
+  font-size: 17px;
+  top: 1px;
+}
+.search-form h2 .looking_data .struct-data-tooltip .tooltiptext {
+  width: 160px;
+  left: -102px;
+}
+.search-form h2 .looking_data .struct-data-tooltip .info-icon {
+  margin-top: 1px;
+  margin-left: 0px;
+}
 .search-form .search-input-group {
   padding: 0 15px;
   width: 100%;

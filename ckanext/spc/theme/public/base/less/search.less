@@ -54,6 +54,43 @@
         font-weight: 300;
         color: @black;
         margin-left: 18px;
+        .looking_data {
+            font-style: normal;
+            font-size: 14px;
+            line-height: 28px;
+            span {
+                display: inline-block;
+                font-weight: 400;
+                margin-top: 15px;
+            }
+            .structured-data {
+                display: inline-block;
+                border: 1px solid #009FDE;
+                border-radius: 4px;
+                color: #009FDE;
+                font-weight: 500;
+                padding: 0 10px;
+                margin-left: 10px;
+                @media screen and (max-width: 447px){
+                    margin-left: 0px;
+                }
+            }
+            .structured-data:hover {
+                text-decoration: none;
+            }
+            .struct-data-tooltip {
+                font-size: 17px;
+                top: 1px;
+                .tooltiptext {
+                    width: 160px;
+                    left: -102px;
+                }
+                .info-icon {
+                    margin-top: 1px;
+                    margin-left: 0px;
+                }
+            }
+        }
     }
     & .search-input-group {
         padding: 0 15px;

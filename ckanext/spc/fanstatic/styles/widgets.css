@@ -468,5 +468,6 @@
 }
 .data-quality-tooltip .info-tooltip {
   width: 160px !important;
+  left: -99px !important;
 }
 
