@@ -447,6 +447,15 @@
     background: none;
   }
 }
+@media screen and (max-width: 768px) {
+  .advanced-filters .advanced-filter-row .search-btn {
+    top: 10px;
+  }
+  .unstyled-button {
+    border: none;
+    background: none;
+  }
+}
 .hdn {
   visibility: hidden;
 }
