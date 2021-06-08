@@ -27,6 +27,9 @@ spc_js:
     - scripts/spc-search-autocomplete.js
 spc_css:
   output: ckanext-spc/%(version)s_spc.css
+  extra:
+    preload:
+      - base/main
   filter: cssrewrite
   contents:
     - styles/widgets.css
