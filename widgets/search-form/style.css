@@ -349,3 +349,6 @@
   margin: 0px 4px;
   vertical-align: top;
 }
+.data-quality-tooltip .info-tooltip {
+  width: 160px !important;
+}
