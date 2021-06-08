@@ -267,7 +267,7 @@ class SpcPlugin(plugins.SingletonPlugin, DefaultTranslation):
         if ext_solr_query:
             q += ' ' + ext_solr_query
         search_params['q'] = q
-        gen_type_datasets = 'general_type:"Datasets"'
+        gen_type_datasets = 'general_type:"Structured Data"'
         gen_type_publications = 'general_type:"Publications"'
         fq = search_params.get('fq')
         if isinstance(fq, string_types):
