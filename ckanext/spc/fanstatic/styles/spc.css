@@ -5141,6 +5141,7 @@ button.header-menu-btn:focus {
   color: #000;
   transform: translateY(-50%);
   transform-origin: 50%;
+  z-index: 50;
 }
 .search-form .search-input-group .pending-request .fa {
   animation: rotate 1s infinite linear;
