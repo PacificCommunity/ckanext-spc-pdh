@@ -1,3 +1,4 @@
+@white: #FFFFFF;
 @gray: #999999;
 @light-gray: #F7F7F7;
 @black: black;
@@ -33,7 +34,7 @@
         width: 82px;
       }
       &.filter-type {
-        width: 148px;
+        width: 160px;
         margin-right: 5px;
       }
       .filter-select {
@@ -42,8 +43,8 @@
         transform: translateY(-17px);
         position: absolute;
         padding: 7px 21px;
-        background: #FFFFFF;
-        border: 1px solid #FFFFFF;
+        background: @white;
+        border: 1px solid @white;
         box-sizing: border-box;
         box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
@@ -148,14 +149,14 @@
         padding: 5px 10px;
         background: @blue2;
         border-radius: 4px;
-        color: #fff;
+        color: @white;
         margin-left: 10px;
         margin-right: 10px;
         .remove-icon {
             cursor: pointer;
           margin-left: 15px;
           svg {
-            stroke: #fff;
+            stroke: @white;
           }
         }
       }
@@ -232,7 +233,7 @@
           &:before {
             margin-right: 5px;
             border: 1px solid @blue;
-            background: #fff;
+            background: @white;
             position: absolute;
             left: 0px;
           }
@@ -268,20 +269,20 @@
     background: @blue;
     border-radius: 5px;
     padding: 7px 19px;
-    color: #fff;
+    color: @white;
     font-size: 14px;
     line-height: 18px;
     box-shadow: none;
     border: none;
     outline: none;
-    margin-right: 5px;
+    margin: -33px 5px 0px 0px;
+    float: right;
     &:hover {
       background: @blue;
-      color: #fff;
+      color: @white;
     }
   }
   .advanced-form-control {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     .enable-advanced-search {
@@ -322,7 +323,6 @@
     }
   }
 }
-
 @media (min-width: 768px) {
   .advanced-filters {
     .advanced-filter-row {
@@ -351,5 +351,38 @@
   .unstyled-button {
     border: none;
     background: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .advanced-filters {
+    .advanced-filter-row {
+      .search-btn {
+        top: 10px;
+      }
+    }
+  }  
+  .unstyled-button {
+    border: none;
+    background: none;
+  }
+}
+
+.hdn {
+  visibility: hidden;
+}
+
+.info-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0px 4px;
+  vertical-align: top;
+}
+
+.data-quality-tooltip {
+  .info-tooltip {
+    width: 160px !important;
+    left: -99px !important;
   }
 }

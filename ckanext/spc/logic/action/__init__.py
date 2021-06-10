@@ -20,5 +20,7 @@ def get_actions():
         approve_access=update.approve_access,
         reject_access=update.reject_access,
         update_access=update.update_access,
+
+        spc_search_autocomplete=get.search_autocomplete,
     )
     return actions

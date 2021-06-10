@@ -54,17 +54,53 @@
         font-weight: 300;
         color: @black;
         margin-left: 18px;
+        .looking_data {
+            font-style: normal;
+            font-size: 14px;
+            line-height: 28px;
+            span {
+                display: inline-block;
+                font-weight: 400;
+                margin-top: 15px;
+            }
+            .structured-data {
+                display: inline-block;
+                border: 1px solid #009FDE;
+                border-radius: 4px;
+                color: #009FDE;
+                font-weight: 500;
+                padding: 0 10px;
+                margin-left: 10px;
+                @media screen and (max-width: 447px){
+                    margin-left: 0px;
+                }
+            }
+            .structured-data:hover {
+                text-decoration: none;
+            }
+            .struct-data-tooltip {
+                font-size: 17px;
+                top: 1px;
+                .tooltiptext {
+                    width: 160px;
+                    left: -102px;
+                }
+                .info-icon {
+                    margin-top: 1px;
+                    margin-left: 0px;
+                }
+            }
+        }
     }
     & .search-input-group {
-        top: -56px;
-        left: 0;
         padding: 0 15px;
         width: 100%;
-        display: block;
+
+        margin-bottom: 10px;
+        position: relative;
         & .input-group-btn {
             position: absolute;
             right: 20px;
-            // top: 0;
             button {
                 position: absolute;
             }
@@ -72,21 +108,64 @@
         #field-giant-search {
             height: 40px;
             padding: 0 10px;
-            border-radius: 20px;
-            font-size: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            color: @black;
+
         }
-        & .btn-lg {
+        & .clear-results, & .btn-lg  {
             background: transparent;
             box-shadow: none;
             border: none;
             position: absolute;
+         }
+         & .clear-results {
+            right: 35px;
+            color: @dark-blue;
+            font-size: 20px;
+         }
+         & .btn-lg  {
             right: 10px;
             .spc-icon-lense;
             background-repeat: no-repeat;
-            color: transparent;
             background-position: 50%;
             background-size: 15px;
+            color: transparent;
          }
+
+        .suggestion-box {
+            display: none;
+        }
+        .pending-request {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            display: none;
+            color: @black;
+            transform: translateY(-50%);
+            transform-origin: 50%;
+
+            z-index: 50;
+
+            .fa {
+                animation: rotate 1s infinite linear;
+            }
+        }
+
+        &.active-suggestions {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            .suggestion-box {
+                display: block;
+            }
+        }
+
+        &.pending-suggestions {
+            .pending-request {
+                display: block;
+            }
+        }
     }
     // fix icon search responsive
     @media (max-width: 767px) {
@@ -298,7 +377,7 @@
         right: -50px;
         top: 48px;
         box-shadow: 0px 3px 70px 0 rgba(142, 153, 158, 0.45);
-        background-color: #ffffff;
+        background-color: @white;
         z-index: 2;
         &.active {
             transform: scale(1);
@@ -320,7 +399,7 @@ input::-ms-clear {
     border-radius: 12px;
     border: solid 2px #dddddd;
     padding: 18px;
-    background: #ffffff;
+    background: @white;
     margin-top: 1px;
     color: #333333;
     li {
@@ -372,13 +451,15 @@ input::-ms-clear {
 }
 
 .advanced-filters {
-  .advanced-form-control {
-    .enable-advanced-search {
-      input:checked + label {
-        &:after {
-          content: url("../../base/images/check.svg");
+    padding: 0 15px;
+
+    .advanced-form-control {
+        .enable-advanced-search {
+            input:checked+label {
+                &:after {
+                    content: url("../../base/images/check.svg");
+                }
+            }
         }
-      }
     }
-  }
 }

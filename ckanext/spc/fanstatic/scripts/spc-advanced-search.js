@@ -23,6 +23,14 @@ ckan.module("spc-advanced-search", function ($, _) {
   return {
     options: {},
     initialize: function () {
+      $("#dataset-search-form").on('submit', function () {
+        if (SPCWidgets.SearchForm.advancedMode.current) {
+          $('#field-giant-search').val('');
+        }
+      });
+      SPCWidgets.SearchForm.advancedMode.subscribe(function (enabled) {
+        $('.search-input-group').prop('hidden', enabled)
+      })
       SPCWidgets.SearchForm.facets$.set(
         fetch(
           this.sandbox.client.url(
