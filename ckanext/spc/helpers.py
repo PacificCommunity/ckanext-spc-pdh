@@ -20,7 +20,6 @@ cache = CacheManager()
 exclude = ['topic', 'member_countries', 'organization', 'tags',
             'res_format','type', 'licence_id', 'ext_advanced_value',
             'general_type']
-structured_data_sorting = "sort=score+desc%2C+_five_star_rating+desc%2C+metadata_modified+desc"
 datasets_query = 'general_type=Datasets'
 
 def get_helpers():
@@ -61,10 +60,7 @@ def is_text_search(request):
 
 def set_strucured_data_url(request):
     original_q_string = request.query_string.decode('utf-8')
-    parts = [structured_data_sorting if x.startswith('sort')
-                else x for x in original_q_string.split('&')]
-    q_string = '&'.join(parts)
-    return f'?{datasets_query}&{q_string}'
+    return f'?{datasets_query}&{original_q_string}'
 
 def countries_list(countries):
     countries_list = []
