@@ -20,8 +20,8 @@ cache = CacheManager()
 exclude = ['topic', 'member_countries', 'organization', 'tags',
             'res_format','type', 'licence_id', 'ext_advanced_value',
             'general_type']
-structured_data_sorting = "sort=_five_star_rating+desc%2C+score+desc%2C+metadata_modified+desc"
-datasets_query = 'general_type=Structured%20Data'
+structured_data_sorting = "sort=score+desc%2C+_five_star_rating+desc%2C+metadata_modified+desc"
+datasets_query = 'general_type=Datasets'
 
 def get_helpers():
     return dict(
