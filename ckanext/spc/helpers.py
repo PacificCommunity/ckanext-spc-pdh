@@ -4,7 +4,7 @@ import requests
 import iso639
 import funcy as F
 from typing import List
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import urlparse, urlunparse, parse_qs
 from operator import eq, itemgetter
 from beaker.cache import CacheManager
 
@@ -17,6 +17,10 @@ from ckanext.spc.utils import eez
 logger = logging.getLogger(__name__)
 cache = CacheManager()
 
+exclude = ['topic', 'member_countries', 'organization', 'tags',
+            'res_format','type', 'licence_id', 'ext_advanced_value',
+            'general_type']
+datasets_query = 'general_type=Datasets'
 
 def get_helpers():
     return dict(
@@ -41,8 +45,22 @@ def get_helpers():
         spc_is_preview_maxsize_exceeded=is_preview_maxsize_exceeded,
         spc_get_proxy_res_max_size=get_proxy_res_max_size,
         spc_convert_bytes=convert_bytes,
+        is_text_search=is_text_search,
+        set_strucured_data_url=set_strucured_data_url,
     )
 
+
+def is_text_search(request):
+    d = parse_qs(request.query_string)
+    query_keys = [x.decode('utf-8') for x in d.keys()]
+    common = set(query_keys).intersection(exclude)
+    if common:
+        return False
+    return True
+
+def set_strucured_data_url(request):
+    original_q_string = request.query_string.decode('utf-8')
+    return f'?{datasets_query}&{original_q_string}'
 
 def countries_list(countries):
     countries_list = []
