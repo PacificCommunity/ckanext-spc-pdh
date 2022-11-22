@@ -10,7 +10,7 @@ pyparsing==2.3.0
 rdflib==4.2.2
 six>=0.13
 progressbar2==3.53.1
-Pillow==8.2.0
+Pillow==9.3.0
 requests-cache==0.5.2
 sdmx1[cache]==1.6.0
 pandas==1.2.0
